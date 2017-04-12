@@ -1,0 +1,33 @@
+#
+# site settings
+#
+title: Triple Except
+description: Discussions from all depths of computer science
+
+#
+# build setting
+#
+markdown: kramdown
+safe: true
+
+kramdown:
+        # Use Github-flavoured markdown (e.g. triple backtick code)
+        imput: GFM
+        syntax_highlighter: rogue
+
+# Sass generated css
+sass:
+        style: compressed
+
+
+# Use the following plug-ins
+gems:
+        - jekyll-sitemap # Create a sitemap
+        - jekyll-feed # Create an Atom feed
+
+# Exclude these files from production
+exclude:
+        - LICENSE
+        - README.md
+        - Dockerfile
+        - Dockerfile-base
