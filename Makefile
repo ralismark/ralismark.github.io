@@ -28,15 +28,18 @@ restart: stop tag/running .phony
 build: tag/app-image .phony
 
 # Display and follow stdout/err logs
-flogs: tag/running .phony
+flogs: .phony
+	cd . < tag/running
 	docker logs -f $(DOCKER_NAME)
 
 # Run sh in the container
-sh: tag/running .phony
+sh: .phony
+	cd . < tag/running
 	docker exec -it $(DOCKER_NAME) /bin/sh
 
 # Show address of exposed ports
-addr: tag/running .phony
+addr: .phony
+	cd . < tag/running
 	echo Published ports:
 	docker inspect $(DOCKER_NAME) --format="{{$$r := .NetworkSettings}}{{range $$p, $$conf := .NetworkSettings.Ports}} {{$$p}} -> {{$$r.IPAddress}}:{{(index $$conf 0).HostPort}}{{end}}"
 
