@@ -19,7 +19,7 @@ start: tag/running addr .phony
 # Stop a running container
 stop: .phony
 	docker stop -t 2 $(DOCKER_NAME) || cd .
-	cd tag && rmdir running || cd .
+	rm tag/running || cd .
 
 # Restart (stop then start) a container
 restart: stop tag/running .phony
@@ -42,19 +42,18 @@ addr: tag/running .phony
 
 clean: stop
 	docker rmi gh-pages $(DOCKER_NAME) || cd .
-	cd tag && rmdir running app-image dir || cd .
-	rmdir tag
+	rm -rf tag
 
 tag/running: tag/app-image
 	docker run --rm -v $(CWD):/app -it --detach -p 127.0.0.1:4000:4000 --name $(DOCKER_NAME) $(DOCKER_NAME)
-	cd tag && mkdir running || cd .
+	echo 1 > $@
 
 tag/app-image: Dockerfile tag/dir
 	docker build -t $(DOCKER_NAME) -f Dockerfile .
-	cd tag && mkdir app-image
+	echo 1 > $@
 
 tag/dir:
 	mkdir tag
-	cd tag && mkdir dir || cd .
+	echo 1 > $@
 
 .phony:
