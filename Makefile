@@ -41,7 +41,7 @@ addr: tag/running .phony
 	docker inspect $(DOCKER_NAME) --format="{{$$r := .NetworkSettings}}{{range $$p, $$conf := .NetworkSettings.Ports}} {{$$p}} -> {{$$r.IPAddress}}:{{(index $$conf 0).HostPort}}{{end}}"
 
 clean: stop
-	docker rmi gh-pages $(DOCKER_NAME) || cd .
+	docker rmi $(DOCKER_NAME) || cd .
 	rm -rf tag
 
 tag/running: tag/app-image
