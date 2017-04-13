@@ -12,7 +12,7 @@ must be installed. Run `make start` to start a new container running Jekyll.
 If you're running windows, the setup is still similar. If you have `nmake`
 installed (through Visual Studio), that is usable too. Otherwise, install of
 `make` (through [GnuWin32][1]) or `nmake` (through Visual Studio, any version
-should be fine). Nothing else is needed!
+should be fine). Additionally, `rm` is needed (through [GnuWin32][1]).
 
   [1]: http://gnuwin32.sourceforge.net/
 
@@ -37,6 +37,5 @@ to "meow").
 ## Implementation Details
 
 Several workarounds were needed so that the Makefile could be used on both
-Windows and Linux without modification. For example, directories were used for
-build tags since `mkdir` and `rmdir` were common to both, as well as `|| cd .`
-for suppressing return codes silently.
+Windows and Linux without modification. For example `|| cd .` was used for
+suppressing return codes silently, since it is a silent no-op.
