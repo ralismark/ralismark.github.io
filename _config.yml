@@ -31,3 +31,5 @@ exclude:
         - README.md
         - Dockerfile
         - Dockerfile-base
+        - Makefile
+        - tags
