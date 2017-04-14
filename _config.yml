@@ -4,6 +4,8 @@
 title: Triple Except
 description: Discussions from all depths of computer science
 
+excerpt_separator: <!--more-->
+
 #
 # build setting
 #
@@ -24,7 +26,7 @@ kramdown:
 
 # Sass generated css
 sass:
-  style: compressed
+  style: expanded
 
 
 # Use the following plug-ins
