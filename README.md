@@ -1,7 +1,9 @@
 # Triple Except
 
-This repo is currently a template for a (somewhat) minimal Jekyll docker
-installation for GitHub pages.
+This repo is the code for [the blog][1]. Additionally, it supports running
+through docker (via the use of a makefile).
+
+  [1]: https://ralismark.github.io
 
 ## Running docker
 
