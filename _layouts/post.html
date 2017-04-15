@@ -1,0 +1,17 @@
+---
+layout: default
+---
+
+{% include post-nav.html %}
+
+<div class="post">
+
+	<h1 class="page-heading">{{ page.title | escape }}</h1>
+
+	<div class="post-body">
+		{{ content }}
+	</div>
+
+</div>
+
+{% include post-nav.html %}

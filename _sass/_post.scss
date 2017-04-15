@@ -1,0 +1,27 @@
+/*
+ * Styling specific to posts
+ */
+.post {
+}
+
+.post-nav {
+	overflow: auto;
+
+	a {
+		&.next {
+			float: left;
+			&:hover:after {
+				content: "(next)";
+			}
+		}
+
+		&.prev {
+			float: right;
+			&:hover:before {
+				content: "(prev)";
+			}
+		}
+
+		text-decoration: none;
+	}
+}
