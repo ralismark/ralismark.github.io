@@ -8,18 +8,12 @@
 	overflow: auto;
 
 	a {
-		&.next {
+		&.left {
 			float: left;
-			&:hover:after {
-				content: "(next)";
-			}
 		}
 
-		&.prev {
+		&.right {
 			float: right;
-			&:hover:before {
-				content: "(prev)";
-			}
 		}
 
 		text-decoration: none;
