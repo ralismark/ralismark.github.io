@@ -1,7 +1,11 @@
 <header class="site-header" role="banner">
 	<div class="wrapper">
 
-		<a class="site-title" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+		<div class="top-bar">
+			<a class="site-title" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+
+			<span class="site-desc">{{ site.description }}</span>
+		</div>
 
 		<nav class="site-nav">
 			<ul class="nav-list">
