@@ -8,6 +8,16 @@ layout: default
 
 	<h1 class="page-heading">{{ page.title | escape }}</h1>
 
+	{% if page.tags %}
+	<div class="post-tags">
+		<ul class="tags">
+			{% for tag in page.tags %}
+			<li><a href="{{ tag | prepend: "/tags#" | relative_url }}" class="tag">{{ tag }}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+	{% endif %}
+
 	<div class="post-body">
 		{{ content }}
 	</div>

@@ -41,4 +41,4 @@ exclude:
   - Dockerfile
   - Dockerfile-base
   - Makefile
-  - tags
+  - tag/
