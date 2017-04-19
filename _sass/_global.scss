@@ -6,8 +6,13 @@
 	margin: 0 auto;
 }
 
+html {
+	background: darken($back-base, 5%);
+}
+
 body {
 	font-family: $font-stack;
+	background: $back-base;
 
 	h1, h2, h3, h4, h5, h6 {
 		font-family: $alt-font-stack;
