@@ -8,6 +8,10 @@
 $font-stack: "Open Sans", serif;
 $alt-font-stack: "Droid Sans", serif;
 
+$back-base: #fff;
+$text-base: #000;
+$accent: #00f;
+
 @import "global";
 @import "syntax";
 @import "post";
