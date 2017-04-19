@@ -1,16 +1,16 @@
 /*
  * Styling affecting the overall site
  */
-.wrapper {
-	width: 60%;
-	margin: 0 auto;
-}
 
 html {
 	background: darken($back-base, 5%);
 }
 
 body {
+	width: 800px;
+	margin: 16px auto;
+	padding: 16px;
+
 	font-family: $font-stack;
 	background: $back-base;
 
