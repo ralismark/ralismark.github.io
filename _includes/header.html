@@ -11,9 +11,11 @@
 			<ul class="nav-list">
 				{% for page in site.pages %}
 				{% if page.title %}
+				<a class="page-link" href="{{ page.url | relative_url }}">
 				<li class="nav-entry">
-					<a class="page-link" href="{{ page.url | relative_url }}">{{ page.title | escape }}</a>
+					{{ page.title | escape }}
 				</li>
+				</a>
 				{% endif %}
 				{% endfor %}
 			</ul>
