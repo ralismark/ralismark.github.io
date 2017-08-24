@@ -4,24 +4,25 @@ layout: default
 
 {% include post-nav.html %}
 
-<div class="post">
+<h1>{{ page.title | escape }}</h1>
 
-	<h1 class="page-heading">{{ page.title | escape }}</h1>
-
+<div id="post-meta">
+	<span id="post-date">{{ page.date | date_to_long_string }}</span>
 	{% if page.tags %}
-	<div class="post-tags">
-		<ul class="tags">
-			{% for tag in page.tags %}
-			<li><a href="{{ tag | prepend: "/tags#" | relative_url }}" class="tag">{{ tag }}</a></li>
-			{% endfor %}
-		</ul>
-	</div>
+	|
+	<span id="post-tags">
+		<span class="text-muted">Tags:</span>
+		{% for tag in page.tags %}
+			<a href="#">{{ tag }}</a>
+		{% endfor %}
+	</span>
 	{% endif %}
-
-	<div class="post-body">
-		{{ content }}
-	</div>
-
 </div>
+
+<hr>
+
+{{ content }}
+
+<hr>
 
 {% include post-nav.html %}
