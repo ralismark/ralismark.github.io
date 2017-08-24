@@ -1,21 +1,12 @@
 /*
  * Styling specific to posts
  */
-.post {
-}
 
-.post-nav {
-	overflow: auto;
-
-	a {
-		&.left {
-			float: left;
-		}
-
-		&.right {
-			float: right;
-		}
-
-		text-decoration: none;
-	}
+#post-tags a {
+	font-size: 80%;
+	padding: 0 1ex 0.4ex;
+	margin: 0 0.2ex;
+	background: orange;
+	color: #fff;
+	border-radius: 1em;
 }
