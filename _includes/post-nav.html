@@ -1,15 +1,13 @@
-<div class="post-nav">
-
+<div class="row">
+	<div class="col-sm-6">
 	{% if page.previous %}
-	<a class="left" href="{{ page.previous.url }}">
-		&laquo {{ page.previous.title }}
-	</a>
+		<a href="{{ page.previous.url | relative_url }}">&laquo {{ page.previous.title }}</a>
 	{% endif %}
+	</div>
 
+	<div class="col-sm-6 text-right">
 	{% if page.next %}
-	<a class="right" href="{{ page.next.url }}">
-		{{ page.next.title }} &raquo
-	</a>
+		<a href="{{ page.next.url | relative_url }}">{{ page.next.title }} &raquo</a>
 	{% endif %}
-
+	</div>
 </div>
