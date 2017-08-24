@@ -1,0 +1,24 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="container">
+		<a class="navbar-brand" href="{{ "/" | relative_url }}">{{ site.title }}</a>
+
+		<div class="collapse navbar-collapse" id="navbar-links">
+			<ul class="navbar-nav mr-auto">
+				{% for page in site.pages %}
+					{% if page.title %}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ page.url | relative_url }}">
+								{{ page.title | escape }}
+							</a>
+						</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</nav>
+
