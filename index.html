@@ -1,0 +1,46 @@
+---
+title: Blog
+layout: default
+---
+
+<div class="row">
+
+	<div class="col-md-8">
+		<h1>Posts</h1>
+
+		{% for post in site.posts %}
+
+		<hr>
+
+		<article>
+			<div class="row">
+				<h4 class="card-title col-md-8">
+					<a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+				</h4>
+				<div class="col-md-4 text-right text-muted">
+					<i class="fa fa-clock-o"></i> {{ post.date | date_to_long_string }}
+				</div>
+			</div>
+
+			<p class="excerpt">
+				{{ post.excerpt | strip_html | truncatewords: 100 }}
+			</p>
+			<a href="{{ post.url | relative_url }}">Read More &raquo</a>
+		</article>
+		{% endfor %}
+	</div>
+
+	<div class="d-md-block d-none col-md-4">
+		<div class="card" id="tag-box">
+			<div class="card-block">
+				<h4 class="card-title">
+					Tags
+				</h4>
+
+				{% for tag in site.tags %}
+					<a href="#">{{ tag | first }}</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
