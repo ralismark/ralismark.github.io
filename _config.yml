@@ -30,7 +30,7 @@ sass:
 
 
 # Use the following plug-ins
-gems:
+plugins:
   - jekyll-sitemap # Create a sitemap
   - jekyll-feed # Create an Atom feed
 
@@ -39,6 +39,5 @@ exclude:
   - LICENSE
   - README.md
   - Dockerfile
-  - Dockerfile-base
   - Makefile
   - tag/
