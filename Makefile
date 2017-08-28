@@ -14,7 +14,7 @@ CWD = $(MAKEDIR)$(CURDIR)
 
 
 # Start a container
-start: tag/running addr .phony
+start: tag/running .phony
 
 # Stop a running container
 stop: .phony
@@ -36,12 +36,6 @@ flogs: .phony
 sh: .phony
 	cd . < tag/running
 	docker exec -it $(DOCKER_NAME) /bin/sh
-
-# Show address of exposed ports
-addr: .phony
-	cd . < tag/running
-	echo Published ports:
-	docker inspect $(DOCKER_NAME) --format="{{$$r := .NetworkSettings}}{{range $$p, $$conf := .NetworkSettings.Ports}} {{$$p}} -> {{$$r.IPAddress}}:{{(index $$conf 0).HostPort}}{{end}}"
 
 clean: stop
 	docker rmi $(DOCKER_NAME) || cd .
