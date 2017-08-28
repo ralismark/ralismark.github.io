@@ -38,7 +38,7 @@ layout: default
 				</h4>
 
 				{% for tag in site.tags %}
-					<a href="#">{{ tag | first }}</a>
+					<a href="{{ "/tags.html" | relative_url }}#{{ tag | first }}">{{ tag | first }}</a>
 				{% endfor %}
 			</div>
 		</div>
