@@ -25,7 +25,6 @@ This Makefile has several build targets (commands):
 - `build` - Build the docker image without starting a container
 - `flogs` - Show logs and follow (stands for **f**ollow **logs**)
 - `sh` - Run a shell in the container (e.g. to inspect files)
-- `addr` - Show published ports and their bindings
 - `clean` - Remove anything that was build - stopping containers, removing the
     image and clearing tags
 
