@@ -1,23 +1,4 @@
-FROM alpine:latest
-
-RUN apk add --no-cache \
-	ruby \
-	libcurl \
-	ruby-rdoc \
-	ruby-irb
-
-# Build dependencies
-RUN apk add --no-cache --virtual build-dependencies \
-	ruby-dev \
-	build-base \
-	libffi-dev \
-	zlib-dev
-
-# Install Github Pages
-RUN gem install --no-document github-pages
-
-# Delete build dependencies
-RUN apk del --no-cache build-dependencies
+FROM starefossen/github-pages:latest
 
 ENV APPDIR /app
 WORKDIR $APPDIR
