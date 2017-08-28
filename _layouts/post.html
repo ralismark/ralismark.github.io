@@ -13,7 +13,7 @@ layout: default
 	<span id="post-tags">
 		<span class="text-muted">Tags:</span>
 		{% for tag in page.tags %}
-			<a href="#">{{ tag }}</a>
+			<a href="{{ "/tags.html" | relative_url }}#{{ tag }}">{{ tag }}</a>
 		{% endfor %}
 	</span>
 	{% endif %}
