@@ -1,6 +1,7 @@
 BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Sentral Calendar Script//ralismark.github.io//
+X-WR-CALNAME:Sentral Calendar
 BEGIN:VEVENT
 SUMMARY:Week A
 DTSTART;VALUE=DATE:20180129
