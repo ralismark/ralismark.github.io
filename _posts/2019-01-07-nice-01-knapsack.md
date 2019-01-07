@@ -23,7 +23,7 @@ Output:
 In this variation, we only need to store if each weight sum is possible, and that this sum will not be greater than W. As such, we can represent it an array of bools. Normally, for each item, you would iterate through the possible weights in reverse and update the possible weight. This is what you'd do for general 0-1 knapsack, but since we only care about if its possible, we can use `std::bitset` and bit shifting to get a very clean solution:
 
 ```cpp
-bitset<W> possible = {1};
+bitset<W+1> possible = {1};
 
 for(int w_i : weights) {
 	possible |= (possible << w_i);
