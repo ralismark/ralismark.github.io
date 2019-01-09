@@ -2,55 +2,32 @@
 # Project Make File
 #
 
-# This makefile is meant to be compatible with both make (on linux) and nmake
-# (on windows, with msvc). As a result, there are a few workarounds for
-# differences between these (e.g. CWD)
-
 DOCKER_NAME = app-serve
 
-# A bit of a hack to make it work with both make and nmake
-# Since (hopefully) only one is defined, this allows CWD to be a simple concat
-CWD = $(MAKEDIR)$(CURDIR)
-
-
 # Start a container
-start: tag/running .phony
+start: image
+	docker run --rm -v $(CURDIR):/app -it --detach -p 127.0.0.1:4000:4000 --name $(DOCKER_NAME) $(DOCKER_NAME)
 
 # Stop a running container
-stop: .phony
-	docker stop -t 2 $(DOCKER_NAME) || cd .
-	rm tag/running || cd .
-
-# Restart (stop then start) a container
-restart: stop tag/running .phony
+stop:
+	docker stop -t 2 $(DOCKER_NAME)
 
 # Build container image (don't run)
-build: tag/app-image .phony
+image: Dockerfile
+	docker build -t $(DOCKER_NAME) -f Dockerfile .
+
+# Restart (stop then start) a container
+restart: stop start
 
 # Display and follow stdout/err logs
-flogs: .phony
-	cd . < tag/running
+flogs:
 	docker logs -f $(DOCKER_NAME)
 
 # Run sh in the container
-sh: .phony
-	cd . < tag/running
+sh:
 	docker exec -it $(DOCKER_NAME) /bin/sh
 
 clean: stop
-	docker rmi $(DOCKER_NAME) || cd .
-	rm -rf tag
+	docker rmi $(DOCKER_NAME)
 
-tag/running: tag/app-image
-	docker run --rm -v $(CWD):/app -it --detach -p 127.0.0.1:4000:4000 --name $(DOCKER_NAME) $(DOCKER_NAME)
-	echo 1 > $@
-
-tag/app-image: Dockerfile tag/dir
-	docker build -t $(DOCKER_NAME) -f Dockerfile .
-	echo 1 > $@
-
-tag/dir:
-	mkdir tag
-	echo 1 > $@
-
-.phony:
+.PHONY: start stop iamge restart flogs sh clean
