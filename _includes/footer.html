@@ -1,7 +1,22 @@
-<footer class="site-footer">
-	<div class="wrapper">
-		<div id="gen-time">
-			<i>Generated at {{ site.time | time_tag }}.</i>
+<div id="footer-wrapper">
+	<footer class="site-footer container py-4">
+		<a class="float-right" href="#">Back to top</a>
+
+		<p>
+		&copy; 2017-2019 Timmy Yao &middot; <a href="https://github.com/ralismark">Github<a/>
+    	</p>
+
+		<p>
+			Site hand-made and <a href="https://github.com/ralismark/ralismark.github.io">hosted on <i class="fa fa-github"></i></a>.
+    	</p>
+
+		<div class="wrapper">
+			<sub>
+				<i class="fa fa-print"></i>
+				<span id="gen-time">
+					<i>Generated on {{ site.time | date: "%e %B %Y" }} at {{ site.time | date: "%X (%Z)" }}.</i>
+				</span>
+			</sub>
 		</div>
-	</div>
-</footer>
+	</footer>
+</div>
