@@ -14,7 +14,7 @@ safe: true
 
 kramdown:
         # Use Github-flavoured markdown (e.g. triple backtick code)
-        imput: GFM
+        input: GFM
         syntax_highlighter: rouge
 
         syntax_highlighter_opts:
@@ -40,4 +40,5 @@ exclude:
         - README.md
         - Dockerfile
         - Makefile
-        - tag/
+
+# vim: set et ts=8 sw=8:
