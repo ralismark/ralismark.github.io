@@ -39,6 +39,10 @@ You can just use the sign of $$x_{switch}$$ to determine if you need to boost
 forward of backwards [^1]. For most cases, this is sufficient. As extra, we can
 solve for $$t$$ to determine how long until the switchover.
 
+ [^1]:
+	The comparison simplifies to $$2Ax + v^2 > 0$$, which is true if the
+	switchover has not been reached.
+
 $$
 \begin{align*}
 	x_{switch} &= x - vt - {1 \over 2} At^2
@@ -65,9 +69,3 @@ $$
 t = \frac{-v + \sqrt{ {v^2 \over 2} + Ax }} {A}
   = t_{stop} + \sqrt{ {1 \over 2}t_{stop}^2 + {x \over A}}
 $$
-
----
-
- [^1]:
-	The comparison simplifies to $$2Ax + v^2 > 0$$, which is true if the
-	switchover has not been reached.
