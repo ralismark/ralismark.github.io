@@ -57,6 +57,11 @@ This has three flags, which can be combined into `-xdff`:
 - `-d`: Delete directories as well as files
 - `-ff`: (yes, two [^1] f's here) Delete even sub-repositories
 
+ [^1]:
+	If the user has `clean.requireForce` set, a single `-f` is always required
+	to delete things. However, two are always needed (independent of config
+	options) to delete sub-repositories.
+
 Running this command will dutifully, irrevocably delete all untracked files
 under the current directory. Make sure you're in the repo root to clean
 everything. If you want to see what you're doing, replace the `-f`s with a
@@ -88,7 +93,3 @@ can be reset with `git checkout -- <pathspec>` for files and
 If you want to learn more about any command described here (they all have many
 options not described here), check out their corresponding docs/man pages.
 
- [^1]:
-	If the user has `clean.requireForce` set, a single `-f` is always required
-	to delete things. However, two are always needed (independent of config
-	options) to delete sub-repositories.
