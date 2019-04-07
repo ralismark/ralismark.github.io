@@ -8,7 +8,7 @@ layout: default
 
 <div id="post-meta">
 	<span id="post-date">{{ page.date | date_to_long_string }}</span>
-	{% if page.tags == blank %}
+	{% if page.tags %}
 	|
 	<span id="post-tags">
 		<span class="text-muted">Tags:</span>
