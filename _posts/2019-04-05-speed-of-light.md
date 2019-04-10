@@ -16,7 +16,7 @@ I'm currently studying EM waves as part of HSC physics, and I looked at this for
 
 # Assumptions
 
-We assume that B and E are perpendicular and only exist along one line. i.e.:
+We assume that B and E are perpendicular and only exist along one line, the $$\vec{x}$$ axis. This axis is also the direction of propagation, so $$\vec{E} \times \vec{B} \parallel \vec{x}$$. i.e.:
 
 $$
 \begin{align*}
@@ -25,9 +25,11 @@ $$
 \end{align*}
 $$
 
-$$\vec{x}$$ is the direction of propagation, so $$\vec{y} \times \vec{z} = \vec{x}$$.
+![](/assets/em-wave.svg "Electromagnetic Wave. Credits to sabicool.")
 
 > My friend I mentioned earlier showed me an in-depth explanation of this (though it's not on his blog), which has a 3D LaTeX diagram. I might adapt it and include it, since this current explanation isn't really that clear.
+>
+> *Update, 10 Apr 2019*: He sent me the code, which I've adapted to create the above diagram. Credits to him.
 
 # Maxwell's Equations
 
