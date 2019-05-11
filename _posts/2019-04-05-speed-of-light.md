@@ -57,7 +57,7 @@ $$
 \end{align*}
 $$
 
-Then, after some rearranging and then equating $$\frac{\partial B}{\partial E}$$, we can get the derivative of position with respect to time. This represents the effective propagation of the wave as you 'follow' its movement[^3], so the velocity is essentially the speed of light.
+Then, after some rearranging and then equating $$\frac{\partial B}{\partial E}$$, we can get the partial derivative of position with respect to time. This represents the effective propagation of the wave as you 'follow' its movement[^3], so the velocity is essentially the speed of light.
 
 [^3]: In reality, the fields themselves aren't moving. It's like a wave in water - the particles are moving up and down, creating motion, but they aren't actually moving longitudinally.
 
