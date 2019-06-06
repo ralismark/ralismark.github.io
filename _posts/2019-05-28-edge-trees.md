@@ -56,25 +56,47 @@ digraph {
 If we abstract away the centroid calculation into a number assigned to each node, then the centroid tree becomes a sort of "Cartesian tree of a tree", with the root being the largest node in the tree, and the children the centroid trees of the remaining connected components.
 
 ```dot
-graph {
+digraph {
+	node [shape=record];
+	ar [label="<d> d | <b> b | <i> i | <e> e | <g> g | <a> a | <c> c | <h> h | <f> f", width=7];
+
 	node [shape=circle];
-	a [label=3]; // 1
-	b [label=2]; // 2
-	c [label=2]; // 3
-	d [label=3]; // 4
-	e [label=1]; // 5
-	f [label=3]; // 6
-	g [label=2]; // 7
-	h [label=3]; // 8
-	i [label=3]; // 9
-	b -- d;
-	c -- f;
-	e -- g;
-	c -- h;
-	a -- c;
-	e -- a;
-	b -- e;
-	b -- i;
+	{ rank = same;
+		e [label=1]; // 5
+	} { rank = same;
+		b [label=2]; // 2
+		c [label=2]; // 3
+		g [label=2]; // 7
+	} { rank = same;
+		a [label=3]; // 1
+		d [label=3]; // 4
+		f [label=3]; // 6
+		h [label=3]; // 8
+		i [label=3]; // 9
+	}
+	subgraph cart {
+		edge [color=grey];
+		ar:a -> a;
+		ar:b -> b;
+		ar:c -> c;
+		ar:d -> d;
+		ar:e -> e;
+		ar:f -> f;
+		ar:g -> g;
+		ar:h -> h;
+		ar:i -> i;
+	}
+	subgraph tree {
+		edge [dir=none];
+		b -> d;
+		c -> f;
+		e -> g;
+		c -> h;
+		a -> c;
+		e -> a;
+		b -> e;
+		b -> i;
+	}
 }
 ```
 
@@ -102,41 +124,21 @@ The way you can make such a tree is by augmenting a Kruskal's MST algorithm to a
 Here we have a random tree with weighted edges to demonstrate what I mean:
 
 ```dot
+// engine=neato
 graph {
 	node [shape=circle];
-	i -- a [label=1];
-	h -- b [label=2];
-	d -- c [label=1];
+	i -- a [label=4];
+	h -- b [label=3];
+	d -- c [label=2];
 	g -- e [label=5];
-	d -- f [label=3];
-	d -- g [label=4];
-	h -- d [label=2];
-	h -- i [label=4];
+	d -- f [label=4];
+	d -- g [label=3];
+	h -- d [label=1];
+	h -- i [label=2];
 }
 ```
 
 *Figure 4: A weighted tree*
-
-```dot
-digraph {
-	node [shape=circle];
-	ai [label="ai\n(4)"];
-	bh [label="bh\n(3)"];
-	cd [label="cd\n(2)"];
-	df [label="df\n(4)"];
-	dg [label="dg\n(3)"];
-	dh [label="dh\n(1)"];
-	eg [label="eg\n(5)"];
-	hi [label="hi\n(2)"];
-
-	dh -> cd -> dg -> df;
-	dg -> eg;
-	dh -> hi -> ai;
-	hi -> bh;
-}
-```
-
-*Figure 5: The Cartesian tree on the edges*
 
 Say we want to support the following query:
 
@@ -165,6 +167,24 @@ Here's a related query. While this problem may appear in graph form, it can be r
 One way to do this is to root the tree, then find the LCA of U and V and the corresponding minimum weight on the paths to the LCA. We know normal LCA is reducible to RMQ, but the need to know the minimum weight as well forces us to use the jump pointers approach (which I don't particularly like).
 
 However, with an edge tree, this problem reduces down to just LCA -- to find the min edge which connects the two nodes. This can reduce to RMQ using the Eulerian Tour Technique, but we can slightly improve on this. Since the nodes we're querying from are always the leaves, we can convert the tree to an array by just traversing it in-order.
+
+```dot
+digraph {
+	node [shape=record];
+	ar [label="<c> c | <d> d | <f> f | <e> e | <g> g | <a> a | <i> i | <b> b | <h> h", width=7];
+	node [shape=circle];
+	df [label="df\n(4)"]; df -> ar:d; df -> ar:f;
+	dg [label="dg\n(3)"]; dg -> df;   dg -> eg;
+	eg [label="eg\n(5)"]; eg -> ar:e; eg -> ar:g;
+	cd [label="cd\n(2)"]; cd -> dg;   cd -> ar:c;
+	dh [label="dh\n(1)"]; dh -> cd;   dh -> hi;
+	ai [label="ai\n(4)"]; ai -> ar:a; ai -> ar:i;
+	hi [label="hi\n(2)"]; hi -> ai;   hi -> bh;
+	bh [label="bh\n(3)"]; bh -> ar:b; bh -> ar:h;
+}
+```
+
+*Figure 5: The Cartesian tree on the edges*
 
 # Near-far Ordering for O(1) Edge Deletion
 
