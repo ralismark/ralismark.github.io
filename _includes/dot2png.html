@@ -1,0 +1,27 @@
+<script src="https://github.com/mdaines/viz.js/releases/download/v2.1.2/viz.js"></script>
+<script src="https://github.com/mdaines/viz.js/releases/download/v2.1.2/full.render.js"></script>
+<script>
+
+	let viz = new Viz();
+
+window.onload = function() {
+	let dots = document.querySelectorAll('.highlighter-rouge.language-dot');
+	[...dots].forEach((dot) => {
+		console.log(dot);
+
+		let text = dot.querySelector('.rouge-code').innerText;
+
+		let engine = (text.match(/engine=(\w*)/) || [])[1] || "dot";
+
+		viz.renderSVGElement(text, {engine}).then((elem) => {
+			let p = document.createElement('p');
+			p.appendChild(elem);
+			dot.parentElement.replaceChild(p, dot);
+		}).catch((error) => {
+			viz = new Viz(); // create new instance
+			console.error(dot, error);
+		});
+	});
+}
+
+</script>

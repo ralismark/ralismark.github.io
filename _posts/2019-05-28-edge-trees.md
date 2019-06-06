@@ -12,7 +12,7 @@ A few days ago, I was thinking about the tree that results from centroid decompo
 >
 > Edit: if you search for "Cartesian tree of edges", you'll find papers describing the stuff I detail here. 
 
-> This post is currently WIP, but the main content is there. I'm posting what I currently have, and I'll complete it when I can. One part of this is turning the DOT code into actual graphs
+> This post is currently WIP, but the main content is there. I'm posting what I currently have, and I'll complete it when I can.
 
 # Implicit Divide and Conquer Trees
 
@@ -23,6 +23,7 @@ A centroid tree is one generated from recursively finding the centroid of a tree
 This is useful if you want to find a node in the tree, and you can only determine which subtree adjacent to a node the target is (see FARIO 2019 Nav). In a sense, it's like a binary search tree.
 
 ``` dot
+// engine=neato
 graph {
 	node [shape=circle];
 	b -- d;
@@ -168,3 +169,5 @@ However, with an edge tree, this problem reduces down to just LCA -- to find the
 # Near-far Ordering for O(1) Edge Deletion
 
 > **TODO: Tag child edges w/ path to parent/path away from parent. And demonstration of how this allows for O(1) edge deletion**
+
+{% include dot2png.html %}
