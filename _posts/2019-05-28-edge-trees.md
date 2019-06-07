@@ -12,7 +12,7 @@ A few days ago, I was thinking about the tree that results from centroid decompo
 >
 > Edit: if you search for "Cartesian tree of edges", you'll find papers describing the stuff I detail here. 
 
-> This post is currently WIP, but the main content is there. I'm posting what I currently have, and I'll complete it when I can.
+> Update: Most of the content for the post is here. I plan on making a part 2 for actually implementing this.
 
 # Implicit Divide and Conquer Trees
 
@@ -188,6 +188,23 @@ digraph {
 
 # Near-far Ordering for O(1) Edge Deletion
 
-> **TODO: Tag child edges w/ path to parent/path away from parent. And demonstration of how this allows for O(1) edge deletion**
+However, this edge tree doesn't have a specific ordering for the children. We can exploit this to store more information about subtrees. One way is to track the subtree which is between this edge and the parent. For instance, `bh` would be on the path from `hi` to `dh`. Let this child be the "near" child (near the parent), and the other the "far" child (far away from the parent), giving this the name "near-far ordering". By the nature of the subtree splitting, we're guaranteed that only at most one child is near, and at most one is far. This even applies when we include vertex self-edges. In this case, the tree is a full binary tree, so every node either has both a near and a far child, or is a vertex.
+
+The benefit of having this ordering is that you can actually perform edge deletions in O(1)! Consider a single edge and it's parent. To remove that element, we replace the parent's pointer to it with the near child, and separate the far child. This simple operation is thus O(1) if you're not tracking information about subtrees. Additionally, if you store the vertices of a subtree as a SBBST, splitting off the vertices is also quite easy.
+
+```dot
+digraph {
+	subgraph cluster_0 {
+		parent -> elem -> {near,far};
+	}
+
+	subgraph cluster_1 {
+		"parent'" -> "near'";
+		"parent'" -> "far'" [color=transparent];
+	}
+}
+```
+
+However, I'm not sure how to create this ordering. It might be possible to modify the edge tree creation to support this (by swapping the children of the subtrees you join), but you need to query if a node is part of a subtree. Doing this dynamically is quite hard. One way is to have an SBBST of edges for partial tree, then range query on it for LCA. If the LCA of the vertex and the subtree element is the parent, then the vertex is not in the subtree.
 
 {% include dot2png.html %}
