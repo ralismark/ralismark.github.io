@@ -4,9 +4,10 @@ layout: default
 
 {% include post-nav.html %}
 
-<h1>{{ page.title | escape }}</h1>
 
 <div id="post-meta">
+	<h1>{{ page.title | escape }}</h1>
+
 	<span id="post-date">{{ page.date | date_to_long_string }}</span>
 	{% if page.tags %}
 	|
@@ -21,7 +22,9 @@ layout: default
 
 <hr>
 
+<main>
 {{ content }}
+</main>
 
 <hr>
 

@@ -1,0 +1,18 @@
+<script>
+
+window.addEventListener('load', function() {
+	let headings = document.querySelectorAll('main > h1, main > h2, main > h3');
+	[...headings].forEach((heading) => {
+		if(!heading.id) return;
+
+		let link = document.createElement('a');
+		link.href = '#' + heading.id;
+		link.classList.add('header-link');
+		link.innerHTML = heading.innerHTML;
+
+		heading.innerHTML = '';
+		heading.appendChild(link);
+	});
+});
+
+</script>
