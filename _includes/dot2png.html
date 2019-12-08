@@ -4,7 +4,7 @@
 
 	let viz = new Viz();
 
-window.onload = function() {
+window.addEventListener("load", function() {
 	let dots = document.querySelectorAll('.highlighter-rouge.language-dot');
 	[...dots].forEach((dot) => {
 		console.log(dot);
@@ -22,6 +22,6 @@ window.onload = function() {
 			console.error(dot, error);
 		});
 	});
-}
+});
 
 </script>
