@@ -140,13 +140,34 @@ graph {
 
 *Figure 4: A weighted tree*
 
+And here's the edge tree for it:
+
+```dot
+digraph {
+	node [shape=record];
+	ar [label="<c> c | <d> d | <f> f | <e> e | <g> g | <a> a | <i> i | <b> b | <h> h", width=7];
+	node [shape=circle];
+	df [label="df\n(4)"]; df -> ar:d; df -> ar:f;
+	dg [label="dg\n(3)"]; dg -> df;   dg -> eg;
+	eg [label="eg\n(5)"]; eg -> ar:e; eg -> ar:g;
+	cd [label="cd\n(2)"]; cd -> dg;   cd -> ar:c;
+	dh [label="dh\n(1)"]; dh -> cd;   dh -> hi;
+	ai [label="ai\n(4)"]; ai -> ar:a; ai -> ar:i;
+	hi [label="hi\n(2)"]; hi -> ai;   hi -> bh;
+	bh [label="bh\n(3)"]; bh -> ar:b; bh -> ar:h;
+}
+```
+
+*Figure 5: The Cartesian tree on the edges*
+
 Say we want to support the following query:
 
 > Given a edge E and weight limit W, what is the number of nodes reachable from E using only edges with weight ≥ W? You are guaranteed that W is less than E's weight.
 
 By constructing an edge tree, we can see that the structure with E as its root contains all edges accessible using a weight lower than E's weight. Additionally, we can "traverse" up the tree if the parent element's weight is greater than W [^2]. We can keep doing this until we reach an element we can't pass, and the size of the structure is the number of edges reachable. Since the whole thing is a tree, the number of nodes is the number of edges +1.
 
-> **TODO: Examples using the above trees**
+> e.g. query from edge df, min weight 2
+> Starting at df, we go up to dg since it has weight greater than 2. We then go up to cd, which has weight 2. We don't traverse up to cd's parent since that edge has weight 1.
 
 [^2]: You may notice that the worst case time complexity is $$O(E)$$ in the case of a linear graph. This can be reduced to $$O(\log E)$$ if we use jump pointers (like the classical LCA algorithm), at the cost of $$O(E \log E)$$ memory. Usually, this is a worthwhile trade.
 
@@ -167,24 +188,6 @@ Here's a related query. While this problem may appear in graph form, it can be r
 One way to do this is to root the tree, then find the LCA of U and V and the corresponding minimum weight on the paths to the LCA. We know normal LCA is reducible to RMQ, but the need to know the minimum weight as well forces us to use the jump pointers approach (which I don't particularly like).
 
 However, with an edge tree, this problem reduces down to just LCA -- to find the min edge which connects the two nodes. This can reduce to RMQ using the Eulerian Tour Technique, but we can slightly improve on this. Since the nodes we're querying from are always the leaves, we can convert the tree to an array by just traversing it in-order.
-
-```dot
-digraph {
-	node [shape=record];
-	ar [label="<c> c | <d> d | <f> f | <e> e | <g> g | <a> a | <i> i | <b> b | <h> h", width=7];
-	node [shape=circle];
-	df [label="df\n(4)"]; df -> ar:d; df -> ar:f;
-	dg [label="dg\n(3)"]; dg -> df;   dg -> eg;
-	eg [label="eg\n(5)"]; eg -> ar:e; eg -> ar:g;
-	cd [label="cd\n(2)"]; cd -> dg;   cd -> ar:c;
-	dh [label="dh\n(1)"]; dh -> cd;   dh -> hi;
-	ai [label="ai\n(4)"]; ai -> ar:a; ai -> ar:i;
-	hi [label="hi\n(2)"]; hi -> ai;   hi -> bh;
-	bh [label="bh\n(3)"]; bh -> ar:b; bh -> ar:h;
-}
-```
-
-*Figure 5: The Cartesian tree on the edges*
 
 # Near-far Ordering for O(1) Edge Deletion
 
