@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A Tale of Indices
-tags: exploit c
+tags: exploit c-cpp
 ---
 
 This is the story of how bad indexing code can lead to an exploit. Even though
