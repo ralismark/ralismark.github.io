@@ -80,9 +80,3 @@ main[role=main] {
 body:not(.loading) #spinner-container {
 	display: none;
 }
-
-footer {
-	margin-top: 3rem;
-	padding: 3rem 0;
-	background: rgba(127, 127, 127, 0.1);
-}
