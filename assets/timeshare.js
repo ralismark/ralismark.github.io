@@ -59,7 +59,7 @@ let cache = {};
 function fetchWebcal(url) {
 	return new Promise((accept, reject) => {
 		let address = url.replace(/^webcal/, "https");
-		if(adddress in cache) {
+		if(address in cache) {
 			accept(cache[address]);
 			return;
 		}
@@ -255,7 +255,7 @@ function loadCalendarConfig(config) {
 
 	for(let url in config.data) {
 		addCalendar(url, config.data[url].name);
-		setCalendarToggle(url, config.data[url]);
+		setCalendarToggle(url, config.data[url].state);
 	}
 }
 
