@@ -60,14 +60,15 @@ function fetchWebcal(url) {
 	return new Promise((accept, reject) => {
 		let address = url.replace(/^webcal/, "https");
 
-		if(address in cache) return accept(cache[address]);
-
-		// whateverorigin.org seems "unmaintained", though there doesn't seem to be an good alternatives
-		// we need to do this since the webcal url might not support CORS
-		$.getJSON("http://www.whateverorigin.org/get?url=" + encodeURIComponent(address) + "&callback=?", (data) => {
-			cache[address] = data.contents;
-			accept(data.contents);
-		}).fail(reject);
+		// We need to bypass CORS since a lot of webcal urls (e.g. UNSW timetables) don't support it
+		let xhr = new XMLHttpRequest();
+		xhr.onerror = reject;
+		xhr.onload = (event) => {
+			cache[address] = xhr.responseText;
+			accept(cache[address]);
+		};
+		xhr.open("GET", "https://non-cors.herokuapp.com/" + address);
+		xhr.send();
 	});
 }
 
