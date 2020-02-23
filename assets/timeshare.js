@@ -59,6 +59,10 @@ let cache = {};
 function fetchWebcal(url) {
 	return new Promise((accept, reject) => {
 		let address = url.replace(/^webcal/, "https");
+		if(adddress in cache) {
+			accept(cache[address]);
+			return;
+		}
 
 		// We need to bypass CORS since a lot of webcal urls (e.g. UNSW timetables) don't support it
 		let xhr = new XMLHttpRequest();
