@@ -28,11 +28,11 @@ main[role=main] {
 
 #now {
 	position: absolute;
-	height: 1px;
+	height: 2px;
 	width: 20%;
 	background: red;
 
-	z-index: 1;
+	z-index: 5;
 }
 
 .event {
@@ -48,7 +48,6 @@ main[role=main] {
 	color: white;
 
 	overflow: hidden;
-	padding: 4px 8px;
 	border: 1px solid rgba(255, 255, 255, 0.2);
 
 	z-index: 1;
