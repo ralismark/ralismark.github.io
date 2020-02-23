@@ -1,0 +1,65 @@
+---
+layout: post
+title: Timeshare
+tags: interactive
+---
+
+<p>
+Timeweave wasn't working for me, so I made an alternative. You can add people's timetables by using their webcal link. All of your data is store client-side only; there's no server at all!
+</p>
+
+<!--more-->
+
+<p>
+Even though it's quite usable at this stage, Timeshare is still a prototype that I hacked together one day - there probably are still some bugs and missing features. For one, this relies on whateverorigin.org.
+</p>
+
+<hr>
+
+<main role="main" class="container-md">
+	<div id="webcal-list-container" class="container-fluid">
+		<form id="form-add" autocomplete="off">
+			<div class="input-group mb-1">
+				<input id="add-url" type="text" class="form-control" placeholder="webcal://">
+				<input id="add-name" type="text" class="form-control" placeholder="Name">
+				<div class="input-group-append">
+					<button class="btn btn-outline-secondary" type="submit" id="add-submit">Add</button>
+				</div>
+			</div>
+		</form>
+
+		<ul id="webcal-list" class="list-group">
+		</ul>
+	</div>
+	<div id="calendar-container" class="container-fluid">
+		<ul class="list-group">
+			<div id="calendar-heading" class="row">
+				<div class="col border bg-light">Monday</div>
+				<div class="col border bg-light">Tuesday</div>
+				<div class="col border bg-light">Wednesday</div>
+				<div class="col border bg-light">Thursday</div>
+				<div class="col border bg-light">Friday</div>
+			</div>
+			<div id="calendar" class="row">
+				<div id="day-0" class="day col border bg-light"></div>
+				<div id="day-1" class="day col border bg-light"></div>
+				<div id="day-2" class="day col border bg-light"></div>
+				<div id="day-3" class="day col border bg-light"></div>
+				<div id="day-4" class="day col border bg-light"></div>
+
+				<div id="now"></div>
+				<div id="spinner-container">
+					<div id="spinner" class="spinner-border" role="status">
+						<span class="sr-only">Loading...</span>
+					</div>
+				</div>
+			</div>
+		</ul>
+	</div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.3.0/ical.min.js" integrity="sha256-1oaCObP6yNz1ouAW50FOpNBBSNqZtpINrbL8B4W+kmM=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/assets/timeshare.css">
+<script src="/assets/timeshare.js"></script>
+
+
