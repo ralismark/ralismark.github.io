@@ -10,7 +10,7 @@ A few days ago, I was thinking about the tree that results from centroid decompo
 
 > In this post, I create a lot of terminology to refer to things that are new. If you find an existing source which described things similar to what I'm describing, please notify me and I'll update this post.
 >
-> Edit: if you search for "Cartesian tree of edges", you'll find papers describing the stuff I detail here. 
+> Edit: if you search for "Cartesian tree of edges", you'll find papers describing the stuff I detail here.
 
 > Update: Most of the content for the post is here. I plan on making a part 2 for actually implementing this.
 
@@ -102,7 +102,7 @@ digraph {
 
 *Figure 3: The original tree, with the nodes relabelled with their depth in the centroid tree*
 
-As you can see, the centroid tree can be defined recursively, and so can a Cartesian tree. Similarly, a binary search tree is basically a centroid tree of a linear chain. All these kinda of trees can be broadly described in a way that appears like divide and conquer, leading to their name of "Implicit divide and conquer trees"[^1]. They can roughly be defined in this way -- for some given some structure (state space, graph, etc.):
+As you can see, the centroid tree can be defined recursively, and so can a Cartesian tree. Similarly, a binary search tree is basically a centroid tree of a linear chain. All these kinds of trees can be broadly described in a way that appears like divide and conquer, leading to their name of "Implicit divide and conquer trees"[^1]. They can roughly be defined in this way -- for some given some structure (state space, graph, etc.):
 
 - The root is an element of this structure, which is subsequently removed.
 - The subtrees are implicit D&C trees of the disjoint parts of the remaining structure after the root element is removed.
