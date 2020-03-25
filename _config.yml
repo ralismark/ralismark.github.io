@@ -41,4 +41,12 @@ exclude:
   - Dockerfile
   - Makefile
 
+# Default values for page frontmatter
+defaults:
+  -
+    scope:
+      path: "" # everything
+    values:
+      modules: [hlink]
+
 # vim: set et ts=2:
