@@ -4,7 +4,7 @@ layout: default
 
 {% include post-nav.html %}
 
-<header>
+<header class="post-meta">
 	<h1 id="post-title">{{ page.title | escape }}</h1>
 	<p>
 		<time datetime="{{ page.date | date_to_xmlschema }}">
@@ -22,7 +22,7 @@ layout: default
 	</p>
 </header>
 
-<article>
+<article class="post-content">
 {{ content }}
 </article>
 
