@@ -4,32 +4,28 @@ layout: default
 
 {% include post-nav.html %}
 
+<header>
+	<h1 id="post-title">{{ page.title | escape }}</h1>
+	<p>
+		<time datetime="{{ page.date | date_to_xmlschema }}">
+			{{ page.date | date_to_long_string }}
+		</time>
+		{% if page.tags %}
+		<span class="separator">|</span>
+		<span id="post-tags">
+			<span id="post-tag-label">Tags:</span>
+			{% for tag in page.tags %}
+				<a href="{{ "/tags.html" | relative_url }}#{{ tag }}">{{ tag }}</a>
+			{% endfor %}
+		</span>
+		{% endif %}
+	</p>
+</header>
 
-<div id="post-meta">
-	<h1>{{ page.title | escape }}</h1>
-
-	<span id="post-date">{{ page.date | date_to_long_string }}</span>
-	{% if page.tags %}
-	|
-	<span id="post-tags">
-		<span class="text-muted">Tags:</span>
-		{% for tag in page.tags %}
-			<a href="{{ "/tags.html" | relative_url }}#{{ tag }}">{{ tag }}</a>
-		{% endfor %}
-	</span>
-	{% endif %}
-</div>
-
-<hr>
-
-<main>
+<article>
 {{ content }}
-</main>
-
-<hr>
+</article>
 
 {% include post-nav.html %}
-
-<hr>
 
 {% include utterances.html %}
