@@ -1,23 +1,17 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-	<div class="mx-auto d-sm-flex d-block flex-sm-nowrap">
-		<a class="navbar-brand" href="{{ "/" | relative_url }}">{{ site.title }}</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
+<header id="site-nav">
+	<nav>
+		<a id="navbar-root" href="{{ "/" | relative_url }}">{{ site.title }}</a>
 
-		<div class="collapse navbar-collapse text-center" id="navbar-links">
-			<ul class="navbar-nav mr-auto">
-				{% for page in site.pages %}
-					{% if page.title %}
-						<li class="nav-item">
-							<a class="nav-link" href="{{ page.url | relative_url }}">
-								{{ page.title | escape }}
-							</a>
-						</li>
-					{% endif %}
-				{% endfor %}
-			</ul>
-		</div>
-	</div>
-</nav>
-
+		<ul id="navbar-pages">
+			{% for page in site.pages %}
+			{% if page.title %}
+			<li class="navbar-page">
+				<a class="navbar-link" href="{{ page.url | relative_url }}">
+					{{ page.title | escape }}
+				</a>
+			</li>
+			{% endif %}
+			{% endfor %}
+		</ul>
+	</nav>
+</header>

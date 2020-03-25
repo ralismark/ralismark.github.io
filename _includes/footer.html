@@ -1,22 +1,20 @@
-<div id="footer-wrapper" class="bg-light">
-	<footer class="site-footer container py-4">
-		<a class="float-right" href="#">Back to top</a>
+<footer id="site-footer">
+	<nav>
+		<a id="back-to-top" href="#">Back to top</a>
+	</nav>
 
-		<p>
-			Site hand-made and <a href="https://github.com/ralismark/ralismark.github.io">hosted on <i class="fa fa-github"></i></a>.
-		</p>
+	<p>
+		Site hand-made and <a href="https://github.com/ralismark/ralismark.github.io">hosted on <i class="fa fa-github"></i></a>.
+	</p>
 
-		<p>
-			<a href="https://ralismark.github.io/feed.xml"><i class="fa fa-rss"></i> RSS</a>
-		</p>
+	<p>
+		<a href="https://ralismark.github.io/feed.xml"><i class="fa fa-rss"></i> RSS</a>
+	</p>
 
-		<div class="wrapper">
-			<sub>
-				<i class="fa fa-print"></i>
-				<span id="gen-time">
-					<i>Generated on {{ site.time | date: "%e %B %Y" }} at {{ site.time | date: "%X (%Z)" }}.</i>
-				</span>
-			</sub>
-		</div>
-	</footer>
-</div>
+	<p id="gen-time">
+		<small>
+			<i class="fa fa-print"></i>
+			Generated on {{ site.time | date: "%e %B %Y" }} at {{ site.time | date: "%X (%Z)" }}.
+		</small>
+	</p>
+</footer>
