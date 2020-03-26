@@ -1,0 +1,21 @@
+/*
+ * Styling for the post listing
+ */
+
+article.summary {
+	padding: 16px 0;
+	border-top: 1px solid $hr-fg;
+
+	.summary-title {
+		display: inline-block;
+	}
+
+	.summary-date {
+		line-height: 1.5;
+		float: right;
+	}
+
+	.summary-excerpt {
+		clear: both;
+	}
+}

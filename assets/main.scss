@@ -3,6 +3,22 @@
 ---
 @charset "utf-8";
 
+$font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+$header-bg: #343a40;
+$link-fg: #007bff;
+$link-fg-hover: #0056b3;
+$footer-bg: #eee;
+$hr-fg: #ddd;
+
+html {
+	--content-width: 750px;
+
+	@media(max-width: 800px) {
+		--content-width: 90%;
+	}
+}
+
 @import "global";
 @import "syntax";
 @import "post";
+@import "posts";
