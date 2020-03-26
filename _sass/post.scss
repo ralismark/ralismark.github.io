@@ -2,6 +2,17 @@
  * Styling specific to posts
  */
 
+.post-nav {
+	display: flex;
+	justify-content: space-between;
+}
+
+.post-meta {
+	padding-bottom: 4px;
+	margin-bottom: 4px;
+	border-bottom: 1px solid $hr-fg;
+}
+
 #post-tags a {
 	font-size: 80%;
 	padding: 0 1ex 0.4ex;
@@ -11,20 +22,18 @@
 	border-radius: 1em;
 }
 
-#content {
+article {
 	blockquote {
 		padding-left: 1em;
 		border-left: 4px solid lightgrey;
 	}
 
 	.footnotes {
-		padding-top: 1em;
-		border-top: 1px solid rgba(0, 0, 0, .1);
+		border-top: 1px solid $hr-fg;
 	}
 
-	img, svg {
+	p > img, p > svg {
 		display: block;
-		margin-left: auto;
-		margin-right: auto;
+		margin: 0 auto;
 	}
 }
