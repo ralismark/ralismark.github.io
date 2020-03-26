@@ -8,6 +8,9 @@ DOCKER_NAME = app-serve
 start: image
 	docker run --rm -v $(CURDIR):/app -it --detach -p 127.0.0.1:4000:4000 --name $(DOCKER_NAME) $(DOCKER_NAME)
 
+foreground: image
+	docker run --rm -v $(CURDIR):/app -it -p 127.0.0.1:4000:4000 --name $(DOCKER_NAME) $(DOCKER_NAME)
+
 # Stop a running container
 stop:
 	docker stop -t 2 $(DOCKER_NAME)
@@ -30,4 +33,4 @@ sh:
 clean: stop
 	docker rmi $(DOCKER_NAME)
 
-.PHONY: start stop iamge restart flogs sh clean
+.PHONY: start foreground stop image restart flogs sh clean
