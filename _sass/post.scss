@@ -5,6 +5,7 @@
 .post-nav {
 	display: flex;
 	justify-content: space-between;
+	margin: 4px 0;
 }
 
 .post-meta {
@@ -36,4 +37,8 @@ article {
 		display: block;
 		margin: 0 auto;
 	}
+}
+
+section.comments {
+	margin-top: 1em;
 }
