@@ -1,6 +1,8 @@
-<div id="footer-wrapper" class="bg-light">
-	<footer class="site-footer container py-4">
-		<a class="float-right" href="#">Back to top</a>
+<footer id="site-footer">
+	<div id="site-footer-inner">
+		<nav>
+			<a id="back-to-top" href="#">Back to top</a>
+		</nav>
 
 		<p>
 			Site hand-made and <a href="https://github.com/ralismark/ralismark.github.io">hosted on <i class="fa fa-github"></i></a>.
@@ -14,13 +16,11 @@
 			Copyright &copy; {{ site.time | date: "%Y" }} Timmy Yao
 		</p>
 
-		<div class="wrapper">
-			<sub>
+		<p id="gen-time">
+			<small>
 				<i class="fa fa-print"></i>
-				<span id="gen-time">
-					<i>Generated on {{ site.time | date: "%e %B %Y" }} at {{ site.time | date: "%X (%Z)" }}.</i>
-				</span>
-			</sub>
-		</div>
-	</footer>
-</div>
+				Generated on {{ site.time | date: "%e %B %Y" }} at {{ site.time | date: "%X (%Z)" }}.
+			</small>
+		</p>
+	</div>
+</footer>

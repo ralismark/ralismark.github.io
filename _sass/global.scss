@@ -1,0 +1,110 @@
+/*
+ * Styling affecting the overall site
+ */
+
+// css "reset"
+html, body, div {
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 500;
+	margin: 0 0 1rem;
+}
+
+p {
+	margin-top: 0;
+	margin-bottom: 1rem;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid $hr-fg;
+}
+
+body {
+	font-family: $font-family;
+	line-height: 1.5;
+
+	* {
+		box-sizing: border-box;
+	}
+
+	// a better colour for links
+	a {
+		color: $link-fg;
+
+		&:hover {
+			color: $link-fg-hover;
+		}
+	}
+
+	a:not(:hover) {
+		text-decoration: none;
+	}
+}
+
+// inspired by https://meyerweb.com/eric/tools/css/reset/
+
+#site-nav {
+	width: 100%;
+
+	background: $header-bg;
+
+	a {
+		color: white;
+		text-decoration: none;
+
+		&:hover {
+			color: #ddd;
+		}
+	}
+
+	// the site title
+	// can add a banner to this
+	#navbar-root {
+		display: block;
+		font-size: 150%;
+		text-align: center;
+	}
+
+	ul#navbar-pages {
+		padding: 0;
+		margin: 0;
+
+		// make it not actually a list
+		list-style-type: none;
+		padding-bottom: 4px;
+
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+
+		li {
+			display: block;
+			margin: 0 8px;
+		}
+	}
+}
+
+body > main {
+	width: var(--content-width);
+	margin: 32px auto;
+}
+
+#site-footer {
+	background: $footer-bg;
+	width: 100%;
+	padding: 16px 0 4px;
+
+	#site-footer-inner {
+		width: var(--content-width);
+		margin: 0 auto;
+	}
+
+	#back-to-top {
+		float: right;
+	}
+}
+

@@ -2,6 +2,7 @@
 layout: post
 title: Edge-based tree data structures
 tags: informatics
+modules: [hlink, dot2png]
 ---
 
 A few days ago, I was thinking about the tree that results from centroid decomposition as well as Cartesian trees, and noticed a surprising similarity. I continued exploring this idea, and (re)discovered a new data structure, that provides surprising insights into graph problems using the max weight edge in a path (widest path problems).
@@ -209,5 +210,3 @@ digraph {
 ```
 
 However, I'm not sure how to create this ordering. It might be possible to modify the edge tree creation to support this (by swapping the children of the subtrees you join), but you need to query if a node is part of a subtree. Doing this dynamically is quite hard. One way is to have an SBBST of edges for partial tree, then range query on it for LCA. If the LCA of the vertex and the subtree element is the parent, then the vertex is not in the subtree.
-
-{% include dot2png.html %}
