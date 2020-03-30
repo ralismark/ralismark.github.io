@@ -3,44 +3,29 @@ title: Blog
 layout: default
 ---
 
-<div class="row">
+<h1>Posts</h1>
 
-	<div class="col-md-8">
-		<h1>Posts</h1>
+{% for post in site.posts %}
+<article class="summary">
+	<header>
+		<h2 class="summary-title">
+			<a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+		</h2>
 
-		{% for post in site.posts %}
+		<p class="summary-date">
+			<i class="fa fa-clock-o"></i>
+			<time datetime="{{ post.date | date_to_xmlschema }}">
+				{{ post.date | date_to_long_string }}
+			</time>
+		</p>
+	</header>
 
-		<hr>
+	<p class="summary-excerpt">
+	{{ post.excerpt | strip_html | truncatewords: 100 }}
+	</p>
 
-		<article>
-			<div class="row">
-				<h4 class="card-title col-md-8">
-					<a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-				</h4>
-				<div class="col-md-4 text-right text-muted">
-					<i class="fa fa-clock-o"></i> {{ post.date | date_to_long_string }}
-				</div>
-			</div>
-
-			<p class="excerpt">
-				{{ post.excerpt | strip_html | truncatewords: 100 }}
-			</p>
-			<a href="{{ post.url | relative_url }}">Read More &raquo</a>
-		</article>
-		{% endfor %}
-	</div>
-
-	<div class="d-md-block d-none col-md-4">
-		<div class="card" id="tag-box">
-			<div class="card-body">
-				<h4 class="card-title">
-					Tags
-				</h4>
-
-				{% for tag in site.tags %}
-					<a href="{{ "/tags.html" | relative_url }}#{{ tag | first }}">{{ tag | first }}</a>
-				{% endfor %}
-			</div>
-		</div>
-	</div>
-</div>
+	<nav class="summary-readmore">
+		<a href="{{ post.url | relative_url }}">Read More &raquo</a>
+	</nav>
+</article>
+{% endfor %}
