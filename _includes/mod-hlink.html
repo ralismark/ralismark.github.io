@@ -1,7 +1,7 @@
 <script>
 
 window.addEventListener('load', function() {
-	let headings = document.querySelectorAll('main > h1, main > h2, main > h3');
+	let headings = document.querySelectorAll('article#post-content > h1, article#post-content > h2, article#post-content > h3');
 	[...headings].forEach((heading) => {
 		if(!heading.id) return;
 
