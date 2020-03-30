@@ -29,14 +29,3 @@ layout: default
 	</nav>
 </article>
 {% endfor %}
-
-<aside>
-	<h1>Tags</h1>
-	<ul>
-		{% for tag in site.tags %}
-		<li>
-			<a href="{{ "/tags.html" | relative_url }}#{{ tag | first }}">{{ tag | first }}</a>
-		</li>
-		{% endfor %}
-	</ul>
-</aside>
