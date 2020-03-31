@@ -9,6 +9,9 @@ layout: default
 <article class="summary">
 	<header>
 		<h2 class="summary-title">
+			{% if post.path contains "_drafts" %}
+			[draft]
+			{% endif %}
 			<a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
 		</h2>
 
