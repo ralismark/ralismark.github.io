@@ -1,7 +1,9 @@
 /*
  * Syntax highlighting styles
  */
-.highlight {
+pre.highlight {
+	overflow-x: auto;
+
 	.rouge-gutter {
 		padding-right: 1ch;
 		opacity: 0.5;
