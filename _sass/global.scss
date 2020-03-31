@@ -49,24 +49,24 @@ body {
 
 #site-nav {
 	width: 100%;
-
 	background: $header-bg;
+	
+	& > nav {
+		width: var(--content-width);
+		margin: 0 auto;
+		padding: 4px 0;
+		display: flex;
+		justify-content: space-between;
+	}
 
 	a {
 		color: white;
 		text-decoration: none;
+		font-size: 1.2em;
 
 		&:hover {
 			color: #ddd;
 		}
-	}
-
-	// the site title
-	// can add a banner to this
-	#navbar-root {
-		display: block;
-		font-size: 150%;
-		text-align: center;
 	}
 
 	ul#navbar-pages {
