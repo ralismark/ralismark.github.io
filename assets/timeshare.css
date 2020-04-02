@@ -80,3 +80,13 @@ main[role=main] {
 body:not(.loading) #spinner-container {
 	display: none;
 }
+
+.timemarker {
+	position: absolute;
+	left: 1px;
+	z-index: 5;
+	background: white;
+	opacity: 0.65;
+	font-size: 70%;
+	user-select: none;
+}
