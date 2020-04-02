@@ -34,6 +34,19 @@ function string2color(str, opacity=1) {
 	return "hsl(" + (stringHash(str) & 0xff) + "rad, 50%, 50%, " + opacity + ")";
 }
 
+function addTimeMarkers() {
+	for(let i = DAY_START+1; i < DAY_END; ++i) {
+		let elem = document.createElement("div");
+		elem.classList.add("timemarker");
+		elem.style.top = hr2pc(i - DAY_START);
+		let hr = ((i - 1) % 12 + 1) + (i < 12 ? "am" : "pm");
+		elem.innerText = hr;
+
+		let container = document.querySelector("#calendar");
+		container.appendChild(elem);
+	}
+}
+
 function addEvent(day, start, duration, desc, id) {
 	// TODO handle collisions
 	let elem = document.createElement("div");
@@ -274,3 +287,4 @@ fixNow();
 setInterval(fixNow, 1000*60);
 
 loadCalendarConfig(JSON.parse(localStorage.getItem("calendars")) || {});
+addTimeMarkers();
