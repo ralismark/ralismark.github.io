@@ -3,19 +3,13 @@
  */
 
 article.summary {
-	padding: 16px 0;
-	border-top: 1px solid $hr-fg;
+	.summary-date {
+		font-style: italic;
+	}
 
 	.summary-title {
 		display: inline-block;
-	}
-
-	.summary-date {
-		line-height: 1.5;
-		float: right;
-	}
-
-	.summary-excerpt {
-		clear: both;
+		font-size: 1.3em;
+		margin-bottom: 4px;
 	}
 }

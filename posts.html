@@ -5,6 +5,12 @@ layout: default
 
 <h1>Posts</h1>
 
+<p>
+	You can also follow this blog using
+	<a href="https://ralismark.github.io/feed.xml"><i class="fa fa-rss"></i> RSS </a>
+	.
+</p>
+
 {% for post in site.posts %}
 <article class="summary">
 	<header>
@@ -15,20 +21,13 @@ layout: default
 			<a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
 		</h2>
 
-		<p class="summary-date">
-			<i class="fa fa-clock-o"></i>
-			<time datetime="{{ post.date | date_to_xmlschema }}">
-				{{ post.date | date_to_long_string }}
-			</time>
-		</p>
+		<time class="summary-date" datetime="{{ post.date | date_to_xmlschema }}">
+			{{ post.date | date: "%e %b '%y" }}
+		</time>
 	</header>
 
 	<p class="summary-excerpt">
 	{{ post.excerpt | strip_html | truncatewords: 100 }}
 	</p>
-
-	<nav class="summary-readmore">
-		<a href="{{ post.url | relative_url }}">Read More &raquo</a>
-	</nav>
 </article>
 {% endfor %}
