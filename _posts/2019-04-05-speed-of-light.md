@@ -2,6 +2,7 @@
 layout: post
 title: A simple "derivation" of the speed of light
 tags: math
+excerpt: Deriving an expression for c without advanced vector calculus
 ---
 
 By assuming the nature of the propagation of EM waves, we can derive the speed of light from Maxwell's equations in a much simpler way and without advanced vector calculus. However, I'm not sure how valid this is, so if there's any issues, please raise them on [the repo for my blog][repo].

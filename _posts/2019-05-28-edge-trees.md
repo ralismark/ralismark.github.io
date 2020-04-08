@@ -3,6 +3,7 @@ layout: post
 title: Edge-based tree data structures
 tags: informatics
 modules: [hlink, dot2png]
+excerpt: A new(?) data structure to solve widest path problems
 ---
 
 A few days ago, I was thinking about the tree that results from centroid decomposition as well as Cartesian trees, and noticed a surprising similarity. I continued exploring this idea, and (re)discovered a new data structure, that provides surprising insights into graph problems using the max weight edge in a path (widest path problems).

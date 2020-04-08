@@ -2,6 +2,7 @@
 layout: post
 title: A Tale of Indices
 tags: exploit c-cpp
+excerpt: Exploting bad indexing code to mess with malloc and the PLT
 ---
 
 This is the story of how bad indexing code can lead to an exploit. Even though

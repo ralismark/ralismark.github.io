@@ -2,6 +2,7 @@
 layout: post
 title: Git Emergency Procedures - Recovering deleted refs
 tags: git
+excerpt: Recovering commits from deleted branches
 ---
 
 Suppose you deleted a branch, or undid a merge with a now deleted branch. How do

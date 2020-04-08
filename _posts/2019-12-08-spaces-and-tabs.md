@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Spaces v. Tabs
-tags:
+excerpt: My opinion on spaces vs tabs
 ---
 
 The "holy war" between using spaces and tabs has existed pretty much since code ever written, with all programmers having their own strong opinions on the matter - from the 8-wide tabs of linux to the 4 spaces of PIP8, there is no conclusive standard on what to use. Here, I'll provide my own perspective on this matter. Adding fuel to the fire? Maybe.

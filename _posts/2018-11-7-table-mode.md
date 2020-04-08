@@ -2,6 +2,7 @@
 layout: post
 title: Emulating table mode on Casio fx-82AU (and variants)
 tags: math
+excerpt: Making a table of values by creating a for loop
 ---
 
 Table mode is a mode available on my old calculator which essentially produced a table of values. This mode is not present on board-approved calculators (like the fx-82AU and similar variants), but I have found a way to essentially produce something similar to it, making obtaining a sequence of numbers much easier.

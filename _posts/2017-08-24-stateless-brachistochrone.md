@@ -2,6 +2,7 @@
 layout: post
 title: Stateless Brachistochrone Trajectories
 tags: math
+excerpt: Determining if you need to decelerate without remembering where you started
 ---
 
 Brachistochrone trajectories are the fastest path an object in space can take

@@ -2,6 +2,7 @@
 layout: post
 title: Diversifying content
 tags: blog
+excerpt: I might have a larger variety of content in the future.
 ---
 
 I might have a larger variety of content in the future.

@@ -2,6 +2,7 @@
 layout: post
 title: Algorithmic Proofing - Nearer Optimal Solution
 tags: informatics
+excerpt: Proving greedy algorithms by making optimal choices more greedy
 ---
 
 Greedy algorithms are a great solution to problems, but it's usually harder to show they're incorrect than to come up with them. Nearer Optimal Solution is one technique that can be used when the problem involves making a sequence of choices.

@@ -2,6 +2,7 @@
 layout: post
 title: e4ecd8b Initial Post
 tags: blog
+excerpt: This is the first post of the (hopefully long-lasting) blog
 ---
 
 This is the first post of the (hopefully long-lasting) blog. I'll be writing

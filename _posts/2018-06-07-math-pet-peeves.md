@@ -2,6 +2,7 @@
 layout: post
 title: Math Pet Peeves
 tags: math
+excerpt: Math notation which I don't like
 ---
 
 I like maths. I do a decent amount of maths, and a lot of my friends do maths. But there are just a few things in maths that are especially annoy me. These aren't actual issues, just my stylistic and notational pet peeves.
