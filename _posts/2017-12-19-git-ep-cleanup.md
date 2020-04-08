@@ -2,6 +2,7 @@
 layout: post
 title: Git Emergency Procedures - Cleaning things up
 tags: git
+excerpt: Resetting the repo to its inital state & deleting extra files
 ---
 
 When working on a repo, you may want to reset the repository to the initial

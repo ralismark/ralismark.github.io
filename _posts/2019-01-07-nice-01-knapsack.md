@@ -2,6 +2,7 @@
 layout: post
 title: A nice 0-1 knapsack variation solution
 tags: c-cpp informatics
+excerpt: Solving a "standard" problem in a very clean way
 ---
 
 The [knapsack problem][ksp] is a informatics problem to find the set of items whose total weight is under a given limit and whose total value is as high as possible. The 0-1 knapsack problem is a variation where there is only 1 of each item. A subcategory of this problem (I call it the allocation problem) is when the value is the weight i.e. the problem is to find the highest weight possible under a limit. It turns out that there's very simple way to solve this problem.

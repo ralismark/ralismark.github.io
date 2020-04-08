@@ -2,6 +2,7 @@
 layout: post
 title: Fenwick Trees
 tags: informatics interactive
+excerpt: Visualising the structure of a fenwick tree
 ---
 
 Fenwick trees are a lesser-known data structure capable of O(log n) update and prefix query. However, they are often forgotten in favour of the more useful segment tree. Still, they're much easier to implement and make a cool structure when drawn.
