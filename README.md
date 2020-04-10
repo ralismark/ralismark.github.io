@@ -5,6 +5,17 @@ through docker (via the use of a makefile).
 
   [1]: https://ralismark.github.io
 
+## Experiments
+
+These are changes I make to the blog that may be temporary e.g. testing
+features, services etc.
+
+Currently:
+
+- [GoatCounter][2] for analytics
+
+  [2]: https://www.goatcounter.com/
+
 ## Running docker
 
 This uses `make` for many of the management operations required, such as
