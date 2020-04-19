@@ -1,0 +1,91 @@
+---
+layout: post
+title: Interactive Canvas
+tags: interactive web
+excerpt: HTML canvas which is redrawn as you code
+---
+
+<p>
+	It's an interactive canvas! Type code in the textbox and it'll be automatically be run on the canvas. The sample code demonstrates what you can do. You also have access to these variables:
+</p>
+
+<ul>
+	<li>canvas - the canvas DOM element</li>
+	<li>ctx - the 2d canvas context</li>
+	<li>width - the width of the canvas</li>
+	<li>height - the height of the canvas</li>
+	<li>drawPath(p, n) - draw a path using n points using the function p</li>
+</ul>
+
+<hr>
+
+<style>
+textarea { width: 500px; height: 300px; }
+textarea.good { border: 1px solid rgba(0, 255, 0, 0.4); }
+textarea.bad { border: 1px solid rgba(255, 0, 0, 0.4); }
+canvas { border: 1px solid rgba(127,127,127,0.3); }
+.hcenter { display: flex; flex-direction: column; align-items: center; }
+</style>
+
+<div class="hcenter">
+<canvas width="500" height="500"></canvas>
+<textarea
+	spellcheck="false"
+	oninput="update()">
+let f = [2,3,5];
+
+let tau = 2*Math.PI;
+let s = (s, v) => [s*v[0], s*v[1]];
+let e3 = (a,b,c) => [a - b/2 - c/2, (c-b) * Math.sqrt(3)/2];
+let P = p => s(100, e3(Math.sin(tau*p*f[0]), Math.sin(tau*p*f[1]), Math.sin(tau*p*f[2])));
+
+ctx.lineWidth = 5;
+ctx.lineCap = "round"
+drawPath(P, 1000);
+</textarea>
+</p>
+
+<script>
+function update() {
+	let textarea = document.querySelector("textarea");
+	let script = textarea.value;
+	let canvas = document.querySelector("canvas");
+	let ctx = canvas.getContext("2d")
+
+	let env = {
+		ctx: ctx,
+		canvas: canvas,
+		width: canvas.width,
+		height: canvas.height,
+		drawPath: (P, N) => {
+			for(let i = 1; i <= N; ++i) {
+				ctx.beginPath();
+				ctx.moveTo(...P((i-1)/N));
+				ctx.lineTo(...P(i/N));
+				ctx.strokeStyle = "hsl(" + (i/N*360) + "deg, 50%, 50%)";
+				ctx.stroke();
+			}
+		}
+		};
+
+	let f = Function(...Object.keys(env), "'use strict';" + script);
+
+	textarea.classList.remove("good", "bad");
+
+	try {
+		ctx.restore(); ctx.save();
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.beginPath();
+		ctx.restore(); ctx.save();
+
+		ctx.setTransform(1, 0, 0, 1, canvas.width/2, canvas.height/2);
+		f(...Object.values(env));
+
+		textarea.classList.add("good");
+	} catch(err) {
+		textarea.classList.add("bad");
+		throw err;
+	}
+}
+setTimeout(update, 100);
+</script>
