@@ -2,7 +2,7 @@
 layout: post
 title: Small Merge
 tags: informatics
-excerpt: A generalisation of DSU's merge by size to be more useful
+excerpt: A generalisation of DSU's merge by size to be more useful.
 ---
 
 Small merge is a technique derived from DSU which allows merging of groups (and data about groups) by moving elements between groups at most O(n log n) times.
@@ -29,7 +29,7 @@ void merge(int a, int b)
 }
 ```
 
-By observing how a single value moves between sets, we can see that the number of moves is log of the size of set its in -- when a number moves, the set must at least double in size. Thus, the overall complexity in terms of total number of moves is in fact $O(n \log n)$.
+By observing how a single value moves between sets, we can see that the number of moves is log of the size of set its in -- when a number moves, the set must at least double in size. Thus, the overall complexity in terms of total number of moves is in fact $$O(n \log n)$$.
 
 # Generalising this idea
 
@@ -40,7 +40,7 @@ We can take the idea of only merging smaller into larger, and generalise it, suc
 > - Merge two groups into one.
 > - Answer query: How many elements in a certain group have a certain value?
 
-To answer the second operation, we keep a map of the number of each value instead of just the contents, and use normal DSU. When merging, we merge from the group whose map is smaller into the one whose map is larger, thus being able solve the problem in $O(n \log^2 n)$ with each query being $O(\log n)$.
+To answer the second operation, we keep a map of the number of each value instead of just the contents, and use normal DSU. When merging, we merge from the group whose map is smaller into the one whose map is larger, thus being able solve the problem in $$O(n \log^2 n)$$ with each query being $$O(\log n)$$.
 
 In particular, this technique is much more useful on trees, where we can entire remove the DSU required to find the root. [HackerRank - Coloring Tree][coloring-tree] is a good problem to demonstrate this:
 
