@@ -4,7 +4,7 @@ layout: default
 
 # Index
 
-Hi, I'm `ralismark`. Welcome to my website.
+Hi, I'm Timmy Yao. Welcome to my website.
 
 I'm a 1st year computer science student at UNSW.
 

@@ -24,6 +24,17 @@
 		}
 	}
 
+	#navbar-root {
+		&::before {
+			content: '';
+			display: inline-block;
+			height: 1.2em;
+			width: 1.6em;
+			vertical-align: text-bottom;
+			background: center/100% url('/assets/logo.png');
+		}
+	}
+
 	ul#navbar-pages {
 		padding: 0;
 		margin: 0;
