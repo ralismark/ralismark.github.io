@@ -53,5 +53,6 @@ defaults:
     values:
       modules:
         hlink: true
+        math: true
 
 # vim: set et ts=2:
