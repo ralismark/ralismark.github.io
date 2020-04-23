@@ -49,7 +49,9 @@ defaults:
   -
     scope:
       path: "" # everything
+      type: "posts"
     values:
-      modules: [hlink]
+      modules:
+        hlink: true
 
 # vim: set et ts=2:

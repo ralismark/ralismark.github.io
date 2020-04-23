@@ -2,7 +2,8 @@
 layout: post
 title: Edge-based tree data structures
 tags: informatics
-modules: [hlink, dot2png]
+modules:
+    dot2png: true
 excerpt: A new(?) data structure to solve widest path problems
 ---
 
