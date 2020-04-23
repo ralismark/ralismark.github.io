@@ -29,11 +29,11 @@ midpoint of the distance between them. The section is effectively a
 mini-brachistochrone trajectory, but with everything moving at speed $$v$$.
 
 $$
-\begin{align*}
+\begin{aligned}
 	  t_{stop} &= {v \over A}
 \\	         p &= {1 \over 2} A t_{stop}^2 = {v^2 \over 2A}
 \\	x_{switch} &= {x + p \over 2} = {x \over 2} + {v^2 \over 4A}
-\end{align*}
+\end{aligned}
 $$
 
 You can just use the sign of $$x_{switch}$$ to determine if you need to boost
@@ -45,12 +45,12 @@ solve for $$t$$ to determine how long until the switchover.
 	switchover has not been reached.
 
 $$
-\begin{align*}
+\begin{aligned}
 	x_{switch} &= x - vt - {1 \over 2} At^2
 \\	0 &= t^2({A \over 2}) + t(v) + (x_{switch} - x)
 \\	t &= \frac{-v \pm \sqrt{v^2 - 2A(x_{switch} - x)}} {A}
 \\	t &= \frac{-v \pm \sqrt{ {v^2 \over 2} + Ax }} {A}
-\end{align*}
+\end{aligned}
 $$
 
 Even though there are 2 solutions (either plus or minus), we'll only want one of
