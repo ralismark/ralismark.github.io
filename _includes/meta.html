@@ -26,6 +26,9 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 {% for module in page.modules %}
-<!-- module {{ module }} -->
-{% include mod-{{ module }}.html %}
+{% assign enabled = module | last %}
+{% if enabled %}
+<!-- module {{ module | first }} -->
+{% include mod-{{ module | first }}.html %}
+{% endif %}
 {% endfor %}
