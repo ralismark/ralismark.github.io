@@ -41,6 +41,11 @@ article.post-content {
 		display: block;
 		margin: 0 auto;
 	}
+
+	p > img, p > svg, div.equation, div.highlighter-rouge {
+		width: 100%;
+		overflow-x: auto;
+	}
 }
 
 section.comments {
