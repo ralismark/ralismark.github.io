@@ -38,10 +38,10 @@ The optimal solution here is the one which is lexicographically least when sorte
 Consider two sequences of numbers $$S$$ and $$G$$, where $$G$$ is lexicographically less. Without loss of generality, assume both are sorted in decreasing order. Let $$A = G_i$$ and $$B = S_i$$, where $$i$$ is the first difference. Since $$G$$ is lexicographically less, $$A < B$$. Since the totals must be the same, there must exist $$j > i$$ where $$C = G_j > D = S_i$$.
 
 $$
-\begin{align*}
+\begin{aligned}
 	G:\;& G_1, G_2, G_3, \dots\ A\dots C \dots \\
 	S:\;& \underbrace{S_1,\ S_2,\ S_3, \dots}_\textrm{same}\ B \dots D \dots
-\end{align*}
+\end{aligned}
 $$
 
 Since $$A \ge C$$, we have $$B > A \ge C > D$$ and so $$B - D > 2$$ since everything is an integer. As such, we can modify $$S$$ through $$B \mapsto B - 1$$, $$D \mapsto D + 1$$ to make it more efficient and closer to the greedy.
