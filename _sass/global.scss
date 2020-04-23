@@ -1,6 +1,4 @@
-/*
- * Styling affecting the overall site
- */
+// inspired by https://meyerweb.com/eric/tools/css/reset/
 
 // css "reset"
 html, body, div {
@@ -13,7 +11,12 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0 0 1rem;
 }
 
-p {
+pre {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+p, div.highlighter-rouge {
 	margin-top: 0;
 	margin-bottom: 1rem;
 }
@@ -23,13 +26,13 @@ hr {
 	border-top: 1px solid $hr-fg;
 }
 
+* {
+	box-sizing: border-box;
+}
+
 body {
 	font-family: $font-family;
 	line-height: 1.5;
-
-	* {
-		box-sizing: border-box;
-	}
 
 	// a better colour for links
 	a {
@@ -38,73 +41,17 @@ body {
 		&:hover {
 			color: $link-fg-hover;
 		}
-	}
 
-	a:not(:hover) {
-		text-decoration: none;
-	}
-}
-
-// inspired by https://meyerweb.com/eric/tools/css/reset/
-
-#site-nav {
-	width: 100%;
-	background: $header-bg;
-	
-	& > nav {
-		width: var(--content-width);
-		margin: 0 auto;
-		padding: 4px 0;
-		display: flex;
-		justify-content: space-between;
-	}
-
-	a {
-		color: white;
-		text-decoration: none;
-		font-size: 1.2em;
-
-		&:hover {
-			color: #ddd;
-		}
-	}
-
-	ul#navbar-pages {
-		padding: 0;
-		margin: 0;
-
-		// make it not actually a list
-		list-style-type: none;
-		padding-bottom: 4px;
-
-		display: flex;
-		justify-content: center;
-		flex-wrap: wrap;
-
-		li {
-			display: block;
-			margin: 0 8px;
+		&:not(:hover) {
+			text-decoration: none;
 		}
 	}
 }
 
-body > main {
-	width: var(--content-width);
-	margin: 32px auto;
+// make KaTeX the right size
+.katex {
+	font-size: 1.1em !important;
 }
-
-#site-footer {
-	background: $footer-bg;
-	width: 100%;
-	padding: 2rem 0;
-
-	#site-footer-inner {
-		width: var(--content-width);
-		margin: 0 auto;
-	}
-
-	#back-to-top {
-		float: right;
-	}
+.highlighter-rouge {
+	font-size: 1em;
 }
-
