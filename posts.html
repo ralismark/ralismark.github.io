@@ -6,11 +6,14 @@ nav: true
 
 <h1>Posts</h1>
 
-<p>
-	You can also follow this blog using
-	<a href="https://ralismark.github.io/feed.xml"><i class="fa fa-rss"></i> RSS </a>
-	.
-</p>
+<hr>
+
+<ul class="ul-flat">
+	<li><a href="/feed.xml"><i class="fa fa-rss"></i> RSS</a></li>
+	<li><a href="/tags.html"><i class="fa fa-tags"></i>Tags</a></li>
+</ul>
+
+<hr>
 
 {% for post in site.posts %}
 <article class="summary">
