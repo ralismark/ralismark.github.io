@@ -55,3 +55,19 @@ body {
 .highlighter-rouge {
 	font-size: 1em;
 }
+
+// globally useful
+ul.ul-flat {
+	padding: 0;
+	margin: 0;
+
+	list-style-type: none;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+
+	li {
+		margin: 0 8px;
+		display: block;
+	}
+}

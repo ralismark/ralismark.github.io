@@ -2,7 +2,7 @@
 	<nav>
 		<a id="navbar-root" href="{{ "/" | relative_url }}">{{ site.title }}</a>
 
-		<ul id="navbar-pages">
+		<ul id="navbar-pages" class="ul-flat">
 			{% for page in site.pages %}
 			{% if page.nav %}
 			<li class="navbar-page">
