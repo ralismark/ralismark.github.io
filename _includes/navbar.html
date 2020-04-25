@@ -4,7 +4,7 @@
 
 		<ul id="navbar-pages">
 			{% for page in site.pages %}
-			{% if page.title %}
+			{% if page.nav %}
 			<li class="navbar-page">
 				<a class="navbar-link" href="{{ page.url | relative_url }}">
 					{{ page.title | escape }}
