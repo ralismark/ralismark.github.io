@@ -26,7 +26,6 @@ A centroid tree is one generated from recursively finding the centroid of a tree
 This is useful if you want to find a node in the tree, and you can only determine which subtree adjacent to a node the target is (see FARIO 2019 Nav). In a sense, it's like a binary search tree.
 
 ``` dot
-// engine=neato
 graph {
 	node [shape=circle];
 	b -- d;
@@ -127,7 +126,6 @@ The way you can make such a tree is by augmenting a Kruskal's MST algorithm to a
 Here we have a random tree with weighted edges to demonstrate what I mean:
 
 ```dot
-// engine=neato
 graph {
 	node [shape=circle];
 	i -- a [label=4];
