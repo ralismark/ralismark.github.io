@@ -28,10 +28,10 @@
 		&::before {
 			content: '';
 			display: inline-block;
-			height: 1.2em;
+			height: 100%;
 			width: 1.6em;
 			margin-right: 0.2em;
-			vertical-align: text-bottom;
+			vertical-align: bottom;
 			background: center/100% url('/assets/logo.png');
 		}
 	}
