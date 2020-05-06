@@ -15,3 +15,10 @@ Right now, the most complete part is [my blog](/posts.html), where I posts stuff
 - [non-competitive programming](/2019/01/04/bluehid-1.html)
 - [maths](/2019/04/05/speed-of-light.html)
 - as well as [tools](/2019/01/09/imgtools.html) and [other interactive things](/2019/05/24/fenwick-tree.html).
+
+# Elsewhere on the internet
+
+I'm called ralismark on all of these places:
+
+- <a rel="me" href="https://twitter.com/ralismark">Twitter</a>
+- <a rel="me" href="https://github.com/ralismark">Github</a>
