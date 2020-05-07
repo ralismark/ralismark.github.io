@@ -1,13 +1,14 @@
 ---
 layout: default
+main_attr: class="h-entry"
 ---
 
 {% include post-nav.html %}
 
 <header class="post-meta">
-	<h1 id="post-title">{{ page.title | escape }}</h1>
+	<h1 id="post-title" class="p-name">{{ page.title | escape }}</h1>
 	<p>
-		<time datetime="{{ page.date | date_to_xmlschema }}">
+		<time datetime="{{ page.date | date_to_xmlschema }}" class="dt-published">
 			{{ page.date | date_to_long_string }}
 		</time>
 		{% if page.tags %}
@@ -15,14 +16,14 @@ layout: default
 		<span id="post-tags">
 			<span id="post-tag-label">Tags:</span>
 			{% for tag in page.tags %}
-				<a href="{{ "/tags.html" | relative_url }}#{{ tag }}">{{ tag }}</a>
+				<a class="p-category" href="{{ "/tags.html" | relative_url }}#{{ tag }}">{{ tag }}</a>
 			{% endfor %}
 		</span>
 		{% endif %}
 	</p>
 </header>
 
-<article class="post-content">
+<article class="post-content e-content">
 {{ content }}
 </article>
 
