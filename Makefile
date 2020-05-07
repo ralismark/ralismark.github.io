@@ -10,7 +10,7 @@ JEKYLL_OPTS = --drafts --config _config.yml,_config-dev.yml
 start: image
 	docker run $(DOCKER_OPTS) --rm -it --detach --name $(DOCKER_NAME) $(DOCKER_NAME) $(JEKYLL_OPTS)
 
-foreground: image
+fg: image
 	# xdg-open "http://localhost:4000"
 	docker run $(DOCKER_OPTS) --rm -it --name $(DOCKER_NAME) $(DOCKER_NAME) $(JEKYLL_OPTS)
 
@@ -36,4 +36,4 @@ sh:
 clean: stop
 	docker rmi $(DOCKER_NAME)
 
-.PHONY: start foreground stop image restart flogs sh clean
+.PHONY: start fg stop image restart flogs sh clean
