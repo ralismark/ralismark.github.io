@@ -1,0 +1,2 @@
+# Config settings for local testing go here
+localhost: true

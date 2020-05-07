@@ -9,6 +9,7 @@ excerpt_separator: <!--more-->
 #
 # build setting
 #
+localhost: false
 markdown: kramdown
 safe: true
 

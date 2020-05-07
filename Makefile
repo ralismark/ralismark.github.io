@@ -3,17 +3,20 @@
 #
 
 DOCKER_NAME = app-serve
+DOCKER_OPTS = -v $(CURDIR):/app:ro -p 127.0.0.1:4000:4000
+JEKYLL_OPTS = --drafts --config _config.yml,_config-dev.yml
 
 # Start a container
 start: image
-	docker run --rm -v $(CURDIR):/app -it --detach -p 127.0.0.1:4000:4000 --name $(DOCKER_NAME) $(DOCKER_NAME)
+	docker run $(DOCKER_OPTS) --rm -it --detach --name $(DOCKER_NAME) $(DOCKER_NAME) $(JEKYLL_OPTS)
 
 foreground: image
-	docker run --rm -v $(CURDIR):/app -it -p 127.0.0.1:4000:4000 --name $(DOCKER_NAME) $(DOCKER_NAME)
+	# xdg-open "http://localhost:4000"
+	docker run $(DOCKER_OPTS) --rm -it --name $(DOCKER_NAME) $(DOCKER_NAME) $(JEKYLL_OPTS)
 
 # Stop a running container
 stop:
-	docker stop -t 2 $(DOCKER_NAME)
+	docker stop -t 0 $(DOCKER_NAME)
 
 # Build container image (don't run)
 image: Dockerfile
