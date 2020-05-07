@@ -12,7 +12,7 @@ involve messing with the plt!
 
 <!--more-->
 
-## A Wild Bug Appears
+# A Wild Bug Appears
 
 First, the code. This is not exactly the original code, but simplified quite a
 bit (removing the input logic, much checking and other functionality).
@@ -63,7 +63,7 @@ Can you find the bug? Hint: it's in `get_addr`. The matrix indexing is
 incorrect, it should be `row * mat->cols + col`. See the difference? This
 overflow is what allows the shell to be spawned.
 
-## A note on float conversion
+# A note on float conversion
 
 In this program, memory is only accessible as floats. While inconvenient, this
 is still usable as floats also take up the same space as ints, 4 bytes. With
@@ -86,7 +86,7 @@ int main()
 Later on, we'll also write strings. Since the system is little endian (x86), we
 just use the characters' ASCII value, in reverse order (for each 4-byte chunk).
 
-## Exploit Preparation
+# Exploit Preparation
 
 Firstly, a bit on `malloc()`. It obtains memory from the system (usually via
 `mmap()`), and divides it up into chunks. These are then allocated when
@@ -113,7 +113,7 @@ can `system()`. However, it is always at the same offset from `free()`, and we
 can use that, along with the existing plt entry to calculate the position of
 `system()`.
 
-## Actual Exploit
+# Actual Exploit
 
 First, we need to get some information:
 

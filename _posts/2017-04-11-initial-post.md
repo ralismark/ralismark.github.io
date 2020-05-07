@@ -16,7 +16,7 @@ them on a blog? And here's the first post.
 
 Not much more to it at this point.
 
-## 2 Hard Problems
+# 2 Hard Problems
 
 As once was said, one of the 2 hardest problems in computer science was naming
 things, such as this blog. I didn't (and probably don't) have a good name for

@@ -16,6 +16,7 @@ kramdown:
   # Use Github-flavoured markdown (e.g. triple backtick code)
   input: GFM
   syntax_highlighter: rouge
+  header_offset: 1 # h1 becomes h2 (h1 is title)
 
   syntax_highlighter_opts:
     span:
