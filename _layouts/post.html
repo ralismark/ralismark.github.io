@@ -7,6 +7,9 @@ main_attr: class="h-entry"
 
 <header class="post-meta">
 	<h1 id="post-title" class="p-name">{{ page.title | escape }}</h1>
+	<p class="p-summary"><em>
+		{{ page.excerpt }}
+	</em></p>
 	<p>
 		<time datetime="{{ page.date | date_to_xmlschema }}" class="dt-published">
 			{{ page.date | date_to_long_string }}
