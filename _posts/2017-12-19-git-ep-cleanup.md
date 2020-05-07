@@ -19,7 +19,7 @@ but it's very difficult to find when hidden by `.gitignore`.
 For this, I'm assuming you want to reset absolutely everything you've done. If
 you want to save things, copy them outside the repo before wiping everything.
 
-## Tracked files
+# Tracked files
 
 Reverting all tracked files is pretty simple:
 
@@ -34,7 +34,7 @@ However, this misses both files ignore by `.gitignore` and those that are just
 plain untracked. These are usually more common than modified files, especially
 when you're just building a project. 
 
-## Actually cleaning
+# Actually cleaning
 
 Fortunately, there exists a command to do just this - [`git clean`][1]! As its
 man page helpfully states:
@@ -74,7 +74,7 @@ best to see the [man page][2].
 However, you still need to run `git reset --hard HEAD` to reset modified files,
 as `git clean` only works on files not under version control.
 
-## Not everything
+# Not everything
 
 The above covers most destructive use cases, but once in a while you'll need to
 save a few things from complete destruction.

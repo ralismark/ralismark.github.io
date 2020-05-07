@@ -10,7 +10,7 @@ you recover the commits? There are several things to go about this.
 
 <!--more-->
 
-## Immediate Action
+# Immediate Action
 
 This is a completely recoverable scenario, since git doesn't immediately delete
 unreferenced commits. To find the hash of the commit, you can run `git reflog`
@@ -21,7 +21,7 @@ best way to find the commit you need to reference.
 Next, to actually restore the reference, you need to make a branch pointing to
 the hash: `git branch <name> <hash>`.
 
-## Possible Causes
+# Possible Causes
 
 One way this can happen (as it did to me) was to:
 1. Merge branch `feature` into `master`.
@@ -42,7 +42,7 @@ from history! This can be done accidentally, since there's no warnings. However,
 if the merged was a fast-forward, you'll have to delete all the commits in the
 merged branch (since the commits on `feature` are inlined into `master`).
 
-## Other Notes
+# Other Notes
 
 If you want to change the commit a branch is pointing to, use
 `git reset --hard <hash>`.

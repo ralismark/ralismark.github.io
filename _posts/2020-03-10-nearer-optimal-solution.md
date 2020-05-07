@@ -15,7 +15,7 @@ However, you need to be careful to ensure that you can indeed convert any optima
 
 In both of these examples, we'll consider the first difference. While this isn't necessary, it's a common approach. There are also a variety of algorithms which can be proven using this technique, such as Kruskal's MST.
 
-## Example: Interval Maximal Independent Set
+# Example: Interval Maximal Independent Set
 
 > You're given a set of intervals. Pick the largest number of intervals which don't overlap.
 
@@ -27,7 +27,7 @@ However, if $$G$$ is a strict prefix of $$S$$, we could've added the missing int
 
 Since you can always repeat this procedure to get to $$G$$, the greedy algorithm is optimal.
 
-## Example: Sum of Squares[^1]
+# Example: Sum of Squares[^1]
 
 > You're given a number $$X$$. Pick $$N$$ non-negative integers which sum to $$X$$ so that the sum of squares is minimised.
 
