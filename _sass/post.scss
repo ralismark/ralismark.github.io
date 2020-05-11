@@ -43,8 +43,9 @@ article.post-content {
 	}
 
 	p > img, p > svg, div.equation, div.highlighter-rouge {
-		width: 100%;
+		max-width: 100%;
 		overflow-x: auto;
+		height: auto;
 	}
 }
 
