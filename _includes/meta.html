@@ -14,7 +14,7 @@
 
 <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
 
-{% if !site.localhost %}
+{% if jekyll.environment == "production" %}
 <!-- experiment: goat counter -->
 <script data-goatcounter="https://ralismark.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
