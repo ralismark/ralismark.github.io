@@ -2,6 +2,12 @@
 	<nav>
 		<a id="navbar-root" href="{{ "/" | relative_url }}">{{ site.title }}</a>
 
+		{% if jekyll.environment != "production" %}
+		<span>
+			{{ jekyll.environment }}
+		</span>
+		{% endif %}
+
 		<ul id="navbar-pages" class="ul-flat">
 			{% for page in site.pages %}
 			{% if page.nav %}
