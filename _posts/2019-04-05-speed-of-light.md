@@ -26,7 +26,7 @@ $$
 \end{aligned}
 $$
 
-![](/assets/em-wave.svg "Electromagnetic Wave. Credits to sabicool.")
+![](/render/build/em-wave.svg "Electromagnetic Wave. Credits to sabicool.")
 
 > My friend I mentioned earlier showed me an in-depth explanation of this (though it's not on his blog), which has a 3D LaTeX diagram. I might adapt it and include it, since this current explanation isn't really that clear.
 >
