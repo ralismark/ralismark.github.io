@@ -31,8 +31,7 @@ hr {
 }
 
 body {
-	font-family: $font-family;
-	line-height: 1.5;
+	font: $font;
 
 	// a better colour for links
 	a {
@@ -53,7 +52,7 @@ body {
 	font-size: 1.1em !important;
 }
 .highlighter-rouge {
-	font-size: 1em;
+	font: $mono-font;
 }
 
 // globally useful
