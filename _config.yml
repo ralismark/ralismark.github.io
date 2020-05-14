@@ -54,7 +54,7 @@ defaults:
       type: "posts"
     values:
       modules:
-        hlink: true
+        # hlink: true
         math: true
 
 # vim: set et ts=2:
