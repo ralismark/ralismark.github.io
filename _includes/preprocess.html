@@ -18,6 +18,15 @@
 		{% endif %}
 	{% elsif tag == "script" or tag == "style" %}
 		{% capture raw_until %}/{{ tag }}{% endcapture %}
+	{% elsif tag == "img" %} <!-- Add caption from title -->
+		{% assign part = segment | split: ">" %}
+		{% assign part = part[0] | split: 'title="' %}
+		{% assign title = part[1] | split: '"' | first %}
+		{% if title and title != "" %}
+			<!-- add a caption element before the image -->
+			{% capture out %}{{ out }}<{{ segment }}<span class="caption">{{ title }}</span>{% endcapture %}
+			{% continue %}
+		{% endif %}
 	{% elsif tag == "h2" %} <!-- add heading links -->
 		<!-- note: we reserve h1 to be page headings (e.g. post title), so don't add links to those -->
 		{% assign part = segment | split: ">" %}

@@ -47,6 +47,12 @@ article.post-content {
 		overflow-x: auto;
 		height: auto;
 	}
+
+	.caption {
+		display: block;
+		text-align: center;
+		font-style: italic;
+	}
 }
 
 section.comments {
