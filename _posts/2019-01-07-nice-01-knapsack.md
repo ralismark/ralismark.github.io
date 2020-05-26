@@ -1,42 +1,78 @@
 ---
 layout: post
-title: A nice 0-1 knapsack variation solution
+title: A nice subset-sum solution
 tags: c-cpp informatics
 excerpt: Solving a "standard" problem in a very clean way
 ---
 
-The [knapsack problem][ksp] is a informatics problem to find the set of items whose total weight is under a given limit and whose total value is as high as possible. The 0-1 knapsack problem is a variation where there is only 1 of each item. A subcategory of this problem (I call it the allocation problem) is when the value is the weight i.e. the problem is to find the highest weight possible under a limit. It turns out that there's very simple way to solve this problem.
+> This post was rewritten in May 2020
 
-[ksp]: https://en.wikipedia.org/wiki/Knapsack_problem
+[Subset-sum][subsetsum] is a problem to determine if it's possible to find a subset of a given set of numbers which sum of a certain value. I found a very simple algorithms that can be extended to a few variations of the problem.
+
+[subsetsum]: https://en.wikipedia.org/wiki/Subset_sum_problem
 
 <!--more-->
 
-Inputs:
+For the problem, let:
 
-- N, the total number of items
-- W, the weight limit
-- w<sub>i</sub>, the weight of the ith element (non-negative)
+- $$T$$ be our target sum, and
+- $$w[0..N]$$ be an array of $$N$$ positive integers.
 
-Output:
+The standard dynamic programming approach is to have your subproblem be "is it possible to reach $$t$$ using only $$w[0..k]$$" for given $$t$$ and $$k$$. The recurrence is as follows:
 
-- W<sub>max</sub>, the maximum attainable weight under W
+$$
+sss(t, k) = \begin{cases}
+	0 & t < 0 \textrm{ or } k < 0 \\
+	1 & t = 0 \\
+	sss(t - w[k], k-1) \vee sss(t, k-1) & \textrm{otherwise}
+\end{cases}
+$$
 
-In this variation, we only need to store if each weight sum is possible, and that this sum will not be greater than W. As such, we can represent it an array of bools. Normally, for each item, you would iterate through the possible weights in reverse and update the possible weight. This is what you'd do for general 0-1 knapsack, but since we only care about if its possible, we can use `std::bitset` and bit shifting to get a very clean solution:
+We can see from this that $$sss(\cdot, k)$$ only depends on values of $$sss(\cdot, k-1)$$. As such, we can "optimise" this algorithm into an iterative one, performing the following transformation at every step:
+
+$$
+sss[t] \mapsto sss[t] \vee sss[t - w[k]]
+$$
+
+With $$sss[t] = 1$$ if $$t = 0$$ otherwise 0 initially.
+
+Since we're working with boolean values, that looks like a bitshift! Translating this to C++ code:
 
 ```cpp
-bitset<W+1> possible = {1};
+bitset<T+1> sss = {1};
+for(int w_i : w) sss |= (sss << w_i);
+// answer is sss[T]
+```
 
-for(int w_i : weights) {
-	possible |= (possible << w_i);
-}
+Solved in only two or three lines.
 
-for(int i = W; i >= 0; --i) {
-	if(possible[i]) {
-		cout << i;
-		break;
+# Variations of this problem
+
+Since we are able to calculate $$sss(t, N-1)$$ for all $$t$$, we can also answer some optimisation problems:
+
+- What is the largest sum possible under $$T$$? (find the highest bit set)
+- How close can we get to T? (Use a bitset of length $$2T$$)
+
+We can also solve similar problems, such as:
+
+- [AIIO2013 - Flatman's Tower][fmt]: Input is a list of pairs. We can pick at most one value from each pair. (`sss |= (sss < a) | (sss < b)`)
+
+[fmt]: https://orac.amt.edu.au/cgi-bin/train/problem.pl?set=aiio13&problemid=649
+
+# Backtracking
+
+In fact, we can even recover the subset used to make the sum by noticing that $$w[i]$$ allows us to "reach" all $$t$$ where $$sss[i+1][t] \wedge \neg sss[i][t]$$ is true:
+
+```cpp
+bitset<T+1> sss[N+1] = {{1}};
+for(int i = 0; i < N; ++i) sss[i+1] = sss[i] | (sss[i] << w[i]);
+// Assuming it's possible to sum to T
+vector<int> taken;
+for(int i = N-1, t = T; i >= 0; --i) {
+	if(!sss[i][t]) {
+		// We need w[i]
+		taken.push_back(w[i]);
+		t -= w[i];
 	}
 }
 ```
-
-Note that this requires W to not be too large, but most problems don't have an extremely large W. This also works for similar problems where the weight and the value is the same.
-
