@@ -32,7 +32,7 @@ int max(int n, int* vals) {
 }
 ```
 
-The invariant here is that $$most$$ is the greatest value in $$vals[0 .. i-1]$$. 
+The invariant here is that $$most$$ is the greatest value in $$vals[0 .. i-1]$$.
 
 Firstly, the invariant is before the loop is run -- the maximum of $$vals[0..0]$$ is simply the only element it contains, $$vals[0]$$.
 
@@ -65,7 +65,7 @@ int lo = -1, hi = N;
 Let $$P(i)$$ be a predicate which is true if $$A[i] \ge x$$. We'll have 3 invariants:
 
 1. None of $$[0..lo]$$ satisfy $$P$$.
-2. All of $$[hi..N-1]$$ satisfy P.
+2. All of $$[hi..N-1]$$ satisfy $$P$$.
 3. The loop only runs while there are indices between $$lo$$ and $$hi$$.
 
 In our loop, we update either $$lo$$ or $$hi$$ depending on if the midpoint $$mid$$ satisfies $$P$$:
