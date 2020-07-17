@@ -27,3 +27,6 @@ html {
 @import "syntax";
 @import "post";
 @import "posts";
+{% for style in site.css_include %}
+@import "{{ style }}";
+{% endfor %}
