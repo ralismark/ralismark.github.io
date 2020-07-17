@@ -36,6 +36,9 @@ kramdown:
 sass:
   style: expanded
 
+# CSS files to include
+css_include: []
+
 # Atom feed config
 feed:
   excerpt_only: true
