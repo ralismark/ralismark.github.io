@@ -1,0 +1,71 @@
+---
+---
+
+$treewidth: 4rem;
+
+/* Styling for project trees */
+div#forest {
+	position: relative; // Contain the trees
+	background: rgba(17, 230, 110, 0.26);
+	height: 350px;
+	margin: 20px 0 16px 50%;
+
+	max-width: 95vw;
+	width: 130%;
+	transform: translateX(-50%);
+
+	.group {
+		--x: 0%; --y: 0%; // defaults
+		position: absolute;
+		bottom: calc(100% - var(--y));
+		left: calc(var(--x) - (#{$treewidth} / 2));
+		width: $treewidth;
+		margin-bottom: -8px; // remove gap between stem and ground
+
+		.tree {
+			width: 100%;
+			z-index: 10;
+
+			a:focus {
+				stroke-width: 5px;
+				stroke: white;
+			}
+		}
+
+		&:not(:hover) .tree-label { display: none; }
+		.tree-label {
+			position: absolute;
+			bottom: 100%;
+			text-align: center;
+			background: #f8f8f8;
+			padding: 8px;
+
+			min-width: 100%;
+			left: 50%;
+			transform: translateX(-50%);
+
+			z-index: 30; // above trees & description
+		}
+	}
+
+	.description {
+		position: absolute;
+		left: 0;
+		right: 0;
+		margin-left: auto;
+		margin-right: auto;
+		top: 0.5em;
+		bottom: 0.5em;
+		height: auto;
+
+		padding: 1em;
+		width: 40%;
+		background: white;
+
+		z-index: 20;
+	}
+
+	// Make click work
+	.project .description { display: none; }
+	.project:focus-within .description { display: initial; }
+}
