@@ -9,6 +9,16 @@
 	<p>
 		Click on a tree to see details.
 	</p>
+	<ul id="legend" class="ul-flat">
+		{% for status in config.colors %}
+		<li class="status">
+			<svg class="status-color" viewBox="-5 -5 110 110">
+				<circle cx="50" cy="50" r="50" fill="{{ status[1] }}" />
+			</svg>
+			<p class="label">{{ status[0] }}</p>
+		</li>
+		{% endfor %}
+	</ul>
 </div>
 
 {% assign projects_sorted = site.data.trees.projects | sort: "y" %}
