@@ -26,7 +26,9 @@
 
 <div class="project">
 
-<div class="group" style="--x:{{ project.x }};--y:{{ project.y }}">
+{% assign is_negative = project.x | slice: 0 %}
+
+<div class="group{% if is_negative == '-' %} reverse{% endif %}" style="--x:{{ project.x }};--y:{{ project.y }}">
 	<div class="tree-label">{{ project.name }}</div>
 	<svg class="tree" viewBox="-5 -5 110 145">
 		<line x1="50" y1="50" x2="50" y2="140"
