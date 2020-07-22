@@ -7,14 +7,14 @@ config:
 projects:
 
   - name: ralismark.xyz
-    x: 23%
+    x: 38
     y: 50%
     link: https://www.ralismark.xyz
     status: active
     description: This website & blog!
 
   - name: Frankie's Space
-    x: 18%
+    x: 30
     y: 40%
     link: https://github.com/cr4sh-0verr1ders/frankies-space
     status: wip
@@ -25,21 +25,21 @@ projects:
       [Demo](https://unswio.herokuapp.com/)
 
   - name: Basalt Bashers (original)
-    x: 6%
+    x: 10
     y: 10%
     link: https://github.com/ralismark/sd2
     status: complete
     description: A game I made as my SDD HSC project. Written in C++
 
   - name: Basalt Bashers (web port)
-    x: 2%
+    x: 4
     y: 27%
     link: https://www.ralismark.xyz/webgames/basalt-bashers
     status: complete
     description: A remake of Basalt Bashers in JavaScript & Canvas
 
   - name: webgames
-    x: 10%
+    x: 16
     y: 20%
     link: https://github.com/ralismark/webgames
     status: active
@@ -50,14 +50,14 @@ projects:
       - [pong](https://www.ralismark.xyz/webgames/pong.html)
 
   - name: bluehid
-    x: 10%
+    x: 16
     y: 80%
     link: https://github.com/ralismark/bluehid
     status: complete
     description: Gamepad for android using the new Bluetooth HID APIs
 
   - name: Regex Crossword App
-    x: 3%
+    x: 10
     y: 90%
     status: abandoned
     description: |
@@ -65,14 +65,14 @@ projects:
       this](https://regexcrossword.com/).
 
   - name: shellscripts
-    x: 80%
+    x: -33
     y: 10%
     link: https://github.com/ralismark/shellscripts
     status: active
     description: A collection of shell/perl/etc scripts to help with various tasks
 
   - name: vim-recover
-    x: 84%
+    x: -27
     y: 40%
     link: https://github.com/ralismark/vim-recover
     status: complete
@@ -81,7 +81,7 @@ projects:
       basis.
 
   - name: itab
-    x: 90%
+    x: -17
     y: 37%
     link: https://github.com/ralismark/itab
     status: complete
@@ -89,14 +89,14 @@ projects:
       Indent with tabs, align with spaces. I use this on a daily basis.
 
   - name: asciigram
-    x: 83%
+    x: -29
     y: 90%
     link: https://github.com/ralismark/asciigram
     status: abandoned
     description: C++/NCurses tool to draw ASCII diagrams
 
   - name: amphetype (python3/gtk port)
-    x: 76%
+    x: -40
     y: 80%
     link: https://github.com/webiest/amphetype
     status: complete
@@ -105,7 +105,7 @@ projects:
       (instead of python 2) and GTK (instead of PyQT)
 
   - name: Blender²
-    x: 92%
+    x: -14
     y: 87%
     link: https://github.com/ralismark/blender-bot
     status: active
