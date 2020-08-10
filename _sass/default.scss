@@ -50,10 +50,13 @@ body > main {
 	#site-footer-inner {
 		width: var(--content-width);
 		margin: 0 auto;
-	}
 
-	#back-to-top {
-		float: right;
+		display: flex;
+		justify-content: space-between;
+
+		& > p {
+			display: inline-block;
+		}
 	}
 }
 
