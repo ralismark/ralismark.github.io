@@ -8,7 +8,6 @@ excerpt_separator: <!--more-->
 #
 # build setting
 #
-localhost: false
 markdown: kramdown
 safe: true
 
@@ -17,13 +16,6 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
   header_offset: 1 # h1 becomes h2 (h1 is title)
-  syntax_highlighter_opts:
-    span:
-      line_numbers: false
-    block:
-      line_numbers: true
-      start_line: 1
-
 
   syntax_highlighter_opts:
     span:
@@ -47,6 +39,13 @@ feed:
 plugins:
   - jekyll-sitemap # Create a sitemap
   - jekyll-feed # Create an Atom feed
+
+whitelist:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
 
 # Exclude these files from production
 exclude:
