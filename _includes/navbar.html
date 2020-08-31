@@ -1,5 +1,5 @@
-<header id="site-nav">
-	<nav>
+<header id="site-nav" class="full-width text-inverted">
+	<nav class="content-width flex-distribute">
 		<a id="navbar-root" href="{{ "/" | relative_url }}">{{ site.title }}</a>
 
 		{% if jekyll.environment != "production" %}
@@ -8,7 +8,7 @@
 		</span>
 		{% endif %}
 
-		<ul id="navbar-pages" class="ul-flat">
+		<ul id="navbar-pages" class="list-inline my-0">
 			{% for page in site.pages %}
 			{% if page.nav %}
 			<li class="navbar-page">

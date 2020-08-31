@@ -2,59 +2,23 @@
  * Styling specific to posts
  */
 
-.post-nav {
-	display: flex;
-	justify-content: space-between;
-	margin: 4px 0;
+// #post-tags a {
+// 	font-size: 80%;
+// 	padding: 0 1ex 0.4ex;
+// 	margin: 0 0.2ex;
+// 	background: orange;
+// 	color: #fff;
+// 	border-radius: 1em;
+// }
+
+.footnotes {
+	@include fenced(top);
+	margin-top: 1rem;
+	padding-top: 1rem;
 }
 
-.post-meta {
-	padding-bottom: 4px;
-	margin-bottom: 4px;
-	border-bottom: 1px solid $hr-fg;
-
-	p {
-		color: $fg-minor;
-	}
-}
-
-#post-tags a {
-	font-size: 80%;
-	padding: 0 1ex 0.4ex;
-	margin: 0 0.2ex;
-	background: orange;
-	color: #fff;
-	border-radius: 1em;
-}
-
-article.post-content {
-	blockquote {
-		padding-left: 1em;
-		border-left: 4px solid lightgrey;
-	}
-
-	.footnotes {
-		border-top: 1px solid $hr-fg;
-	}
-
-	p > img, p > svg {
-		display: block;
-		margin: 0 auto;
-	}
-
-	p > img, p > svg, div.equation, div.highlighter-rouge {
-		max-width: 100%;
-		overflow-x: auto;
-		height: auto;
-	}
-
-	.caption {
-		display: block;
-		text-align: center;
-		font-style: italic;
-	}
-}
-
-section.comments {
-	margin-top: 1em;
+.caption {
+	display: block;
+	text-align: center;
+	font-style: italic;
 }
