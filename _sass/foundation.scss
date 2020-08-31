@@ -65,6 +65,26 @@ img, svg {
 	margin: 0 auto;
 }
 
+// Dark -----------------------------------------------------------------------
+
+body.dark {
+	background: #191a1a;
+	color: #e7e6e5;
+
+	$link-fg: #629ac8;
+	$link-fg-hover: #85b0d4;
+
+	a {
+		color: $link-fg;
+		text-decoration: none;
+
+		&:hover {
+			color: $link-fg-hover;
+			text-decoration: underline;
+		}
+	}
+}
+
 // Decorations ----------------------------------------------------------------
 
 .flex-centred {
