@@ -1,0 +1,159 @@
+@use "sass:selector";
+
+// Block Sizing ---------------------------------------------------------------
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+html, body, div {
+	margin: 0;
+	padding: 0;
+}
+
+pre {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+p, div.highlighter-rouge,
+h1, h2, h3, h4, h5, h6,
+ol, ul
+{
+	// Use margin collapse
+	margin: 0 0 1rem;
+}
+
+// Typography -----------------------------------------------------------------
+
+body {
+	font: $font;
+}
+
+.highlighter-rouge {
+	font: $mono-font;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 500;
+}
+
+// make KaTeX the right size
+.katex {
+	font-size: 1.1em !important;
+}
+
+// a better colour for links
+a {
+	color: $link-fg;
+	text-decoration: none;
+
+	&:hover {
+		color: $link-fg-hover;
+		text-decoration: underline;
+	}
+}
+
+blockquote {
+	padding-left: 1em;
+	border-left: 4px solid lightgrey;
+}
+
+// a bit opinionated. we centre images by default
+img, svg {
+	display: block;
+	margin: 0 auto;
+}
+
+// Decorations ----------------------------------------------------------------
+
+.flex-centred {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.flex-distribute {
+	display: flex;
+	justify-content: space-between;
+}
+
+@mixin text-inverted {
+	// important to override dark mode
+	body.dark &, &,
+	a, body.dark & a {
+		color: white;
+	}
+
+	@at-root #{selector-unify(&, "a:hover")}, & a:hover,
+	#{selector-unify(&, "body.dark a:hover")}, body.dark & a:hover
+	{
+		color: #ccc;
+		text-decoration: none;
+	}
+}
+
+.text-inverted { @include text-inverted; }
+
+@mixin fenced($side) {
+	border-#{$side}: 1px solid $hr-fg;
+	padding-#{$side}: 0.3em;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid $hr-fg;
+}
+
+.fenced-t, .fenced-y { @include fenced(top); }
+.fenced-b, .fenced-y { @include fenced(bottom); }
+
+.list-inline {
+	list-style-type: none;
+	padding-left: 0;
+
+	& > li {
+		display: inline-block;
+
+		&:not(:last-child) {
+			margin-right: 1rem;
+		}
+	}
+}
+
+.bounded {
+	& > *, img, svg {
+		max-width: 100%;
+		overflow-x: auto;
+		height: auto;
+	}
+}
+
+.content-width {
+	width: var(--content-width);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.full-width {
+	width: 100%;
+}
+
+.badge {
+	@include text-inverted;
+
+	font-size: 80%;
+	padding: .3ex 1ex;
+	margin: 0 0.2ex;
+	background: darkorange;
+	border-radius: 1em;
+}
+
+// Sizing Utils ---------------------------------------------------------------
+
+@for $i from 0 through 4 {
+	.mt-#{$i} { margin-top:    $i * 1rem; }
+	.mb-#{$i} { margin-bottom: $i * 1rem; }
+	.mx-#{$i} { margin-left:   $i * 1rem; margin-right:  $i * 1rem; }
+	.my-#{$i} { margin-top:    $i * 1rem; margin-bottom: $i * 1rem; }
+}

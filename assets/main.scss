@@ -8,11 +8,11 @@
 $font: lighter 1em / 1.7 "Merriweather", serif;
 $mono-font: normal 1em / 1.7 monospace;
 $header-bg: #343a40;
+$footer-bg: rgba(127, 127, 127, 0.1);
+
 $link-fg: #007bff;
 $link-fg-hover: #0056b3;
-$footer-bg: #eee;
-$hr-fg: #ddd;
-$fg-minor: rgba(0, 0, 0, 0.6);
+$hr-fg: rgba(127, 127, 127, 0.2);
 
 html {
 	--content-width: 650px;
@@ -22,11 +22,10 @@ html {
 	}
 }
 
-@import "global";
-@import "default";
+// @import "dark";
+@import "foundation";
 @import "syntax";
+
+@import "default";
 @import "post";
 @import "posts";
-{% for style in site.css_include %}
-@import "{{ style }}";
-{% endfor %}
