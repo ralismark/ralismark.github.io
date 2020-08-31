@@ -1,3 +1,11 @@
+<script>
+  const mode = document.body.classList;
+  function toggle_dark() {
+    localStorage.darkmode = mode.toggle("dark") ? "1" : "";
+  }
+  if(localStorage.darkmode) mode.add("dark")
+</script>
+
 <header id="site-nav" class="full-width text-inverted">
 	<nav class="content-width flex-distribute">
 		<a id="navbar-root" href="{{ "/" | relative_url }}">{{ site.title }}</a>
@@ -18,6 +26,11 @@
 			</li>
 			{% endif %}
 			{% endfor %}
+
+			<li class="navbar-page">
+				<a title="Toggle Dark Mode" class="navbar-link" onclick="toggle_dark()" href="#">
+					◑
+				</a>
 		</ul>
 	</nav>
 </header>
