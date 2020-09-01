@@ -1,0 +1,44 @@
+---
+layout: post
+title: Live KaTeX
+tags: interactive
+excerpt: Render LaTeX live in your browser
+---
+
+<div
+  id="katex-target"
+  class="flex-centred my-1"
+  style="min-height: 6rem"
+  >
+</div>
+
+<textarea
+  id="katex-source"
+  class="textarea-fullwidth"
+  rows="10"
+  autofocus
+  >
+\int_{-\infty}^{\infty} e^{-x^2} \;\text dx
+= \sqrt{\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} e^{-x^2-y^2} \;\text dx \;\text dy}
+= \sqrt{\int_0^{2\pi} \int_0^{\infty} e^{-r^2}r \;\text dr \;\text d\theta}
+= \sqrt{\pi}
+</textarea>
+
+<script>
+  function render_tex(string) {
+    let out = document.getElementById("katex-target");
+    katex.render(string, out, {
+      displayMode: true,
+      throwOnError: false,
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const textarea = document.getElementById("katex-source");
+
+    render_tex(textarea.value);
+    textarea.addEventListener("input", () => {
+      render_tex(textarea.value);
+    });
+  });
+</script>
