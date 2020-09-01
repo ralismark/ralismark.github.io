@@ -169,6 +169,22 @@ hr {
 	border-radius: 1em;
 }
 
+// Inputs ---------------------------------------------------------------------
+
+textarea {
+	background: transparent;
+	color: inherit;
+	border: 1px solid $hr-fg;
+
+	padding: 0.4rem;
+	border-radius: 0.2rem;
+}
+
+.textarea-fullwidth {
+	resize: vertical;
+	width: 100%;
+}
+
 // Sizing Utils ---------------------------------------------------------------
 
 @for $i from 0 through 4 {
