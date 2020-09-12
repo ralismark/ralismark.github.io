@@ -12,6 +12,7 @@ markdown: kramdown
 safe: true
 
 kramdown:
+  math_engine: mathjax # Forced by github-pages
   # Use Github-flavoured markdown (e.g. triple backtick code)
   input: GFM
   syntax_highlighter: rouge
