@@ -12,12 +12,16 @@ features, services etc.
 
 Currently:
 
-- [GoatCounter][2] for analytics
 - [Microformats][microformats] and [IndieWeb][indieweb]
 
-  [2]: https://www.goatcounter.com/
   [microformats]: http://microformats.org/wiki/Main_Page
   [indieweb]: https://indieweb.org
+
+Previous:
+
+- [GoatCounter][goatcounter] for analytics
+
+  [goatcounter]: https://www.goatcounter.com/
 
 ## Running docker
 
