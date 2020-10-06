@@ -1,12 +1,11 @@
-FROM starefossen/github-pages:latest
+FROM jekyll/builder:latest
 
-ENV APPDIR /app
-ENV OUTDIR /srv
-WORKDIR $APPDIR
-
-ENV JEKYLL_ENV=development
 EXPOSE "4000"
-ENTRYPOINT jekyll serve \
-	--host 0.0.0.0 --port 4000 -s $APPDIR -d $OUTDIR \
+
+RUN gem install kramdown-math-sskatex
+
+CMD jekyll serve \
+	-d /tmp/_site \
+	--host 0.0.0.0 --port 4000 \
 	--config _config.yml,_config-dev.yml \
-	--watch --force_polling --safe
+	--watch --force_polling
