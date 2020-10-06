@@ -9,12 +9,14 @@ excerpt_separator: <!--more-->
 # build setting
 #
 markdown: kramdown
-safe: true
 
 kramdown:
-  math_engine: mathjax # Forced by github-pages
-  # Use Github-flavoured markdown (e.g. triple backtick code)
-  input: GFM
+  math_engine: sskatex
+  math_engine_opts:
+    katex_js: '/tmp/katex.min.js'
+    katex_opts:
+      throwOnError: false
+
   syntax_highlighter: rouge
   header_offset: 1 # h1 becomes h2 (h1 is title)
 
@@ -38,29 +40,11 @@ plugins:
   - jekyll-sitemap # Create a sitemap
   - jekyll-feed # Create an Atom feed
 
-whitelist:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
-  - jemoji
-
 # Exclude these files from production
 exclude:
   - LICENSE
   - README.md
   - Dockerfile
-  - Makefile
-
-# Default values for page frontmatter
-defaults:
-  -
-    scope:
-      path: "" # everything
-      type: "posts"
-    values:
-      modules:
-        # hlink: true
-        math: true
+  - serve.sh
 
 # vim: set et ts=2:

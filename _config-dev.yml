@@ -1,2 +1,4 @@
 # Config settings for local testing go here
+disable_disk_cache: true
+
 show_drafts: true
