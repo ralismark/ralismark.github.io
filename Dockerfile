@@ -4,6 +4,7 @@ EXPOSE "4000"
 
 RUN gem install kramdown-math-sskatex && \
 	wget 'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js' -O /tmp/katex.min.js
+RUN apk --no-cache add graphviz
 
 CMD jekyll serve \
 	-d /tmp/_site \
