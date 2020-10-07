@@ -47,4 +47,5 @@ exclude:
   - Dockerfile
   - serve.sh
 
+disable_disk_cache: true
 # vim: set et ts=2:
