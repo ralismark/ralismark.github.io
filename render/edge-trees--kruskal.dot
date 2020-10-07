@@ -1,9 +1,0 @@
-digraph {
-	df [label="df(4)"];
-	dg [label="dg(3)"]; dg -> df; dg -> eg;
-	eg [label="eg(4)"];
-	cd [label="cd(2)"]; cd -> dg;
-	dh [label="dh(1)"]; dh -> cd; dh -> ha;
-	ha [label="ha(2)"]; ha -> bh;
-	bh [label="bh(3)"];
-}
