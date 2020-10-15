@@ -47,5 +47,7 @@ exclude:
   - Dockerfile
   - serve.sh
 
-disable_disk_cache: true
+# Technical stuff
+future: true # To correct for timezone issues
+disable_disk_cache: true # Don't try to make .jekyll_cache in readonly dir
 # vim: set et ts=2:
