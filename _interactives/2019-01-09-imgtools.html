@@ -1,21 +1,20 @@
 ---
-layout: post
+layout: interactive
 title: Image Tool
-tags: exploit interactive
+tags: exploit
 excerpt: A client-side-only steganography tool
 ---
 
+{% capture md %}
 This is a client-side only steganography tool to detect information hidden in images, using only the Canvas API - primarily [`getImageData`][getimagedata] and [`putImageData`][putimagedata].
 
 [getimagedata]: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData
 [putimagedata]: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/putImageData
+{% endcapture %}{{ md | markdownify }}
 
 <!--more-->
 
-This will probably keep getting updates in the future as I implement more features.
-
----
-
+<hr>
 
 <div>
 	<div>
@@ -41,9 +40,11 @@ This will probably keep getting updates in the future as I implement more featur
 	<canvas id="canvas" width="0" height="0" style="max-width: 80%; max-height: 600px"></canvas>
 </center>
 
----
+<hr>
 
+<p>
 Sample images (click to load):
+</p>
 
 <figure class="figure mx-4">
 	<img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/Steganography_original.png?1547004448255" crossorigin="Anonymous" onclick="window.image = this; update()">
