@@ -13,7 +13,11 @@ Right now, the most complete part is [my blog](/posts.html), where I posts stuff
 
 - [competitive](/2019/05/28/edge-trees.html) and [non-competitive](/2019/01/04/bluehid-1.html) programming
 - [maths](/2019/04/05/speed-of-light.html)
-- as well as the occasional [interactive post](/2019/05/24/fenwick-tree.html).
+
+I've also got a few interactive toys:
+
+{% for page in site.interactives %}
+- [{{ page.title }}]({{ page.url }}){% endfor %}
 
 # Elsewhere on the internet
 
