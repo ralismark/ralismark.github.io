@@ -5,6 +5,15 @@ title: ralismark
 description: Discussions from all depths of computer science
 excerpt_separator: <!--more-->
 
+collections:
+  interactives:
+    output: true
+    permalink: /:collection/:title
+  posts:
+    output: true
+  drafts:
+    output: false
+
 #
 # build setting
 #
