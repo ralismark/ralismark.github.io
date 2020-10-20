@@ -40,10 +40,6 @@ kramdown:
 sass:
   style: expanded
 
-# Atom feed config
-feed:
-  excerpt_only: true
-
 # Use the following plug-ins
 plugins:
   - jekyll-sitemap # Create a sitemap
