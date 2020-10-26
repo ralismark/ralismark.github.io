@@ -1,0 +1,22 @@
+---
+title: Everything
+layout: default
+---
+
+<h1>Everything</h1>
+
+<p>
+All my posts, in a single file. Handy if you want do full-text search.
+</p>
+
+<div class="bounded">
+
+{% for post in site.posts %}
+  {% if post.tags contains "interactive" %}
+  {% else %}
+    <h2 class="fenced-y">{{post.title}}</h2>
+    {{ post.content }}
+  {% endif %}
+{% endfor %}
+
+</div>
