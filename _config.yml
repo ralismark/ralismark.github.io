@@ -38,7 +38,7 @@ kramdown:
 
 # Sass generated css
 sass:
-  style: expanded
+  style: compressed
 
 # Use the following plug-ins
 plugins:
