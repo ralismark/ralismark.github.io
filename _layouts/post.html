@@ -16,7 +16,8 @@ main_attr: class="h-entry"
 		</time>
 		<span class="separator">|</span>
 		<span>
-			{{ content | strip_html | number_of_words: "auto" | divided_by: 200 }} mins to read
+			{% assign wc = content | strip_html | number_of_words: "auto" | plus: 200 | divided_by: 200 %}
+			{{ wc }} min{% if wc != 1 %}s{% endif %} to read
 		</span>
 		{% assign tagcount = page.tags | size %}
 		{% if tagcount > 0 %}
