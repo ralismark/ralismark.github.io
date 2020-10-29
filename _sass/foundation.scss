@@ -65,26 +65,6 @@ img, svg {
 	margin: 0 auto;
 }
 
-// Dark -----------------------------------------------------------------------
-
-body.dark {
-	background: #191a1a;
-	color: #e7e6e5;
-
-	$link-fg: #629ac8;
-	$link-fg-hover: #85b0d4;
-
-	a {
-		color: $link-fg;
-		text-decoration: none;
-
-		&:hover {
-			color: $link-fg-hover;
-			text-decoration: underline;
-		}
-	}
-}
-
 // Decorations ----------------------------------------------------------------
 
 .flex-centred {
@@ -99,14 +79,11 @@ body.dark {
 }
 
 @mixin text-inverted {
-	// important to override dark mode
-	body.dark &, &,
-	a, body.dark & a {
+	&, & a {
 		color: white;
 	}
 
-	@at-root #{selector-unify(&, "a:hover")}, & a:hover,
-	#{selector-unify(&, "body.dark a:hover")}, body.dark & a:hover
+	@at-root #{selector-unify(&, "a:hover")}, & a:hover
 	{
 		color: #ccc;
 		text-decoration: none;
