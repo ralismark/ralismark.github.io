@@ -14,6 +14,10 @@ main_attr: class="h-entry"
 		<time datetime="{{ page.date | date_to_xmlschema }}" class="dt-published">
 			{{ page.date | date_to_long_string }}
 		</time>
+		<span class="separator">|</span>
+		<span>
+			{{ content | strip_html | number_of_words: "auto" | divided_by: 200 }} mins to read
+		</span>
 		{% assign tagcount = page.tags | size %}
 		{% if tagcount > 0 %}
 		<span class="separator">|</span>
