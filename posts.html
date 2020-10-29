@@ -15,19 +15,19 @@ nav: true
 {% for post in site.posts %}
 <article class="summary">
 	<header>
-		<h2 class="summary-title">
+		<h2 class="display-iblock mb-0">
 			{% if post.path contains "_drafts" %}
 			[draft]
 			{% endif %}
 			<a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
 		</h2>
 
-		<time class="summary-date" datetime="{{ post.date | date_to_xmlschema }}">
+		<time datetime="{{ post.date | date_to_xmlschema }}">
 			{{ post.date | date: "%e %b '%y" }}
 		</time>
 	</header>
 
-	<p class="summary-excerpt my-0">
+	<p class="my-0">
 	{{ post.excerpt | strip_html | truncatewords: 100 }}
 	</p>
 </article>

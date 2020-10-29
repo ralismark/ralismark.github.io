@@ -54,6 +54,11 @@ a {
 	}
 }
 
+// italicise dates & times
+time {
+	font-style: italic;
+}
+
 // a bit opinionated. we centre images by default
 img, svg {
 	display: block;
