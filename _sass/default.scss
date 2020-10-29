@@ -31,3 +31,53 @@
 main {
 	margin-top: 2rem;
 }
+
+/*
+ * Styling for the post listing (/posts.html)
+ */
+
+article.summary {
+	.summary-date {
+		font-style: italic;
+	}
+
+	.summary-title {
+		display: inline-block;
+		font-size: 1.3em;
+		margin-bottom: 4px;
+	}
+}
+
+/*
+ * Styling specific to individual posts
+ */
+
+blockquote {
+	@include card;
+	padding: 0 1em;
+	border-left: 4px solid lightgrey;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.footnotes {
+	@include fenced(top);
+	margin-top: 1rem;
+	padding-top: 1rem;
+}
+
+.caption {
+	display: block;
+	text-align: center;
+	font-style: italic;
+}
+
+.badge {
+	@include text-inverted;
+
+	font-size: 80%;
+	padding: .3ex 1ex;
+	margin: 0 0.2ex;
+	background: darkorange;
+	border-radius: 1em;
+}

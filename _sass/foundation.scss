@@ -54,11 +54,6 @@ a {
 	}
 }
 
-blockquote {
-	padding-left: 1em;
-	border-left: 4px solid lightgrey;
-}
-
 // a bit opinionated. we centre images by default
 img, svg {
 	display: block;
@@ -124,6 +119,17 @@ hr {
 	}
 }
 
+@mixin card {
+	box-shadow: #8f8f8f 0 1.5px 2px;
+	border: 1px solid $hr-fg;
+}
+
+.card {
+	margin: 0.5rem;
+	padding: 0.5rem;
+	@include card;
+}
+
 .bounded {
 	& > *, img, svg {
 		max-width: 100%;
@@ -144,16 +150,6 @@ hr {
 
 .text-centre {
 	text-align: center;
-}
-
-.badge {
-	@include text-inverted;
-
-	font-size: 80%;
-	padding: .3ex 1ex;
-	margin: 0 0.2ex;
-	background: darkorange;
-	border-radius: 1em;
 }
 
 // Inputs ---------------------------------------------------------------------
