@@ -76,6 +76,12 @@ img, svg {
 .flex-distribute {
 	display: flex;
 	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.flex-grow {
+	flex-grow: 1;
+	flex-basis: 0;
 }
 
 @mixin text-inverted {
@@ -174,3 +180,6 @@ textarea {
 	.mx-#{$i} { margin-left:   $i * 1rem; margin-right:  $i * 1rem; }
 	.my-#{$i} { margin-top:    $i * 1rem; margin-bottom: $i * 1rem; }
 }
+
+.display-block { display: block; }
+.display-iblock { display: inline-block; }
