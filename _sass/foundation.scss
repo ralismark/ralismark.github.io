@@ -67,23 +67,6 @@ img, svg {
 
 // Decorations ----------------------------------------------------------------
 
-.flex-centred {
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-}
-
-.flex-distribute {
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-}
-
-.flex-grow {
-	flex-grow: 1;
-	flex-basis: 0;
-}
-
 @mixin text-inverted {
 	&, & a {
 		color: white;
@@ -135,6 +118,35 @@ hr {
 	@include card;
 }
 
+.text-centre {
+	text-align: center;
+}
+
+// Inputs ---------------------------------------------------------------------
+
+textarea {
+	background: transparent;
+	color: inherit;
+	border: 1px solid $hr-fg;
+
+	padding: 0.4rem;
+	border-radius: 0.2rem;
+
+	&.full-width {
+		resize: vertical;
+	}
+}
+
+// Display Utils --------------------------------------------------------------
+
+@for $i from 0 through 4 {
+	.mt-#{$i} { margin-top:    $i * 1rem; }
+	.mb-#{$i} { margin-bottom: $i * 1rem; }
+	.mx-#{$i} { margin-left:   $i * 1rem; margin-right:  $i * 1rem; }
+	.my-#{$i} { margin-top:    $i * 1rem; margin-bottom: $i * 1rem; }
+}
+
+// Sizing
 .bounded {
 	& > *, img, svg {
 		max-width: 100%;
@@ -153,33 +165,24 @@ hr {
 	width: 100%;
 }
 
-.text-centre {
-	text-align: center;
+// Flexbox stuff
+.flex-centred, .flex-distribute {
+	display: flex;
+	flex-wrap: wrap;
 }
 
-// Inputs ---------------------------------------------------------------------
-
-textarea {
-	background: transparent;
-	color: inherit;
-	border: 1px solid $hr-fg;
-
-	padding: 0.4rem;
-	border-radius: 0.2rem;
+.flex-centred {
+	justify-content: center;
 }
 
-.textarea-fullwidth {
-	resize: vertical;
-	width: 100%;
+.flex-distribute {
+	justify-content: space-between;
 }
 
-// Sizing Utils ---------------------------------------------------------------
-
-@for $i from 0 through 4 {
-	.mt-#{$i} { margin-top:    $i * 1rem; }
-	.mb-#{$i} { margin-bottom: $i * 1rem; }
-	.mx-#{$i} { margin-left:   $i * 1rem; margin-right:  $i * 1rem; }
-	.my-#{$i} { margin-top:    $i * 1rem; margin-bottom: $i * 1rem; }
+// Equally space child elements
+.flex-grow {
+	flex-grow: 1;
+	flex-basis: 0;
 }
 
 .display-block { display: block; }
