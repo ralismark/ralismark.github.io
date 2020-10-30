@@ -12,9 +12,6 @@ build/%.svg: %.tex
 	dvisvgm build/$*.dvi -p1 -n -o $@
 	-rm build/$*.dvi build/$*.aux build/$*.log # Remove extra files
 
-build/%.svg: %.dot
-	dot $< -Tsvg > $@
-
 all: $(SVGOUT)
 
 clean:
