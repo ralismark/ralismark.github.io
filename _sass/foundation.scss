@@ -77,6 +77,19 @@ kbd {
 
 // Decorations ----------------------------------------------------------------
 
+// decorate table as we see fit
+table:not(.rouge-table) {
+	border-collapse: collapse;
+	margin: 0 auto;
+
+	$bstyle: 1px solid grey;
+
+	th, td {
+		padding: 0.5em;
+		&.boxed { border: $bstyle; }
+	}
+}
+
 @mixin text-inverted {
 	&, & a {
 		color: white;
