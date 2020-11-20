@@ -23,7 +23,7 @@
 }
 
 #site-footer {
-	background: $footer-bg;
+	@include fenced(top);
 	padding: 2rem 0;
 	font-size: 80%;
 }
@@ -64,4 +64,11 @@ blockquote {
 	margin: 0 0.2ex;
 	background: darkorange;
 	border-radius: 1em;
+}
+
+// Blog post body only
+article {
+	p, ul, ol {
+		text-align: justify;
+	}
 }
