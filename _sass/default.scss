@@ -38,10 +38,12 @@ main {
 
 blockquote {
 	@include card;
-	padding: 0 1em;
-	border-left: 4px solid lightgrey;
-	margin-left: 0;
-	margin-right: 0;
+
+	box-sizing: content-box;
+	margin-left: -1.5rem;
+	margin-right: -1.5rem;
+	padding: 0.5rem 1.5rem; // <p> has 1rem margin
+	background: transparentize($accent, 0.9);
 }
 
 .footnotes {

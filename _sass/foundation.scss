@@ -45,11 +45,11 @@ h1, h2, h3, h4, h5, h6 {
 
 // a better colour for links
 a {
-	color: $link-fg;
+	color: $accent;
 	text-decoration: none;
 
 	&:hover {
-		color: $link-fg-hover;
+		color: darken($accent, 15%);
 		text-decoration: underline;
 	}
 }
@@ -131,15 +131,13 @@ hr {
 }
 
 @mixin card {
-	box-shadow: #8f8f8f 0 1.5px 2px;
+	// box-shadow: #8f8f8f 0 1.5px 2px;
+	margin: 0.5rem;
+	padding: 0.5rem;
 	border: 1px solid $hr-fg;
 }
 
-.card {
-	margin: 0.5rem;
-	padding: 0.5rem;
-	@include card;
-}
+.card { @include card; }
 
 .text-centre {
 	text-align: center;
