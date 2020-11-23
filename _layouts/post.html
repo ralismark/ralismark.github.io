@@ -14,14 +14,14 @@ main_attr: class="h-entry"
 		<time datetime="{{ page.date | date_to_xmlschema }}" class="dt-published">
 			{{ page.date | date_to_long_string }}
 		</time>
-		<span class="separator">|</span>
+		<span class="separator"> ⬥ </span>
 		<span>
 			{% assign wc = content | strip_html | number_of_words: "auto" | plus: 200 | divided_by: 200 %}
 			{{ wc }} min{% if wc != 1 %}s{% endif %} to read
 		</span>
 		{% assign tagcount = page.tags | size %}
 		{% if tagcount > 0 %}
-		<span class="separator">|</span>
+		<span class="separator"> ⬥ </span>
 		<span id="post-tags">
 			<span id="post-tag-label">Tags:</span>
 			{% for tag in page.tags %}
