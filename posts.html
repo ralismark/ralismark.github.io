@@ -4,12 +4,29 @@ layout: default
 nav: true
 ---
 
+{% capture icon_rss %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display: inline; height: 1.1em; vertical-align: text-top">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+{% endcapture %}
+
+{% capture icon_tag %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.7" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display: inline; height: 1.1em; vertical-align: text-top">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+{% endcapture %}
+
 <h1>Posts</h1>
 
-<!-- I need to find another way of adding icons. SVG perhaps? -->
+<!-- icons from https://github.com/tabler/tabler-icons -->
 <ul class="list-inline fenced-y flex-centred">
-	<li><a href="/feed.xml">RSS</a></li>
-	<li><a href="/tags.html">Tags</a></li>
+	<li><a href="/feed.xml">{{ icon_rss }}RSS</a></li>
+	<li><a href="/tags.html">{{ icon_tag }}Tags</a></li>
 </ul>
 
 {% for post in site.posts %}
