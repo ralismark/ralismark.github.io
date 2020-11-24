@@ -1,6 +1,6 @@
 ---
 layout: default
-main_attr: class="h-entry"
+main_class: h-entry
 ---
 
 {% include post-nav.html %}
@@ -13,7 +13,9 @@ main_attr: class="h-entry"
 	<ul class="li-flat">
 		<li>
 		<time datetime="{{ page.date | date_to_xmlschema }}" class="dt-published">
+			<a class="u-url" href="{{ page.url | replace: 'index.html', '' | relative_url }}">
 			{{ page.date | date_to_long_string }}
+			</a>
 		</time>
 		</li>
 
