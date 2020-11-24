@@ -90,6 +90,20 @@ table:not(.rouge-table) {
 	}
 }
 
+ul.li-flat {
+	padding-left: 0;
+
+	& > li {
+		list-style: none;
+		display: inline;
+
+		&:not(:first-child)::before {
+			content: "⬥ "; // HACK to balance space between li elements
+			margin: 0 0.5em;
+		}
+	}
+}
+
 @mixin text-inverted {
 	&, & a {
 		color: white;
