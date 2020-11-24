@@ -4,6 +4,24 @@ layout: default
 ---
 
 <h1>Everything</h1>
+<style>
+@keyframes huespin {
+  from { filter: hue-rotate(0deg);   }
+  to   { filter: hue-rotate(360deg); }
+}
+svg#spiral {
+}
+svg#spiral > use {
+  animation-duration: 3s;
+  animation-name: huespin;
+  animation-iteration-count: infinite;
+}
+</style>
+
+<svg id="spiral" width="200" height="200" viewBox="-200 -200 400 400" xmlns="http://www.w3.org/2000/svg">
+  <title>Have an easter egg!</title>
+  <use href="/assets/spiral.svg#root" width="100" height="100" stroke-width="10">
+</svg>
 
 <p>
 All my posts, in a single file. Handy if you want do full-text search.
