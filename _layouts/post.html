@@ -10,24 +10,26 @@ main_attr: class="h-entry"
 	<p class="p-summary"><em>
 		{{ page.excerpt }}
 	</em></p>
-	<p>
+	<ul class="li-flat">
+		<li>
 		<time datetime="{{ page.date | date_to_xmlschema }}" class="dt-published">
 			{{ page.date | date_to_long_string }}
 		</time>
-		<span class="separator"> ⬥ </span>
-		<span>
+		</li>
+
+		<li>
 			{% assign wc = content | strip_html | number_of_words: "auto" | plus: 200 | divided_by: 200 %}
 			{{ wc }} min{% if wc != 1 %}s{% endif %} to read
-		</span>
+		</li>
+
 		{% assign tagcount = page.tags | size %}
 		{% if tagcount > 0 %}
-		<span class="separator"> ⬥ </span>
-		<span id="post-tags">
+		<li id="post-tags">
 			<span id="post-tag-label">Tags:</span>
 			{% for tag in page.tags %}
 				<a class="p-category badge" href="{{ "/tags.html" | relative_url }}#{{ tag }}">{{ tag }}</a>
 			{% endfor %}
-		</span>
+		</li>
 		{% endif %}
 	</p>
 </header>
