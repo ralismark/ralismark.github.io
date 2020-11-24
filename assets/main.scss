@@ -12,10 +12,16 @@ $accent: #007bff;
 $hr-fg: rgba(127, 127, 127, 0.2);
 
 html {
-	--content-width: 650px;
+	--bleed-size: 60px;
+	--content-width: 620px;
 
-	@media(max-width: 800px) {
+	@media(max-width: 900px) {
+		--bleed-size: 30px;
+	}
+
+	@media(max-width: 700px) {
 		--content-width: 90%;
+		--bleed-size: 5%;
 	}
 }
 

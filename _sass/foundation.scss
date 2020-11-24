@@ -181,6 +181,14 @@ textarea {
 	.my-#{$i} { margin-top:    $i * 1rem; margin-bottom: $i * 1rem; }
 }
 
+@mixin bleed {
+	margin-left:  calc(-1 * var(--bleed-size));
+	margin-right: calc(-1 * var(--bleed-size));
+	width: calc(100% + 2*var(--bleed-size));
+	max-width: unset !important;
+}
+.bleed { @include bleed; }
+
 // Sizing
 .bounded {
 	& > *, img, svg {
