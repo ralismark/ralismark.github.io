@@ -1,36 +1,22 @@
 ---
 layout: article
-title: Book list
+title: Booklist
 ---
 
 <h1>Booklist</h1>
 
 > This book list is a work in progress! I haven't fully entered the entries from the list I sent to my friend.
 
-One day, a friend asked for book recommendations so I wrote up a 400 word summary. This seemed like something that would interest others, so I started cleaning it up and put it on my website.
+One day, a friend asked for book recommendations and I wrote up a 400 word summary. This seemed like something that would interest others, so I started cleaning it up and put it on my website.
 
-There's two Hacker News posts which have a lot of great book recommendations, and they're also good places to look:
+There are two Hacker News posts which have a lot of great book recommendations, and they're also good places to look:
 
 - [Ask HN: Great fiction books that have had a positive impact on your life?](https://news.ycombinator.com/item?id=22718592), and
 - [Ask HN: Mind bending books to read and never be the same as before?](https://news.ycombinator.com/item?id=23151144)
 
-I also read a bunch of blogs, such as Slate Star Codex (you can find a nicely typeset subset at <https://www.slatestarcodexabridged.com/>). One day, I might write up a full list.
+I also read a bunch of blogs, such as Slate Star Codex -- you can find a nicely typeset copy of some posts at <https://www.slatestarcodexabridged.com/>. I intend to create a larger blogroll at some point.
 
-# What I've read in the past
-
-Other than the ones below with longer reviews, I've also read
-
-- *Brave New World*, in early-mid 2020
-- *The Prince of Milk* (by exurb1a), in early 2020. Same characteristic style, but the narrative isn't very cohesive and the story is just generally more confusing.
-- *Ready Player One*, in 2017
-- *Fahrenheit 451*, in 2018
-- *1983*, in 2018
-- *The Science of Interstellar*, in 2017
-- *The Hitchhiker's Guide to the Galaxy*, in 2019
-- *Map and Territory* of the Rationality: A-Z series, in late 2020
-- *Harry Potter and the Methods of Rationality*, in late 2020
-
-## Algorithms to Live By
+# Algorithms to Live By
 
 {: .li-flat }
 - *Brian Christian, Tom Griffiths*
@@ -41,7 +27,7 @@ Applying ideas from computer science & adjacent fields to real life. The ideas a
 
 I also found a more extensive review about its usefulness -- [*What I got out of 'Algorithms to Live By'*](https://www.lesswrong.com/posts/62PRkMtu5jiBA9wLN/what-i-got-out-of-algorithms-to-live-by).
 
-## Code: The Hidden Language of Computer Hardware and Software
+# Code: The Hidden Language of Computer Hardware and Software
 
 {: .li-flat }
 - *Charles Petzold*
@@ -52,7 +38,7 @@ A very approachable exploration of low-level computer hardware, building up a CP
 
 [^1]: Logisim is quite old and has a few bugs. There are some rewrites of it, such as [Logisim Evolution](https://github.com/reds-heig/logisim-evolution)
 
-## The Fifth Science
+# The Fifth Science
 
 {: .li-flat }
 - *Exurb1a*
@@ -63,11 +49,45 @@ A collection of interesting stories using a soft sci-fi world to explore philoso
 
 Have a look at [exurb1a's youtube videos](https://www.youtube.com/c/Exurb1a), in particular [The Lantern](https://www.youtube.com/watch?v=um6cGuJ4mNE), which is a chapter from this book, to see if you'll like it.
 
-## Foundation
+# The Prince of Milk
+
+{: .li-flat }
+- Exurb1a
+- [amazon](https://www.amazon.com.au/Prince-Milk-Exurb1a/dp/1983699748)
+- Read early 2020
+
+A really strange story with magic and philosophy.
+Same characteristic style as Exurb1a's other works, but I found the narrative quite hard to follow and mostly just confusing.
+
+# Foundation
 
 {: .li-flat }
 - *Isaac Asimov*
 - [wikipedia](https://en.wikipedia.org/wiki/Foundation_(Asimov_novel))
 - Read mid 2020
 
-A futuristic story following intelligent characters who influence societies. Asimov creates a really good sense of scope from the high-level sweeps of history and politics. Only downside is that it feels like the protagonists' plans are made foolproof by Plot Magic.
+A futuristic story following intelligent characters who influence societies. Asimov creates a really good sense of scope from the high-level sweeps of history and politics, and the plot is not too simple. Only downside is that it feels like the protagonists' plans are made foolproof by Plot Magic, but the positives definitely make up for this.
+
+# Nineteen Eighty-Four
+
+{: .li-flat }
+- *George Orwell*
+- [wikipedia](https://en.wikipedia.org/wiki/Nineteen_Eighty-Four)
+- Read late 2018
+
+A classic must-read book. Like seriously, you have to read it if you haven't already.
+
+# The rest
+
+Other than the ones above with longer reviews, I've also read
+
+- *Brave New World*, in early-mid 2020
+- *Ready Player One*, in 2017
+- *Fahrenheit 451*, in 2018
+- *The Science of Interstellar*, in 2017
+- *The Hitchhiker's Guide to the Galaxy*, in 2019
+- *Map and Territory* of the Rationality: A-Z series, in late 2020
+- *Harry Potter and the Methods of Rationality*, in late 2020
+
+I may write a more extensive review for them in the future.
+
