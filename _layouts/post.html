@@ -29,7 +29,7 @@ main_class: h-entry
 		<li id="post-tags">
 			<span id="post-tag-label">Tags:</span>
 			{% for tag in page.tags %}
-				<a class="p-category badge" href="{{ "/tags.html" | relative_url }}#{{ tag }}">{{ tag }}</a>
+				<a class="p-category badge" href="{% link tags.html %}#{{ tag }}">{{ tag }}</a>
 			{% endfor %}
 		</li>
 		{% endif %}

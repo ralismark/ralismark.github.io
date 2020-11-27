@@ -4,6 +4,7 @@
 title: ralismark
 description: Discussions from all depths of computer science
 excerpt_separator: <!--more-->
+permalink: /:categories/:title
 
 collections:
   interactives:
@@ -11,6 +12,7 @@ collections:
     permalink: /:collection/:title
   posts:
     output: true
+    permalink: /posts/:title
   drafts:
     output: false
 
