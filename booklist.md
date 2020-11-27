@@ -1,7 +1,9 @@
 ---
-layout: default
+layout: article
 title: Book list
 ---
+
+<h1>Booklist</h1>
 
 > This book list is a work in progress! I haven't fully entered the entries from the list I sent to my friend.
 
