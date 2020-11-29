@@ -83,7 +83,10 @@ kbd {
 table:not(.rouge-table) {
 	border-collapse: collapse;
 	margin: 0 auto;
-	display: block; // so they scroll
+	display: block;
+	// bit of a hack to center tables *but also* have scrolling
+	display: block ruby; // if this is supported
+	text-align: center;
 
 	$bstyle: 1px solid grey;
 
