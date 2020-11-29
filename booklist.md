@@ -88,6 +88,8 @@ Other than the ones above with longer reviews, I've also read
 - *The Hitchhiker's Guide to the Galaxy*, in 2019
 - *Map and Territory* of the Rationality: A-Z series, in late 2020
 - *Harry Potter and the Methods of Rationality*, in late 2020
+- *Making Money (Discworld)*, in 2020
+- *Going Postal (Discworld)*, in 2019
 
 I may write a more extensive review for them in the future.
 
