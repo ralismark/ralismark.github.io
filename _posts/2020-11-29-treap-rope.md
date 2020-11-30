@@ -35,7 +35,7 @@ Treaps are a nice middle ground, with *expected* $$O(\log n)$$ (because of their
 
 Almost all the machinery for treaps are built on top of [Cartesian trees], so we'll look at them first. Formally, they are binary trees derived from a sequence of numbers, and satisfy two properties:
 
-[Cartesian tree]: https://en.wikipedia.org/wiki/Cartesian_tree
+[Cartesian trees]: https://en.wikipedia.org/wiki/Cartesian_tree
 
 <!-- that last sentence is kinda bad -->
 
@@ -45,15 +45,15 @@ Almost all the machinery for treaps are built on top of [Cartesian trees], so we
 [in-order]: https://en.wikipedia.org/wiki/Tree_traversal#In-order_(LNR)
 [heap]: https://en.wikipedia.org/wiki/Heap_(data_structure)
 
-Though you *can* convert a list of numbers into a Cartesian tree, we won't need to -- you can join a bunch of single-element trees to do the same thing.
-
 !["Cartesian tree"](https://upload.wikimedia.org/wikipedia/commons/d/d5/Cartesian_tree.svg)
 
 *Cartesian Tree. Source: [wikipedia](https://en.wikipedia.org/wiki/Cartesian_tree#/media/File:Cartesian_tree.svg)*
 
+Though you can convert a list of numbers into a Cartesian tree, we won't need to -- just join a bunch of single-element trees to do the same thing.
+
 # Join
 
-The first operation we'll tackle is joining. The final tree will need to satisfy the heap property, so the root node must be the smallest element. Fortunately, due to that property, we know it must be one of the two root nodes.
+The first operation we'll tackle is joining. The final tree will need to satisfy the heap property, so the root node must be the smallest element. Fortunately, since both original trees satisfy the heap property, we know the smallest overall element must be one of the two root nodes.
 
 We'll assume the left root is smaller. We can just mirror our final algorithm if the right root was actually greater. Here's an example:
 
@@ -66,15 +66,20 @@ digraph {
 	1 -> {3, 8};
 	3 -> {9, 7};
 
+	8 -> 7 [style=invis];
+	8 -> 12;
+
 	node [color="#9999ff"];
 
-	5 -> 10 -> {12, 15};
+	10 -> l10 [style=invis]; l10 [style=invis];
+	5 -> 10 -> 15;
+
 	15 -> {20, 18};
 	5 -> r5 [style=invis]; r5 [style=invis];
 }
 {% endgraph %}
 
-Since the in-order traversal of the output must go through the entire left tree before going through the right, we know that 1's left subtree remains there. The right side is different though -- if 8 remains the right child, we'll break the heap rule.
+Since the in-order traversal of the output must go through the entire left tree before going through the right, we know that 1's left subtree doesn't change. The right side is different though -- if 8 remains the right child, we'll break the heap rule. So we detach it.
 
 {% graph %}
 digraph {
@@ -88,13 +93,15 @@ digraph {
 
 	node [color="#ff9999"];
 
-	8;
+	8 -> r8 [style=invis, weight=2]; r8 [style=invis];
+	8 -> 12;
 
 	node [color="#9999ff"];
 
-	5 -> 10 -> {12, 15};
+	10 -> l10 [style=invis] l10 [style=invis];
+	5 -> 10 -> 15;
 	15 -> {20, 18};
-	5 -> r5 [style=invis]; r5 [style=invis];
+	5 -> r5 [style=invis, weight=2]; r5 [style=invis];
 
 	1 -> {8, 5} [style=invis];
 }
@@ -129,7 +136,7 @@ This gives us the full splitting algorithm:
 2. Split the subtree on that side, if it exists
 3. Reattach the closer half to the root
 
-However, we've assumed that we can easily determine which side the split is on. I'll admit this is bit of a cop-out, since it isn't even possible with a bare Cartesian tree, but it'll be easy to support in a treap.
+However, we've assumed that we can easily determine which side the split is on. I'll admit this is bit of a cop-out, since it isn't even possible with plain Cartesian trees, but it'll be easy to support when we actually make our treap.
 
 # Complexity
 
@@ -141,21 +148,23 @@ Treaps solve this is by exploiting two theorems[^2]:
 
 [^2]: I don't know how either of these are proven. Sorry.
 
-1. Random binary trees are, With High Probability[^3], balanced.
+1. [Random binary trees] are, [With High Probability][whp][^3], balanced.
 2. Cartesian trees generated from arrays of random numbers are uniformly random.
 
+[Random binary trees]: https://en.wikipedia.org/wiki/Random_binary_tree
+[whp]: https://en.wikipedia.org/wiki/With_high_probability
 [^3]: To mathematicians, this means that the probability tends towards 1 as the size of the tree goes to infinity.
 
 By using random numbers for the Cartesian tree, we ensure our operations are almost always $$O(\log n)$$ i.e. fast. However, we've lost the ability to store anything useful. To remedy this, we attach an *additional* value to each node (and call the random numbers the nodes' *priority*, to avoid confusion). Since the value can change independently to the priority, we can allow updating it in-place.
 
-Or, we can forbid it, instead updating via split-split-clone-merge-merge, and gain persistence, since each node only know about its subtree.
+Or, we can forbid it, instead updating via split-split-merge-merge, and gain persistence, since each node only know about its subtree.
 
-This last point is important -- we can store *any* aggregate statistic, *as long as it doesn't depend on things outside its subtree*. This permits summaries like
+This last point is important. If we enforce immutability, we can store *any* aggregate statistic *as long as it doesn't depend on things outside its subtree*. This permits "summaries" like
 
-- total length -- each node's length is one plus the sum of its children's lengths
-- line count -- store the number of newlines
-- *other* treaps computed from this treap
-- well, *any* monoid or semigroup
+- total length -- a node's length is one plus the sum of its children's lengths
+- line count -- store the number of newline characters
+- *other* treaps computed from this treap (with an additional $$\log n$$ factor to the complexity)
+- well, *any* monoid or semigroup (i.e. you're using an associative binary operator)
 
 to be calculated efficiently -- expected $$O(\log n)$$, as well.
 
