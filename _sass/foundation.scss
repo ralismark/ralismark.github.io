@@ -115,8 +115,7 @@ ul.li-flat {
 		color: white;
 	}
 
-	@at-root #{selector-unify(&, "a:hover")}, & a:hover
-	{
+	& a:hover {
 		color: #ccc;
 		text-decoration: none;
 	}
