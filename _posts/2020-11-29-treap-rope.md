@@ -11,7 +11,7 @@ Treaps are a very neat data structure that I've grown fond of. Though they are a
 
 [sbbst]: https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree
 
-Like dictionaries, [ropes] fall under the category of [abstract data types], but that's where the similarities end. They extend arrays with the two new abilities
+Like dictionaries, [ropes] fall under the category of [abstract data types], but that's where the similarities end. They extend arrays with the two new abilities beyond indexing:
 
 [ropes]: https://en.wikipedia.org/wiki/Rope_(data_structure)
 [abstract data types]: https://en.wikipedia.org/wiki/Abstract_data_type
@@ -19,21 +19,19 @@ Like dictionaries, [ropes] fall under the category of [abstract data types], but
 1. Join (i.e. concatenate) two ropes into a single one
 2. Split a rope at a point into two halves
 
-in addition to access to elements by index.
-
 Of course, this can be implemented using either linked lists or dynamic arrays, but both have time complexity trade-offs.
 
 | | Access | Join | Split |
 |--|--|--|--|
 | Linked List | $$O(n)$$ | $$O(1)$$ | $$O(1)$$ |
 | Dynamic Array | $$O(1)$$ | $$O(n)$$ | $$O(n)$$ |
-| Treap | $$O(\log n)$$\* | $$O(\log n)$$\* | $$O(\log n)$$\* |
+| Treap | $$O(\log n)$$ | $$O(\log n)$$ | $$O(\log n)$$ |
 
 Treaps are a nice middle ground, with *expected* $$O(\log n)$$ (because of their probabilistic nature) for all operations.
 
 # Cartesian Trees
 
-Almost all the machinery for treaps are built on top of [Cartesian trees], so we'll look at them first. Formally, they are binary trees derived from a sequence of numbers, and satisfy two properties:
+Almost all the machinery for treaps are built on top of [Cartesian trees], so we'll look at those first. Formally, they are binary trees derived from a sequence of numbers, and satisfy two properties:
 
 [Cartesian trees]: https://en.wikipedia.org/wiki/Cartesian_tree
 
@@ -49,13 +47,13 @@ Almost all the machinery for treaps are built on top of [Cartesian trees], so we
 
 *Cartesian Tree. Source: [wikipedia](https://en.wikipedia.org/wiki/Cartesian_tree#/media/File:Cartesian_tree.svg)*
 
-Though you can convert a list of numbers into a Cartesian tree, we won't need to -- just join a bunch of single-element trees to do the same thing.
+While you can convert a list of numbers into a Cartesian tree, we won't need to -- just join a bunch of single-element trees to do the same thing.
 
 # Join
 
-The first operation we'll tackle is joining. The final tree will need to satisfy the heap property, so the root node must be the smallest element. Fortunately, since both original trees satisfy the heap property, we know the smallest overall element must be one of the two root nodes.
+The first operation we'll tackle is joining. Lets suppose we have two trees we want to join. The final tree will need to satisfy the heap property, so the root node must be the smallest element out of both trees. Fortunately, since the original trees satisfy the heap property, we know the smallest overall element must be one of the two root nodes.
 
-We'll assume the left root is smaller. We can just mirror our final algorithm if the right root was actually greater. Here's an example:
+We'll assume the left root is smaller -- we can just mirror our final algorithm if the right root was actually greater. Here's an example:
 
 {% graph %}
 digraph {
@@ -79,7 +77,7 @@ digraph {
 }
 {% endgraph %}
 
-Since the in-order traversal of the output must go through the entire left tree before going through the right, we know that 1's left subtree doesn't change. The right side is different though -- if 8 remains the right child, we'll break the heap rule. So we detach it.
+Since the in-order traversal of the output must go through the entire left tree before going through the right, we know that 1's left subtree doesn't change. The right side is different though. If 8 remains the right child, we'll break the heap rule. So we detach it.
 
 {% graph %}
 digraph {
@@ -107,9 +105,7 @@ digraph {
 }
 {% endgraph %}
 
-The correct child would be the smaller one, but we'd need to merge *their* subtrees ... wait, this is the same as our first step!
-
-The problem we have now is analogous to our initial one, so recursion is the way to go to give us the complete join algorithm, which
+The correct child would be the smaller one, but we'd need to merge *their* subtrees. This is same kind of problem we're trying to solve in the first place, so recursion is the way to go. This gives us the full join algorithm:
 
 1. Firstly, finds the smaller root node and sets it as the root of the output.
 2. Then, recursively merges the other tree with the subtree on the same side -- that's blue with red in the example.
@@ -142,7 +138,7 @@ However, we've assumed that we can easily determine which side the split is on. 
 
 Both of our algorithms run in $$O(depth)$$. This looks great until you realise it's valid for a Cartesian tree to be a *linked list*. Which makes the worst case complexity $$O(n)$$.
 
-Now, the obvious solution would be to require the tree be balanced. *How* to achieve this without tacking on a full-blown [self-balancing binary search tree][sbbst] is less obvious.
+Now, the obvious solution would be to require the tree be balanced. How to achieve this without tacking on *another* [self-balancing binary search tree][sbbst] is less obvious.
 
 Treaps solve this is by exploiting two theorems[^2]:
 
@@ -157,14 +153,16 @@ Treaps solve this is by exploiting two theorems[^2]:
 
 By using random numbers for the Cartesian tree, we ensure our operations are almost always $$O(\log n)$$ i.e. fast. However, we've lost the ability to store anything useful. To remedy this, we attach an *additional* value to each node (and call the random numbers the nodes' *priority*, to avoid confusion). Since the value can change independently to the priority, we can allow updating it in-place.
 
-Or, we can forbid it, instead updating via split-split-merge-merge, and gain persistence, since each node only know about its subtree.
+Or, we can forbid it. Since each node only ever knows about its subtree, we can update by instead by splitting out the element, cloning it, then joining the pieces back together.
 
-This last point is important. If we enforce immutability, we can store *any* aggregate statistic *as long as it doesn't depend on things outside its subtree*. This permits "summaries" like
+This last fact is way more useful than it sounds. If we enforce immutability, we can store *any* aggregate statistic *as long as it doesn't depend on things outside its subtree*. This permits "summaries" like
 
 - total length -- a node's length is one plus the sum of its children's lengths
 - line count -- store the number of newline characters
 - *other* treaps computed from this treap (with an additional $$\log n$$ factor to the complexity)
-- well, *any* monoid or semigroup (i.e. you're using an associative binary operator)
+- well, *any* monoid or semigroup[^4] (i.e. you're using an associative binary operator)
+
+[^4]: Await a possible future post where I talk extensively about interesting things you can do with monoids.
 
 to be calculated efficiently -- expected $$O(\log n)$$, as well.
 
