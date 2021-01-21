@@ -29,7 +29,7 @@ All my posts, in a single file. Handy if you want do full-text search.
 </p>
 
 {% for post in site.posts %}
-  <h2 class="fenced-y text-centre bleed"><a href="{{ post.url }}">{{post.title}}</a></h2>
+  <h2 class="fence-y text-centre bleed"><a href="{{ post.url }}">{{post.title}}</a></h2>
   {% unless post.tags contains "interactive" %}
     <div class="bounded">{{ post.content }}</div>
   {% endunless %}

@@ -123,7 +123,7 @@ ul.li-flat {
 
 .text-inverted { @include text-inverted; }
 
-@mixin fenced($side) {
+@mixin fence($side) {
 	border-#{$side}: 1px solid $hr-fg;
 	padding-#{$side}: 0.3em;
 }
@@ -133,8 +133,8 @@ hr {
 	border-top: 1px solid $hr-fg;
 }
 
-.fenced-t, .fenced-y { @include fenced(top); }
-.fenced-b, .fenced-y { @include fenced(bottom); }
+.fence-t, .fence-y { @include fence(top); }
+.fence-b, .fence-y { @include fence(bottom); }
 
 .list-inline {
 	list-style-type: none;
@@ -214,12 +214,12 @@ textarea {
 }
 
 // Flexbox stuff
-.flex-centred, .flex-distribute {
+.flex-centre, .flex-distribute {
 	display: flex;
 	flex-wrap: wrap;
 }
 
-.flex-centred {
+.flex-centre {
 	justify-content: center;
 }
 
