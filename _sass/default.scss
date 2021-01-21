@@ -20,7 +20,7 @@
 }
 
 #site-footer {
-	@include fenced(top);
+	@include fence(top);
 	margin: 2rem auto 1rem;
 	padding: 2rem var(--bleed-size);
 	box-sizing: content-box;
@@ -44,7 +44,7 @@ blockquote {
 }
 
 .footnotes {
-	@include fenced(top);
+	@include fence(top);
 	margin-top: 1rem;
 	padding-top: 1rem;
 }
