@@ -1,10 +1,29 @@
+{% capture accounts -%}
+twitter,https://twitter.com/ralismark;
+mastodon,https://fosstodon.org/@ralismark;
+github,https://github.com/ralismark;
+email,mailto:tim@ralismark.xyz;
+{%- endcapture %}
+{% assign accounts = accounts | split: ";" %}
+
 <div id="site-footer" class="content-width text-centre">
-		<ul class="li-flat mt-0">
-			<li><a href="{% link posts.html %}">blog</a></li>
-			<li><a href="{% link everything.html %}">cat /posts/*</a></li>
-			<li><a href="{% link booklist.md %}">reading list</a></li>
-		</ul>
-		All work licensed under <b>CC BY-SA 4.0</b> unless otherwise stated.
-		<br>
-		This site is <a href="https://github.com/ralismark/ralismark.github.io">open source</a>!
+  <ul class="li-flat mt-0">
+  {% for line in accounts %}
+    {% assign entry = line | strip | split: "," %}
+    {%- assign icon = entry[0] -%}
+    <li>
+      <a class="no-underline" {% if page.url == "/" %}rel="me"{% endif %} title="{{ entry[0] }}" href="{{ entry[1] }}">{%- include icon icon=icon -%}</a>
+    </li>
+  {% endfor %}
+  </ul>
+
+  <ul class="li-flat mt-0">
+    <li><a href="{% link posts.html %}">blog</a></li>
+    <li><a href="{% link everything.html %}">cat /posts/*</a></li>
+    <li><a href="{% link booklist.md %}">reading list</a></li>
+    <li><a href="/feed.xml">rss</a></li>
+  </ul>
+  All work licensed under <a href="https://github.com/ralismark/ralismark.github.io/blob/master/LICENSE">CC BY-SA 4.0</a> unless otherwise stated.
+  <br>
+  This site is <a href="https://github.com/ralismark/ralismark.github.io">open source</a>!
 </div>
