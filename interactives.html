@@ -1,0 +1,13 @@
+---
+title: Blog
+layout: default
+---
+
+<h1>Interactives</h1>
+
+<P>
+  This is a collection of short HTML/JS toys I've made over the years.
+</p>
+
+{% assign entries = site.interactives | reverse %}
+{% include post-listing.html entries=entries %}

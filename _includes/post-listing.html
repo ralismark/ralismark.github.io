@@ -1,0 +1,28 @@
+{% for post in include.entries %}
+{% assign post_year = post.date | date: "%Y" %}
+{% comment %} Never show a year separator above the first item {% endcomment %}
+{% if year and post_year != year %}
+<div class="fence-t" style="text-align: right; font-size: 1.2em; color: grey">
+  {{ post_year }}
+</div>
+{% endif %}
+{% assign year = post_year %}
+<article class="summary mb-1">
+	<header>
+		<h2 class="display-iblock my-0">
+			{% if post.path contains "_drafts" %}
+			[draft]
+			{% endif %}
+			<a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+		</h2>
+
+		<time datetime="{{ post.date | date_to_xmlschema }}">
+			{{ post.date | date: "%e %b '%y" }}
+		</time>
+	</header>
+
+	<p class="my-0">
+	{{ post.excerpt | strip_html | truncatewords: 100 }}
+	</p>
+</article>
+{% endfor %}

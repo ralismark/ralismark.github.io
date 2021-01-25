@@ -10,23 +10,4 @@ layout: default
 	<li><a href="{% link tags.html %}">{% include icon icon="tag" w="24" %}Tags</a></li>
 </ul>
 
-{% for post in site.posts %}
-<article class="summary">
-	<header>
-		<h2 class="display-iblock mb-0">
-			{% if post.path contains "_drafts" %}
-			[draft]
-			{% endif %}
-			<a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-		</h2>
-
-		<time datetime="{{ post.date | date_to_xmlschema }}">
-			{{ post.date | date: "%e %b '%y" }}
-		</time>
-	</header>
-
-	<p class="my-0">
-	{{ post.excerpt | strip_html | truncatewords: 100 }}
-	</p>
-</article>
-{% endfor %}
+{% include post-listing.html entries=site.posts %}
