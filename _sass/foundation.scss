@@ -1,5 +1,3 @@
-@use "sass:selector";
-
 // Block Sizing ---------------------------------------------------------------
 
 *, *::before, *::after {
@@ -38,7 +36,10 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 500;
 }
 
-h1 { text-align: center; }
+h1 {
+	text-align: center;
+	color: $accent;
+}
 
 // make KaTeX the right size
 .katex {
@@ -46,13 +47,21 @@ h1 { text-align: center; }
 }
 
 // a better colour for links
-a {
-	color: $accent;
+main a, footer a {
+	color: $tertiary;
 	text-decoration: none;
 
 	&:hover {
-		color: darken($accent, 15%);
+		color: darken($tertiary, 15%);
 		text-decoration: underline;
+	}
+}
+
+h1 > a, h2 > a, h3 > a {
+	color: $secondary;
+
+	&:hover {
+		color: darken($secondary, 15%);
 	}
 }
 
@@ -62,9 +71,13 @@ time {
 }
 
 // a bit opinionated. we centre images by default
-img, svg {
+img:not(.icon), svg:not(.icon) {
 	display: block;
 	margin: 0 auto;
+}
+
+img.icon, svg.icon {
+	vertical-align: middle;
 }
 
 // Key indicators
@@ -116,12 +129,10 @@ ul.li-flat {
 	}
 
 	& a:hover {
-		color: #ccc;
+		color: #aaa;
 		text-decoration: none;
 	}
 }
-
-.text-inverted { @include text-inverted; }
 
 @mixin fence($side) {
 	border-#{$side}: 1px solid $hr-fg;

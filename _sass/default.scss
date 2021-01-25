@@ -3,19 +3,68 @@
  */
 
 #site-nav {
-	background: $header-bg;
-	font-size: 1.3em;
-	padding: .3rem 0;
+	$height: 3rem;
+	$pad: .5rem;
 
-	#navbar-root {
+	& > div {
+		height: $height + 2 * $pad;
+	}
+
+	svg {
+		height: $height;
+	}
+
+	#nav-left {
+		text-align: right;
+	}
+
+	#nav-right {
+		text-align: left;
+	}
+
+	a {
 		display: inline-block;
+		line-height: $height;
+		padding: $pad;
+	}
 
-		svg {
-			display: inline-block;
-			height: 1.5em;
-			width: 1.5em;
-			vertical-align: middle;
-		}
+	#nav-left a, #nav-right a {
+		padding-left: 1.25rem;
+		padding-right: 1.25rem;
+	}
+
+	// styling
+
+	// from https://css-tricks.com/easing-linear-gradients/
+	$base-opacity: 0.4;
+	background: radial-gradient(100% 100% at top,
+		fade-out($accent, $base-opacity) 0%,
+		fade-out($accent, $base-opacity + (1 - $base-opacity) * 0.262) 19%,
+		fade-out($accent, $base-opacity + (1 - $base-opacity) * 0.459) 34%,
+		fade-out($accent, $base-opacity + (1 - $base-opacity) * 0.618) 47%,
+		fade-out($accent, $base-opacity + (1 - $base-opacity) * 0.722) 56.5%,
+		fade-out($accent, $base-opacity + (1 - $base-opacity) * 0.806) 65%,
+		fade-out($accent, $base-opacity + (1 - $base-opacity) * 0.874) 73%,
+		fade-out($accent, $base-opacity + (1 - $base-opacity) * 0.925) 80.2%,
+		fade-out($accent, $base-opacity + (1 - $base-opacity) * 0.958) 86.1%,
+		fade-out($accent, $base-opacity + (1 - $base-opacity) * 0.979) 91%,
+		fade-out($accent, $base-opacity + (1 - $base-opacity) * 0.992) 95.2%,
+		fade-out($accent, $base-opacity + (1 - $base-opacity) * 0.998) 98.2%,
+		fade-out($accent, 1) 100%
+	);
+
+	border-top: .4rem solid $accent;
+	color: $secondary;
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 1.5em;
+
+	a {
+		text-decoration: none;
+	}
+
+	a.here, a:hover {
+		background: $accent;
+		color: white;
 	}
 }
 
@@ -57,11 +106,12 @@ blockquote {
 
 .badge {
 	@include text-inverted;
+	text-decoration: none;
 
 	font-size: 80%;
 	padding: .3ex 1ex;
 	margin: 0 0.2ex;
-	background: darkorange;
+	background: $secondary;
 	border-radius: 1em;
 }
 

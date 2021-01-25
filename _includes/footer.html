@@ -6,7 +6,7 @@ email,mailto:tim@ralismark.xyz;
 {%- endcapture %}
 {% assign accounts = accounts | split: ";" %}
 
-<div id="site-footer" class="content-width text-centre">
+<footer id="site-footer" class="content-width text-centre">
   <ul class="li-flat mt-0">
   {% for line in accounts %}
     {% assign entry = line | strip | split: "," %}
