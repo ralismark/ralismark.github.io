@@ -6,10 +6,16 @@
 $font: lighter 1em / 1.9 "Merriweather", serif;
 $mono-font: normal 1em / 1.9 monospace;
 
-$accent: #990461;
-$secondary: #5404b0;
-$tertiary: #002da8;
+$accent: #DB5599;
+$accent-bg: #990461;
+$secondary: #9C56DB;
+$tertiary: #6480ED;
 $hr-fg: rgba(127, 127, 127, 0.2);
+
+html {
+	background: #191a1a;
+	color: #e7e6e5;
+}
 
 html {
 	$m-max-width: 45rem;
