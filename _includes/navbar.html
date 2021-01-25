@@ -1,28 +1,15 @@
-<header id="site-nav" class="full-width text-inverted">
-	<nav class="content-width flex-distribute">
-		<a id="navbar-root" href="{{ "/" | relative_url }}">
-			<svg width="200" height="200" viewBox="-200 -200 400 400">
-				<use href="/assets/spiral.svg#root" width="100" height="100" stroke-width="25">
-			</svg>
-			{{ site.title }}
-		</a>
-
-		{% if jekyll.environment != "production" %}
-		<span>
-			{{ jekyll.environment }}
-		</span>
-		{% endif %}
-
-		<ul id="navbar-pages" class="list-inline my-0">
-			{% for page in site.pages %}
-			{% if page.nav %}
-			<li class="navbar-page">
-				<a class="navbar-link" href="{{ page.url | relative_url }}">
-					{{ page.title | escape }}
-				</a>
-			</li>
-			{% endif %}
-			{% endfor %}
-		</ul>
-	</nav>
+<header id="site-nav" class="full-width flex-centre">
+  <div id="nav-left" class="flex-grow">
+    <a {% if page.path == "" %}class="here"{% endif %} href="{% link posts.html %}">none</a>
+  </div>
+  <div id="nav-mid">
+    <a {% if page.path == "index.html" %}class="here"{% endif %} href="{% link index.html %}">
+      <svg viewBox="-200 -200 400 400">
+        <use href="/assets/spiral.svg#root" width="100" height="100" stroke-width="20">
+      </svg>
+    </a>
+  </div>
+  <div id="nav-right" class="flex-grow">
+    <a {% if page.path == "posts.html" %}class="here"{% endif %} href="{% link posts.html %}">posts</a>
+  </div>
 </header>
