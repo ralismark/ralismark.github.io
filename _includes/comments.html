@@ -1,0 +1,115 @@
+{% assign location = page.url | replace: "index.html", "" | relative_url | prepend: "https://www.ralismark.xyz" %}
+<section class="fence-t">
+  <!-- span needed to avoid making the link heading-coloured -->
+  <h2>Webmentions <span><a style="font-size: 0.5em" href="https://indieweb.org/Webmention">what is this?</a></span></h2>
+
+  <noscript>Sorry! JavaScript is required to load comments</noscript>
+  <ul id="webmentions"></ul>
+
+  <hr>
+
+  <p>
+    Feel free to
+    <a class="btn" href="https://quill.p3k.io/auth/start?dontask=1&me=https%3A%2F%2Fcommentpara.de%2F&reply={{ location | url_encode }}"
+      >write a comment</a>
+    or
+    <!-- wow, they directly use the parameter without url-decoding it! -->
+    <a class="btn" href="https://toot.karamoff.dev/?text={{ page.title }} - {{ location }} - @ralismark@fosstodon.org"
+      >share on mastodon</a>!
+  </p>
+
+  <p>
+    Or, if you've written a <a href="https://indieweb.org/responses">response</a> to this, enter that posts' URL:
+  </p>
+  <form action="https://webmention.io/www.ralismark.xyz/webmention" method="post">
+    <input name="source" placeholder="https://example.com/" type="url">
+    <input name="target" value="https://www.ralismark.xyz{{ page.url | replace:'index.html','' | relative_url }}" type="hidden">
+    <input value="Send Webmention" type="submit">
+  </form>
+
+  <script>
+    "use strict";
+
+(function() {
+  const comments = document.getElementById("webmentions");
+  const url = "{{ location }}"
+
+  const xhr = new XMLHttpRequest();
+  xhr.onload = () => show_comments(xhr.response);
+  xhr.onerror = () => {
+    comments.innerHTML = `<p>
+      <em>mi ken ala alasa e toki tawa lipu ni</em>
+      <br> I can't seem to retrieve the comments...
+    </p>`;
+  };
+  xhr.responseType = "json";
+  const api_base = "https://webmention.io/api/mentions.jf2?target=";
+  xhr.open("GET", api_base + encodeURIComponent(url));
+  xhr.send();
+
+  const actionTitle = {
+    "in-reply-to": "replied",
+    "like-of": "liked",
+    "repost-of": "reposted",
+    "bookmark-of": "bookmarked",
+    "mention-of": "mentioned",
+    "rsvp": "RSVPed",
+    "follow-of": "followed"
+  };
+
+  function text(el, ...str) {
+    str.forEach(s => el.appendChild(document.createTextNode(s)));
+  }
+
+  function show_comments(data) {
+    console.log(data);
+    if(!data.children.length) {
+      comments.innerHTML = "<li>No webmentions yet. You could be the first!</li>";
+    }
+
+    data.children.forEach(r => {
+      const li = document.createElement("li");
+
+      const who = (r.author && r.author.name) || r.url.split("/")[2];
+
+      const nametag = document.createElement("a");
+      nametag.setAttribute("rel", "nofollow ugc");
+      nametag.setAttribute("title", who);
+      nametag.setAttribute("href", r.url);
+
+      if(r.author && r.author.photo) {
+        const img = document.createElement("img");
+        img.setAttribute("src", r.author.photo);
+        img.style.display = "inline-block";
+        img.style.maxWidth = "2em";
+        img.style.verticalAlign = "middle";
+        nametag.appendChild(img);
+      }
+      text(nametag, " ", who, " ");
+
+      li.appendChild(nametag);
+
+      const action = actionTitle[r["wm-property"]];
+      if(action) text(li, action, " ");
+
+      const daysago = Math.round((new Date - new Date(r.published || r["wm-received"])) / 1000 / 60 / 60 / 24);
+      const timetag = document.createElement("a");
+      timetag.setAttribute("rel", "nofollow ugc");
+      timetag.setAttribute("title", r.published);
+      timetag.setAttribute("href", r["wm-source"]);
+      timetag.textContent = daysago == 0 ? "today" : daysago == 1 ? "yesterday" : daysago + " days ago";
+
+      li.appendChild(timetag);
+
+      if(r.content && r.content.text) {
+        const wrapper = document.createElement("p");
+        wrapper.textContent = r.content.text;
+        li.appendChild(wrapper);
+      }
+
+      comments.appendChild(li);
+    });
+  }
+})();
+  </script>
+</section>
