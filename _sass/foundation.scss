@@ -175,17 +175,27 @@ hr {
 
 // Inputs ---------------------------------------------------------------------
 
-textarea {
-	background: transparent;
+textarea, input, button, a.btn {
+	background: fade-out($accent, 0.95);
 	color: inherit;
+	font: inherit;
+	font-size: 0.9em;
 	border: 1px solid $hr-fg;
-
-	padding: 0.4rem;
+	padding: 0.5rem;
 	border-radius: 0.2rem;
+}
 
-	&.full-width {
-		resize: vertical;
-	}
+input[type=submit], button, a.btn {
+	background: fade-out($accent, 0.8);
+}
+
+a.btn:hover {
+	color: inherit;
+	text-decoration: none;
+}
+
+textarea.full-width {
+	resize: vertical;
 }
 
 // Display Utils --------------------------------------------------------------
