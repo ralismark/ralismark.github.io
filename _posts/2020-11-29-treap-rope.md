@@ -43,9 +43,8 @@ Almost all the machinery for treaps are built on top of [Cartesian trees], so we
 [in-order]: https://en.wikipedia.org/wiki/Tree_traversal#In-order_(LNR)
 [heap]: https://en.wikipedia.org/wiki/Heap_(data_structure)
 
-!["Cartesian tree"](https://upload.wikimedia.org/wikipedia/commons/d/d5/Cartesian_tree.svg)
-
-*Cartesian Tree. Source: [wikipedia](https://en.wikipedia.org/wiki/Cartesian_tree#/media/File:Cartesian_tree.svg)*
+![Diagram of a cartesian tree, with an array of numbers above showing the correspondence between tree nodes and elements of the array](https://upload.wikimedia.org/wikipedia/commons/d/d5/Cartesian_tree.svg)
+Cartesian Tree. Source: [wikipedia](https://en.wikipedia.org/wiki/Cartesian_tree#/media/File:Cartesian_tree.svg)
 
 While you can convert a list of numbers into a Cartesian tree, we won't need to -- just join a bunch of single-element trees to do the same thing.
 
@@ -116,9 +115,8 @@ And that's it!
 
 The other operation we need to support is splitting. Let's bring back the wikipedia example:
 
-!["Cartesian tree"](https://upload.wikimedia.org/wikipedia/commons/d/d5/Cartesian_tree.svg)
-
-*Cartesian Tree. Source: [wikipedia](https://en.wikipedia.org/wiki/Cartesian_tree#/media/File:Cartesian_tree.svg)*
+![Diagram of a cartesian tree, with an array of numbers above showing the correspondence between tree nodes and elements of the array](https://upload.wikimedia.org/wikipedia/commons/d/d5/Cartesian_tree.svg)
+Cartesian Tree. Source: [wikipedia](https://en.wikipedia.org/wiki/Cartesian_tree#/media/File:Cartesian_tree.svg)
 
 Suppose we want to split this tree between 10 and 20. The first problem is that there are 3 edges between the two sides of the split: 1-5, 5-8, and 10-15. No worries -- we'll just erase them. But this leaves us with *too* many components.
 

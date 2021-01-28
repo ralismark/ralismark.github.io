@@ -25,12 +25,8 @@ $$
 \\	\vec{B} &= B(x) \vec{z}
 \end{aligned}
 $$
-
-![](/render/build/em-wave.svg "Electromagnetic Wave. Credits to sabicool.")
-
-> My friend I mentioned earlier showed me an in-depth explanation of this (though it's not on his blog), which has a 3D LaTeX diagram. I might adapt it and include it, since this current explanation isn't really that clear.
->
-> *Update, 10 Apr 2019*: He sent me the code, which I've adapted to create the above diagram. Credits to him.
+![A diagram of EM wave, with a red sine wave, labelled E, along the X-Y plane and a blue sine wave, labelled B, along the X-Z plane](/render/build/em-wave.svg)
+Electromagnetic wave. Credits to [sabicool]
 
 # Maxwell's Equations
 
