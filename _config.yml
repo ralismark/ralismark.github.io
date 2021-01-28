@@ -19,7 +19,7 @@ collections:
 #
 # build setting
 #
-markdown: kramdown
+markdown: Custom
 
 kramdown:
   math_engine: sskatex
