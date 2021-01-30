@@ -19,12 +19,17 @@ collections:
 #
 # build setting
 #
+# Use the following plug-ins
+plugins:
+  - jekyll-sitemap # Create a sitemap
+  - jekyll-feed # Create an Atom feed
+
 markdown: Custom
 
 kramdown:
   math_engine: sskatex
   math_engine_opts:
-    katex_js: '/tmp/katex.min.js'
+    katex_js: "/tmp/katex.min.js"
     katex_opts:
       throwOnError: false
 
@@ -42,11 +47,6 @@ kramdown:
 sass:
   style: compressed
 
-# Use the following plug-ins
-plugins:
-  - jekyll-sitemap # Create a sitemap
-  - jekyll-feed # Create an Atom feed
-
 # Exclude these files from production
 exclude:
   - LICENSE
@@ -57,4 +57,3 @@ exclude:
 # Technical stuff
 future: true # To correct for timezone issues
 disable_disk_cache: true # Don't try to make .jekyll_cache in readonly dir
-# vim: set et ts=2:
