@@ -25,7 +25,7 @@ module Kramdown
         # Removed the extra checks
 
         # Generate a figure
-        img = "#{' ' * (indent + @indent)}<img#{html_attributes(el.children.first.attr)} />\n"
+        img = ' ' * (indent + @indent) + self.convert_img(el.children.first, indent)
 
         # manually do inner(el, indent)
         caption = +''
@@ -51,6 +51,21 @@ module Kramdown
       body = "#{' ' * (indent + @indent)}<img#{html_attributes(attr)} />\n" \
         "#{' ' * (indent + @indent)}<figcaption>#{attr['title']}</figcaption>\n"
       format_as_indented_block_html("figure", figure_attr, body, indent)
+    end
+
+    # Do picture tag & WEBP generation
+    def convert_img(el, indent)
+      src = el.attr['src']
+      if src && src.start_with?("/") && (src.end_with?(".png") || src.end_with?(".jpg"))
+        webp = Pathname.new(src).sub_ext(".webp").to_s
+
+        spc = ' ' * (indent + @indent)
+        body = "#{spc}<source type=\"image/webp\" srcset=\"#{webp}\" />\n" \
+          "#{spc}<img#{html_attributes(el.attr)} />\n"
+        format_as_block_html("picture", {}, body, indent)
+      else
+        super(el, indent)
+      end
     end
   end
 end
