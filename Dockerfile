@@ -1,12 +1,11 @@
 FROM jekyll/builder:latest
 
-EXPOSE "4000"
-
 RUN gem install kramdown-math-sskatex && \
 	wget 'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js' -O /tmp/katex.min.js
-RUN apk --no-cache add graphviz
-RUN gem install svg_optimizer
+RUN apk --no-cache add graphviz libwebp-tools
+RUN gem install svg_optimizer jekyll-webp
 
+EXPOSE "4000"
 CMD jekyll serve \
 	-d /tmp/_site \
 	--host 0.0.0.0 --port 4000 \
