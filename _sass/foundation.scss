@@ -58,10 +58,10 @@ main a, footer a {
 }
 
 h1 > a, h2 > a, h3 > a {
-	color: $secondary;
+	color: $accent;
 
 	&:hover {
-		color: darken($secondary, 15%);
+		color: darken($accent, 15%);
 	}
 }
 
