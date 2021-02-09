@@ -12,9 +12,16 @@ $secondary: #9C56DB;
 $tertiary: #6480ED;
 $hr-fg: rgba(127, 127, 127, 0.2);
 
-html {
+body:not(.light) {
 	background: #191a1a;
 	color: #e7e6e5;
+}
+
+@media(prefers-color-scheme: light) {
+	body {
+		background: initial;
+		color: initial;
+	}
 }
 
 html {
