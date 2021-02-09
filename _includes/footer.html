@@ -11,7 +11,7 @@ email: "mailto:tim@ralismark.xyz"
   {% for entry in accounts %}
     {% assign icon = entry[0] %}
     <li>
-      <a class="no-underline" {% if page.url == "/" %}rel="me"{% endif %} title="{{ entry[0] }}" href="{{ entry[1] }}">{%- include icon icon=icon -%}</a>
+      <a class="no-underline" {% if page.url == "/" %}rel="me"{% endif %} aria-label="{{ entry[1] }}" title="{{ entry[1] }}" href="{{ entry[1] }}">{%- include icon icon=icon -%}</a>
     </li>
   {% endfor %}
   </ul>
