@@ -11,5 +11,11 @@
 		</main>
 
 		{% include footer.html %}
+
+		{% if jekyll.environment == "production" %}
+			<!-- Cloudflare Web Analytics -->
+			<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "31c95321f0664ebab1641042bda55d96"}'></script>
+			<!-- End Cloudflare Web Analytics -->
+		{% endif %}
 	</body>
 </html>
