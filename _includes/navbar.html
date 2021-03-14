@@ -1,15 +1,16 @@
 <header id="site-nav" class="full-width flex-centre">
-  <div id="nav-left" class="flex-grow">
+  <span id="nav-left" class="flex-grow">
     <a {% if page.path == "interactives.html" %}class="here"{% endif %} href="{% link interactives.html %}">tools</a>
-  </div>
-  <div id="nav-mid">
+  </span>
+  <span id="nav-mid">
     <a aria-label="index" {% if page.path == "index.html" %}class="here"{% endif %} href="{% link index.html %}">
-      <svg viewBox="-200 -200 400 400" aria-label="spiral logo">
+      <svg viewBox="-200 -200 400 400">
+        <title>ralismark.xyz</title>
         <use href="/assets/spiral.svg#root" width="100" height="100" stroke-width="20">
       </svg>
     </a>
-  </div>
-  <div id="nav-right" class="flex-grow">
+  </span>
+  <span id="nav-right" class="flex-grow">
     <a {% if page.path == "posts.html" %}class="here"{% endif %} href="{% link posts.html %}">posts</a>
-  </div>
+  </span>
 </header>

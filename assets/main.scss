@@ -17,8 +17,8 @@ body:not(.light) {
 	color: #e7e6e5;
 }
 
-@media(prefers-color-scheme: light) {
-	body {
+@media (prefers-color-scheme: light) {
+	body:not(.light) {
 		background: initial;
 		color: initial;
 	}

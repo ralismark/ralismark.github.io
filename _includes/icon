@@ -1,4 +1,6 @@
-<svg class="icon" width="{{ include.w | default: "32" }}" height="{{ include.w | default: "32" }}" viewBox="0 0 24 24" aria-label="{{ include.alt | default: include.icon }} icon">
+<svg class="icon" width="{{ include.w | default: "32" }}" height="{{ include.w | default: "32" }}" viewBox="0 0 24 24">
+  {%- assign default_title = include.icon | append: "icon" -%}
+  <title>{{ include.alt | default: default_title }}</title>
   <use xlink:href="/assets/icons.svg#{{ include.icon }}" />
 </svg>
 {%- comment -%}This is to avoid the trailing newline{%- endcomment -%}
