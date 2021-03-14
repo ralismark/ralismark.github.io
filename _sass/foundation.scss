@@ -206,6 +206,7 @@ textarea.full-width {
 	.mx-#{$i} { margin-left:   $i * 1rem; margin-right:  $i * 1rem; }
 	.my-#{$i} { margin-top:    $i * 1rem; margin-bottom: $i * 1rem; }
 }
+.mx-auto { margin-left: auto; margin-right: auto; }
 
 @mixin bleed {
 	margin-left:  calc(-1 * var(--bleed-size));
