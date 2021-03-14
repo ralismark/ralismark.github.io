@@ -18,7 +18,7 @@ jobs:
     - name: Jekyll build
       run: |
         docker build . --tag=image
-        docker run \
+        docker run -e JEKYLL_ENV=production \
           -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
           image jekyll build
 
