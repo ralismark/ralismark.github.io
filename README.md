@@ -1,11 +1,10 @@
 # Triple Except
 
-This repo is the code for [my blog][index]. Everything here is licensed under [**CC BY-SA 4.0**][cc-by-sa] unless otherwise stated.
+This repo houses the code & documents for [my blog][index].
 
 [index]: https://ralismark.github.io
-[cc-by-sa]: https://creativecommons.org/licenses/by-sa/4.0
 
-To test this website locally, run `./serve.sh`.
+To render this website locally, run `./serve.sh`.
 
 ## Experiments
 
