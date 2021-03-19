@@ -5,9 +5,7 @@ title: Licenses
 
 <h1>Licenses</h1>
 
-The contents of this website are licensed under the [Creative Commons Attribution Share Alike 4.0 International](https://github.com/ralismark/ralismark.github.io/blob/master/LICENSE) license (i.e. CC BY-SA 4.0). In short, you can reuse my work as long as it's released under a compatible license and you credit me.
-
-While not covered by it, if you're only using a small part, don't bother with license compatibility.
+The contents of this website are licensed under the [Creative Commons Attribution NonCommercial 4.0 International](https://github.com/ralismark/ralismark.github.io/blob/master/LICENSE) license (i.e. CC BY-NC 4.0). In short, you can reuse my work as long as it's not commercial and you credit me.
 
 Please contact me if licensing is a problem.
 
