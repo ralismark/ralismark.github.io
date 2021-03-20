@@ -3,10 +3,6 @@ layout: article
 title: Booklist
 ---
 
-<h1>Booklist</h1>
-
-> This book list is a work in progress! I haven't fully entered the entries from the list I sent to my friend.
-
 One day, a friend asked for book recommendations and I wrote up a 400 word summary. This seemed like something that would interest others, so I started cleaning it up and put it on my website.
 
 There are two Hacker News posts which have a lot of great book recommendations, and they're also good places to look:
@@ -91,5 +87,5 @@ Other than the ones above with longer reviews, I've also read
 - *Making Money (Discworld)*, in 2020
 - *Going Postal (Discworld)*, in 2019
 
-I may write a more extensive review for them in the future.
+I may write a more extensive review for them in the future. Or you can ask me directly.
 
