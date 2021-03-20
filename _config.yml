@@ -24,7 +24,6 @@ collections:
 #
 # Use the following plug-ins
 plugins:
-  - jekyll-sitemap # Create a sitemap
   - jekyll-feed # Create an Atom feed
 
 markdown: Custom
