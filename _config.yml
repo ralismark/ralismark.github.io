@@ -15,6 +15,9 @@ collections:
     permalink: /posts/:title
   drafts:
     output: false
+  garden:
+    output: true
+    permalink: /:title
 
 #
 # build setting
