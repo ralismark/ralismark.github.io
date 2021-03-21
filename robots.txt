@@ -1,0 +1,8 @@
+---
+---
+User-agent: *
+Allow: /posts
+Allow: /posts/
+Allow: /interactives
+Allow: /interactives/
+Disallow: /

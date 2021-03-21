@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Booklist
+noindex: true
 ---
 
 One day, a friend asked for book recommendations and I wrote up a 400 word summary. This seemed like something that would interest others, so I started cleaning it up and put it on my website.
