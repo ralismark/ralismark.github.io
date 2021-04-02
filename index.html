@@ -9,18 +9,21 @@ title: # blank
 
 I'm **Tim**, but I go by **ralismark** on the internet. I'm a second year computer science/maths student at UNSW.
 
-<!--
-I'm a fan of the Rust programming language, Vim...
-
-%% here i talk a bit more about myself %%
--->
-
 On my [blog]({% link posts.html %}), I (irregularly) post about [competitive programming][lis] which sometimes goes into the [more theoretical parts of computer science][edge-trees], [other computing things][vim] and the occasional [mathy post][light-speed].
 
 [lis]: {% link _posts/2020-04-21-alberts-lis.md %}
 [edge-trees]: {% link _posts/2019-05-28-edge-trees.md %}
 [vim]: {% link _posts/2020-08-29-how-i-use-vim-1.md %}
 [light-speed]: {% link _posts/2019-04-05-speed-of-light.md %}
+
+I've also made some [javascript things]({% link interactives.html %}), and [a game][basalt-bashers].
+
+<!--
+I'm also a fan of the Rust programming langauge (despite usually working with C++), prefer doing web stuff without frameworks (like [this game][basalt-bashers]), [have a weird keyboard][keyboard], and am on Mastodon.
+-->
+
+[basalt-bashers]: /webgames/basalt-bashers/index.html
+[keyboard]: {% link _posts/2020-11-15-keyboard.md %}
 
 {% endcapture %}{{ content | markdownify }}
 
@@ -46,10 +49,11 @@ On my [blog]({% link posts.html %}), I (irregularly) post about [competitive pro
 
 - I'm a lab assistant for [COMP1521][comp1521], a course teaching the low-level fundamentals of how computers work, including assembly (MIPS) and the POSIX APIs.
 
+[comp1521]: https://www.handbook.unsw.edu.au/undergraduate/courses/2021/COMP1521/
+
 - I was a live-in tutor for the 2019 December [AIOC School of Excellence][dec-camp], where I taught problem solving skills and advanced applications of algorithms & data structures. I also helped organise and run practice exams and other camp activities.
 
 [dec-camp]: https://orac.amt.edu.au/
-[comp1521]: https://www.handbook.unsw.edu.au/undergraduate/courses/2021/COMP1521/
 
 - I've contributed to [Tectonic Typesetting][tectonic], a LaTeX engine written in Rust & C, submitting PRs to [upgrade diagnostic reporting][tt-diagnostics], [add an unstable flag system][tt-zed], and [integrate `cbindgen`][tt-cbindgen].
 
@@ -64,4 +68,4 @@ On my [blog]({% link posts.html %}), I (irregularly) post about [competitive pro
 
 - I represented Australia in the 2019 Interational Olympiad of Informatics, winning a silver medal.
 
-{% endcapture %}{{ content | markdownify }}
+{% endcapture %}{% comment %}{{ content | markdownify }}{% endcomment %}
