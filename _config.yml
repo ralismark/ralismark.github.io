@@ -17,7 +17,14 @@ collections:
     output: false
   garden:
     output: true
-    permalink: /:title
+    permalink: /garden/:title
+
+defaults:
+  -
+    scope:
+      path: "_garden"
+    values:
+      noindex: true
 
 #
 # build setting
