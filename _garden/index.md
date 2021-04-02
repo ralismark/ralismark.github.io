@@ -13,4 +13,4 @@ Please be nice. Thanks.
 Here's some things here:
 
 - [Some short book reviews]({% link _garden/booklist.md %})
-- [Gift suggestions]({% link _garden/gifts.md %})
+- [Figuring how to join2 binary trees]({% link _garden/treap.md %})
