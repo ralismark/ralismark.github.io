@@ -12,7 +12,10 @@ I was working part-time 3 days a week plus doing 2 uni courses -- MATH2111 and C
 
 Compared to some other cases of burnout, that's quite a low amount of work. Plus, I didn't feel too stressed at the time. But, turns out that my mental limits were *way* lower than I'd imagined.
 
-Mental exhaustion was something I discovered immediately after I started work. Struggling to do anything remotely complex (e.g. reading a medium-length article or paper, programming), or an incredibly uneasy feeling in your head if you do try. By end, I was having a hard time talking after work, and occasionally getting executive dysfunction issues.
+![Anki review graph](/assets/burnout-anki.png)
+You can my mental wellbeing reflected in the amount of Anki reviews I do each day.
+
+Mental exhaustion was something I discovered immediately after I started work. Struggling to do anything remotely complex (e.g. reading a medium-length article or paper, programming), or an incredibly uneasy feeling in your head if you do try. By end, I was having a hard time talking after work, and occasionally getting executive dysfunction issues. Oh, also losing interest in your hobbies.
 
 I also started getting mental problems. The most notable was having transient issues that I might've only been imagining (I've been internally calling them spurious symptoms), such as
 
