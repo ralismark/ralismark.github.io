@@ -65,12 +65,16 @@
 		background: $accent-bg;
 		color: white;
 	}
+
+	@media print { display: none; }
 }
 
 #site-footer {
 	padding: 2rem var(--bleed-size);
 	box-sizing: content-box;
 	font-size: 80%;
+
+	@media print { display: none; }
 }
 
 main {

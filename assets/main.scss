@@ -24,6 +24,13 @@ body:not(.light) {
 	}
 }
 
+@media print {
+	body:not(.light) {
+		background: initial;
+		color: initial;
+	}
+}
+
 html {
 	$m-max-width: 45rem;
 	$m-content-p: .9;
