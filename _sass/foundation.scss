@@ -97,7 +97,7 @@ kbd {
 // Decorations ----------------------------------------------------------------
 
 // decorate table as we see fit
-table:not(.rouge-table) {
+*:not(pre):not(code) > table {
 	border-collapse: collapse;
 	margin: 0 auto;
 	display: block;
@@ -205,12 +205,12 @@ textarea.full-width {
 // Display Utils --------------------------------------------------------------
 
 @for $i from 0 through 4 {
-	.mt-#{$i} { margin-top:    $i * 1rem; }
-	.mb-#{$i} { margin-bottom: $i * 1rem; }
-	.mx-#{$i} { margin-left:   $i * 1rem; margin-right:  $i * 1rem; }
-	.my-#{$i} { margin-top:    $i * 1rem; margin-bottom: $i * 1rem; }
+	html .mt-#{$i} { margin-top:    $i * 1rem !important; }
+	html .mb-#{$i} { margin-bottom: $i * 1rem !important; }
+	html .mx-#{$i} { margin-left:   $i * 1rem !important; margin-right:  $i * 1rem !important; }
+	html .my-#{$i} { margin-top:    $i * 1rem !important; margin-bottom: $i * 1rem !important; }
 }
-.mx-auto { margin-left: auto; margin-right: auto; }
+html .mx-auto { margin-left: auto !important; margin-right: auto !important; }
 
 @mixin bleed {
 	margin-left:  calc(-1 * var(--bleed-size));
