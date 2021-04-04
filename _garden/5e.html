@@ -1,0 +1,165 @@
+---
+layout: default
+title: 5e Character Sheet
+noindex: true
+---
+
+{% capture content %}
+|Name|Race|Class|Bg|Align|Speed|
+|-|
+|Elenari (short: Elen) Koselu|Eladrin Elf|Warlock {{ lvl }}|Sage|CN|30 ft|
+{% endcapture %}{{ content | markdownify }}
+
+{% assign lvl = 1 %}
+{% assign hp = 10 %}
+{% assign hit_dice = 1 %}
+{% assign spell_slots = 1 %}
+
+{% capture content %}
+{: .mx-0 }
+|Lvl|Name|Cast|Range|Duration|Extra|
+|-|
+|0|Eldrich Blast|1 action VS|120 ft|instant|Ranged spell attack, 1d10 force on hit|
+|0|Magic Hand|1 action VS|30 ft|1 min|Spectral hand whooo|
+|1|Sleep|1 action VSM|90 ft|instant|Roll 5d8. 20ft radius, in increasing hp|
+|1|Hex|1 bonus VSM|90 ft|1 hr (conc)|hit &rarr; +1d6 damage. Disadvantage on one ability. <br>Bonus action to curse new creature if target dies|
+||Dagger|1d4||piercing|finesse, light, thrown (20/60)|
+||Spear|1d6||piercing|thrown (20/60), versatile (1d8)|
+||Quarterstaff|1d6||bludgeoning|versatile (1d8)|
+{% endcapture %}{% assign spell_table = content | markdownify %}
+
+{% capture content %}
+|From|Name|When|What|
+|-|
+|Eladrin|Fey Step|Bonus<br>1/short|Magically teleport 30ft into an unoccupied space|
+|Warlock|Fey Prescence|Action<br>1/short|10ft cube, wis vs spell save, charm or frighten until next turn|
+|Elf|Darkvision||30 ft darkvision|
+|Elf|Fey Ancestry||Advantage on saving throws vs charm<br>Can't be magically put to sleep|
+|Elf|Trance||4hr trance instead of sleeping|
+|Eladrin|Seasons|After long rest|Change own seasons|
+|Sage|Researcher||Know where/from whom to get any information|
+{% endcapture %}{% assign ability_table = content | markdownify %}
+
+{% assign gp = 10 %}
+{% capture content %}
+- spear
+- arcane focus
+- (scholar's pack)
+- leather armour
+- quarterstaff
+- 2x dagger
+- 2x bottle of ink
+- quill
+- ink pen
+- 10x parchment
+- bag of sand
+- 2x small knife
+- common clothes
+- "letter from a dead colleague posing a question you have not yet been able to answer"
+- backpack
+- "book of lore"
+{% endcapture %}{% assign equipment = content | yaml_parse %}
+
+{% capture content %}
+str: 11
+dex: 14
+con: 14
+int: 12
+wis: 8
+cha: 16
+{% endcapture %}{% assign stat = content | yaml_parse %}
+
+<!-- derived numbers -->
+
+{% assign proficiency = lvl | minus: 1 | divided_by: 4 | floor | plus: 2 %}
+
+{% capture content %}
+  {% for field in stat %}
+    {{ field[0] }}: {{ field[1] | minus: 10 | divided_by: 2 | floor }}
+  {% endfor %}
+{% endcapture %}{% assign mod = content | yaml_parse %}
+
+{% assign hp_cap = lvl | minus: 1 | times: 5 | plus: mod.con | plus: 8 %}
+{% capture spell_slots_cap %}
+  {%- if lvl <= 1 -%}1
+  {%- elsif lvl <= 10 -%}2
+  {%- elsif lvl <= 16 -%}3
+  {%- else -%}4
+  {%- endif -%}
+{% endcapture %}
+{% capture spell_level %}
+  {%- if lvl <= 10 -%}{{ lvl | plus: 1 | divided_by: 2 | floor }}
+  {%- else -%}5
+  {%- endif -%}
+{% endcapture %}
+{% capture cantrips_known %}
+  {%- if lvl <= 3 -%}2
+  {%- elsif lvl <= 9 -%}3
+  {%- else -%}4
+  {%- endif -%}
+{% endcapture %}
+{% capture spells_known %}
+  {%- if lvl <= 9 -%}{{ lvl | plus: 1 }}
+  {%- else -%}{{ lvl | plus: 11 | divided_by: 2 }}
+  {%- endif -%}
+{% endcapture %}
+{% assign spell_save_dc = 8 | plus: proficiency | plus: mod.cha %}
+{% assign spell_atk_mod = proficiency | plus: mod.cha %}
+
+{% capture content %}
+{: .mx-0 }
+|**Hp**|{{ hp }} / {{ hp_cap }}|
+|**Hit Dice**|{{ hit_dice }} / {{ lvl }}d8|
+|**Spell Slots**|{{ spell_slots }} / {{ spell_slots_cap }} lvl {{ spell_level }}|
+|**Initiative**|1d20 + {{ mod.dex }}|
+|**AC**|{{ mod.dex | plus: 11 }} (leather)|
+|**Atk Mod**|+{{ mod.str | plus: proficiency }}|
+|**Spell Save**|{{ spell_save_dc }}|
+|**Spell Atk**|+{{ spell_atk_mod }}|
+{% endcapture %}{% assign val_table = content | markdownify %}
+
+{% capture content %}
+{: .mx-0 }
+|Stat|Val|Mod|Skills|
+|-|-|-|:-|
+|str|{{ stat["str"] }}|{{ mod["str"] }}|Athletics|
+|dex|{{ stat["dex"] }}|{{ mod["dex"] }}|Acrobatics, Sleight of Hand, Stealth|
+|con|{{ stat["con"] }}|{{ mod["con"] }}||
+|int|{{ stat["int"] }}|{{ mod["int"] }}|Arcana +{{proficiency}}<!--sage-->, History, Investigation +{{proficiency}}<!--warlock-->,<br> Nature, Religion|
+|wis<br>save +{{proficiency}}|{{ stat["wis"] }}|{{ mod["wis"] }}|Animal Handling, Insight, Medicine,<br> Perception +{{proficiency}}<!--elf-->, Survival|
+|cha<br>save +{{proficiency}}|{{ stat["cha"] }}|{{ mod["cha"] }}|Deception +{{ proficiency }}<!--warlock-->, Intimidation,<br> Performance, Persuation|
+{% endcapture %}{% assign stat_table = content | markdownify %}
+
+<div class="flex-centre fence-y">
+{{ stat_table }}
+{{ val_table }}
+{{ spell_table }}
+</div>
+
+{% capture content %}
+# Traits & Abilities
+
+<div class="bleed">
+{{ ability_table }}
+</div>
+
+# Equipment
+
+gp: {{ gp }}
+
+{: .li-flat }
+{% for entry in equipment -%}
+- {{entry}}
+{% endfor %}
+
+# Proficiencies
+
+- Langs:
+  <!--elf--> Common, ~~Quenya~~ Elvish,
+  <!--sage--> Sylvan, Undercommon
+- Armour: Light armour
+- Weapons:
+  <!--warlock--> Simple weapons
+- Tools: None
+
+{% endcapture %}<div class="content-width">{{ content | markdownify }}</div>
