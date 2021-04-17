@@ -6,6 +6,8 @@ noindex: true
 
 Dump of my treapy research. A bunch of sources from <https://en.wikipedia.org/wiki/Join-based_tree_algorithms>.
 
+> Note: [Finger Trees](https://en.wikipedia.org/wiki/Finger_tree) exist and mostly supersede the work here
+
 # Weight-Balanced Trees
 
 I'll be using *weight* to refer to the number of nodes in a tree. We'll then use the alternate balance criteria of
@@ -50,13 +52,13 @@ As an additional note, we can kinda convert the $$\alpha$$-based criterion back 
 
 $$\alpha$$ (used in the same way as the original criteria) is used as a parameter into the algorithm to determine when to rotate.
 
-For tree manipulation, they define `T'(v, l, r)` as a "join back up after a single-node insert or delete". It gets used a lot.
+For tree manipulation, they define `T'(v, l, r)` as a "join back up after a single-node insert or delete". It gets used a lot. Seems like it's derived from regular weight-balanced trees
 
-Their join2 does the classic thing of basing itself off of join3, which I'm not that much a fan of. But the use of $w$ is a cool way of making analysis easier.
+Their join2 does the classic thing of basing itself off of join3, which I'm not that much a fan of. But the use of $$w$$ is a cool way of making analysis easier.
 
 <!-- bibiography -->
 
 [^adams1992]: Adams, Stephens (1992), *Implementing Sets Efficiently in a Functional Language*, [CiteSeerX:10.1.1.501.8427](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.501.8427)
 [^blelloch2016]: Blelloch, Guy; Ferizovic, Daniel; Sun, Yihan (2016), *Parallel Ordered Sets Using Join*, [arXiv:1602.02120](https://arxiv.org/abs/1602.02120)
-[^hirai2011]: Hirai, Yoichi; Yamamoto, Kazuhiko (2011), Balancing weight-banaced trees*, [doi:10.1017/S0956796811000104](doi.org/10.1017/S0956796811000104), <https://yoichihirai.com/bst.pdf>
+[^hirai2011]: Hirai, Yoichi; Yamamoto, Kazuhiko (2011), *Balancing weight-banaced trees*, [doi:10.1017/S0956796811000104](doi.org/10.1017/S0956796811000104), <https://yoichihirai.com/bst.pdf>
 [^yihan2019]: Sun, Yihan (2019), *Join-based Parallel Balanced Binary Trees*, <https://www.cs.cmu.edu/~yihans/papers/thesis.pdf>
