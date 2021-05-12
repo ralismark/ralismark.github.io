@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Managing graphical user services
-tags: linux
+tags:
 ---
 
 - sway needs the display manager's environment to start

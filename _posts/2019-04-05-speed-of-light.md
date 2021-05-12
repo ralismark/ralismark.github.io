@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A simple "derivation" of the speed of light
-tags: math
+tags:
 excerpt: Deriving an expression for c without advanced vector calculus
 ---
 

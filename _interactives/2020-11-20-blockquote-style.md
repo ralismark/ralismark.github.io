@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Which blockquote looks better
-tags: blog
+tags:
 excerpt: A sample of a few possible blockquote styles
 ---
 

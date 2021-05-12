@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Git Emergency Procedures - Recovering deleted refs
-tags: git
+tags:
 excerpt: Recovering commits from deleted branches
 ---
 

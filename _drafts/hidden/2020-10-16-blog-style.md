@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Blog Post Style
-tags: blog
+tags:
 excerpt: Shorter and less-polished content in the future?
 ---
 

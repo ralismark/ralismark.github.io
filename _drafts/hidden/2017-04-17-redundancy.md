@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Redundancy
-tags: story
+tags:
 ---
 
 You'll never know when your systems just stop working. This is why you have

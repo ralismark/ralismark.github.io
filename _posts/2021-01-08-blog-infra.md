@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Site Infrastructure
-tags: blog
+tags:
 excerpt: The tech stack of this site
 ---
 

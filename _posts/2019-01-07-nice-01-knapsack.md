@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A nice subset-sum solution
-tags: c-cpp informatics
+tags:
 excerpt: Solving a "standard" problem in a very clean way
 ---
 

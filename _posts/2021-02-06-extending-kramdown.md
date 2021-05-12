@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Extending Kramdown
-tags: blog
+tags:
 excerpt: Changing Kramdown at the ruby level
 ---
 

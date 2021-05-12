@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Inline sidenotes
-tags: 
+tags:
 excerpt: A neat css-only inline note
 ---
 
