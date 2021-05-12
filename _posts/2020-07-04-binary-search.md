@@ -1,7 +1,7 @@
 ---
 layout: post
 title: You don't know binary search
-tags: informatics
+tags:
 excerpt: How to never write a binary search wrong again
 ---
 

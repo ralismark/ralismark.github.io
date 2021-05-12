@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Proving Algorithms using Nearer Optimal Solution
-tags: informatics
+tags:
 excerpt: Proving greedy algorithms by making optimal choices more greedy
 ---
 

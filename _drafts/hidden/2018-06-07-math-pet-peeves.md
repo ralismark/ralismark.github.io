@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Math Pet Peeves
-tags: math
+tags:
 excerpt: Math notation which I don't like
 ---
 

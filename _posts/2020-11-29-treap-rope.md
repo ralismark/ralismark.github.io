@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Rope-Making With Treaps
-tags: informatics
+tags:
 excerpt: Building treap ropes from first principles
 ---
 

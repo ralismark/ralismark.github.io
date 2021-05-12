@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Edge-based tree data structures
-tags: informatics
+tags:
 excerpt: A novel data structure to solve widest path problems
 ---
 

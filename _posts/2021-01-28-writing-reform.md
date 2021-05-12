@@ -1,7 +1,7 @@
 ---
 layout: post
 title: The Curse of Multi-Dialect Writing Systems
-tags: linguistics
+tags:
 excerpt: Or why you can never reform English or Chinese writing
 ---
 

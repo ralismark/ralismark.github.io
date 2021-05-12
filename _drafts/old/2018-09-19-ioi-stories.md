@@ -1,7 +1,7 @@
 ---
 layout: post
 title: informatics story
-tags: blog
+tags:
 ---
 
 Last month, I competed at the International Olympiad of Informatics in Baku, Azerbaijan. This week, while fun, had several interesting incidents that happened. I'm making a collection here so I don't forget these, and I'll update these as I get time to write them.

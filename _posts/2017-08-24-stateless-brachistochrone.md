@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Stateless Brachistochrone Trajectories
-tags: math
+tags:
 excerpt: Determining if you need to decelerate without remembering where you started
 ---
 

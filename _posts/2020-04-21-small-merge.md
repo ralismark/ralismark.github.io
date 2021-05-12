@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Small Merge
-tags: informatics
+tags:
 excerpt: A generalisation of DSU's merge by size to be more useful.
 ---
 
