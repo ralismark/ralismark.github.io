@@ -3,47 +3,7 @@
 ---
 @charset "utf-8";
 
-$font: 300 1em / 1.9 "Merriweather", serif;
-$mono-font: normal 1em / 1.9 Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
-
-$accent: #DB5599;
-$accent-bg: #990461;
-$secondary: #9C56DB;
-$tertiary: #6480ED;
-$hr-fg: rgba(127, 127, 127, 0.2);
-
-body:not(.light) {
-	background: #191a1a;
-	color: #e7e6e5;
-}
-
-@media (prefers-color-scheme: light) {
-	body:not(.light) {
-		background: initial;
-		color: initial;
-	}
-}
-
-@media print {
-	body:not(.light) {
-		background: initial;
-		color: initial;
-	}
-}
-
-html {
-	$m-max-width: 45rem;
-	$m-content-p: .9;
-
-	--bleed-size: #{$m-max-width * (1 - $m-content-p) / 2};
-	--content-width: #{$m-max-width * $m-content-p};
-
-	@media(max-width: $m-max-width) {
-		--content-width: #{$m-content-p * 100%};
-		--bleed-size: #{(1 - $m-content-p) / 2 * 100%}; // we want it as a percentage
-	}
-}
-
+@import "defns";
 @import "foundation";
 @import "syntax";
 @import "extra";
