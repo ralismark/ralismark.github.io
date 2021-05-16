@@ -1,7 +1,6 @@
 ---
 layout: article
 title: Post Post-Mortems
-noindex: true
 ---
 
 Basically a "how did each article go".

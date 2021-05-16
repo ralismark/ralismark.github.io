@@ -1,7 +1,6 @@
 ---
 layout: article
 title: Deterministic Treap
-noindex: true
 ---
 
 Dump of my treapy research. A bunch of sources from <https://en.wikipedia.org/wiki/Join-based_tree_algorithms>.
