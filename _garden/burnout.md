@@ -1,7 +1,6 @@
 ---
 layout: article
 title: Burnout
-noindex: true
 ---
 
 I way came too close to burnout in March 2021.

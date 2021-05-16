@@ -1,7 +1,6 @@
 ---
 layout: article
 title: If you're buying me gifts and want suggestions
-noindex: true
 ---
 
 > Note that you most certainly **do not** have to follow these guidelines. Feel free to ignore everything here!

@@ -1,7 +1,6 @@
 ---
 layout: article
 title: 5e Character Backstory
-noindex: true
 ---
 
 > Elenari Koselu, Warlock Eladrin

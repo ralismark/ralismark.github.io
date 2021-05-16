@@ -1,7 +1,6 @@
 ---
 layout: article
 title: Digital Garden
-noindex: true
 ---
 
 Hey there! You've stumbled across the more hidden part of my website. The content here will be more varied and unpolished and personal, and usually doesn't belong in the [main blog]({% link posts.html %}).
