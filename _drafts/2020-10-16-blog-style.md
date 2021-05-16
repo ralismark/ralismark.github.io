@@ -3,6 +3,7 @@ layout: post
 title: Blog Post Style
 tags:
 excerpt: Shorter and less-polished content in the future?
+reason: outdated
 ---
 
 I've been reading a lot of blogs (and similar content) recently, many of which are part of [#100DaysToOffload]. And it's got me thinking about my own post style.
