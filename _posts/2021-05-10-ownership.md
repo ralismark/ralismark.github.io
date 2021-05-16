@@ -1,5 +1,5 @@
 ---
-layout: article
+layout: post
 title: Ownership Semantics for C programmers
 tags:
 excerpt: How to ensure memory safety when the compiler can't help
@@ -7,10 +7,6 @@ excerpt: How to ensure memory safety when the compiler can't help
 
 {% capture content %}
 @import "defns";
-div.highlight {
-  background: rgba(153, 4, 97, .1);
-  padding: 0 1ch;
-}
 div.highlight .cp {
   // hide the header
   // reset stuff
@@ -32,15 +28,19 @@ div.highlight .cp {
 
 *(alt subtitle: How to pretend you're writing rust when in C)*
 
-TODO we need an intro
+One of the many unique aspects of C that you won't encounter in other languages is how manual resource management is -- almost all higher level languages have automatic garbage collection, and those that don't typically have other automated methods like destructors. This memory *un*safety, combined with the lack of any language-level safety rails, make this one thing that's easily mess up. However, we can borrow ideas that have been developed over time to make it easier to be safe.
 
 <!--more-->
 
-For the purposes of this article, we'll mostly be concerned with memory *management* -- ensuring that we clean up all allocated memory (or other resources) exactly once. This means no leaking, and no double or invalid frees. While we're at it, we'll also want to prevent other memory safety issues like use-after-free if we can.
+For the purposes of this article, we'll mostly be concerned with memory *management* -- ensuring that we clean up all allocated memory (or other resources) exactly once. This means no leaking, and no double or invalid frees. Related issues, like use-after-free, will also be covered to a lesser degree, and we mostly won't bother with the remaining concerns.
 
-# Sharing is caring, but it's also kinda unsafe
+# Training Wheels
 
-A basic but rather limiting approach is to never allow multiple pointers to point to a single allocation. Instead, you're only allowed a single variable, struct field, or array element. For now, we'll also forbid changing the value of pointers. Let's have a look at how this works:
+A basic but rather limiting approach is to never allow multiple pointers to point to a single allocation, instead only allowing a single variable, struct field, or array element to hold each resource. We'll *disallow* assigning pointers, since that would create a copy of the pointer, as well as passing pointers as arguments, since both the caller and callee would have a variable.
+
+With this restriction, we can easily determine when memory need to be freed: just before the pointer holding this memory disappears -- a local variable going out of scope, or the parent data structure being freed. No other references to the held memory exist, so we can't double free or leak.
+
+Let's have a look at how this works:
 
 ```c
 {
@@ -59,7 +59,7 @@ A basic but rather limiting approach is to never allow multiple pointers to poin
 
 Now, we guarantee that nothing else can refer to `*val`, and so we must be the one responsible for freeing it once `val` stops existing. In a sense, the variable `val` has exclusive ownership of (and responsibility for) the allocated memory.
 
-Even with such strong restriction, we can still do complex data structures...kinda:
+Even with such strong restriction, we can still do complex data structures ... kinda:
 
 ```c
 {
@@ -73,11 +73,11 @@ Even with such strong restriction, we can still do complex data structures...kin
   head->next->next->next = NULL;
 ```
 
-We can't use loops since we'd create another reference, but we pretty easily figure out how to correctly free it:
+Unfortunately, we can't use loops, since the loop variable would be an extra reference into the list and that's disallowed. However, it's pretty easy to figure out how to correctly free the list:
 
-1. The variable `head` would vanish, so we need to free the first node...
-2. That would invalidate `head->next`, and so we'd have to free the second one...
-3. Which in turn would cause `head->next->next` to disappear, forcing us to free the last node
+1. `head` will go out of scope, and it contains `head->next`, so we'll need to free that first
+2. `head->next` contains `head->next->next` which holds some memory, so that also needs to be freed beforehand
+3. `head->next->next` doesn't contain any further references, so we're done
 
 ```c
   free(head->next->next);
@@ -86,23 +86,21 @@ We can't use loops since we'd create another reference, but we pretty easily fig
 }
 ```
 
-In this way, fields of structs can own memory, not just variables. We also observe that allocations need to be freed before their owners can be freed.
+# No-Cloning Theorem
 
-# No-cloning theorem
-
-However, such strong restrictions are quite limiting. While we can have linked lists and such, they're still essentially glorified local variables since we can't loop over them. Also, I haven't even mentioned how that interacts with returning pointers (e.g. `malloc`), and we're having `free` be an exception.
+However, such restrictions are too limiting to do much. We can't have truly recursive data structures like lists or trees -- no loops means they behave pretty much identical to local variables. We can't have functions either.
 
 So we're going to extend this with the ability to *transfer ownership*.
 
-Now, this is very different to simply creating a new reference. Instead, when we give our reference to someone else, we stop being able to use our old one[^set-null]. This ensures that there's still exactly one reference throughout the whole program. Formally:
+We'll still enforce our "one reference per allocation", but instead allow assigning pointers in a restricted way: when you give a reference to something else, you stop being able to use the old one. While this atomic get-and-invalidate can't be directly expressed in C, we can approximate this by setting the old pointer to null.
 
-[^set-null]: We don't have Rust-style destructive moves, so we have to make do with setting pointers to null. Strictly speaking, this is not safe -- between assigning the pointer and setting it to null, there's two copies of the pointer. This is more obvious if we're moving the reference to a function, since we only clear the pointer *after* the function terminates.
+Code-wise, rules become:
 
 1. All pointers are either null or point to a valid allocation.
 2. If we want to pass a pointer to a function or assign it to something, we must null the original variable.
-3. You must never "leak" a allocation -- you must always deallocate before the pointer becomes TODO reword invalid
+3. You must never leak an allocation -- you must always deallocate before the "holder" gets invalidated
 
-In C, this translates to
+This means that we can now do this
 
 ```c
 {
@@ -122,13 +120,11 @@ type* create_type(int n) {
 }
 ```
 
-Now, the caller becomes responsible[^ignore-result] for this bit of memory.
+Now, the caller becomes responsible[^ignore-result] for this bit of memory. `malloc` is a function like this -- it allocates some memory and gives it to the caller.
 
-[^ignore-result]: In standard C, this is a bit risky since the compiler won't stop you from simply ignoring this. But there's compiler-specific ways of turning this into a warning -- `__attribute__((warn_unused_result))` in clang and gcc, and `_Check_return_` in MSVC.
+[^ignore-result]: In standard C, this is a bit risky since the compiler won't stop the caller from simply ignoring the returned pointer. But there's compiler-specific ways of turning this into a warning -- `__attribute__((warn_unused_result))` in clang and gcc, and `_Check_return_` in MSVC.
 
-We can also incorporate `malloc` and `free` into this framework -- `malloc` transfers ownership of memory from the allocator to us, and `free` transfers ownership back. Initially, all memory is owned by the system, and by the end, all memory must be returned.
-
-Under this model, we can do pretty much everything we want, albeit with difficulty. For example, this gets the sum of a linked list:
+Under this model, we can do much more, though with some difficulty. For example, this gets the sum of a linked list:
 
 ```c
 // return type
@@ -142,7 +138,7 @@ struct pair list_sum(struct list* list) {
     return out;
   }
 
-### ↓ We detach the tail of the list and transfer it to the call of list_sum. This function then gives us back a list (hopefully the one we passed to it) vai a struct pair.
+### ↓ We detach the tail of the list and transfer it to the call of list_sum. This function then gives us back a list (hopefully the one we passed to it) via a struct pair.
   struct pair inner = list_sum(list->next);
       list->next = 0;
 
@@ -157,20 +153,20 @@ struct pair list_sum(struct list* list) {
 }
 ```
 
-This is pretty tedious. If we want a function to be able to simply *read* part of the list -- not even modifying it -- we need to
+This is pretty tedious, but at least it's now possible. If we want a function to be able to simply *read* part of the list -- not even modifying it -- we need to
 
 1. Detach the tail of the list from the head,
 2. Pass it to the function,
 3. Get it back via the returned value, and
 4. Reattach the tail back onto the head
 
-when we would originally just pass a pointer. The upside is that we can very easily follow how ownership of memory moves around our program, and more importantly, we are able to tell if any function handles memory correctly (no leaking or double freeing) *without looking at other functions* -- if we pass a pointer to a function, we can't use it again, and if we get a pointer, we must always do something with it[^linear-logic].
+when we would originally just pass a pointer. The upside is that we can very easily follow how resources moves around our program, and more importantly, we are able to tell if any function handles memory correctly (no leaking or double freeing) *without looking at other functions* -- if we pass a pointer to a function, we can't use it again, and if we get a pointer, we must always do something with it[^linear-logic].
 
-[^linear-logic]: If you want to read more about this, have a look at [Wikipedia: linear logic](https://en.wikipedia.org/wiki/Linear_logic) and [Wikipedia: linear type system](https://en.wikipedia.org/wiki/Substructural_type_system#Linear_type_systems)
+[^linear-logic]: These are sometimes called linear types (or affine types if you have automatic cleanup). If you want to read more about this, have a look at [Wikipedia: linear logic](https://en.wikipedia.org/wiki/Linear_logic) and [Wikipedia: linear type system](https://en.wikipedia.org/wiki/Substructural_type_system#Linear_type_systems)
 
-This gives us a massively helpful safety guarantee. But we can do a bit better.
+Types that act like this -- not just pointers, but also files handles, mutexes, and other non-copyable resources -- are called *move-only types*. These give us a massively helpful safety guarantee. But we can do a bit better.
 
-# The pointer that keeps on giving
+# Sharing Is Caring
 
 One of the first things we disallowed in this journey was non-owning pointers. Originally, we banned them to develop our guarantees, but we're now ready to allow them again, as **borrowing pointers**[^rust-borrow]. As such, we'll have two "families" pointers:
 
@@ -234,24 +230,24 @@ int sum = list_sum(&local_head);
 
 In fact, the `&` operator can also be seen to *exclusively* give borrows -- if you take the address of something, then that thing must already exist and hence be owned.
 
-While this model (or similar variants) are used pretty widely, the biggest issue is that correctly reasoning about lifetimes can get tricky when more complex structures e.g. structs containing `borrow_ptr`. However, in most cases you'll only have temporary `borrow_ptr`s that are passed to functions and possibly returned. This gives a few heuristics:
+While this model (or similar variants) are used pretty widely, the biggest issue is that correctly reasoning about lifetimes can get tricky when more complex structures e.g. structs containing `borrow_ptr`. However, in most cases you'll only have temporary borrows that are passed to functions and returned/dropped. This gives a few heuristics:
 
 - for the caller: the lifetime of the returned borrows is *usually* the same as the lifetime of `borrow_ptr` arguments
 - for the callee: `borrow_ptr` arguments are valid for at least the duration of a function, and you can return borrows derived from `borrow_ptr` arguments
 
-As an interesting final note, these `borrow_ptr` and `owning_ptr` types don't actually have to be pointers returned by `malloc`! For examples of other things:
+As an interesting final note, these `borrow_ptr` and `owning_ptr` types don't actually have to be pointers returned by `malloc`! For examples of other types:
 
 - `owning_ptr` -- reference counted types[^non-unique], dynamic arrays, and `FILE*`/file descriptors
 - `borrow_ptr` -- pointer+length pairs (for slices of arrays)
 
-[^non-unique]: This might relax the "one owning pointer per resource" rule into just "each create must have a corresponding destroy". However, our move-only rules from our second model still applies.
+[^non-unique]: This only works under the "creates must have a corresponding destroy" variant of the rules, not "one owning pointer per resource".
 
-# TODO section title
+# Closing Words
 
-We've developed a pretty good and practical framework that we can use to eliminate certain classes of memory safety errors. Now, in real C code much of this is very much implicit -- there probably wont' be comments pointing this stuff out, let alone typedefs.
+We've developed a pretty good and practical framework that we can use to eliminate certain classes of memory safety errors. Now, in real C code much of this is very much implicit and might not even be precisely followed -- pointers that are moved out of might not be nulled, for example.
 
-Much of what I've laid out here is inspired by more modern programming languages, namely C++ and Rust. These enforce at the language much of what we had to do manually: C++ has move semantics and move-only types -- essentially our second model -- and Rust has, well, very comprehensive *compile-time* memory safety features (seriously, take a look if you haven't).
+Much of what I've laid out here is inspired by more modern programming languages, namely C++ and Rust. These enforce at the language much of what we had to do manually: C++ has move semantics and move-only types, and Rust has, well, an very comprehensive *compile-time* memory safety features (seriously, take a look if you haven't).
 
-TODO a better conclusion
+But if you're stuck with C, these concepts will make memory management a little safer.
 
 {% endcapture %}{{ content | markdownify | replace: "###", "" }}

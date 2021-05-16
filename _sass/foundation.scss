@@ -177,6 +177,11 @@ hr {
 	text-align: center;
 }
 
+div.highlight {
+	background: fade-out($accent-bg, 0.9);
+	padding: 0 0.3em;
+}
+
 // Inputs ---------------------------------------------------------------------
 
 textarea, input, button, a.btn {
