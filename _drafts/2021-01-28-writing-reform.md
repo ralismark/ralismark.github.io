@@ -3,6 +3,7 @@ layout: post
 title: The Curse of Multi-Dialect Writing Systems
 tags:
 excerpt: Or why you can never reform English or Chinese writing
+reason: unprofessional
 ---
 
 I've recently been interested in linguistics, mostly from getting into the [Toki Pona](https://en.wikipedia.org/wiki/Toki_Pona) community. While constructed languages and writing systems are quite cool and interesting in their own way, learning about linguistics has also revealed to me some things about real world languages.

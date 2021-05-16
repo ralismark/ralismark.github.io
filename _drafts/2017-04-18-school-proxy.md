@@ -2,6 +2,7 @@
 layout: post
 title: School Proxy
 tags:
+reason: lowquality
 ---
 
 In the previous post, I mentioned the school proxy. Today, I'll reveal how

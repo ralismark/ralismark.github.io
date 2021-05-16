@@ -11,7 +11,7 @@
 	<header>
 		<h2 class="display-iblock my-0">
 			{% if post.path contains "_drafts" %}
-			[draft]
+			[draft: {{ post.reason | default: "no reason" }}]
 			{% endif %}
 			<a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
 		</h2>

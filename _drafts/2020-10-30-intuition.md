@@ -3,6 +3,7 @@ layout: post
 title: Dissecting intuition & Exam technique
 tags:
 excerpt: How I do problem solving
+reason: lowquality
 ---
 
 > This post is quite low-polish. I had this topic queued up for quite a while, and this is just a dump of my thoughts.

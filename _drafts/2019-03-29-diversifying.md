@@ -3,6 +3,7 @@ layout: post
 title: Diversifying content
 tags:
 excerpt: I might have a larger variety of content in the future.
+reason: outdated
 ---
 
 I might have a larger variety of content in the future.
