@@ -6,24 +6,6 @@ excerpt: How to ensure memory safety when the compiler can't help
 ---
 
 {% capture content %}
-@import "defns";
-div.highlight .cp {
-  // hide the header
-  // reset stuff
-  display: block;
-  white-space: normal;
-  font: $font;
-  color: var(--body-fg);
-  // actual styling
-  font-style: italic;
-  border: 1px solid $accent-bg;
-  padding: 0 1ch;
-  margin: 0 1em;
-  background: var(--body-bg);
-}
-{% endcapture %}<style>{{ content | scssify }}</style>
-
-{% capture content %}
 {::options syntax_highlighter_opts="{ line_numbers: false \}" /}
 
 *(alt subtitle: How to pretend you're writing rust when in C)*
@@ -251,3 +233,21 @@ Much of what I've laid out here is inspired by more modern programming languages
 But if you're stuck with C, these concepts will make memory management a little safer.
 
 {% endcapture %}{{ content | markdownify | replace: "###", "" }}
+
+{% capture content %}
+@import "defns";
+div.highlight .cp {
+  // hide the header
+  // reset stuff
+  display: block;
+  white-space: normal;
+  font: $font;
+  color: var(--body-fg);
+  // actual styling
+  font-style: italic;
+  border: 1px solid $accent-bg;
+  padding: 0 1ch;
+  margin: 0 1em;
+  background: var(--body-bg);
+}
+{% endcapture %}<style>{{ content | scssify }}</style>
