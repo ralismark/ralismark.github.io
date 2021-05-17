@@ -9,22 +9,22 @@ title: 5e Character Sheet
 |Elenari (short: El/Elen) Koselu|Eladrin Elf|Warlock {{ lvl }}|Sage|CN|30 ft|
 {% endcapture %}{{ content | markdownify }}
 
-{% assign lvl = 1 %}
-{% assign hp = 10 %}
-{% assign hit_dice = 1 %}
-{% assign spell_slots = 1 %}
+{% assign lvl = 2 %}
 
 {% capture content %}
 {: .mx-0 }
 |Lvl|Name|Cast|Range|Duration|Extra|
 |-|
-|0|Eldrich Blast|1 action VS|120 ft|instant|Ranged spell attack, 1d10 force on hit|
+|i|Disguise Self|1 action VS|Self|1 hr|Disguise physical appearance.<br>Investigation vs spell save to detect.|
+|0|Eldrich Blast|1 action VS|120 ft|instant|Ranged spell attack, 1d10+3 force on hit|
 |0|Magic Hand|1 action VS|30 ft|1 min|Spectral hand whooo|
 |1|Sleep|1 action VSM|90 ft|instant|Roll 5d8. 20ft radius, in increasing hp|
 |1|Hex|1 bonus VSM|90 ft|1 hr (conc)|hit &rarr; +1d6 damage. Disadvantage on one ability. <br>Bonus action to curse new creature if target dies|
+|1|Charm Person|1 action VS|30 ft|1 hr|Wis save (advantage if fighting) &rarr; Charmed|
 ||Dagger|1d4||piercing|finesse, light, thrown (20/60)|
 ||Spear|1d6||piercing|thrown (20/60), versatile (1d8)|
 ||Quarterstaff|1d6||bludgeoning|versatile (1d8)|
+{: .card }
 {% endcapture %}{% assign spell_table = content | markdownify %}
 
 {% capture content %}
@@ -32,6 +32,8 @@ title: 5e Character Sheet
 |-|
 |Eladrin|Fey Step|Bonus<br>1/short|Magically teleport 30ft into an unoccupied space|
 |Warlock|Fey Prescence|Action<br>1/short|10ft cube, wis vs spell save, charm or frighten until next turn|
+|Invocation|Agonizing Blast||Add cha mod to eldrich blast damage|
+|Invocation|Mask of Many Faces||*Disguise self* at will|
 |Elf|Darkvision||30 ft darkvision|
 |Elf|Fey Ancestry||Advantage on saving throws vs charm<br>Can't be magically put to sleep|
 |Elf|Trance||4hr trance instead of sleeping|
@@ -80,7 +82,7 @@ cha: 16
   {% endfor %}
 {% endcapture %}{% assign mod = content | yaml_parse %}
 
-{% assign hp_cap = lvl | minus: 1 | times: 5 | plus: mod.con | plus: 8 %}
+{% assign hp_cap = mod.con | plus: 5 | times: lvl | plus: 3 %}
 {% capture spell_slots_cap %}
   {%- if lvl <= 1 -%}1
   {%- elsif lvl <= 10 -%}2
@@ -109,14 +111,15 @@ cha: 16
 
 {% capture content %}
 {: .mx-0 }
-|**Hp**|{{ hp }} / {{ hp_cap }}|
-|**Hit Dice**|{{ hit_dice }} / {{ lvl }}d8|
-|**Spell Slots**|{{ spell_slots }} / {{ spell_slots_cap }} lvl {{ spell_level }}|
+|**Hp Cap**|{{ hp_cap }}|
+|**Hit Dice**|{{ lvl }}d8|
+|**Spell Slots**|{{ spell_slots_cap }}&times;L{{ spell_level }}|
 |**Initiative**|1d20 + {{ mod.dex }}|
 |**AC**|{{ mod.dex | plus: 11 }} (leather)|
-|**Atk Mod**|+{{ mod.str | plus: proficiency }}|
+|**Plain Atk**|+{{ mod.str | plus: proficiency }}|
 |**Spell Save**|{{ spell_save_dc }}|
 |**Spell Atk**|+{{ spell_atk_mod }}|
+{: .card }
 {% endcapture %}{% assign val_table = content | markdownify %}
 
 {% capture content %}
@@ -129,6 +132,7 @@ cha: 16
 |int|{{ stat["int"] }}|{{ mod["int"] }}|Arcana +{{proficiency}}<!--sage-->, History, Investigation +{{proficiency}}<!--warlock-->,<br> Nature, Religion|
 |wis<br>save +{{proficiency}}|{{ stat["wis"] }}|{{ mod["wis"] }}|Animal Handling, Insight, Medicine,<br> Perception +{{proficiency}}<!--elf-->, Survival|
 |cha<br>save +{{proficiency}}|{{ stat["cha"] }}|{{ mod["cha"] }}|Deception +{{ proficiency }}<!--warlock-->, Intimidation,<br> Performance, Persuation|
+{: .card }
 {% endcapture %}{% assign stat_table = content | markdownify %}
 
 <div class="flex-centre fence-y">
@@ -162,5 +166,8 @@ gp: {{ gp }}
 - Weapons:
   <!--warlock--> Simple weapons
 - Tools: None
+
+|**Known Cantrips**|{{ cantrips_known }}|
+|**Known Spells**|{{ spells_known }}|
 
 {% endcapture %}<div class="content-width">{{ content | markdownify }}</div>
