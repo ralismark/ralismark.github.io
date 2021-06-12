@@ -22,6 +22,11 @@ ol, ul
 	margin: 1rem 0;
 }
 
+.katex-display {
+	// avoid scrollbar popping up
+	padding: .5em 0;
+}
+
 // Typography -----------------------------------------------------------------
 
 body {
