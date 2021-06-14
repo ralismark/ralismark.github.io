@@ -11,7 +11,12 @@ email: "mailto:tim@ralismark.xyz"
   {% for entry in accounts %}
     {% assign icon = entry[0] %}
     <li>
-      <a class="no-underline" {% if page.url == "/" %}rel="me"{% endif %} aria-label="{{ entry[1] }}" title="{{ entry[1] }}" href="{{ entry[1] }}">{%- include icon icon=icon -%}</a>
+      <a class="no-underline"
+        {% if page.url == "/" %}rel="me"{% endif %}
+        aria-label="{{ entry[1] }}"
+        title="{{ entry[1] }}"
+        href="{{ entry[1] }}"
+        >{%- include icon icon=icon -%}</a>
     </li>
   {% endfor %}
   </ul>
@@ -21,7 +26,14 @@ email: "mailto:tim@ralismark.xyz"
     <li><a href="{% link everything.html %}">cat /posts/*</a></li>
     <li><a href="/feed.xml">rss</a></li>
   </ul>
+
   All work licensed under <a href="{% link licenses.md %}">CC BY-NC 4.0</a> unless otherwise stated.
   <br>
   This site is <a href="https://github.com/ralismark/ralismark.github.io">open source</a>!
+
+  <iframe
+    style="width: 100%; height: 3rem; filter: invert(1) saturate(3) hue-rotate(225deg) brightness(.9); border: 1px solid #990461"
+    class="my-1"
+    src="https://sike-lipu.ralismark.xyz/embed/ralismark"
+  ></iframe>
 </div>
