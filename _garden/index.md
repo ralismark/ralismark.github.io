@@ -13,4 +13,4 @@ Here's some things here:
 
 - [Some short book reviews]({% link _garden/booklist.md %})
 - [Figuring how to join2 binary trees]({% link _garden/treap.md %})
-- [Burnout stories]({% link _garden/burnout.md %})
+- [My d&d 5e character]({% link _garden/5e.html %})
