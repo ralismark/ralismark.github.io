@@ -9,31 +9,36 @@ title: 5e Character Sheet
 |Elenari (short: El/Elen) Koselu|Eladrin Elf|Warlock {{ lvl }}|Sage|CN|30 ft|
 {% endcapture %}{{ content | markdownify }}
 
-{% assign lvl = 2 %}
+{% assign lvl = 3 %}
+{% capture spell_level %}
+  {%- if lvl <= 10 -%}{{ lvl | plus: 1 | divided_by: 2 | floor }}
+  {%- else -%}5
+  {%- endif -%}
+{% endcapture %}
 
 {% capture content %}
 {: .mx-0 }
 |Lvl|Name|Cast|Range|Duration|Extra|
 |-|
-|i|Disguise Self|1 action VS|Self|1 hr|Disguise physical appearance.<br>Investigation vs spell save to detect.|
 |0|Eldrich Blast|1 action VS|120 ft|instant|Ranged spell attack, 1d10+3 force on hit|
 |0|Magic Hand|1 action VS|30 ft|1 min|Spectral hand whooo|
-|1|Sleep|1 action VSM|90 ft|instant|Roll 5d8. 20ft radius, in increasing hp|
+|1|Sleep|1 action VSM|90 ft|instant|Roll {{ spell_level | times: 2 | plus: 3 }}d8. 20ft radius, in increasing hp|
 |1|Hex|1 bonus VSM|90 ft|1 hr (conc)|hit &rarr; +1d6 damage. Disadvantage on one ability. <br>Bonus action to curse new creature if target dies|
-|1|Charm Person|1 action VS|30 ft|1 hr|Wis save (advantage if fighting) &rarr; Charmed|
+|1|Charm Person|1 action VS|30 ft|1 hr|Wis save (advantage if fighting) &rarr; Charmed.<br>{{ spell_level }} targets.|
+|2|Flock of Familiars|1 min VS|Touch|1 hr|Create 3 [familiars](https://www.gmbinder.com/share/-LSGd7ACEznArBZIcdgC).<br><abbr title="blinded + deafened">Shared senses</abbr>, telepathy, cast touch spells.|
 ||Dagger|1d4||piercing|finesse, light, thrown (20/60)|
 ||Spear|1d6||piercing|thrown (20/60), versatile (1d8)|
-||Quarterstaff|1d6||bludgeoning|versatile (1d8)|
 {: .card }
 {% endcapture %}{% assign spell_table = content | markdownify %}
 
 {% capture content %}
 |From|Name|When|What|
 |-|
-|Eladrin|Fey Step|Bonus<br>1/short|Magically teleport 30ft into an unoccupied space|
+|Eladrin|Fey Step|Bonus<br>1/short|Magically teleport 30ft into an unoccupied space<br>Autumn: charm, wis save vs 8+prof+cha<br>Winter: frighten, wis save vs 8+prof+cha<br>Spring: touch willing, they teleport<br>Summer: cha fire damage|
 |Warlock|Fey Prescence|Action<br>1/short|10ft cube, wis vs spell save, charm or frighten until next turn|
+|Warlock|Pact of Talisman|2 per long rest|+1d4 to any failed ability check|
 |Invocation|Agonizing Blast||Add cha mod to eldrich blast damage|
-|Invocation|Mask of Many Faces||*Disguise self* at will|
+|Invocation|Grasp of Hadar||On eldrich blast hit, move 10ft closer|
 |Elf|Darkvision||30 ft darkvision|
 |Elf|Fey Ancestry||Advantage on saving throws vs charm<br>Can't be magically put to sleep|
 |Elf|Trance||4hr trance instead of sleeping|
@@ -88,11 +93,6 @@ cha: 16
   {%- elsif lvl <= 10 -%}2
   {%- elsif lvl <= 16 -%}3
   {%- else -%}4
-  {%- endif -%}
-{% endcapture %}
-{% capture spell_level %}
-  {%- if lvl <= 10 -%}{{ lvl | plus: 1 | divided_by: 2 | floor }}
-  {%- else -%}5
   {%- endif -%}
 {% endcapture %}
 {% capture cantrips_known %}
