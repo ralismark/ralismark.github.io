@@ -5,7 +5,31 @@ title: 5e Character Backstory
 
 > Elenari Koselu, Warlock Eladrin
 
-# Traits
+- interested in (researching) magic, particularly less conventional stuff. this leads to them looking at the magic pact book and getting themselves into a pact
+  - also part of why they left magic uni
+- as an extension of that, less careful and less patient about their own safety
+- still mental telephone with patron, but being a warlock isn't particularly weird or anything so doesn't really try to hide it
+  - details of pact still not exactly defined
+
+- patron initially seemed innocuous/prankster but is actually kinda evil
+  - aligned goals for magic
+  - hoarding magic? some overarching plan
+
+Trinkets
+
+- idea: patron book is a book of really unusual magic stuff and our task is to eventually investigate it
+  - e.g. detailed instruction on making a paper hat. if you make one it automatically becomes magical
+  - partially decoded ("letter from dead colleague") and we want to figure it out
+
+- "an engagement ring that belonged to one of your parents"
+  - elenari is from feywild so parents are special
+  - patron has some deal with elenari's parents
+
+# Backstory v1
+
+The below stuff was made at the start of the campaign and is no longer an accurate reflection of this character.
+
+## Traits
 
 - Elen has less regard for their own safety, mostly because they're pretty confident in their own ability to not mess things up. I guess this transfers to memory loss periods? More generally, less worried and careful about things.
 - Still thinks they're a(n aspiring) wizard and not a warlock. Because, well, they haven't recognised the signs that they're a warlock, and it's very distinct from more the common deliberate pacts.
@@ -13,7 +37,7 @@ title: 5e Character Backstory
 - Values knowledge and research
 - People helped them a bunch in the past (I haven't figured this out yet, DM feel free to fill this in lmao), and Elen values helping others in a "pay it forward" kind of manner.
 
-# Backstory
+## Backstory
 
 - (stuff about character growing up. Very much not rushed because, well, elves)
 - At some point, they decide to enrol in magic uni to get a more comprehensive & formal understanding of magic. <!--why?-->
@@ -27,7 +51,7 @@ title: 5e Character Backstory
 - This whole time, has been having occasional memory loss incidents and every so often hears patron's voice in their mind, but how often this occurs is very variable.
 - But yeah, hasn't told anyone about this because others think it's heckin weird.
 
-# Extra notes
+## Extra notes
 
 - Elen doesn't know who their patron is
 - What does the patron gain from this? Is there like an overarching plan (and if so, how much does Elen know), or is it just for their amusement?
