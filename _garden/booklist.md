@@ -12,6 +12,8 @@ There are two Hacker News posts which have a lot of great book recommendations, 
 
 I also read a bunch of blogs, such as Slate Star Codex -- you can find a nicely typeset copy of some posts at <https://www.slatestarcodexabridged.com/>. I intend to create a larger blogroll at some point.
 
+> *Disclaimer: exurb1a is under investigation for [some seriously nasty stuff](https://www.photoandgrime.com/blog-1/2020/11/25/pieke-roelofs/youtuber-exurb1a-exposed-sickening-truth-about-an-abuser). I'm not really sure what's the best course of action here, so I'm going to keep the reviews for his books -- I want to make it clear that I do not support his actions. Keep his problematic nature in mind when interacting with his content. If you really want to read his books (which, honestly, are pretty disconnected from this), I suggest you obtain them for free.
+
 # Algorithms to Live By
 
 {: .li-flat }
@@ -41,6 +43,8 @@ A very approachable exploration of low-level computer hardware, building up a CP
 - [amazon](https://www.amazon.com/gp/product/B07GTMYVZF)
 - Read early 2020
 
+*Disclaimer: exurb1a is under investigation for [some seriously nasty stuff](https://www.photoandgrime.com/blog-1/2020/11/25/pieke-roelofs/youtuber-exurb1a-exposed-sickening-truth-about-an-abuser). See note at the top of the page.*
+
 A collection of interesting stories using a soft sci-fi world to explore philosophical topics. Cool enough that I'm seriously considering re-reading it -- and I usually don't reread books.
 
 Have a look at [exurb1a's youtube videos](https://www.youtube.com/c/Exurb1a), in particular [The Lantern](https://www.youtube.com/watch?v=um6cGuJ4mNE), which is a chapter from this book, to see if you'll like it.
@@ -51,6 +55,8 @@ Have a look at [exurb1a's youtube videos](https://www.youtube.com/c/Exurb1a), in
 - Exurb1a
 - [amazon](https://www.amazon.com.au/Prince-Milk-Exurb1a/dp/1983699748)
 - Read early 2020
+
+*Disclaimer: exurb1a is under investigation for [some seriously nasty stuff](https://www.photoandgrime.com/blog-1/2020/11/25/pieke-roelofs/youtuber-exurb1a-exposed-sickening-truth-about-an-abuser). See note at the top of the page.*
 
 A really strange story with magic and philosophy.
 Same characteristic style as Exurb1a's other works, but I found the narrative quite hard to follow and mostly just confusing.
