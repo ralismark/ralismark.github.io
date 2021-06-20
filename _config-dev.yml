@@ -1,4 +1,5 @@
 # Config settings for local testing go here
-disable_disk_cache: true
+disable_disk_cache: false
+incremental: true
 show_drafts: true
 profile: true
