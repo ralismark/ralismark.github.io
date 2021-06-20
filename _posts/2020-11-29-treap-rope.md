@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Rope-Making With Treaps
-tags:
+tags: algos
 excerpt: Building treap ropes from first principles
 ---
 

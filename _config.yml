@@ -20,9 +20,8 @@ collections:
     permalink: /garden/:title
 
 defaults:
-  -
-    scope:
-      path: "_garden"
+  - scope:
+      path: _garden
     values:
       noindex: true
 

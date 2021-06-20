@@ -1,13 +1,11 @@
 ---
 layout: article
-title: Digital Garden
+title: Garden
 ---
 
-Hey there! You've stumbled across the more hidden part of my website. The content here will be more varied and unpolished and personal, and usually doesn't belong in the [main blog]({% link posts.html %}).
+Hey there! You've stumbled across the more hidden part of my website. The content here will be more varied and unpolished and personal, and usually doesn't belong in the [main blog]({% link posts.html %}). For this reason (well, mainly the fact that it's more personal and private), I've intentionally made it difficult to look around.
 
-Please be nice. Thanks.
-
----
+Please be nice. Thanks. And may you find what you're looking for.
 
 Here's some things here:
 

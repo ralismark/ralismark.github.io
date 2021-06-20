@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Extending Kramdown
-tags:
+tags: static-site-gen
 excerpt: Changing Kramdown at the ruby level
 ---
 

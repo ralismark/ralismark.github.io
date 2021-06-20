@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Against "flip bits, plus one"
-tags:
+tags: algos
 excerpt: Teaching two's complement in a more intuitive way
 ---
 

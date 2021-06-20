@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A nice subset-sum solution
-tags:
+tags: algos
 excerpt: Solving a "standard" problem in a very clean way
 ---
 

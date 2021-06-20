@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Site Infrastructure
-tags:
+tags: static-site-gen
 excerpt: The tech stack of this site
 ---
 
