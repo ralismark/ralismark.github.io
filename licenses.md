@@ -3,7 +3,11 @@ layout: article
 title: Licenses
 ---
 
-The contents of this website are licensed under the [Creative Commons Attribution NonCommercial 4.0 International](https://github.com/ralismark/ralismark.github.io/blob/master/LICENSE) license (i.e. CC BY-NC 4.0). In short, you can reuse my work as long as it's not commercial and you credit me.
+The contents of this website are licensed under the *Creative Commons Attribution-NonCommercial 4.0 International* license (i.e. CC BY-NC 4.0). In short, you can reuse my work as long as it's not commercial and you credit me.
+
+<details markdown="1"><summary>LICENSE</summary>
+{% include_relative LICENSE %}
+</details>
 
 Please contact me if licensing is a problem.
 
