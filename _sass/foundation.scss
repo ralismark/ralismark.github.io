@@ -66,7 +66,7 @@ main a, footer a {
 	}
 }
 
-h1 > a, h2 > a, h3 > a {
+h1 > a, h2 > a, h3 > a, h4 > a, h5 > a, h6 > a {
 	color: $accent;
 
 	&:hover {
@@ -231,8 +231,8 @@ html .mx-auto { margin-left: auto !important; margin-right: auto !important; }
 .bleed { @include bleed; }
 
 // Sizing
-.bounded {
-	& > *, img, svg {
+.bounded, .bounded > details {
+	& > *:not(details), img, svg {
 		max-width: 100%;
 		overflow-x: auto;
 		height: auto;
