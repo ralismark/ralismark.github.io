@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Short and simple LIS
-tags:
+tags: algos
 excerpt: O(n log n) Longest Increasing Subsequence in just 7 lines
 ---
 

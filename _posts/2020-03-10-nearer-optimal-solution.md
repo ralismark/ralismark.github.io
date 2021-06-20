@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Proving Algorithms using Nearer Optimal Solution
-tags:
+tags: algos
 excerpt: Proving greedy algorithms by making optimal choices more greedy
 ---
 
