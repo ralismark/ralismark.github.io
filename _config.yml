@@ -45,6 +45,7 @@ kramdown:
   header_offset: 1 # h1 becomes h2 (h1 is title)
 
   syntax_highlighter_opts:
+    formatter: Custom
     span:
       line_numbers: false
     block:

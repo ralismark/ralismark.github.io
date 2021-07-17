@@ -102,7 +102,7 @@ kbd {
 // Decorations ----------------------------------------------------------------
 
 // decorate table as we see fit
-*:not(pre):not(code) > table {
+* > table:not(.rouge-line-table):not(.rouge-table) {
 	border-collapse: collapse;
 	margin: 0 auto;
 	display: block;
@@ -180,11 +180,6 @@ hr {
 
 .text-centre {
 	text-align: center;
-}
-
-div.highlight {
-	padding: 0 0.3em;
-	background: fade-out($accent-bg, 0.9);
 }
 
 // Inputs ---------------------------------------------------------------------
