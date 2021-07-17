@@ -4,11 +4,19 @@
 .highlighter-rouge {
 	table {
 		border-collapse: collapse;
+		padding: 0 0.3em;
+		background: fade-out($accent-bg, 0.9);
 	}
 
 	.rouge-gutter {
 		padding-right: 1ch;
 		opacity: 0.5;
+		vertical-align: baseline; // align to first line
+	}
+
+	&.wrap .rouge-code pre {
+		overflow-wrap: anywhere;
+		white-space: pre-wrap;
 	}
 
 	// adapted from https://gist.github.com/nicolashery/5765395
