@@ -85,7 +85,7 @@
 		// first create the bits of the heading:
 		// (pic) {person name} {action} {time}
 
-		const nametag = E("a", { rel: "nofollow ugc", title: who, href: r.href },
+		const nametag = E("a", { rel: "nofollow ugc", title: who, href: r.url },
 			// profile pic
 			r.author && r.author.photo &&
 				E("img", {
