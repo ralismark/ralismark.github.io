@@ -1,11 +1,10 @@
 ---
 layout: post
 title: Spaces v. Tabs
-excerpt: My opinion on spaces vs tabs
-reason: unprofessional
+excerpt: My opinion on tabs or spaces
 ---
 
-The "holy war" between using spaces and tabs has existed pretty much since code ever written, with all programmers having their own strong opinions on the matter - from the 8-wide tabs of linux to the 4 spaces of PIP8, there is no conclusive standard on what to use. Here, I'll provide my own perspective on this matter. Adding fuel to the fire? Maybe.
+The war between using spaces and tabs has existed pretty much since code ever written, with all programmers having their own opinions on the matter -- from the 8-wide tabs of linux to the 4 spaces of PEP8, there is no conclusive standard on what to use. Here, I'll provide a third, albeit rather unusual, approach.
 
 <!--more-->
 
@@ -30,6 +29,20 @@ Projects rarely have tabs be 3 or 9 characters, meaning spaces must be used for 
 
 It's this lack of distinction between indenting and alignment which makes space indenting much more commonly used. However, by distinguishing between these two uses, we can freely exploit the main benefit of tabs, their user-configurable width. Hence the rule becomes **tabs to indent, spaces to align**, also known as Smart Tabs. Aligned code looks aligned for everyone, and people are free to use whatever tab size they want.
 
-I'm not completely sure about how easily editors can be configured to support this. I pretty much only use [Neo]Vim, and this behaviour cannot be achieved with just in-built settings. Plugins exist to support this, [including my own][2], which I use daily.
+I'm not completely sure about how easily editors can be configured to support this. I pretty much only use (Neo)Vim, and this behaviour cannot be achieved with just in-built settings. Plugins exist to support this, [including my own][2], which I use daily.
 
 [2]: https://github.com/ralismark/itab
+
+# Addendum: On tabs xor spaces
+
+In the absence of any existing convention (e.g. C and C++), My preference is still towards using tab characters. I don't have a strong reason for this, though the customisability of tabs is one positive aspect.
+
+Also, there's an accessibility argument to be made in favour of tabs -- see [this reddit post](https://www.reddit.com/r/javascript/comments/c8drjo/nobody_talks_about_the_real_reason_to_use_tabs/). The gist of it is this:
+
+> i get approached by not one, but TWO coworkers who unfortunately are highly visually impaired, and each has a different visual impairment
+>
+> - one of them uses tab-width 1 because he uses such a gigantic font-size
+> - the other uses tab-width 8 and a really wide monitor
+> - these guys have serious problems using codebases with spaces, they have to convert, do their work, and then unconvert before committing
+>
+> --- /u/ChaseMoskal, Jul 2019
