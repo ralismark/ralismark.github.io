@@ -1,12 +1,12 @@
 /*
  * Syntax highlighting styles
  */
-.highlighter-rouge {
-	table {
-		border-collapse: collapse;
-		padding: 0 0.3em;
-		background: fade-out($accent-bg, 0.9);
-	}
+div.highlighter-rouge {
+	// code blocks only, not inline
+
+	border-collapse: collapse;
+	padding: 0 0.3em;
+	background: fade-out($accent-bg, 0.9);
 
 	.rouge-gutter {
 		padding-right: 1ch;
@@ -18,6 +18,9 @@
 		overflow-wrap: anywhere;
 		white-space: pre-wrap;
 	}
+}
+
+.highlighter-rouge {
 
 	// adapted from https://gist.github.com/nicolashery/5765395
 	// other themes available at https://jwarby.github.io/jekyll-pygments-themes/languages/ruby.html
