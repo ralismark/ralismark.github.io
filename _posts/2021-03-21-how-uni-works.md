@@ -1,6 +1,7 @@
 ---
 layout: post
 title: How Uni Works (at least in UNSW/Australia)
+tags:
 excerpt: For high school students who are figuring things out
 ---
 
