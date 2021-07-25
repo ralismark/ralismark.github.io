@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Blog Update: Going Private"
-tags:
+tags: meta
 excerpt: Making the ralismark/ralismark.github.io repo private
 ---
 

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Spaces v. Tabs
+tags:
 excerpt: My opinion on tabs or spaces
 ---
 

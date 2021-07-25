@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Emulating table mode on Casio fx-82AU (and variants)
-tags:
+tags: math
 excerpt: Making a table of values by creating a for loop
 ---
 

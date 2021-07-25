@@ -1,7 +1,7 @@
 ---
 layout: post
 title: e4ecd8b Initial Post
-tags:
+tags: meta
 excerpt: This is the first post of the (hopefully long-lasting) blog
 ---
 
