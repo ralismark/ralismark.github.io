@@ -48,15 +48,13 @@ This isn't a plugin with a repo, but it's pretty self-contained and there are pl
 ```vim
 function! SortMotion(motion)
 	if a:motion ==# "line"
-		exec "'[,']sort"
+		'[,']sort
 	elseif a:motion ==# "\<c-v>"
-		let cols = [ virtcol("'<"), virtcol("'>") ]
-		let sel = [ line("'<"), line("'>") ]
-		normal! <esc>
-		let regex = '/\%' . cols[0] . 'v.*\%<' . (cols[1] + 1) . 'v/'
+		let regex = '/\%' . virtcol("'<") . 'v.*\%<' . (virtcol("'>") + 1) . 'v/'
+		exec "normal! \<esc>"
 		exec "'<,'>sort" regex
 	elseif a:motion ==# "V" || a:motion ==# "v"
-		normal! <esc>
+		exec "normal! \<esc>"
 		'<,'>sort
 	endif
 endfunction
