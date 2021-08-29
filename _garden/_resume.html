@@ -1,0 +1,131 @@
+<p class="text-centre">
+	P: 0406 255 292
+	{% assign email = site.firstname | downcase | append: "@ralismark.xyz" %}
+	⋄ E: <a href="mailto:{{email}}">{{email}}</a>
+	⋄ Website: <a href="https://ralismark.xyz">https://ralismark.xyz</a>
+</p>
+
+<div class="bleed">
+<table id="resume">
+<tr><th scope="row"><h2>Education</h2></th>
+	<td>
+		<h3>
+			<strong>University of New South Wales</strong>
+			<span class="x-datespan">2020-2022???</span>
+		</h3>
+
+		<span>B. Computer Science/Mathematics (97 WAM)</span>
+		<ul>
+			<li>Jane Street COMP3161 Prize (2020) - 1st Place</li>
+			<li>The ROKT COMP2041 Prize (2020)</li>
+		</ul>
+
+	</td>
+</tr>
+
+<tr><th scope="row"><h2>Work Experience</h2></th>
+	<td>
+		<h3>
+			<strong>Autumn Compass &mdash; Quant???</strong>
+			<span class="x-datespan">Feb 2020 &mdash; Present</span>
+		</h3>
+
+		<span>High-frequency algorithmic trading firm</span>
+		<ul>
+			<li>???</li>
+		</ul>
+
+		<h3 class="mt-1">
+			<strong>COMP1521 Casual Academic</strong>
+			<span class="x-datespan">Sep 2020 &mdash; Dec 2020</span>
+		</h3>
+
+		<ul>
+			<li>Answered students' questions during weekly tutorial classes</li>
+			<li>Improved understanding of course content for students</li>
+		</ul>
+
+		<h3 class="mt-1">
+			<strong>AIOC School of Excellence &mdash; Live-in Tutor</strong>
+			<span class="x-datespan">Dec 2019</span>
+		</h3>
+
+		<span>Annual 10-day camp as first stage of IOI preparation &amp; national team selection</span>
+
+		<ul>
+			<li>Taught problem solving skills and advanced applications of algorithms &amp; data structures</li>
+			<li>Helped organise and run practice exams and other camp activities</li>
+		</ul>
+
+	</td>
+</tr>
+
+<tr><th scope="row"><h2>Achievements</h2></th>
+	<td>
+		<h3>
+			<strong>International Olympiad of Informatics &mdash; Silver Medal</strong>
+			<span class="x-datespan">2019</span>
+		</h3>
+
+		<ul>
+			<li>Represented Australia internationally, competing against top high school students worldwide</li>
+			<li>Applied advanced data structure &amp; algorithms to solve novel problems</li>
+			<li>Writing efficient programs in C++ with the STL in a timed environment</li>
+		</ul>
+
+	</td>
+</tr>
+
+<tr><th scope="row"><h2>Projects</h2></th>
+	<td>
+		<h3>
+			<strong>Tectonic Typesetting (contributor)</strong>
+			| Rust, C
+		</h3>
+		<a href="https://tectonic-typesetting.github.io">tectonic-typesetting.github.io</a>
+		<br>
+		<span>Modernised TeX/LaTeX engine, developed using Rust programming language</span>
+		<ul>
+			<li>Experience with legacy C codebase &amp; integrating it with Rust</li>
+			<li>Improved C and Rust interoperability using <code>cbindgen</code>, reducing future effort to modernise codebase</li>
+		</ul>
+
+		<h3 class="mt-1">
+			<strong>Personal Website &amp; Blog</strong>
+			| Docker, JS, SCSS
+		</h3>
+		<a href="https://ralismark.xyz">ralismark.xyz</a>
+
+		<ul>
+			<li>Explained competitive programming techniques; used as supplementary reference for official Australian informatics training</li>
+			<li>Provided experience in front-end &amp; website management</li>
+		</ul>
+
+	</td>
+</tr>
+
+<tr><th scope="row"><h2>Skills</h2></th>
+	<td>
+		<table>
+			<tr><th scope="row">Tools:</th><td>Linux command line, git</td></tr>
+			<tr><th scope="row">Languages:</th><td>C/C++, Python, Javascript, Bash, Rust</td></tr>
+		</table>
+	</td>
+</tr>
+</table>
+</div>
+
+<style>
+#resume td, #resume th {
+	text-align: initial;
+	vertical-align: top;
+}
+#resume td { width: 100%; }
+#resume td > *, #resume th > * { margin-top: 0; margin-bottom: 0; }
+
+#resume h2, #resume h3 { font-size: 1.1rem; }
+#resume h2 { font-weight: bold; }
+#resume .x-datespan { float: right; }
+
+#resume tr + tr { border-top: 1px solid rgba(127, 127, 127, 0.4); }
+</style>
