@@ -4,18 +4,6 @@
 		{% include meta.html %}
 	</head>
 	<body>
-		{% include navbar.html %}
-
-		<main class="my-2 {{ layout.main_class }} {{ page.main_class }}">
-			{{ content }}
-		</main>
-
-		{% include footer.html %}
-
-		{% if jekyll.environment == "production" %}
-			<!-- Cloudflare Web Analytics -->
-			<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "31c95321f0664ebab1641042bda55d96"}'></script>
-			<!-- End Cloudflare Web Analytics -->
-		{% endif %}
+		{{ content }}
 	</body>
 </html>
