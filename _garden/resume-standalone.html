@@ -1,0 +1,27 @@
+---
+layout: null
+title: "Resume"
+---
+
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}" class="light">
+	<head>
+		{% include meta.html %}
+	</head>
+	<body>
+		<main class="content-width mt-0">
+
+			<h1 style="line-height: 1">{{ site.firstname }} Yao</h1>
+
+			{% include_relative _resume.html %}
+
+		</main>
+
+<style>
+body { font: 300 1em/1.4 KaTeX_SansSerif; }
+h1, a { color: initial; !important }
+a { font: normal 1em / 1.4 Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace; }
+p, h1 { margin-top: 0; margin-bottom: 0; }
+</style>
+	</body>
+</html>
