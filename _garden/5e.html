@@ -9,7 +9,7 @@ title: 5e Character Sheet
 |Elenari (short: El/Elen) Koselu|Eladrin Elf|Warlock {{ lvl }}|Sage|CN|30 ft|
 {% endcapture %}{{ content | markdownify }}
 
-{% assign lvl = 3 %}
+{% assign lvl = 4 %}
 {% capture spell_level %}
   {%- if lvl <= 10 -%}{{ lvl | plus: 1 | divided_by: 2 | floor }}
   {%- else -%}5
@@ -18,14 +18,16 @@ title: 5e Character Sheet
 
 {% capture content %}
 {: .mx-0 }
-|Lvl|Name|Cast|Range|Duration|Extra|
+|Lvl|Name|Cast|Range|Duration|Description|
 |-|
 |0|Eldrich Blast|1 action VS|120 ft|instant|Ranged spell attack, 1d10+3 force on hit|
 |0|Magic Hand|1 action VS|30 ft|1 min|Spectral hand whooo|
+|0|[Prestidigitation](http://dnd5e.wikidot.com/spell:prestidigitation)|1 action VS|10 ft|1 hr|Misc effects.
 |1|Sleep|1 action VSM|90 ft|instant|Roll {{ spell_level | times: 2 | plus: 3 }}d8. 20ft radius, in increasing hp|
 |1|Hex|1 bonus VSM|90 ft|1 hr (conc)|hit &rarr; +1d6 damage. Disadvantage on one ability. <br>Bonus action to curse new creature if target dies|
 |1|Charm Person|1 action VS|30 ft|1 hr|Wis save (advantage if fighting) &rarr; Charmed.<br>{{ spell_level }} targets.|
 |2|Flock of Familiars|1 min VS|Touch|1 hr|Create 3 [familiars](https://www.gmbinder.com/share/-LSGd7ACEznArBZIcdgC).<br><abbr title="blinded + deafened">Shared senses</abbr>, telepathy, cast touch spells.|
+|2|Invisibility|1 action VSM|Touch|1 hr (conc)|Invisible. Ends on attack or cast.|
 ||Dagger|1d4||piercing|finesse, light, thrown (20/60)|
 ||Spear|1d6||piercing|thrown (20/60), versatile (1d8)|
 {: .card }
@@ -43,6 +45,7 @@ title: 5e Character Sheet
 |Elf|Fey Ancestry||Advantage on saving throws vs charm<br>Can't be magically put to sleep|
 |Elf|Trance||4hr trance instead of sleeping|
 |Eladrin|Seasons|After long rest|Change own seasons|
+|Feat|Observant||Can lip-read|
 |Sage|Researcher||Know where/from whom to get any information|
 {% endcapture %}{% assign ability_table = content | markdownify %}
 
@@ -73,7 +76,7 @@ str: 11
 dex: 14
 con: 14
 int: 12
-wis: 8
+wis: 9 # +1 from observant feat
 cha: 16
 {% endcapture %}{% assign stat = content | yaml_parse %}
 
@@ -111,6 +114,7 @@ cha: 16
 
 {% capture content %}
 {: .mx-0 }
+|**Level**|{{ lvl }}|
 |**Hp Cap**|{{ hp_cap }}|
 |**Hit Dice**|{{ lvl }}d8|
 |**Spell Slots**|{{ spell_slots_cap }}&times;L{{ spell_level }}|
@@ -127,11 +131,11 @@ cha: 16
 |Stat|Val|Mod|Skills|
 |-|-|-|:-|
 |str|{{ stat["str"] }}|{{ mod["str"] }}|Athletics|
-|dex|{{ stat["dex"] }}|{{ mod["dex"] }}|Acrobatics, Sleight of Hand, Stealth|
+|dex|{{ stat["dex"] }}|{{ mod["dex"] }}|Acrobatics<br>Sleight of Hand<br>Stealth|
 |con|{{ stat["con"] }}|{{ mod["con"] }}||
-|int|{{ stat["int"] }}|{{ mod["int"] }}|Arcana +{{proficiency}}<!--sage-->, History, Investigation +{{proficiency}}<!--warlock-->,<br> Nature, Religion|
-|wis<br>save +{{proficiency}}|{{ stat["wis"] }}|{{ mod["wis"] }}|Animal Handling, Insight, Medicine,<br> Perception +{{proficiency}}<!--elf-->, Survival|
-|cha<br>save +{{proficiency}}|{{ stat["cha"] }}|{{ mod["cha"] }}|Deception +{{ proficiency }}<!--warlock-->, Intimidation,<br> Performance, Persuation|
+|int|{{ stat["int"] }}|{{ mod["int"] }}|Arcana +{{proficiency}}<!--sage--><br>History<br>Investigation +{{proficiency}}<!--warlock--> (+5 pas)<!--observant--><br>Nature<br>Religion|
+|wis<br>save +{{proficiency}}|{{ stat["wis"] }}|{{ mod["wis"] }}|Animal Handling<br>Insight<br>Medicine<br>Perception +{{proficiency}}<!--elf--> (+5 pas<!--observant-->)<br>Survival|
+|cha<br>save +{{proficiency}}|{{ stat["cha"] }}|{{ mod["cha"] }}|Deception +{{ proficiency }}<!--warlock--><br>Intimidation<br>Performance<br>Persuation|
 {: .card }
 {% endcapture %}{% assign stat_table = content | markdownify %}
 
