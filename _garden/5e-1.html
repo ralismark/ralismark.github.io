@@ -6,7 +6,7 @@ title: 5e Character Sheet
 {% capture content %}
 |Name|Race|Class|Bg|Align|Speed|
 |-|
-|Sylvie|Eladrin Elf|Warlock (Celestial) {{ lvl }}|Custom|LG|30 ft|
+|Elenari (short: El/Elen) Koselu|Eladrin Elf|Warlock {{ lvl }}|Sage|CN|30 ft|
 {% endcapture %}{{ content | markdownify }}
 
 {% assign lvl = 4 %}
@@ -20,20 +20,16 @@ title: 5e Character Sheet
 {: .mx-0 }
 |Lvl|Name|Cast|Range|Duration|Description|
 |-|
-|0|[Light](http://dnd5e.wikidot.com/spell:light)|1 action VM|Touch|1 hr|Object sheds light|
-|0|[Sacred Flame](http://dnd5e.wikidot.com/spell:sacred-flame)|1 action VS|60 ft|Instant|1d8 radiant damage vs dex save|
-|0|[Eldrich Blast](http://dnd5e.wikidot.com/spell:eldritch-blast)|1 action VS|120 ft||Spell atk, 1d10+{{mod.cha}} force|
-|0|[Mage Hand](http://dnd5e.wikidot.com/spell:mage-hand)|1 action VS|30 ft||Magic hand whoo|
-|0|[Prestidigitation](http://dnd5e.wikidot.com/spell:prestidigitation)|1 action VS|10 ft|1 hr|Misc effects.|
-|1|[Hex](http://dnd5e.wikidot.com/spell:hex)|1 bonus VSM|90 ft|1 hr (conc)|Hit &rarr; +1d6 damage. Disadvantage on one ability. <br>Bonus action to curse new creature if target dies|
-|1|[Burning Hands](http://dnd5e.wikidot.com/spell:burning-hands)|1 action VS|15 ft cone|Instant|3d6 fire vs dex save (halving)|
-|1|[Charm Person](http://dnd5e.wikidot.com/spell:charm-person)|1 action VS|30 ft|1 hr|Wis save (advantage if fighting) &rarr; Charmed.<br>{{ spell_level }} targets.|
-|1|[Comprehend Languages](http://dnd5e.wikidot.com/spell:comprehend-languages)|10 mins (ritual) VSM|self|1 hr|literal translations|
-|1|[Detect Magic](http://dnd5e.wikidot.com/spell:detect-magic)|10 mins (ritual) VS|self|10 mins (conc)|30 ft sense magic & school|
-|2|[Misty Step](http://dnd5e.wikidot.com/spell:misty-step)|1 bonus V|Self|Instant|30ft teleport|
-|2|[Lesser Restoration](http://dnd5e.wikidot.com/spell:lesser-restoration)|1 action VS|Touch|Instant|End one condition or disease<br>blind/deaf/paralysis/poison|
-||Dagger|1d4||Piercing|finesse, light, thrown (20/60)|
-||Spear|1d6||Piercing|thrown (20/60), versatile (1d8)|
+|0|Eldrich Blast|1 action VS|120 ft|instant|Ranged spell attack, 1d10+3 force on hit|
+|0|Magic Hand|1 action VS|30 ft|1 min|Spectral hand whooo|
+|0|[Prestidigitation](http://dnd5e.wikidot.com/spell:prestidigitation)|1 action VS|10 ft|1 hr|Misc effects.
+|1|Sleep|1 action VSM|90 ft|instant|Roll {{ spell_level | times: 2 | plus: 3 }}d8. 20ft radius, in increasing hp|
+|1|Hex|1 bonus VSM|90 ft|1 hr (conc)|hit &rarr; +1d6 damage. Disadvantage on one ability. <br>Bonus action to curse new creature if target dies|
+|1|Charm Person|1 action VS|30 ft|1 hr|Wis save (advantage if fighting) &rarr; Charmed.<br>{{ spell_level }} targets.|
+|2|Flock of Familiars|1 min VS|Touch|1 hr|Create 3 [familiars](https://www.gmbinder.com/share/-LSGd7ACEznArBZIcdgC).<br><abbr title="blinded + deafened">Shared senses</abbr>, telepathy, cast touch spells.|
+|2|Invisibility|1 action VSM|Touch|1 hr (conc)|Invisible. Ends on attack or cast.|
+||Dagger|1d4||piercing|finesse, light, thrown (20/60)|
+||Spear|1d6||piercing|thrown (20/60), versatile (1d8)|
 {: .card }
 {% endcapture %}{% assign spell_table = content | markdownify %}
 
@@ -42,41 +38,46 @@ title: 5e Character Sheet
 |-|
 |Eladrin|Fey Step|Bonus<br>1/short|Magically teleport 30ft into an unoccupied space<br>Autumn: charm, wis save vs 8+prof+cha<br>Winter: frighten, wis save vs 8+prof+cha<br>Spring: touch willing, they teleport<br>Summer: cha fire damage|
 |Warlock|Fey Prescence|Action<br>1/short|10ft cube, wis vs spell save, charm or frighten until next turn|
+|Warlock|Pact of Talisman|2 per long rest|+1d4 to any failed ability check|
+|Invocation|Agonizing Blast||Add cha mod to eldrich blast damage|
+|Invocation|Grasp of Hadar||On eldrich blast hit, move 10ft closer|
 |Elf|Darkvision||60 ft darkvision|
 |Elf|Fey Ancestry||Advantage on saving throws vs charm<br>Can't be magically put to sleep|
 |Elf|Trance||4hr trance instead of sleeping|
 |Eladrin|Seasons|After long rest|Change own seasons|
-|Feat|Ritual Caster||Ritual spell book (sorcerer)|
-|Invocation|Agonizing Blast||+cha to eldrich blast damage|
-|Invocation|Voice of the Chain Master||see documentation|
-|Celestial|Healing Light|Bonus action<br>{{ lvl | add: 1 }}d6/long|60 ft, spend up to {{ mod.cha }} dice for heal|
+|Feat|Observant||Can lip-read|
+|Sage|Researcher||Know where/from whom to get any information|
 {% endcapture %}{% assign ability_table = content | markdownify %}
 
-{% assign gp = 69 %}
+{% assign gp = 10 %}
 {% capture content %}
-- 50ft hempen rope
-- healer's kit
+- 2x spear
 - arcane focus
-- backpack
-- a book of lore
-- a bottle of ink
-- an ink pen
-- 10 sheets of parchment
-- little bag of sand
+- leather armour
+- 2x dagger
+- bottle of ink
+- quill
 - small knife
-- (sold leather armour)
-- studded leather armour
-- two spear
-- two dagger
+- common clothes
+- "letter from a dead colleague posing a question you have not yet been able to answer"
+- backpack
+- crowbar
+- hammer
+- 10x pitons
+- 10x torches
+- tinderbox
+- 10x rations
+- waterskin
+- 50ft hemp rope
 {% endcapture %}{% assign equipment = content | yaml_parse %}
 
 {% capture content %}
-str: 10
+str: 11
 dex: 14
-con: 12
-int: 14
-wis: 13
-cha: 14
+con: 14
+int: 12
+wis: 9 # +1 from observant feat
+cha: 16
 {% endcapture %}{% assign stat = content | yaml_parse %}
 
 <!-- derived numbers -->
@@ -118,7 +119,7 @@ cha: 14
 |**Hit Dice**|{{ lvl }}d8|
 |**Spell Slots**|{{ spell_slots_cap }}&times;L{{ spell_level }}|
 |**Initiative**|1d20 + {{ mod.dex }}|
-|**AC**|{{ mod.dex | plus: 12 }}|
+|**AC**|{{ mod.dex | plus: 11 }} (leather)|
 |**Plain Atk**|+{{ mod.str | plus: proficiency }}|
 |**Spell Save**|{{ spell_save_dc }}|
 |**Spell Atk**|+{{ spell_atk_mod }}|
@@ -132,9 +133,9 @@ cha: 14
 |str|{{ stat["str"] }}|{{ mod["str"] }}|Athletics|
 |dex|{{ stat["dex"] }}|{{ mod["dex"] }}|Acrobatics<br>Sleight of Hand<br>Stealth|
 |con|{{ stat["con"] }}|{{ mod["con"] }}||
-|int|{{ stat["int"] }}|{{ mod["int"] }}|Arcana +{{proficiency}}<!--sage--><br>History<br>Investigation +{{proficiency}}<!--warlock--><br>Nature +{{ proficiency }}<!--warlock--><br>Religion +{{proficiency}}<!--custom bg-->|
-|wis<br>save +{{proficiency}}|{{ stat["wis"] }}|{{ mod["wis"] }}|Animal Handling<br>Insight<br>Medicine +{{proficiency}}<!--custom bg--><br>Perception +{{proficiency}}<!--elf--><br>Survival|
-|cha<br>save +{{proficiency}}|{{ stat["cha"] }}|{{ mod["cha"] }}|Deception<br>Intimidation<br>Performance<br>Persuation|
+|int|{{ stat["int"] }}|{{ mod["int"] }}|Arcana +{{proficiency}}<!--sage--><br>History<br>Investigation +{{proficiency}}<!--warlock--> (+5 pas)<!--observant--><br>Nature<br>Religion|
+|wis<br>save +{{proficiency}}|{{ stat["wis"] }}|{{ mod["wis"] }}|Animal Handling<br>Insight<br>Medicine<br>Perception +{{proficiency}}<!--elf--> (+5 pas<!--observant-->)<br>Survival|
+|cha<br>save +{{proficiency}}|{{ stat["cha"] }}|{{ mod["cha"] }}|Deception +{{ proficiency }}<!--warlock--><br>Intimidation<br>Performance<br>Persuation|
 {: .card }
 {% endcapture %}{% assign stat_table = content | markdownify %}
 
@@ -164,11 +165,11 @@ gp: {{ gp }}
 
 - Langs:
   <!--elf--> Common, ~~Quenya~~ Elvish,
-  <!--background--> Dwarvish
+  <!--sage--> Sylvan, Undercommon
 - Armour: Light armour
 - Weapons:
   <!--warlock--> Simple weapons
-- Tools: Herbalism kit
+- Tools: None
 
 |**Known Cantrips**|{{ cantrips_known }}|
 |**Known Spells**|{{ spells_known }}|
