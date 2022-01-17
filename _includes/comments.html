@@ -24,7 +24,7 @@
   </p>
   <form action="https://webmention.io/www.ralismark.xyz/webmention" method="post">
     <input name="source" placeholder="https://example.com/" type="url">
-    <input name="target" value="https://www.ralismark.xyz{{ page.url | replace:'index.html','' | relative_url }}" type="hidden">
+    <input name="target" value="{{ location }}" type="hidden">
     <input value="Send Webmention" type="submit">
   </form>
 </section>
