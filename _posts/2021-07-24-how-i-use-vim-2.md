@@ -72,7 +72,7 @@ With Neovim v0.5, LSP support now comes with neovim itself, and that is what I'm
 
 - [neovim/nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
 - [nvim-lua/completion-nvim](https://github.com/nvim-lua/completion-nvim)
-- [sirver/ultisnips](sirver/ultisnips)
+- [sirver/ultisnips](https://github.com/sirver/ultisnips)
 
 # End
 
