@@ -55,10 +55,15 @@ h1 {
 	font-size: 1.1em !important;
 }
 
+a {
+	text-underline-offset: 2pt;
+	text-decoration-thickness: 1pt;
+}
+
 // a better colour for links
 main a, footer a {
 	color: $tertiary;
-	text-decoration: none;
+	text-decoration: underline fade-out($tertiary, 0.6);
 
 	&:hover {
 		color: darken($tertiary, 15%);
@@ -68,6 +73,7 @@ main a, footer a {
 
 h1 > a, h2 > a, h3 > a, h4 > a, h5 > a, h6 > a {
 	color: $accent;
+	text-decoration: none;
 
 	&:hover {
 		color: darken($accent, 15%);
