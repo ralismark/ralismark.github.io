@@ -79,7 +79,7 @@ cha: 14
 {: .mx-0 }
 |**Level**|{{ lvl }}|
 |**Hp Cap**|{{ hp_cap }}|
-|**Hit Dice**|{{ lvl }}d8|
+|**Hit Dice**|{{ lvl }}: d8+{{mod.con}}|
 |**Spell Slots**|{{ spell_slots_cap }}&times;L{{ spell_level }}|
 |**Initiative**|1d20 + {{ mod.dex }}|
 |**AC**|{{ mod.dex | plus: 12 }}|
