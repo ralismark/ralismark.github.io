@@ -108,17 +108,18 @@ cha: 14
 |-|
 |0|[Light](http://dnd5e.wikidot.com/spell:light)|1 action VM|Touch|1 hr|Object sheds light|
 |0|[Sacred Flame](http://dnd5e.wikidot.com/spell:sacred-flame)|1 action VS|60 ft|Instant|2d8 radiant damage vs dex save|
-|0|[Eldrich Blast](http://dnd5e.wikidot.com/spell:eldritch-blast)|1 action VS|120 ft|Instant|2xSpell atk, 1d10+{{mod.cha}} force|
+|0|[Eldrich Blast](http://dnd5e.wikidot.com/spell:eldritch-blast)|1 action VS|120 ft|Instant|2x: spell atk, 1d10+{{mod.cha}} force|
 |0|[Mage Hand](http://dnd5e.wikidot.com/spell:mage-hand)|1 action VS|30 ft|1 min|Magic hand whoo|
 |0|[Prestidigitation](http://dnd5e.wikidot.com/spell:prestidigitation)|1 action VS|10 ft|1 hr|Misc effects.|
 |1|[Hex](http://dnd5e.wikidot.com/spell:hex)|1 bonus VSM|90 ft|8 hr (conc)|Hit &rarr; +1d6 damage. Disadvantage on one ability. <br>Bonus action to curse new creature if target dies|
 |1|[Burning Hands](http://dnd5e.wikidot.com/spell:burning-hands)|1 action VS|15 ft cone|Instant|{{ spell_level | plus: 2 }}d6 fire vs dex save (halving)|
-|1|[Charm Person](http://dnd5e.wikidot.com/spell:charm-person)|1 action VS|30 ft|1 hr|charm vs wis save (advantage if fighting)<br>{{ spell_level }} targets.|
-|1|[Comprehend Languages](http://dnd5e.wikidot.com/spell:comprehend-languages)|10 mins (ritual) VSM|self|1 hr|literal translations|
-|1|[Detect Magic](http://dnd5e.wikidot.com/spell:detect-magic)|10 mins (ritual) VS|self|10 mins (conc)|30 ft sense magic & school|
+|1|[Charm Person](http://dnd5e.wikidot.com/spell:charm-person)|1 action VS|30 ft|1 hr|charm {{ spell_level }} vs wis save (advantage if fighting)|
 |2|[Misty Step](http://dnd5e.wikidot.com/spell:misty-step)|1 bonus V|Self|Instant|30ft teleport|
 |2|[Suggestion](http://dnd5e.wikidot.com/spell:suggestion)|1 action VM|30 ft|8 hrs (conc)|Suggest course of activity, vs wis save<br>Attacking them stops spell|
+|3|[Moonbeam](http://dnd5e.wikidot.com/spell:moonbeam)|1 action VSM|120 ft|1 min (conc)|5ft radius\*40ft tall cylinder of light<br>per turn: {{spell_level}}d10 vs con save (halving)|
 |3|[Dispel Magic](http://dnd5e.wikidot.com/spell:dispel-magic)|1 action VS|120 ft|Instant|End spell if lvl &le; {{spell_level}}, or 1d20+{{mod.cha}} vs 10+spell lvl|
+|1|[Comprehend Languages](http://dnd5e.wikidot.com/spell:comprehend-languages)|10 mins (ritual) VSM|self|1 hr|literal translations|
+|1|[Detect Magic](http://dnd5e.wikidot.com/spell:detect-magic)|10 mins (ritual) VS|self|10 mins (conc)|30 ft sense magic & school|
 ||Dagger|1d4||Piercing|finesse, light, thrown (20/60)|
 ||Spear|1d6||Piercing|thrown (20/60), versatile (1d8)|
 {: .card }
