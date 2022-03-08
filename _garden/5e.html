@@ -116,7 +116,6 @@ cha: 14
 |1|[Charm Person](http://dnd5e.wikidot.com/spell:charm-person)|1 action VS|30 ft|1 hr|charm {{ spell_level }} vs wis save (advantage if fighting)|
 |2|[Misty Step](http://dnd5e.wikidot.com/spell:misty-step)|1 bonus V|Self|Instant|30ft teleport|
 |2|[Suggestion](http://dnd5e.wikidot.com/spell:suggestion)|1 action VM|30 ft|8 hrs (conc)|Suggest course of activity, vs wis save<br>Attacking them stops spell|
-|3|[Moonbeam](http://dnd5e.wikidot.com/spell:moonbeam)|1 action VSM|120 ft|1 min (conc)|5ft radius\*40ft tall cylinder of light<br>per turn: {{spell_level}}d10 vs con save (halving)|
 |3|[Dispel Magic](http://dnd5e.wikidot.com/spell:dispel-magic)|1 action VS|120 ft|Instant|End spell if lvl &le; {{spell_level}}, or 1d20+{{mod.cha}} vs 10+spell lvl|
 |1|[Comprehend Languages](http://dnd5e.wikidot.com/spell:comprehend-languages)|10 mins (ritual) VSM|self|1 hr|literal translations|
 |1|[Detect Magic](http://dnd5e.wikidot.com/spell:detect-magic)|10 mins (ritual) VS|self|10 mins (conc)|30 ft sense magic & school|
@@ -137,6 +136,7 @@ cha: 14
 |Feat|Ritual Caster||Ritual spell book (sorcerer)|
 |Invocation|Agonizing Blast||+cha to eldrich blast damage|
 |Invocation|Voice of the Chain Master||see documentation|
+|Invocation|Grasp of Hadar||pull up to 10ft on eldrich blast|
 |Celestial|Healing Light|Bonus action<br>{{ lvl | add: 1 }}d6/long|60 ft, spend up to {{ mod.cha }} dice for heal|
 {% endcapture %}{% assign ability_table = content | markdownify %}
 
