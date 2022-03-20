@@ -1,6 +1,7 @@
 ---
 layout: article
 title: # blank
+article_class: "disable-link-markers"
 ---
 
 # Hi!
@@ -30,5 +31,3 @@ I [write irregularly] about tech stuff I [look at and use], [competitive program
 [b1]: {% link _posts/2021-02-06-extending-kramdown.md %}
 [b2]: {% link _posts/2020-10-28-blog-ci.md %}
 [b3]: {% link _posts/2021-01-08-blog-infra.md %}
-
-*(btw, those links are styled to show where they go -- [wedges]({% link _posts/2017-04-11-initial-post.md %}) link posts and [borders](/) link other pages on my site)*
