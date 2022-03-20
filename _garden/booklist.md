@@ -3,6 +3,12 @@ layout: article
 title: Booklist
 ---
 
+Originally, this just contained a list of books I liked, but I'm extending it to more than just that
+
+I also read a bunch of blogs, such as Slate Star Codex -- you can find a nicely typeset copy of some posts at <https://www.slatestarcodexabridged.com/>. I intend to create a larger blogroll at some point.
+
+# Books
+
 One day, a friend asked for book recommendations and I wrote up a 400 word summary. This seemed like something that would interest others, so I started cleaning it up and put it on my website.
 
 There are two Hacker News posts which have a lot of great book recommendations, and they're also good places to look:
@@ -10,11 +16,11 @@ There are two Hacker News posts which have a lot of great book recommendations, 
 - [Ask HN: Great fiction books that have had a positive impact on your life?](https://news.ycombinator.com/item?id=22718592), and
 - [Ask HN: Mind bending books to read and never be the same as before?](https://news.ycombinator.com/item?id=23151144)
 
-I also read a bunch of blogs, such as Slate Star Codex -- you can find a nicely typeset copy of some posts at <https://www.slatestarcodexabridged.com/>. I intend to create a larger blogroll at some point.
+{% comment %}
+> *Disclaimer*: exurb1a is under investigation for [some seriously nasty stuff](https://www.photoandgrime.com/blog-1/2020/11/25/pieke-roelofs/youtuber-exurb1a-exposed-sickening-truth-about-an-abuser). I'm not really sure what's the best course of action here, so I'm going to keep the reviews for his books -- I want to make it clear that I do not support his actions. Keep his problematic nature in mind when interacting with his content. If you really want to read his books (which, honestly, are pretty disconnected from this issue), I suggest you obtain them for free.
+{% endcomment %}
 
-> *Disclaimer: exurb1a is under investigation for [some seriously nasty stuff](https://www.photoandgrime.com/blog-1/2020/11/25/pieke-roelofs/youtuber-exurb1a-exposed-sickening-truth-about-an-abuser). I'm not really sure what's the best course of action here, so I'm going to keep the reviews for his books -- I want to make it clear that I do not support his actions. Keep his problematic nature in mind when interacting with his content. If you really want to read his books (which, honestly, are pretty disconnected from this), I suggest you obtain them for free.
-
-# Algorithms to Live By
+## Algorithms to Live By
 
 {: .li-flat }
 - *Brian Christian, Tom Griffiths*
@@ -25,7 +31,7 @@ Applying ideas from computer science & adjacent fields to real life. The ideas a
 
 I also found a more extensive review about its usefulness -- [*What I got out of 'Algorithms to Live By'*](https://www.lesswrong.com/posts/62PRkMtu5jiBA9wLN/what-i-got-out-of-algorithms-to-live-by).
 
-# Code: The Hidden Language of Computer Hardware and Software
+## Code: The Hidden Language of Computer Hardware and Software
 
 {: .li-flat }
 - *Charles Petzold*
@@ -36,7 +42,8 @@ A very approachable exploration of low-level computer hardware, building up a CP
 
 [^1]: Logisim is quite old and has a few bugs. There are some rewrites of it, such as [Logisim Evolution](https://github.com/reds-heig/logisim-evolution)
 
-# The Fifth Science
+{% comment %}
+## The Fifth Science
 
 {: .li-flat }
 - *Exurb1a*
@@ -49,7 +56,10 @@ A collection of interesting stories using a soft sci-fi world to explore philoso
 
 Have a look at [exurb1a's youtube videos](https://www.youtube.com/c/Exurb1a), in particular [The Lantern](https://www.youtube.com/watch?v=um6cGuJ4mNE), which is a chapter from this book, to see if you'll like it.
 
-# The Prince of Milk
+{% endcomment %}
+
+{% comment %}
+## The Prince of Milk
 
 {: .li-flat }
 - Exurb1a
@@ -61,7 +71,9 @@ Have a look at [exurb1a's youtube videos](https://www.youtube.com/c/Exurb1a), in
 A really strange story with magic and philosophy.
 Same characteristic style as Exurb1a's other works, but I found the narrative quite hard to follow and mostly just confusing.
 
-# Foundation
+{% endcomment %}
+
+## Foundation
 
 {: .li-flat }
 - *Isaac Asimov*
@@ -70,22 +82,34 @@ Same characteristic style as Exurb1a's other works, but I found the narrative qu
 
 A futuristic story following intelligent characters who influence societies. Asimov creates a really good sense of scope from the high-level sweeps of history and politics, and the plot is not too simple. Only downside is that it feels like the protagonists' plans are made foolproof by Plot Magic, but the positives definitely make up for this.
 
-# Nineteen Eighty-Four
+# Podcasts
 
-{: .li-flat }
-- *George Orwell*
-- [wikipedia](https://en.wikipedia.org/wiki/Nineteen_Eighty-Four)
-- Read late 2018
+I'm quite a fan of podcasts, mostly fiction ones. Here's what I've been listening to
 
-A classic must-read book. Like seriously, you have to read it if you haven't already.
+- [Lingthusiasm](https://lingthusiasm.com/about) -- a great and very fun podcast about linguistics and interesting aspects of language and communication. Called "joyously nerdy" by some. Highly recommended this if you're interested in linguistics.
+- [Welcome to Night Vale](https://www.welcometonightvale.com/) -- a classic podcast series of radio updates from a mysterious and bizzare town in the middle of nowhere. It's pretty well known and it definitely holds up to it's great reputation.
+- [Foundaction After Midnight Radio](https://scp-wiki.wikidot.com/fam-radio-hub) -- a fictional radio station in the SCP foundation, a bit like Welcome to Night Vale. The earlier episodes are really cool and unique, but episodes are *extremely* infrequent (my app shows they average 8 months between episodes) and the later ones feel more generic? There's only 11 episodes so far, so it's definitely something you can listen to completion pretty soon.
+- [SCP: Find Us Alive](https://www.findusalivepodcast.com/) -- another SCP audio story (I'm a fan of these, but there really aren't that many out there) about a research site that gets stuck in a pocket dimension. Unlike FAM Radio, there's new episodes *every month*! The story and characters are great and it's pretty light-hearted as well.
+- [The Strange Case of Starship Iris](https://www.procyonpodcastnetwork.com/starship-iris) -- the story of a crew of space smugglers getting caught up in a government coverup. I'm still partway through season 1, but it's the story and characters have been really fun and I'm pretty hooked.
 
-# The rest
+# Blogs
 
-Other than the ones above with longer reviews, I've also read
+Also blogs! These all have RSS feeds.
+
+(Whoops! I ran out of energy to fill this in. Poke me about it if you care)
+
+# Some Other Things
+
+(I was going to add some miscellaneous interesting things here, like [Learning Rust With Entirely Too Many Linked Lists](https://rust-unofficial.github.io/too-many-lists/), but I ran out of energy while originally writing it and subsequently forgot about it)
+
+# The Long List
+
+Other than the ones above with longer reviews, I've also read these books:
 
 - *Brave New World*, in early-mid 2020
 - *Ready Player One*, in 2017
 - *Fahrenheit 451*, in 2018
+- *Nineteen Eighty-Four*, in late 2018
 - *The Science of Interstellar*, in 2017
 - *The Hitchhiker's Guide to the Galaxy*, in 2019
 - *Map and Territory* of the Rationality: A-Z series, in late 2020
@@ -94,4 +118,3 @@ Other than the ones above with longer reviews, I've also read
 - *Going Postal (Discworld)*, in 2019
 
 I may write a more extensive review for them in the future. Or you can ask me directly.
-
