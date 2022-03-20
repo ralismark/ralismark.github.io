@@ -6,7 +6,7 @@ article_class: "disable-link-markers"
 
 # Hi!
 
-I'm **{{ site.firstname }}**, but I go by **ralismark** on the internet.
+I'm **{{ site.me.name }}**, but I go by **ralismark** on the internet.
 I'm a third year computer science student at UNSW, plus tutor/problem setter and dev.
 
 I mainly work with C++ and Python and a smattering of other tech.

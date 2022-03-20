@@ -1,8 +1,11 @@
 #
 # site settings
 #
-title: ralismark
-firstname: Tim
+title: ralismark.xyz
+me:
+  name: Tim
+  email: tim@ralismark.xyz
+
 description: Discussions from all depths of computer science
 excerpt_separator: <!--more-->
 permalink: /:categories/:title
