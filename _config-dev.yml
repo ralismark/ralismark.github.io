@@ -1,4 +1,7 @@
-firstname: Temmie
+me:
+  name: Temmie
+  email: tem@ralismark.xyz
+
 # Config settings for local testing go here
 disable_disk_cache: false
 incremental: true
