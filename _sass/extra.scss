@@ -166,7 +166,7 @@ article {
 	opacity: 0.6;
 }
 
-article *:not(h1):not(h2) > a {
+article:not(.disable-link-markers) *:not(h1):not(h2) > a {
 	&[href^="/posts/"] {
 		&::after {
 			content: "";
@@ -189,7 +189,7 @@ article *:not(h1):not(h2) > a {
 			vertical-align: text-top;
 
 			width: 0.4em;
-			height: 0.7em;
+			height: 0.5em;
 			margin-left: -0.2em;
 			border-top: 1pt solid fade-out($accent, 0.5);
 			border-right: 1pt solid fade-out($accent, 0.5);
