@@ -15,6 +15,7 @@ I've also taken the opportunity to weave some more related files:
 - [weave v4.5]({% link assets/weave.pdf %}), from <https://www.ctan.org/pkg/weave>
 - The original [TeX v3.14159265]({% link assets/tex.pdf %})
 - [ε-TeX v2.6]({% link assets/etex.pdf %}) (using `weave tex.web etexdir/etex.ch`)
+- [bibtex v0.99d]({% link assets/bibtex.pdf %}), from <https://ctan.org/pkg/bibtex> (I had to `sed 's/\\ETs/, and~/'` the .tex file to fix a compile error -- I think pdftex was somehow reading it as `\E Ts` due to there being a `\E` macro for exponentials)
 - And [XeTeX v0.999992]({% link assets/xetex.pdf %}) from above
 
 The build process for the most of these is just `weave <input.web> && pdftex <input.tex>`.
