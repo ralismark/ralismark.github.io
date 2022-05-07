@@ -13,8 +13,8 @@ email: "mailto:{{ site.me.email }}"
     <li>
       <a class="no-underline"
         {% if page.url == "/" %}rel="me"{% endif %}
-        aria-label="{{ entry[1] }}"
-        title="{{ entry[1] }}"
+        aria-label="{{ entry[0] }}"
+        title="{{ entry[0] }}"
         href="{{ entry[1] }}"
         >{%- include icon icon=icon -%}</a>
     </li>

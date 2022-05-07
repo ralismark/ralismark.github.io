@@ -24,8 +24,10 @@ module Kramdown
       elsif el.children.first.type == :img
         # Removed the extra checks
 
-        # Generate a figure
         img = ' ' * (indent + @indent) + self.convert_img(el.children.first, indent)
+        return img if el.children.length == 1
+
+        # Generate a figure
 
         # manually do inner(el, indent)
         caption = +''
@@ -40,17 +42,7 @@ module Kramdown
       else
         format_as_block_html("p", el.attr, inner(el, indent), indent)
       end
-    end
-
-    # I want to use title instead of alt text for caption
-    def convert_standalone_image(el, indent)
-      attr = el.attr.dup
-      figure_attr = {}
-      figure_attr['class'] = attr.delete('class') if attr.key?('class')
-      figure_attr['id'] = attr.delete('id') if attr.key?('id')
-      body = "#{' ' * (indent + @indent)}<img#{html_attributes(attr)} />\n" \
-        "#{' ' * (indent + @indent)}<figcaption>#{attr['title']}</figcaption>\n"
-      format_as_indented_block_html("figure", figure_attr, body, indent)
+      # note: in ruby the last expression gets returned (like in rust)
     end
 
     # Do picture tag & WEBP generation
@@ -66,6 +58,11 @@ module Kramdown
       else
         super(el, indent)
       end
+    end
+
+    # This was originally called from convert_p, but i'm not sure if it's still used
+    def convert_standalone_image(el, indent)
+      self.convert_img(el, indent)
     end
   end
 end
