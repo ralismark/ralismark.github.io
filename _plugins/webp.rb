@@ -14,7 +14,7 @@ class WebpFile < Jekyll::StaticFile
         path.to_s,
         "-o", dest_path.to_s,
     )
-      Jekyll.logger.error "Webp:", "Conversion for input #{path} failed with error #{$?}"
+      Jekyll.logger.error "WebP:", "Conversion for input #{path} failed with error #{$?}"
     end
 
     # From original function

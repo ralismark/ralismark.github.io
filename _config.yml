@@ -39,6 +39,8 @@ plugins:
 markdown: Custom
 
 kramdown:
+  header_offset: 1 # h1 becomes h2 (h1 is title)
+
   math_engine: sskatex
   math_engine_opts:
     katex_js: "/tmp/katex.min.js"
@@ -46,8 +48,6 @@ kramdown:
       throwOnError: false
 
   syntax_highlighter: rouge
-  header_offset: 1 # h1 becomes h2 (h1 is title)
-
   syntax_highlighter_opts:
     formatter: Custom
     span:
