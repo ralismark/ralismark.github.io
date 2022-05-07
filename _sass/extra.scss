@@ -117,12 +117,43 @@ main {
  * Styling specific to individual posts
  */
 
-blockquote {
+blockquote:not([admonition]) {
 	@include card;
 	@include bleed;
 
 	padding: 0.5rem var(--bleed-size); // <p> has 1rem margin
 	background: transparentize($accent, 0.9);
+}
+
+blockquote[admonition] {
+	$padding: 1rem;
+	$outer-margin: 1rem; // space on left and right of the admonition
+	$sep-margin: 0;
+	$embedded-margin: 1rem; // amount of margin included in the image itself
+	$size: 6rem; // image size
+
+	& > img:first-child, & > picture:first-child {
+		position: absolute;
+		margin: (-$embedded-margin) 0 (-$embedded-margin) (-$size - $padding - $sep-margin);
+		height: $size;
+	}
+
+	& > picture:first-child > img {
+		// reset stuff, a bit unclean :(
+		// TODO fix the .bounded img rule
+		height: inherit;
+		width: auto;
+	}
+
+	margin: 1rem ($outer-margin) 1rem ($size + $outer-margin - $embedded-margin + $sep-margin);
+	padding: 0 $padding;
+	min-height: ($size - 2 * $embedded-margin);
+
+	width: fit-content;
+
+	background: fade-out($accent, 0.95);
+	border: 1px solid $hr-fg;
+	border-radius: 0.2rem;
 }
 
 .footnotes {

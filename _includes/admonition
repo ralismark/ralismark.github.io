@@ -1,0 +1,17 @@
+{% capture admonition_config %}
+aside:
+  image: "assets/tem-chill.png"
+  text: "tem is think"
+ask:
+  image: "assets/tem-chill.png"
+  text: "tem is ask"
+default:
+  image: "assets/tem-chill.png"
+  text: "tem is here"
+{% endcapture %}{% assign admonition_config = admonition_config | yaml_parse -%}
+{% assign admonition_verb = include.verb | default: "default" %}
+{% assign admonition_config = admonition_config[admonition_verb] -%}
+{: admonition="{{ admonition_verb }}" }
+> ![{{ admonition_config.text }}]({% link {{ admonition_config.image }} %} "{{ admonition_config.text }}"){: width="64" height="64" }
+>
+{%- comment -%}This is to avoid the trailing newline{%- endcomment -%}
