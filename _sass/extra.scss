@@ -21,19 +21,6 @@ body {
 	background: var(--body-bg);
 }
 
-html {
-	$m-max-width: 45rem;
-	$m-content-p: .9;
-
-	--bleed-size: #{$m-max-width * (1 - $m-content-p) / 2};
-	--content-width: #{$m-max-width * $m-content-p};
-
-	@media(max-width: $m-max-width) {
-		--content-width: #{$m-content-p * 100%};
-		--bleed-size: #{(1 - $m-content-p) / 2 * 100%}; // we want it as a percentage
-	}
-}
-
 #site-nav {
 	$height: 3rem;
 	$pad: .5rem;
@@ -127,7 +114,6 @@ blockquote:not([admonition]) {
 
 blockquote[admonition] {
 	$padding: 1rem;
-	$outer-margin: 1rem; // space on left and right of the admonition
 	$sep-margin: 0;
 	$embedded-margin: 1rem; // amount of margin included in the image itself
 	$size: 6rem; // image size
@@ -145,7 +131,7 @@ blockquote[admonition] {
 		width: auto;
 	}
 
-	margin: 1rem ($outer-margin) 1rem ($size + $outer-margin - $embedded-margin + $sep-margin);
+	margin: 1rem var(--inset-margin) 1rem calc(#{$size - $embedded-margin + $sep-margin} + var(--inset-margin));
 	padding: 0 $padding;
 	min-height: ($size - 2 * $embedded-margin);
 
