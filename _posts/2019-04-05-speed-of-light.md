@@ -69,7 +69,7 @@ $ dvisvgm em-wave.dvi -p1 -n -o em-wave.svg
 
 {% endcomment %}
 
-![A diagram of EM wave, with a red sine wave, labelled E, along the X-Y plane and a blue sine wave, labelled B, along the X-Z plane](/assets/em-wave.svg)
+![A diagram of EM wave, with a red sine wave, labelled E, along the X-Y plane and a blue sine wave, labelled B, along the X-Z plane]({% link assets/speed-of-light:em-wave.svg %})
 Electromagnetic wave. Credits to [sabicool]
 
 # Maxwell's Equations
