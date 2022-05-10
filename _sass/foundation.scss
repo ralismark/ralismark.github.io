@@ -262,16 +262,20 @@ html .mx-auto { margin-left: auto !important; margin-right: auto !important; }
 // Page Widths ----------------------------------------------------------------
 
 html {
-	$m-max-width: 45rem;
-	$m-content-p: .90;
+	$breaking-width: 45rem; // "clamp" page width to this if above. Used to transition between desktop-like and mobile-like sizing
+	$content-frac: .90; // maximum proportion of page width to use for content (i.e. remaining space is margin)
 
-	--content-width: #{$m-max-width * $m-content-p};
-	--bleed-size: calc(#{$m-content-p * 25 + 25}vw - #{$m-max-width * $m-content-p / 2});
+	// --content-width is width of content
+	// --inset-margin is extra margin for "inset" thing (e.g. admonitions)
+	// --bleed-size is "negative margin" for bleed elements
+
+	--content-width: #{$breaking-width * $content-frac};
+	--bleed-size: calc(25vw - #{$breaking-width * $content-frac / 4});
 	--inset-margin: 1rem;
 
-	@media(max-width: $m-max-width) {
-		--content-width: #{$m-content-p * 100%};
-		--bleed-size: #{(1 - $m-content-p) / 2 * 100%}; // we want it as a percentage
+	@media(max-width: $breaking-width) {
+		--content-width: #{$content-frac * 100}vw;
+		--bleed-size: #{(1 - $content-frac) * 100 / 4}vw;
 		--inset-margin: 0rem;
 	}
 }

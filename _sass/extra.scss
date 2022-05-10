@@ -114,13 +114,29 @@ blockquote:not([admonition]) {
 
 blockquote[admonition] {
 	$padding: 1rem;
-	$sep-margin: 0;
+	$gap: 1rem;
 	$embedded-margin: 1rem; // amount of margin included in the image itself
 	$size: 6rem; // image size
 
+	&::before {
+		$triangle-size: $embedded-margin * 0.75;
+
+		// content: ""; // uncomment this to enable the triangle
+
+		display: block;
+		width: 0;
+		height: 0;
+
+		position: absolute;
+		margin-left: -$padding - $triangle-size * 2;
+		margin-top: 1rem;
+		border: $triangle-size solid transparent;
+		border-right-color: $hr-fg;
+	}
+
 	& > img:first-child, & > picture:first-child {
 		position: absolute;
-		margin: (-$embedded-margin) 0 (-$embedded-margin) (-$size - $padding - $sep-margin);
+		margin: (-$embedded-margin) 0 (-$embedded-margin) #{-$size - $padding + $embedded-margin - $gap};
 		height: $size;
 	}
 
@@ -131,7 +147,7 @@ blockquote[admonition] {
 		width: auto;
 	}
 
-	margin: 1rem var(--inset-margin) 1rem calc(#{$size - $embedded-margin + $sep-margin} + var(--inset-margin));
+	margin: 1rem var(--inset-margin) 1rem calc(#{$size - 2 * $embedded-margin + $gap} + var(--inset-margin));
 	padding: 0 $padding;
 	min-height: ($size - 2 * $embedded-margin);
 
