@@ -4,17 +4,22 @@ title: # blank
 article_class: "disable-link-markers"
 ---
 
+{% comment %}
+TODO Make all series titles the same style
+TODO Make all post tiles have the same capitalisation style
+{% endcomment %}
+
 # Hi!
 
 I'm **{{ site.me.name }}**, but I go by **ralismark** on the internet.
 
-I'm a quantitative developer at algorithmic trading firm [Autumn Compass], third year compsci student at UNSW, and [COMP3121]/[COMP3821] problem writer.
+I'm a developer at algorithmic trading firm [Autumn Compass], third year compsci student at UNSW, and [COMP3121]/[COMP3821] problem writer.
 
 [Autumn Compass]: https://autumncompass.com/
 [COMP3121]: https://www.handbook.unsw.edu.au/undergraduate/courses/{{ site.time | date: "%Y" }}/comp3121
 [COMP3821]: https://www.handbook.unsw.edu.au/undergraduate/courses/{{ site.time | date: "%Y" }}/comp3821
 
-I mainly work with C++, Go, and Python and a smattering of other tech.
+I mainly work with C++, Go, and Python, plus a smattering of other tech.
 I'm also a fan of Rust and contributed [a][pr1] [few][pr2] [PRs][pr3] to [Tectonic Typesetting], a LaTeX engine in Rust &amp; C.
 And I often do old-school web development in plain JavaScript -- such as [this website], [a game], and [a wiki].
 
