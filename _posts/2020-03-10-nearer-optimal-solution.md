@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Proving Algorithms using Nearer Optimal Solution
+title: Proving Algorithms Using Nearer Optimal Solution
 tags: algos math
 excerpt: Proving greedy algorithms by making optimal choices more greedy
 ---

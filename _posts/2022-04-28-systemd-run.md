@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Notes on systemd: a better nohup"
+title: "Notes On Systemd #1: A Better Nohup"
 tags: systemd
 excerpt: Leveraging the system manager for ad-hoc tasks
 ---

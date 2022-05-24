@@ -1,6 +1,6 @@
 ---
 layout: post
-title: XeTeX, weaved
+title: XeTeX, Weaved
 tags:
 excerpt: I build the docs for XeTeX (and some other projects) so you don't have to
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: Small Merge
 tags: algos
-excerpt: A generalisation of DSU's merge by size to be more useful.
+excerpt: A generalisation of DSU's merge by size to be more useful
 ---
 
 Small merge is a technique derived from DSU which allows merging of groups (and data about groups) by moving elements between groups at most O(n log n) times.

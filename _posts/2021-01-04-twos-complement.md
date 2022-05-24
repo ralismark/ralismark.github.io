@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Against "flip bits, plus one"
+title: Against "Flip Bits, Plus One"
 tags:
 excerpt: Teaching two's complement in a more intuitive way
 ---
