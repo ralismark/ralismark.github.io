@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Git Emergency Procedures - Recovering deleted refs
+title: "Git Emergency Procedures #1: Recovering Deleted Refs"
 tags:
 excerpt: Recovering commits from deleted branches
 ---

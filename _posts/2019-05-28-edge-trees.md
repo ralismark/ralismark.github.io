@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Edge-based tree data structures
+title: Edge-based Tree Data Structures
 tags: algos
 excerpt: A novel data structure to solve widest path problems
 ---

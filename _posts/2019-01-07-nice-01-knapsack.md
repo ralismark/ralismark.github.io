@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A nice subset-sum solution
+title: A Nice Subset-sum Solution
 tags: algos
 excerpt: Solving a "standard" problem in a very clean way
 ---

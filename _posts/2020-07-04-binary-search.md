@@ -1,6 +1,6 @@
 ---
 layout: post
-title: You don't know binary search
+title: You Don't Know Binary Search
 tags: algos
 excerpt: How to never write a binary search wrong again
 ---

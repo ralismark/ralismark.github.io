@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How I Use Vim (part 2)
+title: "How I Use Vim #2"
 tags:
 excerpt: Vim plugins I use
 ---

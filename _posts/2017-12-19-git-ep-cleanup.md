@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Git Emergency Procedures - Cleaning things up
+title: "Git Emergency Procedures #2: Cleaning Things Up"
 tags:
 excerpt: Resetting the repo to its inital state & deleting extra files
 ---

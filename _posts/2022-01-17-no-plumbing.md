@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Don't plumb for the programmer
+title: Don't Plumb For The Programmer
 tags:
 excerpt: A sort of follow-up to "Write Libraries, Not Frameworks"
 ---

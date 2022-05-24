@@ -1,8 +1,8 @@
 ---
 layout: post
-title: Short and simple LIS
+title: Short And Simple Longest Increasing Subsequence
 tags: algos
-excerpt: O(n log n) Longest Increasing Subsequence in just 7 lines
+excerpt: An O(n log n) algorithm in just 7 lines
 ---
 
 The [Longest Increasing Subsequence problem](https://en.wikipedia.org/wiki/Longest_increasing_subsequence) is a "standard" problem in informatics, and it is sometimes used as an introduction to more advanced DPs. While the naive DP algorithm runs in $$O(n^2)$$, this can be optimised to $$O(n\log n)$$ using a variety of data structures and algorithms.

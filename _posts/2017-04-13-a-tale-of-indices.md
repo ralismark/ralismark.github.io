@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A Tale of Indices
+title: A Tale Of Indices
 tags:
 excerpt: Exploting bad indexing code to mess with malloc and the PLT
 ---

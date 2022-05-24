@@ -2,7 +2,7 @@
 layout: post
 title: "5 Years Of This Website"
 tags: meta
-excerpt: Through change after change after change
+excerpt: A tour of the history of this place
 ---
 
 Last month was the 5 year anniversary of the [first ever post] on this blog 🎉!

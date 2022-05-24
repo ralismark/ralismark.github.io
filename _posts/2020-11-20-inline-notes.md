@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Inline sidenotes
+title: Inline Sidenotes
 tags: static-site-gen
 excerpt: A neat css-only inline note
 ---
