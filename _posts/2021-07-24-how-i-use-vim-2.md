@@ -6,8 +6,11 @@ excerpt: Vim plugins I use
 ---
 
 > This is part 2 of *How I Use Vim*.
-> - [part 1, core usage & vimrc snippets]({% link _posts/2020-08-29-how-i-use-vim-1.md %})
-> - [part 2, plugins]({% link _posts/2021-07-24-how-i-use-vim-2.md %})  &larr; you are here
+> - [part 1, core usage & vimrc snippets]
+> - [part 2, plugins] &larr; you are here
+
+[part 1, core usage & vimrc snippets]: {% link _posts/2020-08-29-how-i-use-vim-1.md %}
+[part 2, plugins]: {% link _posts/2021-07-24-how-i-use-vim-2.md %}
 
 In addition to the things listed in part 1, I also use a number of plugins, including some of my own. All the ones listed here are github repos, so if you're using a plugin manager like `vim-plug`, you can copy these directly.
 
@@ -49,22 +52,29 @@ This isn't a plugin with a repo, but it's pretty self-contained and there are pl
 function! SortMotion(motion)
 	if a:motion ==# "line"
 		'[,']sort
-	elseif a:motion ==# "\<c-v>"
-		let regex = '/\%' . virtcol("'<") . 'v.*\%<' . (virtcol("'>") + 1) . 'v/'
-		exec "normal! \<esc>"
-		exec "'<,'>sort" regex
-	elseif a:motion ==# "V" || a:motion ==# "v"
+	elseif a:motion ==# "V"
 		exec "normal! \<esc>"
 		'<,'>sort
+	elseif a:motion ==# "block"
+		let [left, right] = sort([virtcol("'["), virtcol("']")], "n")
+		let regex = '/\%>' . (left - 1) . 'v.*\%<' . (right + 2) . 'v/'
+		exec "'[,']sort" regex "r"
+	elseif a:motion ==# "\<c-v>"
+		exec "normal! \<esc>"
+		let [left, right] = sort([virtcol("'<"), virtcol("'>")], "n")
+		let regex = '/\%>' . (left - 1) . 'v.*\%<' . (right + 2) . 'v/'
+		exec "'<,'>sort" regex "r"
+	elseif type(a:motion) == v:t_number
+		exec ".,.+" . a:motion . "sort"
 	endif
 endfunction
 
 nnoremap gs <cmd>set operatorfunc=SortMotion<cr>g@
-nnoremap gss <nop>
+nnoremap gss <cmd>call SortMotion(v:count1)<cr>
 xnoremap gs <cmd>call SortMotion(mode())<cr>
 ```
 
-This defines `gs` as an operation that sorts the selected lines. The above code might be a bit buggy, but this is a thing I've used very often and definitely beats doing `:sort<cr>`.
+This defines `gs` as an operation that sorts the selected lines. The visual block ones were a bit hard to get right.
 
 # Autocomplete/LSP/etc
 
