@@ -6,8 +6,11 @@ excerpt: Interesting aspects of my vim usage
 ---
 
 > This is part 1 of *How I Use Vim*.
-> - [part 1, core usage & vimrc snippets]({% link _posts/2020-08-29-how-i-use-vim-1.md %}) &larr; you are here
-> - [part 2, plugins]({% link _posts/2021-07-24-how-i-use-vim-2.md %})
+> - [part 1, core usage & vimrc snippets] &larr; you are here
+> - [part 2, plugins]
+
+[part 1, core usage & vimrc snippets]: {% link _posts/2020-08-29-how-i-use-vim-1.md %}
+[part 2, plugins]: {% link _posts/2021-07-24-how-i-use-vim-2.md %}
 
 I've been using Vim (well, Neovim) for several years now and I've developed some idiosyncrasies along the way. [My vimrc][vimrc] is quite large, so here's a few points.
 
