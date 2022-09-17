@@ -9,7 +9,7 @@ title: 5e Character Sheet
 |Sylvie|Eladrin Elf|Warlock (Celestial) {{ lvl }}|Custom|LG|30 ft|
 {% endcapture %}{{ content | markdownify }}
 
-{% assign lvl = 5 %}
+{% assign lvl = 6 %}
 {% capture spell_level %}
   {%- if lvl <= 10 -%}{{ lvl | plus: 1 | divided_by: 2 | floor }}
   {%- else -%}5
@@ -107,12 +107,12 @@ cha: 14
 |Lvl|Name|Cast|Range|Duration|Description|
 |-|
 |0|[Light](http://dnd5e.wikidot.com/spell:light)|1 action VM|Touch|1 hr|Object sheds light|
-|0|[Sacred Flame](http://dnd5e.wikidot.com/spell:sacred-flame)|1 action VS|60 ft|Instant|2d8 radiant damage vs dex save|
+|0|[Sacred Flame](http://dnd5e.wikidot.com/spell:sacred-flame)|1 action VS|60 ft|Instant|2d8+{{mod.cha}} radiant damage vs dex save|
 |0|[Eldrich Blast](http://dnd5e.wikidot.com/spell:eldritch-blast)|1 action VS|120 ft|Instant|2x: spell atk, 1d10+{{mod.cha}} force|
 |0|[Mage Hand](http://dnd5e.wikidot.com/spell:mage-hand)|1 action VS|30 ft|1 min|Magic hand whoo|
 |0|[Prestidigitation](http://dnd5e.wikidot.com/spell:prestidigitation)|1 action VS|10 ft|1 hr|Misc effects.|
 |1|[Hex](http://dnd5e.wikidot.com/spell:hex)|1 bonus VSM|90 ft|8 hr (conc)|Hit &rarr; +1d6 damage. Disadvantage on one ability. <br>Bonus action to curse new creature if target dies|
-|1|[Burning Hands](http://dnd5e.wikidot.com/spell:burning-hands)|1 action VS|15 ft cone|Instant|{{ spell_level | plus: 2 }}d6 fire vs dex save (halving)|
+|1|[Burning Hands](http://dnd5e.wikidot.com/spell:burning-hands)|1 action VS|15 ft cone|Instant|{{ spell_level | plus: 2 }}d6+{{mod.cha}} fire vs dex save (halving)|
 |1|[Charm Person](http://dnd5e.wikidot.com/spell:charm-person)|1 action VS|30 ft|1 hr|charm {{ spell_level }} vs wis save (advantage if fighting)|
 |2|[Misty Step](http://dnd5e.wikidot.com/spell:misty-step)|1 bonus V|Self|Instant|30ft teleport|
 |2|[Suggestion](http://dnd5e.wikidot.com/spell:suggestion)|1 action VM|30 ft|8 hrs (conc)|Suggest course of activity, vs wis save<br>Attacking them stops spell|
@@ -139,6 +139,7 @@ cha: 14
 |Invocation|Voice of the Chain Master||see documentation|
 |Invocation|Grasp of Hadar||pull up to 10ft on eldrich blast|
 |Celestial|Healing Light|Bonus action<br>{{ lvl | add: 1 }}d6/long|60 ft, spend up to {{ mod.cha }} dice for heal|
+|Celestial|Radiant Soul||Resist radiant. +{{mod.cha}} to radiant/fire spells|
 {% endcapture %}{% assign ability_table = content | markdownify %}
 
 <div class="flex-centre fence-y">
