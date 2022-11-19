@@ -30,7 +30,7 @@ Like all Vim users, I use `hjkl` to navigate. However, one thing you might see i
 [visual line]: https://vimhelp.org/visual.txt.html#linewise-visual
 [block]: https://vimhelp.org/visual.txt.html#blockwise-visual
 
-Furthermore, for plain navigation I often use uppercase [`W`] and [`B`] to move left and right. I also use `0w` instead of `^`, which is harder to type, to move to the start of line. I haven't figured out a good way of navigating vertically yet, so I'm still on h/j plus fast keyrepeat.
+Furthermore, for plain navigation I often use uppercase [`W`] and [`B`] to move left and right. I also use `0w` instead of `^`, which is harder to type, to move to the start of line. I haven't figured out a good way of navigating vertically yet, so I'm still on j/k plus fast keyrepeat.
 
 [`W`]: https://vimhelp.org/motion.txt.html#W
 [`B`]: https://vimhelp.org/motion.txt.html#B
@@ -130,4 +130,4 @@ noremap X "_d
 
 # Conclusion
 
-This is the more "core" part of my Vim usage. I plan on going into my many plugins in part 2 (whenever I get around to it).
+This is the more "core" part of my Vim usage. I plan on going into my many plugins in part 2.
