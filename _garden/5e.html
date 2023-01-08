@@ -9,7 +9,7 @@ title: 5e Character Sheet
 |Sylvie|Eladrin Elf|Warlock (Celestial) {{ lvl }}|Custom|LG|30 ft|
 {% endcapture %}{{ content | markdownify }}
 
-{% assign lvl = 6 %}
+{% assign lvl = 7 %}
 {% capture spell_level %}
   {%- if lvl <= 10 -%}{{ lvl | plus: 1 | divided_by: 2 | floor }}
   {%- else -%}5
@@ -129,7 +129,6 @@ cha: 14
 |From|Name|When|What|
 |-|
 |Eladrin|Fey Step|Bonus<br>1/short|Magically teleport 30ft into an unoccupied space<br>Autumn: charm, wis save vs 8+prof+cha<br>Winter: frighten, wis save vs 8+prof+cha<br>Spring: touch willing, they teleport<br>Summer: cha fire damage|
-|Warlock|Fey Prescence|Action<br>1/short|10ft cube, wis vs spell save, charm or frighten until next turn|
 |Elf|Darkvision||60 ft darkvision|
 |Elf|Fey Ancestry||Advantage on saving throws vs charm<br>Can't be magically put to sleep|
 |Elf|Trance||4hr trance instead of sleeping|
