@@ -16,5 +16,4 @@ Here's some things here:
 Also, did you know about these pages?
 
 - [A single file with every single blog post]({% link everything.html %})
-- [Info about the static site generation setup]({% link infra.md %})
 - [Licensing info & attributions]({% link licenses.md %})
