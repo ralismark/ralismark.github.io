@@ -68,7 +68,7 @@ It'd get a separate landing page, a proper footer, and many more posts, but you 
 22 July 2020[^details].
 It had gotten an index page and a bit of a rebranding, and recently a cute project listing, inspired by [an old version of a friend's blog] (maybe I should bring it back?).
 
-[^details]: The redacted bits are my old name. Also, the website used to be public on github; see [this post]({% link _posts/2021-06-20-going-private.md %}) for why that's no longer the case.
+[^details]: The redacted bits are my old name. ~~Also, the website used to be public on github; see [this post]({% link _posts/2021-06-20-going-private.md %}) for why that's no longer the case.~~ *\[update 2023-01-15: it's public again\]*
 [an old version of a friend's blog]: http://htmlpreview.github.io/?https://github.com/acenturyandabit/acenturyandabit.github.io/blob/68a24395b008dde778b6576c805a4346a35f06b7/index.html
 
 In those four years, I'd get way too involved in competitive programming, graduate high school, and get hit with a good amount of pandemic time.

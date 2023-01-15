@@ -5,6 +5,9 @@ tags: static-site-gen meta
 excerpt: The tech stack of this site
 ---
 
+> This setup was accurate at the time of writing, but may not reflect the infrastructure I am using today.
+> You can see the latest setup from [the source code](https://github.com/ralismark/ralismark.github.io) or by asking me!
+
 I've gotten a decent number of questions asking about how my blog is set up. Last year, I wrote [Blog CI], which covered the continuous deployment that I recently introduced. This post will be an extension of that, detailing everything else about how this site works.
 
 [Blog CI]: {% link _posts/2020-10-28-blog-ci.md %}
@@ -35,11 +38,14 @@ While not essential, it provides many features, such as includes and Liquid temp
 
 Without Github Pages's restrictions on Jekyll, I have plugins to
 
-- Render graphviz, such as on my [Kruskal Tree post]
-- Turn headings into links
-- Create redirects after I changed the URL scheme
+- [Render graphviz], such as on my [Kruskal Tree post]
+- [Turn headings into links]
+- [Create redirects] after I changed the URL scheme
 
+[Render graphviz]: https://github.com/ralismark/ralismark.github.io/blob/d0a7ce4823f2f5a88295c031f470d102eaa8f792/_plugins/graphviz.rb
 [Kruskal Tree post]: {% link _posts/2019-05-28-edge-trees.md %}
+[Turn headings into links]: https://github.com/ralismark/ralismark.github.io/blob/d0a7ce4823f2f5a88295c031f470d102eaa8f792/_plugins/markdown-header.rb
+[Create redirects]: https://github.com/ralismark/ralismark.github.io/blob/d0a7ce4823f2f5a88295c031f470d102eaa8f792/_plugins/redirect.rb
 
 # Local Testing
 
