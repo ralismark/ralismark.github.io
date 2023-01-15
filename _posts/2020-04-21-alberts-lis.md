@@ -63,7 +63,7 @@ Now, you can get an $$O(n \log n)$$ solution from here using a segment tree, but
 
 Intuitively, (1) means that $$lis$$ can only step up one at a time (removing the last element from a increasing sequence will produce another increasing sequence) and (2) means that these steps only occur at values of $$A$$ (which is intuitively obvious once you think about it).
 
-The key idea to creating the `std::set` solution is to *only* track these steps. Thus, finding $$m$$ becomes a `lower_bound` (line 4) and the range increment is equivalent to decreasing a value in the set (lines 5 and 6).
+The key idea to creating the `std::set` solution is to *only* track these steps. Thus, finding $$m$$ becomes a `lower_bound` and the range increment is equivalent to decreasing a value in the set.
 
 Getting the value of $$lis(h)$$ is then the same as counting how many "steps" are below $$h$$ i.e. the number of elements in the set not greater than $$h$$. Finding $$lis(\infty)$$, which is done to get the final answer, simply means taking the size of the set, and querying any other value can be supported by using an [order-statistic tree](https://en.wikipedia.org/wiki/Order_statistic_tree).
 

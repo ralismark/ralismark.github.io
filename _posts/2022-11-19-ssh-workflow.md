@@ -109,7 +109,7 @@ git status -sb  1.18s user 1.58s system 1% cpu 4:22.04 total
 ```
 
 Under a seconds compared to over 4 minutes -- that's a *1505x* slowdown!
-Pretty awful for something as common as `git statsus`.
+Pretty awful for something as common as `git status`.
 Furthermore, if you're working over ssh you almost certainly have some commands that must be run remotely, such as `make` or other tools that only exist on the remote system.
 Running them via `ssh <host> <command>` would work, except that they always run in the home directory and not where you're actually doing work.
 
