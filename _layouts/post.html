@@ -3,7 +3,9 @@ layout: plain
 main_class: h-entry content-width
 ---
 
+{% unless page.noindex %}
 {% include post-nav.html %}
+{% endunless %}
 
 <header class="post-meta fence-b mb-1 text-centre bleed">
 	<h1 id="post-title" class="p-name">{{ page.title | escape }}</h1>
@@ -40,6 +42,8 @@ main_class: h-entry content-width
 	{{ content }}
 </article>
 
+{% unless page.noindex %}
 {% include post-nav.html %}
+{% endunless %}
 
 {% include comments.html %}
