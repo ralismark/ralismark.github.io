@@ -13,7 +13,7 @@ TODO Make all post tiles have the same capitalisation style
 
 I'm **{{ site.me.name }}**, but I go by **ralismark** on the internet.
 
-I'm a developer at algorithmic trading firm [Autumn Compass], third year compsci student at UNSW, and [COMP3121]/[COMP3821] problem writer.
+I'm a developer at algorithmic trading firm [Autumn Compass], fourth year compsci student at UNSW, and former [COMP3121]/[COMP3821] problem writer.
 
 [Autumn Compass]: https://autumncompass.com/
 [COMP3121]: https://www.handbook.unsw.edu.au/undergraduate/courses/{{ site.time | date: "%Y" }}/comp3121
