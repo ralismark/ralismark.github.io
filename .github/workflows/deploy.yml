@@ -1,16 +1,24 @@
 name: Deploy to Github Pages
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # allow manually running
   push:
-    branches:
-      - master
+    branches: ["master"] # run on pushes
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -22,18 +30,8 @@ jobs:
           -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
           image jekyll build
 
-    - name: Push to gh-pages
-      uses: JamesIves/github-pages-deploy-action@3.6.2
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # This is the branch you wish to deploy to, for example gh-pages or
-        # docs.
-        BRANCH: gh-pages
-        # The folder in your repository that you want to deploy. If your build
-        # script compiles into a directory named build you would put it here.
-        # Folder paths cannot have a leading / or ./. If you wish to deploy the
-        # root directory you can place a . here.
-        FOLDER: _site
-        # This option can be used if you'd prefer to have a single commit on
-        # the deployment branch instead of maintaining the full history.
-        SINGLE_COMMIT: true
+    - name: Upload built site
+      uses: actions/upload-pages-artifact@v1
+
+    - name: Deploy to gh-pages
+      uses: actions/deploy-pages@v1.2.3
