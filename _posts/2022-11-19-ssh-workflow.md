@@ -5,7 +5,7 @@ tags:
 excerpt: How to have a nice time developing remotely
 ---
 
-For both uni and my day job, I regularly do development over ssh, where your entire development environment -- that is source code, compilers, and other tooling -- are all situation on a remote machine.
+For both uni and my day job, I regularly do development over ssh, where your entire development environment -- that is source code, compilers, and other tooling -- are all situated on a remote machine.
 As with most people, my local environment is set up just the way I like it, so working remotely using out-of-the-box vim or nano is a bit painful.
 
 Now, if you use [VSCode], this is pretty easy to do with extensions such as [SSH FS] (there is also Remote SSH but it's surprisingly intensive on the remote server so please avoid it if you can).
