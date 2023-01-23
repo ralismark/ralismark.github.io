@@ -107,20 +107,22 @@ cha: 14
 |Lvl|Name|Cast|Range|Duration|Description|
 |-|
 |0|[Light](http://dnd5e.wikidot.com/spell:light)|1 action VM|Touch|1 hr|Object sheds light|
-|0|[Sacred Flame](http://dnd5e.wikidot.com/spell:sacred-flame)|1 action VS|60 ft|Instant|2d8+{{mod.cha}} radiant damage vs dex save|
+|0|[Sacred Flame](http://dnd5e.wikidot.com/spell:sacred-flame)|1 action VS|60 ft|Instant|2d8 radiant damage vs dex save|
 |0|[Eldrich Blast](http://dnd5e.wikidot.com/spell:eldritch-blast)|1 action VS|120 ft|Instant|2x: spell atk, 1d10+{{mod.cha}} force|
 |0|[Mage Hand](http://dnd5e.wikidot.com/spell:mage-hand)|1 action VS|30 ft|1 min|Magic hand whoo|
 |0|[Prestidigitation](http://dnd5e.wikidot.com/spell:prestidigitation)|1 action VS|10 ft|1 hr|Misc effects.|
 |1|[Hex](http://dnd5e.wikidot.com/spell:hex)|1 bonus VSM|90 ft|8 hr (conc)|Hit &rarr; +1d6 damage. Disadvantage on one ability. <br>Bonus action to curse new creature if target dies|
-|1|[Burning Hands](http://dnd5e.wikidot.com/spell:burning-hands)|1 action VS|15 ft cone|Instant|{{ spell_level | plus: 2 }}d6+{{mod.cha}} fire vs dex save (halving)|
+|1|[Burning Hands](http://dnd5e.wikidot.com/spell:burning-hands)|1 action VS|15 ft cone|Instant|{{ spell_level | plus: 2 }}d6 fire vs dex save (halving)|
 |1|[Charm Person](http://dnd5e.wikidot.com/spell:charm-person)|1 action VS|30 ft|1 hr|charm {{ spell_level }} vs wis save (advantage if fighting)|
-|2|[Misty Step](http://dnd5e.wikidot.com/spell:misty-step)|1 bonus V|Self|Instant|30ft teleport|
-|2|[Suggestion](http://dnd5e.wikidot.com/spell:suggestion)|1 action VM|30 ft|8 hrs (conc)|Suggest course of activity, vs wis save<br>Attacking them stops spell|
+|2|[Mind Spike](http://dnd5e.wikidot.com/spell:mind-spike)|1 action S|60 ft|1 hr (conc)|{{ spell_level | plus: 1 }}d8 psychic vs wis save (halving)<br>fail: tracking|
 |3|[Dispel Magic](http://dnd5e.wikidot.com/spell:dispel-magic)|1 action VS|120 ft|Instant|End spell if lvl &le; {{spell_level}}, or 1d20+{{mod.cha}} vs 10+spell lvl|
+|4|[Dimension Door](http://dnd5e.wikidot.com/spell:dimension-door)|1 action V|500 ft|Instant|teleport with +1|
+|4|[Wall of Fire](http://dnd5e.wikidot.com/spell:wall-of-fire)|1 action VSM|120 ft|1 min (conc)|60x20x1ft wall/20x20ft ring<br>{{ spell_level | plus: 1 }}d6 fire vs dex save (halving)|
 |1|[Comprehend Languages](http://dnd5e.wikidot.com/spell:comprehend-languages)|10 mins (ritual) VSM|self|1 hr|literal translations|
 |1|[Detect Magic](http://dnd5e.wikidot.com/spell:detect-magic)|10 mins (ritual) VS|self|10 mins (conc)|30 ft sense magic & school|
 ||Dagger|1d4||Piercing|finesse, light, thrown (20/60)|
 ||Spear|1d6||Piercing|thrown (20/60), versatile (1d8)|
+{% comment %}|2|[Suggestion](http://dnd5e.wikidot.com/spell:suggestion)|1 action VM|30 ft|8 hrs (conc)|Suggest course of activity, vs wis save<br>Attacking them stops spell|{% endcomment %}
 {% comment %}|3|[Moonbeam](http://dnd5e.wikidot.com/spell:moonbeam)|1 action VSM|120 ft|1 min (conc)|5ft radius\*40ft tall cylinder of light<br>per turn: {{spell_level}}d10 vs con save (halving)|{% endcomment %}
 {: .card }
 {% endcapture %}{% assign spell_table = content | markdownify %}
@@ -134,11 +136,13 @@ cha: 14
 |Elf|Trance||4hr trance instead of sleeping|
 |Eladrin|Seasons|After long rest|Change own seasons|
 |Feat|Ritual Caster||Ritual spell book (sorcerer)|
-|Invocation|Agonizing Blast||+cha to eldrich blast damage|
+|Invocation|Agonizing Blast||+{{mod.cha}} to eldrich blast damage|
 |Invocation|Voice of the Chain Master||see documentation|
 |Invocation|Grasp of Hadar||pull up to 10ft on eldrich blast|
+|Invocation|Ghostly Gaze|Action<br>1/short|1min 30ft see through solids|
 |Celestial|Healing Light|Bonus action<br>{{ lvl | add: 1 }}d6/long|60 ft, spend up to {{ mod.cha }} dice for heal|
-|Celestial|Radiant Soul||Resist radiant. +{{mod.cha}} to radiant/fire spells|
+|Celestial HB|Inexorable Law||Force fail save vs int/wis/cha, get task|
+{% comment %}|Celestial|Radiant Soul||Resist radiant. +{{mod.cha}} to radiant/fire spells|{% endcomment %}
 {% endcapture %}{% assign ability_table = content | markdownify %}
 
 <div class="flex-centre fence-y">
