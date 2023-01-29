@@ -8,11 +8,13 @@ module Jekyll
       @site = site
 
       @site.posts.docs.each do |post|
-        from = URL.new(
-          :template => "/:year/:month/:day/:title:output_ext",
-          :placeholders => post.url_placeholders
-        )
-        generate_aliases(post.url, from)
+        if post.data["date"] < Time.new(2023, 1, 1)
+          from = URL.new(
+            :template => "/:year/:month/:day/:title:output_ext",
+            :placeholders => post.url_placeholders
+          )
+          generate_aliases(post.url, from)
+        end
       end
     end
 
@@ -40,9 +42,6 @@ module Jekyll
         end
 
         # Make sure jekyll know about them
-        alias_sections.size.times do |sections|
-          @site.static_files << Jekyll::AliasFile.new(@site, @site.dest, alias_sections[0, sections + 1].join('/'), '')
-        end
         @site.static_files << Jekyll::AliasFile.new(@site, @site.dest, alias_dir, alias_file)
       end
     end
