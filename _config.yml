@@ -53,7 +53,7 @@ kramdown:
     span:
       line_numbers: false
     block:
-      line_numbers: false
+      line_numbers: true # TODO setting this to false breaks a bunch of code block formatting
       start_line: 1
 
 # Sass generated css
