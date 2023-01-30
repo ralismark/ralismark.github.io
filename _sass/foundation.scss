@@ -116,11 +116,15 @@ kbd {
 	display: block ruby; // if this is supported
 	text-align: center;
 
-	$bstyle: 1px solid grey;
-
 	th, td {
 		padding: 0.5em;
-		&.boxed { border: $bstyle; }
+	}
+
+	&.boxed th,
+	&.boxed td,
+	th.boxed,
+	td.boxed {
+		border: 1px solid grey;
 	}
 }
 

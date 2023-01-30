@@ -5,8 +5,11 @@ tags:
 excerpt: How to ensure memory safety when the compiler can't help
 ---
 
-{% capture content %}
 {::options syntax_highlighter_opts="{ line_numbers: false \}" /}
+
+{% capture esc %}
+<!<span class="code-annotation">{% endcapture %}
+{% capture endesc %}</span>!>{% endcapture %}
 
 *(alt subtitle: How to pretend you're writing rust when in C)*
 
@@ -24,17 +27,15 @@ With this restriction, we can easily determine when memory need to be freed: jus
 
 Let's have a look at how this works:
 
-```c
+```escape?lang=c
 {
   type* val = malloc(sizeof(type));
   val->field = 1; // this is allowed
   do_abc(val->foo); // this is too
 
-  // type* copy = val;
-### ↑ We don't allow this, since we would then have two references
+  // type* copy = val; {{ esc }}↑ We don't allow this, since we would then have two references{{ endesc }}
 
-  // do_xyz(val);
-### ↑ This is also forbidden - do_xyz's argument would be a second reference. However, we'll allow free() as the only exception to this rule.
+  // do_xyz(val); {{ esc }}↑ This is also forbidden - do_xyz's argument would be a second reference. However, we'll allow free() as the only exception to this rule.{{ endesc }}
   free(val);
 }
 ```
@@ -108,26 +109,22 @@ Now, the caller becomes responsible[^ignore-result] for this bit of memory. `mal
 
 Under this model, we can do much more, though with some difficulty. For example, this gets the sum of a linked list:
 
-```c
+```escape?lang=c
 // return type
 struct pair { struct list* list; int sum; };
 
 struct pair list_sum(struct list* list) {
   // handle the end of the list
-  if(!list) {
-### We actually don't have a reference here, so we don't need to care.
+  if(!list) { {{ esc }}We actually don't have a reference here, so we don't need to care.{{ endesc }}
     struct pair out = { 0, 0 };
     return out;
   }
-
-### ↓ We detach the tail of the list and transfer it to the call of list_sum. This function then gives us back a list (hopefully the one we passed to it) via a struct pair.
+{{ esc }}↓ We detach the tail of the list and transfer it to the call of list_sum. This function then gives us back a list (hopefully the one we passed to it) via a struct pair.{{ endesc }}
   struct pair inner = list_sum(list->next);
       list->next = 0;
-
-### ↓ Then, we put the list back together.
+{{ esc }}↓ Then, we put the list back together.{{ endesc }}
   list->next = inner.list; inner.list = 0;
-
-### ↓ We then move the list out of the local variable and into out, which we give back to the caller.
+{{ esc }}↓ We then move the list out of the local variable and into out, which we give back to the caller.{{ endesc }}
   struct pair out;
   out.list = list; list = 0;
   out.sum = inner.sum + list->val;
@@ -159,19 +156,15 @@ One of the first things we disallowed in this journey was non-owning pointers. O
 
 Now, we can rewrite our linked list sum like this:
 
-```c
+```escape?lang=c
 typedef struct list* list_owned;
-typedef struct list* list_borrow;
-### ↑ Here's our two pointer types.
+typedef struct list* list_borrow; {{ esc }}↑ Here's our two pointer types.{{ endesc }}
 
-struct list { list_owned next; int val; };
-### ↑ Each node of the linked list actually owns the next node (and indirectly, the rest of the list).
+struct list { list_owned next; int val; }; {{ esc }}↑ Each node of the linked list actually owns the next node (and indirectly, the rest of the list).{{ endesc }}
 
-int list_sum(list_borrow list) {
-### ↑ We don't need to move or dispose of this list, so we can simple use a borrowing pointer.
+int list_sum(list_borrow list) { {{ esc }}↑ We don't need to move or dispose of this list, so we can simple use a borrowing pointer.{{ endesc }}
     if(!list) return 0;
-    return list->val + list_sum(&*list->next);
-### ↑ We borrow from list->next, which owns the next node, and pass this new list_borrow as the argument to our list_sum call.
+    return list->val + list_sum(&*list->next); {{ esc }}↑ We borrow from list->next, which owns the next node, and pass this new list_borrow as the argument to our list_sum call.{{ endesc }}
 }
 ```
 
@@ -232,11 +225,9 @@ Much of what I've laid out here is inspired by more modern programming languages
 
 But if you're stuck with C, these concepts will make memory management a little safer.
 
-{% endcapture %}{{ content | markdownify | replace: "###", "" }}
-
 {% capture content %}
 @import "defns";
-div.highlight .cp {
+div.highlight .code-annotation {
   // hide the header
   // reset stuff
   display: block;

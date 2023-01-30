@@ -34,8 +34,7 @@ Here's how to build the XeTeX weave
 - If you run `weave xetex.web`, you'll start getting errors. I've made a patch that fixes these errors -- see below.
 - Run `weave xetex.web` -- the output should look something like this:
 
-{: .wrap }
-```
+```terminal
 $ weave xetex.web
 This is WEAVE, Version 4.5 (TeX Live 2021/Arch Linux)
 *1*17*25*38*54*76*103*114*132*137*155*187*199*225*229*233*237*246*282*298*319*327*330*351*362*396*436*499*522*546*574*619*628*682*683*722*741*762*814*859*908*937*951*971*994*1019*1032*1081*1107*1188*1260*1351*1382*1390*1392*1449*1676*1677
