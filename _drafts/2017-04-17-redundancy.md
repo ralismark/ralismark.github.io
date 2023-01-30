@@ -11,7 +11,7 @@ the extremely roundabout way I recovered some files from a system crash.
 
 <!--more-->
 
-``` raw
+```plain
 Characters:
 	$netsec, a friend (may appear again later stories)
 ```

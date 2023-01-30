@@ -42,7 +42,7 @@ Firstly, you almost certainly want `-o idmap=user`, which avoids files owned by 
 The reason is a bit technical.
 By default, when accessing things over sshfs, remote user/group IDs are not translated to what they should be locally.
 This means that on using sshfs with a system where I have a different user ID (i.e. basically all ssh servers), I'll see this:
-```
+```terminal
 $ sshfs cse: ~/mnt
 
 $ ls -l ~/mnt
@@ -62,7 +62,7 @@ To be honest though, I'm not really sure what the implications of this are -- I 
 
 Still, you can fix it with the option `-o idmap=user`.
 You'll see this instead:
-```
+```terminal
 $ sshfs cse: ~/mnt -oidmap=user
 
 $ ls -l ~/mnt
@@ -93,7 +93,7 @@ Still, there's so much more you can do!
 With sshfs acting just like your local filesystem, you can in fact run (local) commands there!
 However, anything filesystem-intensive takes *forever*:
 
-```
+```terminal
 $ time git status -sb # remote command, remote filesystem
 ## master...origin/master
  M projects/aos/apps/countdown/src/main.c
@@ -120,7 +120,7 @@ It's used as command wrapper, just like with `ssh`.
 
 [tunnel-run]: https://github.com/ralismark/micro/blob/main/tunnel-run
 
-```shellsession
+```terminal
 $ hostname
 delta
 $ tunnel-run hostname
@@ -206,7 +206,7 @@ To avoid the pain of having to type out `~/.local/mount/remote/...` each time, I
 The way this is done is with *directory hashes*.
 Let me demonstrate -- all of this is running in zsh.
 
-```
+```terminal
 $ cd ~remote
 cd: no such file or directory: ~remote
 $ hash -d remote=$HOME/.local/mount/remote

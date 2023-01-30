@@ -6,6 +6,8 @@ module Rouge
       tag 'custom'
 
       def initialize(opts={})
+        Formatter.enable_escape!
+
         @formatter = opts[:inline_theme] ? HTMLInline.new(opts[:inline_theme])
                    : HTML.new
 
