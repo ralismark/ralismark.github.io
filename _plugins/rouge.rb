@@ -2,19 +2,21 @@ require 'rouge'
 
 module Rouge
   module Formatters
-    class Custom < Formatter
-      tag 'custom'
+    Formatter.enable_escape!
 
+    class CustomBlock < Formatter
       def initialize(opts={})
-        Formatter.enable_escape!
+        @formatter = HTMLPygments.new(HTML.new())
+      end
 
-        @formatter = opts[:inline_theme] ? HTMLInline.new(opts[:inline_theme])
-                   : HTML.new
+      def stream(tokens, &b)
+        @formatter.stream(tokens, &b)
+      end
+    end
 
-        @formatter = HTMLLineTable.new(@formatter, opts) if opts[:line_numbers]
-
-        # @formatter = opts[:inline_theme] ? HTMLInline.new(opts[:inline_theme]) : HTML.new
-        # @formatter = HTMLLineTable.new(@formatter, opts) if opts[:line_numbers]
+    class CustomSpan < Formatter
+      def initialize(opts={})
+        @formatter = HTML.new()
       end
 
       def stream(tokens, &b)

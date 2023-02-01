@@ -5,8 +5,6 @@ tags:
 excerpt: How to ensure memory safety when the compiler can't help
 ---
 
-{::options syntax_highlighter_opts="{ line_numbers: false \}" /}
-
 {% capture esc %}
 <!<span class="code-annotation">{% endcapture %}
 {% capture endesc %}</span>!>{% endcapture %}
