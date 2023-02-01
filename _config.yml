@@ -49,12 +49,10 @@ kramdown:
 
   syntax_highlighter: rouge
   syntax_highlighter_opts:
-    formatter: Custom
     span:
-      line_numbers: false
+      formatter: CustomSpan
     block:
-      line_numbers: true # TODO setting this to false breaks a bunch of code block formatting
-      start_line: 1
+      formatter: CustomBlock
 
 # Sass generated css
 sass:
