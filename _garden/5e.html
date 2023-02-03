@@ -86,7 +86,6 @@ cha: 14
 |**Plain Atk**|+{{ mod.str | plus: proficiency }}|
 |**Spell Save**|{{ spell_save_dc }}|
 |**Spell Atk**|+{{ spell_atk_mod }}|
-{: .card }
 {% endcapture %}{% assign val_table = content | markdownify %}
 
 {% capture content %}
@@ -99,7 +98,6 @@ cha: 14
 |int|{{ stat["int"] }}|{{ mod["int"] }}|Arcana +{{proficiency}}<!--sage--><br>History<br>Investigation +{{proficiency}}<!--warlock--><br>Nature +{{ proficiency }}<!--warlock--><br>Religion +{{proficiency}}<!--custom bg-->|
 |wis<br>save +{{proficiency}}|{{ stat["wis"] }}|{{ mod["wis"] }}|Animal Handling<br>Insight<br>Medicine +{{proficiency}}<!--custom bg--><br>Perception +{{proficiency}}<!--elf--><br>Survival|
 |cha<br>save +{{proficiency}}|{{ stat["cha"] }}|{{ mod["cha"] }}|Deception<br>Intimidation<br>Performance<br>Persuation|
-{: .card }
 {% endcapture %}{% assign stat_table = content | markdownify %}
 
 {% capture content %}
@@ -124,7 +122,6 @@ cha: 14
 ||Spear|1d6||Piercing|thrown (20/60), versatile (1d8)|
 {% comment %}|2|[Suggestion](http://dnd5e.wikidot.com/spell:suggestion)|1 action VM|30 ft|8 hrs (conc)|Suggest course of activity, vs wis save<br>Attacking them stops spell|{% endcomment %}
 {% comment %}|3|[Moonbeam](http://dnd5e.wikidot.com/spell:moonbeam)|1 action VSM|120 ft|1 min (conc)|5ft radius\*40ft tall cylinder of light<br>per turn: {{spell_level}}d10 vs con save (halving)|{% endcomment %}
-{: .card }
 {% endcapture %}{% assign spell_table = content | markdownify %}
 
 {% capture content %}
