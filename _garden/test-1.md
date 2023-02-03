@@ -25,6 +25,20 @@ signed main() {
   const char* a = "suppose you want to determine whether a star is a giant. a giant star has a large extended photosphere. because it is so large, its atoms are spread over a greater volume.";
 }
 ```
+
+<details><summary>Open me!</summary>
+<details><summary>Open me!</summary>
+<details><summary>Open me!</summary>
+<details><summary>Open me!</summary>
+<details><summary>Open me!</summary>
+<details><summary>Open me!</summary>
+<p>hello there</p>
+</details>
+</details>
+</details>
+</details>
+</details>
+</details>
 </details>
 
 
@@ -102,11 +116,42 @@ hello
 
 # tables
 
+narrow table:
+
+|One|Two|Three|
+|-|-|-|
+|Four|Five|Six|
+
 wide table:
 
 |One|Two|Three|Four|Five|Six|Seven|Eight|One|Two|Three|Four|Five|Six|Seven|Eight|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|-
 |Suppose you want to determine whether a star is a giant.|A giant star has a large extended photosphere.|Because it is so large,|Its atoms are spread over a greater volume.|Suppose you want to determine whether a star is a giant.|A giant star has a large extended photosphere.|Because it is so large,|Its atoms are spread over a greater volume.|Suppose you want to determine whether a star is a giant.|A giant star has a large extended photosphere.|Because it is so large,|Its atoms are spread over a greater volume.|Suppose you want to determine whether a star is a giant.|A giant star has a large extended photosphere.|Because it is so large,|Its atoms are spread over a greater volume.|
+
+wide and narrow cells:
+
+|One|Two|Three|
+|-
+|Four|Five|Six|
+|Suppose you want to determine whether a star is a giant.|A giant star has a large extended photosphere.|Because it is so large,|
+
+table without thead:
+
+|-
+|Four|Five|Six|
+|Suppose you want to determine whether a star is a giant.|A giant star has a large extended photosphere.|Because it is so large,|
+
+multiple tbody:
+
+|-
+|Four|Five|Six|
+|Suppose you want to determine whether a star is a giant.|A giant star has a large extended photosphere.|Because it is so large,|
+|-
+|Four|Five|Six|
+|Suppose you want to determine whether a star is a giant.|A giant star has a large extended photosphere.|Because it is so large,|
+|-
+|Four|Five|Six|
+|Suppose you want to determine whether a star is a giant.|A giant star has a large extended photosphere.|Because it is so large,|
 
 packed tables:
 
