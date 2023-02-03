@@ -6,11 +6,13 @@ module Rouge
 
     class CustomBlock < Formatter
       def initialize(opts={})
-        @formatter = HTMLPygments.new(HTML.new())
+        @formatter = HTML.new()
       end
 
       def stream(tokens, &b)
+        yield "<pre><code>"
         @formatter.stream(tokens, &b)
+        yield "</code></pre>"
       end
     end
 

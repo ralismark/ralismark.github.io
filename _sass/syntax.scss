@@ -1,18 +1,11 @@
 /*
  * Syntax highlighting styles
  */
-div.highlighter-rouge {
+pre {
 	// code blocks only, not inline
 
 	border-collapse: collapse; // TODO what is this for?
 	background: fade-out($accent-bg, 0.9);
-
-	pre {
-		position: relative; // to become reference for percent-based length
-		padding: 0 .3em;
-		width: fit-content;
-		min-width: 100%;
-	}
 
 	.rouge-gutter {
 		padding-right: 1ch;

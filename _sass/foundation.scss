@@ -170,6 +170,12 @@ textarea {
 
 // Sizing ---------------------------------------------------------------------
 
+pre,
+div.highlighter-rouge
+{
+	overflow-x: scroll;
+}
+
 img, svg {
 	max-width: 100%;
 	height: auto;
@@ -181,6 +187,8 @@ table:not(.rouge-line-table):not(.rouge-table) {
 
 	display: block; // FIXME accessibility issue, see https://developer.mozilla.org/en-US/docs/Web/CSS/display#tables
 	width: fit-content;
+	max-width: 100%;
+	overflow-x: scroll;
 
 	th, td {
 		padding: 0.5em;
@@ -188,28 +196,19 @@ table:not(.rouge-line-table):not(.rouge-table) {
 	}
 }
 
-// Decorations ----------------------------------------------------------------
+pre {
+	overflow-x: scroll;
 
-// decorate table as we see fit
-// * > table:not(.rouge-line-table):not(.rouge-table) {
-// 	border-collapse: collapse;
-// 	margin: 0 auto;
-// 	display: block;
-// 	// bit of a hack to center tables *but also* have scrolling
-// 	display: block ruby; // if this is supported
-// 	text-align: center;
-//
-// 	th, td {
-// 		padding: 0.5em;
-// 	}
-//
-// 	&.boxed th,
-// 	&.boxed td,
-// 	th.boxed,
-// 	td.boxed {
-// 		border: 1px solid grey;
-// 	}
-// }
+	code {
+		position: relative; // to become reference for percent-based length
+		display: block;
+		padding: 0 .3em;
+		width: fit-content;
+		min-width: 100%;
+	}
+}
+
+// Decorations ----------------------------------------------------------------
 
 ul.li-flat {
 	padding-left: 0;
@@ -222,17 +221,6 @@ ul.li-flat {
 			content: "⬥ "; // HACK to balance space between li elements
 			margin: 0 0.5em;
 		}
-	}
-}
-
-@mixin text-inverted {
-	&, & a {
-		color: white;
-	}
-
-	& a:hover {
-		color: #aaa;
-		text-decoration: none;
 	}
 }
 
