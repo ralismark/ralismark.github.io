@@ -15,6 +15,17 @@ excerpt: CSS Integration Tests
 
 &lt;kbd&gt;: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Delete</kbd>
 
+{: .li-flat }
+- foo
+- bar
+- baz
+- suppose you want
+- to determine whether
+- a star is
+- a giant. a
+- giant star has
+- a large extended
+
 <details markdown="1">
 <summary>This is collapsed</summary>
 
