@@ -215,6 +215,10 @@ ul.li-flat {
 	display: flex;
 	flex-wrap: wrap;
 
+	.text-centre & {
+		justify-content: center;
+	}
+
 	& > li {
 		list-style: none;
 		display: inline;
