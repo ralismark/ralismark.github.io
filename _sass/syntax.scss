@@ -52,10 +52,10 @@ pre {
 	.cp { color: $green } /* Comment.Preproc */
 	.c1 { color: $faint } /* Comment.Single */
 	.cs { color: $green } /* Comment.Special */
-	.gd { color: $teal } /* Generic.Deleted */
+	.gd { color: $red } /* Generic.Deleted */
 	.ge { color: $normal; font-style: italic } /* Generic.Emph */
 	.gr { color: $red } /* Generic.Error */
-	.gh { color: $red } /* Generic.Heading */
+	.gh { color: $blue } /* Generic.Heading */
 	.gi { color: $green } /* Generic.Inserted */
 	.go { color: $normal } /* Generic.Output */
 	.gp { color: $normal; font-weight: bold } /* Generic.Prompt */
