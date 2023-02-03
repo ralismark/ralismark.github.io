@@ -26,13 +26,19 @@ signed main() {
 }
 ```
 
-<details><summary>Open me!</summary>
-<details><summary>Open me!</summary>
-<details><summary>Open me!</summary>
-<details><summary>Open me!</summary>
-<details><summary>Open me!</summary>
-<details><summary>Open me!</summary>
-<p>hello there</p>
+<details markdown="1"><summary>Open me!</summary>
+<details markdown="1"><summary>Open me!</summary>
+<details markdown="1"><summary>Open me!</summary>
+<details markdown="1"><summary>Open me!</summary>
+<details markdown="1"><summary>Open me!</summary>
+<details markdown="1"><summary>Open me!</summary>
+
+hello there!
+
+|One|Two|Three|Four|Five|Six|Seven|Eight|One|Two|Three|Four|Five|Six|Seven|Eight|
+|-
+|Suppose you want to determine whether a star is a giant.|A giant star has a large extended photosphere.|Because it is so large,|Its atoms are spread over a greater volume.|Suppose you want to determine whether a star is a giant.|A giant star has a large extended photosphere.|Because it is so large,|Its atoms are spread over a greater volume.|Suppose you want to determine whether a star is a giant.|A giant star has a large extended photosphere.|Because it is so large,|Its atoms are spread over a greater volume.|Suppose you want to determine whether a star is a giant.|A giant star has a large extended photosphere.|Because it is so large,|Its atoms are spread over a greater volume.|
+
 </details>
 </details>
 </details>
@@ -71,10 +77,8 @@ here is text filetype
 there is another. there are two of them
 ```
 
-`raw`:
-
-```raw
-this is raw
+```
+this is no format
 
 suppose you want to determine whether a star is a giant. a giant star has a large extended photosphere. because it is so large, its atoms are spread over a greater volume.
 ```

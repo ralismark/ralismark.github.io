@@ -27,7 +27,7 @@ In addition to the below entries, here are some projects that have helped me mak
 - [Website](https://tabler-icons.io/)
 - [Repo](https://github.com/tabler/tabler-icons)
 
-```plain
+<details markdown="1"><summary>MIT License</summary>
 MIT License
 
 Copyright (c) 2020 Paweł Kuna
@@ -49,4 +49,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
+</details>
