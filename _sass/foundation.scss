@@ -170,8 +170,7 @@ textarea {
 
 // Sizing ---------------------------------------------------------------------
 
-pre,
-div.highlighter-rouge
+pre
 {
 	overflow-x: scroll;
 }
@@ -213,12 +212,15 @@ pre {
 ul.li-flat {
 	padding-left: 0;
 
+	display: flex;
+	flex-wrap: wrap;
+
 	& > li {
 		list-style: none;
 		display: inline;
 
 		&:not(:first-child)::before {
-			content: "⬥ "; // HACK to balance space between li elements
+			content: "⬥";
 			margin: 0 0.5em;
 		}
 	}
@@ -231,19 +233,6 @@ ul.li-flat {
 
 .fence-t, .fence-y { @include fence(top); }
 .fence-b, .fence-y { @include fence(bottom); }
-
-.list-inline {
-	list-style-type: none;
-	padding-left: 0;
-
-	& > li {
-		display: inline-block;
-
-		&:not(:last-child) {
-			margin-right: 1rem;
-		}
-	}
-}
 
 .text-centre {
 	text-align: center;
