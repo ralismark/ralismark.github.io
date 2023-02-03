@@ -16,6 +16,7 @@ pre {
 
 p, div.highlighter-rouge,
 h1, h2, h3, h4, h5, h6,
+details,
 ol, ul
 {
 	// Use margin collapse
@@ -35,6 +36,7 @@ body {
 
 pre, code {
 	font: $mono-font;
+	tab-size: 4;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -55,13 +57,8 @@ h1 {
 	font-size: 1.1em !important;
 }
 
-// a {
-// 	text-underline-offset: 2pt;
-// 	text-decoration-thickness: 1pt;
-// }
-
 // a better colour for links
-main a, footer a {
+a:not([role=button]) {
 	color: $tertiary;
 	text-decoration: underline fade-out($tertiary, 0.6);
 
@@ -71,7 +68,12 @@ main a, footer a {
 	}
 }
 
-h1 > a, h2 > a, h3 > a, h4 > a, h5 > a, h6 > a {
+h1 > a:not([role=button]),
+h2 > a:not([role=button]),
+h3 > a:not([role=button]),
+h4 > a:not([role=button]),
+h5 > a:not([role=button]),
+h6 > a:not([role=button]) {
 	color: $accent;
 	text-decoration: none;
 
@@ -85,6 +87,17 @@ time {
 	font-style: italic;
 }
 
+// Key indicators
+kbd {
+	border: 1px solid grey;
+	border-radius: 4px;
+	padding: 0.1em 0.2em;
+	box-shadow: rgba(128, 128, 128, 0.5) 0 2px 0;
+	vertical-align: 2px;
+}
+
+// Decorations & Input --------------------------------------------------------
+
 // a bit opinionated. we centre images by default
 img:not(.icon), svg:not(.icon) {
 	display: block;
@@ -95,38 +108,108 @@ img.icon, svg.icon {
 	vertical-align: middle;
 }
 
-// Key indicators
-kbd {
-	background: #111;
-	color: white;
-	border: 1px solid grey;
-	border-radius: 4px;
-	padding: 0 .3em;
-	box-shadow: silver 0 2px 2px;
+hr {
+	border: none;
+	border-top: 1px solid $hr-fg;
+}
+
+@mixin cardy {
+	// TODO rename
+	background: fade-out($accent, 0.95);
+	color: inherit;
+	font: inherit;
+	border: 1px solid $hr-fg;
+	padding: 0.5rem;
+	border-radius: 0.2rem;
+}
+
+details {
+	// collapsy thing
+	@include cardy;
+	background: fade-out($accent, 0.95);
+
+	// relying on inner margins
+	padding-top: 0;
+	padding-bottom: 0;
+
+	summary {
+		cursor: pointer;
+		font-size: 0.9em;
+		margin: .5rem;
+	}
+}
+
+textarea,
+input:not([type]),
+input[type=url] {
+	// typy things
+	@include cardy;
+}
+
+input[type=submit], button, a[role=button] {
+	// clicky things
+	@include cardy;
+	font-size: 0.9em;
+	background: fade-out($accent, 0.8);
+	cursor: pointer;
+}
+
+a[role=button] {
+	display: inline-block;
+
+	&, &:hover {
+		color: inherit;
+		text-decoration: none;
+	}
+}
+
+textarea {
+	width: 100%;
+	resize: vertical;
+}
+
+// Sizing ---------------------------------------------------------------------
+
+img, svg {
+	max-width: 100%;
+	height: auto;
+}
+
+table:not(.rouge-line-table):not(.rouge-table) {
+	border-collapse: collapse; // merge borders
+	margin: 0 auto; // centre
+
+	display: block; // FIXME accessibility issue, see https://developer.mozilla.org/en-US/docs/Web/CSS/display#tables
+	width: fit-content;
+
+	th, td {
+		padding: 0.5em;
+		text-align: center; // center all elements
+	}
 }
 
 // Decorations ----------------------------------------------------------------
 
 // decorate table as we see fit
-* > table:not(.rouge-line-table):not(.rouge-table) {
-	border-collapse: collapse;
-	margin: 0 auto;
-	display: block;
-	// bit of a hack to center tables *but also* have scrolling
-	display: block ruby; // if this is supported
-	text-align: center;
-
-	th, td {
-		padding: 0.5em;
-	}
-
-	&.boxed th,
-	&.boxed td,
-	th.boxed,
-	td.boxed {
-		border: 1px solid grey;
-	}
-}
+// * > table:not(.rouge-line-table):not(.rouge-table) {
+// 	border-collapse: collapse;
+// 	margin: 0 auto;
+// 	display: block;
+// 	// bit of a hack to center tables *but also* have scrolling
+// 	display: block ruby; // if this is supported
+// 	text-align: center;
+//
+// 	th, td {
+// 		padding: 0.5em;
+// 	}
+//
+// 	&.boxed th,
+// 	&.boxed td,
+// 	th.boxed,
+// 	td.boxed {
+// 		border: 1px solid grey;
+// 	}
+// }
 
 ul.li-flat {
 	padding-left: 0;
@@ -158,11 +241,6 @@ ul.li-flat {
 	padding-#{$side}: 0.3em;
 }
 
-hr {
-	border: none;
-	border-top: 1px solid $hr-fg;
-}
-
 .fence-t, .fence-y { @include fence(top); }
 .fence-b, .fence-y { @include fence(bottom); }
 
@@ -192,31 +270,6 @@ hr {
 	text-align: center;
 }
 
-// Inputs ---------------------------------------------------------------------
-
-textarea, input, button, a.btn {
-	background: fade-out($accent, 0.95);
-	color: inherit;
-	font: inherit;
-	font-size: 0.9em;
-	border: 1px solid $hr-fg;
-	padding: 0.5rem;
-	border-radius: 0.2rem;
-}
-
-input[type=submit], button, a.btn {
-	background: fade-out($accent, 0.8);
-}
-
-a.btn:hover {
-	color: inherit;
-	text-decoration: none;
-}
-
-textarea.full-width {
-	resize: vertical;
-}
-
 // Display Utils --------------------------------------------------------------
 
 @for $i from 0 through 4 {
@@ -228,14 +281,6 @@ textarea.full-width {
 html .mx-auto { margin-left: auto !important; margin-right: auto !important; }
 
 // Sizing
-.bounded, .bounded > details {
-	& > *:not(details), img, svg {
-		max-width: 100%;
-		overflow-x: auto;
-		height: auto;
-	}
-}
-
 .full-width {
 	width: 100%;
 }
@@ -288,9 +333,6 @@ html {
 	width: var(--content-width);
 	margin-left: auto;
 	margin-right: auto;
-}
-
-.page-width {
 }
 
 @mixin bleed {
