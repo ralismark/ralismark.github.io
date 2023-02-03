@@ -30,7 +30,6 @@ title: 5e Character Sheet
 |2|Invisibility|1 action VSM|Touch|1 hr (conc)|Invisible. Ends on attack or cast.|
 ||Dagger|1d4||piercing|finesse, light, thrown (20/60)|
 ||Spear|1d6||piercing|thrown (20/60), versatile (1d8)|
-{: .card }
 {% endcapture %}{% assign spell_table = content | markdownify %}
 
 {% capture content %}
@@ -123,7 +122,6 @@ cha: 16
 |**Plain Atk**|+{{ mod.str | plus: proficiency }}|
 |**Spell Save**|{{ spell_save_dc }}|
 |**Spell Atk**|+{{ spell_atk_mod }}|
-{: .card }
 {% endcapture %}{% assign val_table = content | markdownify %}
 
 {% capture content %}
@@ -136,7 +134,6 @@ cha: 16
 |int|{{ stat["int"] }}|{{ mod["int"] }}|Arcana +{{proficiency}}<!--sage--><br>History<br>Investigation +{{proficiency}}<!--warlock--> (+5 pas)<!--observant--><br>Nature<br>Religion|
 |wis<br>save +{{proficiency}}|{{ stat["wis"] }}|{{ mod["wis"] }}|Animal Handling<br>Insight<br>Medicine<br>Perception +{{proficiency}}<!--elf--> (+5 pas<!--observant-->)<br>Survival|
 |cha<br>save +{{proficiency}}|{{ stat["cha"] }}|{{ mod["cha"] }}|Deception +{{ proficiency }}<!--warlock--><br>Intimidation<br>Performance<br>Persuation|
-{: .card }
 {% endcapture %}{% assign stat_table = content | markdownify %}
 
 <div class="flex-centre fence-y">

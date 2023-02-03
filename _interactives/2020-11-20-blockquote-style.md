@@ -66,11 +66,3 @@ Preceeding text about some things (don't mind the scroll)
 <p style="box-sizing: content-box; margin-left: -50vw; margin-right: -50vw; padding: 1rem 50vw; background: rgba(20, 150, 200, 0.1)">{{ lipsum }}</p>
 
 And this is the text that follows
-
-# Plain Card
-
-Preceeding text about some things
-
-<p class="card" style="padding: 0.5rem 1rem">{{ lipsum }}</p>
-
-And this is the text that follows

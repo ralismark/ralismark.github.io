@@ -105,7 +105,7 @@ main {
  */
 
 blockquote:not([admonition]) {
-	@include card;
+	@include cardy;
 	@include bleed;
 
 	padding: 0.5rem var(--bleed-size); // <p> has 1rem margin

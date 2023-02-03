@@ -257,15 +257,6 @@ ul.li-flat {
 	}
 }
 
-@mixin card {
-	// box-shadow: #8f8f8f 0 1.5px 2px;
-	margin: 0.5rem;
-	padding: 0.5rem;
-	border: 1px solid $hr-fg;
-}
-
-.card { @include card; }
-
 .text-centre {
 	text-align: center;
 }
