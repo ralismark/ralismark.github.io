@@ -4,19 +4,33 @@
 div.highlighter-rouge {
 	// code blocks only, not inline
 
-	border-collapse: collapse;
-	padding: 0 0.3em;
+	border-collapse: collapse; // TODO what is this for?
 	background: fade-out($accent-bg, 0.9);
+
+	pre {
+		position: relative; // to become reference for percent-based length
+		padding: 0 .3em;
+		width: fit-content;
+		min-width: 100%;
+	}
 
 	.rouge-gutter {
 		padding-right: 1ch;
 		opacity: 0.5;
 		vertical-align: baseline; // align to first line
 	}
+}
 
-	&.wrap .rouge-code pre {
-		overflow-wrap: anywhere;
-		white-space: pre-wrap;
+@mixin line-bg($color) {
+	&::after {
+		// occupy entire line
+		content: " ";
+		position: absolute;
+		left: 0;
+		width: 100%;
+
+		background: $color;
+		z-index: -1; // behind other content
 	}
 }
 
@@ -51,7 +65,7 @@ div.highlighter-rouge {
 	.gh { color: $red } /* Generic.Heading */
 	.gi { color: $green } /* Generic.Inserted */
 	.go { color: $normal } /* Generic.Output */
-	.gp { color: $normal } /* Generic.Prompt */
+	.gp { color: $normal; font-weight: bold } /* Generic.Prompt */
 	.gs { color: $normal; font-weight: bold } /* Generic.Strong */
 	.gu { color: $red } /* Generic.Subheading */
 	.gt { color: $normal } /* Generic.Traceback */
