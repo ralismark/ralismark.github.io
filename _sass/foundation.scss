@@ -168,6 +168,14 @@ textarea {
 	resize: vertical;
 }
 
+blockquote:not([admonition]) {
+	@include cardy;
+
+	padding: 0.5rem 1rem;
+	margin-left: 0;
+	margin-right: 0;
+}
+
 // Sizing ---------------------------------------------------------------------
 
 pre
