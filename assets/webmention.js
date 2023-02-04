@@ -1,9 +1,10 @@
 "use strict";
+// vim: set noet:
 
 (async function() {
 	// constants
-	const MAX_TEXT_LENGTH = 1000;
 	const MAX_ENTRIES = 20;
+	const API_BASE = "https://webmention.io/api/mentions.jf2?target=";
 
 	const scriptTag = document.currentScript;
 
@@ -28,31 +29,28 @@
 		ch.forEach(e => e && elem.appendChild(e));
 		return elem;
 	};
-	// wrap children in an element
-	const W = (tag, ...ch) => E(tag, {}, ...ch);
 
-	// fetch webmentions. await so we save a level of indent
+	// fetch webmentions. wrap in promise so we save a level of indent
 	const response = await new Promise((resolve) => {
 		const xhr = new XMLHttpRequest();
 		xhr.onload = () => resolve(xhr.response);
 		xhr.onerror = () => {
 			// we don't actually get any helpful error strings, so just display a generic message
-			become(W("p",
-					W("em", T("mi ken ala alasa e toki pi lipu ni")),
-					W("br"),
+			become(E("p", {},
+					E("em", {}, T("mi ken ala alasa e toki pi lipu ni")),
+					E("br"),
 					T("I can't seem to retrieve the comments...")
 			));
 		};
 		xhr.responseType = "json";
-		const api_base = "https://webmention.io/api/mentions.jf2?target=";
-		xhr.open("GET", api_base + encodeURIComponent(url));
+		xhr.open("GET", API_BASE + encodeURIComponent(url));
 		xhr.send();
 	});
 
 	console.log("Got webmention data", response);
 
 	if(response.children.length === 0) {
-		return become(W("p", T("Nothing here yet. You could be the first!")));
+		return become(E("p", {}, T("Nothing here yet. You could be the first!")));
 	}
 
 	const actionTitle = {
@@ -66,16 +64,17 @@
 	};
 
 	function getContent(r) {
-		if(!r.content || !r.content.text) return null;
+		if(!r.content) return null;
 
-		// r.content.html is a thing, but we don't want to XSS attacks
-
-		let text = r.content.text;
-		if(text.length > MAX_TEXT_LENGTH) {
-			text = text.substr(0, MAX_TEXT_LENGTH) + "...";
+		if(r.content.html) {
+			const e = E("blockquote")
+			e.innerHTML = r.content.html; // webmention.io sanitises it for us ^.^
+			return e;
+		} else if(r.content.text) {
+			return E("blockquote", {}, T(r.content.text));
 		}
 
-		return W("p", T(text));
+		return null;
 	}
 
 	const entries = response.children.slice(0, MAX_ENTRIES).map(r => {
@@ -85,7 +84,7 @@
 		// first create the bits of the heading:
 		// (pic) {person name} {action} {time}
 
-		const nametag = E("a", { rel: "nofollow ugc", title: who, href: r.url },
+		const nametag = E("a", { rel: "nofollow ugc", title: who, href: r.author && r.author.url },
 			// profile pic
 			r.author && r.author.photo &&
 				E("img", {
@@ -99,21 +98,27 @@
 
 		const action = actionTitle[r["wm-property"]] && T(actionTitle[r["wm-property"]] + " ");
 
-		const datetag = E("time", { datetime: when.toISOString(), style: "opacity: .7" },
-			T(when.toLocaleDateString(undefined, { dateStyle: "long" })),
+		const datetag = E("a", { rel: "nofollow ugc", href: r.url },
+			E("time", { datetime: when.toISOString(), },
+				T(when.toLocaleDateString(undefined, { dateStyle: "long" })),
+			)
 		);
 
 		// then, the body of the thing
 		const contentText = getContent(r);
 
-		return E("div", { style: "margin-bottom: 1rem" },
-			nametag, action, datetag,
+		return E("li", { style: "margin-bottom: 1rem" },
+			E("div", {},
+				nametag, action, datetag,
+			),
 			getContent(r),
 		);
 	});
 
 	return become(
-		...entries,
+		E("ul", {
+			style: "list-style: none; padding: 0",
+		}, ...entries,),
 		response.children.length > MAX_ENTRIES &&
 			E("p", { style: "opacity: .7" },
 				T("+ " + (response.children.length - MAX_ENTRIES) + " more...")
