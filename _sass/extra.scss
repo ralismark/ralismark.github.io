@@ -104,13 +104,6 @@ main {
  * Styling specific to individual posts
  */
 
-blockquote:not([admonition]) {
-	@include cardy;
-	@include bleed;
-
-	padding: 0.5rem var(--bleed-size); // <p> has 1rem margin
-	background: transparentize($accent, 0.9);
-}
 
 blockquote[admonition] {
 	$padding: 1rem;
