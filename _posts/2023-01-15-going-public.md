@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Blog Update: Going Public"
-tags:
+tags: meta
 excerpt: We're back to being open source!
 ---
 
