@@ -28,12 +28,31 @@ One way this can happen (as it did to me) was to:
 2. Delete branch `feature`.
 3. Later, delete the merge commit (e.g. during a rebase).
 
-```
-o --- o --- o --- o --- o --- o <-- master
-       \               .'
-        \             .'
-         o --- o --- o  (feature, deleted)
-```
+{% graph %}
+digraph G {
+  rankdir="LR";
+  graph [ranksep=1];
+  node [label="",shape="circle"];
+
+  subgraph cluster_m {
+    m0 -> m1 -> m2 -> m3;
+    m4 -> m5 [color="grey",style="dotted"];
+    m3 -> m5 [constraint=false];
+    m4 [color="grey"];
+    m3 -> m4 [color="grey"];
+    color="none";
+  }
+  subgraph cluster_b {
+    node [color="grey"];
+    edge [color="grey"];
+    m1 -> b1 -> b2 -> m4;
+    color="none";
+  }
+  { rank=same; master -> m5 [constraint=false]; master [label="master",shape="none"] }
+  { rank=same; b2 -> feature [dir=back,constraint=false,color="grey"]; feature [label="feature",shape="none",color="grey",fontcolor="grey"] }
+}
+{% endgraph %}
+Git history after a rebase removed a merge commit.
 
 Normally, deleting the branch in step 2 is fine, since the merge still holds a
 reference to the deleted branch. However, after deleting the merge commit (or
