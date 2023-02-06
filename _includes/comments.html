@@ -1,30 +1,24 @@
 {% assign location = page.url | replace: "index.html", "" | relative_url | prepend: "https://www.ralismark.xyz" %}
 <hr>
 <section>
-  <!-- span needed to avoid making the link heading-coloured -->
-  <h2>Webmentions <span><a style="font-size: 0.5em" href="https://indieweb.org/Webmention">what is this?</a></span></h2>
+  <h2>Interactions</h2>
 
-  <noscript>Sorry! JavaScript is required to load comments</noscript>
-  <script data-url="{{ location }}" src="{% link assets/webmention.js %}"></script>
-
-  <hr>
-
-  <p>
-    Feel free to
-    <a role="button" href="https://quill.p3k.io/auth/start?dontask=1&me=https%3A%2F%2Fcommentpara.de%2F&reply={{ location | url_encode }}"
-      >write a comment</a>
-    or
-    <a role="button" href="https://toot.karamoff.dev/?text={{ page.title | uri_escape }} - {{ location }} - @ralismark@fosstodon.org"
-      >share on mastodon</a>,
-    especially if there is a problem!
-  </p>
-
-  <p>
-    Or, if you've written a <a href="https://indieweb.org/responses">response</a> to this, enter that posts' URL:
-  </p>
   <form action="https://webmention.io/www.ralismark.xyz/webmention" method="post">
-    <input name="source" placeholder="https://example.com/" type="url">
-    <input name="target" value="{{ location }}" type="hidden">
-    <input value="Send Webmention" type="submit">
+    <p>
+    Link this page in a
+    <a role="button" href="https://toot.karamoff.dev/?text={{ page.title | uri_escape }} - {{ location }} - @ralismark@fosstodon.org%0A">Toot 🐘</a>
+    or
+    <a role="button" href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }} - {{ location }} - @ralismark%0A">Tweet 🐦</a>
+    to leave a comment!
+      Have a reply somewhere else? Send it here:
+      <input name="source" placeholder="https://example.com/" type="url">
+      <input name="target" value="{{ location }}" type="hidden">
+      <input value="Submit" type="submit">
+    </p>
   </form>
+
+  <section style="padding: 0 2rem">
+    <noscript>Sorry! JavaScript is required to load comments</noscript>
+    <script data-url="{{ location }}" src="{% link assets/webmention.js %}"></script>
+  </section>
 </section>
