@@ -20,7 +20,7 @@ details,
 ol, ul
 {
 	// Use margin collapse
-	margin: 1rem 0;
+	margin: 1em 0;
 }
 
 .katex-display {
@@ -119,8 +119,8 @@ hr {
 	color: inherit;
 	font: inherit;
 	border: 1px solid $hr-fg;
-	padding: 0.5rem;
-	border-radius: 0.2rem;
+	padding: 0.5em;
+	border-radius: 0.2em;
 }
 
 details {
@@ -135,7 +135,7 @@ details {
 	summary {
 		cursor: pointer;
 		font-size: 0.9em;
-		margin: .5rem;
+		margin: .5em;
 	}
 }
 
@@ -144,11 +144,16 @@ input:not([type]),
 input[type=url] {
 	// typy things
 	@include cardy;
+	padding: 0.2em 0.5em;
+	margin: 0.2em 0;
+	font-size: 0.9em;
 }
 
 input[type=submit], button, a[role=button] {
 	// clicky things
 	@include cardy;
+	padding: 0.2em 0.5em;
+	margin: 0.2em 0;
 	font-size: 0.9em;
 	background: fade-out($accent, 0.8);
 	cursor: pointer;
@@ -171,7 +176,7 @@ textarea {
 blockquote:not([admonition]) {
 	@include cardy;
 
-	padding: 0.5rem 1rem;
+	padding: 0.5em 1em;
 	margin-left: 0;
 	margin-right: 0;
 }
