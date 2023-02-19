@@ -28,7 +28,7 @@ One way this can happen (as it did to me) was to:
 2. Delete branch `feature`.
 3. Later, delete the merge commit (e.g. during a rebase).
 
-{% graph %}
+![]({% graph %}
 digraph G {
   rankdir="LR";
   graph [ranksep=1];
@@ -51,7 +51,7 @@ digraph G {
   { rank=same; master -> m5 [constraint=false]; master [label="master",shape="none"] }
   { rank=same; b2 -> feature [dir=back,constraint=false,color="grey"]; feature [label="feature",shape="none",color="grey",fontcolor="grey"] }
 }
-{% endgraph %}
+{% endgraph %})
 Git history after a rebase removed a merge commit.
 
 Normally, deleting the branch in step 2 is fine, since the merge still holds a

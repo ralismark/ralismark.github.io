@@ -48,16 +48,17 @@ module Kramdown
     # Do picture tag & WEBP generation
     def convert_img(el, indent)
       src = el.attr['src']
-      if src && src.start_with?("/") && (src.end_with?(".png") || src.end_with?(".jpg"))
-        webp = Pathname.new(src).sub_ext(".webp").to_s
+      if src && src.start_with?("/")
+        if src.end_with?(".png") || src.end_with?(".jpg")
+          webp = Pathname.new(src).sub_ext(".webp").to_s
 
-        spc = ' ' * (indent + @indent)
-        body = "#{spc}<source type=\"image/webp\" srcset=\"#{webp}\" />\n" \
-          "#{spc}<img#{html_attributes(el.attr)} />\n"
-        format_as_block_html("picture", {}, body, indent)
-      else
-        super(el, indent)
+          spc = ' ' * (indent + @indent)
+          body = "#{spc}<source type=\"image/webp\" srcset=\"#{webp}\" />\n" \
+            "#{spc}<img#{html_attributes(el.attr)} />\n"
+          return format_as_block_html("picture", {}, body, indent)
+        end
       end
+      super(el, indent)
     end
 
     # This was originally called from convert_p, but i'm not sure if it's still used

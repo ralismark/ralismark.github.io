@@ -54,7 +54,7 @@ The first operation we'll tackle is joining. Lets suppose we have two trees we w
 
 We'll assume the left root is smaller -- we can just mirror our final algorithm if the right root was actually greater. Here's an example:
 
-{% graph %}
+![]({% graph %}
 digraph {
 	node [shape=circle, color="#ff9999"];
 
@@ -74,11 +74,11 @@ digraph {
 	15 -> {20, 18};
 	5 -> r5 [style=invis]; r5 [style=invis];
 }
-{% endgraph %}
+{% endgraph %})
 
 Since the in-order traversal of the output must go through the entire left tree before going through the right, we know that 1's left subtree doesn't change. The right side is different though. If 8 remains the right child, we'll break the heap rule. So we detach it.
 
-{% graph %}
+![]({% graph %}
 digraph {
 	node [shape=circle];
 
@@ -102,7 +102,7 @@ digraph {
 
 	1 -> {8, 5} [style=invis];
 }
-{% endgraph %}
+{% endgraph %})
 
 The correct child would be the smaller one, but we'd need to merge *their* subtrees. This is same kind of problem we're trying to solve in the first place, so recursion is the way to go. This gives us the full join algorithm:
 
