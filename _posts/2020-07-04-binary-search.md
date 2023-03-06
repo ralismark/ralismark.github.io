@@ -50,7 +50,7 @@ In this example, we used the loop invariant to determine the body of the loop.
 
 # Binary Search
 
-For our binary search, we'll find the first element in $$A[N]$$ that's not larger than $$X$$[^1], returning one past the end if it's not found[^2]. For this, we'll have two variables:
+For our binary search, we'll find the first element in $$A[N]$$ that's greater or equal to $$X$$[^1], returning one past the end if it's not found[^2]. For this, we'll have two variables:
 
 [^1]: The "standard" binary search of finding an element in a sorted array has [many edge cases that you need to consider & specify][so-binary-search]: How do we handle duplicate elements? What if the value is missing? What if the array is empty? and so on. The "lower bound" binary search is much simpler to reason about and avoids all of these edge cases.
 
