@@ -9,6 +9,9 @@ title: Tags
 	<ul>
 		{% for post in tagset[1] %}
 		<li>
+			{% if post.path contains "_drafts" %}
+			[draft: {{ post.reason | default: "no reason" }}]
+			{% endif %}
 			<a href="{{ post.url }}">
 				{{ post.title }}
 			</a>
@@ -18,3 +21,22 @@ title: Tags
 	</ul>
 </section>
 {% endfor %}
+<section>
+	<h1>posts without tags</h1>
+	<ul>
+		{% for post in site.posts %}
+		{% assign nr_tags = post.tags | size %}
+		{% if nr_tags == 0 %}
+		<li>
+			{% if post.path contains "_drafts" %}
+			[draft: {{ post.reason | default: "no reason" }}]
+			{% endif %}
+			<a href="{{ post.url }}">
+				{{ post.title }}
+			</a>
+			<time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_long_string }}</time>
+		</li>
+		{% endif %}
+		{% endfor %}
+	</ul>
+</section>

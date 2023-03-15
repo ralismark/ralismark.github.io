@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How I Use Vim #1"
-tags:
+tags: uses
 excerpt: Interesting aspects of my vim usage
 ---
 
