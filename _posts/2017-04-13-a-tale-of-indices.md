@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A Tale Of Indices
-tags:
+tags: c-cpp
 excerpt: Exploting bad indexing code to mess with malloc and the PLT
 ---
 

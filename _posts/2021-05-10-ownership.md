@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Ownership Semantics For C Programmers
-tags:
+tags: c-cpp
 excerpt: How to ensure memory safety when the compiler can't help
 ---
 

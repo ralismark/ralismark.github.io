@@ -1,7 +1,7 @@
 ---
 layout: post
 title: An SSH Workflow
-tags:
+tags: uses
 excerpt: How to have a nice time developing remotely
 ---
 

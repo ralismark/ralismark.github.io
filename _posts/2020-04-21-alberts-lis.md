@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Short And Simple Longest Increasing Subsequence
-tags: algos
+tags: algos c-cpp
 excerpt: An O(n log n) algorithm in just 7 lines
 ---
 
