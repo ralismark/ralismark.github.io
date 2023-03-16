@@ -5,6 +5,9 @@ aside:
 ask:
   image: "assets/tem-chill.png"
   text: "tem is ask"
+annotate:
+  image: "assets/tem-chill.png"
+  text: "tem is noting"
 default:
   image: "assets/tem-chill.png"
   text: "tem is here"
