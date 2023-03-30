@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Don't Plumb For The Programmer
-tags:
+tags: opinion
 excerpt: A sort of follow-up to "Write Libraries, Not Frameworks"
 ---
 
