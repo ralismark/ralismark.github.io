@@ -5,6 +5,9 @@ title: ralismark.xyz
 me:
   name: Temmie
   email: tem@ralismark.xyz
+  fedi:
+    str: "@ralismark@cathode.church"
+    url: "https://cathode.church/@ralismark"
 
 description: Discussions from all depths of computer science
 excerpt_separator: <!--more-->
