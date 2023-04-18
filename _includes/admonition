@@ -8,11 +8,14 @@ ask:
 annotate:
   image: "assets/tem-chill.png"
   text: "tem is noting"
+fortune:
+  image: "assets/fortune.png"
+  text: "fortune is fortuning"
 default:
   image: "assets/tem-chill.png"
   text: "tem is here"
 {% endcapture %}{% assign admonition_config = admonition_config | yaml_parse -%}
-{% assign admonition_verb = include.verb | default: "default" %}
+{% assign admonition_verb = include.verb | default: "default" -%}
 {% assign admonition_config = admonition_config[admonition_verb] -%}
 {: admonition="{{ admonition_verb }}" }
 > ![{{ admonition_config.text }}]({% link {{ admonition_config.image }} %} "{{ admonition_config.text }}"){: width="64" height="64" }
