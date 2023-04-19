@@ -2,4 +2,4 @@
 disable_disk_cache: false
 incremental: true
 show_drafts: true
-profile: true
+profile: true # show how long things took
