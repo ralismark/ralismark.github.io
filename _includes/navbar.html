@@ -1,3 +1,10 @@
+{% if jekyll.environment == "development" %}
+<div style="text-align: center">
+  🚧
+  You are looking at a {{ jekyll.environment }} environment!
+  🚧
+</div>
+{% endif %}
 <header id="site-nav" class="full-width flex-centre">
   <span id="nav-left" class="flex-grow">
     <a {% if page.path == "interactives.html" %}class="here"{% endif %} href="{% link interactives.html %}">tools</a>

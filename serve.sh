@@ -8,7 +8,7 @@ touch .jekyll-metadata
 
 docker build -t "$IMAGE_NAME" . &&
 docker run --rm -it --name "$IMAGE_NAME" \
-  -p 0.0.0.0:17003:17003 \
+  -p 0.0.0.0:80:4000 \
   -v "$PWD:/srv/jekyll:ro" \
   -v "$PWD/.jekyll-cache:/srv/jekyll/.jekyll-cache:rw" \
   -v "$PWD/.jekyll-metadata:/srv/jekyll/.jekyll-metadata:rw" \

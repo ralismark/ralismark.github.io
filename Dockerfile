@@ -5,9 +5,11 @@ RUN gem install kramdown-math-sskatex && \
 RUN apk --no-cache add graphviz libwebp-tools
 RUN gem install svg_optimizer jekyll-webp
 
-EXPOSE "17003"
 CMD jekyll serve \
 	-d /tmp/_site \
-	--host 0.0.0.0 --port 17003 \
+	--host 0.0.0.0 \
 	--config _config.yml,_config-dev.yml \
 	--watch --force_polling
+
+# This is the default jekyll serve port
+EXPOSE "4000"
