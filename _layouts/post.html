@@ -22,7 +22,7 @@ main_class: h-entry content-width
 		</li>
 
 		<li>
-			{% assign wc = content | strip_html | number_of_words: "auto" | plus: 200 | divided_by: 200 %}
+			{% assign wc = content | strip_html | number_of_words: "auto" | plus: 100 | divided_by: 200 | at_least: 1 %}
 			<abbr title="{{ content | strip_html | number_of_words: "auto" }} total words">{{ wc }} min{% if wc != 1 %}s{% endif %} to read</abbr>
 		</li>
 
