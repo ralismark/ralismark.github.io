@@ -5,11 +5,10 @@
 
   <form action="https://webmention.io/www.ralismark.xyz/webmention" method="post">
     <p>
-    Link this page in a
-    <a role="button" href="https://toot.karamoff.dev/?text={{ page.title | uri_escape }} - {{ location }} - {{ site.me.fedi.str }}%0A">Toot 🐘</a>
-    or
-    <a role="button" href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }} - {{ location }} - @ralismark%0A">Tweet 🐦</a>
-    to leave a comment!
+      Link this page in a
+      <a role="button" href="https://toot.karamoff.dev/?text={{ page.title | uri_escape }} - {{ location }} - @ralismark@fosstodon.org%0A">Toot 🐘</a>
+      to leave a comment!
+
       Have a reply somewhere else? Send it here:
       <input name="source" placeholder="https://example.com/" type="url">
       <input name="target" value="{{ location }}" type="hidden">
