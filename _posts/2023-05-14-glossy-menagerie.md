@@ -15,7 +15,7 @@ They're also pending some better art, though credits to [spdskatr] for the curre
 
 [spdskatr]: https://violetteahouse.com/
 
-{% include admonition %}
+{% include admonition aside="say" %}
 > You should really get onto that!
 
 I will!

@@ -87,7 +87,7 @@ The cute garden from 2020, the webmention comments, even some of my posts -- suc
 [uses]: {% link _posts/2021-08-16-uses.md %}
 [sidenotes]: {% link _posts/2020-11-20-inline-notes.md %}
 
-{% include admonition %}
+{% include admonition verb="say" %}
 > And more recently, I'd make myself home on these blog posts too, inspired by [Amos's Cool Bear] and [Xe's Mara (and co)].
 
 [Xe's Mara (and co)]: https://christine.website/blog/how-mara-works-2020-09-30
