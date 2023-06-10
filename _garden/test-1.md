@@ -258,13 +258,13 @@ bleed code
 
 This is a short admonition.
 
-{% include admonition %}
+{% include admonition verb="aside" %}
 > hello there
 
 This is a long admonition.
 I'm having a bunch of text here so I can test the right margins.
 
-{% include admonition %}
+{% include admonition verb="aside" %}
 > Suppose you want to determine whether a star is a giant.
 > A giant star has a large extended photosphere.
 > Because it is so large, its atoms are spread over a larger volume.
@@ -282,18 +282,18 @@ Here's an big tip
 
 Here's a sequence of messages
 
-{% include admonition %}
+{% include admonition verb="say" %}
 > short
 
-{% include admonition %}
+{% include admonition verb="say" %}
 > Suppose you want to determine whether a star is a giant.
 > A giant star has a large extended photosphere.
 > Because it is so large, its atoms are spread over a larger volume.
 
-{% include admonition %}
+{% include admonition verb="say" %}
 > short
 
-{% include admonition %}
+{% include admonition verb="say" %}
 > short
 >
 > two

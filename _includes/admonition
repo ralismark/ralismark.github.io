@@ -1,16 +1,22 @@
 {% capture admonition_config %}
-aside:
-  image: "assets/tem-chill.png"
-  text: "tem is think"
-ask:
-  image: "assets/tem-chill.png"
-  text: "tem is ask"
-annotate:
-  image: "assets/tem-chill.png"
-  text: "tem is noting"
 fortune:
   image: "assets/fortune.png"
   text: "fortune is fortuning"
+
+ask:
+  image: "assets/tem-chill.png"
+  text: "tem is asking"
+say:
+  image: "assets/tem-chill.png"
+  text: "tem is saying"
+
+aside:
+  image: "assets/tem-chill.png"
+  text: "tem is thinking"
+warn:
+  image: "assets/tem-chill.png"
+  text: "tem is warning"
+
 default:
   image: "assets/tem-chill.png"
   text: "tem is here"
