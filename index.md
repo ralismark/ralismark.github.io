@@ -5,7 +5,6 @@ article_class: "disable-link-markers"
 ---
 
 {% comment %}
-TODO Make all series titles the same style
 TODO Make all post tiles have the same capitalisation style
 {% endcomment %}
 
@@ -13,11 +12,13 @@ TODO Make all post tiles have the same capitalisation style
 
 I'm **{{ site.me.name }}**, but I go by **ralismark** on the internet.
 
+<!--
 I'm a developer at algorithmic trading firm [Autumn Compass], fourth year compsci student at UNSW, and former [COMP3121]/[COMP3821] problem writer.
 
 [Autumn Compass]: https://autumncompass.com/
 [COMP3121]: https://www.handbook.unsw.edu.au/undergraduate/courses/{{ site.time | date: "%Y" }}/comp3121
 [COMP3821]: https://www.handbook.unsw.edu.au/undergraduate/courses/{{ site.time | date: "%Y" }}/comp3821
+-->
 
 I mainly work with C++, Go, and Python, plus a smattering of other tech.
 I'm also a fan of Rust and contributed [a][pr1] [few][pr2] [PRs][pr3] to [Tectonic Typesetting], a LaTeX engine in Rust &amp; C.
@@ -32,12 +33,12 @@ And I often do old-school web development in plain JavaScript -- such as [this w
 [a game]: /webgames/basalt-bashers/
 [a wiki]: /ibis-wiki/static/
 
-I [write irregularly] about tech stuff I [look at and use], [competitive programming] and [other CS shenanigans], plus [probably][b1] [too][b2] [much][b3] on how this website and blog works.
+I [write irregularly] about tech stuff I [look at and use], [competitive programming] and [other funky computing things], plus [probably][b1] [too][b2] [much][b3] on how this website and blog works.
 
 [write irregularly]: {% link posts.html %}
 [look at and use]: {% link _posts/2021-08-16-uses.md %}
 [competitive programming]: {% link _posts/2020-04-21-alberts-lis.md %}
-[other CS shenanigans]: {% link _posts/2019-05-28-edge-trees.md %}
+[other funky computing things]: {% link _posts/2019-05-28-edge-trees.md %}
 [b1]: {% link _posts/2021-02-06-extending-kramdown.md %}
 [b2]: {% link _posts/2020-10-28-blog-ci.md %}
 [b3]: {% link _posts/2021-01-08-blog-infra.md %}
