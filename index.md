@@ -8,37 +8,34 @@ article_class: "disable-link-markers"
 TODO Make all post tiles have the same capitalisation style
 {% endcomment %}
 
-# Hi!
+# Welcome!
 
-I'm **{{ site.me.name }}**, but I go by **ralismark** on the internet.
+<div class="h-card" markdown=1>
 
-<!--
-I'm a developer at algorithmic trading firm [Autumn Compass], fourth year compsci student at UNSW, and former [COMP3121]/[COMP3821] problem writer.
+I'm **{{ site.me.name }}**{: .p-name } (she/her), but I usually go by **ralismark**{: .p-nickname } on the internet.
 
-[Autumn Compass]: https://autumncompass.com/
-[COMP3121]: https://www.handbook.unsw.edu.au/undergraduate/courses/{{ site.time | date: "%Y" }}/comp3121
-[COMP3821]: https://www.handbook.unsw.edu.au/undergraduate/courses/{{ site.time | date: "%Y" }}/comp3821
--->
+This website -- [ralismark.xyz](https://ralismark.xyz){: .u-url.u-uid rel="me" } -- is my canonical corner of the internet, where I [write irregularly]({% link posts.html %}), mostly on technical topics.
 
-I mainly work with C++, Go, and Python, plus a smattering of other tech.
-I'm also a fan of Rust and contributed [a][pr1] [few][pr2] [PRs][pr3] to [Tectonic Typesetting], a LaTeX engine in Rust &amp; C.
-And I often do old-school web development in plain JavaScript -- such as [this website], [a game], and [a wiki].
+I'm [ralismark on GitHub](https://github.com/ralismark), and I toot as [{{ site.me.fedi.str }}]({{ site.me.fedi.url }}).
+You can also email me via [tem@ this domain](mailto:{{ site.me.email }}).
+<!--cloudflare email obfuscation means I can't u-email that last one-->
 
-<!-- no http: here to remove line noise -->
-[pr1]: //github.com/tectonic-typesetting/tectonic/pull/635
-[pr2]: //github.com/tectonic-typesetting/tectonic/pull/657
-[pr3]: //github.com/tectonic-typesetting/tectonic/pull/643
-[Tectonic Typesetting]: https://tectonic-typesetting.github.io/
-[this website]: /
-[a game]: /webgames/basalt-bashers/
-[a wiki]: /ibis-wiki/static/
+</div>
 
-I [write irregularly] about tech stuff I [look at and use], [competitive programming] and [other funky computing things], plus [probably][b1] [too][b2] [much][b3] on how this website and blog works.
+## whoami
 
-[write irregularly]: {% link posts.html %}
-[look at and use]: {% link _posts/2021-08-16-uses.md %}
-[competitive programming]: {% link _posts/2020-04-21-alberts-lis.md %}
-[other funky computing things]: {% link _posts/2019-05-28-edge-trees.md %}
-[b1]: {% link _posts/2021-02-06-extending-kramdown.md %}
-[b2]: {% link _posts/2020-10-28-blog-ci.md %}
-[b3]: {% link _posts/2021-01-08-blog-infra.md %}
+- retired competitive programmer
+- (previously) SWE @ algorithmic trading firm [Autumn Compass](https://autumncompass.com/)
+- compsci student @ UNSW
+
+I poke at a bunch of computing areas -- recently Nix, Rust, and contributing to Open Source.
+I've also had experience with C++ & Go & bits of infra.
+
+I also like making frontend things the old-school way with handwritten HTML/CSS and a touch of JavaScript.
+This includes this website you're looking at, [some games] (try [this one]!), and [my personal wiki app].
+
+[some games]: /webgames/
+[this one]: /webgames/basalt-bashers/
+[my personal wiki app]: /ibis-wiki/static/
+
+Outside of tech, I play violin and am trying to memorise more Chinese, and I like learning about linguistics.
