@@ -24,9 +24,9 @@ You can also email me via [tem@ this domain](mailto:{{ site.me.email }}).
 
 ## whoami
 
+- compsci student @ UNSW
 - retired competitive programmer
 - (previously) SWE @ algorithmic trading firm [Autumn Compass](https://autumncompass.com/)
-- compsci student @ UNSW
 
 I poke at a bunch of computing areas -- recently Nix, Rust, and contributing to Open Source.
 I've also had experience with C++ & Go & bits of infra.

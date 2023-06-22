@@ -58,6 +58,21 @@ hello there!
 </details>
 </details>
 
+# overflowing things
+
+```
+suppose you want to determine whether a star is a giant. a giant star has a large extended photosphere. because it is so large, its atoms are spread over a greater volume.
+```
+
+$$
+suppose you want to determine whether a star is a giant. a giant star has a large extended photosphere. because it is so large, its atoms are spread over a greater volume.
+$$
+
+```
+definition safety :: "'s property ⇒ bool"
+  where "safety P ≡ ∀σ. ¬(σ ⊨ P) ⟶
+    (∃i. ∀β. ¬(i_take i σ ⌢ β ⊨ P))"
+```
 
 # code escape
 

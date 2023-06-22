@@ -178,3 +178,5 @@ theorem alpern_schneider: "∃S L. safety S ∧ liveness L ∧ (P = (S ∧ L))"
    subgoal by (metis (mono_tags, lifting) dense_def dense_is_liveness not_limit_closure)
   subgoal by auto
   done
+
+end
