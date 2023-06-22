@@ -190,6 +190,12 @@ blockquote:not([admonition]) {
 pre
 {
 	overflow-x: scroll;
+	overflow-y: hidden; /* for unicode */
+}
+
+.katex-display
+{
+	overflow-x: scroll;
 }
 
 img, svg {
