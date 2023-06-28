@@ -61,6 +61,12 @@ hello there!
 # overflowing things
 
 ```
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+         |         |         |         |         |         |         |         |
+        10        20        30        40        50        60        70        80
+```
+
+```
 suppose you want to determine whether a star is a giant. a giant star has a large extended photosphere. because it is so large, its atoms are spread over a greater volume.
 ```
 

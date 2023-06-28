@@ -19,7 +19,8 @@ In addition to the below entries, here are some projects that have helped me mak
 
 - [tsmango/jekyll_alias_generator](https://github.com/tsmango/jekyll_alias_generator/), MIT license (albeit without a copy)
 - Merriweather font, SIL license
-- And Docker and Jekyll, which together build the entire site
+
+This site is powered by Docker and Jekyll!
 
 ## Tabler-icons
 

@@ -2,31 +2,27 @@
  * Styling affecting the overall site
  */
 
-@mixin light {
-	html.light & { @content }
-	@media (prefers-color-scheme: light) { @content }
-	@media print { @content }
-}
-
-body {
-	--body-bg: #191a1a;
-	--body-fg: #e7e6e5;
-
-	@include light {
-		--body-bg: initial;
-		--body-fg: initial;
-	}
-
-	color: var(--body-fg);
-	background: var(--body-bg);
-}
-
 #site-nav {
 	$height: 3rem;
-	$pad: .5rem;
+	$pad: .5rem; // vertical padding (also horizontal padding for central logo)
 
-	& > span {
+	margin-bottom: 2rem;
+
+	// layout
+
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	& > * {
 		height: $height + 2 * $pad;
+	}
+
+	a {
+		display: inline-block;
+		line-height: $height;
+		padding: $pad;
 	}
 
 	svg {
@@ -41,15 +37,13 @@ body {
 		text-align: left;
 	}
 
-	a {
-		display: inline-block;
-		line-height: $height;
-		padding: $pad;
-	}
+	#nav-left, #nav-right {
+		flex-basis: 0;
 
-	#nav-left a, #nav-right a {
-		padding-left: 1.25rem;
-		padding-right: 1.25rem;
+		a {
+			padding-left: 1.25rem;
+			padding-right: 1.25rem;
+		}
 	}
 
 	// styling
@@ -89,21 +83,16 @@ body {
 }
 
 #site-footer {
-	padding: 2rem var(--bleed-size);
-	box-sizing: content-box;
+	margin-top: 2rem;
+	padding: 2rem 0;
 	font-size: 80%;
 
 	@media print { display: none; }
 }
 
-main {
-	margin-top: 2rem;
-}
-
 /*
  * Styling specific to individual posts
  */
-
 
 blockquote[admonition] {
 	$padding: 1rem;
@@ -187,7 +176,7 @@ figcaption {
 	opacity: 0.6;
 }
 
-article:not(.disable-link-markers) *:not(h1):not(h2) > a {
+article *:not(h1):not(h2) > a {
 	&[href^="/posts/"] {
 		&::after {
 			content: "";
