@@ -18,22 +18,20 @@ svg#spiral > use {
 }
 </style>
 
-<header class="bleed">
-  <h1>{{ page.title | escape }}</h1>
+<h1>{{ page.title | escape }}</h1>
 
-  <svg id="spiral" width="200" height="200" viewBox="-200 -200 400 400" xmlns="http://www.w3.org/2000/svg">
-    <title>Have an easter egg!</title>
-    <use href="/assets/spiral.svg#root" width="100" height="100" stroke-width="10">
-  </svg>
+<svg id="spiral" width="200" height="200" viewBox="-200 -200 400 400" xmlns="http://www.w3.org/2000/svg">
+  <title>Have an easter egg!</title>
+  <use href="/assets/spiral.svg#root" width="100" height="100" stroke-width="10">
+</svg>
 
-  <p>
-  All my posts, in a single file. Handy if you want do full-text search.
-  </p>
-</header>
+<p>
+All my posts, in a single file. Handy if you want do full-text search.
+</p>
 
 {% for post in site.posts %}
   <h2 class="fence-y text-centre bleed"><a href="{{ post.url }}">{{post.title}}</a></h2>
   {% unless post.tags contains "interactive" %}
-    <article class="bounded">{{ post.content }}</article>
+    <article>{{ post.content }}</article>
   {% endunless %}
 {% endfor %}

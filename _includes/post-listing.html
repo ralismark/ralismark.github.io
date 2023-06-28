@@ -9,7 +9,7 @@
 {% assign year = post_year %}
 <article class="summary mb-1">
 	<header>
-		<h2 class="display-iblock my-0">
+		<h2 class="my-0" style="display: inline-block">
 			{% if post.path contains "_drafts" %}
 			[draft: {{ post.reason | default: "no reason" }}]
 			{% endif %}

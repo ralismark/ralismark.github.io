@@ -13,26 +13,42 @@ main_class: content-width
 
 <!-- Navbar ------------------------------------------------------------------->
 
-<header id="site-nav" class="flex-centre" style="width: 100%">
-  <span id="nav-left" class="flex-grow">
-    <a {% if page.path == "interactives.html" %}class="here"{% endif %} href="{% link interactives.html %}">tools</a>
-  </span>
-  <span id="nav-mid">
-    <a aria-label="index" {% if page.path == "index.md" %}class="here"{% endif %} href="{% link index.md %}">
-      <svg viewBox="-200 -200 400 400">
-        <title>ralismark.xyz</title>
-        <use href="/assets/spiral.svg#root" width="100" height="100" stroke-width="20">
-      </svg>
+<header id="site-nav">
+  <!--
+    We wrap the <a> in <span> that take up all the space so that everything is
+    correctly centred even the contents have different length.
+  -->
+  <span id="nav-left">
+    <a
+      {% if page.path == "interactives.html" %}class="here"{% endif %}
+      href="{% link interactives.html %}"
+    >
+      tools
     </a>
   </span>
-  <span id="nav-right" class="flex-grow">
-    <a {% if page.path == "posts.html" %}class="here"{% endif %} href="{% link posts.html %}">posts</a>
+  <a
+    aria-label="index"
+    {% if page.path == "index.md" %}class="here"{% endif %}
+    href="{% link index.md %}"
+  >
+    <svg viewBox="-200 -200 400 400">
+      <title>ralismark.xyz</title>
+      <use href="/assets/spiral.svg#root" width="100" height="100" stroke-width="20">
+    </svg>
+  </a>
+  <span id="nav-right">
+    <a
+      {% if page.path == "posts.html" %}class="here"{% endif %}
+      href="{% link posts.html %}"
+    >
+      posts
+    </a>
   </span>
 </header>
 
 <!-- Content ------------------------------------------------------------------>
 
-<main class="my-2 {{ layout.main_class }} {{ page.main_class }}">
+<main class="{{ layout.main_class }} {{ page.main_class }}">
 	{{ content }}
 </main>
 
@@ -46,8 +62,8 @@ email: "mailto:{{ site.me.email }}"
 {% endcapture %}
 {% assign accounts = accounts | yaml_parse %}
 
-<footer id="site-footer" class="content-width text-centre mx-auto fence-t">
-  <ul class="li-flat mt-0">
+<footer id="site-footer" class="text-centre fence-t">
+  <ul class="li-flat">
   {% for entry in accounts %}
     {% assign icon = entry[0] %}
     <li>
@@ -61,13 +77,16 @@ email: "mailto:{{ site.me.email }}"
   {% endfor %}
   </ul>
 
-  <ul class="li-flat mt-0">
+  <ul class="li-flat">
     <li><a href="{% link posts.html %}">blog</a></li>
     <li><a href="{% link everything.html %}">cat /posts/*</a></li>
     <li><a href="/feed.xml">rss</a></li>
   </ul>
 
+  <p>
   All work licensed under <a href="{% link licenses.md %}">CC BY-NC 4.0</a> unless otherwise stated.
-  <br>
+  </p>
+  <p>
   This site is <a href="https://github.com/ralismark/ralismark.github.io">open source</a>!
+  </p>
 </div>
