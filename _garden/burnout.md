@@ -1,5 +1,5 @@
 ---
-layout: article
+layout: post-standalone
 title: Burnout
 ---
 
