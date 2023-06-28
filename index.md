@@ -1,7 +1,5 @@
 ---
-layout: article
-title: # blank
-article_class: "disable-link-markers"
+layout: default
 ---
 
 {% comment %}

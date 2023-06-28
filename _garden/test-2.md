@@ -1,5 +1,5 @@
 ---
-layout: plain-wide
+layout: default-wide
 title: Test Post Please Ignore 2
 tags:
 excerpt: CSS Integration Tests
