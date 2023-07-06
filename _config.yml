@@ -25,6 +25,8 @@ collections:
   garden:
     output: true
     permalink: /garden/:title
+  somewhere:
+    output: false
 
 defaults:
   - scope:
