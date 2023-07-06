@@ -1,0 +1,90 @@
+---
+layout: empty
+noindex: true
+title: "Somewhere"
+excerpt: "Somewhere..."
+---
+
+<!--
+  Spoilers!
+
+  Looking at the source code will spoil things!
+
+  For whatever reason I'm putting everything on the same page and using the URL
+  fragment (the bit after the hash) to determine where you are. This avoids
+  loading additional pages when you navigate around, but with the downside that
+  I can't really hide anything.
+
+  Inspired by <https://lunabee.space/archive.html>
+-->
+
+<style>
+@media (not (prefers-reduced-motion)){
+  @keyframes fade {
+    from { opacity: 0; }
+  }
+
+  section {
+    animation: fade 0.5s;
+  }
+}
+
+/* only show the current, falling back to the last one */
+main:not(:target) > section:not(:last-of-type):not(:target),
+main:not(:target) > section:target ~ section:last-of-type {
+  display: none;
+  opacity: 0;
+}
+
+/* we have a big padding at the top of section so fragment links don't scroll. */
+section {
+  padding-top: 4rem;
+}
+
+main {
+  padding-bottom: 4rem;
+}
+
+header {
+  position: absolute;
+  top: 0;
+  height: 4rem;
+  width: 100%;
+  z-index: -99;
+
+  background-image: radial-gradient(100% 100% at top,
+    rgba(153,4,97,0.6) 0%,
+    rgba(153,4,97,0.4428) 19%,
+    rgba(153,4,97,0.3246) 34%,
+    rgba(153,4,97,0.2292) 47%,
+    rgba(153,4,97,0.1668) 56.5%,
+    rgba(153,4,97,0.1164) 65%,
+    rgba(153,4,97,0.0756) 73%,
+    rgba(153,4,97,0.045) 80.2%,
+    rgba(153,4,97,0.0252) 86.1%,
+    rgba(153,4,97,0.0126) 91%,
+    rgba(153,4,97,0.0048) 95.2%,
+    rgba(153,4,97,0.0012) 98.2%,
+    rgba(153,4,97,0) 100%);
+}
+</style>
+
+<header>
+</header>
+
+<main id="debug" class="content-width">
+  {% for place in site.somewhere %}
+    {% assign name = place.url | split: "/" | last %}
+    {% if name != "index" %}
+      <section id="{{ place.url | split: "/" | last }}">
+        {{ place.content }}
+      </section>
+    {% else %}
+      {% assign index = place %}
+    {% endif %}
+  {% endfor %}
+
+  <section id="{{ index.url | split: "/" | last }}">
+    {{ index.content }}
+  </section>
+</main>
