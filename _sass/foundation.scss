@@ -9,6 +9,14 @@ html, body, div {
 	padding: 0;
 }
 
+html {
+	--accent: #{$accent};
+	--accent-bg: #{$accent-bg};
+	--secondary: #{$secondary};
+	--tertiary: #{$tertiary};
+	--hr-fg: #{$hr-fg};
+}
+
 // Typography -----------------------------------------------------------------
 
 // We default to a dark theme
@@ -20,7 +28,7 @@ html, body, div {
 	@media print { @content }
 }
 
-body {
+html {
 	--body-bg: #191a1a;
 	--body-fg: #e7e6e5;
 
@@ -30,7 +38,7 @@ body {
 	}
 
 	color: var(--body-fg);
-	background: var(--body-bg);
+	background-color: var(--body-bg);
 
 	font: $font;
 	text-align: justify;

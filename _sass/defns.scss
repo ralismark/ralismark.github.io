@@ -2,7 +2,8 @@
  * Colour scheme & other variable declarations
  */
 
-$font: 300 1em / 1.9 "Merriweather", serif;
+// based on <https://github.com/system-fonts/modern-font-stacks#old-style>
+$font: 300 1em / 1.9 Merriweather, 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
 $mono-font: normal 1em / 1.5 Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
 
 $accent: #DB5599;
