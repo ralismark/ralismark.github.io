@@ -146,24 +146,6 @@ blockquote[admonition] {
 	padding-top: 1rem;
 }
 
-figcaption {
-	text-align: center;
-	font-style: italic;
-}
-
-.badge {
-	// to override anchor styling
-	color: white !important;
-	&:hover { color: #aaa !important; }
-	text-decoration: none !important;
-
-	font-size: 80%;
-	padding: .3ex 1ex;
-	margin: 0 0.2ex;
-	background: $accent-bg;
-	border-radius: 1em;
-}
-
 /*
  * Stylised links, inspired by gwern
  */

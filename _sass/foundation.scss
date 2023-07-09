@@ -97,6 +97,11 @@ time {
 	font-style: italic;
 }
 
+figcaption {
+	text-align: center;
+	font-style: italic;
+}
+
 // inline icons
 img.icon, svg.icon {
 	vertical-align: middle;
@@ -324,6 +329,19 @@ ul.li-flat {
 
 .fence-t, .fence-y { @include fence(top); }
 .fence-b, .fence-y { @include fence(bottom); }
+
+.badge {
+	// to override anchor styling
+	color: white !important;
+	&:hover { color: #aaa !important; }
+	text-decoration: none !important;
+
+	font-size: 80%;
+	padding: .3ex 1ex;
+	margin: 0 0.2ex;
+	background: $accent-bg;
+	border-radius: 1em;
+}
 
 // Customisation Utils --------------------------------------------------------
 
