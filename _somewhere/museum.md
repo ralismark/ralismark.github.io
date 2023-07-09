@@ -23,7 +23,14 @@ It's sort of meant as a memorial to who I am:
 
 - as a creative outlet, via a medium I'm already somewhat comfortable with
 - as more concrete artifact of who I am, because memories are fallible and identity is variable
+
+I don't have any big plans yet for this world, so right now it'll just be a hodgepodge of whatever inspiration I get.
 </details>
 
-- [A passageway to the right](#museum:strings)
+- [An area to the right](#museum:right).
+<!--- [A passage on the right, a bit further down the space](#museum:)-->
+- The passageway behind the desk, which appears to be the main entrance.
+It's fenced off, and a sign stands in front, bearing the message "~~Under Construction~~ Redecorating!"
+- [An area to the left, labelled "~~Gift Shop~~ Library"](#library)
 - [Leave](#clearing)
+<!--TODO-->
