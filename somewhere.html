@@ -3,6 +3,7 @@ layout: empty
 noindex: true
 title: "Somewhere"
 excerpt: "Somewhere..."
+regenerate: true # see https://jekyllrb.com/docs/configuration/incremental-regeneration/#incremental-regeneration
 ---
 
 <!--
@@ -34,6 +35,13 @@ main:not(:target) > section:not(:last-of-type):not(:target),
 main:not(:target) > section:target ~ section:last-of-type {
   display: none;
   opacity: 0;
+}
+
+/* debug!! */
+main:target > section::before {
+  content: "#" attr(id);
+  background-color: var(--accent-bg);
+  display: block;
 }
 
 /* we have a big padding at the top of section so fragment links don't scroll. */
