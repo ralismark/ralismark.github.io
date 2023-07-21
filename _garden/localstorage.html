@@ -1,0 +1,31 @@
+---
+layout: default
+title: localStorage
+---
+
+<script>
+  function* localStorageEntries() {
+    for (let i = 0; i < localStorage.length; ++i) {
+      const key = localStorage.key(i);
+      yield [key, localStorage.getItem(key)];
+    }
+  }
+
+  const p = document.createElement("p");
+  p.textContent = "Num entries: " + localStorage.length;
+
+  const ul = document.createElement("ul");
+  for (let [k, v] of localStorageEntries()) {
+    const li = document.createElement("li");
+    li.textContent = k + ": " + v;
+    ul.appendChild(li);
+  }
+
+  const frag = new DocumentFragment();
+  frag.appendChild(p);
+  frag.appendChild(ul);
+
+  document.currentScript.parentNode.replaceChild(frag, document.currentScript);
+</script>
+
+<button onclick="localStorage.clear()">Clear LocalStorage</button>
