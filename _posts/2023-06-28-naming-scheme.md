@@ -34,3 +34,14 @@ Both Canva and Google have rooms called Arvo, and one of the Sydney Atlassian of
 I heard a rumour that this trend of naming meeting rooms originally started in Google, but I don't know if this is true or not.
 
 What names/naming schemes do y'all have for your things?
+
+> _Addendum 2023-07-21_
+>
+> I just remembered that for a brief period of time I used to name my software projects after _birds_.
+> Unfortunately, this was very short lived since most computing things I start nowadays have more self-descriptive names.
+> The only two things using this naming scheme were:
+>
+> - Heron, a static site generator library in Python that never really went anywhere.
+> - [Ibis Wiki](https://ralismark.xyz/ibis-wiki/), my personal notetaking app -- and very much in active use by me (and recently rewritten to use React instead of some bespoke DOM manipulation).
+>
+> Bird names are pretty varies and are pretty cute and have personality so they're definitely a pretty good naming scheme!
