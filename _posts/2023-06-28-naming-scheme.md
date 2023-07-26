@@ -14,20 +14,23 @@ Right now, I just have:
 However, I haven't had a need for it after I started using cloudflared tunnel, and so the name is currently unused.
 
 I previously used Greek letters, and kept a text document listing them.
-However, that document is probably lost to time (or the poor organisation of my backups) now.
+That _original_ document is probably lost to time (or the poor organisation of my backups) now, but I discovered a note about this as I was trawling through an old wiki of mine.
 
-- Gamma for my phone I think?
-Though the name wasn't actually used much, so I don't remember it as much
-- Delta was my Dell laptop.
+- Gamma for the removable sd card I used to have in my phone (and not actually my phone)?
+I think this was mainly to give it a name when I was plugged in to a machine.
+My notes also say that this is unconfirmed so who knows...
+- Delta was my Dell laptop (pun intended).
 - Epsilon for a very slim USB I had, back when I still had a use for carrying a USB with me all the time.
 - Zeta for my big chonky hard disk, that has since died.
+- Iota for my pixel 3 phone.
 
-I probably assigned Alpha and Beta to something but I don't remember anymore -- maybe it was like a Windows C:\ drive situation...
+Alpha and Beta were originally assigned to something, but the note I found only listed these names as "retired", so I don't know anymore -- maybe it was like a Windows C:\ drive situation...
 
 # Tangent
 
 Interestingly enough, Wikipedia has a page on [Computer network naming schemes](https://en.wikipedia.org/wiki/Computer_network_naming_scheme), but there's not much content on it.
 However, it did lead me to [RFC1178](https://datatracker.ietf.org/doc/html/rfc1178), guidelines on picking names, and [RFC2100](https://datatracker.ietf.org/doc/html/rfc2100), a cute poem about names.
+I also found this [Lobsters post](https://lobste.rs/s/28cup4/how_do_you_name_your_hosts) and [another website about naming](https://web.cecs.pdx.edu/~trent/name-themes.html).
 
 Outside of naming electronic things, I recently discovered that many tech companies also give their meeting rooms names!
 Both Canva and Google have rooms called Arvo, and one of the Sydney Atlassian offices has several named after songs, including _Never Gonna Give You Up_.
