@@ -217,6 +217,12 @@ Here's a textarea
 
 <label>URL Textbox: <input placeholder="http://example.com" type="url"></label>
 
+<form>
+<label>Checkbox 1 suppose you want to determine whether a start is a giant a giant star has a large extended photosphere because it is so large its atoms are spread over a greater volume <input type="checkbox"></label>
+<label>Checkbox 2 <input type="checkbox"></label>
+<label>Textbox <input type="text"></label>
+</form>
+
 # bleed
 
 regular table
