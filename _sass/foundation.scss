@@ -204,21 +204,10 @@ html {
 	}
 }
 
-.content-width {
-	display: grid;
-	grid-template-columns: 1fr var(--content-width) 1fr;
-}
-
-.content-width > .content-width {
-	grid-column: 1 / 4;
-}
-
-.content-width > * {
-	grid-column: 2;
-}
-
-.bleed {
-	grid-column: 1 / 4;
+.content-width > *:not(.bleed, .content-width) {
+	max-width: var(--content-width);
+	margin-left: auto;
+	margin-right: auto;
 }
 
 // Elements -------------------------------------------------------------------
@@ -269,6 +258,15 @@ blockquote:not([admonition]) {
 	padding: 0.5em 1em;
 	margin-left: 0;
 	margin-right: 0;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+thead, tbody, tfoot {
+	border-top: 1px solid $hr-fg;
+	border-bottom: 1px solid $hr-fg;
 }
 
 // Elements: Input ------------------------------------------------------------
