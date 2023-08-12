@@ -116,6 +116,11 @@ blockquote[admonition] {
 		border-right-color: $hr-fg;
 	}
 
+	.content-width > & {
+		max-width: calc(var(--content-width) - #{$size - 2 * $embedded-margin + $gap});
+		margin-left: calc(50% - var(--content-width) / 2 + #{$size - 2 * $embedded-margin + $gap});
+	}
+
 	& > img:first-child, & > picture:first-child {
 		position: absolute;
 		margin: (-$embedded-margin) 0 (-$embedded-margin) #{-$size - $padding + $embedded-margin - $gap};
