@@ -1,0 +1,171 @@
+---
+layout: null
+---
+
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>COMP3151 Reference Document</title>
+	
+	<style>
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+html, body, div {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	max-width: 200mm;
+	margin: 0 auto;
+	font: normal 0.8em Merriweather, serif;
+}
+
+ul {
+	margin: 0;
+	padding-left: 1em;
+}
+
+h1 {
+	background: rgba(0,0,0,0.2);
+	font-size: 1.5em;
+	margin: 0 0 0.1em ;
+	text-align: center;
+}
+
+h2 {
+	margin: 0;
+	font-size: 1em;
+	background: rgba(0,0,0,0.1);
+}
+
+main {
+	columns: 2;
+	widows: 999;
+	orphans: 999;
+}
+
+div {
+	border: 1px solid grey;
+	border-radius: 4px;
+	margin-bottom: 1rem;
+
+	break-inside: avoid;
+}
+
+	</style>
+</head>
+
+<body>
+	<main>
+
+		<div>
+			<h1>Mutexes</h1>
+			<h2>Dekker (P=2)</h2>
+			<ul>
+				<li>per-process flag for wants to enter, wait for turn if other wants to enter</li>
+			</ul>
+			<h2>Petersons</h2>
+			<ul>
+				<li>P-1 "spike traps", last one in gets trapped</li>
+				<li>Advance if everyone in earlier trap, or someone else got stuck</li>
+			</ul>
+			<h2>Lamport Bakery (P=2)</h2>
+			<ul>
+				<li>Ticket number = other's ticket number</li>
+				<li>Wait until (ticket, pid) is lowest</li>
+			</ul>
+			<h2>Fast (P=2)</h2>
+			<ul>
+				<li>Two signs. Write pid on sign when passing, wipe 2nd in post-proto</li>
+				<li>Restart after 1st if 2nd has pid. Restart after 2nd if 1st has pid</li>
+			</ul>
+			<h2>Szymanski</h2>
+			<ul>
+				<li>0: non-cs</li>
+				<li>1: intent to enter</li>
+				<li>3: await everyone &lt; 3, enter waiting room</li>
+				<li>2: someone else = 1, wait till someone bars door</li>
+				<li>4: barring door, wait till lower pids not 0 or 1</li>
+				<li>CS, then wait for all higher pids in waiting room to bar door</li>
+			</ul>
+			<h2>Ricart-Agrawala</h2>
+			<ul>
+				<li>Lamport-clock + pid ticket numbers</li>
+				<li>Send request to all nodes, wait for okay</li>
+				<li>Give okay if they have lower ticket number than you</li>
+			</ul>
+			<h2>Token-Passing</h2>
+			<ul>
+				<li>Can only lock if you hold token (map[pid]ticket)</li>
+				<li>Accounce request on pre-protocol, give to someone requesting when you're done</li>
+			</ul>
+		</div>
+
+		<div>
+			<ul>
+				<li>○p = next</li>
+				<li>◊p = finally</li>
+				<li>□p = globally</li>
+				<li>&lt;<sub>lex</sub> = lexicographic</li>
+				<li>&lt;<sub>cw</sub> = componentwise (no element gets bigger, at least one gets smaller)</li>
+				<li>compositional proof -- global h: Array&lt;[chan, msg]&gt; of history, then combine claims about (restricted) h</li>
+				<li>CCS = Act, Choice1/2, Par1/2, Sync, Restrict</li>
+			</ul>
+		</div>
+
+		<div>
+			<h1>Algs</h1>
+			<h2>Bankers</h2>
+			<ul>
+				<li>Decide safety by simulation: repeatedly run any process that can complete to completion</li>
+			</ul>
+			<h2>Dijkstra-Scholten</h2>
+			<ul>
+				<li>Back-signal along inDeficit &gt; 1, or non-parent inDeficit = 1</li>
+				<li>Back-signal parent when inDeficit = 1 and outDeficit = 0 and terminated</li>
+			</ul>
+			<h2>Credit Recovery</h2>
+			<ul>
+				<li>When you message, give some token</li>
+				<li>When done, return token to env node</li>
+			</ul>
+			<h2>Global Snapshot (fifo reliable chans)</h2>
+			<ul>
+				<li>Snap on first marker, send markers on all out-chans</li>
+				<li>Record msgs (to replay) on chans until they get marker</li>
+			</ul>
+			<h2>Byzantine: n &gt; 3t, t + 1 rounds, O(n<sup>t</sup>)</h2>
+			<ul>
+				<li>Gossip G<sub>1</sub> says G<sub>2</sub> says ... G<sub>k</sub> says A/R</li>
+				<li>Majority for each person, then commit to majority of those</li>
+			</ul>
+			<h2>Flood: n &gt t, t + 1 rounds, O(n<sup>2</sup>t)</h2>
+			<ul>
+				<li>Tell everyone map[pid]preference each round, union after round</li>
+			</ul>
+			<h2>King: n &gt 4t, 2t + 2 rounds, O(n<sup>2</sup>t)</h2>
+			<ul>
+				<li>a) share current vote</li>
+				<li>b) king (diff each time) announces majority</li>
+				<li>Switch to option w/ more than floor(n/2) + t agree, otherwise king's vote</li>
+			</ul>
+		</div>
+
+		<div>
+			<h1>Resource Request Assumptions</h1>
+			<ul>
+				<li>Access is exclusive, resources are non-fungible</li>
+				<li>Block if you can't acquire</li>
+				<li>No preemption or aborts</li>
+				<li>Only cause of blocking is to acquire (no chans or CVs)</li>
+			</ul>
+		</div>
+
+	</main>
+
+</body>
+</html>

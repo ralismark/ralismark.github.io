@@ -296,6 +296,17 @@ a[role=button] {
 	text-decoration: none;
 }
 
+// opinionated: we assume labels wrap input elements
+form {
+	label {
+		display: block;
+
+		input[type=checkbox], input[type=text], input[type=url] {
+			float: right;
+		}
+	}
+}
+
 // Elements: Custom -----------------------------------------------------------
 
 // ul items in a line
