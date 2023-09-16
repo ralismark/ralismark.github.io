@@ -8,6 +8,7 @@ You hear the sounds of chirping birds and rustling leaves in the distance.
 
 It's quite comforting.
 You feel safe here.
+Yet you can sense that this place was not designed for you.
 
 There are a few of doors stood up around this clearing.
 You feel like they change when you're not looking.
@@ -16,5 +17,5 @@ You feel like they change when you're not looking.
 - [An worn door that is falling apart](#museum)
 - A tall wooden door, once majestic but now rather aged. Locked...
 - A red door.
-- A path leading into the trees. Seems like it leads nowhere right now...
+- [A path southwards](#mountain)
 - [Sit for a bit](#clearing:sit)
