@@ -230,7 +230,7 @@ div.highlight .code-annotation {
   // reset stuff
   display: block;
   white-space: normal;
-  font: $font;
+  font: var(--main-font);
   color: var(--body-fg);
   // actual styling
   font-style: italic;

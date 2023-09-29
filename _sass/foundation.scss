@@ -1,4 +1,7 @@
-// Reset ----------------------------------------------------------------------
+// vim: foldmethod=marker foldmarker=@@@,@@@@
+// for some reason scss doesn't like unmatched braces
+
+// Reset ----------------------------------------------------------------- @@@1
 
 *, *::before, *::after {
 	box-sizing: border-box;
@@ -9,43 +12,17 @@ html, body, div {
 	padding: 0;
 }
 
-html {
-	--accent: #{$accent};
-	--accent-bg: #{$accent-bg};
-	--secondary: #{$secondary};
-	--tertiary: #{$tertiary};
-	--hr-fg: #{$hr-fg};
-}
-
-// Typography -----------------------------------------------------------------
-
-// We default to a dark theme
-// TODO is this too opinionated to be in foundation
-
-@mixin light {
-	html.light & { @content }
-	@media (prefers-color-scheme: light) { @content }
-	@media print { @content }
-}
+// Typography ------------------------------------------------------------ @@@1
 
 html {
-	--body-bg: #191a1a;
-	--body-fg: #e7e6e5;
-
-	@include light {
-		--body-bg: initial;
-		--body-fg: initial;
-	}
-
 	color: var(--body-fg);
 	background-color: var(--body-bg);
-
-	font: $font;
+	font: var(--main-font);
 	text-align: justify;
 }
 
 pre, code {
-	font: $mono-font;
+	font: var(--mono-font);
 	tab-size: 4;
 }
 
@@ -57,9 +34,9 @@ strong {
 	font-weight: 700;
 }
 
+// TODO this is opinionated, move it out of foundation
 h1 {
 	text-align: center;
-	color: $accent;
 }
 
 // make KaTeX the right size
@@ -68,8 +45,11 @@ h1 {
 }
 
 // a better colour for links
-a:not([role=button]) {
-	color: $tertiary;
+a:not([role]), [role=link] {
+	color: var(--tertiary);
+
+	// TODO make these use CSS variables instead of SASS ones
+
 	text-decoration: underline fade-out($tertiary, 0.6);
 
 	&:hover {
@@ -78,17 +58,20 @@ a:not([role=button]) {
 	}
 }
 
-h1 > a:not([role=button]),
-h2 > a:not([role=button]),
-h3 > a:not([role=button]),
-h4 > a:not([role=button]),
-h5 > a:not([role=button]),
-h6 > a:not([role=button]) {
-	color: $accent;
-	text-decoration: none;
+h1, h2, h3, h4, h5, h6 {
+	color: var(--primary);
 
-	&:hover {
-		color: darken($accent, 15%);
+	& a {
+		color: inherit;
+	}
+
+	& a[href^="#"] {
+		color: inherit;
+		text-decoration: none;
+
+		&:hover {
+			color: inherit;
+		}
 	}
 }
 
@@ -107,7 +90,162 @@ img.icon, svg.icon {
 	vertical-align: middle;
 }
 
-// Layout: Vertical -----------------------------------------------------------
+// Elements -------------------------------------------------------------- @@@1
+
+// Elements: Basics ------------------------------------------------------ @@@2
+
+kbd {
+	font: var(--mono-font);
+	vertical-align: baseline;
+	padding: 0.1em 0.2em;
+
+	border: 1px solid grey;
+	border-radius: 0.3em;
+	box-shadow: rgba(128, 128, 128, 0.5) 0 0.1em 0;
+}
+
+table:not([role=grid]) {
+	border-collapse: collapse;
+
+	thead, tbody, tfoot {
+		// we copy the default latex style for tables here
+		border-top: 1px solid var(--stroke);
+		border-bottom: 1px solid var(--stroke);
+	}
+
+	th, td {
+		padding: 0.5em;
+		text-align: center; // center all elements
+	}
+}
+
+hr {
+	width: 100%;
+	border: none;
+	border-top: 1px solid var(--stroke);
+}
+
+details {
+	background: var(--box-tint);
+	border: 1px solid var(--stroke);
+	padding: 0 0.5em 0; // relying on inner margins for vertical padding
+	border-radius: 0.2em;
+
+	summary {
+		cursor: pointer;
+		font-size: 0.9;
+		margin: .5em;
+	}
+}
+
+blockquote:not([admonition]) {
+	background: var(--box-tint);
+	border: 1px solid var(--stroke);
+	border-radius: 0.2em;
+
+	padding: 0.5em 1em;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+// Elements: Inputs ------------------------------------------------------ @@@2
+
+// typed things
+textarea,
+select,
+input:not(
+	// buttons
+	[type=button], [type=image], [type=reset], [type=submit],
+	// non-text inputs
+	[type=checkbox], [type=color], [type=file], [type=radio], [type=range],
+) {
+	color: inherit;
+	font: inherit;
+
+	border: 1px solid var(--stroke);
+	border-radius: 0.2em;
+
+	padding: 0.2em 0.5em;
+	margin: 0.2em 0;
+	font-size: 0.9em;
+
+	// above is the same as buttons
+
+	background: var(--box-tint);
+}
+
+// clicky things
+input[type=button], input[type=image], input[type=reset], input[type=submit],
+button,
+a[role=button] {
+	color: inherit;
+	font: inherit;
+
+	border: 1px solid var(--stroke);
+	border-radius: 0.2em;
+
+	padding: 0.2em 0.5em;
+	margin: 0.2em 0;
+	font-size: 0.9em;
+
+	// above is the same as text inputs
+
+	background: var(--button-tint);
+}
+
+a[role=button] {
+	// undo link styling
+	display: inline-block; // no wrap
+	text-decoration: none;
+}
+
+// Elements: Custom ------------------------------------------------------ @@@2
+
+// ul items in a line
+ul.li-flat {
+	padding-left: 0;
+
+	display: flex;
+	flex-wrap: wrap;
+
+	.text-centre & {
+		justify-content: center;
+	}
+
+	& > li {
+		list-style: none;
+		display: inline;
+
+		&:not(:first-child)::before {
+			content: "⬥";
+			margin: 0 0.5em;
+		}
+	}
+}
+
+@mixin fence($side) {
+	border-#{$side}: 1px solid var(--stroke);
+	padding-#{$side}: 0.3em;
+}
+
+.fence-t, .fence-y { @include fence(top); }
+.fence-b, .fence-y { @include fence(bottom); }
+
+.badge {
+	// !important to override anchor styling
+	color: var(--filled-fg) !important;
+	background: var(--filled-bg) !important;
+	text-decoration: none !important;
+
+	font-size: 80%;
+	padding: .3ex 1ex;
+	margin: 0 0.2ex;
+	border-radius: 1em;
+}
+
+// Layout ---------------------------------------------------------------- @@@1
+
+// Layout: Vertical ------------------------------------------------------ @@@2
 
 pre {
 	margin-top: 0;
@@ -128,20 +266,27 @@ ol, ul
 	padding: .5em 0;
 }
 
-// Layout: Horizontal ---------------------------------------------------------
+// Layout: Horizontal ---------------------------------------------------- @@@2
 
-// code blocks (just <code> is inline)
+// code blocks from rouge (just <code> is inline)
 pre {
 	overflow-x: scroll;
-	overflow-y: hidden; // unicode things. TODO does this cause issues if there's too much tall things?
 
-	code {
-		// TODO what does this do?
-		position: relative; // to become reference for percent-based length
+	// Unicode can overflow the line and cause scrolling.
+	overflow-y: hidden;
+	// I would prefer overflow-y: visible, but alas that's not possible:
+	//
+	// > Setting one axis to visible (the default) while setting the other to a
+	// > different value results in visible behaving as auto.
+	// >
+	// > <https://developer.mozilla.org/en-US/docs/Web/CSS/overflow>
+
+	& > code {
+		// make it a block
 		display: block;
-		padding: 0 .3em;
 		width: fit-content;
-		min-width: 100%;
+
+		padding: 0.3em;
 	}
 }
 
@@ -167,23 +312,18 @@ img:not(.icon), svg:not(.icon) {
 	margin: 0 auto;
 }
 
-// make table centre aligned if narrower than space, and scroll if wider than space
 table:not(.rouge-line-table):not(.rouge-table) {
-	border-collapse: collapse; // merge borders. TODO why, and should this be a reset?
+	// make table centre aligned if narrower than space, and scroll if wider than space
+	// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table#displaying_large_tables_in_small_spaces
 
 	display: block; // FIXME accessibility issue, see https://developer.mozilla.org/en-US/docs/Web/CSS/display#tables
 	margin: 0 auto;
 	width: fit-content;
 	max-width: 100%;
 	overflow-x: scroll;
-
-	th, td {
-		padding: 0.5em;
-		text-align: center; // center all elements
-	}
 }
 
-// Layout: Content Width ------------------------------------------------------
+// Layout: Content Width ------------------------------------------------- @@@2
 
 html {
 	$breaking-width: 45rem; // "clamp" page width to this if above. Used to transition between desktop-like and mobile-like sizing
@@ -210,149 +350,7 @@ html {
 	margin-right: auto;
 }
 
-// Elements -------------------------------------------------------------------
-
-@mixin box {
-	background: fade-out($accent, 0.95);
-	color: inherit;
-	font: inherit;
-	border: 1px solid $hr-fg;
-	padding: 0.5em;
-	border-radius: 0.2em;
-}
-
-// Key indicators
-kbd {
-	border: 1px solid grey;
-	border-radius: 4px;
-	padding: 0.1em 0.2em;
-	box-shadow: rgba(128, 128, 128, 0.5) 0 2px 0;
-	vertical-align: 2px;
-}
-
-hr {
-	width: 100%;
-	border: none;
-	border-top: 1px solid $hr-fg;
-}
-
-details {
-	// collapsy thing
-	@include box;
-	background: fade-out($accent, 0.95);
-
-	// relying on inner margins
-	padding-top: 0;
-	padding-bottom: 0;
-
-	summary {
-		cursor: pointer;
-		font-size: 0.9em;
-		margin: .5em;
-	}
-}
-
-blockquote:not([admonition]) {
-	@include box;
-
-	padding: 0.5em 1em;
-	margin-left: 0;
-	margin-right: 0;
-}
-
-table {
-	border-collapse: collapse;
-}
-
-thead, tbody, tfoot {
-	border-top: 1px solid $hr-fg;
-	border-bottom: 1px solid $hr-fg;
-}
-
-// Elements: Input ------------------------------------------------------------
-
-textarea,
-input:not([type]),
-input[type=url] {
-	// typy things
-	@include box;
-	padding: 0.2em 0.5em;
-	margin: 0.2em 0;
-	font-size: 0.9em;
-}
-
-input[type=submit], button, a[role=button] {
-	// clicky things
-	@include box;
-	padding: 0.2em 0.5em;
-	margin: 0.2em 0;
-	font-size: 0.9em;
-	background: fade-out($accent, 0.8);
-	cursor: pointer;
-}
-
-a[role=button] {
-	display: inline-block;
-	text-decoration: none;
-}
-
-// opinionated: we assume labels wrap input elements
-form {
-	label {
-		display: block;
-
-		input[type=checkbox], input[type=text], input[type=url] {
-			float: right;
-		}
-	}
-}
-
-// Elements: Custom -----------------------------------------------------------
-
-// ul items in a line
-ul.li-flat {
-	padding-left: 0;
-
-	display: flex;
-	flex-wrap: wrap;
-
-	.text-centre & {
-		justify-content: center;
-	}
-
-	& > li {
-		list-style: none;
-		display: inline;
-
-		&:not(:first-child)::before {
-			content: "⬥";
-			margin: 0 0.5em;
-		}
-	}
-}
-
-@mixin fence($side) {
-	border-#{$side}: 1px solid $hr-fg;
-	padding-#{$side}: 0.3em;
-}
-
-.fence-t, .fence-y { @include fence(top); }
-.fence-b, .fence-y { @include fence(bottom); }
-
-.badge {
-	// to override anchor styling
-	color: white !important;
-	&:hover { color: #aaa !important; }
-	text-decoration: none !important;
-
-	font-size: 80%;
-	padding: .3ex 1ex;
-	margin: 0 0.2ex;
-	background: $accent-bg;
-	border-radius: 1em;
-}
-
-// Customisation Utils --------------------------------------------------------
+// Customisation Utils --------------------------------------------------- @@@1
 
 @for $i from 0 through 4 {
 	html .mt-#{$i} { margin-top:    $i * 1rem !important; }

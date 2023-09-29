@@ -5,7 +5,6 @@ pre {
 	// code blocks only, not inline
 
 	border-collapse: collapse; // TODO what is this for?
-	background: fade-out($accent-bg, 0.9);
 
 	.rouge-gutter {
 		padding-right: 1ch;

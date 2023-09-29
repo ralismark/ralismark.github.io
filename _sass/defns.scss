@@ -2,12 +2,61 @@
  * Colour scheme & other variable declarations
  */
 
-// based on <https://github.com/system-fonts/modern-font-stacks#old-style>
-$font: 300 1em / 1.9 Merriweather, 'Iowan Old Style', 'Palatino Linotype', 'URW Palladio L', P052, serif;
-$mono-font: normal 1em / 1.5 Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
-
 $accent: #DB5599;
 $accent-bg: #990461;
-$secondary: #9C56DB;
 $tertiary: #6480ED;
-$hr-fg: rgba(127, 127, 127, 0.3);
+
+:root { // for non-sass use
+	// based on <https://github.com/system-fonts/modern-font-stacks#old-style>
+	--main-font-family: Merriweather, "Iowan Old Style", "Palatino Linotype", "URW Palladio L", "P052", serif;
+	--main-font: 300 1em / 1.9 var(--main-font-family);
+	--mono-font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+	--mono-font: normal 1em / 1.5 var(--mono-font-family);
+
+	// light/dark mode; use --body-{fg,bg} for correctly coloured version
+	--body-fg-light: black;
+	--body-bg-light: white;
+	--body-fg-dark: #e7e6e5;
+	--body-bg-dark: #191a1a;
+
+	// ui lines
+	--stroke: rgba(127.5, 127.5, 127.5, 0.3);
+
+	// background of boxes/etc
+	--box-tint: #{fade-out($accent, 0.95)};
+	--button-tint: #{fade-out($accent, 0.8)};
+
+	// filled in UI elements
+	--filled-fg: white;
+	--filled-bg: #{$accent-bg};
+
+	// text colours
+	--primary: #{$accent};
+	--secondary: #9C56DB;
+	--tertiary: #{$tertiary};
+}
+
+// TODO is this too opinionated? we default to dark mode
+
+@mixin light {
+	@media (prefers-color-scheme: light) { @content }
+	@media print { @content }
+}
+
+@mixin dark {
+	@media (prefers-color-scheme: dark) { @content }
+}
+
+:root {
+	--body-bg: var(--body-bg-dark);
+	--body-fg: var(--body-fg-dark);
+
+	@include dark {
+		--body-bg: var(--body-bg-dark);
+		--body-fg: var(--body-fg-dark);
+	}
+	@include light {
+		--body-bg: var(--body-bg-light);
+		--body-fg: var(--body-fg-light);
+	}
+}

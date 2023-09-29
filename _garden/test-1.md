@@ -13,7 +13,7 @@ excerpt: CSS Integration Tests
 
 # misc
 
-&lt;kbd&gt;: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Delete</kbd>
+&lt;kbd&gt;: <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd style="font-size: 2em">Delete</kbd>
 
 {: .li-flat }
 - foo
@@ -89,6 +89,10 @@ using &lt;! and !&gt; with language `escape?lang=cpp`:
 ```
 
 # long lines in code blocks
+
+```raw
+foofdjskal
+```
 
 ```
 suppose you want to determine whether a star is a giant. a giant star has a large extended photosphere. because it is so large, its atoms are spread over a greater volume.
@@ -324,3 +328,22 @@ Here's a sequence of messages
 > short
 >
 > two
+
+# math
+
+This is inline math: $$1+1 \textrm{ is equal to } 2$$, and 1+1 = 2
+
+$$
+\textrm{This is block: }
+\int_{-\infty}^\infty e^{-x^2}\;dx = \sqrt{\pi}
+$$
+
+# foundation styles
+
+<p style="background: var(--box-tint)">box-tint</p>
+<p style="background: var(--button-tint)">button-tint</p>
+<p style="color: var(--filled-fg); background: var(--filled-bg)">filled</p>
+
+<p style="color: var(--primary)">primary</p>
+<p style="color: var(--secondary)">secondary</p>
+<p style="color: var(--tertiary)">tertiary</p>
