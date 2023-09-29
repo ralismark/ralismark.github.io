@@ -70,7 +70,7 @@
 	font-size: 1.5em;
 
 	a {
-		color: $tertiary;
+		color: var(--tertiary);
 		text-decoration: none;
 	}
 
@@ -113,7 +113,7 @@ blockquote[admonition] {
 		margin-left: -$padding - $triangle-size * 2;
 		margin-top: 1rem;
 		border: $triangle-size solid transparent;
-		border-right-color: $hr-fg;
+		border-right-color: var(--stroke);
 	}
 
 	.content-width > & {
@@ -141,7 +141,7 @@ blockquote[admonition] {
 	width: fit-content;
 
 	background: fade-out($accent, 0.95);
-	border: 1px solid $hr-fg;
+	border: 1px solid var(--stroke);
 	border-radius: 0.2rem;
 }
 
