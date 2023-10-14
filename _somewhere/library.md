@@ -72,7 +72,7 @@ Or, in the style of first aid mnemonics, the three D's:
 3. **Deal** with stressors.
 
 Firstly, actually engaging with the thoughts and trying to convince yourself away from the concerns is often not that productive.
-Anxiety is as much an emotional thing as it is a reasoning thing, and a lot of the time trying to fight it is like fighting an oil fire with water i.e. very .
+Anxiety is as much an emotional thing as it is a reasoning thing, and a lot of the time trying to fight it is like fighting an oil fire with water i.e. very bad.
 
 Secondly, the purpose of distraction is to give your brain something else to focus on.
 The most accessible one is often youtube videos (like cooking videos which are a really nice comfort thing).
