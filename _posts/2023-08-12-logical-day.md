@@ -58,6 +58,11 @@ I think people are able to figure out what is meant most of the time but at the 
 And this doesn't even get to which day weeks start on -- is it Sunday[^weekends]? Monday? Or even Saturday? -- making the phrase "this week" ambiguous for a couple days each week.
 I'm personally in favour of having the week start on Sunday, partly because on Sunday you're thinking about the upcoming week, and partly for the humorous reason that that makes the weekends be the two _ends_ of the _week_.
 
+[^weekends]:
+    I like sunday as the first day of the week for two reasons.
+    Firstly, on Sunday you'll often be planning for the week ahead, and in that context "next week" feels somewhat unnatural.
+    Secondly, this makes Saturday and Sunday the two ends of the week ;)
+
 # Tangent: Absolute Time, Relative Day
 
 While writing this, I was reminded of a notation that was used at Autumn Compass for time during a trading day.
