@@ -9,7 +9,7 @@ My current naming scheme for machines is to use the names of native Australian p
 Right now, I just have:
 
 - [wattle](https://en.wikipedia.org/wiki/Acacia_pycnantha) is my laptop, my daily driver.
-- [hakea](https://en.wikipedia.org/wiki/Hakea) is my phone.
+- [hakea](https://en.wikipedia.org/wiki/Hakea) is my old phone, and [grevillea](https://en.wikipedia.org/wiki/Grevillea) is my new one.
 - [banksia](https://en.wikipedia.org/wiki/Banksia) was previously my router, mainly for a stable domain name for my home internet when doing port forwarding.
 However, I haven't had a need for it after I started using cloudflared tunnel, and so the name is currently unused.
 
