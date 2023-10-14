@@ -2,6 +2,10 @@
  * Styling affecting the overall site
  */
 
+.p-summary {
+	font-style: italic;
+}
+
 #site-nav {
 	$height: 3rem;
 	$pad: .5rem; // vertical padding (also horizontal padding for central logo)
@@ -74,7 +78,7 @@
 		text-decoration: none;
 	}
 
-	a.here, a:hover {
+	a[aria-current], a:hover {
 		background: $accent-bg;
 		color: white;
 	}
@@ -162,7 +166,7 @@ blockquote[admonition] {
 	opacity: 0.6;
 }
 
-article *:not(h1):not(h2) > a {
+main *:not(h1):not(h2) > a {
 	&[href^="/posts/"] {
 		&::after {
 			content: "";
