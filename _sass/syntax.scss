@@ -4,7 +4,7 @@
 pre {
 	// code blocks only, not inline
 
-	border-collapse: collapse; // TODO what is this for?
+	background: var(--box-tint);
 
 	.rouge-gutter {
 		padding-right: 1ch;
