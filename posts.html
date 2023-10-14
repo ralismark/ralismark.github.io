@@ -1,19 +1,27 @@
 ---
-layout: default
+layout: default-wide
 title: Blog
 ---
 
-<header class="bleed">
-  <h1>{{ page.title | escape }}</h1>
-</header>
+<h1>{{ page.title | escape }}</h1>
 
-<p class="text-centre">
-	(does anyone even read these?)
-</p>
-
-<ul class="li-flat fence-y flex-centre">
+<ul class="li-flat flex-centre">
 	<li><a href="/feed.xml">{% include icon icon="rss" w="24" %}RSS</a></li>
 	<li><a href="{% link tags.html %}">{% include icon icon="tag" w="24" %}Tags</a></li>
 </ul>
 
+<hr>
+
+<main class="content-width">
 {% include post-listing.html entries=site.posts %}
+</main>
+
+{% assign totalwc = 0 %}
+{% for post in site.posts %}
+  {% assign wc = post.content | strip_html | number_of_words: "auto" %}
+  {% assign totalwc = totalwc | plus: wc  %}
+{% endfor %}
+
+<p class="text-centre">
+  {{ totalwc }} words total ... does anyone even read them?
+</p>
