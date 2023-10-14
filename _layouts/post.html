@@ -1,10 +1,10 @@
 ---
 layout: default
-main_class: h-entry content-width
+main_class: h-entry
 ---
 
 {% capture post_nav %}
-<nav class="my-1">
+<nav class="my-1 content-width">
 	{% if page.previous %}
 		<a style="float: left; text-align: left" href="{{ page.previous.url | relative_url }}">&laquo; {{ page.previous.title }}</a>
 	{% endif %}
@@ -21,7 +21,7 @@ main_class: h-entry content-width
 {{ post_nav }}
 {% endunless %}
 
-<header id="post-meta" class="fence-b text-centre bleed" style="padding-bottom: 1rem; margin-bottom: 1rem">
+<header class="text-centre content-width">
 	<h1 class="p-name">{{ page.title | escape }}</h1>
 	<p class="p-summary"><em>
 		{{ page.excerpt }}
@@ -49,8 +49,10 @@ main_class: h-entry content-width
 			{% endfor %}
 		</li>
 		{% endif %}
-	</p>
+	</ul>
 </header>
+
+<hr/>
 
 <article class="e-content content-width">
 	{{ content }}

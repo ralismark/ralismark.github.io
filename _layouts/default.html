@@ -62,7 +62,9 @@ email: "mailto:{{ site.me.email }}"
 {% endcapture %}
 {% assign accounts = accounts | yaml_parse %}
 
-<footer id="site-footer" class="text-centre fence-t">
+<hr/>
+
+<footer id="site-footer" class="text-centre">
   <ul class="li-flat">
   {% for entry in accounts %}
     {% assign icon = entry[0] %}

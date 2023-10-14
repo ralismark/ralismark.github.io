@@ -266,6 +266,11 @@ ol, ul
 	padding: .5em 0;
 }
 
+hr {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
 // Layout: Horizontal ---------------------------------------------------- @@@2
 
 // code blocks from rouge (just <code> is inline)
@@ -344,11 +349,17 @@ html {
 	}
 }
 
-.content-width > *:not(.bleed, .content-width) {
+.content-width {
 	max-width: var(--content-width);
 	margin-left: auto;
 	margin-right: auto;
 }
+
+// .content-width > *:not(.bleed, .content-width) {
+// 	max-width: var(--content-width);
+// 	margin-left: auto;
+// 	margin-right: auto;
+// }
 
 // Customisation Utils --------------------------------------------------- @@@1
 
