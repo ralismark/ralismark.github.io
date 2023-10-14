@@ -329,6 +329,16 @@ Here's a sequence of messages
 >
 > two
 
+Here's a toot I guess
+
+{: admonition="tweet" }
+> ![@ralismark@cathode.church](https://deflector.cathode.church/accounts/avatars/110/099/219/993/802/408/original/50065f9fa9cc2e4f.png "@ralismark@cathode.church")
+>
+> -funsafe-math, for when you want your math to be both fun and safe!
+>
+> --- temmie ([@ralismark@cathode.church](https://cathode.church/@ralismark))
+> [Oct 9, 2023](https://cathode.church/@ralismark/111201602363815163)
+
 # math
 
 This is inline math: $$1+1 \textrm{ is equal to } 2$$, and 1+1 = 2
