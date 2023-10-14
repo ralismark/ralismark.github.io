@@ -98,15 +98,55 @@
  */
 
 blockquote[admonition] {
-	$padding: 1rem;
-	$gap: 1rem;
-	$embedded-margin: 1rem; // amount of margin included in the image itself
-	$size: 6rem; // image size
 
-	&::before {
+	/*
+	 *   |           __________ |
+	 *   |[     ]   |          ||
+	 *   |[ img ]<2>|<1>text<1>||
+	 *   |[     ]   |__________||
+	 *   |<--3-->               |
+	 *   |                      |
+	 */
+	$padding: 1rem; // 1. text padding
+	$gap: 1rem; // 2. space between image and text
+	$size: 4rem; // 3. image size
+
+	// TODO media query for if page is too narrow?
+
+	// make a gap on the left
+	max-width: calc(100% - #{$size + $gap});
+	margin: 1rem 0 1rem #{$size + $gap};
+	padding: 0 $padding;
+
+	// move it to the right position
+	& > img:first-child, & > picture:first-child {
+		position: absolute;
+		margin-left: #{-$size - $gap - $padding};
+	}
+
+	& > img:first-child, & > picture:first-child, & > picture:first-child > img {
+		height: $size;
+		width: auto;
+	}
+
+	// Stops images of really short admonitions from overlapping subsequent
+	// paragraphs.
+	//
+	// I would prefer if this was like margin or sth, but 1. I haven't bothered
+	// to see if it's possible, and 2. I feel like there would be issues with
+	// margin collapse.
+	min-height: $size;
+
+	width: fit-content; // don't fill the width for short texts
+
+	background: var(--box-tint);
+	border: 1px solid var(--stroke);
+	border-radius: 0.2em;
+
+	/*&::before {
 		$triangle-size: $embedded-margin * 0.75;
 
-		// content: ""; // uncomment this to enable the triangle
+		content: "";
 
 		display: block;
 		width: 0;
@@ -117,35 +157,7 @@ blockquote[admonition] {
 		margin-top: 1rem;
 		border: $triangle-size solid transparent;
 		border-right-color: var(--stroke);
-	}
-
-	.content-width > & {
-		max-width: calc(var(--content-width) - #{$size - 2 * $embedded-margin + $gap});
-		margin-left: calc(50% - var(--content-width) / 2 + #{$size - 2 * $embedded-margin + $gap});
-	}
-
-	& > img:first-child, & > picture:first-child {
-		position: absolute;
-		margin: (-$embedded-margin) 0 (-$embedded-margin) #{-$size - $padding + $embedded-margin - $gap};
-		height: $size;
-	}
-
-	& > picture:first-child > img {
-		// reset stuff, a bit unclean :(
-		// TODO fix the .bounded img rule
-		height: inherit;
-		width: auto;
-	}
-
-	margin: 1rem var(--inset-margin) 1rem calc(#{$size - 2 * $embedded-margin + $gap} + var(--inset-margin));
-	padding: 0 $padding;
-	min-height: ($size - 2 * $embedded-margin);
-
-	width: fit-content;
-
-	background: fade-out($accent, 0.95);
-	border: 1px solid var(--stroke);
-	border-radius: 0.2rem;
+	}*/
 }
 
 .footnotes {
