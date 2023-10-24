@@ -24,7 +24,11 @@
 		-->
 
 		<link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+		<!-- defer loading of katex? -->
+		{% capture katex_attrs %}href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"{% endcapture %}
+		<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" {{ katex_attrs }}>
+		<noscript><link rel="stylesheet" {{ katex_attrs }}></noscript>
 
 		<!-- indieweb -->
 		<link rel="webmention" href="https://webmention.io/www.ralismark.xyz/webmention" />
