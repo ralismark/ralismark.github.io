@@ -84,4 +84,15 @@ For this, have a look at "Why do I feel like shit: A personal diagnostic guide"!
 I feel like this model of mental health issues being downstream of unrelated stressors is more healthy, since you have more control over those, and you also aren't fighting the anxiety while trying to deal with it.
 </details>
 
+<details markdown=1><summary>"Not Names"</summary>
+I'm not entirely sure why, but a lot of people mishear my name when I tell them it.
+And it's not just basic mishearings like "tammy" or whatever, I've had:
+
+- Emily
+- Kevin
+- Kelly
+</details>
+
+There's also a shelf describing itself as "loans from elsewhere".
+
 - [Back to museum](#museum)
