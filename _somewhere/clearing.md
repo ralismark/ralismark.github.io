@@ -16,6 +16,6 @@ You feel like they change when you're not looking.
 - [A silver door with a pushbar sitting in the corner, wearing a flickering green EXIT sign on top of itself](/)
 - [An worn door that is falling apart](#museum)
 - A tall wooden door, once majestic but now rather aged. Locked...
-- A red door.
+- [A red door](https://www.tumblr.com/zinjanthropusboisei/726211136019644417)
 - [A path southwards](#mountain)
 - [Sit for a bit](#clearing:sit)
