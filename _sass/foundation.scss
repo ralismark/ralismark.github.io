@@ -205,20 +205,17 @@ a[role=button] {
 ul.li-flat {
 	padding-left: 0;
 
-	display: flex;
-	flex-wrap: wrap;
-
-	.text-centre & {
-		justify-content: center;
-	}
-
 	& > li {
-		list-style: none;
 		display: inline;
 
 		&:not(:first-child)::before {
-			content: "⬥";
-			margin: 0 0.5em;
+			// Some lists have whitespace between elements, some don't. But multiple
+			// whitespace characters (including across both <li> and here) get
+			// collapsed into a single space.
+			//
+			// Unfortunately it makes double-click word selection kinda messed up
+			// but that's something we have to give for this to look fine.
+			content: " ⬥ ";
 		}
 	}
 }
@@ -376,8 +373,4 @@ html .mx-auto { margin-left: auto !important; margin-right: auto !important; }
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-}
-
-.text-centre {
-	text-align: center;
 }
