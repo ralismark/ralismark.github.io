@@ -37,6 +37,7 @@ strong {
 // TODO this is opinionated, move it out of foundation
 h1 {
 	text-align: center;
+	font-size: 2em;
 }
 
 // make KaTeX the right size
@@ -45,25 +46,21 @@ h1 {
 }
 
 // a better colour for links
-a:not([role]), [role=link] {
-	color: var(--tertiary);
+a:not([role=button]), [role=link] {
+	color: var(--linking);
 
 	// TODO make these use CSS variables instead of SASS ones
 
-	text-decoration: underline fade-out($tertiary, 0.6);
+	text-decoration: underline fade-out($linking-dark, 0.6);
 
 	&:hover {
-		color: darken($tertiary, 15%);
+		color: darken($linking-dark, 15%);
 		text-decoration: underline;
 	}
 }
 
 h1, h2, h3, h4, h5, h6 {
-	color: var(--primary);
-
-	& a {
-		color: inherit;
-	}
+	color: var(--secondary);
 
 	& a[href^="#"] {
 		color: inherit;
@@ -202,7 +199,7 @@ a[role=button] {
 // Elements: Custom ------------------------------------------------------ @@@2
 
 // ul items in a line
-ul.li-flat {
+menu, ul.li-flat {
 	padding-left: 0;
 
 	& > li {
@@ -238,6 +235,26 @@ ul.li-flat {
 	padding: .3ex 1ex;
 	margin: 0 0.2ex;
 	border-radius: 1em;
+}
+
+.paper > a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a.paper, .paper {
+	// have a.paper in addition to just .paper so we can override <a> styles
+	text-decoration: none;
+	color: var(--body-fg);
+
+	border: .1em solid rgba(0, 0, 0, 0.3);
+	box-shadow: 0.15em 0.15em rgba(0, 0, 0, 0.65);
+	display: inline-block;
+	margin: 0 0.5em;
+	padding: 0 0.5em;
+	transform: rotate(var(--angle, -2deg));
+
+	background: var(--button-tint);
 }
 
 // Layout ---------------------------------------------------------------- @@@1

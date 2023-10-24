@@ -7,53 +7,10 @@
 }
 
 #site-nav {
-	$height: 3rem;
-	$pad: .5rem; // vertical padding (also horizontal padding for central logo)
-
-	margin-bottom: 2rem;
-
-	// layout
-
-	width: 100%;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-
-	& > * {
-		height: $height + 2 * $pad;
-	}
-
-	a {
-		display: inline-block;
-		line-height: $height;
-		padding: $pad;
-	}
-
-	svg {
-		height: $height;
-	}
-
-	#nav-left {
-		text-align: right;
-	}
-
-	#nav-right {
-		text-align: left;
-	}
-
-	#nav-left, #nav-right {
-		flex-basis: 0;
-
-		a {
-			padding-left: 1.25rem;
-			padding-right: 1.25rem;
-		}
-	}
-
-	// styling
+	@media print { display: none; }
 
 	// from https://css-tricks.com/easing-linear-gradients/
-	$base-opacity: 0.4;
+	$base-opacity: 0.5;
 	background: radial-gradient(100% 100% at top,
 		fade-out($accent-bg, $base-opacity) 0%,
 		fade-out($accent-bg, $base-opacity + (1 - $base-opacity) * 0.262) 19%,
@@ -67,27 +24,31 @@
 		fade-out($accent-bg, $base-opacity + (1 - $base-opacity) * 0.979) 91%,
 		fade-out($accent-bg, $base-opacity + (1 - $base-opacity) * 0.992) 95.2%,
 		fade-out($accent-bg, $base-opacity + (1 - $base-opacity) * 0.998) 98.2%,
-		fade-out($accent-bg, 1) 100%
+		fade-out($accent-bg, 1) 110%,
 	);
 
-	border-top: .4rem solid $accent-bg;
-	font-size: 1.5em;
+	border-top: .2rem solid var(--filled-bg);
 
-	a {
-		color: var(--tertiary);
-		text-decoration: none;
+	padding: 1rem 0 1.5rem;
+	margin-bottom: -1rem;
+
+	font-family: var(--hand-font-family);
+	font-weight: 700;
+	font-size: 1.2em;
+
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 1rem 0;
+
+	.paper[aria-current] {
+		background: var(--filled-bg);
+		color: var(--filled-fg);
 	}
-
-	a[aria-current], a:hover {
-		background: $accent-bg;
-		color: white;
-	}
-
-	@media print { display: none; }
 }
 
 #site-footer {
-	margin: 2rem 0;
+	margin: 1rem 0;
 	font-size: 80%;
 
 	@media print { display: none; }

@@ -1,10 +1,63 @@
 ---
-layout: default
+layout: default-wide
 ---
 
 {% comment %}
 TODO Make all post tiles have the same capitalisation style
 {% endcomment %}
+
+<h1
+  id="index-banner"
+>
+  <small>🏵️🌿🌸</small>
+  <span>ralismark<span class="paper">.xyz</span></span>
+  <small>🌸🌿🏵️</small>
+</h1>
+
+<style>
+#index-banner {
+  font-family: var(--hand-font-family);
+  font-size: 300%;
+
+  padding: 4rem 0;
+  max-width: 60rem;
+  margin: 1rem auto;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+
+  gap: 2rem 0;
+}
+
+@media(max-width: 45rem) {
+  #index-banner {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+#index-banner .paper {
+  margin: 0;
+  padding: 0;
+  background: var(--filled-bg);
+  color: var(--filled-fg);
+
+  line-height: 1.2;
+}
+
+#index-banner > * {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+#index-banner > small {
+  font-size: 80%;
+  line-height: 2; /* emoji fonts are tall sometimes */
+}
+</style>
+
+<main class="content-width" markdown=1>
 
 # Welcome!
 
@@ -20,26 +73,4 @@ You can also email me via [tem@ this domain](mailto:{{ site.me.email }}).
 
 </div>
 
-## whoami
-
-- compsci student @ UNSW
-- retired competitive programmer
-- (previously) SWE @ algorithmic trading firm [Autumn Compass](https://autumncompass.com/)
-
-I poke at a bunch of computing areas -- recently Nix, Rust, and contributing to Open Source.
-I've also had experience with C++ & Go & bits of infra.
-
-I also like making frontend things the old-school way with handwritten HTML/CSS and a touch of JavaScript.
-This includes this website you're looking at, [some games] (try [this one]!), and [my personal wiki app].
-
-[some games]: /webgames/
-[this one]: /webgames/basalt-bashers/
-[my personal wiki app]: /ibis-wiki/static/
-
-Outside of tech, I play violin and am trying to memorise more Chinese, and I like learning about linguistics.
-
-## fun facts
-
-1. Prominent Rust blogger [Amos / fasterthanli.me](https://fasterthanli.me) gave me a shout out on [one of his posts](https://fasterthanli.me/series/making-our-own-executable-packer/part-12#:~:text=Thanks%20to%20ralismark)!
-1. [My keyboard]({% link _posts/2020-11-15-keyboard.md %}) is featured [in the Sydney Morning Herald](https://12ft.io/https://www.smh.com.au/technology/people-are-spending-7500-on-keyboards-maybe-you-should-too-20220524-p5ao6h.html#:~:text=Keyboards%20can%20cost%20hundreds%20or%20even%20thousands%20of%20dollars), with an incorrect caption!
-1. I have [contributed](https://github.com/shlomif/fortune-mod/commits?author=ralismark) to a piece of software that is [over 40 years old](https://en.wikipedia.org/wiki/Fortune_(Unix))!
+</main>

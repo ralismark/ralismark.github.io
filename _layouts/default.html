@@ -13,37 +13,26 @@ main_class: content-width
 
 <!-- Navbar ------------------------------------------------------------------->
 
+{% capture navs %}
+index: "{% link index.md %}"
+posts: "{% link posts.html %}"
+toys: "{% link interactives.html %}"
+about: "{% link about.md %}"
+somewhere: "{% link somewhere.html %}"
+{% endcapture %}
+{% assign navs = navs | yaml_parse %}
+
 <header id="site-nav">
-  <!--
-    We wrap the <a> in <span> that take up all the space so that everything is
-    correctly centred even the contents have different length.
-  -->
-  <span id="nav-left" role="presentation">
-    <a
-      {% if page.path == "interactives.html" %}aria-current="page"{% endif %}
-      href="{% link interactives.html %}"
-    >
-      tools
-    </a>
-  </span>
+  {% for nav in navs %}
   <a
-    aria-label="index"
-    {% if page.path == "index.md" %}aria-current="page"{% endif %}
-    href="{% link index.md %}"
-  >
-    <svg role="img" aria-label="index" viewBox="-200 -200 400 400">
-      <title>ralismark.xyz</title>
-      <use href="/assets/spiral.svg#root" width="100" height="100" stroke-width="20">
-    </svg>
-  </a>
-  <span id="nav-right" role="presentation">
-    <a
-      {% if page.path == "posts.html" %}aria-current="page"{% endif %}
-      href="{% link posts.html %}"
+    class="paper"
+    {% if page.url == nav[1] %}aria-current="page"{% endif %}
+    href="{{ nav[1] }}"
+    style="--angle: {{ forloop.index | plus: 2 | times: 2 | modulo: 5 | minus: 2 }}deg"
     >
-      posts
-    </a>
-  </span>
+    {{ nav[0] }}
+  </a>
+  {% endfor %}
 </header>
 
 <!-- Content ------------------------------------------------------------------>
@@ -78,13 +67,6 @@ email: "mailto:{{ site.me.email }}"
         >{%- include icon icon=icon -%}</a>
     </li>
   {% endfor %}
-  </ul>
-
-  <ul class="li-flat">
-    <li><a href="{% link posts.html %}">blog</a></li>
-    <li><a href="{% link everything.html %}">cat /posts/*</a></li>
-    <li><a href="{% link somewhere.html %}">somewhere</a></li>
-    <li><a href="/feed.xml">rss</a></li>
   </ul>
 
   <p>
