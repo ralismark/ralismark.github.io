@@ -6,7 +6,7 @@ excerpt: "All the bugs and quirks that didn't make into the previous post"
 reason: wip
 ---
 
-While testing out the various fortune versions for [_A History of Fortune_]({% link _drafts/2023-10-23-fortune.md %}), I found so, _so_ many interesting bugs, issues, and just general oddities in the code.
+While testing out the various fortune versions for the previous post, I found so, _so_ many interesting bugs, issues, and just general oddities in the code.
 So much that it was starting to bloat up that post!
 
 I've taken them out of that article to keep it a bit tidier, but they're still really interesting (plus I don't want my research to go to waste), so I'll be covering them here.
