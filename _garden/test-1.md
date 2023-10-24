@@ -26,6 +26,8 @@ excerpt: CSS Integration Tests
 - giant star has
 - a large extended
 
+<ul class="li-flat"><li>no space</li><li>before this</li> <li>but there is before this</li></ul>
+
 <details markdown="1">
 <summary>This is collapsed</summary>
 
