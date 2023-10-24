@@ -3,25 +3,27 @@ layout: default-wide
 title: Blog
 ---
 
-<h1>{{ page.title | escape }}</h1>
-
-<ul class="li-flat flex-centre">
-	<li><a href="/feed.xml">{% include icon icon="rss" w="24" %}RSS</a></li>
-	<li><a href="{% link tags.html %}">{% include icon icon="tag" w="24" %}Tags</a></li>
-</ul>
-
-<hr>
-
-<main class="content-width">
-{% include post-listing.html entries=site.posts %}
-</main>
-
 {% assign totalwc = 0 %}
 {% for post in site.posts %}
   {% assign wc = post.content | strip_html | number_of_words: "auto" %}
   {% assign totalwc = totalwc | plus: wc  %}
 {% endfor %}
 
-<p style="text-align: center">
-  {{ totalwc }} words total ... does anyone even read them?
+<h1>{{ page.title | escape }}</h1>
+
+<p class="content-width">
+  Occasionally I have things I want to write about!
+  As a fun statistic, in total there's {{ totalwc }} words!
 </p>
+
+<nav style="text-align: center">
+  <a class="paper" href="{% link tags.html %}">tags</a>
+  <a class="paper" href="/feed.xml">rss feed</a>
+  <a class="paper" href="{% link tags.html %}">cat *</a>
+</nav>
+
+<hr>
+
+<main class="content-width">
+{% include post-listing.html entries=site.posts %}
+</main>

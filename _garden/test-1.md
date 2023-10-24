@@ -359,3 +359,4 @@ $$
 <p style="color: var(--primary)">primary</p>
 <p style="color: var(--secondary)">secondary</p>
 <p style="color: var(--tertiary)">tertiary</p>
+<p style="color: var(--linking)">linking</p>

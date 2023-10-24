@@ -4,7 +4,10 @@
 
 $accent: #DB5599;
 $accent-bg: #990461;
-$tertiary: #6480ED;
+$secondary: #A747FF;
+$tertiary: #939C28;
+$linking-dark: #4890FF;
+$linking-light: #094EBA;
 
 :root { // for non-sass use
 	// based on <https://github.com/system-fonts/modern-font-stacks#old-style>
@@ -12,6 +15,7 @@ $tertiary: #6480ED;
 	--main-font: 300 1em / 1.9 var(--main-font-family);
 	--mono-font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
 	--mono-font: normal 1em / 1.5 var(--mono-font-family);
+	--hand-font-family: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
 
 	// light/dark mode; use --body-{fg,bg} for correctly coloured version
 	--body-fg-light: black;
@@ -20,7 +24,7 @@ $tertiary: #6480ED;
 	--body-bg-dark: #191a1a;
 
 	// ui lines
-	--stroke: rgba(127.5, 127.5, 127.5, 0.3);
+	--stroke: rgba(127.5, 127.5, 127.5, 0.4);
 
 	// background of boxes/etc
 	--box-tint: #{fade-out($accent, 0.95)};
@@ -32,8 +36,11 @@ $tertiary: #6480ED;
 
 	// text colours
 	--primary: #{$accent};
-	--secondary: #9C56DB;
+	--secondary: #{$secondary};
 	--tertiary: #{$tertiary};
+
+	--linking-light: #{$linking-light};
+	--linking-dark: #{$linking-dark};
 }
 
 // TODO is this too opinionated? we default to dark mode
@@ -50,13 +57,16 @@ $tertiary: #6480ED;
 :root {
 	--body-bg: var(--body-bg-dark);
 	--body-fg: var(--body-fg-dark);
+	--linking: var(--linking-dark);
 
 	@include dark {
 		--body-bg: var(--body-bg-dark);
 		--body-fg: var(--body-fg-dark);
+		--linking: var(--linking-dark);
 	}
 	@include light {
 		--body-bg: var(--body-bg-light);
 		--body-fg: var(--body-fg-light);
+		--linking: var(--linking-light);
 	}
 }
