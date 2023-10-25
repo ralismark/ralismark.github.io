@@ -49,12 +49,10 @@ h1 {
 a:not([role=button]), [role=link] {
 	color: var(--linking);
 
-	// TODO make these use CSS variables instead of SASS ones
-
-	text-decoration: underline fade-out($linking-dark, 0.6);
+	text-decoration: underline color-mix(in srgb, var(--linking), transparent 60%);
 
 	&:hover {
-		color: darken($linking-dark, 15%);
+		color: color-mix(in srgb, var(--linking) 50%, var(--body-bg));
 		text-decoration: underline;
 	}
 }
