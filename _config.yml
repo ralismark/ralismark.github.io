@@ -9,7 +9,7 @@ me:
     str: "@ralismark@cathode.church"
     url: "https://cathode.church/@ralismark"
 
-description: "The place where temmie puts her stuff!"
+description: "Where temmie puts her internet things!"
 excerpt_separator: <!--more-->
 permalink: /:categories/:title
 
