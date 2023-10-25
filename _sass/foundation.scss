@@ -145,6 +145,24 @@ blockquote:not([admonition]) {
 	margin-right: 0;
 }
 
+abbr {
+	position: relative;
+
+	// make tooltip accessible as popup below the <abbr>
+	&:active::after {
+		content: attr(title);
+		position: absolute;
+		display: block;
+
+		left: 0;
+		top: 100%;
+		width: max-content;
+
+		background: var(--filled-bg);
+		color: var(--filled-fg);
+	}
+}
+
 // Elements: Inputs ------------------------------------------------------ @@@2
 
 // typed things
@@ -250,7 +268,7 @@ a.paper, .paper {
 	border: .1em solid rgba(0, 0, 0, 0.3);
 	box-shadow: 0.15em 0.15em rgba(0, 0, 0, 0.65);
 	display: inline-block;
-	margin: 0 0.5em;
+	margin: 0.2em 0.3em;
 	padding: 0 0.5em;
 	transform: rotate(var(--angle, -2deg));
 

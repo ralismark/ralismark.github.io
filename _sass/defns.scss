@@ -10,12 +10,12 @@ $linking-dark: #4890FF;
 $linking-light: #094EBA;
 
 :root { // for non-sass use
-	// based on <https://github.com/system-fonts/modern-font-stacks#old-style>
+	// based on <https://github.com/system-fonts/modern-font-stacks>
 	--main-font-family: Merriweather, "Iowan Old Style", "Palatino Linotype", "URW Palladio L", "P052", serif;
 	--main-font: 300 1em / 1.9 var(--main-font-family);
-	--mono-font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+	--mono-font-family: Menlo, Consolas, Monaco, "Liberation Mono", "Lucida Console", monospace;
 	--mono-font: normal 1em / 1.5 var(--mono-font-family);
-	--hand-font-family: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
+	--hand-font-family: "Segoe Print", "Bradley Hand", Chilanka, TSCu_Comic, casual, cursive;
 
 	// light/dark mode; use --body-{fg,bg} for correctly coloured version
 	--body-fg-light: black;

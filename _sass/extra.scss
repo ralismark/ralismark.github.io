@@ -39,7 +39,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: 1rem 0;
+	gap: 1rem 0.5rem;
 
 	.paper[aria-current] {
 		background: var(--filled-bg);
@@ -185,14 +185,12 @@ main *:not(h1):not(h2) > a {
 	}
 
 	&[href^="https://stackoverflow.com/"]::after,
-	&[href^="https://superuser.com/"]::after
-	{
+	&[href^="https://superuser.com/"]::after {
 		@include atag;
 		content: "SO";
 	}
 
-	&[href^="https://en.cppreference.com/"]::after,
-	{
+	&[href^="https://en.cppreference.com/"]::after {
 		@include atag;
 		content: "c++";
 	}
