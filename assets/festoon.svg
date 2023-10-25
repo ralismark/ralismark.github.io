@@ -1,49 +1,71 @@
+---
+---
 <?xml version="1.0" encoding="UTF-8"?>
+
+{% assign wiring = "#333" %}
+
+<!--
+  christmas: c00 0a0
+  trans: 4bf f8a fff f8a
+-->
+{% capture colours %}
+- "#fec"
+{% endcapture %}
+{% assign colours = colours | yaml_parse %}
+
 <svg
-	xmlns="http://www.w3.org/2000/svg"
-	width="200"
-	height="150"
-	fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  width="{{ colours | size | times: 200 }}"
+  height="150"
+  fill="none"
 >
-	<defs>
-		<radialGradient
-			id="glow"
-		>
-			<stop offset="20%" stop-color="#fec8" />
-			<stop offset="65%" stop-color="#fec1" />
-			<stop offset="85%" stop-color="#fec0" />
-		</radialGradient>
-	</defs>
+  <defs>
+    {% for colour in colours %}
+    <radialGradient id="glow-{{ forloop.index }}">
+      <stop offset="20%" stop-color="{{ colour }}8" />
+      <stop offset="65%" stop-color="{{ colour }}1" />
+      <stop offset="85%" stop-color="{{ colour }}0" />
+    </radialGradient>
+    {% endfor %}
+  </defs>
 
-	<rect
-		fill="url(#glow)"
-		x="62.5"
-		y="0"
-		width="75"
-		height="150"
-	/>
+  {% for colour in colours %}
+  <rect
+    fill="url(#glow-{{ forloop.index }})"
+    x="{{ forloop.index0 | times: 200 | plus: 62.5 }}"
+    y="0"
+    width="75"
+    height="150"
+  />
 
-	<ellipse
-		fill="#fec"
-		cx="100"
-		cy="75"
-		rx="15"
-		ry="30"
-	/>
+  <ellipse
+    fill="{{ colour }}"
+    cx="{{ forloop.index0 | times: 200 | plus: 100 }}"
+    cy="75"
+    rx="15"
+    ry="30"
+  />
 
-	<path
-		stroke="#333"
-		stroke-width="4"
-		d="M0 50c50 0, 100 -15, 100 -15c0 0, 50 15, 100 15"
-	/>
-	<rect
-		fill="#333"
-		x="85"
-		y="30"
-		width="30"
-		height="20"
-		rx="5"
-		ry="5"
-	/>
+  <rect
+    fill="{{ wiring }}"
+    x="{{ forloop.index0 | times: 200 | plus: 85 }}"
+    y="30"
+    width="30"
+    height="20"
+    rx="5"
+    ry="5"
+  />
+  {% endfor %}
+
+  <path
+    stroke="#333"
+    stroke-width="4"
+    d="
+    M0 50
+    {% for _ in colours %}
+    c50 0, 100 -15, 100 -15c0 0, 50 15, 100 15
+    {% endfor %}
+    "
+  />
 </svg>
 
