@@ -4,10 +4,6 @@
 
 $accent: #DB5599;
 $accent-bg: #990461;
-$secondary: #A747FF;
-$tertiary: #939C28;
-$linking-dark: #4890FF;
-$linking-light: #094EBA;
 
 :root { // for non-sass use
 	// based on <https://github.com/system-fonts/modern-font-stacks>
@@ -25,6 +21,8 @@ $linking-light: #094EBA;
 
 	// ui lines
 	--stroke: rgba(127.5, 127.5, 127.5, 0.4);
+	
+	// TODO switch these over to use color-mix at some point
 
 	// background of boxes/etc
 	--box-tint: #{fade-out($accent, 0.95)};
@@ -36,11 +34,12 @@ $linking-light: #094EBA;
 
 	// text colours
 	--primary: #{$accent};
-	--secondary: #{$secondary};
-	--tertiary: #{$tertiary};
+	--secondary: #A747FF;
+	--tertiary: #939C28;
 
-	--linking-light: #{$linking-light};
-	--linking-dark: #{$linking-dark};
+	// colour of links
+	--linking-light: #094EBA;
+	--linking-dark: #4890FF;
 }
 
 // TODO is this too opinionated? we default to dark mode
