@@ -16,4 +16,3 @@ And may you find what you're looking for.
 Also, did you know about these pages?
 
 - [A single file with every single blog post]({% link everything.html %})
-- [Licensing info & attributions]({% link licenses.md %})
