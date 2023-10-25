@@ -12,8 +12,8 @@ title: Blog
 <h1>{{ page.title | escape }}</h1>
 
 <p class="content-width">
-  Occasionally I have things I want to write about!
-  As a fun statistic, in total there's {{ totalwc }} words!
+  Irregularly I have things I want to write about!
+  As a fun statistic, there's <strong>{{ site.posts | size }} posts</strong>, totalling <strong>{{ totalwc }} words</strong>!
 </p>
 
 <nav style="text-align: center">
@@ -22,7 +22,7 @@ title: Blog
   <a class="paper" href="{% link everything.html %}">cat *</a>
 </nav>
 
-<hr>
+<hr class="lit">
 
 <main class="content-width">
 {% include post-listing.html entries=site.posts %}

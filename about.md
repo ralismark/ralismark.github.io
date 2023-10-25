@@ -33,11 +33,11 @@ Outside of tech, I play violin and am trying to memorise more Chinese, and I lik
 
 The contents of this website are licensed under the *Creative Commons Attribution-NonCommercial 4.0 International* license (i.e. CC BY-NC 4.0). In short, you can reuse my work as long as it's not commercial and you credit me.
 
-Though not required, I would also appreciate it if you let me know when you use my content :)
-
 <details markdown="1"><summary>LICENSE</summary>
 {% include_relative LICENSE %}
 </details>
+
+Though not required, I would also appreciate it if you let me know when you use my content :)
 
 This website also uses some other projects:
 

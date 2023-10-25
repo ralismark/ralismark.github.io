@@ -36,7 +36,6 @@ main_class: h-entry
 		</li>
 
 		<li>
-			<!-- TODO wordcount not accessible on mobile -->
 			{% assign wc = content | strip_html | number_of_words: "auto" | plus: 100 | divided_by: 200 | at_least: 1 %}
 			<abbr title="{{ content | strip_html | number_of_words: "auto" }} total words">{{ wc }} min{% if wc != 1 %}s{% endif %} to read</abbr>
 		</li>
@@ -46,14 +45,14 @@ main_class: h-entry
 		<li id="post-tags">
 			<span id="post-tag-label">Tags:</span>
 			{% for tag in page.tags %}
-				<a class="p-category badge" href="{% link tags.html %}#{{ tag }}">{{ tag }}</a>
+				<a class="p-category paper" href="{% link tags.html %}#{{ tag }}">{{ tag }}</a>
 			{% endfor %}
 		</li>
 		{% endif %}
 	</ul>
 </header>
 
-<hr/>
+<hr class="lit"/>
 
 <main class="e-content content-width">
 	{{ content }}

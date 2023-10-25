@@ -4,10 +4,16 @@ main_class: content-width
 ---
 
 {% if jekyll.environment != "production" %}
-<div style="text-align: center">
-  🚧
-  You are looking at a {{ jekyll.environment }} environment!
-  🚧
+<div style="
+  text-align: center;
+  writing-mode: sideways-lr;
+  position: absolute;
+  padding: 2rem 0;
+  left: 1rem;
+  background: var(--tertiary);
+  color: white;
+">
+  <strong>{{ jekyll.environment }}</strong> environment
 </div>
 {% endif %}
 
@@ -52,7 +58,7 @@ email: "mailto:{{ site.me.email }}"
 {% endcapture %}
 {% assign accounts = accounts | yaml_parse %}
 
-<hr/>
+<hr>
 
 <footer id="site-footer" style="text-align: center" class="content-width">
   <ul class="li-flat">

@@ -241,18 +241,6 @@ menu, ul.li-flat {
 .fence-t, .fence-y { @include fence(top); }
 .fence-b, .fence-y { @include fence(bottom); }
 
-.badge {
-	// !important to override anchor styling
-	color: var(--filled-fg) !important;
-	background: var(--filled-bg) !important;
-	text-decoration: none !important;
-
-	font-size: 80%;
-	padding: .3ex 1ex;
-	margin: 0 0.2ex;
-	border-radius: 1em;
-}
-
 .paper > a {
 	color: inherit;
 	text-decoration: none;
@@ -271,6 +259,15 @@ a.paper, .paper {
 	transform: rotate(var(--angle, -2deg));
 
 	background: var(--button-tint);
+}
+
+hr.lit {
+	border: none;
+
+	background-image: url("/assets/festoon.svg");
+	background-repeat: round no-repeat;
+	background-size: 4em 3em;
+	height: 3em;
 }
 
 // Layout ---------------------------------------------------------------- @@@1

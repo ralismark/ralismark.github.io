@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	width="200"
+	height="150"
+	fill="none"
+>
+	<defs>
+		<radialGradient
+			id="glow"
+		>
+			<stop offset="20%" stop-color="#fec8" />
+			<stop offset="65%" stop-color="#fec1" />
+			<stop offset="85%" stop-color="#fec0" />
+		</radialGradient>
+	</defs>
+
+	<rect
+		fill="url(#glow)"
+		x="62.5"
+		y="0"
+		width="75"
+		height="150"
+	/>
+
+	<ellipse
+		fill="#fec"
+		cx="100"
+		cy="75"
+		rx="15"
+		ry="30"
+	/>
+
+	<path
+		stroke="#333"
+		stroke-width="4"
+		d="M0 50c50 0, 100 -15, 100 -15c0 0, 50 15, 100 15"
+	/>
+	<rect
+		fill="#333"
+		x="85"
+		y="30"
+		width="30"
+		height="20"
+		rx="5"
+		ry="5"
+	/>
+</svg>
+

@@ -6,56 +6,67 @@ layout: default-wide
 TODO Make all post tiles have the same capitalisation style
 {% endcomment %}
 
-<h1
-  id="index-banner"
->
-  <small>🏵️🌿🌸</small>
-  <span>ralismark<span class="paper">.xyz</span></span>
-  <small>🌸🌿🏵️</small>
-</h1>
+<hgroup id="index-banner">
+  <h1>
+    <small>🏵️🌿🌸</small>
+    <span>ralismark<span class="paper">.xyz</span></span>
+    <small>🌸🌿🏵️</small>
+  </h1>
+
+  <p>{{ site.description }}</p>
+</hgroup>
 
 <style>
 #index-banner {
   font-family: var(--hand-font-family);
-  font-size: 300%;
 
   padding: 4rem 0;
   max-width: 60rem;
   margin: 1rem auto;
+}
+
+#index-banner > h1 {
+  font-size: 300%;
+  margin: 0;
 
   display: flex;
   justify-content: space-around;
   align-items: baseline;
-
-  gap: 2rem 0;
 }
 
 @media(max-width: 45rem) {
-  #index-banner {
+  #index-banner > h1 {
     flex-direction: column;
     align-items: center;
   }
 }
 
-#index-banner .paper {
-  margin: 0;
-  padding: 0;
-  background: var(--filled-bg);
-  color: var(--filled-fg);
-
-  line-height: 1.2;
-}
-
-#index-banner > * {
+#index-banner h1 > * {
   flex-grow: 0;
   flex-shrink: 0;
 }
 
-#index-banner > small {
+#index-banner .paper {
+  margin: 0 0.1em 0 0;
+  padding: 0;
+  background: var(--filled-bg);
+  color: var(--filled-fg);
+
+  line-height: 1.3;
+}
+
+#index-banner small {
   font-size: 80%;
   line-height: 2; /* emoji fonts are tall sometimes */
 }
+
+#index-banner > p {
+  text-align: center;
+  font-size: 120%;
+}
 </style>
+
+<hr class="lit">
 
 <main class="content-width" markdown=1>
 

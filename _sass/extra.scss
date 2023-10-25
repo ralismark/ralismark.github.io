@@ -45,6 +45,26 @@
 		background: var(--filled-bg);
 		color: var(--filled-fg);
 	}
+
+	// TODO make the stalks not overlap the paper
+
+	.paper::after {
+		content: "";
+
+		display: block;
+		position: absolute;
+		left: 50%;
+		bottom: 100%;
+		width: 0.15em;
+		height: 20rem;
+
+		background-color: var(--stroke);
+
+		transform: rotate(calc(-1 * var(--angle)));
+		transform-origin: center bottom;
+
+		pointer-events: none;
+	}
 }
 
 #site-footer {
