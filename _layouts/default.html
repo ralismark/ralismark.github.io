@@ -4,16 +4,10 @@ main_class: content-width
 ---
 
 {% if jekyll.environment != "production" %}
-<div style="
-  text-align: center;
-  writing-mode: sideways-lr;
-  position: absolute;
-  padding: 2rem 0;
-  left: 1rem;
-  background: var(--tertiary);
-  color: white;
-">
-  <strong>{{ jekyll.environment }}</strong> environment
+<div style="text-align: center">
+  🚧
+  You are looking at a {{ jekyll.environment }} environment!
+  🚧
 </div>
 {% endif %}
 
