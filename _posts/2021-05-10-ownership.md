@@ -223,20 +223,17 @@ Much of what I've laid out here is inspired by more modern programming languages
 
 But if you're stuck with C, these concepts will make memory management a little safer.
 
-{% capture content %}
-@import "defns";
-div.highlight .code-annotation {
-  // hide the header
-  // reset stuff
+<style>
+.code-annotation {
   display: block;
   white-space: normal;
   font: var(--main-font);
   color: var(--body-fg);
   // actual styling
   font-style: italic;
-  border: 1px solid $accent-bg;
+  border: 1px solid var(--stroke);
   padding: 0 1ch;
   margin: 0 1em;
   background: var(--body-bg);
 }
-{% endcapture %}<style>{{ content | scssify }}</style>
+</style>
