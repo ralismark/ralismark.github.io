@@ -2,14 +2,15 @@
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 
-{% assign wiring = "#333" %}
+{% assign wiring = "#444" %}
 
 <!--
+  plain: fec
   christmas: c00 0a0
-  trans: 4bf f8a fff f8a
+  trans: 4bf f8a ccc
 -->
 {% capture colours %}
-- "#fec"
+- "#cba"
 {% endcapture %}
 {% assign colours = colours | yaml_parse %}
 
@@ -58,12 +59,12 @@
   {% endfor %}
 
   <path
-    stroke="#333"
-    stroke-width="4"
+    stroke="{{ wiring }}"
+    stroke-width="2"
     d="
-    M0 50
+    M0 35
     {% for _ in colours %}
-    c50 0, 100 -15, 100 -15c0 0, 50 15, 100 15
+    c50 0, 100 -0, 100 -0c0 0, 50 0, 100 0
     {% endfor %}
     "
   />
