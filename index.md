@@ -66,7 +66,7 @@ TODO Make all post tiles have the same capitalisation style
 }
 </style>
 
-<hr class="lit">
+<hr>
 
 <main class="content-width" markdown=1>
 
