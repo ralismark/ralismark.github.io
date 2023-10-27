@@ -33,6 +33,36 @@ somewhere: "{% link somewhere.html %}"
     {{ nav[0] }}
   </a>
   {% endfor %}
+
+  <div
+    class="paper"
+    style="
+      padding: 0;
+      --angle: -1deg
+    "
+  >
+    <select
+      id="color-scheme-select"
+      style="
+      border: none;
+      box-shadow: none;
+      background: none;
+      margin: 0;
+      height: 100%;
+      "
+      onchange="
+        document.documentElement.setAttribute('data-color-scheme',this.value);
+        localStorage.setItem('xyz/color-scheme',this.value);
+      "
+    >
+      <option value="">☀🌙</option>
+      <option value="dark">🌙</option>
+      <option value="light">☀</option>
+    </select>
+    <script>
+      document.getElementById("color-scheme-select").value = localStorage.getItem("xyz/color-scheme") || "";
+    </script>
+  </div>
 </header>
 
 <!-- Content ------------------------------------------------------------------>

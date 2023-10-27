@@ -42,30 +42,25 @@ $accent-bg: #990461;
 	--linking-dark: #4890FF;
 }
 
-// TODO is this too opinionated? we default to dark mode
-
 @mixin light {
-	@media (prefers-color-scheme: light) { @content }
-	@media print { @content }
+	--body-bg: var(--body-bg-light);
+	--body-fg: var(--body-fg-light);
+	--linking: var(--linking-light);
 }
-
 @mixin dark {
-	@media (prefers-color-scheme: dark) { @content }
-}
-
-:root {
 	--body-bg: var(--body-bg-dark);
 	--body-fg: var(--body-fg-dark);
 	--linking: var(--linking-dark);
-
-	@include dark {
-		--body-bg: var(--body-bg-dark);
-		--body-fg: var(--body-fg-dark);
-		--linking: var(--linking-dark);
-	}
-	@include light {
-		--body-bg: var(--body-bg-light);
-		--body-fg: var(--body-fg-light);
-		--linking: var(--linking-light);
-	}
 }
+
+html {
+	// order of these determines priority of conditions for light/dark
+	// TODO is this too opinionated? we default to dark mode
+	@include dark;
+	@media (prefers-color-scheme: light) { @include light; }
+	@media (prefers-color-scheme: dark) { @include dark; }
+	@media print { @include light; }
+	&[data-color-scheme="light"] { @include light; }
+	&[data-color-scheme="dark"] { @include dark; }
+}
+
