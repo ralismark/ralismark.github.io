@@ -88,12 +88,14 @@ img.icon, svg.icon {
 // Elements -------------------------------------------------------------- @@@1
 
 @mixin card($inset: false) {
-	border: .1em solid rgba(0, 0, 0, 0.3);
+	border: .1em solid var(--stroke);
 	@if $inset {
-		box-shadow: inset .1em .1em .1em rgba(0, 0, 0, 0.2);
+		//box-shadow: inset .1em .1em .1em rgba(0, 0, 0, 0.5);
 	} @else {
-		box-shadow: 0.15em 0.15em rgba(0, 0, 0, 0.2);
+		//box-shadow: 0.15em 0.15em rgba(0, 0, 0, 0.5);
 	}
+
+	border-radius: .2em;
 
 	// includers can override if necessary
 	background: var(--box-tint);
@@ -134,7 +136,6 @@ hr {
 
 details {
 	@include card;
-	border-radius: 0.2em;
 
 	padding: 0 0.5em 0; // relying on inner margins for vertical padding
 
@@ -183,7 +184,6 @@ input:not(
 	[type=checkbox], [type=color], [type=file], [type=radio], [type=range],
 ) {
 	@include card(true);
-	border-radius: .2em; // TODO does this clash with paper?
 
 	color: inherit;
 	font: inherit;
@@ -200,7 +200,6 @@ input[type=button], input[type=image], input[type=reset], input[type=submit],
 button,
 a[role=button] {
 	@include card;
-	border-radius: .2em; // TODO does this clash with paper?
 
 	color: inherit;
 	font: inherit;
@@ -259,7 +258,7 @@ a.paper, .paper {
 	text-decoration: none;
 	color: var(--body-fg);
 
-	border: .1em solid rgba(0, 0, 0, 0.3);
+	border: .1em solid var(--stroke);
 	box-shadow: 0.15em 0.15em rgba(0, 0, 0, 0.65);
 	display: inline-block;
 	margin: 0.2em 0.3em;
