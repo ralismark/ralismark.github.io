@@ -46,6 +46,7 @@
 		color: var(--filled-fg);
 	}
 
+	// TODO make paper not be transparent
 	.paper::after {
 		content: "";
 

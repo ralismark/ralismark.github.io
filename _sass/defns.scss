@@ -46,11 +46,13 @@ $accent-bg: #990461;
 	--body-bg: var(--body-bg-light);
 	--body-fg: var(--body-fg-light);
 	--linking: var(--linking-light);
+	color-scheme: light;
 }
 @mixin dark {
 	--body-bg: var(--body-bg-dark);
 	--body-fg: var(--body-fg-dark);
 	--linking: var(--linking-dark);
+	color-scheme: dark;
 }
 
 html {
