@@ -68,20 +68,16 @@ TODO Make all post tiles have the same capitalisation style
 
 <hr>
 
-<main class="content-width" markdown=1>
+<main class="h-card content-width" markdown=1>
 
 # Welcome!
-
-<div class="h-card" markdown=1>
 
 I'm **{{ site.me.name }}**{: .p-name } (she/her), but I usually go by **ralismark**{: .p-nickname } on the internet.
 
 This website -- [ralismark.xyz](https://ralismark.xyz){: .u-url.u-uid rel="me" } -- is my canonical corner of the internet, where I [write irregularly]({% link posts.html %}), mostly on technical topics.
 
-I'm [ralismark on GitHub](https://github.com/ralismark), and I toot as [{{ site.me.fedi.str }}]({{ site.me.fedi.url }}).
-You can also email me via [tem@ this domain](mailto:{{ site.me.email }}).
+I'm [ralismark on GitHub](https://github.com/ralismark){: rel="me" }, and I toot as [{{ site.me.fedi.str }}]({{ site.me.fedi.url }}){: rel="me" }.
+You can also email me via [tem@ this domain](mailto:{{ site.me.email }}){: rel="me" }.
 <!--cloudflare email obfuscation means I can't u-email that last one-->
-
-</div>
 
 </main>
