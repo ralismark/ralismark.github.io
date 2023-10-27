@@ -36,8 +36,9 @@ main_class: h-entry
 		</li>
 
 		<li>
-			{% assign wc = content | strip_html | number_of_words: "auto" | plus: 100 | divided_by: 200 | at_least: 1 %}
-			<abbr title="{{ content | strip_html | number_of_words: "auto" }} total words">{{ wc }} min{% if wc != 1 %}s{% endif %} to read</abbr>
+			{% assign wc = content | strip_html | number_of_words: "auto" %}
+			{% assign readtime = wc | plus: 100 | divided_by: 200 | at_least: 1 %}
+			<abbr title="{{ wc }} total words">{{ readtime }} min{% if readtime != 1 %}s{% endif %}</abbr>
 		</li>
 
 		{% assign tagcount = page.tags | size %}
