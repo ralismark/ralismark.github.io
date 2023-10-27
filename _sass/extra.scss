@@ -37,7 +37,7 @@
 	font-size: 1.2em;
 
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: wrap-reverse; // reverse is needed to make z-index correct for occluding the stalks
 	justify-content: center;
 	gap: 1rem 0.5rem;
 
@@ -45,8 +45,6 @@
 		background: var(--filled-bg);
 		color: var(--filled-fg);
 	}
-
-	// TODO make the stalks not overlap the paper
 
 	.paper::after {
 		content: "";
@@ -120,9 +118,7 @@ blockquote[admonition] {
 
 	width: fit-content; // don't fill the width for short texts
 
-	background: var(--box-tint);
-	border: 1px solid var(--stroke);
-	border-radius: 0.2em;
+	@include card;
 
 	/*&::before {
 		$triangle-size: $embedded-margin * 0.75;

@@ -87,6 +87,18 @@ img.icon, svg.icon {
 
 // Elements -------------------------------------------------------------- @@@1
 
+@mixin card($inset: false) {
+	border: .1em solid rgba(0, 0, 0, 0.3);
+	@if $inset {
+		box-shadow: inset .1em .1em .1em rgba(0, 0, 0, 0.2);
+	} @else {
+		box-shadow: 0.15em 0.15em rgba(0, 0, 0, 0.2);
+	}
+
+	// includers can override if necessary
+	background: var(--box-tint);
+}
+
 // Elements: Basics ------------------------------------------------------ @@@2
 
 kbd {
@@ -121,10 +133,10 @@ hr {
 }
 
 details {
-	background: var(--box-tint);
-	border: 1px solid var(--stroke);
-	padding: 0 0.5em 0; // relying on inner margins for vertical padding
+	@include card;
 	border-radius: 0.2em;
+
+	padding: 0 0.5em 0; // relying on inner margins for vertical padding
 
 	summary {
 		cursor: pointer;
@@ -134,9 +146,7 @@ details {
 }
 
 blockquote:not([admonition]) {
-	background: var(--box-tint);
-	border: 1px solid var(--stroke);
-	border-radius: 0.2em;
+	@include card;
 
 	padding: 0.5em 1em;
 	margin-left: 0;
@@ -172,30 +182,28 @@ input:not(
 	// non-text inputs
 	[type=checkbox], [type=color], [type=file], [type=radio], [type=range],
 ) {
+	@include card(true);
+	border-radius: .2em; // TODO does this clash with paper?
+
 	color: inherit;
 	font: inherit;
-
-	border: 1px solid var(--stroke);
-	border-radius: 0.2em;
 
 	padding: 0.2em 0.5em;
 	margin: 0.2em 0;
 	font-size: 0.9em;
 
 	// above is the same as buttons
-
-	background: var(--box-tint);
 }
 
 // clicky things
 input[type=button], input[type=image], input[type=reset], input[type=submit],
 button,
 a[role=button] {
+	@include card;
+	border-radius: .2em; // TODO does this clash with paper?
+
 	color: inherit;
 	font: inherit;
-
-	border: 1px solid var(--stroke);
-	border-radius: 0.2em;
 
 	padding: 0.2em 0.5em;
 	margin: 0.2em 0;
