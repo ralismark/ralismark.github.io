@@ -74,35 +74,13 @@ somewhere: "{% link somewhere.html %}"
 
 <!-- Footer ------------------------------------------------------------------->
 
-{% capture accounts %}
-twitter: "https://twitter.com/ralismark"
-mastodon: {{ site.me.fedi.url }}
-github: "https://github.com/ralismark"
-email: "mailto:{{ site.me.email }}"
-{% endcapture %}
-{% assign accounts = accounts | yaml_parse %}
-
 <hr>
 
 <footer id="site-footer" style="text-align: center" class="content-width">
-  <ul class="li-flat">
-  {% for entry in accounts %}
-    {% assign icon = entry[0] %}
-    <li>
-      <a class="no-underline"
-        {% if page.url == "/" %}rel="me"{% endif %}
-        aria-label="{{ entry[0] }}"
-        title="{{ entry[0] }}"
-        href="{{ entry[1] }}"
-        >{%- include icon icon=icon -%}</a>
-    </li>
-  {% endfor %}
-  </ul>
-
   <p>
-  All work licensed under <a href="{% link about.md %}#licenses">CC BY-NC 4.0</a> unless otherwise stated.
+    All work licensed under <a href="{% link about.md %}#licenses">CC BY-NC 4.0</a> unless otherwise stated.
   </p>
   <p>
-  This site is <a href="https://github.com/ralismark/ralismark.github.io">open source</a>!
+    This site grown with 💜 on <a href="https://github.com/ralismark/ralismark.github.io">Github</a>!
   </p>
 </div>
