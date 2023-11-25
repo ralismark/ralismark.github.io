@@ -1,0 +1,46 @@
+---
+layout: empty
+title: "Somewhere"
+excerpt: "Somewhere..."
+---
+{# vim: set ft=htmldjango #}
+
+<!--
+  Spoilers!
+
+  Looking at the source code will spoil things!
+
+  For whatever reason I'm putting everything on the same page and using the URL
+  fragment (the bit after the hash) to determine where you are. This avoids
+  loading additional pages when you navigate around, but with the downside that
+  I can't really hide anything.
+
+  Inspired by <https://lunabee.space/archive.html>
+-->
+
+<style>{{ recipe.read("./style.css") }}</style>
+
+<header></header> {# for the glowy #}
+
+<main id="debug" class="content-width">
+  {% for inp in recipe.readdir("./scenes") %}
+    {% set name = inp.stem %}
+    <section id="{{ name }}">
+      {% if inp.suffix == ".md" %}
+        {% filter markdownify %}{% include inp|string %}{% endfilter %}
+      {% elif inp.suffix == ".html" %}
+        {% include inp|string %}
+      {% else %}
+        {{ 0/0 }}
+      {% endif %}
+    </section>
+  {% endfor %}
+
+  <section>
+    {% filter markdownify %}
+You don't know where you are, you're not sure how you got here...
+
+- [find your bearings](#clearing)
+    {% endfilter %}
+  </section>
+</main>

@@ -1,0 +1,92 @@
+{% extends "default.html" %}
+
+{% block content %}
+<article class="h-entry">
+
+{% set post_nav %}
+	<nav class="my-1 content-width">
+		{% if prev() %}
+			{% set prev = recipe.build(prev().meta) %}
+			<a style="float: left; text-align: left" href="{{ prev }}">&laquo; {{ prev.props.title | e }}</a>
+		{% endif %}
+
+		{% if next() %}
+			{% set next = recipe.build(next().meta) %}
+			<a style="float: right; text-align: right" href="{{ next }}">{{ next.props.title | e }} &raquo;</a>
+		{% endif %}
+
+		<div role="none" style="clear: both"></div>
+	</nav>
+{% endset %}
+
+	{{ post_nav }}
+
+	<header class="content-width" style="text-align: center">
+		<h1 class="p-name">{{ page.props.title | escape }}</h1>
+		<p class="p-summary">
+			{{ page.props.excerpt | escape }}
+		</p>
+
+		<ul class="li-flat">
+			<li>
+				<a class="u-url" href="{{ page.url }}">
+					<time datetime="{{ page.props.date.strftime("%Y-%m-%d") }}" class="dt-published">
+						{{ page.props.date.strftime("%-d %b %Y") }}
+					</time>
+				</a>
+			</li>
+
+			<li>
+				{% set wc = content | striptags | wordcount %}
+				{% set readtime = [(wc + 100) // 200, 1] | max %}
+				<abbr title="{{ wc }} total words">{{ readtime }} min{% if readtime != 1 %}s{% endif %} to read</abbr>
+			</li>
+
+			{% set tags = parse_tags(page) %}
+			{% if tags %}
+			<li>
+				<span id="post-tag-label">Tags:</span>
+				{% for tag in tags %}
+					<a class="p-category paper" href="/tags#{{ tag }}">{{ tag }}</a>
+				{% endfor %}
+			</li>
+			{% endif %}
+		</ul>
+
+	</header>
+
+	<hr class="lit">
+
+	<main class="e-content content-width">
+		{{ content }}
+	</main>
+
+	{{ post_nav }}
+
+	<hr>
+
+	{% set location = "https://ralismark.xyz" + page.url %}
+	<aside class="content-width">
+		<h2>Interactions</h2>
+
+		<form action="https://webmention.io/www.ralismark.xyz/webmention" method="post">
+			<p>
+				Link this page and mention me in a
+				<a role="button" href="https://toot.karamoff.dev/?text=@ralismark@cathode.church {{ location }}%0A">Toot 🐘</a>
+				to leave a comment!
+
+				Have a reply somewhere else? Send it here:
+				<input name="source" placeholder="https://example.com/" type="url">
+				<input name="target" value="{{ location }}" type="hidden">
+				<input value="Submit" type="submit">
+			</p>
+		</form>
+
+		<section style="padding: 0 2rem">
+			<noscript>Sorry! JavaScript is required to load comments</noscript>
+			<script data-url="{{ location }}" src="{{ recipe.copy("assets/webmention.js", "/assets/webmention.js").url }}" async></script>
+		</section>
+	</aside>
+
+</article>
+{% endblock content %}

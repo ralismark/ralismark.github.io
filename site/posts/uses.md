@@ -1,0 +1,32 @@
+---
+layout: post
+title: My Tech Stack
+excerpt: An sample of the tools I use
+date: 2021-08-16
+tags: uses
+---
+
+Here's a short list of some of the tools I use regularly.
+
+This seems to be a thing other people are doing, so time to follow the trend.
+
+# Desktop
+
+I don't have a proper desktop computer, instead opting for just a laptop. Handy back in the pre-pandemic times when I'd be able to bring it with me.
+
+- [Manjaro Linux](https://manjaro.org/), an arch-based distro, as my daily driver. Having the AUR available is amazing, and the main reason I'm not using arch proper is for manjaro's (claimed) stability[^manjaro-stability]. Though I might be trying out NixOS in the near future.
+- [Firefox](https://firefox.com/), a cool web browser. It's certainly not chrome or chromium-based, and firefox's UI can also be [somewhat customised using CSS](https://www.reddit.com/r/FirefoxCSS/).
+- [SwayWM](https://swaywm.org/), a wayland port of i3wm. Not sure when or why I switched to wayland, and while there are some teething issues (e.g. screen sharing not working for a bit), they're pretty negligible for me.
+
+[^manjaro-stability]: I've never actually had issues with Arch's rolling release system, and I'm not sure how much Manjaro actually helps with stability.
+
+# Computing
+
+- [Alacritty](https://github.com/alacritty/alacritty), a fast terminal emulator. I don't really notice the speed, and its features are in the background enough for me to not really notice.
+- [tmux](https://github.com/tmux/tmux), a terminal multiplexer. I only regularly use a small fraction of its functionality -- the tab functionality. I've had `alt + <number>` bound to switch tabs.
+- [Neovim](https://neovim.io/), a descendant of the great Vi(m). Started with vim, then switched to the fork. I mostly use it in the terminal/from the command line. I've got two blog posts about it -- [one about general usage](how-i-use-vim-1) and [one about plugins](how-i-use-vim-2) -- and [my vim config is on github](https://github.com/ralismark/vimfiles).
+- [ranger](https://ranger.github.io/), a console file manager. It's just nicer than navigating via `cd` and doing file operations via commands, plus the `:bulkrename` feature is very useful.
+- [Zsh](https://www.zsh.org/), a shell that is often claimed to be better than bash. I'm guessing mostly in ease of customisation and plugin support, though I'm not familiar with what differences there actually are.
+- [sshfs](https://github.com/libfuse/sshfs), a way to mount remote filesystems so you can use local commands on remote files (rather than remote commands on remote files with regular ssh). It's really handy![^tunnel-run]
+
+[^tunnel-run]: I've also got a script that wraps commands and runs them on the connected server if you're in a sshfs -- [tunnel-run in ralismark/micro](https://github.com/ralismark/micro).

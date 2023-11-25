@@ -1,0 +1,37 @@
+---
+layout: default
+title: Everything
+---
+
+<header class="content-width">
+	<h1>Everything</h1>
+
+	<p>
+		All my posts, in a single file.
+		Handy if you want do full-text search.
+	</p>
+
+	<details><summary>Table of Contents</summary>
+		<ul>
+			{% for post in posts|reverse %}
+				{% set post = recipe.build(post) %}
+				<li>
+					<a href="#{{ loop.index }}">{{ post.props.title|e }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</details>
+</header>
+
+{% for post in posts|reverse %}
+	{% set post = recipe.build(post) %}
+	<article>
+		<h1 id="{{ loop.index }}" class="fence-y" style="text-align: center">
+			<a href="{{ post }}">{{ post.props.title|e }}</a>
+		</h1>
+
+		<section role="presentation" class="content-width">
+			{{ post.content }}
+		</section>
+	</article>
+{% endfor %}

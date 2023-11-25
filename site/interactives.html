@@ -1,0 +1,18 @@
+---
+layout: default
+title: Interactives
+---
+
+<h1>{{ page.title | e }}</h1>
+
+<p class="content-width">
+	This is a collection of small HTML/JS toys I've made over the years that don't fit in the main blog series.
+	In addition to the ones below, also see <a href="//www.ralismark.xyz/webgames/">Webgames</a>.
+</p>
+
+<hr class="lit">
+
+<main class="content-width">
+	{% import "layout/macros.html" as macros %}
+	{{ macros.post_listing(posts) }}
+</main>

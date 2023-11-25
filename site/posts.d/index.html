@@ -1,0 +1,30 @@
+---
+layout: default
+title: Blog
+---
+
+{% set ns = namespace(wc=0) %}
+{% for post in posts %}
+	{% set post = recipe.build(post) %}
+	{% set ns.wc = ns.wc + (post.content | striptags | wordcount) %}
+{% endfor %}
+
+<h1>{{ page.title | e }}</h1>
+
+<p class="content-width">
+	Irregularly I have things I want to write about!
+	As a fun statistic, there's <strong>{{ posts | length }} posts</strong>, totalling <strong>{{ ns.wc }} words</strong>!
+</p>
+
+<nav style="text-align: center">
+	<a class="paper" href="{{ recipe.page("./tags.html", "/tags.html", inherit=["posts"]) }}">tags</a>
+	<a class="paper" href="{{ recipe.page("./feed.xml", "/feed.xml", inherit=["posts"]) }}">rss feed</a>
+	<a class="paper" href="{{ recipe.page("./everything.html", "/everything.html", inherit=["posts"]) }}">cat *</a>
+</nav>
+
+<hr class="lit">
+
+<main class="content-width">
+	{% import "layout/macros.html" as macros %}
+	{{ macros.post_listing(posts) }}
+</main>

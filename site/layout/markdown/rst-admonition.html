@@ -1,0 +1,16 @@
+{% set placeholder_img = recipe.copy("../assets/tem-placeholder.png", "/assets/tem-placeholder.png") %}
+{% set preset = {
+	"ask": (placeholder_img, "tem is asking"),
+	"say": (placeholder_img, "tem is saying"),
+	"aside": (placeholder_img, "tem is thinking"),
+	"warn": (placeholder_img, "tem is warning"),
+}.get(title, (None, None)) %}
+{% set image = options.image | default(preset[0]) %}
+{% set alt = options.alt | default(preset[1]) | default("") %}
+<blockquote admonition="{{ title }}">
+	{% with src=image, alt=alt, title=alt %}
+		{% include "./img.html" %}
+	{% endwith %}
+
+	{{ content }}
+</blockquote>

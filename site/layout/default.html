@@ -1,0 +1,72 @@
+{% extends "empty.html" %}
+
+{% block body %}
+<header id="site-nav">
+	{% for name, url in [
+		("index", "/"),
+		("posts", "/posts"),
+		("toys", "/interactives"),
+		("about", "/about"),
+		("somewhere", "/somewhere"),
+	] %}
+		<a
+			class="paper"
+			{% if page.url == url %}aria-current="page"{% endif %}
+			href="{{ url }}"
+			style="--angle: {{ (loop.index + 2) * 2 % 5 - 2 }}deg"
+		>
+			{{ name }}
+		</a>
+	{% endfor %}
+
+	<div
+		class="paper"
+		style="
+			padding: 0;
+			--angle: -1deg
+		"
+	>
+		<select
+			id="color-scheme-select"
+			style="
+			border: none;
+			box-shadow: none;
+			background: none;
+			margin: 0;
+			height: 100%;
+			"
+			onchange="
+				document.documentElement.setAttribute('data-color-scheme',this.value);
+				localStorage.setItem('xyz/color-scheme',this.value);
+			"
+		>
+			<option value="">☀🌙</option>
+			<option value="dark">🌙</option>
+			<option value="light">☀</option>
+		</select>
+		<script>
+			document.getElementById("color-scheme-select").value = localStorage.getItem("xyz/color-scheme") || "";
+		</script>
+	</div>
+</header>
+
+{# content ----------------------------------------------------------------- #}
+
+{% block content %}
+<article>
+	{{ content }}
+</article>
+{% endblock content %}
+
+<hr>
+
+<footer id="site-footer" style="text-align: center" class="content-width">
+	<p>
+		All work licensed under <a href="/about#licenses">CC BY-NC 4.0</a> unless otherwise stated.
+	</p>
+	<p>
+		This site grown with 💜 on <a href="https://github.com/ralismark/ralismark.github.io">Github</a>!
+	</p>
+</div>
+
+{% endblock body %}

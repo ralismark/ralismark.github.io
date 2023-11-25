@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>{% if page.props.title %}{{ page.props.title }} - {% endif %}{{ site.title }}</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="icon" type="image/png" sizes="32x32" href="{{ recipe.copy("assets/logo-32.png", "/assets/logo-32.png") }}">
+		<link type="application/atom+xml" rel="alternate" href="/feed.xml" />
+
+		{% if page.noindex %}<meta name="robots" content="noindex">{% endif %}
+
+		{% set _ = recipe.page("assets/festoon.svg", "/assets/festoon.svg") %}
+		<link rel="stylesheet" href="{{
+			recipe.sass(
+				"css/main.scss",
+				"/assets/main.css",
+				include="./css",
+			)
+		}}">
+
+		{# defer loading of katex? #}
+		{% set katex_attrs %}
+		href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+		integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+		crossorigin="anonymous"
+		{% endset %}
+		<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" {{ katex_attrs }}>
+		<noscript><link rel="stylesheet" {{ katex_attrs }}></noscript>
+		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				for (const e of document.querySelectorAll("[data-math]")) {
+					katex.render(e.innerText, e, {
+						throwOnError: false,
+						output: "mathml",
+						displayMode: e.getAttribute("data-math") == "1",
+					})
+				}
+			})
+		</script>
+
+		<!-- indieweb -->
+		<link rel="webmention" href="https://webmention.io/www.ralismark.xyz/webmention" />
+		<link rel="pingback" href="https://webmention.io/www.ralismark.xyz/xmlrpc" />
+
+		<script>
+			// do it in head so we don't get flash of wrong style
+			(c => c && document.documentElement.setAttribute("data-color-scheme", c))(localStorage.getItem("xyz/color-scheme"));
+		</script>
+	</head>
+	<body>
+		{% block body %}
+		{{ content }}
+		{% endblock %}
+	</body>
+</html>

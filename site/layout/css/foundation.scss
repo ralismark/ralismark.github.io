@@ -1,0 +1,414 @@
+// vim: foldmethod=marker foldmarker=@@@,@@@@
+// for some reason scss doesn't like unmatched braces
+
+// Reset ----------------------------------------------------------------- @@@1
+
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+html, body, div {
+	margin: 0;
+	padding: 0;
+}
+
+// Typography ------------------------------------------------------------ @@@1
+
+html {
+	color: var(--body-fg);
+	background-color: var(--body-bg);
+	font: var(--main-font);
+	text-align: justify;
+}
+
+pre, code {
+	font: var(--mono-font);
+	tab-size: 4;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 500;
+}
+
+strong {
+	font-weight: 700;
+}
+
+// TODO this is opinionated, move it out of foundation
+h1 {
+	text-align: center;
+	font-size: 2em;
+}
+
+// make KaTeX the right size
+.katex {
+	font-size: 1.1em !important;
+}
+
+// a better colour for links
+a:not([role=button]), [role=link] {
+	color: var(--linking);
+
+	text-decoration: underline color-mix(in srgb, var(--linking), transparent 60%);
+
+	&:hover {
+		color: color-mix(in srgb, var(--linking) 50%, var(--body-bg));
+		text-decoration: underline;
+	}
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: var(--secondary);
+
+	& a[href^="#"] {
+		color: inherit;
+		text-decoration: none;
+
+		&:hover {
+			color: inherit;
+		}
+	}
+}
+
+// italicise dates & times
+time {
+	font-style: italic;
+}
+
+figcaption {
+	text-align: center;
+	font-style: italic;
+}
+
+// inline icons
+img.icon, svg.icon {
+	vertical-align: middle;
+}
+
+// Elements -------------------------------------------------------------- @@@1
+
+@mixin card($inset: false) {
+	border: .1em solid var(--stroke);
+	@if $inset {
+		//box-shadow: inset .1em .1em .1em rgba(0, 0, 0, 0.5);
+	} @else {
+		//box-shadow: 0.15em 0.15em rgba(0, 0, 0, 0.5);
+	}
+
+	border-radius: .2em;
+
+	// includers can override if necessary
+	background: var(--box-tint);
+}
+
+// Elements: Basics ------------------------------------------------------ @@@2
+
+kbd {
+	font: var(--mono-font);
+	vertical-align: baseline;
+	padding: 0.1em 0.2em;
+
+	border: 1px solid grey;
+	border-radius: 0.2em;
+	box-shadow: rgba(128, 128, 128, 0.5) 0 0.1em 0;
+}
+
+table:not([role=grid]) {
+	border-collapse: collapse;
+
+	thead, tbody, tfoot {
+		// we copy the default latex style for tables here
+		border-top: 1px solid var(--stroke);
+		border-bottom: 1px solid var(--stroke);
+	}
+
+	th, td {
+		padding: 0.5em;
+		text-align: center; // center all elements
+	}
+}
+
+hr {
+	width: 100%;
+	border: none;
+	border-top: 1px solid var(--stroke);
+}
+
+details {
+	@include card;
+
+	padding: 0 0.5em 0; // relying on inner margins for vertical padding
+
+	summary {
+		cursor: pointer;
+		font-size: 0.9;
+		margin: .5em;
+	}
+}
+
+blockquote:not([admonition]) {
+	@include card;
+
+	padding: 0.5em 1em;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+abbr {
+	position: relative;
+
+	// make tooltip accessible as popup below the <abbr>
+	&:active::after {
+		content: attr(title);
+		position: absolute;
+		display: block;
+
+		left: 0;
+		top: 100%;
+		width: max-content;
+
+		background: var(--filled-bg);
+		color: var(--filled-fg);
+	}
+}
+
+// Elements: Inputs ------------------------------------------------------ @@@2
+
+// typed things
+textarea,
+select,
+input:not(
+	// buttons
+	[type=button], [type=image], [type=reset], [type=submit],
+	// non-text inputs
+	[type=checkbox], [type=color], [type=file], [type=radio], [type=range],
+) {
+	@include card(true);
+
+	color: inherit;
+	font: inherit;
+
+	padding: 0.2em 0.5em;
+	margin: 0.2em 0;
+	font-size: 0.9em;
+
+	// above is the same as buttons
+}
+
+// clicky things
+input[type=button], input[type=image], input[type=reset], input[type=submit],
+button,
+a[role=button] {
+	@include card;
+
+	color: inherit;
+	font: inherit;
+
+	padding: 0.2em 0.5em;
+	margin: 0.2em 0;
+	font-size: 0.9em;
+
+	// above is the same as text inputs
+
+	cursor: pointer;
+	background: var(--button-tint);
+}
+
+a[role=button] {
+	// undo link styling
+	display: inline-block; // no wrap
+	text-decoration: none;
+}
+
+// Elements: Custom ------------------------------------------------------ @@@2
+
+// ul items in a line
+menu, ul.li-flat {
+	padding-left: 0;
+
+	& > li {
+		display: inline;
+
+		&:not(:first-child)::before {
+			// Some lists have whitespace between elements, some don't. But multiple
+			// whitespace characters (including across both <li> and here) get
+			// collapsed into a single space.
+			//
+			// Unfortunately it makes double-click word selection kinda messed up
+			// but that's something we have to give for this to look fine.
+			content: " ⬥ ";
+		}
+	}
+}
+
+@mixin fence($side) {
+	border-#{$side}: 1px solid var(--stroke);
+	padding-#{$side}: 0.3em;
+}
+
+.fence-t, .fence-y { @include fence(top); }
+.fence-b, .fence-y { @include fence(bottom); }
+
+.paper > a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a.paper, .paper {
+	// have a.paper in addition to just .paper so we can override <a> styles
+	text-decoration: none;
+	color: var(--body-fg);
+
+	border: .1em solid var(--stroke);
+	box-shadow: 0.15em 0.15em rgba(0, 0, 0, 0.65);
+	display: inline-block;
+	margin: 0.2em 0.3em;
+	padding: 0 0.5em;
+	transform: rotate(var(--angle, -2deg));
+
+	background: var(--button-tint);
+}
+
+hr.lit {
+	border: none;
+
+	background-image: url("/assets/festoon.svg");
+	background-repeat: round no-repeat;
+	background-size: contain;
+	height: 3em;
+}
+
+// Layout ---------------------------------------------------------------- @@@1
+
+// Layout: Vertical ------------------------------------------------------ @@@2
+
+pre {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+p, div.highlighter-rouge,
+h1, h2, h3, h4, h5, h6,
+details,
+ol, ul
+{
+	// Use margin collapse
+	margin: 0.5em 0;
+}
+
+.katex-display {
+	// avoid scrollbar popping up
+	padding: .5em 0;
+}
+
+hr {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+// Layout: Horizontal ---------------------------------------------------- @@@2
+
+// code blocks from rouge (just <code> is inline)
+pre {
+	overflow-x: scroll;
+
+	// Unicode can overflow the line and cause scrolling.
+	overflow-y: hidden;
+	// I would prefer overflow-y: visible, but alas that's not possible:
+	//
+	// > Setting one axis to visible (the default) while setting the other to a
+	// > different value results in visible behaving as auto.
+	// >
+	// > <https://developer.mozilla.org/en-US/docs/Web/CSS/overflow>
+
+	& > code {
+		// make it a block
+		display: block;
+		width: fit-content;
+
+		padding: 0.3em;
+	}
+}
+
+.katex-display {
+	overflow-x: scroll;
+}
+
+img, svg {
+	max-width: 100%;
+	height: auto;
+}
+
+textarea {
+	width: 100%;
+	// stop horizontal resizing without resize: vertical
+	max-width: 100%;
+	min-width: 100%;
+}
+
+img:not(.icon), svg:not(.icon) {
+	// centre align
+	display: block;
+	margin: 0 auto;
+}
+
+table:not(.rouge-line-table):not(.rouge-table) {
+	// make table centre aligned if narrower than space, and scroll if wider than space
+	// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table#displaying_large_tables_in_small_spaces
+
+	display: block; // FIXME accessibility issue, see https://developer.mozilla.org/en-US/docs/Web/CSS/display#tables
+	margin: 0 auto;
+	width: fit-content;
+	max-width: 100%;
+	overflow-x: scroll;
+}
+
+// Layout: Content Width ------------------------------------------------- @@@2
+
+html {
+	$breaking-width: 45rem; // "clamp" page width to this if above. Used to transition between desktop-like and mobile-like sizing
+	$content-frac: .90; // maximum proportion of page width to use for content (i.e. remaining space is margin)
+
+	// --content-width is width of content
+	// --inset-margin is extra margin for "inset" thing (e.g. admonitions)
+	// --bleed-size is "negative margin" for bleed elements
+
+	--content-width: #{$breaking-width * $content-frac};
+	--bleed-size: calc(25vw - #{$breaking-width * $content-frac / 4});
+	// --inset-margin: 1rem;
+
+	@media(max-width: $breaking-width) {
+		--content-width: #{$content-frac * 100}vw;
+		--bleed-size: #{(1 - $content-frac) * 100 / 4}vw;
+		// --inset-margin: 0rem;
+	}
+}
+
+.content-width {
+	max-width: var(--content-width);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+// .content-width > *:not(.bleed, .content-width) {
+// 	max-width: var(--content-width);
+// 	margin-left: auto;
+// 	margin-right: auto;
+// }
+
+// Customisation Utils --------------------------------------------------- @@@1
+
+@for $i from 0 through 4 {
+	html .mt-#{$i} { margin-top:    $i * 1rem !important; }
+	html .mb-#{$i} { margin-bottom: $i * 1rem !important; }
+	html .mx-#{$i} { margin-left:   $i * 1rem !important; margin-right:  $i * 1rem !important; }
+	html .my-#{$i} { margin-top:    $i * 1rem !important; margin-bottom: $i * 1rem !important; }
+}
+html .mx-auto { margin-left: auto !important; margin-right: auto !important; }
+
+// Flexbox stuff
+.flex-centre {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}

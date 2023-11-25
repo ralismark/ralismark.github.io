@@ -1,0 +1,50 @@
+---
+layout: post
+title: Live HTML
+excerpt: Write HTML live
+date: 2022-11-19
+tags:
+---
+
+<p>
+	Any HTML that's entered in the below textbox will automatically get rendered.
+	You can also use this to write SVG!
+</p>
+
+<textarea
+	id="input"
+	spellcheck="false"
+	oninput="update()"
+	>
+&lt;svg
+	viewBox="0 0 300 100"
+	xmlns="http://www.w3.org/2000/svg"
+	stroke="red"
+	fill="grey"&gt;
+	&lt;circle cx="50" cy="50" r="40" /&gt;
+	&lt;circle cx="150" cy="50" r="4" /&gt;
+
+	&lt;svg viewBox="0 0 10 10" x="200" width="100"&gt;
+		&lt;circle cx="5" cy="5" r="4" /&gt;
+	&lt;/svg&gt;
+&lt;/svg&gt;
+</textarea>
+
+<div id="output">
+</div>
+
+<style>
+	textarea { width: 100%; height: 500px; font-family: monospace; }
+	#output { margin: 1rem auto; }
+</style>
+
+<script>
+	const update = (() => {
+		const output = document.getElementById("output");
+
+		return function() {
+			output.innerHTML = document.getElementById("input").value;
+		}
+	})();
+	update();
+</script>

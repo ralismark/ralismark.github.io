@@ -1,0 +1,17 @@
+{% extends "default.html" %}
+
+{% block content %}
+
+<article class="h-entry content-width">
+
+{% if page.props.title %}
+	<h1 class="p-name">{{ page.props.title }}</h1>
+{% endif %}
+
+<main class="e-content">
+	{{ content }}
+</main>
+
+</article>
+
+{% endblock content %}

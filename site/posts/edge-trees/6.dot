@@ -1,0 +1,10 @@
+digraph {
+	subgraph cluster_0 {
+		parent -> elem -> {near,far};
+	}
+
+	subgraph cluster_1 {
+		"parent'" -> "near'";
+		"parent'" -> "far'" [color=transparent];
+	}
+}
