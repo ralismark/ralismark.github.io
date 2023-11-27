@@ -74,6 +74,13 @@ def make_series(
 def main(ctx: heron.core.BuildContext) -> None:
     ctx.build(heron.recipe.WriteRecipe("/CNAME", "www.ralismark.xyz"))
     ctx.build(heron.recipe.CopyRecipe(here / "robots.txt", "/robots.txt"))
+    ctx.build(
+        heron.recipe.SassRecipe(
+            here / "layout/css/main-foundation.scss",
+            "/assets/foundation.css",
+            include_paths=(str(here / "layout/css"),),
+        )
+    )
 
     def build_root_page(glob: str, **kwargs):
         matches = list(ctx.input(here).glob(glob))
