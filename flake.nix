@@ -20,6 +20,7 @@
 
           buildInputs = [
             pkgs.graphviz
+            pkgs.nodePackages.katex
             (pkgs.python3.withPackages (p: with p; [
               jinja2
               pyyaml

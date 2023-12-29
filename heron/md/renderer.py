@@ -10,6 +10,7 @@ import mistune.plugins.table
 import mistune.plugins.math
 
 from .codeblock import render_block_code
+from .katex import render_katex
 
 
 def basic_generate_id(text: str) -> str:
@@ -57,10 +58,10 @@ class JinjaRenderer(mistune.renderers.html.HTMLRenderer):
         return render_block_code(text, info=info, location=(self.filename, 0))
 
     def block_math(self, text: str) -> str:
-        return f'<div data-math="1">{mistune.escape(text)}</div>'
+        return render_katex(text, display=True)
 
     def inline_math(self, text: str) -> str:
-        return f'<span data-math="0">{mistune.escape(text)}</span>'
+        return render_katex(text, display=False)
 
     def image(self, alt: str, url: str, title: t.Optional[str] = None) -> str:
         warnings.warn_explicit(
