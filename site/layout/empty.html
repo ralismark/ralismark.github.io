@@ -28,18 +28,6 @@
 		{% endset %}
 		<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" {{ katex_attrs }}>
 		<noscript><link rel="stylesheet" {{ katex_attrs }}></noscript>
-		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-		<script>
-			document.addEventListener("DOMContentLoaded", () => {
-				for (const e of document.querySelectorAll("[data-math]")) {
-					katex.render(e.innerText, e, {
-						throwOnError: false,
-						output: "mathml",
-						displayMode: e.getAttribute("data-math") == "1",
-					})
-				}
-			})
-		</script>
 
 		<!-- indieweb -->
 		<link rel="webmention" href="https://webmention.io/www.ralismark.xyz/webmention" />
