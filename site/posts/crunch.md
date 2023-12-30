@@ -48,7 +48,7 @@ I then stopped doing basically any coding, I didn't even look at my blog, for a 
 
 To be honest, killing off all desire to code and enjoyment from it hasn't entirely been a bad thing.
 It's taken up too much of my life in the past, and wanting to just relax is pretty nice, if a little boring.
-And I guess lesson learned to stop myself from doing so much at a time.
+And I guess lesson learned to stop myself from doing so much at a time -- don't work too hard on what you enjoy, or it'll become something you don't enjoy.
 
 I do want to get those drafts out the door soon -- one of them has been in the works since like January.
 Probably early next year.
