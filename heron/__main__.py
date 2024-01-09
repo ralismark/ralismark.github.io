@@ -5,7 +5,7 @@ import logging
 from pathlib import Path
 import shutil
 
-from . import core, dev
+from . import core, dev, recipe
 
 logger = logging.getLogger(__name__)
 
@@ -20,25 +20,6 @@ subparser = parser.add_subparsers(
 
 def register_func(p: argparse.ArgumentParser):
     return lambda func: p.set_defaults(func=func)
-
-
-def load_recipe(recipe: tuple[Path, str]):
-    path, name = recipe
-
-    ns: dict = {
-        "__file__": str(path),
-        "__name__": "__heron_main__",  # intentionally not __main__ to allow scripts to keep working
-    }
-    with path.open("rb") as f:
-        code = compile(f.read(), path, "exec")
-        exec(code, ns)
-
-    if name not in ns:
-        raise KeyError(f"nothing named {name!r} in {path}")
-    recipe = ns[name]
-    if not isinstance(recipe, core.Recipe):
-        raise TypeError(f"{name!r} is not a heron.core.Recipe")
-    return recipe
 
 
 def add_driver_args(parser: argparse.ArgumentParser):
@@ -104,7 +85,7 @@ def cmd_build(args: argparse.Namespace):
         shutil.rmtree(args.out)
     driver = LoggingDriver(args.out)
     print("building...", end="\r")
-    driver.build(load_recipe(args.recipe))
+    driver.build(recipe.LoadRecipe(*args.recipe).join())
     print("built successfully")
 
 
@@ -126,11 +107,13 @@ def cmd_dev(args: argparse.Namespace):
         shutil.rmtree(args.out)
     driver = dev.IncrementalDriver(args.out)
 
+    r = recipe.LoadRecipe(*args.recipe).join()
+
     def run_build():
         # print("\033c\033[3J", end="")
         print("building...", end="\r")
         try:
-            driver.build(load_recipe(args.recipe))
+            driver.build(r)
         except core.BuildFailure as e:
             logger.exception("Failed to build %s", e.recipe, exc_info=e.__context__)
         except Exception:
