@@ -3,9 +3,14 @@ Implementations of Driver
 """
 
 import time
+import logging
 from pathlib import Path
 
 from .. import core
+
+logger = logging.getLogger(__name__)
+
+logger_hit_miss = logger.getChild("hit_miss")
 
 
 class IncrementalDriver(core.Driver):
@@ -68,6 +73,7 @@ class IncrementalDriver(core.Driver):
 
         mf = self.old_cache.get(recipe)
         if mf is None:
+            logger_hit_miss.debug("miss (unseen): %s", recipe)
             return do_fresh_build()
 
         for ev in mf.log:
@@ -76,15 +82,18 @@ class IncrementalDriver(core.Driver):
                     mtime = ev.path.stat().st_mtime
                 except FileNotFoundError:
                     # file got deleted
+                    logger_hit_miss.debug("miss (input gone: %s): %s", ev.path, recipe)
                     return do_fresh_build()
                 if mtime >= self.old_readtimes[ev.path]:
                     # input file changed
+                    logger_hit_miss.debug("miss (input changed: %s): %s", ev.path, recipe)
                     return do_fresh_build()
             elif isinstance(ev, core.Manifest.SubRecipe):
                 # since recipes should be "pure", it is safe to reuse
                 # subrecipes if all preceeding subrecipes have the same output.
                 new_mf = self.build(ev.recipe)
                 if new_mf != ev.manifest:
+                    logger_hit_miss.debug("miss (subrecipe manifest changed: %s): %s", ev.recipe, recipe)
                     return do_fresh_build()
 
         # we now know that all inputs (files or drv values) haven't changed, so
@@ -95,5 +104,7 @@ class IncrementalDriver(core.Driver):
         # we also need to copy over the readtimes
         for inp in mf.filter(core.Manifest.Input):
             self.new_readtimes[inp.path] = self.old_readtimes[inp.path]
+
+        logger_hit_miss.debug("hit: %s", recipe)
 
         return mf
