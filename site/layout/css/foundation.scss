@@ -366,7 +366,7 @@ table:not(.rouge-line-table):not(.rouge-table) {
 // Layout: Content Width ------------------------------------------------- @@@2
 
 html {
-	$breaking-width: 45rem; // "clamp" page width to this if above. Used to transition between desktop-like and mobile-like sizing
+	$breaking-width: 55rem; // "clamp" page width to this if above. Used to transition between desktop-like and mobile-like sizing
 	$content-frac: .90; // maximum proportion of page width to use for content (i.e. remaining space is margin)
 
 	// --content-width is width of content
