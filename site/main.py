@@ -62,6 +62,9 @@ def make_series(
             next=heron.util.Impurity(
                 (lambda i: lambda: out[i + 1] if i < len(out) - 1 else None)(i)
             ),
+            posts=heron.util.Impurity(
+                lambda: tuple(r.meta for r in out),
+            ),
         )
         for i, r in enumerate(pages)
     )
