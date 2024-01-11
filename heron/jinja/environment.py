@@ -93,10 +93,19 @@ base_env = Environment(
         "jinja2.ext.debug",
     ],
 )
-base_env.globals["recipe"] = GetItemWrapper(RECIPE_FILTERS)
 base_env.globals["dt"] = dt
 base_env.filters["repr"] = repr
 base_env.tests["recipe"] = lambda v: isinstance(v, core.Recipe)
+
+
+base_env.globals["recipe"] = GetItemWrapper(RECIPE_FILTERS)
+for k, v in RECIPE_FILTERS.items():
+    base_env.filters[f"recipe.{k}"] = v
+
+
+@util.setitem(base_env.globals, "raise")
+def jinja_raise(msg: str) -> str:
+    raise Exception(msg)
 
 
 @util.setitem(base_env.filters, "markdownify")

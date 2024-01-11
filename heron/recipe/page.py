@@ -25,22 +25,6 @@ def main_file(ctx: core.BuildContext, path: Path) -> Path:
     return path
 
 
-def jinja_render(
-    jenv: jinja2.Environment,
-    content: str,
-    filename: str,
-    vars: dict,
-) -> str:
-    # TODO we need to fix up the line numbers
-    return jenv.template_class.from_code(
-        jenv,
-        # doing this so the template gets the filename
-        jenv.compile(content, filename=filename),
-        jenv.make_globals(None),
-        None,
-    ).render(vars)
-
-
 @dataclasses.dataclass(frozen=True)
 class PageInout(inout.Inout):
     props: frozendict[str, t.Hashable]
@@ -75,6 +59,44 @@ class PageMetaRecipe(inout.InoutRecipeBase[PageInout]):
 
 
 @dataclasses.dataclass(frozen=True)
+class JinjaStage(core.Recipe[str]):
+    content: str
+    filename: str
+    jenv: jinja2.Environment
+    vars: frozendict
+
+    def build_impl(self, ctx: core.BuildContext) -> str:
+        # manually instantiating using from_code allows us to specify the
+        # filename
+        return self.jenv.template_class.from_code(
+            self.jenv,
+            self.jenv.compile(
+                self.content,
+                filename=self.filename,
+            ),
+            self.jenv.make_globals(None),
+            None,
+        ).render(self.vars)
+
+
+@dataclasses.dataclass(frozen=True)
+class JMarkdownStage(core.Recipe[str]):
+    content: str
+    filename: str
+    jenv: jinja2.Environment
+
+    def build_impl(self, ctx: core.BuildContext) -> str:
+        from .. import md
+        renderer = md.create_md(
+            md.JinjaRenderer(
+                lambda name: self.jenv.get_template(name),
+                self.filename,
+            )
+        )
+        return renderer(self.content)
+
+
+@dataclasses.dataclass(frozen=True)
 class PageRecipe(inout.InoutRecipeBase[PageInout]):
     jenv: jinja2.Environment
     ext: t.Optional[str] = None
@@ -106,41 +128,33 @@ class PageRecipe(inout.InoutRecipeBase[PageInout]):
         props = preamble.preamble_or(dict())
 
         # 2. jinja
-        jinja_vars = {
+        jinja_vars = frozendict(
             **self.props,
-            "page": {
+            page=frozendict(
                 **dataclasses.asdict(super().inout()),
-                "props": props,
-            },
-        }
-
-        # doing this so the template can fill in __file__, and also so the
-        # traceback has the right line numbers
-        content = self.jenv.template_class.from_code(
-            self.jenv,
-            self.jenv.compile(
-                # fix up line numbers
-                "\n" * preamble.line_offset + content,
-                filename=str(path),
+                props=frozendict(props),
             ),
-            self.jenv.make_globals(None),
-            None,
-        ).render(jinja_vars)
+        )
+
+        content = ctx.build(
+            JinjaStage(
+                content="\n" * preamble.line_offset + content,  # fix up line numbers
+                filename=str(path),
+                jenv=self.jenv,
+                vars=jinja_vars,
+            )
+        )
 
         # 3. render
         ext = self.ext or path.suffix.lstrip(".")
         if ext == "md":
-            from .. import md
-
-            render = md.create_md(
-                md.JinjaRenderer(
-                    lambda name: self.jenv.get_template(
-                        name,
-                    ),
-                    str(path),
+            content = ctx.build(
+                JMarkdownStage(
+                    content=content,
+                    filename=str(path),
+                    jenv=self.jenv,
                 )
             )
-            content = render(content)
         elif ext == "html":
             pass  # don't need to do anything
         else:
