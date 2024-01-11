@@ -24,7 +24,7 @@ The actual answer is that completing Heron severely burnt me out from working on
 Because even though Heron reached 90% feature parity within about two weeks, that last 10% took so much longer than expected:
 
 - The `escape` filetype, which allowed insertion of arbitrary HTML into a code block.
-I've only used this 5 times _ever_, across 2 blog posts ([Ownership](ownership) and [Alpern & Schneider](lets-prove-1)).
+	I've only used this 5 times _ever_, across 2 blog posts ([Ownership](ownership) and [Alpern & Schneider](lets-prove-1)).
 - Support for rendering GraphViz graphs (for 3 blog posts).
 - Beating the hell out of the markdown engine[^mistune] until I was happy with its dialect.
 - Tweaking all 80+ posts, drafts, and other pages to fix all the formatting differences between mine and Jekyll's dialect.
