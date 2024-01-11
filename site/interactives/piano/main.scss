@@ -1,0 +1,59 @@
+#piano {
+	--white-key-height: 6em;
+	--white-key-width: 1.5em;
+	--white-key-gap: 0.1em;
+	--black-key-height: 4em;
+	--black-key-width: calc(var(--white-key-width) * 0.7);
+
+	max-width: calc(100% - 2em);
+	overflow: scroll;
+	width: fit-content;
+	margin: 1em auto 2em;
+
+	&, > .octave {
+		display: flex;
+	}
+
+	.key {
+		&[data-white] {
+			background: white;
+			&[aria-pressed=true] { background: #aaa; }
+			margin: 0 var(--white-key-gap);
+
+			width: var(--white-key-width);
+			height: var(--white-key-height);
+		}
+
+		&[data-black] {
+			background: black;
+			&[aria-pressed=true] { background: #555; }
+			margin: 0 calc(-0.5 * var(--black-key-width));
+			z-index: 1;
+
+			width: var(--black-key-width);
+			height: var(--black-key-height);
+		}
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-end;
+
+		span {
+			font-weight: bold;
+
+			line-height: 1.2;
+			display: block;
+			margin-bottom: 0.2em;
+
+			color: white;
+
+			&[data-group="0"] { color: orange; }
+			&[data-group="1"] { color: steelblue; }
+		}
+	}
+
+	.key[data-pitch="C4"] {
+		border-top: 0.3em solid var(--primary);
+	}
+}
