@@ -12,7 +12,7 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		{% set _ = recipe.page("assets/festoon.svg", "/assets/festoon.svg") %}
+		{% do recipe.page("assets/festoon.svg", "/assets/festoon.svg") %}
 		<link rel="stylesheet" href="{{
 			recipe.sass(
 				"css/main.scss",

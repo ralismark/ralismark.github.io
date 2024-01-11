@@ -18,7 +18,7 @@ html {
 	color: var(--body-fg);
 	background-color: var(--body-bg);
 	font: var(--main-font);
-	text-align: justify;
+	text-align: left;
 }
 
 pre, code {
@@ -287,7 +287,7 @@ pre {
 	margin-bottom: 0;
 }
 
-p, div.highlighter-rouge,
+p, pre,
 h1, h2, h3, h4, h5, h6,
 details,
 ol, ul
@@ -295,6 +295,11 @@ ol, ul
 	// Use margin collapse
 	margin: 0.5em 0;
 }
+
+// to cancel the above when they're in a list
+// TODO it looks a bit packed...
+li > p:first-child { margin-top: 0; }
+li > p:last-child { margin-bottom: 0; }
 
 .katex-display {
 	// avoid scrollbar popping up
