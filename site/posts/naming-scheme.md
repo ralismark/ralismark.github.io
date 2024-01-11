@@ -12,7 +12,7 @@ Right now, I just have:
 - [wattle](https://en.wikipedia.org/wiki/Acacia_pycnantha) is my laptop, my daily driver.
 - [hakea](https://en.wikipedia.org/wiki/Hakea) is my old phone, and [grevillea](https://en.wikipedia.org/wiki/Grevillea) is my new one.
 - [banksia](https://en.wikipedia.org/wiki/Banksia) was previously my router, mainly for a stable domain name for my home internet when doing port forwarding.
-However, I haven't had a need for it after I started using cloudflared tunnel, and so the name is currently unused.
+	However, I haven't had a need for it after I started using cloudflared tunnel, and so the name is currently unused.
 
 <!--https://en.wikipedia.org/wiki/Proteaceae-->
 
@@ -20,8 +20,8 @@ I previously used Greek letters, and kept a text document listing them.
 That _original_ document is probably lost to time (or the poor organisation of my backups) now, but I discovered a note about this as I was trawling through an old wiki of mine.
 
 - Gamma for the removable sd card I used to have in my phone (and not actually my phone)?
-I think this was mainly to give it a name when I was plugged in to a machine.
-My notes also say that this is unconfirmed so who knows...
+	I think this was mainly to give it a name when I was plugged in to a machine.
+	My notes also say that this is unconfirmed so who knows...
 - Delta was my Dell laptop (pun intended).
 - Epsilon for a very slim USB I had, back when I still had a use for carrying a USB with me all the time.
 - Zeta for my big chonky hard disk, that has since died.
