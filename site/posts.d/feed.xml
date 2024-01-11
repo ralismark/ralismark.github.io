@@ -15,7 +15,7 @@
 			<title>{{ post.props.title|e }}</title>
 			<updated>{{ post.props.date.strftime("%Y-%m-%dT%H:%M:%SZ") }}</updated>
 			<content type="html">{{ post.content|e }}</content>
-			<link rel="alternate" type="text/html" href="{{ post.props.url }}" />
+			<link rel="alternate" type="text/html" href="{{ post.url }}" />
 			<summary type="html">{{ post.props.excerpt|e }}</summary>
 			<published>{{ post.props.date.strftime("%Y-%m-%dT%H:%M:%SZ") }}</published>
 		</entry>
