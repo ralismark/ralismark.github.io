@@ -4,6 +4,7 @@ title: "Git Emergency Procedures #2: Cleaning Things Up"
 excerpt: "Resetting the repo to its inital state & deleting extra files"
 date: 2017-12-19
 tags:
+series: git-ep
 ---
 
 When working on a repo, you may want to reset the repository to the initial state when you cloned it.
