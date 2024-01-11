@@ -1,14 +1,11 @@
 ---
 layout: post
-title: "How I Use Vim #2"
+title: "How I Use Vim #2: Plugins"
 excerpt: Vim plugins I use
 date: 2021-07-24
 tags: uses
+series: how-i-use-vim
 ---
-
-> This is part 2 of *How I Use Vim*.
-> - [part 1, core usage & vimrc snippets](how-i-use-vim-1)
-> - [part 2, plugins](how-i-use-vim-2) &larr; you are here
 
 In addition to the things listed in part 1, I also use a number of plugins, including some of my own.
 All the ones listed here are github repos, so if you're using a plugin manager like `vim-plug`, you can copy these directly.

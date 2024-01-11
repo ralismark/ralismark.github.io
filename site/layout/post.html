@@ -55,6 +55,28 @@
 
 	</header>
 
+	{% if page.props.series %}
+	<aside class="content-width">
+		<details>
+			<summary>
+				This post is part of the <em class="paper">{{ page.props.series }}</em> series!
+			</summary>
+
+			<ol>
+				{% for post in posts() %}
+					{% set post = post | recipe.build %}
+					{% if post.props.series == page.props.series %}
+						<li>
+							<a href="{{ post }}">{{ post.props.title | e }}</a>
+							{% if post.url == page.url %}<strong>&larr; You are here!</strong>{% endif %}
+						</li>
+					{% endif %}
+				{% endfor %}
+			</ol>
+		</details>
+	</aside>
+	{% endif %}
+
 	<hr class="lit">
 
 	<main class="e-content content-width">

@@ -4,6 +4,7 @@ title: "BlueHID Details #2: What The Heck Is A HID Descriptor"
 excerpt: Figuring out how to make a useful HID descriptor
 date: 2019-01-07
 tags:
+series: bluehid
 ---
 
 Now that we've got our Bluetooth HID support up (either through part 1 or by being on P), it's time to start using the API.

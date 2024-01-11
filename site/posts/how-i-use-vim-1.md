@@ -1,17 +1,11 @@
 ---
 layout: post
-title: "How I Use Vim #1"
+title: "How I Use Vim #1: Core"
 excerpt: Interesting aspects of my vim usage
 date: 2020-08-29
 tags: uses
+series: how-i-use-vim
 ---
-
-> This is part 1 of *How I Use Vim*.
-> - [part 1, core usage & vimrc snippets] &larr; you are here
-> - [part 2, plugins]
-
-[part 1, core usage & vimrc snippets]: how-i-use-vim-1
-[part 2, plugins]: how-i-use-vim-2
 
 I've been using Vim (well, Neovim) for several years now and I've developed some idiosyncrasies along the way.
 [My vimrc][vimrc] is quite large, so here's a few points.

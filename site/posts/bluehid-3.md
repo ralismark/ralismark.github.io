@@ -4,6 +4,7 @@ title: "BlueHID Details #3: Finally, Controls!"
 excerpt: Finally sending inputs over bluetooth
 date: 2019-01-13
 tags:
+series: bluehid
 ---
 
 After part 1 and 2, we've got everything (finally) set up implement a Bluetoooth HID device.

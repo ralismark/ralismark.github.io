@@ -4,6 +4,7 @@ title: "Git Emergency Procedures #1: Recovering Deleted Refs"
 excerpt: Recovering commits from deleted branches
 date: 2017-11-30
 tags:
+series: git-ep
 ---
 
 Suppose you deleted a branch, or undid a merge with a now deleted branch.

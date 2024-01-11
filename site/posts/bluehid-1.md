@@ -4,6 +4,7 @@ title: "BlueHID Details #1: Oreo Hacks"
 excerpt: Enabling the Bluetooth HID device API on Oreo
 date: 2019-01-04
 tags:
+series: bluehid
 ---
 
 The upcoming Android P adds support for using your phone as a Bluetooth HID, allowing you to potentially use it as a keyboard, mouse, or even a gamepad.
