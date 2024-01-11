@@ -1,0 +1,55 @@
+---
+layout: post-wide
+title: Virtual Piano
+excerpt: For when you lack a real piano
+date: 2024-01-11
+tags:
+---
+
+<section id="piano">
+{% for octave in range(2, 6) %}
+<section class="octave" data-octave="{{ octave }}">
+	{% for idx, note, sharp in [
+		(0, "C", false), (0, "C", true),
+		(1, "D", false), (1, "D", true),
+		(2, "E", false),
+		(3, "F", false), (3, "F", true),
+		(4, "G", false), (4, "G", true),
+		(5, "A", false), (5, "A", true),
+		(6, "B", false),
+	] %}
+	<div
+		class="key"
+		data-nr="{{ idx + octave * 7 }}"
+		data-pitch="{{ note }}{% if sharp %}#{% endif %}{{ octave }}"
+		aria-pressed="false"
+		data-{% if sharp %}black{% else %}white{% endif %}="1"
+	></div>
+	{% endfor %}
+</section>
+{% endfor %}
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.58/Tone.js"></script>
+<link rel="stylesheet" href="{{ recipe.sass("./main.scss", page.url + "/main.css") }}">
+<script src="{{ recipe.copy("./data.js", page.url + "/data.js") }}"></script>
+<script src="{{ recipe.copy("./main.js", page.url + "/main.js") }}"></script>
+
+<details class="content-width"><summary>About</summary>
+{% filter markdownify %}
+I'm currently learning music theory.
+However, I don't have any instruments other than my violin, which I can't really mess around with chords on.
+This is my substitute.
+
+At the moment, there's still a few features missing:
+
+- Changing the ranges that you play.
+- Look okay on narrower screens.
+
+Credits:
+
+- Inspired by [Online Pianist](https://www.onlinepianist.com/virtual-piano), in particular the key layout.
+- This uses [Tone.js](https://tonejs.github.io/) (MIT) to play sounds.
+- The sounds are [Salamander Grand Piano V2](https://github.com/Tonejs/audio/tree/master/salamander) (CC BY 3.0), by Alexander Holm.
+{% endfilter %}
+</details>
