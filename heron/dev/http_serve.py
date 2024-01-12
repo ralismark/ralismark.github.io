@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import typing as t
 import shutil
 import urllib.parse
 import http
@@ -9,6 +10,14 @@ from pathlib import Path, PurePosixPath
 
 class RequestHandler(http.server.BaseHTTPRequestHandler):
     NOT_FOUND_MSG = "404 Not Found."
+
+    MIME_FOR_SUFFIX = {
+        ".htm": "text/html",
+        ".html": "text/html",
+        ".css": "text/css",
+        ".js": "text/javascript",
+        ".mjs": "text/javascript",
+    }
 
     def __init__(self, *args, directory: Path, **kwargs):
         self.directory = directory
@@ -54,6 +63,10 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
 
     def sendfile(self, path: Path, send_content: bool):
         self.send_header("Content-Length", str(path.stat().st_size))
+
+        if mime := self.MIME_FOR_SUFFIX.get(path.suffix):
+            self.send_header("Content-Type", mime)
+
         self.end_headers()
 
         if send_content:
