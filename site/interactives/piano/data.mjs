@@ -1,7 +1,7 @@
 // replace with KeyboardLayoutMap[1] once that stabilises
 //
 // [1]: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardLayoutMap
-const keyNames = {
+export const keyNames = {
   "Digit1":       "1",
   "Digit2":       "2",
   "Digit3":       "3",
@@ -54,7 +54,7 @@ const keyNames = {
 }
 
 // values are [name, group, key nr, black?]
-const keymap = [
+export const keymap = [
   // top row
   ["Digit1",       0, -1, true],
   ["KeyQ",         0, 0,  false],
@@ -104,7 +104,7 @@ const keymap = [
   ["Quote",        1, 9,  true],
 ]
 
-const salamander = {
+export const salamander = {
   baseUrl: "https://tonejs.github.io/audio/salamander/",
   release: 1,
 

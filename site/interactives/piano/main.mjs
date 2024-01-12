@@ -1,3 +1,6 @@
+import {keyNames, keymap, salamander} from "./data.mjs"
+import identify from "./chords.mjs"
+
 const map = (() => {
   const map = {}
   for (const [key, group, offset, black] of keymap) {
@@ -6,20 +9,13 @@ const map = (() => {
   return map
 })()
 
-const base = [21, 28]
+window.base = [21, 28]
 
 // whether a distinct sharp exists and isn't just enharmonic to another scale
 // degree
 const hasSharp = [true, true, false, true, true, true, false]
 
-function getPitch(keynr, sharp) {
-  const octave = Math.floor(keynr / 7)
-  const degree = keynr % 7
-
-  return "CDEFGAB"[degree] + (sharp ? "#" : "") + octave
-}
-
-function relabel() {
+window.relabel = function() {
   for (const label of document.querySelectorAll("[data-mapped]")) {
     label.remove()
   }
@@ -41,13 +37,20 @@ function relabel() {
 
 relabel()
 
-//const synth = new Tone.PolySynth(Tone.Synth).toDestination();
-const synth = new Tone.Sampler(salamander).toDestination()
+const pressed = new Set()
 
-const pressed = {}
+const focusarea = document.querySelector("main")
+const chordname = document.querySelector("#chordname")
+
+await import("https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.58/Tone.js")
+
+const synth = new Tone.Sampler(salamander).toDestination()
+await Tone.loaded()
+
+document.querySelector("#piano").setAttribute("data-ready", 1)
 
 const handle = async ev => {
-  if (ev.target !== document.body) return
+  if (!focusarea.contains(ev.target)) return
 
   const mapped = map[ev.code]
   if (mapped === undefined) return
@@ -60,27 +63,32 @@ const handle = async ev => {
     // sharp = false
   }
 
-  const pitch = getPitch(keynr, sharp)
+  const octave = Math.floor(keynr / 7)
+  const degree = keynr % 7
+
+  const pitchName = "CDEFGAB"[degree] + (sharp ? "#" : "") + octave
+  const pitchNr = octave * 12 + [0, 2, 4, 5, 7, 9, 11][degree] + (sharp ? 1 : 0)
 
   ev.preventDefault()
 
-  const el = document.querySelector(`.key[data-pitch="${pitch}"]`)
+  const el = document.querySelector(`.key[data-pitch="${pitchName}"]`)
   if (ev.type === "keydown") {
-    if (pressed[pitch]) return
-    pressed[pitch] = true
+    if (pressed.has(pitchNr)) return
+    pressed.add(pitchNr)
     if (el) el.setAttribute("aria-pressed", "true")
   } else {
-    delete pressed[pitch]
+    pressed.delete(pitchNr)
     if (el) el.setAttribute("aria-pressed", "false")
   }
 
+  chordname.innerHTML = identify(pressed)
+
   await Tone.start()
-  await Tone.loaded()
 
   if (ev.type === "keydown") {
-    synth.triggerAttack(pitch, Tone.now())
+    synth.triggerAttack(pitchName)
   } else {
-    synth.triggerRelease(pitch, Tone.now())
+    synth.triggerRelease(pitchName)
   }
 }
 

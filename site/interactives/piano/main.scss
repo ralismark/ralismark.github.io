@@ -1,16 +1,23 @@
 #piano {
-	--white-key-height: 6em;
-	--white-key-width: 1.5em;
 	--white-key-gap: 0.1em;
+
+	--white-key-height: 6em;
 	--black-key-height: 4em;
+
+	--white-key-width: 1.5em;
 	--black-key-width: calc(var(--white-key-width) * 0.7);
 
 	max-width: calc(100% - 2em);
-	overflow: scroll;
-	width: fit-content;
-	margin: 1em auto 2em;
+	// overflow: scroll;
+	// width: fit-content;
+	margin: 1em auto;
 
-	&, > .octave {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1em 0;
+	justify-content: center;
+
+	> .octave {
 		display: flex;
 	}
 
@@ -55,5 +62,35 @@
 
 	.key[data-pitch="C4"] {
 		border-top: 0.3em solid var(--primary);
+	}
+
+	position: relative;
+
+	main:not(:focus-within) & {
+		&::after {
+			content: "Not focused...";
+			position: absolute;
+			z-index: 2;
+
+			width: 100%;
+			height: 100%;
+
+			background: rgba(128, 128, 128, 0.9);
+			text-align: center;
+		}
+	}
+
+	&:not([data-ready]) {
+		&::after {
+			content: "Loading...";
+			position: absolute;
+			z-index: 2;
+
+			width: 100%;
+			height: 100%;
+
+			background: rgba(128, 128, 128, 0.9);
+			text-align: center;
+		}
 	}
 }
