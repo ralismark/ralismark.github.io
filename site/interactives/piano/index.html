@@ -6,7 +6,7 @@ date: 2024-01-11
 tags:
 ---
 
-<section id="piano">
+<section id="piano" tabindex="0">
 {% for octave in range(2, 6) %}
 <section class="octave" data-octave="{{ octave }}">
 	{% for idx, note, sharp in [
@@ -30,21 +30,24 @@ tags:
 {% endfor %}
 </section>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.58/Tone.js"></script>
-<link rel="stylesheet" href="{{ recipe.sass("./main.scss", page.url + "/main.css") }}">
-<script src="{{ recipe.copy("./data.js", page.url + "/data.js") }}"></script>
-<script src="{{ recipe.copy("./main.js", page.url + "/main.js") }}"></script>
+<p id="chordname" class="content-width" style="text-align: center">
+-
+</p>
+
+<div class="content-width" style="text-align: center">
+	<button type="button" onclick="--base[0]; relabel()">&larr; top row</button>
+	<button type="button" onclick="++base[0]; relabel()">top row &rarr;</button>
+	<button type="button" onclick="--base[1]; relabel()">&larr; bottom row</button>
+	<button type="button" onclick="++base[1]; relabel()">bottom row &rarr;</button>
+</div>
+
+<br>
 
 <details class="content-width"><summary>About</summary>
 {% filter markdownify %}
 I'm currently learning music theory.
 However, I don't have any instruments other than my violin, which I can't really mess around with chords on.
 This is my substitute.
-
-At the moment, there's still a few features missing:
-
-- Changing the ranges that you play.
-- Look okay on narrower screens.
 
 Credits:
 
@@ -53,3 +56,11 @@ Credits:
 - The sounds are [Salamander Grand Piano V2](https://github.com/Tonejs/audio/tree/master/salamander) (CC BY 3.0), by Alexander Holm.
 {% endfilter %}
 </details>
+
+<link rel="stylesheet" href="{{ recipe.sass("./main.scss", page.url + "/main.css") }}">
+{% for path in recipe.readdir(".") %}
+	{% if path.suffix == ".mjs" %}
+		{% do recipe.copy(path, page.url + "/" + path.name) %}
+	{% endif %}
+{% endfor %}
+<script type="module" defer src="{{ page.url }}/main.mjs"></script>
