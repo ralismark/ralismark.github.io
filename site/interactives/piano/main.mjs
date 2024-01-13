@@ -39,7 +39,6 @@ relabel()
 
 const pressed = new Set()
 
-const focusarea = document.querySelector("main")
 const chordname = document.querySelector("#chordname")
 
 await import("https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.58/Tone.js")
@@ -50,8 +49,6 @@ await Tone.loaded()
 document.querySelector("#piano").setAttribute("data-ready", 1)
 
 const handle = async ev => {
-  if (!focusarea.contains(ev.target)) return
-
   const mapped = map[ev.code]
   if (mapped === undefined) return
   let [group, offset, sharp] = mapped
@@ -68,8 +65,6 @@ const handle = async ev => {
 
   const pitchName = "CDEFGAB"[degree] + (sharp ? "#" : "") + octave
   const pitchNr = octave * 12 + [0, 2, 4, 5, 7, 9, 11][degree] + (sharp ? 1 : 0)
-
-  ev.preventDefault()
 
   const el = document.querySelector(`.key[data-pitch="${pitchName}"]`)
   if (ev.type === "keydown") {
