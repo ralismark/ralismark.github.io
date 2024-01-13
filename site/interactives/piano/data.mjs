@@ -100,8 +100,8 @@ export const keymap = [
   ["KeyL",         1, 7,  true],
   ["Period",       1, 8,  false],
   ["Semicolon",    1, 8,  true],
-  ["Slash",        1, 9,  false],
-  ["Quote",        1, 9,  true],
+  //["Slash",        1, 9,  false], // doesn't work with firefox
+  //["Quote",        1, 9,  true], // doesn't work with firefox
 ]
 
 export const salamander = {
