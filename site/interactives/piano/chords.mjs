@@ -2,7 +2,7 @@ function notename(pitch) {
   return ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"][pitch % 12]
 }
 
-const triads = {
+const chords = {
   // dyads
   "100000000000": " + P8",
   "110000000000": " + m2",
@@ -33,6 +33,17 @@ const triads = {
   "100100010100": "<sup>o7</sup>", // full-diminished seventh
 }
 
+// validate that we don't have any chords which are just rotations of each other
+for (const bmap of Object.keys(chords)) {
+  for (let i = 1; i < 12; ++i) {
+    if (bmap[i] !== "1") continue
+    const inv = bmap.substring(i) + bmap.substring(0, i)
+    if (chords[inv] !== undefined) {
+      console.warn("duplicate chord fingerprint", bmap, inv)
+    }
+  }
+}
+
 export default function identify(pitches) {
   if (pitches.size === 0) {
     return "-"
@@ -56,7 +67,7 @@ export default function identify(pitches) {
     if (!mask[0]) continue
     const bmask = mask.join("")
 
-    const suffix = triads[bmask]
+    const suffix = chords[bmask]
     console.log(bmask, suffix)
     if (suffix === undefined) continue
 
