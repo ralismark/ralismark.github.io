@@ -29,8 +29,8 @@ const chords = {
   "100010010001": "<sup>ma7</sup>", // major-major (major) seventh
   "100010010010": "<sup>7</sup>", // major-minor (dominant) seventh
   "100100010010": "m<sup>7</sup>", // minor-minor (minor) seventh
-  "100100010010": "<sup>ø7</sup>", // half-diminished seventh
-  "100100010100": "<sup>o7</sup>", // full-diminished seventh
+  "100100100010": "<sup>ø7</sup>", // half-diminished seventh
+  "100100100100": "<sup>o7</sup>", // full-diminished seventh
 }
 
 // validate that we don't have any chords which are just rotations of each other
