@@ -1,17 +1,16 @@
 ---
 layout: post
 title: "Even More Concepts In C++14 #1"
+excerpt: "Implementing concepts in C++14 in under 50 lines"
+date: 2017-05-07
 tags: c-cpp
-excerpt: Implementing concepts in C++14 in under 50 lines
 ---
 
-Despite Concepts Lite not making it into the standard (yet), there is still an
-extensive use of them in the standard library. It has its place in user
-libraries as well (most notable [ranges-v3][1]), providing a friendlier tool to
-use alongside SFINAE. Today, I'll provide (yet another) C++14-compatible
-implementation of them.
+Despite Concepts Lite not making it into the standard (yet), there is still an extensive use of them in the standard library.
+It has its place in user libraries as well (most notable [ranges-v3][1]), providing a friendlier tool to use alongside SFINAE.
+Today, I'll provide (yet another) C++14-compatible implementation of them.
 
-  [1]: https://github.com/ericniebler/range-v3
+[1]: https://github.com/ericniebler/range-v3
 
 <!--more-->
 
@@ -20,23 +19,18 @@ implementation of them.
 
 # Previous Work
 
-Many other libraries have also been made to support concepts in c++. For
-example, [Tick][2], which provides concept checking in C++11 (albeit with some
-macros) and [concepts in ranges-v3][3], which is a completely library-only
-solution (no preprocessor!). However, both those libraries are decently heavy -
-Tick is a whole library, and the ranges-v3 implementation requires the meta
-template metaprogramming library (unless you go back far enough in the commit
-history).
+Many other libraries have also been made to support concepts in c++.
+For example, [Tick][2], which provides concept checking in C++11 (albeit with some macros) and [concepts in ranges-v3][3], which is a completely library-only solution (no preprocessor!).
+However, both those libraries are decently heavy -- Tick is a whole library, and the ranges-v3 implementation requires the meta template metaprogramming library (unless you go back far enough in the commit history).
 
-  [2]: https://github.com/pfultz2/Tick
-  [3]: https://github.com/ericniebler/range-v3/blob/e411a19a312542be98ec9f318ef5b335e0fdaf0a/include/range/v3/utility/concepts.hpp
+[2]: https://github.com/pfultz2/Tick
+[3]: https://github.com/ericniebler/range-v3/blob/e411a19a312542be98ec9f318ef5b335e0fdaf0a/include/range/v3/utility/concepts.hpp
 
 # Yet Another Concepts Library
 
-I've been able to make a single header implementation in under 200 lines, with
-the core component taking less than 50 lines. The syntax is similar to
-ranges-v3's implementation, declaring the requirements in the return type of a
-template member function. Concept checking is also similar.
+I've been able to make a single header implementation in under 200 lines, with the core component taking less than 50 lines.
+The syntax is similar to ranges-v3's implementation, declaring the requirements in the return type of a template member function.
+Concept checking is also similar.
 
 ```cpp
 // Concept definition
@@ -54,19 +48,19 @@ static constexpr bool int_models_ec = concepts::models<EqualityComparable, int>:
 
 # Core Implementation
 
-The implementation is somewhat based off of ranges-v3's implementation, and uses
-overload  resolution to determine if a concept is matched. No `void_t` detection
-idiom required.
+The implementation is somewhat based off of ranges-v3's implementation, and uses overload  resolution to determine if a concept is matched.
+No `void_t` detection idiom required.
 
 ```cpp
 template <typename...>
 auto models_(...) -> std::false_type;
 ```
-This catch-all function is the fallback if the concept is not matched. This
-ensures that the overload set is not empty after SFINAE. The ellipses (`...`)
-parameter list is a variadic parameter list (whose actual use is effectively
-replaced by templates), which accepts any and all arguments. The caller cleans
-this up, so it's all OK. Besides, this should never be actually called.
+
+This catch-all function is the fallback if the concept is not matched.
+This ensures that the overload set is not empty after SFINAE.
+The ellipses (`...`) parameter list is a variadic parameter list (whose actual use is effectively replaced by templates), which accepts any and all arguments.
+The caller cleans this up, so it's all OK.
+Besides, this should never be actually called.
 
 ```cpp
 template <typename... Ts, typename Concept,
@@ -77,14 +71,13 @@ template <typename... Ts, typename Concept,
 auto models_(Concept*) -> std::true_type;
 ```
 
-This is the part of the concept checking that does all the work. It uses SFINAE
-to remove it (and falling back to the other one) if the return type is not
-well-formed for the given template types. Why a pointer as an argument? I'm not
-sure, I was just following Eric Niebler's implementation ([which also uses a
-pointer][4]).  I'm guessing it bypasses having to use `declval` and that kind of
-stuff, while still getting the concept type.
+This is the part of the concept checking that does all the work.
+It uses SFINAE to remove it (and falling back to the other one) if the return type is not well-formed for the given template types.
+Why a pointer as an argument?
+I'm not sure, I was just following Eric Niebler's implementation ([which also uses a pointer][4]).
+ I'm guessing it bypasses having to use `declval` and that kind of stuff, while still getting the concept type.
 
-  [4]: https://github.com/ericniebler/range-v3/blob/e411a19a312542be98ec9f318ef5b335e0fdaf0a/include/range/v3/utility/concepts.hpp#L112
+[4]: https://github.com/ericniebler/range-v3/blob/e411a19a312542be98ec9f318ef5b335e0fdaf0a/include/range/v3/utility/concepts.hpp#L112
 
 # Helpers
 
@@ -102,15 +95,12 @@ using exists = int;
 ```
 
 The `models` alias wraps `models_()`, providing a friendlier interface.
-`valid_expr` checks if all expressions passed are valid (e.g.
-`decltype(valid_expr(i++, ++i))`). `exists` is the same, but with types (e.g.
-`exists<typename T::value_type, typename T::reference>`).
+`valid_expr` checks if all expressions passed are valid (e.g. `decltype(valid_expr(i++, ++i))`). `exists` is the same, but with types (e.g. `exists<typename T::value_type, typename T::reference>`).
 
 # Refining Concepts?
 
-Right now, the implementation does directly support refining concepts. You can
-do this in a roundabout way with `enable_if`, but it's quite non-natural
-considering how common refinement is:
+Right now, the implementation does directly support refining concepts.
+You can do this in a roundabout way with `enable_if`, but it's quite non-natural considering how common refinement is:
 
 ```cpp
 template <typename T>
@@ -124,4 +114,4 @@ That's why there's going to be part 2 (when I decide to make it).
 
 All code is on [Github][5].
 
-  [5]: https://gist.github.com/ralismark/e30a1f4988748d4f700da44fef36c606
+[5]: https://gist.github.com/ralismark/e30a1f4988748d4f700da44fef36c606

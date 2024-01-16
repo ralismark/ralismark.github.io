@@ -1,13 +1,15 @@
 ---
 layout: post
-title: "Raspberry-Pi-As-Code"
-tags:
+title: Raspberry-Pi-As-Code
 excerpt: Embedded device infrastructure entirely in docker with balenaOS
+date: 2022-05-08
+tags:
 ---
 
-{% include admonition verb="warn" %}
-> By late 2022, I no longer had anything that needed to be run on a raspberry pi, and I've now decommissioned my raspberry pi.
-> While I still have the infra configurations (including GitHub Actions deploy workflows), alas I cannot vouch for whether this is post is still up to date.
+.. admonition:: warn
+
+	By late 2022, I no longer had anything that needed to be run on a raspberry pi, and I've now decommissioned my raspberry pi.
+	While I still have the infra configurations (including GitHub Actions deploy workflows), alas I cannot vouch for whether this is post is still up to date.
 
 For a while now I've been running [balenaOS] on my raspberry pi.
 This is an operating system that's tailored towards hosting docker containers on embedded devices, allowing you to avoid basically all stateful or manual configuration on the device itself.
@@ -29,9 +31,10 @@ The entire infrastructure stack, which typically includes the balena cloud platf
 [balenaEngine]: https://www.balena.io/engine/
 [its docs]: https://www.balena.io/docs/learn/welcome/introduction/
 
-{% include admonition verb="say" %}
-> balenaOS being another [free] component of a fully functioning balena platform?
-> [Where have I heard that before](https://wiki.installgentoo.com/index.php/Interjection)?
+.. admonition:: say
+
+	balenaOS being another [free] component of a fully functioning balena platform?
+	[Where have I heard that before](https://wiki.installgentoo.com/index.php/Interjection)?
 
 [free]: https://www.balena.io/os/docs/custom-build/
 
@@ -40,10 +43,12 @@ I also want to highlight the [massive list of example project] (and [even more c
 [even more community ones]: https://hub.balena.io/projects
 [massive list of example project]: https://www.balena.io/docs/learn/more/examples/seed-projects/
 
-{% include admonition verb="ask" %}
-> By the way, can you use balenaOS without balena cloud?
+.. admonition:: ask
 
-Yep! Despite most of the stack assuming you're using balenaCloud -- which is free if you're managing less than 10 devices -- you can in fact just run unmanaged balenaOS, avoiding any cloud bits.
+	By the way, can you use balenaOS without balena cloud?
+
+Yep!
+Despite most of the stack assuming you're using balenaCloud -- which is free if you're managing less than 10 devices -- you can in fact just run unmanaged balenaOS, avoiding any cloud bits.
 For this, follow the [balenaOS guide] instead of the main docs.
 
 [balenaOS guide]: https://www.balena.io/os/docs/raspberrypi3/getting-started/

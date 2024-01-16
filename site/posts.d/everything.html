@@ -1,46 +1,37 @@
 ---
-layout: default-wide
+layout: default
 title: Everything
 ---
 
-<style>
-@keyframes huespin {
-  from { filter: hue-rotate(0deg);   }
-  to   { filter: hue-rotate(360deg); }
-}
-svg#spiral {
-}
-svg#spiral > use {
-  animation-timing-function: linear;
-  animation-duration: 3s;
-  animation-name: huespin;
-  animation-iteration-count: infinite;
-}
-</style>
-
 <header class="content-width">
-  <h1>{{ page.title | escape }}</h1>
+	<h1>Everything</h1>
 
-  <svg id="spiral" width="200" height="200" viewBox="-200 -200 400 400" xmlns="http://www.w3.org/2000/svg">
-    <title>Have an easter egg!</title>
-    <use href="/assets/spiral.svg#root" width="100" height="100" stroke-width="10">
-  </svg>
+	<p>
+		All my posts, in a single file.
+		Handy if you want do full-text search.
+	</p>
 
-  <p>
-  All my posts, in a single file. Handy if you want do full-text search.
-  </p>
+	<details><summary>Table of Contents</summary>
+		<ul>
+			{% for post in posts|reverse %}
+				{% set post = recipe.build(post) %}
+				<li>
+					<a href="#{{ loop.index }}">{{ post.props.title|e }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</details>
 </header>
 
-{% for post in site.posts %}
-  <article>
-    <h1 class="fence-y" style="text-align: center">
-      <a href="{{ post.url }}">
-        {{post.title}}
-      </a>
-    </h1>
+{% for post in posts|reverse %}
+	{% set post = recipe.build(post) %}
+	<article>
+		<h1 id="{{ loop.index }}" class="fence-y" style="text-align: center">
+			<a href="{{ post }}">{{ post.props.title|e }}</a>
+		</h1>
 
-    <section role="presentation" class="content-width">
-      {{ post.content }}
-    </section>
-  </article>
+		<section role="presentation" class="content-width">
+			{{ post.content }}
+		</section>
+	</article>
 {% endfor %}

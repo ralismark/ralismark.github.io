@@ -1,86 +1,72 @@
----
-layout: empty
-main_class: content-width
----
+{% extends "empty.html" %}
 
-{% if jekyll.environment != "production" %}
-<div style="text-align: center">
-  🚧
-  You are looking at a {{ jekyll.environment }} environment!
-  🚧
-</div>
-{% endif %}
-
-<!-- Navbar ------------------------------------------------------------------->
-
-{% capture navs %}
-index: "{% link index.md %}"
-posts: "{% link posts.html %}"
-toys: "{% link interactives.html %}"
-about: "{% link about.md %}"
-somewhere: "{% link somewhere.html %}"
-{% endcapture %}
-{% assign navs = navs | yaml_parse %}
-
+{% block body %}
 <header id="site-nav">
-  {% for nav in navs %}
-  <a
-    class="paper"
-    {% if page.url == nav[1] %}aria-current="page"{% endif %}
-    href="{{ nav[1] }}"
-    style="--angle: {{ forloop.index | plus: 2 | times: 2 | modulo: 5 | minus: 2 }}deg"
-    >
-    {{ nav[0] }}
-  </a>
-  {% endfor %}
+	{% for name, url in [
+		("index", "/"),
+		("posts", "/posts"),
+		("toys", "/interactives"),
+		("about", "/about"),
+		("somewhere", "/somewhere"),
+	] %}
+		<a
+			class="paper"
+			{% if page.url == url %}aria-current="page"{% endif %}
+			href="{{ url }}"
+			style="--angle: {{ (loop.index + 2) * 2 % 5 - 2 }}deg"
+		>
+			{{ name }}
+		</a>
+	{% endfor %}
 
-  <div
-    class="paper"
-    style="
-      padding: 0;
-      --angle: -1deg
-    "
-  >
-    <select
-      id="color-scheme-select"
-      style="
-      border: none;
-      box-shadow: none;
-      background: none;
-      margin: 0;
-      height: 100%;
-      "
-      onchange="
-        document.documentElement.setAttribute('data-color-scheme',this.value);
-        localStorage.setItem('xyz/color-scheme',this.value);
-      "
-    >
-      <option value="">☀🌙</option>
-      <option value="dark">🌙</option>
-      <option value="light">☀</option>
-    </select>
-    <script>
-      document.getElementById("color-scheme-select").value = localStorage.getItem("xyz/color-scheme") || "";
-    </script>
-  </div>
+	<div
+		class="paper"
+		style="
+			padding: 0;
+			--angle: -1deg
+		"
+	>
+		<select
+			id="color-scheme-select"
+			style="
+			border: none;
+			box-shadow: none;
+			background: none;
+			margin: 0;
+			height: 100%;
+			"
+			onchange="
+				document.documentElement.setAttribute('data-color-scheme',this.value);
+				localStorage.setItem('xyz/color-scheme',this.value);
+			"
+		>
+			<option value="">☀🌙</option>
+			<option value="dark">🌙</option>
+			<option value="light">☀</option>
+		</select>
+		<script>
+			document.getElementById("color-scheme-select").value = localStorage.getItem("xyz/color-scheme") || "";
+		</script>
+	</div>
 </header>
 
-<!-- Content ------------------------------------------------------------------>
+{# content ----------------------------------------------------------------- #}
 
-<!-- TODO what role should this be? -->
-<article class="{{ layout.main_class }} {{ page.main_class }}">
+{% block content %}
+<article>
 	{{ content }}
 </article>
-
-<!-- Footer ------------------------------------------------------------------->
+{% endblock content %}
 
 <hr>
 
 <footer id="site-footer" style="text-align: center" class="content-width">
-  <p>
-    All work licensed under <a href="{% link about.md %}#licenses">CC BY-NC 4.0</a> unless otherwise stated.
-  </p>
-  <p>
-    This site grown with 💜 on <a href="https://github.com/ralismark/ralismark.github.io">Github</a>!
-  </p>
+	<p>
+		All work licensed under <a href="/about#licenses">CC BY-NC 4.0</a> unless otherwise stated.
+	</p>
+	<p>
+		This site grown with 💜 on <a href="https://github.com/ralismark/ralismark.github.io">Github</a>!
+	</p>
 </div>
+
+{% endblock body %}

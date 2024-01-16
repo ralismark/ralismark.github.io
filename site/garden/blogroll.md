@@ -1,5 +1,5 @@
 ---
-layout: post-standalone
+layout: standalone
 title: Booklist
 ---
 

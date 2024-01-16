@@ -1,12 +1,17 @@
----
-layout: default
-main_class: h-entry content-width
----
+{% extends "default.html" %}
 
-{% if page.title %}
-<h1 class="p-name">{{ page.title | escape }}</h1>
+{% block content %}
+
+<article class="h-entry content-width">
+
+{% if page.props.title %}
+	<h1 class="p-name">{{ page.props.title }}</h1>
 {% endif %}
 
-<article class="e-content">
-  {{ content }}
+<main class="e-content">
+	{{ content }}
+</main>
+
 </article>
+
+{% endblock content %}

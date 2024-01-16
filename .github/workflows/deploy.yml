@@ -23,12 +23,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Jekyll build
-      run: |
-        docker build . --tag=image
-        docker run -e JEKYLL_ENV=production \
-          -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-          image jekyll build
+    - uses: DeterminateSystems/nix-installer-action@v4
+
+    - uses: DeterminateSystems/magic-nix-cache-action@v2
+
+    - name: "Build site"
+      run: "nix build -o _site"
 
     - name: Upload built site
       uses: actions/upload-pages-artifact@v1

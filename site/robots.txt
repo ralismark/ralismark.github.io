@@ -1,5 +1,3 @@
----
----
 # https://neil-clarke.com/block-the-bots-that-feed-ai-models-by-scraping-your-website/
 User-agent: CCBot
 Disallow: /

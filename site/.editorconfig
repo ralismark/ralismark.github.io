@@ -1,8 +1,5 @@
 root = true
 
-[*]
-indent_style = space
-indent_size = 2
-
-[*.scss]
+[*.{md,html,scss}]
 indent_style = tab
+indent_size = 4

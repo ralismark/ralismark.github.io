@@ -1,8 +1,9 @@
 ---
 layout: post
 title: "What I Want From My Instance"
-tags: opinion
 excerpt: "Some thoughts while searching for a new fediverse home"
+date: 2023-03-30
+tags: opinion
 ---
 
 For a while now I've been thinking of moving away from [fosstodon.org] to another instance.

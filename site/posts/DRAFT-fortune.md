@@ -1,8 +1,9 @@
 ---
 layout: post
-title: "Stiching Together the Story of Fortune"
+title: Stiching Together the Story of Fortune
+excerpt: Doing some archeology on 40+ year old software
+date: 2023-10-22
 tags:
-excerpt: "Doing some archeology on 40+ year old software"
 reason: wip
 ---
 
@@ -11,32 +12,32 @@ However, this humble program has quite the history, having multiple forks over i
 There's bits and pieces of it all over the internet, but nothing covering the whole history from start to end.
 So that's what this post is[^why] -- stitching the pieces I could find together into one single story.
 
-[^why]:
-    This blog post is the product of several levels of yak shaving:
+[^why]: This blog post is the product of several levels of yak shaving:
 
-    1.  I originally wanted to add [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) support to [fortune-mod](https://github.com/shlomif/fortune-mod), so that I could have it search for fortunes in more directories.
-        This is particularly pertinent on NixOS, which I use, where you can't add fortunes to the default directory without a decent amount of work.
+	1. I originally wanted to add [XDG Base Directory](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html) support to [fortune-mod](https://github.com/shlomif/fortune-mod), so that I could have it search for fortunes in more directories.
+		This is particularly pertinent on NixOS, which I use, where you can't add fortunes to the default directory without a decent amount of work.
 
-    2.  But, in order to make that change, I had to understand how the code works first.
-        Unfortunately, it's quite unclear and nothing close to straightforward, likely because of its long history, and there was quite a lack of comments explaining _why_ the code did things a certain way.
+	2. But, in order to make that change, I had to understand how the code works first.
+		Unfortunately, it's quite unclear and nothing close to straightforward, likely because of its long history, and there was quite a lack of comments explaining _why_ the code did things a certain way.
 
-    3.  So, I resorted to digging through the commit history and the blame.
-        However, [fortune-mod](https://github.com/shlomif/fortune-mod)'s commit history only goes up to the start of this fork, which was after the changes I was interested in.
+	3. So, I resorted to digging through the commit history and the blame.
+		However, [fortune-mod](https://github.com/shlomif/fortune-mod)'s commit history only goes up to the start of this fork, which was after the changes I was interested in.
 
-    4.  To get as complete a history as I could, I decided to dig through archives of old BSD versions to get the start, and spelunking through the internet to find other snapshots of intermediate versions.
-        With this, I assembled <https://github.com/ralismark/fortune-history>.
+	4. To get as complete a history as I could, I decided to dig through archives of old BSD versions to get the start, and spelunking through the internet to find other snapshots of intermediate versions.
+		With this, I assembled <https://github.com/ralismark/fortune-history>.
 
-    5.  Digging up the history left me with a sense that there was a story to tell here -- especially the individual contributions between NetBSD and the current (shlomif's) [fortune-mod](https://github.com/shlomif/fortune-mod).
+	5. Digging up the history left me with a sense that there was a story to tell here -- especially the individual contributions between NetBSD and the current (shlomif's) [fortune-mod](https://github.com/shlomif/fortune-mod).
 
-    (I also felt like writing somewhat.
-    Though there was a considerable gap between when I started this -- early 2023 -- and when I actually finished it)
+	(I also felt like writing somewhat.
+	Though there was a considerable gap between when I started this -- early 2023 -- and when I actually finished it)
 
 In researching this, I've managed to assemble a pretty comprehensive code history in <https://github.com/ralismark/fortune-history>.
 So have a look if you wanna have a look around!
 
-{% include admonition verb="aside" %}
-> I'm also going to be focusing on just the fortune *programs* here -- mainly `fortune` and `strfile`.
-> The actual fortunes strings that come bundled with it have their own story, but that's mostly for another time.
+.. admonition:: aside
+
+	I'm also going to be focusing on just the fortune *programs* here -- mainly `fortune` and `strfile`.
+	The actual fortunes strings that come bundled with it have their own story, but that's mostly for another time.
 
 # In The Beginning
 
@@ -111,9 +112,8 @@ This version also had command-line flags, to select between offensive/non-offens
 |-w[^why-w]|Sleep a bit after printing the message, to give the user some time to read it.|
 
 <!--TODO this is explicitly mentioned in the manual at some point-->
-[^why-w]:
-    My guess as to why `-w` exists is if you're running `fortune` in your logout script, so you have time to read it before the screen got cleared.
-    You could probably achieve something similar just with `sleep`, but the time fortune waits before exiting is proportional to the fortune length, which would be tricky to replicate otherwise.
+[^why-w]: My guess as to why `-w` exists is if you're running `fortune` in your logout script, so you have time to read it before the screen got cleared.
+	You could probably achieve something similar just with `sleep`, but the time fortune waits before exiting is proportional to the fortune length, which would be tricky to replicate otherwise.
 
 Interestingly, help is printed by running `fortune -` (that's a single dash), so I'm guessing we're right between when dash became the standard option syntax, and when `-h` or `--help` would be the standard help option.
 
@@ -134,11 +134,11 @@ The main reason for this is that, unlike modern fortune implementations, both of
 Where this delimiter is is included in the datafile, which has a format like this:
 
 - A header, which is a C struct with the fields:
-  - `int str_numstr`, the total number of strings.
-  - `int str_longlen`, the length of the longest string.
-  - `int str_shortlen`, the length of the shortest string.
-  - `long str_delims[3]`, the number of strings in each section -- this is what `%-` affects!
-  - `int str_unused` padding.
+	- `int str_numstr`, the total number of strings.
+	- `int str_longlen`, the length of the longest string.
+	- `int str_shortlen`, the length of the shortest string.
+	- `long str_delims[3]`, the number of strings in each section -- this is what `%-` affects!
+	- `int str_unused` padding.
 - A list of `long` offsets into this this file, pointing to the start of each fortune.
 - All the fortunes, null terminated, one after another.
 
@@ -146,9 +146,10 @@ Yep, this format is pretty non-portable between systems.
 I'm not really sure why some fields are `int`s while others are `long`s, or whether there even is a difference on the systems that 4BSD was run on.
 Anyways, when making the datafile, `strfile` would keep a counter of the number of fortunes, and when it saw a `%-`, it would put that counter into one of the `str_delims` fields.
 
-{% include admonition verb="aside" %}
-> 4BSD `strfile` also had two bugs in the delimiter processing code -- a _guaranteed_ null dereference, and an uninitialised variable -- that causes it to always crash on my system.
-> The first was fixed in 4.2BSD as the only change to any of C code <!-- REWORD -->, and the second in 4.3BSD by converting it into a global variable.
+.. admonition:: aside
+
+	4BSD `strfile` also had two bugs in the delimiter processing code -- a _guaranteed_ null dereference, and an uninitialised variable -- that causes it to always crash on my system.
+	The first was fixed in 4.2BSD as the only change to any of C code <!--REWORD-->, and the second in 4.3BSD by converting it into a global variable.
 
 Ken Arnold would add shuffling (`-r`) and sorting (`-o`) to `strfile` in November 1984 as part of 4.3BSD.
 This also turned `str_unused` in the datafile header into `str_flags`, which had bits indicating whether the input was shuffled or sorted or neither.
@@ -183,11 +184,10 @@ Firstly, the datafile no longer contained the fortune strings -- the offsets ins
 - `unsigned long str_version`, which is currently 1.
 - `unsigned long str_numstr, str_longlen, str_shortlen, str_flags`, are all still here, same as before.
 - `unsigned char str_delim`[^delim-is-stuff] for the delimiter character, usually `%`.
-  This was used by the `unstr` program to allow you to recover the plaintext fortune listing from the datafile.
+	This was used by the `unstr` program to allow you to recover the plaintext fortune listing from the datafile.
 - `unsigned char stuff[3]`, described as "long aligned space", which I'm guessing means padding?
 
 [^delim-is-stuff]: Okay, this is a bit of a lie -- the actual format has `stuff` as an array of 4 characters, and `str_delim` as just a macro expanding to `stuff[0]`.
-
 
 There were also some new flags:
 
@@ -259,9 +259,8 @@ From here, Florian La Roche[^florian] of Saarland University re-packaged it for 
 It would then get picked up by Amy A. Lewis, from the University of North Carolina, who would heavily modify fortune -- ["Too many changes to mention, really"](https://github.com/ralismark/fortune-history/blob/11a1aca6e7e035eaf5c66a816488581d5d9eb9ad/ChangeLog#L2C3-L2C39) -- in September and October 1995.
 This involved a ton of bug fixes, some new features, and a lot of cleanup of the fortune collection -- her [changelog](https://github.com/ralismark/fortune-history/blob/11a1aca6e7e035eaf5c66a816488581d5d9eb9ad/ChangeLog) is pretty detailed and provides a bunch of insight into the different revisions during this time, but I only have a snapshot of the code from late October 1995.
 
-[^florian]:
-    He also made [an early Linux distribution known as Jurix](https://en.wikipedia.org/wiki/Jurix).
-    This would eventually be used as the basis for SUSE Linux, which he also worked on.
+[^florian]: He also made [an early Linux distribution known as Jurix](https://en.wikipedia.org/wiki/Jurix).
+	This would eventually be used as the basis for SUSE Linux, which he also worked on.
 
 First of all, bug fixes!
 It turns out that the sorting and shuffling feature of `strfile` were completely broken, since the routines which reordered the fortunes always thought that there were no fortunes at all, due to the wrong size variable being used.
@@ -367,10 +366,11 @@ And there was always some cross-pollination between the individual contributors'
 
 <!--TODO get quotes-->
 
-{% include admonition verb="aside" %}
-> Within Debian, I only ended up going digging for the history of the fortune-mod package, and not the original fortune.
-> The former only goes up to the origin of that name -- Amy's "9510" version.
-> The history of the latter likely goes earlier, so I'll fill it in if I get around to it.
+.. admonition:: aside
+
+	Within Debian, I only ended up going digging for the history of the fortune-mod package, and not the original fortune.
+	The former only goes up to the origin of that name -- Amy's "9510" version.
+	The history of the latter likely goes earlier, so I'll fill it in if I get around to it.
 
 In the 7 or so years since Dennis's version, fortune-mod would switch versioning schemes again to be Y2K-compatible, and grow several more features.
 Primarily, this was adding support for UTF-8 and some basic internationalisation capability, which were apparently ["one of the most requested features for fortune-mod"](https://web.archive.org/web/20070704161840/http://www.redellipse.net/code/fortune).

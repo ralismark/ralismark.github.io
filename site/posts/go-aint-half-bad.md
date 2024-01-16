@@ -1,8 +1,9 @@
 ---
 layout: post
-title: "Go Ain't Half Bad"
+title: Go Ain't Half Bad
+excerpt: Reflections after a year of using Go
+date: 2023-06-24
 tags:
-excerpt: "Reflections after a year of using Go"
 ---
 
 I learnt Go in early 2022 from [blog posts about Go's issues](https://fasterthanli.me/tags/golang).

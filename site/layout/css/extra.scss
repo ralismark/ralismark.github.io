@@ -143,3 +143,22 @@ blockquote[admonition] {
 	margin-top: 1rem;
 	padding-top: 1rem;
 }
+
+.sparkle {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1em 0;
+	font-weight: bold;
+	font-style: italic;
+
+	&::before, &::after {
+		content: "✨";
+		margin: 0 0.5em;
+	}
+
+	// flip em
+	em {
+		font-style: normal;
+	}
+}

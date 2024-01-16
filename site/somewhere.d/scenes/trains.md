@@ -1,6 +1,3 @@
----
----
-
 You find yourself on an underground train platform.
 
 The area is illuminated in warm light that is very familiar to you.

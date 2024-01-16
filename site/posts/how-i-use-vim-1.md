@@ -1,43 +1,56 @@
 ---
 layout: post
 title: "How I Use Vim #1"
-tags: uses
 excerpt: Interesting aspects of my vim usage
+date: 2020-08-29
+tags: uses
 ---
 
 > This is part 1 of *How I Use Vim*.
 > - [part 1, core usage & vimrc snippets] &larr; you are here
 > - [part 2, plugins]
 
-[part 1, core usage & vimrc snippets]: {% link _posts/2020-08-29-how-i-use-vim-1.md %}
-[part 2, plugins]: {% link _posts/2021-07-24-how-i-use-vim-2.md %}
+[part 1, core usage & vimrc snippets]: how-i-use-vim-1
+[part 2, plugins]: how-i-use-vim-2
 
-I've been using Vim (well, Neovim) for several years now and I've developed some idiosyncrasies along the way. [My vimrc][vimrc] is quite large, so here's a few points.
+I've been using Vim (well, Neovim) for several years now and I've developed some idiosyncrasies along the way.
+[My vimrc][vimrc] is quite large, so here's a few points.
 
 [vimrc]: https://github.com/ralismark/vimfiles
 
 <!--more-->
 
-> Note: This not intended as a guide on how to learn or use Vim -- it's how *I* use Vim, not how you should use Vim. This is a sample of the things I do and use.
->
-> Nor is this written with absolute beginners in mind. If you're just starting, take time to learn Vim fundamentals before diving into extensive customisation.
+.. admonition:: warn
+
+	This not intended as a guide on how to learn or use Vim -- it's how *I* use Vim, not how you should use Vim.
+	This is a sample of the things I do and use.
+
+	Nor is this written with absolute beginners in mind.
+	If you're just starting, take time to learn Vim fundamentals before diving into extensive customisation.
 
 # Core Vim
 
-Like all Vim users, I use `hjkl` to navigate. However, one thing you might see in Vim tutorials that I *don't* use are numbers with these keys -- `5j` to go down 5 lines, for example. I had [`'relativenumber'`] set for several years, but it never felt intuitive. This extends to operator-pending mode too -- I heavily rely on [visual line]/[block] mode to do multiline operations. For example, to delete multiple lines, I would do `Vjjjjd` instead of `d4j`.
+Like all Vim users, I use `hjkl` to navigate.
+However, one thing you might see in Vim tutorials that I *don't* use are numbers with these keys -- `5j` to go down 5 lines, for example.
+I had [`'relativenumber'`] set for several years, but it never felt intuitive.
+This extends to operator-pending mode too -- I heavily rely on [visual line]/[block] mode to do multiline operations.
+For example, to delete multiple lines, I would do `Vjjjjd` instead of `d4j`.
 
 [`'relativenumber'`]: https://vimhelp.org/options.txt.html#%27relativenumber%27
 [visual line]: https://vimhelp.org/visual.txt.html#linewise-visual
 [block]: https://vimhelp.org/visual.txt.html#blockwise-visual
 
-Furthermore, for plain navigation I often use uppercase [`W`] and [`B`] to move left and right. I also use `0w` instead of `^`, which is harder to type, to move to the start of line. I haven't figured out a good way of navigating vertically yet, so I'm still on j/k plus fast keyrepeat.
+Furthermore, for plain navigation I often use uppercase [`W`] and [`B`] to move left and right.
+I also use `0w` instead of `^`, which is harder to type, to move to the start of line.
+I haven't figured out a good way of navigating vertically yet, so I'm still on j/k plus fast keyrepeat.
 
 [`W`]: https://vimhelp.org/motion.txt.html#W
 [`B`]: https://vimhelp.org/motion.txt.html#B
 
 # Leader Mapping
 
-I have [`<leader>`][leader] mapped to `<space>`. Here's some of my bindings for inspiration:
+I have [`<leader>`][leader] mapped to `<space>`.
+Here's some of my bindings for inspiration:
 
 [leader]: https://vimhelp.org/map.txt.html#%3CLeader%3E
 
@@ -55,7 +68,8 @@ I have [`<leader>`][leader] mapped to `<space>`. Here's some of my bindings for 
 
 # Splits & Tabs
 
-I have a lot of bindings set up to make splits and tabs easier to use. This includes:
+I have a lot of bindings set up to make splits and tabs easier to use.
+This includes:
 
 - `<leader>s<key>` to open empty splits in different directions with [`:new`] and [`:aboveleft`]/[`:belowright`]/[`:vertical`].
 - `<c-hjkl>` to move between splits
@@ -67,14 +81,16 @@ I have a lot of bindings set up to make splits and tabs easier to use. This incl
 [`:belowright`]: https://vimhelp.org/windows.txt.html#:belowright
 [`:vertical`]: https://vimhelp.org/windows.txt.html#:vertical
 
-When I started using Vim, I often encountered articles about how "people are using tabs wrong" and how buffers are the way you're meant to use Vim e.g. [this][tab-buffer-1]. However, having hidden buffers ([`'hidden'`]) didn't feel right and I kept forgetting which I had open, so this was the setup I eventually settled into.
+When I started using Vim, I often encountered articles about how "people are using tabs wrong" and how buffers are the way you're meant to use Vim e.g. [this][tab-buffer-1].
+However, having hidden buffers ([`'hidden'`]) didn't feel right and I kept forgetting which I had open, so this was the setup I eventually settled into.
 
 [`'hidden'`]: https://vimhelp.org/options.txt.html#%27hidden%27
 [tab-buffer-1]: https://stackoverflow.com/a/103590/6936976
 
 # Less surprising behaviour
 
-I've got quite a few mappings that make movement and operations behave "as you would expect", or just generally more useful. Firstly, for wrapping:
+I've got quite a few mappings that make movement and operations behave "as you would expect", or just generally more useful.
+Firstly, for wrapping:
 
 ```vim
 noremap <expr> G &wrap ? "G$g0" : "G"
@@ -112,7 +128,7 @@ nnoremap x "_x
 
 # A grab bag of mappings
 
-Finally, here's a collection of miscellaneous mappings that I use often
+Finally, here's a collection of miscellaneous mappings that I use often:
 
 ```vim
 noremap ; :
@@ -130,4 +146,5 @@ noremap X "_d
 
 # Conclusion
 
-This is the more "core" part of my Vim usage. I plan on going into my many plugins in part 2.
+This is the more "core" part of my Vim usage.
+I plan on going into my many plugins in part 2.

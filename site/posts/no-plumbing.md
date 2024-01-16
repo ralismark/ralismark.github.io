@@ -1,8 +1,9 @@
 ---
 layout: post
 title: Don't Plumb For The Programmer
-tags: opinion
 excerpt: A sort of follow-up to "Write Libraries, Not Frameworks"
+date: 2022-01-17
+tags: opinion
 ---
 
 I was recently linked this article by a coworker: [Write Libraries, Not Frameworks](https://www.brandons.me/blog/libraries-not-frameworks).

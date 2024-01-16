@@ -1,66 +1,92 @@
----
-layout: default
-main_class: h-entry
----
+{% extends "default.html" %}
 
-{% capture post_nav %}
-<nav class="my-1 content-width">
-	{% if page.previous %}
-		<a style="float: left; text-align: left" href="{{ page.previous.url | relative_url }}">&laquo; {{ page.previous.title }}</a>
-	{% endif %}
+{% block content %}
+<article class="h-entry">
 
-	{% if page.next %}
-		<a style="float: right; text-align: right" href="{{ page.next.url | relative_url }}">{{ page.next.title }} &raquo;</a>
-	{% endif %}
-
-	<div style="clear: both"></div>
-</nav>
-{% endcapture %}
-
-{% unless page.noindex %}
-{{ post_nav }}
-{% endunless %}
-
-<header class="content-width" style="text-align: center">
-	<h1 class="p-name">{{ page.title | escape }}</h1>
-	<p class="p-summary">
-		{{ page.excerpt }}
-	</p>
-	<ul class="li-flat">
-		<li>
-		<time datetime="{{ page.date | date_to_xmlschema }}" class="dt-published">
-			<a class="u-url" href="{{ page.url | replace: 'index.html', '' | relative_url }}">
-			{{ page.date | date_to_long_string }}
-			</a>
-		</time>
-		</li>
-
-		<li>
-			{% assign wc = content | strip_html | number_of_words: "auto" %}
-			{% assign readtime = wc | plus: 100 | divided_by: 200 | at_least: 1 %}
-			<abbr title="{{ wc }} total words">{{ readtime }} min{% if readtime != 1 %}s{% endif %}</abbr>
-		</li>
-
-		{% assign tagcount = page.tags | size %}
-		{% if tagcount > 0 %}
-		<li id="post-tags">
-			<span id="post-tag-label">Tags:</span>
-			{% for tag in page.tags %}
-				<a class="p-category paper" href="{% link tags.html %}#{{ tag }}">{{ tag }}</a>
-			{% endfor %}
-		</li>
+{% set post_nav %}
+	<nav class="my-1 content-width">
+		{% if prev() %}
+			{% set prev = recipe.build(prev().meta) %}
+			<a style="float: left; text-align: left" href="{{ prev }}">&laquo; {{ prev.props.title | e }}</a>
 		{% endif %}
-	</ul>
-</header>
 
-<hr class="lit"/>
+		{% if next() %}
+			{% set next = recipe.build(next().meta) %}
+			<a style="float: right; text-align: right" href="{{ next }}">{{ next.props.title | e }} &raquo;</a>
+		{% endif %}
 
-<main class="e-content content-width">
-	{{ content }}
-</main>
+		<div role="none" style="clear: both"></div>
+	</nav>
+{% endset %}
 
-{% unless page.noindex %}
-{{ post_nav }}
-{% endunless %}
+	{{ post_nav }}
 
-{% include comments.html %}
+	<header class="content-width" style="text-align: center">
+		<h1 class="p-name">{{ page.props.title | escape }}</h1>
+		<p class="p-summary">
+			{{ page.props.excerpt | escape }}
+		</p>
+
+		<ul class="li-flat">
+			<li>
+				<a class="u-url" href="{{ page.url }}">
+					<time datetime="{{ page.props.date.strftime("%Y-%m-%d") }}" class="dt-published">
+						{{ page.props.date.strftime("%-d %b %Y") }}
+					</time>
+				</a>
+			</li>
+
+			<li>
+				{% set wc = content | striptags | wordcount %}
+				{% set readtime = [(wc + 100) // 200, 1] | max %}
+				<abbr title="{{ wc }} total words">{{ readtime }} min{% if readtime != 1 %}s{% endif %} to read</abbr>
+			</li>
+
+			{% set tags = parse_tags(page) %}
+			{% if tags %}
+			<li>
+				<span id="post-tag-label">Tags:</span>
+				{% for tag in tags %}
+					<a class="p-category paper" href="/tags#{{ tag }}">{{ tag }}</a>
+				{% endfor %}
+			</li>
+			{% endif %}
+		</ul>
+
+	</header>
+
+	<hr class="lit">
+
+	<main class="e-content content-width">
+		{{ content }}
+	</main>
+
+	{{ post_nav }}
+
+	<hr>
+
+	{% set location = "https://ralismark.xyz" + page.url %}
+	<aside class="content-width">
+		<h2>Interactions</h2>
+
+		<form action="https://webmention.io/www.ralismark.xyz/webmention" method="post">
+			<p>
+				Link this page and mention me in a
+				<a role="button" href="https://toot.karamoff.dev/?text=@ralismark@cathode.church {{ location }}%0A">Toot 🐘</a>
+				to leave a comment!
+
+				Have a reply somewhere else? Send it here:
+				<input name="source" placeholder="https://example.com/" type="url">
+				<input name="target" value="{{ location }}" type="hidden">
+				<input value="Submit" type="submit">
+			</p>
+		</form>
+
+		<section style="padding: 0 2rem">
+			<noscript>Sorry! JavaScript is required to load comments</noscript>
+			<script data-url="{{ location }}" src="{{ recipe.copy("assets/webmention.js", "/assets/webmention.js").url }}" async></script>
+		</section>
+	</aside>
+
+</article>
+{% endblock content %}

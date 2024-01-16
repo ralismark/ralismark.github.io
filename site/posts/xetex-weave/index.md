@@ -1,26 +1,29 @@
 ---
 layout: post
 title: XeTeX, Weaved
-tags:
 excerpt: I build the docs for XeTeX (and some other projects) so you don't have to
+date: 2021-07-16
+tags:
 ---
 
-Pretty much as the subtitle says -- I spent most of today figuring out how to generate a nicely typeset pdf from `xetex.web`. Here's it is -- [XeTeX source documentation for v0.999992]({% link assets/xetex.pdf %})!
+Pretty much as the subtitle says -- I spent most of today figuring out how to generate a nicely typeset pdf from `xetex.web`.
+Here's it is -- [XeTeX source documentation for v0.999992]({{ recipe.copy("./xetex.pdf", "/assets/xetex.pdf") }})!
 
 <!--more-->
 
 I've also taken the opportunity to weave some more related files:
 
-- [tangle v4.6]({% link assets/tangle.pdf %}), from <https://www.ctan.org/pkg/tangle>
-- [weave v4.5]({% link assets/weave.pdf %}), from <https://www.ctan.org/pkg/weave>
-- The original [TeX v3.14159265]({% link assets/tex.pdf %})
-- [ε-TeX v2.6]({% link assets/etex.pdf %}) (using `weave tex.web etexdir/etex.ch`)
-- [bibtex v0.99d]({% link assets/bibtex.pdf %}), from <https://ctan.org/pkg/bibtex> (I had to `sed 's/\\ETs/, and~/'` the .tex file to fix a compile error -- I think pdftex was somehow reading it as `\E Ts` due to there being a `\E` macro for exponentials)
-- And [XeTeX v0.999992]({% link assets/xetex.pdf %}) from above
+- [tangle v4.6]({{ recipe.copy("./tangle.pdf", "/assets/tangle.pdf") }}), from <https://www.ctan.org/pkg/tangle>
+- [weave v4.5]({{ recipe.copy("./weave.pdf", "/assets/weave.pdf") }}), from <https://www.ctan.org/pkg/weave>
+- The original [TeX v3.14159265]({{ recipe.copy("./tex.pdf", "/assets/tex.pdf") }})
+- [ε-TeX v2.6]({{ recipe.copy("./etex.pdf", "/assets/etex.pdf") }}) (using `weave tex.web etexdir/etex.ch`)
+- [bibtex v0.99d]({{ recipe.copy("./bibtex.pdf", "/assets/bibtex.pdf") }}), from <https://ctan.org/pkg/bibtex> (I had to `sed 's/\\ETs/, and~/'` the .tex file to fix a compile error -- I think pdftex was somehow reading it as `\E Ts` due to there being a `\E` macro for exponentials)
+- And [XeTeX v0.999992]({{ recipe.copy("./xetex.pdf", "/assets/xetex.pdf") }}) from above
 
 The build process for the most of these is just `weave <input.web> && pdftex <input.tex>`.
 
-For some background, the original TeX code, as well as most of XeTeX, is written in Knuth's literate programming system [Web]. Web files are a mix of Pascal code (extracted using `tangle`) and TeX documentation (extracted using `weave`).
+For some background, the original TeX code, as well as most of XeTeX, is written in Knuth's literate programming system [Web].
+Web files are a mix of Pascal code (extracted using `tangle`) and TeX documentation (extracted using `weave`).
 
 [WEB]: https://en.wikipedia.org/wiki/Web_(programming_system)
 
@@ -29,19 +32,21 @@ For some background, the original TeX code, as well as most of XeTeX, is written
 Here's how to build the XeTeX weave
 
 - Clone the XeTeX repo with `git clone --depth 1 https://git.code.sf.net/p/xetex/code`[^green-download].
-- If you don't already have `weave` -- which is distinct from `cweave`![^cweave] -- either get it from a pre-built TeXLive install, or build this project. There's no need to build if you already have `weave` though.
+- If you don't already have `weave` -- which is distinct from `cweave`![^cweave] -- either get it from a pre-built TeXLive install, or build this project.
+	There's no need to build if you already have `weave` though.
 - Go to `source/texk/web2c/xetexdir`
-- If you run `weave xetex.web`, you'll start getting errors. I've made a patch that fixes these errors -- see below.
+- If you run `weave xetex.web`, you'll start getting errors.
+	I've made a patch that fixes these errors -- see below.
 - Run `weave xetex.web` -- the output should look something like this:
 
-```terminal
-$ weave xetex.web
-This is WEAVE, Version 4.5 (TeX Live 2021/Arch Linux)
-*1*17*25*38*54*76*103*114*132*137*155*187*199*225*229*233*237*246*282*298*319*327*330*351*362*396*436*499*522*546*574*619*628*682*683*722*741*762*814*859*908*937*951*971*994*1019*1032*1081*1107*1188*1260*1351*1382*1390*1392*1449*1676*1677
-Writing the output file...*1*17*25*38*54*76*103*114*132*137*155*187*199*225*229*233*237*246*282*298*319*327*330*351*362*396*436*499*522*546*574*619*628*682*683*722*741*762*814*859*908*937*951*971*994*1019*1032*1081*1107*1188*1260*1351*1382*1390*1392*1449*1676*1677
-Writing the index...Done.
-(No errors were found.)
-```
+	```console
+	$ weave xetex.web
+	This is WEAVE, Version 4.5 (TeX Live 2021/Arch Linux)
+	*1*17*25*38*54*76*103*114*132*137*155*187*199*225*229*233*237*246*282*298*319*327*330*351*362*396*436*499*522*546*574*619*628*682*683*722*741*762*814*859*908*937*951*971*994*1019*1032*1081*1107*1188*1260*1351*1382*1390*1392*1449*1676*1677
+	Writing the output file...*1*17*25*38*54*76*103*114*132*137*155*187*199*225*229*233*237*246*282*298*319*327*330*351*362*396*436*499*522*546*574*619*628*682*683*722*741*762*814*859*908*937*951*971*994*1019*1032*1081*1107*1188*1260*1351*1382*1390*1392*1449*1676*1677
+	Writing the index...Done.
+	(No errors were found.)
+	```
 
 - Finally, run `xetex xetex.tex` to generate `xetex.pdf`.
 
@@ -153,4 +158,4 @@ index 81b450c..7fe4b83 100644
  and 64 consecutive array elements.  These four levels of index nodes are
  followed by a fifth level with nodes for the individual array elements.
 
-{% endraw %}```
+``` {% endraw %}

@@ -1,0 +1,19 @@
+digraph {
+	node [shape=circle, color="#ff9999"];
+
+	1 [color="#99ee99"];
+
+	1 -> {3, 8};
+	3 -> {9, 7};
+
+	8 -> 7 [style=invis];
+	8 -> 12;
+
+	node [color="#9999ff"];
+
+	10 -> l10 [style=invis]; l10 [style=invis];
+	5 -> 10 -> 15;
+
+	15 -> {20, 18};
+	5 -> r5 [style=invis]; r5 [style=invis];
+}

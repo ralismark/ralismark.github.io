@@ -1,34 +1,44 @@
 <!doctype html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<html lang="en">
 	<head>
-		<title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-
-		<!--[if lt IE 9]>
-			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+		<title>{% if page.props.title %}{{ page.props.title }} - {% endif %}{{ site.title }}</title>
 
 		<meta charset="utf-8">
-		<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link rel="canonical" href="{{ page.url | replace:'index.html','' | relative_url }}">
-		<meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
-		<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo-32.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="{{ recipe.copy("assets/logo-32.png", "/assets/logo-32.png") }}">
+		<link type="application/atom+xml" rel="alternate" href="/feed.xml" />
 
 		{% if page.noindex %}<meta name="robots" content="noindex">{% endif %}
 
-		{% feed_meta %}
+		{% set _ = recipe.page("assets/festoon.svg", "/assets/festoon.svg") %}
+		<link rel="stylesheet" href="{{
+			recipe.sass(
+				"css/main.scss",
+				"/assets/main.css",
+				include="./css",
+			)
+		}}">
 
-		<!-- we don't need to make the user fetch a fancy font: https://bt.ht/webfonts
-		<link rel="preconnect" href="https://fonts.gstatic.com">
-		<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,700;1,300;1,700&display=swap" rel="stylesheet">
-		-->
-
-		<link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
-
-		<!-- defer loading of katex? -->
-		{% capture katex_attrs %}href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous"{% endcapture %}
+		{# defer loading of katex? #}
+		{% set katex_attrs %}
+		href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+		integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
+		crossorigin="anonymous"
+		{% endset %}
 		<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" {{ katex_attrs }}>
 		<noscript><link rel="stylesheet" {{ katex_attrs }}></noscript>
+		<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				for (const e of document.querySelectorAll("[data-math]")) {
+					katex.render(e.innerText, e, {
+						throwOnError: false,
+						output: "mathml",
+						displayMode: e.getAttribute("data-math") == "1",
+					})
+				}
+			})
+		</script>
 
 		<!-- indieweb -->
 		<link rel="webmention" href="https://webmention.io/www.ralismark.xyz/webmention" />
@@ -40,6 +50,8 @@
 		</script>
 	</head>
 	<body>
+		{% block body %}
 		{{ content }}
+		{% endblock %}
 	</body>
 </html>

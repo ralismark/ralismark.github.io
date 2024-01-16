@@ -1,8 +1,9 @@
 ---
 layout: post
-title: "Which Prometheus rate of change function to use?"
-tags:
+title: Which Prometheus rate of change function to use?
 excerpt: "rate, irate, delta, deriv, increase, and idelta: what do they mean?"
+date: 2023-03-17
+tags:
 ---
 
 Prometheus has a large number of PromQL functions all of which roughly mean "rate of change".
@@ -27,13 +28,13 @@ So I've made a table.
 The two column correspond to the two metric types:
 
 1. **Counters** only go up, except when your task restarts and they reset to 0.
-Functions for this account for resets, and give only non-negative values.
+	Functions for this account for resets, and give only non-negative values.
 2. **Gauges** are a measurement of a value, and a task restart might cause a jump and might not.
 
 And the rows correspond to what value you want:
 
 1. **Average slope in time period** is the standard "rate of change".
-Notably, [deriv()] does a linear regression so the effect of outliers/volatility is reduced.
+	Notably, [deriv()] does a linear regression so the effect of outliers/volatility is reduced.
 2. **Difference between last two samples** is essentially the instantaneous derivative for gauges, and for counters is the number of counts that happened "at this time".
-I like using this with Grafana's state timelines to plot instances of low-occurrence event.
+	I like using this with Grafana's state timelines to plot instances of low-occurrence event.
 3. **Last sample minus first sample** can be used to the actual change over a time period, such as how many counts happened in the last 24 hours.

@@ -1,15 +1,21 @@
 ---
 layout: post
 title: librtc.js - A WebRTC connection helper
-tags:
 excerpt: A minimal wrapper around WebRTC to make connecting easier
+date: 2020-04-13
+tags:
 ---
 
-A few years ago I messed around with WebRTC, and managed to do peer-to-peer communication via data channels. However, this endeavour didn't go anywhere. I'm revisited what I found back then and packaged it up into a simple library.
+{% filter markdownify %}
+A few years ago I messed around with WebRTC, and managed to do peer-to-peer communication via data channels.
+However, this endeavour didn't go anywhere.
+I'm revisited what I found back then and packaged it up into a simple library.
 
 <!--more-->
 
-You can find the library and its documentation [in a github gist][librtc-js]. I didn't feel it was long enough to warrant a repo, especially considering I likely won't change much. To use in your site, you can add this to your website -- it's hosted on [raw.githack.com][raw-githack-com][^1].
+You can find the library and its documentation [in a github gist][librtc-js].
+I didn't feel it was long enough to warrant a repo, especially considering I likely won't change much.
+To use in your site, you can add this to your website -- it's hosted on [raw.githack.com][raw-githack-com][^1].
 
 ```html
 <script src="https://gistcdn.githack.com/ralismark/5f4588ae7313a728212adda4f868a3b8/raw/41dddce14a6870df76d6cba633d5b01c9c8142c2/rtclib.js"></script>
@@ -20,7 +26,8 @@ You can find the library and its documentation [in a github gist][librtc-js]. I 
 
 [^1]: You can't directly include a gist as a script, so you need something which serves the files using something like raw.githack.com
 
-This library requires ES6 -- in particular, the classes feature. Use Babel if you need support for older browsers.
+This library requires ES6 -- in particular, the classes feature.
+Use Babel if you need support for older browsers.
 
 The main benefit of this library is the ease of establishing a connection, requiring just 3 method calls for the actual handshake:
 
@@ -35,15 +42,18 @@ let reply = await bob.answer(offer);
 alice.accept(reply);
 ```
 
-Last time I messed around with WebRTC, I managed to compress the SDP in the offer the roughly a third of the original size by discarding unneeded information. However, that was quite a hack, and you can see similar efforts [in this post][min-sdp].
+Last time I messed around with WebRTC, I managed to compress the SDP in the offer the roughly a third of the original size by discarding unneeded information.
+However, that was quite a hack, and you can see similar efforts [in this post][min-sdp].
 
 [min-sdp]: https://webrtchacks.com/the-minimum-viable-sdp/
 
-<hr>
+---
 
-And here's a sample where you can test this handshaking. Check the console and the [source code for this post][this-post] for more details.
+And here's a sample where you can test this handshaking.
+Check the console and the [source code for this post][this-post] for more details.
 
-[this-post]: https://github.com/ralismark/ralismark.github.io/blob/master/{{page.path}}
+[this-post]: {# TODO #}
+{% endfilter %}
 
 <script src="https://gistcdn.githack.com/ralismark/5f4588ae7313a728212adda4f868a3b8/raw/41dddce14a6870df76d6cba633d5b01c9c8142c2/rtclib.js"></script>
 

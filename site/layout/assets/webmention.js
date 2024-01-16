@@ -1,5 +1,4 @@
-"use strict";
-// vim: set noet:
+"use strict"; // vim: set noet:
 
 (async function() {
 	// constants
@@ -111,7 +110,7 @@
 			E("div", {},
 				nametag, action, datetag,
 			),
-			getContent(r),
+			contentText,
 		);
 	});
 

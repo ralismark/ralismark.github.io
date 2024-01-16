@@ -1,8 +1,9 @@
 ---
 layout: post
 title: "Systemd-matising Nohup"
-tags:
 excerpt: Leveraging the system manager for ad-hoc tasks
+date: 2022-04-28
+tags:
 ---
 
 [systemd] is a massive bundle of system components and management utilities, but at its core, it is a service manager.
@@ -11,8 +12,9 @@ While service management is usually done at a system-wide level and require root
 
 [systemd]: https://systemd.io/
 
-{% include admonition verb="aside" %}
-> I've used systemd a bunch on my laptop (including running my graphical environment) under it, so I might write more on it.
+.. admonition:: aside
+
+	I've used systemd a bunch on my laptop (including running my graphical environment) under it, so I might write more on it.
 
 # nohup
 
@@ -24,7 +26,7 @@ The biggest is that tracking this detached process is hard, with:
 1. Little indication of if/when they exit or get killed
 2. No real way of identifying them beyond process name/args or PID
 3. As such, it's easy to forget about them and have them linger around forever.
-   I've seen this happen many times, sometimes eating up a whole CPU core or several gigabytes of RAM doing who knows what.
+	I've seen this happen many times, sometimes eating up a whole CPU core or several gigabytes of RAM doing who knows what.
 4. stdout gets dumped to `~/nohup.out` by default, contributing to the above "no identification" problems, and causing issues if you have multiple detached processes.
 
 (There's also `screen` and `tmux`, which solve some of these by having a persistent shell session.
@@ -38,7 +40,7 @@ Now, how can systemd do background processes better?
 Introducing [systemd-run](https://man.archlinux.org/man/systemd-run.1.en)!
 Here's what running the `distccd` looks like:
 
-```
+```console
 $ systemd-run --user -u distcc-123 distccd --no-detach
 Running as unit: distcc-123.service
 ```
@@ -50,7 +52,7 @@ Just like with ssh and other command wrappers, options before the first non-opti
 
 - Firstly, the `--user` flag tells systemd-run to use the user service manager (systemd utilities interact with the system-wide service manager by default, which will usually prompt you for a password).
 - The subsequent `-u distcc-123` option sets the name that will be used to identify the service.
-  This can basically be anything, but will be something unfriendly like `run-r1051a71b69934d1fb3414578fab92172.service` by default.
+	This can basically be anything, but will be something unfriendly like `run-r1051a71b69934d1fb3414578fab92172.service` by default.
 
 After starting, we can interact with it via `systemctl`, and read logs with `journalctl`.
 As a quick reference:
@@ -59,8 +61,8 @@ As a quick reference:
 - `systemctl --user stop <service>` to, well, stop it.
 - `systemctl --user restart <service>` to stop and start again.
 - `journalctl --user -x -a -u <service>` to see logs.
-  The `-x` means to explain when systemd notices something (e.g. the service starting/stopping/etc), `-a` makes all lines be printed, even if they're long or have unprintable characters, and `-u <service>` specifies the unit.
-  You can also pass `-e` to jump to the end, and `-f` to `tail -f` the log.
+	The `-x` means to explain when systemd notices something (e.g. the service starting/stopping/etc), `-a` makes all lines be printed, even if they're long or have unprintable characters, and `-u <service>` specifies the unit.
+	You can also pass `-e` to jump to the end, and `-f` to `tail -f` the log.
 
 The service will automatically unload itself if it exits cleanly, making `systemctl` but not `journalctl` not work with it.
 If it crashed or exited with non-zero return code, then it'll remain, allowing you to restart it for example.
