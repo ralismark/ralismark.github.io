@@ -1,16 +1,17 @@
 ---
 layout: post
 title: Image Tool
-tags:
 excerpt: A client-side-only steganography tool
+date: 2019-01-09
+tags:
 ---
 
-{% capture md %}
+{% filter markdownify %}
 This is a client-side only steganography tool to detect information hidden in images, using only the Canvas API - primarily [`getImageData`][getimagedata] and [`putImageData`][putimagedata].
 
 [getimagedata]: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/getImageData
 [putimagedata]: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/putImageData
-{% endcapture %}{{ md | markdownify }}
+{% endfilter %}
 
 <!--more-->
 

@@ -1,8 +1,9 @@
 ---
 layout: post
 title: "Blog Update: Going Public"
-tags: meta
 excerpt: We're back to being open source!
+date: 2023-01-15
+tags: meta
 ---
 
 Around two and a half years ago I decided to take down the source code for my blog and make <https://github.com/ralismark/ralismark.github.io> private.

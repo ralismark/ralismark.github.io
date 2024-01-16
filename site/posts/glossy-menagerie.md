@@ -1,8 +1,9 @@
 ---
 layout: post
-title: "A Glossy Menagerie"
+title: A Glossy Menagerie
+excerpt: Inline character dialogue across blogs
+date: 2023-05-14
 tags:
-excerpt: "Inline character dialogue across blogs"
 ---
 
 An interesting trend I've seen with blogging is people introducing characters to their blog in order to have a dialog with them, a bit like the [Socratic method].
@@ -15,8 +16,9 @@ They're also pending some better art, though credits to [spdskatr] for the curre
 
 [spdskatr]: https://violetteahouse.com/
 
-{% include admonition aside="say" %}
-> You should really get onto that!
+.. admonition:: say
+
+	You should really get onto that!
 
 I will!
 
@@ -55,7 +57,7 @@ This brings the minimal set of portraits to roughly:
 
 As an aside, a friend mentioned that a lot of games also have character portraits accompanying their dialog (e.g. Undertale, OneShot, Omori).
 
-# Afterword: On Titling
+# Afterword: What's With The Title
 
 The other day, I was wondering what it's called when you have a bit of text in a different style between paragraphs of regular text.
 HTML has the `<aside>` tag, but I've also seen ones for warnings/etc be called *callouts* and *admonition*.

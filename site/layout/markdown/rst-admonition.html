@@ -1,29 +1,16 @@
-{% capture admonition_config %}
-fortune:
-  image: "assets/fortune.png"
-  text: "fortune is fortuning"
+{% set placeholder_img = recipe.copy("../assets/tem-placeholder.png", "/assets/tem-placeholder.png") %}
+{% set preset = {
+	"ask": (placeholder_img, "tem is asking"),
+	"say": (placeholder_img, "tem is saying"),
+	"aside": (placeholder_img, "tem is thinking"),
+	"warn": (placeholder_img, "tem is warning"),
+}.get(title, (None, None)) %}
+{% set image = options.image | default(preset[0]) %}
+{% set alt = options.alt | default(preset[1]) | default("") %}
+<blockquote admonition="{{ title }}">
+	{% with src=image, alt=alt, title=alt %}
+		{% include "./img.html" %}
+	{% endwith %}
 
-ask:
-  image: "assets/tem-chill.png"
-  text: "tem is asking"
-say:
-  image: "assets/tem-chill.png"
-  text: "tem is saying"
-
-aside:
-  image: "assets/tem-chill.png"
-  text: "tem is thinking"
-warn:
-  image: "assets/tem-chill.png"
-  text: "tem is warning"
-
-default:
-  image: "assets/tem-chill.png"
-  text: "tem is here"
-{% endcapture %}{% assign admonition_config = admonition_config | yaml_parse -%}
-{% assign admonition_verb = include.verb | default: "default" -%}
-{% assign admonition_config = admonition_config[admonition_verb] -%}
-{: admonition="{{ admonition_verb }}" }
-> ![{{ admonition_config.text }}]({% link {{ admonition_config.image }} %} "{{ admonition_config.text }}")
->
-{%- comment -%}This is to avoid the trailing newline{%- endcomment -%}
+	{{ content }}
+</blockquote>

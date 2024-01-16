@@ -1,15 +1,17 @@
 ---
 layout: post
 title: Which blockquote looks better
-tags:
 excerpt: A sample of a few possible blockquote styles
+date: 2020-11-20
+tags:
 ---
 
-Somewhat recently, I changed the style of blockquotes here from just "text with grey bar" to "boxed text with grey bar". Still, I've seen various style floating around, so here's a comparison of them.
+Somewhat recently, I changed the style of blockquotes here from just "text with grey bar" to "boxed text with grey bar".
+Still, I've seen various style floating around, so here's a comparison of them.
 
 <!--more-->
 
-{% assign lipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." %}
+{% set lipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." %}
 
 # Current style
 

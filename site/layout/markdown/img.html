@@ -1,0 +1,6 @@
+<img
+	src="{{ src|e }}"
+	{% if alt %}alt="{{ alt|trim|e }}"{% endif %}
+	{% if not title %}{% set title = alt %}{% endif %}
+	{% if title %}title="{{ title|trim|e }}"{% endif %}
+/>

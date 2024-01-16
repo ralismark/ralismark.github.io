@@ -1,0 +1,11 @@
+<figure>
+	{% with src=title, alt=options.alt, title="" %}
+		{% include "./img.html" %}
+	{% endwith %}
+
+	{% if content %}
+	<figcaption>
+		{{ content }}
+	</figcaption>
+	{% endif %}
+</figure>

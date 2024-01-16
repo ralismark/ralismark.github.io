@@ -1,8 +1,9 @@
 ---
 layout: post
-title: "Logical Day"
-tags:
+title: Logical Day
 excerpt: 'An alternate meaning of "today" and "tomorrow"'
+date: 2023-08-12
+tags:
 ---
 
 Conventionally, "today" and "tomorrow" are relative to a date that switches over to a new day at midnight.
@@ -23,9 +24,10 @@ To summarise a part of that video, in Japan, times past midnight are sometimes c
 The [Wikipedia page](https://en.wikipedia.org/wiki/Date_and_time_notation_in_Japan#Time) also elaborates on this, giving examples of usages in late-night bars and television scheduling.
 And from a quick search online, it seems that many societies in history have had day start at sunset, with night being part of the next day, or sunrise, with night being part of the previous day.
 
-{% include admonition verb="aside" %}
-> Similarly, for many cultures and much of history, [a year didn't start on January 1](https://en.wikipedia.org/wiki/New_Year#Adoptions_of_January_1)!
-> 25 of March was used in several countries during the Middle Ages, for example.
+.. admonition:: aside
+
+	Similarly, for many cultures and much of history, [a year didn't start on January 1](https://en.wikipedia.org/wiki/New_Year#Adoptions_of_January_1)!
+	25 of March was used in several countries during the Middle Ages, for example.
 
 I guess along these lines you could just have a fixed start-of-day time at some time when everyone should be asleep, like 4am.
 I've found this kind of logical day in some pieces of software.
@@ -58,10 +60,9 @@ I think people are able to figure out what is meant most of the time but at the 
 And this doesn't even get to which day weeks start on -- is it Sunday[^weekends]? Monday? Or even Saturday? -- making the phrase "this week" ambiguous for a couple days each week.
 I'm personally in favour of having the week start on Sunday, partly because on Sunday you're thinking about the upcoming week, and partly for the humorous reason that that makes the weekends be the two _ends_ of the _week_.
 
-[^weekends]:
-    I like sunday as the first day of the week for two reasons.
-    Firstly, on Sunday you'll often be planning for the week ahead, and in that context "next week" feels somewhat unnatural.
-    Secondly, this makes Saturday and Sunday the two ends of the week ;)
+[^weekends]: I like sunday as the first day of the week for two reasons.
+	Firstly, on Sunday you'll often be planning for the week ahead, and in that context "next week" feels somewhat unnatural.
+	Secondly, this makes Saturday and Sunday the two ends of the week ;)
 
 # Tangent: Absolute Time, Relative Day
 

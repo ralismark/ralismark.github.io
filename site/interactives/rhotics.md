@@ -1,15 +1,18 @@
 ---
 layout: post
 title: How Many Rhotics Can You Pronounce?
-tags:
 excerpt: Rhotics go rrrr
+date: 2021-01-08
+tags:
 ---
 
-[Rhotics][Rhotic Consonant], or "R-like" sounds, are a group of consonants found in many languages. However, they are quite ambiguous phonetically, being pronounced in a wide variety of ways.
+[Rhotics][Rhotic Consonant], or "R-like" sounds, are a group of consonants found in many languages.
+However, they are quite ambiguous phonetically, being pronounced in a wide variety of ways.
 
 [Rhotic Consonant]: https://en.wikipedia.org/wiki/Rhotic_consonant
 
-Here are the main ones, going off of Wikipedia's [Rhotic Consonant] page. When voicedness is not specified, it's voiced.
+Here are the main ones, going off of Wikipedia's [Rhotic Consonant] page.
+When voicedness is not specified, it's voiced.
 
 | IPA | Name(s) | Sample |
 | - | - | - | - |
@@ -21,8 +24,6 @@ Here are the main ones, going off of Wikipedia's [Rhotic Consonant] page. When v
 | [&#967;] | [Voiceless Uvular Fricative](https://en.wikipedia.org/wiki/Voiceless_uvular_fricative)  <br> ("unvoiced guttural r") | <audio controls src="https://www.ipachart.com/ogg/Voiceless_uvular_fricative.ogg"></audio> |
 | [&#640;] | [Uvular Trill](https://en.wikipedia.org/wiki/Uvular_trill)                              <br> ("rolled guttural r")   | <audio controls src="https://www.ipachart.com/ogg/Uvular_trill.ogg"></audio>               |
 | [&#651;] | [Labiodental Approximant](https://en.wikipedia.org/wiki/Voiced_labiodental_approximant) <br> ("not an r")            | <audio controls src="https://www.ipachart.com/ogg/Labiodental_approximant.ogg"></audio>    |
-
----
 
 # The Full List
 

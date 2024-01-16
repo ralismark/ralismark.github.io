@@ -1,13 +1,15 @@
 ---
 layout: post
 title: A Nice Subset-sum Solution
+excerpt: "Solving a \"standard\" problem in a very clean way"
+date: 2019-01-08
 tags: algos c-cpp
-excerpt: Solving a "standard" problem in a very clean way
 ---
 
 > This post was rewritten in May 2020
 
-[Subset-sum][subsetsum] is a problem to determine if it's possible to find a subset of a given set of numbers which sum of a certain value. I found a very simple algorithms that can be extended to a few variations of the problem.
+[Subset-sum][subsetsum] is a problem to determine if it's possible to find a subset of a given set of numbers which sum of a certain value.
+I found a very simple algorithms that can be extended to a few variations of the problem.
 
 [subsetsum]: https://en.wikipedia.org/wiki/Subset_sum_problem
 
@@ -15,10 +17,11 @@ excerpt: Solving a "standard" problem in a very clean way
 
 For the problem, let:
 
-- $$T$$ be our target sum, and
-- $$w[0..N]$$ be an array of $$N$$ positive integers.
+- $T$ be our target sum, and
+- $w[0..N]$ be an array of $N$ positive integers.
 
-The standard dynamic programming approach is to have your subproblem be "is it possible to reach $$t$$ using only $$w[0..k]$$" for given $$t$$ and $$k$$. The recurrence is as follows:
+The standard dynamic programming approach is to have your subproblem be "is it possible to reach $t$ using only $w[0..k]$" for given $t$ and $k$.
+The recurrence is as follows:
 
 $$
 sss(t, k) = \begin{cases}
@@ -28,15 +31,17 @@ sss(t, k) = \begin{cases}
 \end{cases}
 $$
 
-We can see from this that $$sss(\cdot, k)$$ only depends on values of $$sss(\cdot, k-1)$$. As such, we can "optimise" this algorithm into an iterative one, performing the following transformation at every step:
+We can see from this that $sss(\cdot, k)$ only depends on values of $sss(\cdot, k-1)$.
+As such, we can "optimise" this algorithm into an iterative one, performing the following transformation at every step:
 
 $$
 sss[t] \mapsto sss[t] \vee sss[t - w[k]]
 $$
 
-With $$sss[t] = 1$$ if $$t = 0$$ otherwise 0 initially.
+With $sss[t] = 1$ if $t = 0$ otherwise 0 initially.
 
-Since we're working with boolean values, that looks like a bitshift! Translating this to C++ code:
+Since we're working with boolean values, that looks like a bitshift!
+Translating this to C++ code:
 
 ```cpp
 bitset<T+1> sss = {1};
@@ -48,10 +53,10 @@ Solved in only two or three lines.
 
 # Variations of this problem
 
-Since we are able to calculate $$sss(t, N-1)$$ for all $$t$$, we can also answer some optimisation problems:
+Since we are able to calculate $sss(t, N-1)$ for all $t$, we can also answer some optimisation problems:
 
-- What is the largest sum possible under $$T$$? (find the highest bit set)
-- How close can we get to T? (Use a bitset of length $$2T$$)
+- What is the largest sum possible under $T$? (find the highest bit set)
+- How close can we get to T? (Use a bitset of length $2T$)
 
 We can also solve similar problems, such as:
 
@@ -61,7 +66,7 @@ We can also solve similar problems, such as:
 
 # Backtracking
 
-In fact, we can even recover the subset used to make the sum by noticing that $$w[i]$$ allows us to "reach" all $$t$$ where $$sss[i+1][t] \wedge \neg sss[i][t]$$ is true:
+In fact, we can even recover the subset used to make the sum by noticing that $w[i]$ allows us to "reach" all $t$ where $sss[i+1][t] \wedge \neg sss[i][t]$ is true:
 
 ```cpp
 bitset<T+1> sss[N+1] = {{1}};

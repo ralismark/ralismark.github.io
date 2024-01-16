@@ -1,8 +1,9 @@
 ---
 layout: post
 title: My Tech Stack
-tags: uses
 excerpt: An sample of the tools I use
+date: 2021-08-16
+tags: uses
 ---
 
 Here's a short list of some of the tools I use regularly.
@@ -23,7 +24,7 @@ I don't have a proper desktop computer, instead opting for just a laptop. Handy 
 
 - [Alacritty](https://github.com/alacritty/alacritty), a fast terminal emulator. I don't really notice the speed, and its features are in the background enough for me to not really notice.
 - [tmux](https://github.com/tmux/tmux), a terminal multiplexer. I only regularly use a small fraction of its functionality -- the tab functionality. I've had `alt + <number>` bound to switch tabs.
-- [Neovim](https://neovim.io/), a descendant of the great Vi(m). Started with vim, then switched to the fork. I mostly use it in the terminal/from the command line. I've got two blog posts about it -- [one about general usage]({% link _posts/2020-08-29-how-i-use-vim-1.md %}) and [one about plugins]({% link _posts/2021-07-24-how-i-use-vim-2.md %}) -- and [my vim config is on github](https://github.com/ralismark/vimfiles).
+- [Neovim](https://neovim.io/), a descendant of the great Vi(m). Started with vim, then switched to the fork. I mostly use it in the terminal/from the command line. I've got two blog posts about it -- [one about general usage](how-i-use-vim-1) and [one about plugins](how-i-use-vim-2) -- and [my vim config is on github](https://github.com/ralismark/vimfiles).
 - [ranger](https://ranger.github.io/), a console file manager. It's just nicer than navigating via `cd` and doing file operations via commands, plus the `:bulkrename` feature is very useful.
 - [Zsh](https://www.zsh.org/), a shell that is often claimed to be better than bash. I'm guessing mostly in ease of customisation and plugin support, though I'm not familiar with what differences there actually are.
 - [sshfs](https://github.com/libfuse/sshfs), a way to mount remote filesystems so you can use local commands on remote files (rather than remote commands on remote files with regular ssh). It's really handy![^tunnel-run]

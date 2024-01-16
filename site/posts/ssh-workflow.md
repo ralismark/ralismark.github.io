@@ -1,8 +1,9 @@
 ---
 layout: post
 title: An SSH Workflow
-tags: uses
 excerpt: How to have a nice time developing remotely
+date: 2022-11-19
+tags: uses
 ---
 
 For both uni and my day job, I regularly do development over ssh, where your entire development environment -- that is source code, compilers, and other tooling -- are all situated on a remote machine.
@@ -42,7 +43,8 @@ Firstly, you almost certainly want `-o idmap=user`, which avoids files owned by 
 The reason is a bit technical.
 By default, when accessing things over sshfs, remote user/group IDs are not translated to what they should be locally.
 This means that on using sshfs with a system where I have a different user ID (i.e. basically all ssh servers), I'll see this:
-```terminal
+
+```console
 $ sshfs cse: ~/mnt
 
 $ ls -l ~/mnt
@@ -57,12 +59,14 @@ drwxr-xr-x 1 51148 51148   4096 Jul  8 00:26 remote-bin
 -rw-r--r-- 1 51148 51148      0 Jul 13 12:01 results.tsv
 -rw-r--r-- 1 51148 51148      0 Jul 19 14:53 sosh
 ```
+
 showing that, to my local system, none of the files actually appear owned by me!
 To be honest though, I'm not really sure what the implications of this are -- I thought it'd mess with permissions or something but that doesn't seem to be the case?
 
 Still, you can fix it with the option `-o idmap=user`.
 You'll see this instead:
-```terminal
+
+```console
 $ sshfs cse: ~/mnt -oidmap=user
 
 $ ls -l ~/mnt
@@ -93,7 +97,7 @@ Still, there's so much more you can do!
 With sshfs acting just like your local filesystem, you can in fact run (local) commands there!
 However, anything filesystem-intensive takes *forever*:
 
-```terminal
+```console
 $ time git status -sb # remote command, remote filesystem
 ## master...origin/master
  M projects/aos/apps/countdown/src/main.c
@@ -120,7 +124,7 @@ It's used as command wrapper, just like with `ssh`.
 
 [tunnel-run]: https://github.com/ralismark/micro/blob/main/tunnel-run
 
-```terminal
+```console
 $ hostname
 delta
 $ tunnel-run hostname
@@ -159,7 +163,7 @@ First are ones to keep ssh connections around and reuse them:
 
 - `ControlMaster auto` will enable this feature -- if there is an existing connection, reuse it, otherwise start a new one and allow other to reuse it
 - `ControlPath /run/user/%i/sshmux-%r@%h:%p-%l` sets the path that ssh uses to lookup this connection.
-What specifically this is isn't that important but there are some constraints[^controlpath].
+	What specifically this is isn't that important but there are some constraints[^controlpath].
 - `ControlPersist 60` determines how many seconds a connection is kept around for reuse (in this case 1 minute), so that the process doesn't hang around forever taking up resources, but you still get the benefits if you run commands on the same server a bunch.
 
 [^controlpath]: it should contain either all of `%l`, `%h`, `%p`, and `%r`, or `%C`, so that it doesn't reuse connections that should be distinct.
@@ -171,7 +175,8 @@ I'm quite a fan of systemd, so here's my way of integrating these mounts into it
 
 Systemd has mount units, which are a special kind of unit that corresponds to mounting something at a specific place in your filesystem.
 To use sshfs for it, put a file that looks like this
-```ini
+
+```systemd
 [Unit]
 Description=sshfs mount cse: to /home/temmie/.local/mount/cse
 
@@ -185,6 +190,7 @@ LazyUnmount=true
 [Install]
 WantedBy=default.target
 ```
+
 in `~/.config/systemd/user/`.
 The name for the file is a bit funny, since systemd needs special escaping for the path, but you can find this with `systemd-escape -p $PWD`.
 
@@ -198,15 +204,16 @@ However, if you're not a fan of polluting the home directory, and you use [zsh],
 
 [zsh]: https://wiki.archlinux.org/title/Zsh
 
-{% include admonition verb="aside" %}
-> As you might be able to tell, it's going to get more and more tailored to me as we go.
+.. admonition:: aside
+
+	As you might be able to tell, it's going to get more and more tailored to me as we go.
 
 I currently have all my mounts as subdirectories of `~/.local/mount/`.
 To avoid the pain of having to type out `~/.local/mount/remote/...` each time, I've set up zsh so that `~remote` points there, so you can just do `cd ~remote` to go to the mount for that server.
 The way this is done is with *directory hashes*.
 Let me demonstrate -- all of this is running in zsh.
 
-```terminal
+```console
 $ cd ~remote
 cd: no such file or directory: ~remote
 $ hash -d remote=$HOME/.local/mount/remote

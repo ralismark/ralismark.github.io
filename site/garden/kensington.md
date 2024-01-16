@@ -1,6 +1,6 @@
 ---
-layout: post-standalone
-title: "On Why I Moved Out"
+layout: standalone
+title: On Why I Moved Out
 ---
 
 This is the story of why I moved out of Kensington, written up for once so I don't have to keep repeating it.
@@ -50,7 +50,6 @@ Also we didn't have proper flyscreens and had to kinda make do with the removabl
 This was a problem because the one in the kitchen would regularly fall down.
 As such, when Neel and Frank went to Japan for a holiday while I was interning at Canva, we started having a fly problem that I was way too burnt out to really do much about.
 I was just really overwhelmed by this issue and I couldn't do much to try and address it.
-
 
 The main thing that catalysed the events that led to me leaving was our rent increasing from $650 to $800 -- $50 each.
 That led to this exchange:

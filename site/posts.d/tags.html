@@ -1,42 +1,39 @@
 ---
-layout: default
+layout: standalone
 title: Tags
 ---
 
-{% for tagset in site.tags %}
-<section>
-	<h1 id="{{ tagset[0] | slugify }}">{{ tagset[0] }}</h1>
-	<ul>
-		{% for post in tagset[1] %}
-		<li>
-			{% if post.path contains "_drafts" %}
-			[draft: {{ post.reason | default: "no reason" }}]
-			{% endif %}
-			<a href="{{ post.url }}">
-				{{ post.title }}
-			</a>
-			<time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_long_string }}</time>
-		</li>
-		{% endfor %}
-	</ul>
-</section>
+{% set ns = namespace(tags=dict(),untagged=[]) %}
+{% for post in posts %}
+	{% set post = recipe.build(post.meta) %}
+	{% for tag in parse_tags(post) %}
+		{% do ns.tags.setdefault(tag, []).append(post) %}
+	{% else %}
+		{% do ns.untagged.append(post) %}
+	{% endfor %}
 {% endfor %}
-<section>
-	<h1>posts without tags</h1>
-	<ul>
-		{% for post in site.posts %}
-		{% assign nr_tags = post.tags | size %}
-		{% if nr_tags == 0 %}
+
+{% macro list_posts(posts) %}
+<ul>
+	{% for post in posts|reverse %}
 		<li>
-			{% if post.path contains "_drafts" %}
-			[draft: {{ post.reason | default: "no reason" }}]
+			{% if post.draft %}
+			[draft: {{ post.props.reason | default("no reason specified") | e }}]
 			{% endif %}
-			<a href="{{ post.url }}">
-				{{ post.title }}
-			</a>
-			<time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date_to_long_string }}</time>
+			<a href="{{ post.url }}">{{ post.props.title|e }}</a>
+			<time datetime="{{ post.props.date.strftime("%Y-%m-%d") }}">
+				{{ post.props.date.strftime("%e %b '%y") }}
+			</time>
 		</li>
-		{% endif %}
-		{% endfor %}
-	</ul>
-</section>
+	{% endfor %}
+</ul>
+{% endmacro %}
+
+{% for tag, pages in ns.tags|dictsort %}
+	<h2 id="{{ tag }}">{{ tag }}</h2>
+	{{ list_posts(pages) }}
+{% endfor %}
+{% if ns.untagged %}
+	<h2>posts without tags</h2>
+	{{ list_posts(ns.untagged) }}
+{% endif %}

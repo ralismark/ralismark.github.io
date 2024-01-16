@@ -1,19 +1,25 @@
 ---
 layout: post
 title: Contention On 96 Cores
-tags: c-cpp
 excerpt: An interesting issue with std::locale and massive parallelism
+date: 2021-11-14
+tags: c-cpp
 ---
 
 I recently investigated an interesting issue at work:
 
-> Running \[one build variant of a program] takes approx 5 seconds on a 96 core machine. Running \[this other build variant] takes 30 seconds. CPU usage is 100% for 96 core, so it is definitely running stuff efficiently - seems there is a huge amount of overhead here.
+> Running one build variant of a program takes approx 5 seconds on a 96 core machine.
+> Running this other build variant takes 30 seconds.
+> CPU usage is 100% for 96 core, so it is definitely running stuff efficiently - seems there is a huge amount of overhead here.
 
-The program is architectured in a way such that it should scale up to more threads very well -- essentially generating a large number of independent tasks, then running them in parallel and gathering the results. So a 6x slowdown is not something that's expected.
+The program is architectured in a way such that it should scale up to more threads very well -- essentially generating a large number of independent tasks, then running them in parallel and gathering the results.
+So a 6x slowdown is not something that's expected.
 
 After some investigation with [`perf`][perf] and [`hotspot`][hotspot], it turns out that most of that time is within the [`std::basic_ostringstream` constructor][basic_oss], and within that almost entire in the [`std::locale` constructor][locale].
 
-Turns out we had a very hot loop that was constructing a `std::stringstream` every iteration, and this was being run by every single core. Moreover, this code was compiled out in the first build variant which meant it didn't have that performance issue. Editing this loop to not use `std::stringstream` fixed the issue, and that's more or less where the original story ended.
+Turns out we had a very hot loop that was constructing a `std::stringstream` every iteration, and this was being run by every single core.
+Moreover, this code was compiled out in the first build variant which meant it didn't have that performance issue.
+Editing this loop to not use `std::stringstream` fixed the issue, and that's more or less where the original story ended.
 
 But, what's the actual cause behind this slowness?
 
@@ -28,7 +34,8 @@ Looking on cppreference leads us to a couple of pointers as to the cause:
 >
 > [...]
 >
-> Internally, a locale object is implemented as-if it is a reference-counted pointer to an array (indexed by `std::locale::id`) of reference-counted pointers to facets: copying a locale only copies one pointer and increments several reference counts. To maintain the standard C++ library thread safety guarantees (operations on different objects are always thread-safe), both the locale reference count and each facet reference count are updated in thread-safe manner, similar to `std::shared_ptr`.
+> Internally, a locale object is implemented as-if it is a reference-counted pointer to an array (indexed by `std::locale::id`) of reference-counted pointers to facets: copying a locale only copies one pointer and increments several reference counts.
+> To maintain the standard C++ library thread safety guarantees (operations on different objects are always thread-safe), both the locale reference count and each facet reference count are updated in thread-safe manner, similar to `std::shared_ptr`.
 >
 > --- <https://en.cppreference.com/w/cpp/locale/locale>
 
@@ -36,9 +43,14 @@ This would explain it: the frantic construction and destruction of the `std::loc
 
 Revisiting the off-cpu (i.e. blocking) flame graph from the `perf` trace supports this, showing a massive *27 seconds* of blocking within `std::locale`.
 
-But, there's a slight wrinkle in this story. Note the wording of the above passage: _**as-if** it is a reference-counted pointer_. So, it's not actually guaranteed to be the case. In fact, the standard says
+But, there's a slight wrinkle in this story.
+Note the wording of the above passage: _**as-if** it is a reference-counted pointer_.
+So, it's not actually guaranteed to be the case.
+In fact, the standard says
 
-> Whether there is one global locale object for the entire program or one global locale object per thread is implementation-defined. Implementations should provide one global locale object per thread. If there is a single global locale object for the entire program, implementations are not required to avoid data races on it (\[res.on.data.races\]).
+> Whether there is one global locale object for the entire program or one global locale object per thread is implementation-defined.
+> Implementations should provide one global locale object per thread.
+> If there is a single global locale object for the entire program, implementations are not required to avoid data races on it (\[res.on.data.races\]).
 >
 > --- [\[locale.general\]/9](http://eel.is/c++draft/locale#general-9)
 
@@ -98,6 +110,9 @@ The [`_S_initialize`][_S_initialize] call just runs [`_S_initialize_once`][_S_in
   }
 ```
 
-After that, we load a `_S_global`, then if it's not the default of `_S_classic`, we lock and increment a reference count. Now, given what we've seen this seems to imply that our program had a non-default locale. Doing a simple grep seems to imply that this isn't the case though, so it's not clear what's up.
+After that, we load a `_S_global`, then if it's not the default of `_S_classic`, we lock and increment a reference count.
+Now, given what we've seen this seems to imply that our program had a non-default locale.
+Doing a simple grep seems to imply that this isn't the case though, so it's not clear what's up.
 
-However, `_S_global` and `_S_classic` are both defined as plain `_Impl*` so maybe memory contention there, despite them not being atomics? At this point, I don't have a good enough grasp of how CPUs handle this so unfortunately I don't have a clean resolution to this mystery.
+However, `_S_global` and `_S_classic` are both defined as plain `_Impl*` so maybe memory contention there, despite them not being atomics?
+At this point, I don't have a good enough grasp of how CPUs handle this so unfortunately I don't have a clean resolution to this mystery.

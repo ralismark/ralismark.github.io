@@ -1,21 +1,30 @@
 ---
 layout: post
 title: Extending Kramdown
-tags: static-site-gen
 excerpt: Changing Kramdown at the ruby level
+date: 2021-02-06
+tags: static-site-gen
 ---
 
-Back in my [Inline Sidenotes]({% link _posts/2020-11-20-inline-notes.md %}) post I discovered an interesting alternative to footnotes, but unfortunately couldn't make Kramdown emit them instead of the regular footnotes. Recently, I stumbled across [Making Markdown more HTML5 with Kramdown](https://kalifi.org/2015/04/html5-markdown-kramdown.html), which listed out the steps for changing how markdown gets rendered. However, it lacked some detail and was a bit outdated, and this process is pretty obscure, so here's another explanation.
+Back in my [Inline Sidenotes](inline-notes) post I discovered an interesting alternative to footnotes, but unfortunately couldn't make Kramdown emit them instead of the regular footnotes.
+Recently, I stumbled across [Making Markdown more HTML5 with Kramdown](https://kalifi.org/2015/04/html5-markdown-kramdown.html), which listed out the steps for changing how markdown gets rendered.
+However, it lacked some detail and was a bit outdated, and this process is pretty obscure, so here's another explanation.
 
 <!--more-->
 
-> All of this assumes that you have a Jekyll setup that allows custom plugins and code execution. Github Pages' Jekyll support does not! If you're using github pages, see my [Site Infrastructure] post for *one* way of getting around this.
+> All of this assumes that you have a Jekyll setup that allows custom plugins and code execution.
+> Github Pages' Jekyll support does not!
+> If you're using github pages, see my [Site Infrastructure] post for *one* way of getting around this.
 
-[Site Infrastructure]: {% link _posts/2021-01-08-blog-infra.md %}
+[Site Infrastructure]: blog-infra
 
-As an example, we'll change Kramdown to make headings into links. This'll allow readers to easily link to specific sections of articles -- try clicking the link of any header on my articles! Of course, there are other ways of doing this -- see this [stackoverflow question](https://stackoverflow.com/q/40469259) -- but directly extending Kramdown is the cleanest.
+As an example, we'll change Kramdown to make headings into links.
+This'll allow readers to easily link to specific sections of articles -- try clicking the link of any header on my articles!
+Of course, there are other ways of doing this -- see this [stackoverflow question](https://stackoverflow.com/q/40469259) -- but directly extending Kramdown is the cleanest.
 
-Fortunately, we can change Kramdown's behaviour pretty easily by subclassing [`Kramdown::Converter::Html`](https://kramdown.gettalong.org/rdoc/Kramdown/Converter/Html.html) which converts Kramdown's internal document representation to HTML. The `convert_*` method of this class produce the HTML for different Markdown parts. For our change, we'll want to change `#convert_header` -- other changes will require editing other methods.
+Fortunately, we can change Kramdown's behaviour pretty easily by subclassing [`Kramdown::Converter::Html`](https://kramdown.gettalong.org/rdoc/Kramdown/Converter/Html.html) which converts Kramdown's internal document representation to HTML.
+The `convert_*` method of this class produce the HTML for different Markdown parts.
+For our change, we'll want to change `#convert_header` -- other changes will require editing other methods.
 
 Put this in `_plugins/kramdown.rb`:
 
@@ -43,12 +52,16 @@ module Kramdown
       link = format_as_span_html('a', {"href": "##{attr['id']}"}, inner(el, indent))
       format_as_block_html("h#{level}", attr, link, indent)
     end
+  end
 end
 ```
 
-*Note: This class must be in the `Kramdown::Converter` module, and the actual name of the class is used in a method name -- I'll point this out when it turns up.*
+.. admonition:: warn
 
-However, we can't change the converter that's used by Kramdown using config options. Instead, to get Jekyll to recognise our new Kramdown converter, we need to make (well, subclass) our own Markdown variant:
+	This class must be in the `Kramdown::Converter` module, and the actual name of the class is used in a method name -- I'll point this out when it turns up.
+
+However, we can't change the converter that's used by Kramdown using config options.
+Instead, to get Jekyll to recognise our new Kramdown converter, we need to make (well, subclass) our own Markdown variant:
 
 ```ruby
 class Jekyll::Converters::Markdown::Custom < Jekyll::Converters::Markdown::KramdownParser
@@ -75,4 +88,6 @@ Finally, to make Jekyll use this Markdown variant, we need to set the `markdown`
 markdown: Custom
 ```
 
-Now, if you've done everything right, your headings should be links now! Congrats on your first Kramdown modification! If you have problems, feel free to reply below or contact me.
+Now, if you've done everything right, your headings should be links now!
+Congrats on your first Kramdown modification!
+If you have problems, feel free to reply below or contact me.

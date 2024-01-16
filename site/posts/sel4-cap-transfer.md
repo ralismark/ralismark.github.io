@@ -1,8 +1,9 @@
 ---
 layout: post
 title: Debugging Capability Transfer on seL4
+excerpt: Finding why a central part of capabilities wasn't working
+date: 2022-11-19
 tags:
-excerpt: "Finding why a central part of capabilities wasn't working"
 ---
 
 # A bit of context
@@ -148,10 +149,10 @@ You can also Mint the capability, but be aware that this changes the CNode capab
 
 Then, before the IPC call, call `seL4_SetCapReceivePath` with the following arguments:
 
-1. The CNode you want received caps to be sent to
-This is usually the process's own CSpace, but you need to be given this explicitly, as explained earlier.
+1. The CNode you want received caps to be sent to.
+	This is usually the process's own CSpace, but you need to be given this explicitly, as explained earlier.
 2. An unoccupied CPtr addressed in that CNode that you want the received cap to go.
 3. The depth of the target CSpace, usually `seL4_WordBits`.
-Often `seL4_WordBits`, but having this incorrect will cause the operation to silently fail (which is what happened to us)!
+	Often `seL4_WordBits`, but having this incorrect will cause the operation to silently fail (which is what happened to us)!
 
 If you've done everything correctly (and permissions are also right), you'll be able to send capabilities over endpoints!

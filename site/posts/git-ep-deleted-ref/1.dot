@@ -1,0 +1,22 @@
+digraph G {
+	rankdir="LR";
+	graph [ranksep=1];
+	node [label="",shape="circle"];
+
+	subgraph cluster_m {
+		m0 -> m1 -> m2 -> m3;
+		m4 -> m5 [color="grey",style="dotted"];
+		m3 -> m5 [constraint=false];
+		m4 [color="grey"];
+		m3 -> m4 [color="grey"];
+		color="none";
+	}
+	subgraph cluster_b {
+		node [color="grey"];
+		edge [color="grey"];
+		m1 -> b1 -> b2 -> m4;
+		color="none";
+	}
+	{ rank=same; master -> m5 [constraint=false]; master [label="master",shape="none"] }
+	{ rank=same; b2 -> feature [dir=back,constraint=false,color="grey"]; feature [label="feature",shape="none",color="grey",fontcolor="grey"] }
+}

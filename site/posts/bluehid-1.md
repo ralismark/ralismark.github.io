@@ -1,27 +1,31 @@
 ---
 layout: post
 title: "BlueHID Details #1: Oreo Hacks"
-tags:
 excerpt: Enabling the Bluetooth HID device API on Oreo
+date: 2019-01-04
+tags:
 ---
 
-The upcoming Android P adds support for using your phone as a Bluetooth HID, allowing you to potentially use it as a keyboard, mouse, or even a gamepad. However, there hasn't really been any examples of its use, so I made one. In this series, I'll break down how I made it work.
+The upcoming Android P adds support for using your phone as a Bluetooth HID, allowing you to potentially use it as a keyboard, mouse, or even a gamepad.
+However, there hasn't really been any examples of its use, so I made one.
+In this series, I'll break down how I made it work.
 
-However, I don't have Android P, only Oreo. But there is way to do this on Oreo, which I'll explain in this entry.
+However, I don't have Android P, only Oreo.
+But there is way to do this on Oreo, which I'll explain in this entry.
 
 <!--more-->
 
-> I will be uploading the code to GitHub soon, hopefully in a couple of days - stay tuned for updates.
->
-> EDIT: Code uploaded as <https://github.com/ralismark/bluehid>
+> Code is on github at <https://github.com/ralismark/bluehid>
 
-Despite the interest around the addition [BluetoothHidDevice], there doesn't seem too much interest on actually using it [^1] and implementing a device - probably a combination of P still being in developer preview and the actual API being a bit daunting (we'll get up to that later).
+Despite the interest around the addition [BluetoothHidDevice], there doesn't seem too much interest on actually using it[^1] and implementing a device -- probably a combination of P still being in developer preview and the actual API being a bit daunting (we'll get up to that later).
 
 [BluetoothHidDevice]: https://developer.android.com/reference/android/bluetooth/BluetoothHidDevice
 
 [^1]: [How can i use the Bluetooth HID Device profile in Android Pie?](https://stackoverflow.com/q/53555092), with no answers (as of the writing of this).
 
-There has been interest before on using an android phone as a Bluetooth HID device [^2], and there are [successful implementations using BLE][blehid]. However, that approach requires the BLE peripheral feature, which many phones (including mine, a OnePlus X) do not support. After some digging, I found that this was already implemented (but disabled and under a different name) in android O - see [this PR][commit].
+There has been interest before on using an android phone as a Bluetooth HID device[^2], and there are [successful implementations using BLE][blehid].
+However, that approach requires the BLE peripheral feature, which many phones (including mine, a OnePlus X) do not support.
+After some digging, I found that this was already implemented (but disabled and under a different name) in android O -- see [this PR][commit].
 
 [^2]: [Implementation of Bluetooth HID device profile in Android Kitkat](https://stackoverflow.com/q/29406726) and [Android as a bluetooth HID keyboard and mouse](https://stackoverflow.com/q/49189504), for instance.
 
@@ -29,9 +33,10 @@ There has been interest before on using an android phone as a Bluetooth HID devi
 
 [commit]: https://android-review.googlesource.com/c/platform/packages/apps/Bluetooth/+/203832
 
- All I need to be able to use this is to enable it, and is quite easy with Xposed. Firstly, you need to set the [flag to enable][flag] it.
+All I need to be able to use this is to enable it, and is quite easy with Xposed.
+Firstly, you need to set the [flag to enable][flag] it.
 
- [flag]: https://android.googlesource.com/platform/packages/apps/Bluetooth/+/oreo-release/res/values/config.xml#33
+[flag]: https://android.googlesource.com/platform/packages/apps/Bluetooth/+/oreo-release/res/values/config.xml#33
 
 ```java
 @Override
@@ -45,7 +50,8 @@ public void handleInitPackageResources(InitPackageResourcesParam resparam) throw
 }
 ```
 
-However, due to [this in AndroidManifest.xml][manifest], and the fact that the manifest only matters when installing the app, you also need to enable to service. This can be done through the package manager API:
+However, due to [this in AndroidManifest.xml][manifest], and the fact that the manifest only matters when installing the app, you also need to enable to service.
+This can be done through the package manager API:
 
 [manifest]: https://android.googlesource.com/platform/packages/apps/Bluetooth/+/oreo-release/AndroidManifest.xml#384
 

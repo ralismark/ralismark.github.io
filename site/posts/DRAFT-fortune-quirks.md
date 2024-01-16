@@ -1,8 +1,9 @@
 ---
 layout: post
 title: "Fortune Was So Broken"
-tags:
 excerpt: "All the bugs and quirks that didn't make into the previous post"
+date: 2023-10-24
+tags:
 reason: wip
 ---
 

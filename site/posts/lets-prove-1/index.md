@@ -1,11 +1,10 @@
 ---
 layout: post
 title: "Let's Prove #1: Safety, Liveness, Alpern and Schneider"
-tags: isabelle
 excerpt: "theorem \"Every property is the intersection of a safety and a liveness property\""
+date: 2023-06-07
+tags: isabelle
 ---
-
-*[IIRM]: The Isabelle/Isar Reference Manual
 
 A couple of years ago I took [COMP4161 "Advanced Topics in Software Verification" at UNSW](https://www.handbook.unsw.edu.au/undergraduate/courses/2023/comp4161), which taught how to use the [Isabelle proof assistant] to prove theorems and eventually formally verify C programs.
 I had so much fun in that course, but unfortunately formally proving theorems isn't something that is widely applicable these days, so I haven't had much chance to do more.
@@ -16,44 +15,46 @@ However, I'm currently doing [COMP3151 "Foundations of Concurrency" at UNSW](htt
 While the main portion of the course is for formally reasoning about concurrent programs, it began with reasoning about single-threaded program via the different states they go through, and the properties these sequences of states can satisfy.
 A major theorem in this area is Alpern and Schneider’s Theorem:
 
-<div class="x-thm">
-<span>Every property is the intersection of a safety and a liveness property.</span>
-</div>
+.. sparkle::
+
+	Every property is the intersection of a safety and a liveness property.
 
 I've seen this theorem alluded to in a bunch of other computing courses, but this is the first time I've been properly introduced to it.
 And so, I'm gonna have some fun and take you on a journey to formally proving that!
 
-{% include admonition verb="warn" %}
-> I'll be assuming a basic understanding of (first order) logic and set theory.
-> We'll also be diving right into Isabelle, so if you're looking for an introduction, this isn't the place unfortunately.
+.. admonition:: warn
+
+	I'll be assuming a basic understanding of (first order) logic and set theory.
+	We'll also be diving right into Isabelle, so if you're looking for an introduction, this isn't the place unfortunately.
 
 # Foundations
 
 First of all, let me explain what that even means:
 
 - A **behaviour**, also called a program trace, is an infinite sequence of all the states that a program goes through during execution[^halt].
-This includes, for example, the value of variables, though what states actually are doesn't really matter -- they just are abstract equality-comparable mathematical objects.
+	This includes, for example, the value of variables, though what states actually are doesn't really matter -- they just are abstract equality-comparable mathematical objects.
 - A **property** is a predicate on behaviours, i.e. a function from behaviours to bool.
 - A [**safety** property](https://en.wikipedia.org/wiki/Safety_and_liveness_properties#Safety) is, colloquially, is one that requires that "nothing bad happens", e.g. "the program uses more than 100MB of memory", "when the program exits, it has printed `hello world`", "the program never halts".
-- A [**liveness** property](https://en.wikipedia.org/wiki/Safety_and_liveness_properties#Liveness) is, colloquially, one that requires that "something good eventually happens", e.g. "the program halts", "all requests are eventually responded to", "the state $$s$$ occurs at least once".
+- A [**liveness** property](https://en.wikipedia.org/wiki/Safety_and_liveness_properties#Liveness) is, colloquially, one that requires that "something good eventually happens", e.g. "the program halts", "all requests are eventually responded to", "the state $s$ occurs at least once".
 
 [^halt]: A halting program would have a finite trace, but we usually represent that by having the last state repeat forever.
 
-Thus, Alpern and Schneider's Theorem states that, for all properties $$P$$, you can find two properties, a safety one $$P_S$$ and a liveness one $$P_L$$, such that $$P$$ is satisfied by a behaviour if and only if it satisfies both $$P_S$$ and $$P_L$$.
+Thus, Alpern and Schneider's Theorem states that, for all properties $P$, you can find two properties, a safety one $P_S$ and a liveness one $P_L$, such that $P$ is satisfied by a behaviour if and only if it satisfies both $P_S$ and $P_L$.
 This was proven in their 1984 paper ["Defining Liveness"][alpern1984], and we'll follow a similar approach to what's described there.
 
 [alpern1984]: https://www.cs.cornell.edu/fbs/publications/DefLiveness.pdf
 
 Now that the basics are out of the way, let's boot up Isabelle!
 
-{% include admonition verb="aside" %}
-> Unfortunately, there's no syntax highlighting for Isabelle right now :(.
-> [It's been implemented upstream](https://github.com/rouge-ruby/rouge/pull/1682), but I'm still on an old version of Jekyll and haven't figured out how to update that dependency.
+.. admonition:: aside
+
+	Unfortunately, there's no syntax highlighting for Isabelle right now :(.
+	[It's been implemented upstream](https://github.com/rouge-ruby/rouge/pull/1682), but I'm still on an old version of Jekyll and haven't figured out how to update that dependency.
 
 # Working with Infinite Lists
 
 While Isabelle comes with a theory for finite lists, it doesn't have one for infinite lists, so we'll need to make our own!
-We'll represent infinite lists as functions from naturals to the elements -- the first state is $$\sigma\ 0$$, the second is $$\sigma\ 1$$, and so on.
+We'll represent infinite lists as functions from naturals to the elements -- the first state is $\sigma\ 0$, the second is $\sigma\ 1$, and so on.
 
 ```isabelle
 type_synonym 's behaviour = "nat ⇒ 's"
@@ -83,7 +84,7 @@ We'll add supplementary theorems about them later, but this is enough for now.
 For properties, I defined those as predicates.
 A decent amount of literate defines them as sets (which are equivalent), and that gets reflected in wording as well -- that's why Alpern & Schneider's statement of their theorem uses _intersection_.
 
-```
+```isabelle
 type_synonym 's property = "'s behaviour ⇒ bool"
 ```
 
@@ -94,7 +95,7 @@ This wasn't done much in COMP4161 so I was initially a bit lost, and so headed t
 Looking online, I was led to [§8.2 of The Isabelle/Isar Reference Manual (IIRM)](https://isabelle.in.tum.de/doc/isar-ref.pdf#section.8.2), plus all the `syntax`, `notation`, `abbreviation`, and so on in the subsequent sections that went entirely over my head.
 But after a bunch of trial and error I managed to make turnstile notation (i.e. "does a behaviour satisfy this property") with
 
-```
+```isabelle
 abbreviation(input) models :: "'s behaviour ⇒ ('s behaviour ⇒ bool) ⇒ bool" (infix "⊨" 15)
   where "models σ p ≡ p σ"
 ```
@@ -106,7 +107,7 @@ This is why I specified `(input)`, which only does the desugaring without modify
 
 Additionally, I discovered you can directly overload syntax, so we can just use the standard logic operators between properties (with full sugar)!
 
-```
+```isabelle
 abbreviation pNot :: "'s property ⇒ 's property" ("¬_" [40] 40)
   where "pNot p ≡ λσ. ¬(p σ)"
 
@@ -125,25 +126,25 @@ Though unfortunately you regularly get syntax ambiguity warnings:
 > Ambiguous input⌂ produces 2 parse trees:
 >
 > - ```escape
->   ("<!<b><i>const</i></b>!>Pure.eq"
->     ("_applC" ("_position" pNot) ("_position" p))
->     ("_lambda" ("_position" b)
->       ("<!<b><i>fixed</i></b>!>pNot"
->         ("_applC" ("_position" p) ("_position" b)))))
-> ```
+> 	("<!<b><i>const</i></b>!>Pure.eq"
+> 	  ("_applC" ("_position" pNot) ("_position" p))
+> 	  ("_lambda" ("_position" b)
+> 	    ("<!<b><i>fixed</i></b>!>pNot"
+> 	      ("_applC" ("_position" p) ("_position" b)))))
+> 	```
 >
 > - ```escape
->   ("<!<b><i>const</i></b>!>Pure.eq"
->     ("_applC" ("_position" pNot) ("_position" p))
->     ("_lambda" ("_position" b)
->       ("<!<b><i>const</i></b>!>HOL.Not"
->         ("_applC" ("_position" p) ("_position" b)))))
-> ```
+> 	("<!<b><i>const</i></b>!>Pure.eq"
+> 	  ("_applC" ("_position" pNot) ("_position" p))
+> 	  ("_lambda" ("_position" b)
+> 	    ("<!<b><i>const</i></b>!>HOL.Not"
+> 	      ("_applC" ("_position" p) ("_position" b)))))
+> 	```
 >
 > Fortunately, only one parse tree is well-formed and type-correct,
 > but you may still want to disambiguate your grammar or your input.
 
-We know that our new syntax isn't ambiguous with default HOL operators once you consider the types, so we can whisk these warnings away with this from [IIRM §8.4.5](https://isabelle.in.tum.de/doc/isar-ref.pdf#attribute.syntax-ambiguity-warning):
+We know that our new syntax isn't ambiguous with default HOL operators once you consider the types, so we can whisk these warnings away with this, from [IIRM §8.4.5](https://isabelle.in.tum.de/doc/isar-ref.pdf#attribute.syntax-ambiguity-warning):
 
 ```isabelle
 (* since we're overloading a bunch of logic operators *)
@@ -165,7 +166,7 @@ Okay, we're now ready to define safety and liveness!
 # Safety and Liveness
 
 In ["Defining Liveness"][alpern1984], Alpern and Schneider proposes the mathematical definitions for safety and liveness that are commonly used today.
-Their definitions are that a property $$P$$ is a safety one if and only if
+Their definitions are that a property $P$ is a safety one if and only if
 
 $$
 (\forall\sigma: \sigma \in S^\omega : \sigma \not\models P \implies (\exists i: 0 \le i : (\forall \beta: \beta \in S^\omega : \sigma_i \beta \not\models P))).
@@ -173,15 +174,15 @@ $$
 
 The notation there is a bit quirky, so let's convert the definition to Isabelle.
 
-```
+```isabelle
 definition safety :: "'s property ⇒ bool"
   where "safety P ≡ ∀σ. ¬(σ ⊨ P) ⟶
     (∃i. ∀β. ¬(i_take i σ ⌢ β ⊨ P))"
 ```
 
-The intuition behind this definition is that, if a behaviour violates a safety property, there must be an identifiable point (index $$i$$) where the violation happens, and nothing you do after that (behaviour $$\beta$$) can then un-violate that property.
+The intuition behind this definition is that, if a behaviour violates a safety property, there must be an identifiable point (index $i$) where the violation happens, and nothing you do after that (behaviour $\beta$) can then un-violate that property.
 
-Alpern and Schneider then define liveness as properties $$P$$ where
+Alpern and Schneider then define liveness as properties $P$ where
 
 $$
 (\forall \alpha : \alpha \in S^* : (\exists \beta : \beta \in S^\omega : \alpha \beta \models P)).
@@ -190,7 +191,7 @@ $$
 This is a bit less of a mouthful than safety.
 In Isabelle it's
 
-```
+```isabelle
 definition liveness :: "'s property ⇒ bool"
   where "liveness P ≡ ∀α. ∃β. α ⌢ β ⊨ P"
 ```
@@ -204,11 +205,12 @@ The way that both ["Defining Liveness"][alpern1984] and COMP3151 approach provin
 Now, this isn't really coffee-mug-and-donut topology, and this route invokes a bunch of additional maths involving metric theory[^topo].
 We'll follow COMP3151 and sidestep this using an alternate but equivalent formulation:
 
-[^topo]: If you want the metric-theoretic topology way: Define the distance metric $$d(x, y)$$ as $$2^{-k}$$, where $$k$$ is the length of the longest common prefix of $$x$$ and $$y$$. Then, take the regular (topological) definitions of limit points, closed sets, and so on.
+[^topo]: If you want the metric-theoretic topology way: Define the distance metric $d(x, y)$ as $2^{-k}$, where $k$ is the length of the longest common prefix of $x$ and $y$.
+	Then, take the regular (topological) definitions of limit points, closed sets, and so on.
 
-<div class="x-thm" markdown=1>
-The _limit closure_ of a property $$P$$ is another property $$\bar{P}$$ that accepts all behaviours whose finite prefixes are all a prefix of some behaviour accepted by $$P$$.
-</div>
+.. sparkle::
+
+	The _limit closure_ of a property $P$ is another property $\bar{P}$ that accepts all behaviours whose finite prefixes are all a prefix of some behaviour accepted by $P$.
 
 Or, in math notation,
 
@@ -226,60 +228,67 @@ definition limit_closure :: "'s property ⇒ 's property"
 
 With this, there's two basic theorems for limit closure:
 
-1. $$P$$ is a subset of its limit closure.
-```isabelle
-lemma limit_closure_subset[intro]: "σ ⊨ P ⟹ σ ⊨ limit_closure P"
-  unfolding limit_closure_def i_drop_def
-  by auto
-```
-I labelled it as an  `[intro]` rule ([IIRM §9.4.2](https://isabelle.in.tum.de/doc/isar-ref.pdf#attribute.intro)) to make automated methods (e.g. `auto`) try it.
+1. $P$ is a subset of its limit closure.
+
+	```isabelle
+	lemma limit_closure_subset[intro]: "σ ⊨ P ⟹ σ ⊨ limit_closure P"
+	  unfolding limit_closure_def i_drop_def
+	  by auto
+	```
+
+	I labelled it as an `[intro]` rule ([IIRM §9.4.2](https://isabelle.in.tum.de/doc/isar-ref.pdf#attribute.intro)) to make automated methods (e.g. `auto`) try it.
 
 2. The limit closure operation is idempotent -- repeating it does nothing and should be removed, hence `[simp]`.
-```isabelle
-lemma limit_closure_idem[simp]: "limit_closure (limit_closure P) = limit_closure P"
-  unfolding limit_closure_def i_take_def
-  by fastforce
-```
+	```isabelle
+	lemma limit_closure_idem[simp]: "limit_closure (limit_closure P) = limit_closure P"
+	  unfolding limit_closure_def i_take_def
+	  by fastforce
+	```
 
 Next up we define what it means for a property to be [limit closed](https://en.wikipedia.org/wiki/Closed_set) and [dense](https://en.wikipedia.org/wiki/Dense_set):
 
-<!--TODO these are formatted a bit yuckily in the markdown file-->
-
 1. **Limit-closed** properties are equal to their limit closure.
-Equivalently but more usefully, limit-closed properties have all behaviours satisfying the limit closure also satisfy P.
-   ```isabelle
-   definition limit_closed :: "'s property ⇒ bool"
-     where "limit_closed P ≡ (limit_closure P) = P"
+	Equivalently but more usefully, limit-closed properties have all behaviours satisfying the limit closure also satisfy P.
 
-   lemma limit_closed_forall[simp]:
-       "limit_closed P = (∀σ. (σ ⊨ limit_closure P) ⟶ (σ ⊨ P))"
-     unfolding limit_closed_def
-     by auto
-   ```
-`limit_closed_forall` here is basically the reverse direction of `limit_closure_subset`.
+	```isabelle
+	definition limit_closed :: "'s property ⇒ bool"
+	  where "limit_closed P ≡ (limit_closure P) = P"
+	
+	lemma limit_closed_forall[simp]:
+	    "limit_closed P = (∀σ. (σ ⊨ limit_closure P) ⟶ (σ ⊨ P))"
+	  unfolding limit_closed_def
+	  by auto
+	```
+
+	`limit_closed_forall` here is basically the reverse direction of `limit_closure_subset`.
 
 2. **Dense** properties have their limit closure satisfied by all properties.
-   ```isabelle
-   definition dense :: "'s property ⇒ bool"
-     where "dense P ≡ (limit_closure P) = pTrue"
 
-   lemma dense_forall[simp]: "dense P = (∀σ. σ ⊨ limit_closure P)"
-     using dense_def by auto
-   ```
+	```isabelle
+	definition dense :: "'s property ⇒ bool"
+	  where "dense P ≡ (limit_closure P) = pTrue"
+	
+	lemma dense_forall[simp]: "dense P = (∀σ. σ ⊨ limit_closure P)"
+	  using dense_def by auto
+	```
 
 # Four Big Lemmas
 
 There's only two theorems we need to show before we can attack Alpern and Schneider’s Theorem, and they are that
-<div class="x-thm">
-<span>Safety properties are exactly the limit-closed ones</span>
-</div>
+
+.. sparkle::
+
+	Safety properties are exactly the limit-closed ones
+
 and
-<div class="x-thm">
-<span>Liveness properties are exactly the dense ones</span>
-</div>
+
+.. sparkle::
+
+	Liveness properties are exactly the dense ones
+
 However, it turns out that proving these directly _seriously_ involved, so we'll split up the two implication directions for each, giving us four lemmas.
 
-```
+```isabelle
 lemma safety_is_closed: "safety P ⟹ limit_closed P"
   sorry
 
@@ -299,11 +308,12 @@ theorem liveness_dense[simp]: "liveness P = dense P"
   using dense_is_liveness liveness_is_dense by blast
 ```
 
-{% include admonition verb="aside" %}
-> Strictly, we don't actually need the "safety implies limit-closed" and "liveness implies dense" directions, but we'll still prove those for fun.
->
-> Also, while looking at the IIRM I discovered that in addition to `[simp]`, `[intro]`, `[elim]`, and so on, there's also `[iff]` which, uh, "declares logical equivalences to the Simplifier and the Classical reasoner at the same time".
-> I'm not really sure what that means though...
+.. admonition:: aside
+
+	Strictly, we don't actually need the "safety implies limit-closed" and "liveness implies dense" directions, but we'll still prove those for fun.
+
+	Also, while looking at the IIRM I discovered that in addition to `[simp]`, `[intro]`, `[elim]`, and so on, there's also `[iff]` which, uh, "declares logical equivalences to the Simplifier and the Classical reasoner at the same time".
+	I'm not really sure what that means though...
 
 # Liveness Is Dense
 
@@ -320,23 +330,23 @@ I didn't realise it, but you can actually unfold with any theorem of the right s
 This leaves us with
 
 > Output
-```
-proof (prove)
-goal (1 subgoal):
- 1. ⋀σ n. ∀α. ∃β. P (α ⌢ β) ⟹
-           ∃σ'. P σ' ∧ i_take n σ = i_take n σ'
-```
+> ```
+> proof (prove)
+> goal (1 subgoal):
+>  1. ⋀σ n. ∀α. ∃β. P (α ⌢ β) ⟹
+>            ∃σ'. P σ' ∧ i_take n σ = i_take n σ'
+> ```
 
-Alrighty, our goal here is to show that there's some $$\sigma' \models P$$ whose first $$n$$ states are the same as $$\sigma$$.
-Our only assumption is the expanded liveness property, which, after a bit of interpretation, is saying that for any finite sequences of states $$\alpha$$, there's some subsequent behaviour $$\beta$$ that makes $$\alpha \frown \beta$$ satisfy $$P$$.
-So let's instantiate that assumption with $$\alpha = i\_take\ n\ \sigma$$
+Alrighty, our goal here is to show that there's some $\sigma' \models P$ whose first $n$ states are the same as $\sigma$.
+Our only assumption is the expanded liveness property, which, after a bit of interpretation, is saying that for any finite sequences of states $\alpha$, there's some subsequent behaviour $\beta$ that makes $\alpha \frown \beta$ satisfy $P$.
+So let's instantiate that assumption with $\alpha = i\_take\ n\ \sigma$
 
 ```isabelle
   apply (erule_tac x="i_take n σ" in allE)
   apply (erule exE)
 ```
 
-and fulfil the existential with $$\sigma' = (i\_take\ n\ \sigma) \frown \beta$$
+and fulfil the existential with $\sigma' = (i\_take\ n\ \sigma) \frown \beta$
 
 ```isabelle
   apply (rule_tac x="(i_take n σ) ⌢ β" in exI)
@@ -345,26 +355,26 @@ and fulfil the existential with $$\sigma' = (i\_take\ n\ \sigma) \frown \beta$$
 leaving us with
 
 > Output
-```
-proof (prove)
-goal (1 subgoal):
- 1. ⋀σ n β.
-       P (i_take n σ ⌢ β) ⟹
-       P (i_take n σ ⌢ β) ∧
-       i_take n σ = i_take n (i_take n σ ⌢ β)
-```
+> ```
+> proof (prove)
+> goal (1 subgoal):
+>  1. ⋀σ n β.
+>        P (i_take n σ ⌢ β) ⟹
+>        P (i_take n σ ⌢ β) ∧
+>        i_take n σ = i_take n (i_take n σ ⌢ β)
+> ```
 
 The first part of that conjunction is simply our assumption, while the latter looks like it should be a basic list identity.
 So let's chuck sledgehammer at it.
 
 > Sledgehammer
-```
-cvc4 found a proof...
-cvc4: Try this: by (simp add: i_append_def) (16 ms)
-z3 found a proof...
-z3: Try this: by (simp add: i_append_def) (12 ms)
-QED
-```
+> ```
+> cvc4 found a proof...
+> cvc4: Try this: by (simp add: i_append_def) (16 ms)
+> z3 found a proof...
+> z3: Try this: by (simp add: i_append_def) (12 ms)
+> QED
+> ```
 
 allowing us to finish off the proof with
 
@@ -374,25 +384,25 @@ allowing us to finish off the proof with
 
 That wasn't so bad!
 
-<details markdown=1>
-<summary>Full proof of liveness_is_dense</summary>
-```isabelle
-lemma liveness_is_dense: "liveness P ⟹ dense P"
-  unfolding liveness_def dense_forall limit_closure_def
-  apply (intro allI)
-  apply (erule_tac x="i_take n σ" in allE)
-  apply (erule exE)
-  apply (rule_tac x="(i_take n σ) ⌢ β" in exI)
-  by (simp add: i_append_def)
-```
-</details>
+.. details:: Full proof of liveness_is_dense
+
+	```isabelle
+	lemma liveness_is_dense: "liveness P ⟹ dense P"
+	  unfolding liveness_def dense_forall limit_closure_def
+	  apply (intro allI)
+	  apply (erule_tac x="i_take n σ" in allE)
+	  apply (erule exE)
+	  apply (rule_tac x="(i_take n σ) ⌢ β" in exI)
+	  by (simp add: i_append_def)
+	```
 
 # Dense Is Liveness
 
 Now for the other direction of this.
 
-{% include admonition verb="aside" %}
-> If you wanna see an outtake where I messed up a definition and went finding it, see [Let's Prove #2]({% link _posts/2023-06-23-lets-prove-2.md %})!
+.. admonition:: aside
+
+	If you wanna see an outtake where I messed up a definition and went finding it, see [Let's Prove #2](lets-prove-2)!
 
 ```isabelle
 lemma dense_is_liveness: "dense P ⟹ liveness P"
@@ -401,15 +411,15 @@ lemma dense_is_liveness: "dense P ⟹ liveness P"
 ```
 
 > Output
-```
-proof (prove)
-goal (1 subgoal):
- 1. ⋀α. ∀σ n. ∃σ'. P σ' ∧ i_take n σ = i_take n σ' ⟹
-         ∃β. P (α ⌢ β)
-```
+> ```
+> proof (prove)
+> goal (1 subgoal):
+>  1. ⋀α. ∀σ n. ∃σ'. P σ' ∧ i_take n σ = i_take n σ' ⟹
+>          ∃β. P (α ⌢ β)
+> ```
 
-This time we want a behaviour accepted by $$P$$ that starts with $$\alpha$$.
-Our assumption is that $$P$$ is dense, which we can use to generate a behaviour that starts with $$\alpha$$:
+This time we want a behaviour accepted by $P$ that starts with $\alpha$.
+Our assumption is that $P$ is dense, which we can use to generate a behaviour that starts with $\alpha$:
 
 ```isabelle
   apply (erule_tac x="α ⌢ _" in allE)
@@ -417,32 +427,32 @@ Our assumption is that $$P$$ is dense, which we can use to generate a behaviour 
   apply (erule exE)
 ```
 
-and fulfill $$\beta$$ with the correct suffix of $$\sigma'$$:
+and fulfill $\beta$ with the correct suffix of $\sigma'$:
 
 ```isabelle
   apply (rule_tac x="i_drop (length α) σ'" in exI)
 ```
 
 > Output
-```
-proof (prove)
-goal (1 subgoal):
- 1. ⋀α σ'.
-       P σ' ∧
-       i_take (length α) (α ⌢ ?uu6 α) = i_take (length α) σ' ⟹
-       P (α ⌢ i_drop (length α) σ')
-```
+> ```
+> proof (prove)
+> goal (1 subgoal):
+>  1. ⋀α σ'.
+>        P σ' ∧
+>        i_take (length α) (α ⌢ ?uu6 α) = i_take (length α) σ' ⟹
+>        P (α ⌢ i_drop (length α) σ')
+> ```
 
 It's only basic infinite list manipulation left, but unfortunately it's too much for sledgehammer --
 
 > Sledgehammer
-```
-No proof found
-```
+> ```
+> No proof found
+> ```
 
 -- so we'll need to introduce some extra identities for our behaviour functions.
 
-The first one I notice is that we have `i_take (length α) (α ⌢ ?uu6 α)` -- appending something to $$\alpha$$, then cutting it off again -- which should just be equal to $$\alpha$$.
+The first one I notice is that we have `i_take (length α) (α ⌢ ?uu6 α)` -- appending something to $\alpha$, then cutting it off again -- which should just be equal to $\alpha$.
 So I'll make a theorem that's easily proven with the help of sledgehammer.
 
 ```isabelle
@@ -450,7 +460,7 @@ lemma append_inv[simp]: "i_take (length a) (a ⌢ b) = a"
   by (simp add: i_append_def map_upt_eqI)
 ```
 
-We'll also get the expression `i_take (length α) σ' ⌢ i_drop (length α) σ'` -- splitting a behaviour at a point then joining the two parts together -- which should also just be $$\sigma'$$.
+We'll also get the expression `i_take (length α) σ' ⌢ i_drop (length α) σ'` -- splitting a behaviour at a point then joining the two parts together -- which should also just be $\sigma'$.
 
 ```isabelle
 lemma take_append_drop[simp]: "i_take n xs ⌢ i_drop n xs = xs"
@@ -462,33 +472,32 @@ Now, back to the `dense_is_liveness`.
 Sledgehammering again has all the provers yelling `metis` at us,
 
 > Sledgehammer
-```
-cvc4 found a proof...
-vampire found a proof...
-cvc4: Try this: by (metis append_inv take_append_drop) (15 ms)
-verit found a proof...
-vampire: Try this: by (metis append_inv take_append_drop) (24 ms)
-verit: Try this: by (metis append_inv take_append_drop) (24 ms)
-zipperposition found a proof...
-zipperposition: Try this: by (metis append_inv take_append_drop) (17 ms)
-QED
-```
+> ```
+> cvc4 found a proof...
+> vampire found a proof...
+> cvc4: Try this: by (metis append_inv take_append_drop) (15 ms)
+> verit found a proof...
+> vampire: Try this: by (metis append_inv take_append_drop) (24 ms)
+> verit: Try this: by (metis append_inv take_append_drop) (24 ms)
+> zipperposition found a proof...
+> zipperposition: Try this: by (metis append_inv take_append_drop) (17 ms)
+> QED
+> ```
 
 which we'll gladly take to complete our proof.
 
-<details markdown=1>
-<summary>Full proof of dense_is_liveness</summary>
-```isabelle
-lemma dense_is_liveness: "dense P ⟹ liveness P"
-  unfolding liveness_def dense_forall limit_closure_def
-  apply (rule allI)
-  apply (erule_tac x="α ⌢ _" in allE)
-  apply (erule_tac x="length α" in allE)
-  apply (erule exE)
-  apply (rule_tac x="i_drop (length α) σ'" in exI)
-  by (metis append_inv take_append_drop)
-```
-</details>
+.. details:: Full proof of dense_is_liveness
+
+	```isabelle
+	lemma dense_is_liveness: "dense P ⟹ liveness P"
+	  unfolding liveness_def dense_forall limit_closure_def
+	  apply (rule allI)
+	  apply (erule_tac x="α ⌢ _" in allE)
+	  apply (erule_tac x="length α" in allE)
+	  apply (erule exE)
+	  apply (rule_tac x="i_drop (length α) σ'" in exI)
+	  by (metis append_inv take_append_drop)
+	```
 
 And with this, we can prove that liveness properties are exactly the dense ones!
 
@@ -501,43 +510,45 @@ theorem liveness_dense[simp]: "liveness P = dense P"
 
 Here's our starting point:
 
-```
+```isabelle
 lemma safety_is_closed: "safety P ⟹ limit_closed P"
   unfolding safety_def limit_closed_forall limit_closure_def
 ```
 
 > Output
-```
-proof (prove)
-goal (1 subgoal):
- 1. ∀σ. (¬P) σ ⟶ (∃i. ∀β. (¬P) (i_take i σ ⌢ β)) ⟹
-    ∀σ. (∀n. ∃σ'. P σ' ∧ i_take n σ = i_take n σ') ⟶ P σ
-```
+> ```
+> proof (prove)
+> goal (1 subgoal):
+>  1. ∀σ. (¬P) σ ⟶ (∃i. ∀β. (¬P) (i_take i σ ⌢ β)) ⟹
+>     ∀σ. (∀n. ∃σ'. P σ' ∧ i_take n σ = i_take n σ') ⟶ P σ
+> ```
 
 Now that's quite a mess, and the negations scare me a little.
 The obvious thing is to get rid of the foralls in the goal with `allI`, and-
 
-{% include admonition verb="say" %}
-> *psst*
+.. admonition:: say
+
+	*psst*
 
 Hm?
 
-{% include admonition verb="say" %}
-> Use sledgehammer!
+.. admonition:: say
+
+	Use sledgehammer!
 
 No way that's gonna w-
 
 > Sledgehammer
-```
-vampire found a proof...
-```
+> ```
+> vampire found a proof...
+> ```
 
 You what?
 
 > Sledgehammer
-```
-vampire: Try this: by (metis take_append_drop) (748 ms)
-```
+> ```
+> vampire: Try this: by (metis take_append_drop) (748 ms)
+> ```
 
 Oh.
 
@@ -545,14 +556,13 @@ Wow.
 
 That was so much easier than expected, but I'll take that.
 
-<details markdown=1>
-<summary>Full proof of safety_is_closed</summary>
-```isabelle
-lemma safety_is_closed: "safety P ⟹ limit_closed P"
-  unfolding safety_def limit_closed_forall limit_closure_def
-  by (metis take_append_drop)
-```
-</details>
+.. details:: Full proof of safety_is_closed
+
+	```isabelle
+	lemma safety_is_closed: "safety P ⟹ limit_closed P"
+	  unfolding safety_def limit_closed_forall limit_closure_def
+	  by (metis take_append_drop)
+	```
 
 I guess the lesson from this is to always try sledgehammering.
 
@@ -580,10 +590,10 @@ lemma closed_is_safety: "limit_closed P ⟹ safety P"
 Unfortunately, sledgehammer won't be able to help-
 
 > Sledgehammer
-```
-e found a proof...
-e: Try this: by (metis append_inv diff_zero i_take_def length_map length_upt limit_closure_def) (97 ms)
-```
+> ```
+> e found a proof...
+> e: Try this: by (metis append_inv diff_zero i_take_def length_map length_upt limit_closure_def) (97 ms)
+> ```
 
 ...seriously?
 Way to ruin the fun.
@@ -592,14 +602,14 @@ For the sake of content I'll make the executive decision to ignore that proof by
 Here's what we need to do.
 
 > Output
-```
-proof (prove)
-goal (1 subgoal):
- 1. ⋀σ. ∀σ. (limit_closure P ⟶ P) σ ⟹
-         (¬P) σ ⟹ ∃i. ∀β. (¬P) (i_take i σ ⌢ β)
-```
+> ```
+> proof (prove)
+> goal (1 subgoal):
+>  1. ⋀σ. ∀σ. (limit_closure P ⟶ P) σ ⟹
+>          (¬P) σ ⟹ ∃i. ∀β. (¬P) (i_take i σ ⌢ β)
+> ```
 
-Notably, our assumption includes $$\sigma \not\models P$$, which is a bit tricky since we need to now think about what's true for behaviours _not_ satisfying a property.
+Notably, our assumption includes $\sigma \not\models P$, which is a bit tricky since we need to now think about what's true for behaviours _not_ satisfying a property.
 
 When I was originally going through and proving these 4 lemmas, the extra `[simp]` rules I had at the time caused a `clarsimp` to expand it out into some monster with a bunch of negations, and I got so intimidated I `sorry`ed it and moved on to prove the big theorem at the end.
 
@@ -609,11 +619,11 @@ By midnight, I had formulated a vague idea for a plan of attack.
 I hurredly scribbled it into Discord before proceeding to falling asleep.
 
 In the morning, I booted up Isabelle again.
-My idea was that, because $$\sigma$$ _doesn't_ satisfy $$P$$ and hence also doesn't satisfy its limit closure, it must have some prefix that differs from all behaviours satisfying $$P$$.
-We can then use this prefix in the definition of safety, as nothing you do after that prefix can make a behaviour satisfying $$P$$.
+My idea was that, because $\sigma$ _doesn't_ satisfy $P$ and hence also doesn't satisfy its limit closure, it must have some prefix that differs from all behaviours satisfying $P$.
+We can then use this prefix in the definition of safety, as nothing you do after that prefix can make a behaviour satisfying $P$.
 
-First step of this is to show that $$\sigma \not\models limit\_closure\ P$$, which took more steps than I expected.
-Instantiating the forall with $$\sigma$$,
+First step of this is to show that $\sigma \not\models limit\_closure\ P$, which took more steps than I expected.
+Instantiating the forall with $\sigma$,
 
 ```isabelle
   apply (erule_tac x="σ" in allE)
@@ -622,18 +632,20 @@ Instantiating the forall with $$\sigma$$,
 we're left with
 
 > Output
-```
-proof (prove)
-goal (1 subgoal):
- 1. ⋀σ. (¬ P) σ ⟹
-         (limit_closure P ⟶ P) σ ⟹
-         ∃i. ∀β. (¬ P) (i_take i σ ⌢ β)
-```
+> ```
+> proof (prove)
+> goal (1 subgoal):
+>  1. ⋀σ. (¬ P) σ ⟹
+>          (limit_closure P ⟶ P) σ ⟹
+>          ∃i. ∀β. (¬ P) (i_take i σ ⌢ β)
+> ```
 
 That second assumption is just `(σ ⊨ limit_closure P) ⟶ (σ ⊨ P)` but rewritten, and for the life of me I could not figure out how to directly combine it with `¬(P σ)` to get `¬(σ ⊨ limit_closure P)`.
 And so I resorted to `case_tac`[^subgoal_tac].
 
-[^subgoal_tac]: An alternative to `case_tac` is `subgoal_tac`. While `case_tac` splits the goal into two, one where a fact is true one and one where it's false, `subgoal_tac` directly creates an assumption and a subgoal for it. Very handy for stepping stones in longer proofs without invoking Isar!
+[^subgoal_tac]: An alternative to `case_tac` is `subgoal_tac`.
+	While `case_tac` splits the goal into two, one where a fact is true one and one where it's false, `subgoal_tac` directly creates an assumption and a subgoal for it.
+	Very handy for stepping stones in longer proofs without invoking Isar!
 
 ```isabelle
   apply (case_tac "limit_closure P σ")
@@ -642,18 +654,18 @@ And so I resorted to `case_tac`[^subgoal_tac].
 Here's what that does by the way:
 
 > Output
-```
-proof (prove)
-goal (2 subgoals):
- 1. ⋀σ. (¬P) σ ⟹
-         (limit_closure P ⟶ P) σ ⟹
-         limit_closure P σ ⟹
-         ∃i. ∀β. (¬P) (i_take i σ ⌢ β)
- 2. ⋀σ. (¬P) σ ⟹
-         (limit_closure P ⟶ P) σ ⟹
-         (¬limit_closure P) σ ⟹
-         ∃i. ∀β. (¬P) (i_take i σ ⌢ β)
-```
+> ```
+> proof (prove)
+> goal (2 subgoals):
+>  1. ⋀σ. (¬P) σ ⟹
+>          (limit_closure P ⟶ P) σ ⟹
+>          limit_closure P σ ⟹
+>          ∃i. ∀β. (¬P) (i_take i σ ⌢ β)
+>  2. ⋀σ. (¬P) σ ⟹
+>          (limit_closure P ⟶ P) σ ⟹
+>          (¬limit_closure P) σ ⟹
+>          ∃i. ∀β. (¬P) (i_take i σ ⌢ β)
+> ```
 
 The first subgoal is simply a contradiction that gets resolved with the simplifier[^subgoal_by], and for the second, our original assumptions aren't necessary anymore and can be removed with `thin_tac`,
 
@@ -668,18 +680,19 @@ The first subgoal is simply a contradiction that gets resolved with the simplifi
 leaving us with a very clean goal.
 
 > Output
-```
-proof (prove)
-goal (1 subgoal):
- 1. ⋀σ. (¬ limit_closure P) σ ⟹
-         ∃i. ∀β. (¬ P) (i_take i σ ⌢ β)
-```
+> ```
+> proof (prove)
+> goal (1 subgoal):
+>  1. ⋀σ. (¬ limit_closure P) σ ⟹
+>          ∃i. ∀β. (¬ P) (i_take i σ ⌢ β)
+> ```
 
-The next step of my midnight plan is to show that $$\sigma$$ has a prefix that isn't a prefix of anything satisfying $$P$$.
+The next step of my midnight plan is to show that $\sigma$ has a prefix that isn't a prefix of anything satisfying $P$.
 We'll do that in a separate lemma, though using the size of the prefix instead of the contents of the prefix.
 
-{% include admonition verb="aside" %}
-> It turns out that it's an full-blown iff and not just an implication, since it's pretty much just a consequence of quantifier De Morgan's.
+.. admonition:: aside
+
+	It turns out that it's an full-blown iff and not just an implication, since it's pretty much just a consequence of quantifier De Morgan's.
 
 ```isabelle
 lemma not_limit_closure: "(σ ⊨ ¬(limit_closure P)) =
@@ -695,8 +708,9 @@ There's a couple of ways of applying this:
 2. Forming an meta-implication using `iffD1` then doing a forward proof step with `drule not_limit_closure[THEN iffD1]` ([IIRM §9.2.1](https://isabelle.in.tum.de/doc/isar-ref.pdf#method.drule)).
 3. You can also do the same with `frule` instead ([IIRM §9.2.1](https://isabelle.in.tum.de/doc/isar-ref.pdf#method.frule)), or combine those two theorem with `iffD1[OF not_limit_closure]` ([IIRM §6.4.3](https://isabelle.in.tum.de/doc/isar-ref.pdf#attribute.OF)), for `frule iffD1[OF not_limit_closure]`!
 
-{% include admonition verb="aside" %}
-> To be honest, I just wanted to show off a bit :)
+.. admonition:: aside
+
+	To be honest, I just wanted to show off a bit :)
 
 We'll take the first one, then play around with existentials to pass the prefix to the safety definition.
 
@@ -707,12 +721,12 @@ We'll take the first one, then play around with existentials to pass the prefix 
 ```
 
 > Output
-```
-proof (prove)
-goal (1 subgoal):
- 1. ⋀σ n. ∀σ'. P σ' ⟶ i_take n σ ≠ i_take n σ' ⟹
-           ∀β. (¬P) (i_take n σ ⌢ β)
-```
+> ```
+> proof (prove)
+> goal (1 subgoal):
+>  1. ⋀σ n. ∀σ'. P σ' ⟶ i_take n σ ≠ i_take n σ' ⟹
+>            ∀β. (¬P) (i_take n σ ⌢ β)
+> ```
 
 This leaves us with just a bunch of behaviour manipulation to show that you can never satisfy the safety property.
 Doing it manually would lead us to showing a neat identity that `i_take n (i_take n σ ⌢ b) = i_take n σ` (which previously showed up in the end of [Liveness is Dense](#liveness-is-dense)!) but at this point I got bored and simply threw a sledgehammer at it to get
@@ -728,23 +742,22 @@ theorem safety_closed[simp]: "safety P = limit_closed P"
   using closed_is_safety safety_is_closed by blast
 ```
 
-<details markdown=1>
-<summary>Full proof of closed_is_safety</summary>
-```isabelle
-lemma closed_is_safety: "limit_closed P ⟹ safety P"
-  unfolding safety_def limit_closed_forall
-  apply (intro allI impI)
-  apply (erule_tac x="σ" in allE)
-  apply (case_tac "limit_closure P σ")
-   subgoal by simp
-  apply (thin_tac "σ ⊨ ¬P")
-  apply (thin_tac "σ ⊨ limit_closure P ⟶ P")
-  apply (subst (asm) not_limit_closure)
-  apply (erule exE)
-  apply (rule_tac x="n" in exI)
-  by (metis append_inv i_take_def length_map take_append_drop)
-```
-</details>
+.. details:: Full proof of closed_is_safety
+
+	```isabelle
+	lemma closed_is_safety: "limit_closed P ⟹ safety P"
+	  unfolding safety_def limit_closed_forall
+	  apply (intro allI impI)
+	  apply (erule_tac x="σ" in allE)
+	  apply (case_tac "limit_closure P σ")
+	   subgoal by simp
+	  apply (thin_tac "σ ⊨ ¬P")
+	  apply (thin_tac "σ ⊨ limit_closure P ⟶ P")
+	  apply (subst (asm) not_limit_closure)
+	  apply (erule exE)
+	  apply (rule_tac x="n" in exI)
+	  by (metis append_inv i_take_def length_map take_append_drop)
+	```
 
 And now, the big boss battle: Alpern and Schneider’s Theorem.
 
@@ -756,7 +769,7 @@ Here's the goal:
 theorem alpern_schneider: "∃S L. safety S ∧ liveness L ∧ (P = (S ∧ L))"
 ```
 
-It seems pretty daunting to find $$S$$ and $$L$$, but fortunately ["Defining Liveness"][alpern1984] provides us exactly what they should be -- in their notation, $$S = \bar{P}$$ and $$L = \lnot(\bar{P} - P)$$ -- that we can plug directly into the existential.
+It seems pretty daunting to find $S$ and $L$, but fortunately ["Defining Liveness"][alpern1984] provides us exactly what they should be -- in their notation, $S = \bar{P}$ and $L = \lnot(\bar{P} - P)$ -- that we can plug directly into the existential.
 
 ```isabelle
   apply (rule_tac x="limit_closure P" in exI)
@@ -765,13 +778,13 @@ It seems pretty daunting to find $$S$$ and $$L$$, but fortunately ["Defining Liv
 ```
 
 > Output
-```
-proof (prove)
-goal (3 subgoals):
- 1. safety (limit_closure P)
- 2. liveness (¬(limit_closure P ∧ ¬P))
- 3. P = (limit_closure P ∧ ¬(limit_closure P ∧ ¬P))
-```
+> ```
+> proof (prove)
+> goal (3 subgoals):
+>  1. safety (limit_closure P)
+>  2. liveness (¬(limit_closure P ∧ ¬P))
+>  3. P = (limit_closure P ∧ ¬(limit_closure P ∧ ¬P))
+> ```
 
 The first simplifies away, the second can be sledgehammered with the help of `vampire` again, and the third is dismissed with `auto`.
 
@@ -784,40 +797,39 @@ The first simplifies away, the second can be sledgehammered with the help of `va
 And now, we are greeted with best thing a proof engineer can see:
 
 > Output
-```
-proof (prove)
-goal:
-No subgoals!
-```
+> ```
+> proof (prove)
+> goal:
+> No subgoals!
+> ```
 
 ```isabelle
   done
 ```
 
-<details markdown=1>
-<summary>Full proof of alpern_schneider</summary>
-```isabelle
-theorem alpern_schneider: "∃S L. safety S ∧ liveness L ∧ (P = (S ∧ L))"
-  apply (rule_tac x="limit_closure P" in exI)
-  apply (rule_tac x="¬((limit_closure P) ∧ ¬P)" in exI)
-  apply (intro conjI)
-    subgoal by simp
-   subgoal by (metis (mono_tags, lifting) dense_def dense_is_liveness not_limit_closure)
-  subgoal by auto
-  done
-```
-</details>
+.. details:: Full proof of alpern_schneider
+
+	```isabelle
+	theorem alpern_schneider: "∃S L. safety S ∧ liveness L ∧ (P = (S ∧ L))"
+	  apply (rule_tac x="limit_closure P" in exI)
+	  apply (rule_tac x="¬((limit_closure P) ∧ ¬P)" in exI)
+	  apply (intro conjI)
+	    subgoal by simp
+	   subgoal by (metis (mono_tags, lifting) dense_def dense_is_liveness not_limit_closure)
+	  subgoal by auto
+	  done
+	```
 
 
 And thus, just so I get to reuse this cute theorem styling[^css], we have proven that
 
 [^css]: Sorry people without CSS, for whom it just looks like a plain paragraph.
 
-<div class="x-thm">
-<span>Every property is the intersection of a safety and a liveness property.</span>
-</div>
+.. sparkle::
 
-For completeness, here's the [full theory]({% link assets/lets-prove-1:Full.thy %}) with with everything we've done.
+	Every property is the intersection of a safety and a liveness property.
+
+For completeness, here's the [full theory]({{ recipe.copy("./Full.thy", "/assets/lets-prove-1:Full.thy") }}) with with everything we've done.
 
 # Reflections
 
@@ -828,7 +840,7 @@ This has been one of the rare opportunities where I get to exercise my theorem p
 Though I think some of the proofs I tackled in COMP4161 are harder, if only by step count.
 Plus, I completely managed to avoid Isar, which, while probably more powerful, is also a more cumbersome to use in my experience.
 
-In this process, I also made an interesting mistake that I'll be turning into a followup blog post, ~~so stay tuned for that~~ which you can see in [Part 2]({% link _posts/2023-06-23-lets-prove-2.md %}) :)
+In this process, I also made an interesting mistake that I'll be turning into a followup blog post, ~~so stay tuned for that~~ which you can see in [Part 2](lets-prove-2) :)
 
 On the blog writing side, this has become my longest article so far by quite the margin[^big].
 But despite that, it's is still nowhere near the hour-long reads by the likes of [JeanHeyd](https://thephd.dev/), [Amos](https://fasterthanli.me), and other, who I genuinely look up to for technical writing.
@@ -836,34 +848,8 @@ With so much content, I've also a couple opportunities to get a better feel for 
 This been quite fun to write, so much so that I've genuinely been neglecting my university coursework (and sleep to some extent) this week.
 Though I don't know how many people would even have the background to read this, but hey, I'm mostly writing for myself here.
 
-[^big]: At over 4.5k words, this is over 2 times the word count of the next longest, [Ownership Semantics For C Programmers]({% link _posts/2021-05-10-ownership.md %}).  That count is probably a bit inflated from all the spaces in my maths and Isabelle code, but I write with a new line per sentence and it's actually around 3 times as long by that metric. The next longest are [Edge-based Tree Data Structures]({% link _posts/2019-05-28-edge-trees.md %}) and [An SSH Workflow]({% link _posts/2022-11-19-ssh-workflow.md %}), with their order depending on which metric you use.
+[^big]: At over 4.5k words, this is over 2 times the word count of the next longest, [Ownership Semantics For C Programmers](ownership).
+	That count is probably a bit inflated from all the spaces in my maths and Isabelle code, but I write with a new line per sentence and it's actually around 3 times as long by that metric.
+	The next longest are [Edge-based Tree Data Structures](edge-trees) and [An SSH Workflow](ssh-workflow), with their order depending on which metric you use.
 
 And finally, if you got all the way here, thanks so much for reading! 💜
-
-
-
-
-
-
-
-
-<style>
-.x-thm {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1em 0;
-  font-weight: bold;
-  font-style: italic;
-}
-
-.x-thm::before, .x-thm::after {
-  content: "✨";
-  margin: 0 0.5em;
-}
-
-/* flip em */
-.x-thm em {
-  font-style: normal;
-}
-</style>

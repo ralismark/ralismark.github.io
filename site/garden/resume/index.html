@@ -1,6 +1,7 @@
 ---
-layout: post-standalone
-title: "Resume"
+layout: standalone
+title: Resume
 ---
 
-{% include_relative _resume.html %}
+{% include (__file__.parent / "resume.html") | string %}
+{% do recipe.page("./standalone.html", page.url + "-standalone.html") %}

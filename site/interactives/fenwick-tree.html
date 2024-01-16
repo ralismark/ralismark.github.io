@@ -1,18 +1,22 @@
 ---
 layout: post
 title: Fenwick Trees
-tags:
 excerpt: Visualising the structure of a fenwick tree
+date: 2019-05-24
+tags:
 ---
 
 <p>
-Fenwick trees are a lesser-known data structure capable of O(log n) update and prefix query. However, they are often forgotten in favour of the more useful segment tree. Still, they're much easier to implement and make a cool structure when drawn.
+	Fenwick trees are a lesser-known data structure capable of O(log n) update and prefix query.
+	However, they are often forgotten in favour of the more useful segment tree.
+	Still, they're much easier to implement and make a cool structure when drawn.
 </p>
 
 <!--more-->
 
 <p>
-If you draw out a Fenwick tree to sufficient depth, you'll see that they're fractal in nature - a tree of depth N is defined as 2 trees of depth N-1, with root of the second tree as a child of the root of the first. This definition makes it really easy to render.
+	If you draw out a Fenwick tree to sufficient depth, you'll see that they're fractal in nature - a tree of depth N is defined as 2 trees of depth N-1, with root of the second tree as a child of the root of the first.
+	This definition makes it really easy to render.
 </p>
 
 <center>
