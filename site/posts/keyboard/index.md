@@ -37,9 +37,9 @@ Palm Keys (see <https://superuser.com/a/317593>) is the idea of pressing <kbd>Ct
 I can't praise this enough -- it's incredibly simple (I originally used Lego & blu-tack) and the benefits are immense.
 I started using this mod around 1½ years ago, back when I still used a full-sized keyboard, and I've been using it ever since.
 
-> _Addendum 2023-09-11_
->
-> This is so good I even converted my mum to using it for a while!
+.. addendum:: 2023-09-11
+
+	This is so good I even converted my mum to using it for a while!
 
 # Thumb Keys
 

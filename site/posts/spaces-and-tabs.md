@@ -46,18 +46,18 @@ Plugins exist to support this, [including my own][2], which I use daily.
 
 [2]: https://github.com/ralismark/itab
 
-> _Addendum 2023-11-17_
->
-> I've since given up on using this mixture of spaces and tabs, instead preferring code styles where I never need to align the start of a line.
-> For example, I'd never do the above example anymore, and instead would write it as
->
-> ```python
-do_thing(
-	arg1,
-	arg2,
-	arg3
-)
-> ```
+.. addendum:: 2023-11-17
+
+	I've since given up on using this mixture of spaces and tabs, instead preferring code styles where I never need to align the start of a line.
+	For example, I'd never do the above example anymore, and instead would write it as
+
+	```python
+	do_thing(
+		arg1,
+		arg2,
+		arg3
+	)
+	```
 
 # Extra: On tabs xor spaces
 
