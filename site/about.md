@@ -23,42 +23,11 @@ Outside of tech, I play violin and am trying to memorise more Chinese, and I lik
 
 # colophon
 
-This website uses my own mess of a static site generator (previously Jekyll), which primarily uses Jinja and Mistune.
+This website uses my own mess of a static site generator (previously Jekyll), which primarily uses [Jinja](https://jinja.palletsprojects.com/) and [Mistune](https://mistune.lepture.com/).
 The code for that, as well as all the pages, is [on github](https://github.com/ralismark/ralismark.github.io)!
 
 # licences
 
-{# TODO relicence as regular copyright #}
-
-## tabler-icons
-
-<dl>
-	<dt>Website</dt>
-	<dd><a href="https://tabler-icons.io/">https://tabler-icons.io/</a></dd>
-	<dt>Repo</dt>
-	<dd><a href="https://github.com/tabler/tabler-icons">https://github.com/tabler/tabler-icons</a></dd>
-</dl>
-
-.. details:: MIT License
-
-	MIT License
-
-	Copyright (c) 2020 Paweł Kuna
-
-	Permission is hereby granted, free of charge, to any person obtaining a copy
-	of this software and associated documentation files (the "Software"), to deal
-	in the Software without restriction, including without limitation the rights
-	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	copies of the Software, and to permit persons to whom the Software is
-	furnished to do so, subject to the following conditions:
-
-	The above copyright notice and this permission notice shall be included in all
-	copies or substantial portions of the Software.
-
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-	SOFTWARE.
+Unless otherwise noted, all work on this site is under _copyright_, all rights reserved.
+In particular, use of any material for AI, such as to train machine learning models, are prohibited.
+However, if you do want to use the content for anything else, feel free to ask me!
