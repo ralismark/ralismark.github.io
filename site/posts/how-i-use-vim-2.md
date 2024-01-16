@@ -81,9 +81,9 @@ xnoremap gs <cmd>call SortMotion(mode())<cr>
 This defines `gs` as an operation that sorts the selected lines.
 The visual block ones were a bit hard to get right.
 
-> _Addendum 2023-11-19_
->
-> I ended up polishing this into a proper plugin, [opsort.vim](https://github.com/ralismark/opsort.vim).
+.. addendum:: 2023-11-19
+
+	I ended up polishing this into a proper plugin, [opsort.vim](https://github.com/ralismark/opsort.vim).
 
 # Autocomplete/LSP/etc
 
