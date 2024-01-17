@@ -8,6 +8,7 @@ import contextvars
 from pathlib import Path, PurePosixPath
 import abc
 import logging
+import time
 
 __all__ = ["Recipe", "Manifest", "BuildFailure", "Driver", "BuildContext"]
 
@@ -52,6 +53,7 @@ class Manifest(t.Generic[R]):
         """
 
         path: Path
+        time: float = dataclasses.field(compare=False, default_factory=time.time)
 
     @dataclasses.dataclass(frozen=True)
     class Output:
@@ -226,6 +228,7 @@ class BuildContext:
         path = self._driver.input(path)
         self._log.append(Manifest.Input(path))
         return path
+
 
 def current_ctx() -> BuildContext:
     return BuildContext.Current.get()

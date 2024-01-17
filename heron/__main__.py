@@ -110,6 +110,7 @@ def cmd_dev(args: argparse.Namespace):
     r = recipe.LoadRecipe(*args.recipe).join()
 
     def run_build():
+        successful = False
         # print("\033c\033[3J", end="")
         print("building...", end="\r")
         try:
@@ -119,8 +120,9 @@ def cmd_dev(args: argparse.Namespace):
         except Exception:
             logger.exception("error")
         else:
+            successful = True
             print("built successfully")
-        driver.finish()
+        driver.finish(flush=successful)
 
     run_build()
 
