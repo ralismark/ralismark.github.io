@@ -47,7 +47,7 @@ What names/naming schemes do y'all have for your things?
 	Unfortunately, this was very short lived since most computing things I start nowadays have more self-descriptive names.
 	The only two things using this naming scheme were:
 
-	- [Ibis Wiki](https://ralismark.xyz/ibis-wiki/), my personal notetaking app -- and very much in active use by me (and recently rewritten to use React instead of some bespoke DOM manipulation).
+	- [Ibis Wiki](/ibis-wiki/), my personal notetaking app -- and very much in active use by me (and recently rewritten to use React instead of some bespoke DOM manipulation).
 	- Heron, a static site generator library in Python that never really went anywhere.
 
 	.. addendum:: 2024-01-16

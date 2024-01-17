@@ -7,6 +7,7 @@ from pathlib import Path
 import os
 import warnings
 import datetime as dt
+import re
 
 import jinja2
 
@@ -106,6 +107,16 @@ for k, v in RECIPE_FILTERS.items():
 @util.setitem(base_env.globals, "raise")
 def jinja_raise(msg: str) -> str:
     raise Exception(msg)
+
+
+@util.setitem(base_env.filters, "re.sub")
+def jinja_re_sub(string: str, pattern: str, repl: str, count: int = 0) -> str:
+    return re.sub(pattern, repl, string, count)
+
+
+@util.setitem(base_env.filters, "re.split")
+def jinja_re_split(string: str, pattern: str, maxsplit: int = 0) -> list[str]:
+    return re.split(pattern, string, maxsplit)
 
 
 @util.setitem(base_env.filters, "markdownify")
