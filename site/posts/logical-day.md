@@ -32,7 +32,7 @@ And from a quick search online, it seems that many societies in history have had
 I guess along these lines you could just have a fixed start-of-day time at some time when everyone should be asleep, like 4am.
 I've found this kind of logical day in some pieces of software.
 The main one that comes to mind right now is Anki, which has a "next day starts at" settings.
-I also do this in my [Ibis Wiki](https://ralismark.xyz/ibis-wiki/) for determining which day's journal entry to show, though I hardcode the day to start at 5am.
+I also do this in my [Ibis Wiki](/ibis-wiki/) for determining which day's journal entry to show, though I hardcode the day to start at 5am.
 If you know any other software that does this please let me know!
 
 Of course, things are ambiguous while both conventions are around.

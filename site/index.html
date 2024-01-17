@@ -72,11 +72,11 @@ layout: default
 		I'm <strong class="p-name">Temmie</strong> (she/her), but I usually go by <strong class="p-nickname">ralismark</strong> on the internet.
 	</p>
 	<p>
-		This website &ndash; <a href="https://ralismark.xyz" class="u-url u-uid" rel="me">ralismark.xyz</a> &ndash; is my canonical corner of the internet, where I <a href="posts">write irregularly</a>, mostly on technical topics.
+		This website &ndash; <a href="{{ site.url }}" class="u-url u-uid" rel="me">{{ site.title }}</a> &ndash; is my canonical corner of the internet, where I <a href="posts">write irregularly</a>, mostly on technical topics.
 	</p>
 	<p>
 		I'm <a href="https://github.com/ralismark" rel="me">ralismark on GitHub</a>, and I toot as <a href="https://cathode.church/@ralismark" rel="me">@ralismark@cathode.church</a>.
-		You can also email me at <a href="mailto:tem@ralismark.xyz" rel="me">tem at this domain</a>.
+		You can also email me at <a href="mailto:{{ site.me.email }}" rel="me">{{ site.me.email | re.sub("@.*", "") }} at this domain</a>.
 		<!--cloudflare email obfuscation means I can't u-email that last one-->
 	</p>
 

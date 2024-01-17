@@ -19,6 +19,9 @@ jenv.globals["site"] = site = {
     "url": "https://www.ralismark.xyz",
     "title": "ralismark.xyz",
     "description": "Where temmie puts her internet things!",
+    "me": {
+        "email": "tem@ralismark.xyz",
+    },
 }
 
 
