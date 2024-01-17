@@ -4,4 +4,4 @@ title: Resume
 ---
 
 {% include (__file__.parent / "resume.html") | string %}
-{% do recipe.page("./standalone.html", page.url + "-standalone.html") %}
+{% do recipe.page("./standalone.html", page.url + "-standalone.html", inherit=["noindex"]) %}
