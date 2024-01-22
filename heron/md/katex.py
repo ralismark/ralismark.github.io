@@ -1,30 +1,30 @@
 import subprocess
+import dataclasses
+
+from .. import core
 
 
-def render_katex(
-    content: str,
-    display: bool = False,
-) -> str:
-    """
-    Renders math using KaTeX.
-    """
+@dataclasses.dataclass(frozen=True)
+class KatexRecipe(core.Recipe[str]):
+    content: str
+    display: bool
 
-    # see <https://katex.org/docs/cli>
+    def build_impl(self, ctx=None) -> str:
+        # see <https://katex.org/docs/cli>
+        args = [
+            "katex",
+            "--no-throw-on-error",
+            "--trust",
+        ]
+        if self.display:
+            args.append("--display-mode")
 
-    args = [
-        "katex",
-        "--no-throw-on-error",
-        "--trust",
-    ]
-    if display:
-        args.append("--display-mode")
-
-    # TODO spawning a process each time is kinda slow, is there a way to make it faster?
-    proc = subprocess.run(
-        args,
-        check=True,
-        text=True,
-        input=content,
-        capture_output=True,
-    )
-    return proc.stdout
+        # TODO spawning a process each time is kinda slow, is there a way to make it faster?
+        proc = subprocess.run(
+            args,
+            check=True,
+            text=True,
+            input=self.content,
+            capture_output=True,
+        )
+        return proc.stdout

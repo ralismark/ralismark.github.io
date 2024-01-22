@@ -81,7 +81,15 @@ class Environment(jinja2.Environment):
     template_class = Template
 
     def join_path(self, template: str, parent: str) -> str:
-        return os.path.normpath(os.path.join(os.path.dirname(parent), template))
+        if template.startswith("/"):
+            # relative to root of disk
+            return template
+        elif template.startswith("./") or template.startswith("../"):
+            # relative to parent
+            return os.path.normpath(os.path.join(os.path.dirname(parent), template))
+        else:
+            # relative to project root
+            return template
 
 
 # -----------------------------------------------------------------------------
