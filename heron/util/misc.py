@@ -1,16 +1,16 @@
 import typing as t
 from frozendict import frozendict
 
-T = t.TypeVar("T")
-F = t.TypeVar("F")
+_T = t.TypeVar("_T")
+_F = t.TypeVar("_F")
 
 
-def setitem(d: dict[T, F], key: T) -> t.Callable[[F], F]:
+def setitem(d: dict[_T, _F], key: _T) -> t.Callable[[_F], _F]:
     """
     Decorator for setting an item in a dict.
     """
 
-    def decorate(fn: F) -> F:
+    def decorate(fn: _F) -> _F:
         d[key] = fn
         return fn
 
@@ -39,15 +39,15 @@ def freeze(x: Freezable) -> t.Hashable:
         raise TypeError("not freezable:", x)
 
 
-class Impurity(t.Generic[T]):
+class Impurity(t.Generic[_T]):
     """
     Explicit impurity that compares equal to other Impurities.
     """
 
-    def __init__(self, fn: t.Callable[[], T]):
+    def __init__(self, fn: t.Callable[[], _T]):
         object.__setattr__(self, "_fn", fn)
 
-    def __call__(self) -> T:
+    def __call__(self) -> _T:
         return object.__getattribute__(self, "_fn")()
 
     def __eq__(self, o):

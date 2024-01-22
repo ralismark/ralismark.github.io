@@ -12,14 +12,14 @@ import time
 
 __all__ = ["Recipe", "Manifest", "BuildFailure", "Driver", "BuildContext"]
 
-E = t.TypeVar("E")
-R = t.TypeVar("R", bound=t.Hashable)
+_E = t.TypeVar("_E")
+_R = t.TypeVar("_R", bound=t.Hashable)
 
 
 logger = logging.getLogger(__name__)
 
 
-class Recipe(abc.ABC, t.Generic[R]):
+class Recipe(abc.ABC, t.Generic[_R]):
     """
     Recipe represents a single build task.
 
@@ -29,7 +29,7 @@ class Recipe(abc.ABC, t.Generic[R]):
     """
 
     @abc.abstractmethod
-    def build_impl(self, ctx: "BuildContext") -> R:
+    def build_impl(self, ctx: "BuildContext") -> _R:
         """
         Perform the build step.
 
@@ -40,7 +40,7 @@ class Recipe(abc.ABC, t.Generic[R]):
 
 
 @dataclasses.dataclass(frozen=True)
-class Manifest(t.Generic[R]):
+class Manifest(t.Generic[_R]):
     """
     Manifest is a record of the details of a single build run, including
     information to allow for dependency tracking and other behaviour.
@@ -86,10 +86,10 @@ class Manifest(t.Generic[R]):
     # the actual dataclass content
 
     recipe: Recipe  # the recipe that was built
-    value: R  # the return value of the recipe's build_impl
+    value: _R  # the return value of the recipe's build_impl
     log: tuple[Entry, ...]  # events that ocurred during build
 
-    def filter(self, entry_type: t.Type[E]) -> t.Iterable[E]:
+    def filter(self, entry_type: t.Type[_E]) -> t.Iterable[_E]:
         """
         Get log entries of a specific type.
         """
@@ -136,7 +136,7 @@ class Driver:
     def __init__(self, builddir: Path):
         self.builddir = builddir
 
-    def build(self, recipe: Recipe[R]) -> Manifest[R]:
+    def build(self, recipe: Recipe[_R]) -> Manifest[_R]:
         """
         Turn a Recipe into its resulting Manifest.
         """
@@ -204,7 +204,7 @@ class BuildContext:
     _driver: Driver
     _log: list[Manifest.Entry] = dataclasses.field(default_factory=list)
 
-    def build(self, recipe: Recipe[R]) -> R:
+    def build(self, recipe: Recipe[_R]) -> _R:
         """
         Build a sub-recipe.
         """

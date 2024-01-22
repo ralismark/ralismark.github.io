@@ -4,18 +4,18 @@ import dataclasses
 from .. import core
 from .basic import InputMixin
 
-R = t.TypeVar("R")
+_R = t.TypeVar("_R")
 
 
 @dataclasses.dataclass(frozen=True)
-class Join(core.Recipe[R]):
+class Join(core.Recipe[_R]):
     """
     Monadic join, for processing recipes that produce a recipe.
     """
 
-    recipe: core.Recipe[core.Recipe[R]]
+    recipe: core.Recipe[core.Recipe[_R]]
 
-    def build_impl(self, ctx: core.BuildContext) -> R:
+    def build_impl(self, ctx: core.BuildContext) -> _R:
         return ctx.build(ctx.build(self.recipe))
 
 

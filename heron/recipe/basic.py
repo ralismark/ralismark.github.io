@@ -34,18 +34,18 @@ class OutputMixin:
         object.__setattr__(self, "opath", util.canonicalise_opath(out))
 
 
-R = t.TypeVar("R")
+_R = t.TypeVar("_R")
 
 
 @dataclasses.dataclass(frozen=True)
-class FnRecipe(core.Recipe[R]):
+class FnRecipe(core.Recipe[_R]):
     """
     Decorator to generate a recipe from a function.
     """
 
-    fn: t.Callable[[core.BuildContext], R]
+    fn: t.Callable[[core.BuildContext], _R]
 
-    def build_impl(self, ctx: core.BuildContext) -> R:
+    def build_impl(self, ctx: core.BuildContext) -> _R:
         return self.fn(ctx)
 
 

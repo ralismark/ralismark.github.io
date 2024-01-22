@@ -3,10 +3,10 @@ import inspect
 
 import jinja2
 
-R = t.TypeVar("R")
+_R = t.TypeVar("_R")
 
 
-def pass_heron(fn: t.Callable[..., R]) -> t.Callable[..., R]:
+def pass_heron(fn: t.Callable[..., _R]) -> t.Callable[..., _R]:
     """
     Pass heron variables to the wrapped function.
     """
