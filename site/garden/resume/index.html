@@ -3,5 +3,5 @@ layout: standalone
 title: Resume
 ---
 
-{% include (__file__.parent / "resume.html") | string %}
+{% include "./resume.html" %}
 {% do recipe.page("./standalone.html", page.url + "-standalone.html", inherit=["noindex"]) %}

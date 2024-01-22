@@ -39,7 +39,7 @@
           '';
 
           shellHook = ''
-            PYTHONPATH=.
+            export PYTHONPATH=.:
           '';
         };
 

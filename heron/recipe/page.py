@@ -72,6 +72,7 @@ class JinjaStage(core.Recipe[str]):
             self.jenv,
             self.jenv.compile(
                 self.content,
+                name=self.filename,
                 filename=self.filename,
             ),
             self.jenv.make_globals(None),

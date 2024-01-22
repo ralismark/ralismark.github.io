@@ -3,6 +3,7 @@
 import typing as t
 from pathlib import Path
 import os
+import re
 
 from frozendict import frozendict
 
@@ -33,6 +34,8 @@ def parse_tags(
         page = heron.core.current_ctx().build(page)
     if isinstance(page, heron.recipe.PageInout):
         page = page.props
+    page = t.cast(t.Mapping, page)
+
     tags = page.get("tags")
     if tags is None:
         return []
@@ -51,9 +54,13 @@ def make_series(
             raise RuntimeError(f"{post.path} does not have date")
         return date
 
-    pages = (
-        page.extend_props(draft=page.path.stem.startswith("DRAFT")) for page in pages
-    )
+    def extract_draft(path: Path):
+        m = re.match("([A-Z]+)-", path.stem)
+        if m is not None:
+            return m.group(1)
+        return None
+
+    pages = (page.extend_props(draft=extract_draft(page.path)) for page in pages)
     pages = (page for page in pages if site["drafts"] or not page.props["draft"])
     pages = sorted(pages, key=post_date)
     out: tuple[heron.recipe.PageRecipe, ...]
