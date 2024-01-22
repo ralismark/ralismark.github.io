@@ -4,7 +4,7 @@ title: Tags
 ---
 
 {% set ns = namespace(tags=dict(),untagged=[]) %}
-{% for post in posts %}
+{% for post in site.series.posts %}
 	{% set post = recipe.build(post.meta) %}
 	{% for tag in parse_tags(post) %}
 		{% do ns.tags.setdefault(tag, []).append(post) %}

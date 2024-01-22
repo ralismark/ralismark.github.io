@@ -4,7 +4,7 @@ title: Blog
 ---
 
 {% set ns = namespace(wc=0) %}
-{% for post in posts %}
+{% for post in site.series.posts %}
 	{% set post = recipe.build(post) %}
 	{% set ns.wc = ns.wc + (post.content | striptags | wordcount) %}
 {% endfor %}
@@ -13,18 +13,18 @@ title: Blog
 
 <p class="content-width">
 	Irregularly I have things I want to write about!
-	As a fun statistic, there's <strong>{{ posts | length }} posts</strong>, totalling <strong>{{ ns.wc }} words</strong>!
+	As a fun statistic, there's <strong>{{ site.series.posts | length }} posts</strong>, totalling <strong>{{ ns.wc }} words</strong>!
 </p>
 
 <nav style="text-align: center">
-	<a class="paper" href="{{ recipe.page("./tags.html", "/tags.html", inherit=["posts"]) }}">tags</a>
-	<a class="paper" href="{{ recipe.page("./feed.xml", "/feed.xml", inherit=["posts"]) }}">rss feed</a>
-	<a class="paper" href="{{ recipe.page("./everything.html", "/everything.html", inherit=["posts"]) }}">cat *</a>
+	<a class="paper" href="{{ recipe.page("./tags.html", "/tags.html") }}">tags</a>
+	<a class="paper" href="{{ recipe.page("./feed.xml", "/feed.xml") }}">rss feed</a>
+	<a class="paper" href="{{ recipe.page("./everything.html", "/everything.html") }}">cat *</a>
 </nav>
 
 <hr class="lit">
 
 <main class="content-width">
 	{% import "layout/macros.html" as macros %}
-	{{ macros.post_listing(posts) }}
+	{{ macros.post_listing(site.series.posts) }}
 </main>
