@@ -59,6 +59,9 @@ class Impurity(t.Generic[_T]):
     def __getattribute__(self, name: str):
         return getattr(self(), name)
 
+    def __getitem__(self, key: str):
+        return self()[key]
+
     def repr(self):
         fn = object.__getattribute__(self, "_fn")
         return f"Impurity({fn!r})"

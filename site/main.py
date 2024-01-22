@@ -11,11 +11,7 @@ import heron
 
 here = Path(__file__).parent
 
-
-jenv = heron.jinja.base_env.overlay(
-    loader=heron.jinja.Loader(here),
-)
-jenv.globals["site"] = site = {
+site = {
     "drafts": os.getenv("HERON_ENV") == "development",
     "url": "https://www.ralismark.xyz",
     "title": "ralismark.xyz",
@@ -24,6 +20,18 @@ jenv.globals["site"] = site = {
         "email": "tem@ralismark.xyz",
     },
 }
+
+jenv = heron.jinja.base_env.overlay(
+    loader=heron.jinja.Loader(here),
+)
+jenv.globals["site"] = heron.util.Impurity(lambda: site)
+
+
+def one(x: t.Iterable):
+    items = list(x)
+    if len(items) == 1:
+        return items[0]
+    raise ValueError(f"expected 1 item, got {len(items)}")
 
 
 @heron.util.setitem(jenv.globals, "parse_tags")
@@ -78,50 +86,23 @@ def make_series(
         )
         for i, r in enumerate(pages)
     )
-    for p in out:
-        ctx.build(p)
     return out
 
 
-@heron.recipe.FnRecipe
-def main(ctx: heron.core.BuildContext) -> None:
-    ctx.build(heron.recipe.WriteRecipe("/CNAME", "www.ralismark.xyz"))
-    ctx.build(heron.recipe.CopyRecipe(here / "robots.txt", "/robots.txt"))
-    ctx.build(
-        heron.recipe.SassRecipe(
-            here / "layout/css/main-foundation.scss",
-            "/assets/foundation.css",
-            include_paths=(str(here / "layout/css"),),
-        )
+def inner_main(ctx: heron.core.BuildContext):
+    posts: tuple
+    interactives: tuple
+    garden: tuple
+
+    site["series"] = heron.util.Impurity(
+        lambda: {
+            "posts": posts,
+            "interactives": interactives,
+            "garden": garden,
+        }
     )
 
-    def build_root_page(glob: str, **kwargs):
-        matches = list(ctx.input(here).glob(glob))
-        if not matches:
-            raise ValueError(f"no files matched glob {glob!r}")
-        for path in matches:
-            ctx.build(
-                heron.recipe.PageRecipe(
-                    path,
-                    f"/{path.stem}.html",
-                    jenv,
-                    **kwargs,
-                )
-            )
-
-    build_root_page("404.*")
-    build_root_page("index.*")
-    build_root_page("about.*")
-    build_root_page("somewhere.*")
-
-    interactives = make_series(
-        ctx,
-        (
-            heron.recipe.PageRecipe(path, f"/interactives/{path.stem}.html", jenv)
-            for path in ctx.input(here / "interactives").iterdir()
-        ),
-    )
-    build_root_page("interactives.*", props=frozendict(posts=interactives))
+    # initialise series
 
     posts = make_series(
         ctx,
@@ -130,11 +111,51 @@ def main(ctx: heron.core.BuildContext) -> None:
             for path in ctx.input(here / "posts").iterdir()
         ),
     )
-    build_root_page("posts.*", props=frozendict(posts=posts))
+    yield from posts
 
-    # garden
-    for path in ctx.input(here / "garden").iterdir():
-        r = heron.recipe.PageRecipe(path, f"/garden/{path.stem}.html", jenv).extend_props(
-            noindex=True,
+    interactives = make_series(
+        ctx,
+        (
+            heron.recipe.PageRecipe(path, f"/interactives/{path.stem}.html", jenv)
+            for path in ctx.input(here / "interactives").iterdir()
+        ),
+    )
+    yield from interactives
+
+    garden = tuple(
+        heron.recipe.PageRecipe(
+            path, f"/garden/{path.stem}.html", jenv, props=frozendict(noindex=True)
         )
+        for path in ctx.input(here / "garden").iterdir()
+    )
+    yield from garden
+
+    # root pages
+
+    root_page_globs = [
+        "404.*",
+        "about.*",
+        "index.*",
+        "interactives.*",
+        "posts.*",
+        "somewhere.*",
+    ]
+    for root_page in root_page_globs:
+        path = one(ctx.input(here).glob(root_page))
+        yield heron.recipe.PageRecipe(path, f"/{path.stem}.html", jenv)
+
+    # extra stuff
+
+    yield heron.recipe.CopyRecipe(here / "robots.txt", "/robots.txt")
+    yield heron.recipe.SassRecipe(
+        here / "layout/css/main-foundation.scss",
+        "/assets/foundation.css",
+        include_paths=(str(here / "layout/css"),),
+    )
+
+
+@heron.recipe.FnRecipe
+def main(ctx: heron.core.BuildContext):
+    recipes = [r for r in inner_main(ctx)]
+    for r in recipes:
         ctx.build(r)
