@@ -14,12 +14,14 @@ from .utils import pass_heron
 
 RECIPE_FILTERS: dict[str, t.Any] = dict()
 
+_R = t.TypeVar("_R")
+
 
 @util.setitem(RECIPE_FILTERS, "build")
 @pass_heron
 def recipe_build(
-    recipe: core.Recipe[core.R],
-) -> core.R:
+    recipe: core.Recipe[_R],
+) -> _R:
     return core.current_ctx().build(recipe)
 
 
