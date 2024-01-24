@@ -53,3 +53,36 @@
 		</html>
 	{% endfilter %}
 {%- endmacro -%}
+
+{%- macro comments() -%}
+	{% set location = site.url + page.url %}
+	<div>
+		Please leave a comment!
+
+		You can
+
+		<form method="get" action="https://sharetomastodon.github.io/" target="_blank" style="display: inline">
+			<input type="hidden" name="title" value="@ralismark@cathode.church">
+			<input type="hidden" name="url" value="{{ location }}&#13;">
+			<button>
+				via toot 🐘
+			</button>
+		</form>
+
+		or
+
+		<form method="get" action="https://quill.p3k.io/" target="_blank" style="display: inline">
+			<input type="hidden" name="dontask" value="1">
+			<input type="hidden" name="me" value="https://commentpara.de/">
+			<input type="hidden" name="reply" value="{{ location }}">
+			<button>
+				anonymously 📝
+			</button>
+		</form>
+	</div>
+
+	<section style="padding: 0 2rem">
+		<noscript>Sorry! JavaScript is required to load comments</noscript>
+		<script data-url="{{ location }}" src="{{ recipe.copy("assets/webmention.js", "/assets/webmention.js").url }}" async></script>
+	</section>
+{%- endmacro -%}

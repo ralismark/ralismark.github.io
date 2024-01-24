@@ -93,23 +93,8 @@
 	<aside class="content-width">
 		<h2>Interactions</h2>
 
-		<form action="https://webmention.io/www.ralismark.xyz/webmention" method="post">
-			<p>
-				Link this page and mention me in a
-				<a role="button" href="https://toot.karamoff.dev/?text=@ralismark@cathode.church {{ location }}%0A">Toot 🐘</a>
-				to leave a comment!
-
-				Have a reply somewhere else? Send it here:
-				<input name="source" placeholder="https://example.com/" type="url">
-				<input name="target" value="{{ location }}" type="hidden">
-				<input value="Submit" type="submit">
-			</p>
-		</form>
-
-		<section style="padding: 0 2rem">
-			<noscript>Sorry! JavaScript is required to load comments</noscript>
-			<script data-url="{{ location }}" src="{{ recipe.copy("assets/webmention.js", "/assets/webmention.js").url }}" async></script>
-		</section>
+		{% import "./macros.html" as macros with context %}
+		{{ macros.comments() }}
 	</aside>
 
 </article>
