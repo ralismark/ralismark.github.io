@@ -28,7 +28,7 @@ jobs:
     - uses: DeterminateSystems/magic-nix-cache-action@v2
 
     - name: "Build site"
-      run: "nix build -o _site"
+      run: "nix run . -- build -o _site site/main.py"
 
     - name: Upload built site
       uses: actions/upload-pages-artifact@v1
