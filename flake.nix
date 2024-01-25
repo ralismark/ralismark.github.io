@@ -22,14 +22,15 @@
             pkgs.graphviz
             pkgs.nodePackages.katex
             (pkgs.python3.withPackages (p: with p; [
-              jinja2
-              pyyaml
-              mistune
-              watchdog
               frozendict
-              pygments
-              libsass
               graphviz
+              jinja2
+              libsass
+              mistune
+              pygments
+              pyyaml
+              requests
+              watchdog
             ]))
           ];
 
