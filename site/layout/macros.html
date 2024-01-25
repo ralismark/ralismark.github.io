@@ -31,6 +31,11 @@
 			<p class="my-0 p-summary">
 				{{ post.props.excerpt|e }}
 			</p>
+
+			{% set issue = recipe.posse_github("ralismark", "ralismark.github.io-comments", post.url) %}
+			{% if issue %}
+			<link class="u-syndication" href="{{ issue }}"/>
+			{% endif %}
 		</article>
 	{% endfor %}
 {%- endmacro -%}
