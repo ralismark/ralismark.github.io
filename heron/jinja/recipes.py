@@ -146,3 +146,18 @@ def recipe_graphviz(
             layout,
         )
     )
+
+
+@util.setitem(RECIPE_FILTERS, "posse_github")
+def recipe_posse_github(
+    owner: str,
+    repo: str,
+    title: str,
+) -> str | None:
+    return core.current_ctx().build(
+        recipe.GitHubIssueRecipe(
+            owner,
+            repo,
+            title,
+        )
+    )

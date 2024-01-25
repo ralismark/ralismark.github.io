@@ -25,3 +25,6 @@ from .exec import (
     Join,
     LoadRecipe,
 )
+from .posse import (
+    GitHubIssueRecipe,
+)
