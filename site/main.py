@@ -132,17 +132,9 @@ def inner_main(ctx: heron.core.BuildContext):
 
     # root pages
 
-    root_page_globs = [
-        "404.*",
-        "about.*",
-        "index.*",
-        "interactives.*",
-        "posts.*",
-        "somewhere.*",
-    ]
-    for root_page in root_page_globs:
-        path = one(ctx.input(here).glob(root_page))
-        yield heron.recipe.PageRecipe(path, f"/{path.stem}.html", jenv)
+    for root_page_glob in ["*.html", "*.md", "*.d"]:
+        for path in ctx.input(here).glob(root_page_glob):
+            yield heron.recipe.PageRecipe(path, f"/{path.stem}.html", jenv)
 
     # extra stuff
 

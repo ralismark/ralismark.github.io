@@ -66,11 +66,11 @@
 		if(!r.content) return null;
 
 		if(r.content.html) {
-			const e = E("blockquote")
+			const e = E("blockquote", { class: "e-content" })
 			e.innerHTML = r.content.html; // webmention.io sanitises it for us ^.^
 			return e;
 		} else if(r.content.text) {
-			return E("blockquote", {}, T(r.content.text));
+			return E("blockquote", { class: "p-content" }, T(r.content.text));
 		}
 
 		return null;
@@ -83,7 +83,7 @@
 		// first create the bits of the heading:
 		// (pic) {person name} {action} {time}
 
-		const nametag = E("a", { rel: "nofollow ugc", title: who, href: r.author && r.author.url },
+		const nametag = E("a", { rel: "nofollow ugc", title: who, href: r.author && r.author.url, class: "u-author h-card" },
 			// profile pic
 			r.author && r.author.photo &&
 				E("img", {
@@ -97,8 +97,8 @@
 
 		const action = actionTitle[r["wm-property"]] && T(actionTitle[r["wm-property"]] + " ");
 
-		const datetag = E("a", { rel: "nofollow ugc", href: r.url },
-			E("time", { datetime: when.toISOString(), },
+		const datetag = E("a", { class: "u-url", rel: "nofollow ugc", href: r.url },
+			E("time", { class: "dt-published", datetime: when.toISOString(), },
 				T(when.toLocaleDateString(undefined, { dateStyle: "long" })),
 			)
 		);
@@ -106,7 +106,7 @@
 		// then, the body of the thing
 		const contentText = getContent(r);
 
-		return E("li", { style: "margin-bottom: 1rem" },
+		return E("li", { style: "margin-bottom: 1rem", class: "u-comment h-cite" },
 			E("div", {},
 				nametag, action, datetag,
 			),
@@ -119,7 +119,7 @@
 			style: "list-style: none; padding: 0",
 		}, ...entries,),
 		response.children.length > MAX_ENTRIES &&
-			E("p", { style: "opacity: .7" },
+		E("p", { style: "opacity: .7" },
 				T("+ " + (response.children.length - MAX_ENTRIES) + " more...")
 			),
 	);
