@@ -17,6 +17,13 @@ def setitem(d: dict[_T, _F], key: _T) -> t.Callable[[_F], _F]:
     return decorate
 
 
+def one(x: t.Iterable[_T]) -> _T:
+    items = list(x)
+    if len(items) == 1:
+        return items[0]
+    raise ValueError(f"expected 1 element but got {len(items)}")
+
+
 Freezable = t.Union[
     t.Iterable["Freezable"],
     t.Mapping["Freezable", "Freezable"],
