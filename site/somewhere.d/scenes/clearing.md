@@ -11,5 +11,4 @@ There are a few of doors stood up around this clearing, you feel like they chang
 - [An worn door that is falling apart](#museum)
 - A tall wooden door, once majestic but now rather aged. Locked...
 - [A red door](https://www.tumblr.com/zinjanthropusboisei/726211136019644417)
-- [A path southwards](#mountain)
 - [Sit for a bit](#clearing:sit)
