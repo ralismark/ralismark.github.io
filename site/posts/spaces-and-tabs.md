@@ -61,9 +61,11 @@ Plugins exist to support this, [including my own][2], which I use daily.
 
 # Extra: On tabs xor spaces
 
-In the absence of any existing convention (e.g. C and C++), My preference is still towards using tab characters. I don't have a strong reason for this, though the customisability of tabs is one positive aspect.
+In the absence of any existing convention (e.g. C and C++), my preference is still towards using tab characters.
+I don't have a strong reason for this, though the customisability of tabs is one positive aspect.
 
-Also, there's an accessibility argument to be made in favour of tabs -- see [this reddit post](https://www.reddit.com/r/javascript/comments/c8drjo/nobody_talks_about_the_real_reason_to_use_tabs/). The gist of it is this:
+Also, there's an accessibility argument to be made in favour of tabs -- see [this reddit post](https://www.reddit.com/r/javascript/comments/c8drjo/nobody_talks_about_the_real_reason_to_use_tabs/).
+The gist of it is this:
 
 > i get approached by not one, but TWO coworkers who unfortunately are highly visually impaired, and each has a different visual impairment
 >
