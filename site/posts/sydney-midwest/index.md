@@ -1,8 +1,9 @@
 ---
-layout: standalone
+layout: post
 title: The Sydney Midwest
 excerpt: Not quite the Inner West, not quite Western Sydney
 date: 2024-03-01
+tags:
 ---
 
 The Inner West is the area of Sydney pretty much immediately west of the city.
