@@ -1,7 +1,9 @@
 ---
-layout: standalone
-title: "In which Temmie has too many thoughts about an Obra Dinn soundtrack"
+layout: post
+title: "Too many thoughts about an Obra Dinn soundtrack"
 excerpt: "It's called Bargain, which also describes my violin playing (though not my instrument I love them)"
+date: 2024-03-05
+tags:
 ---
 
 .. admonition:: warn
@@ -36,6 +38,10 @@ And this:
 ></iframe>
 
 That's not a real violin.
+
+.. admonition:: aside
+
+	Okay, I'm going to be spending a lot of words kinda breaking down what sounds off about it, so I'm going to preempt that by saying that this is _genuinely a non-issue_ and in no way detracts from the wonderful work of art that is this game.
 
 # What makes a violin sound real
 
@@ -87,8 +93,11 @@ Especially the timbre change at 7s which sounds _exactly_ like if I did moved st
 There's also so much more variation in dynamics!
 Which you'd get from a real bow!
 
-> it's so crazy that there's also like the
+{# TODO cite #}
+> it's so crazy that there's also like the<br>
 > like the cresc. when you fuck up changing your bowing so u kinda swell
+>
+> --- nic
 
 Though it does go a bit overboard at times.
 
