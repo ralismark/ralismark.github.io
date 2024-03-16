@@ -1,7 +1,9 @@
 You stand in the main lobby of a small museum.
 
 It appears the original owners abandoned it long ago, and someone else has come and repurposed the space to display their own things!
+However, it is still reasonably tidied.
 
+In the middle of the lobby is a round reception desk.
 At the counter there's a couple copies of a pamphlet:
 
 .. details:: Notes on "Somewhere"
@@ -23,6 +25,9 @@ At the counter there's a couple copies of a pamphlet:
 	- as more concrete artifact of who I am, because memories are fallible and identity is variable
 
 	I don't have any big plans yet for this world, so right now it'll just be a hodgepodge of whatever inspiration I get.
+
+The other side of the desk has bunch of scribbled notes, a notebook, and a bowl of soup that has gone cold.
+Seems like whoever runs this place is out at the moment, but you're free to take a look around.
 
 - [An area to the right](#museum:right).
 <!--- [A passage on the right, a bit further down the space](#museum:)-->

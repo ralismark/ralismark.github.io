@@ -13,4 +13,4 @@ There's a notebook nearby.
 
 	(the rest is illegible)
 
-- [Back to museum](#museum)
+- [Back to the lobby](#museum)
