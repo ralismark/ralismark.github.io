@@ -2,17 +2,17 @@
 Subclasses of jinja types to alter their behaviour.
 """
 
-import typing as t
-from pathlib import Path
-import os
-import warnings
 import datetime as dt
+import os
 import re
+import typing as t
+import warnings
+from pathlib import Path
 
 import jinja2
 
 from .. import core, util
-from .recipes import RECIPE_FILTERS
+from .registry import RECIPE_FILTERS
 from .utils import GetItemWrapper
 
 
@@ -108,8 +108,6 @@ base_env.tests["recipe"] = lambda v: isinstance(v, core.Recipe)
 
 
 base_env.globals["recipe"] = GetItemWrapper(RECIPE_FILTERS)
-for k, v in RECIPE_FILTERS.items():
-    base_env.filters[f"recipe.{k}"] = v
 
 
 @util.setitem(base_env.globals, "raise")

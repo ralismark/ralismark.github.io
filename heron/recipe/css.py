@@ -1,9 +1,11 @@
 import dataclasses
-from pathlib import Path
+import typing as t
+from pathlib import Path, PurePosixPath
 
 import sass
 
 from .. import core
+from ..jinja.registry import jinja_recipe_builder
 from . import inout
 
 
@@ -27,3 +29,22 @@ class SassRecipe(inout.InoutRecipeBase):
         with ctx.output(self.opath).open("w") as f:
             f.write(content)
         return self.inout()
+
+    @jinja_recipe_builder("sass")
+    @staticmethod
+    def jinja(
+        path: str | PurePosixPath,
+        out: str,
+        include: str | PurePosixPath | t.Sequence[str | PurePosixPath] = tuple(),
+        *,
+        __file__: Path,
+    ) -> "SassRecipe":
+        if isinstance(include, (str, PurePosixPath)):
+            include = (include,)
+        include = tuple(str(__file__.parent / p) for p in include)
+
+        return SassRecipe(
+            path=__file__.parent / path,
+            out=out,
+            include_paths=include,
+        )

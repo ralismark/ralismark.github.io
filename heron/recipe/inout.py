@@ -1,10 +1,11 @@
-import typing as t
 import dataclasses
-from pathlib import Path, PurePosixPath
 import shutil
+import typing as t
+from pathlib import Path, PurePosixPath
 
 from .. import core, util
 from .basic import InputMixin, OutputMixin
+from ..jinja.registry import jinja_recipe_builder
 
 
 @dataclasses.dataclass(frozen=True)
@@ -50,3 +51,16 @@ class CopyRecipe(InoutRecipeBase):
             dst=ctx.output(self.opath),
         )
         return self.inout()
+
+    @jinja_recipe_builder("copy")
+    @staticmethod
+    def jinja(
+        path: str | PurePosixPath,
+        out: str,
+        *,
+        __file__: Path,
+    ) -> "CopyRecipe":
+        return CopyRecipe(
+            path=__file__.parent / path,
+            out=out,
+        )

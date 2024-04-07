@@ -1,8 +1,10 @@
-import os
-import heron
 import dataclasses
+import os
+
 import requests
 
+from .. import core, util
+from ..jinja.registry import jinja_recipe_builder
 
 POSSE_READONLY = True
 
@@ -19,15 +21,15 @@ def gh_headers() -> dict[str, str]:
 
 
 @dataclasses.dataclass(frozen=True)
-class GitHubIssueRecipe(heron.core.Recipe[str | None]):
+class GitHubIssueRecipe(core.Recipe[str | None]):
     @dataclasses.dataclass(frozen=True)
-    class ListIssues(heron.core.Recipe[heron.util.Impurity[list]]):
+    class ListIssues(core.Recipe[util.Impurity[list]]):
         # because of GitHub's very low API ratelimit, it's much nicer to fetch
         # everything once and cache the results
         owner: str
         repo: str
 
-        def build_impl(self, ctx: heron.core.BuildContext):
+        def build_impl(self, ctx: core.BuildContext):
             # TODO pagination
             r = requests.get(
                 f"https://api.github.com/repos/{self.owner}/{self.repo}/issues",
@@ -37,13 +39,13 @@ class GitHubIssueRecipe(heron.core.Recipe[str | None]):
 
             # the returned result is mutable! since GitHubIssueRecipe may extend it when creating issues
             issues = [x for x in r.json() if "pull_request" not in x]
-            return heron.util.Impurity(lambda: issues)
+            return util.Impurity(lambda: issues)
 
     owner: str
     repo: str
     title: str
 
-    def build_impl(self, ctx: heron.core.BuildContext) -> str | None:
+    def build_impl(self, ctx: core.BuildContext) -> str | None:
         repo_issues = ctx.build(self.ListIssues(self.owner, self.repo))()
         items = [x for x in repo_issues if x["title"] == self.title]
 
@@ -70,3 +72,16 @@ class GitHubIssueRecipe(heron.core.Recipe[str | None]):
         issue = r.json()
         repo_issues.append(issue)
         return issue["html_url"]
+
+    @jinja_recipe_builder("posse_github")
+    @staticmethod
+    def jinja(
+        owner: str,
+        repo: str,
+        title: str,
+    ) -> "GitHubIssueRecipe":
+        return GitHubIssueRecipe(
+            owner,
+            repo,
+            title,
+        )

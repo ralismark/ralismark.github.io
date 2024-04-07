@@ -2,11 +2,12 @@
 Various basic recipe types
 """
 
-import typing as t
 import dataclasses
+import typing as t
 from pathlib import Path, PurePosixPath
 
 from .. import core, util
+from ..jinja.registry import jinja_recipe_builder
 
 
 @dataclasses.dataclass(frozen=True)
@@ -59,6 +60,17 @@ class ReadTextRecipe(core.Recipe[str], InputMixin):
         with ctx.input(self.path).open("rt") as f:
             return f.read()
 
+    @jinja_recipe_builder("read")
+    @staticmethod
+    def jinja(
+        path: str | PurePosixPath,
+        *,
+        __file__: Path,
+    ) -> "ReadTextRecipe":
+        return ReadTextRecipe(
+            path=__file__.parent / path,
+        )
+
 
 @dataclasses.dataclass(frozen=True)
 class ReadBinaryRecipe(core.Recipe[bytes], InputMixin):
@@ -69,6 +81,17 @@ class ReadBinaryRecipe(core.Recipe[bytes], InputMixin):
     def build_impl(self, ctx: core.BuildContext) -> bytes:
         with ctx.input(self.path).open("rb") as f:
             return f.read()
+
+    @jinja_recipe_builder("readb")
+    @staticmethod
+    def jinja(
+        path: str | PurePosixPath,
+        *,
+        __file__: Path,
+    ) -> "ReadBinaryRecipe":
+        return ReadBinaryRecipe(
+            path=__file__.parent / path,
+        )
 
 
 @dataclasses.dataclass(frozen=True)
@@ -85,6 +108,17 @@ class WriteRecipe(core.Recipe[str], OutputMixin):
             f.write(self.content)
         return util.permalink(self.opath)
 
+    @jinja_recipe_builder("write")
+    @staticmethod
+    def jinja(
+        content: str | bytes,
+        out: str,
+    ) -> "WriteRecipe":
+        return WriteRecipe(
+            out=util.canonicalise_opath(out),
+            content=content,
+        )
+
 
 @dataclasses.dataclass(frozen=True)
 class ReadDirRecipe(core.Recipe[tuple[Path, ...]], InputMixin):
@@ -94,3 +128,14 @@ class ReadDirRecipe(core.Recipe[tuple[Path, ...]], InputMixin):
 
     def build_impl(self, ctx: core.BuildContext) -> tuple[Path, ...]:
         return tuple(ctx.input(self.path).iterdir())
+
+    @jinja_recipe_builder("readdir")
+    @staticmethod
+    def jinja(
+        path: str | PurePosixPath,
+        *,
+        __file__: Path,
+    ) -> "ReadDirRecipe":
+        return ReadDirRecipe(
+            path=__file__.parent / path,
+        )

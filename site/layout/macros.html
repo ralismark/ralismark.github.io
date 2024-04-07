@@ -41,7 +41,7 @@
 {%- endmacro -%}
 
 {%- macro redirect_here(opath) -%}
-	{% filter recipe.write(opath) %}
+	{% set content %}
 		<!doctype html>
 		<html>
 			<head>
@@ -56,7 +56,8 @@
 				<a href="{{ page.url }}">Click here if you are not redirected</a>
 			</body>
 		</html>
-	{% endfilter %}
+	{% endset %}
+	{% do recipe.write(content, opath) %}
 {%- endmacro -%}
 
 {%- macro comments() -%}

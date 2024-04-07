@@ -1,11 +1,12 @@
-import typing as t
 import dataclasses
-from pathlib import Path
+import typing as t
+from pathlib import Path, PurePosixPath
 
 import jinja2
 from frozendict import frozendict
 
 from .. import core, util
+from ..jinja.registry import RECIPE_FILTERS, jinja_recipe_builder
 from . import inout
 
 
@@ -88,6 +89,7 @@ class JMarkdownStage(core.Recipe[str]):
 
     def build_impl(self, ctx: core.BuildContext) -> str:
         from .. import md
+
         renderer = md.create_md(
             md.JinjaRenderer(
                 lambda name: self.jenv.get_template(name),
@@ -192,4 +194,27 @@ class PageRecipe(inout.InoutRecipeBase[PageInout]):
             props=t.cast(frozendict, util.freeze(props)),
             recipe_props=self.props,
             content=pre_layout_content,
+        )
+
+    @jinja_recipe_builder("page")
+    @jinja2.pass_context
+    @staticmethod
+    def jinja(
+        ctx: jinja2.runtime.Context,
+        path: str | PurePosixPath,
+        out: str,
+        *,
+        ext: str | None = None,
+        props: t.Mapping[str, util.Freezable] = dict(),
+        inherit: t.Iterable[str] = tuple(),
+        __file__: Path,
+    ) -> "PageRecipe":
+        child_props = {**props, **{k: ctx[k] for k in inherit}}
+
+        return PageRecipe(
+            path=__file__.parent / path,
+            out=out,
+            jenv=ctx.environment,
+            ext=ext,
+            props=t.cast(t.Any, util.freeze(child_props)),
         )
