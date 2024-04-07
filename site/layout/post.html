@@ -64,7 +64,7 @@
 
 			<ol>
 				{% for post in posts() %}
-					{% set post = post | recipe.build %}
+					{% set post = recipe.build(post) %}
 					{% if post.props.series == page.props.series %}
 						<li>
 							<a href="{{ post }}">{{ post.props.title | e }}</a>

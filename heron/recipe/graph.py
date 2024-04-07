@@ -1,8 +1,10 @@
 import dataclasses
+from pathlib import Path, PurePosixPath
 
 import graphviz
 
 from .. import core
+from ..jinja.registry import jinja_recipe_builder
 from . import inout
 
 
@@ -19,3 +21,18 @@ class GraphvizRecipe(inout.InoutRecipeBase):
             outfile=ctx.output(self.opath),
         )
         return self.inout()
+
+    @jinja_recipe_builder("graphviz")
+    @staticmethod
+    def jinja(
+        path: str | PurePosixPath,
+        out: str,
+        layout: str = "dot",
+        *,
+        __file__: Path,
+    ) -> "GraphvizRecipe":
+        return GraphvizRecipe(
+            path=__file__.parent / path,
+            out=out,
+            engine=layout,
+        )
