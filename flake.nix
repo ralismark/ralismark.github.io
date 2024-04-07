@@ -23,7 +23,6 @@
             pkgs.nodePackages.katex
             (pkgs.python3.withPackages (p: with p; [
               frozendict
-              graphviz
               jinja2
               libsass
               mistune
