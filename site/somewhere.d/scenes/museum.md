@@ -29,7 +29,7 @@ At the counter there's a couple copies of a pamphlet:
 The other side of the desk has bunch of scribbled notes, a notebook, and a bowl of soup that has gone cold.
 Seems like whoever runs this place is out at the moment, but you're free to take a look around.
 
-- [An area to the right](#museum:right).
+- [An area to the right](#museum:right)
 <!--- [A passage on the right, a bit further down the space](#museum:)-->
 - The passageway behind the desk, which appears to be the main entrance.
 It's fenced off, and a sign stands in front, bearing the message "~~Under Construction~~ Redecorating!"
