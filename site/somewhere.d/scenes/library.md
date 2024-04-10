@@ -82,7 +82,7 @@ There's isn't anything to buy though, since all the shelving and table space has
 
 .. details:: "Not Names"
 
-	I'm not entirely sure why, but a lot of people mishear my name when I tell them it.
+	I'm not entirely sure why, but a lot of people mishear my name when I tell them it's Temmie.
 	And it's not just basic mishearings like "tammy" or whatever, I've had:
 
 	- Emily
@@ -91,10 +91,12 @@ There's isn't anything to buy though, since all the shelving and table space has
 
 There's also a shelf describing itself as "interlibrary loans".
 
-{# TODO make this more part of the world #}
-- [a scorpion and a frog](https://www.tumblr.com/sparkling-woter/687395556265525248/a-scorpion-not-knowing-how-to-swim-asked-a-frog)
-- [the ants and the grasshopper](https://www.narrativeark.xyz/p/the-ants-and-grasshopperhtml)
-- [honey](https://www.tumblr.com/inkskinned/611002739643826176/when-the-honey-showed-up-we-all-just-took-it)
-- [a bowl of soup](https://scp-wiki.wikidot.com/scp-348)
+> _["A Scorpion and A Frog"](https://www.tumblr.com/sparkling-woter/687395556265525248/a-scorpion-not-knowing-how-to-swim-asked-a-frog)_
+
+> _["The Ants and The Grasshopper"](https://www.narrativeark.xyz/p/the-ants-and-grasshopperhtml)_
+
+> _["Honey"](https://www.tumblr.com/inkskinned/611002739643826176/when-the-honey-showed-up-we-all-just-took-it)_
+
+> _["A Bowl of Soup"](https://scp-wiki.wikidot.com/scp-348)_
 
 - [Back to museum](#museum)

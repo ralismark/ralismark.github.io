@@ -44,3 +44,24 @@ You don't know where you are, you're not sure how you got here...
     {% endfilter %}
   </section>
 </main>
+
+<style>
+@keyframes undecipherable {
+	{% set chars = "}yhMkKEm$dG]CrQ*s)%DJ61=,+YvZBF^q32IL#ga9-i<x:7(t@8R&nfX?cS_Op~N.A'w5Wl[zb`P|/U>Ve{ujo;!H04T" %}
+	{% for l in chars %}
+		{{ loop.index * 100 // (loop.length) }}% { content: "{{ l }}"; }
+	{% endfor %}
+}
+
+.undecipherable::before {
+	content: "?";
+
+	font-family: monospace;
+	display: inline-block;
+	width: 1ex;
+
+	--undecipherable-duration: 5s;
+	animation: undecipherable var(--undecipherable-duration) linear infinite;
+	animation-delay: calc(var(--undecipherable-duration) * var(--random) / -101);
+}
+</style>
