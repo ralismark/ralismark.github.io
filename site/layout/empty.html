@@ -20,6 +20,9 @@
 				include="./css",
 			)
 		}}">
+		<link rel="stylesheet" href="{{
+			recipe.page("css/random.css.jinja", "/assets/random.css")
+		}}">
 
 		{# defer loading of katex? #}
 		{% set katex_attrs %}

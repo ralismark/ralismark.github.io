@@ -13,6 +13,7 @@
 			class="paper"
 			{% if page.url == url %}aria-current="page"{% endif %}
 			href="{{ url }}"
+			{# TODO change this to use --random? #}
 			style="--angle: {{ (loop.index + 2) * 2 % 5 - 2 }}deg"
 		>
 			{{ name }}
