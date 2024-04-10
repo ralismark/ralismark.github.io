@@ -5,7 +5,7 @@ At a certain place further up the steps, the bushes on the side part away, revea
 
 This trail gives way to a clearing as the ground becomes stone.
 At the centre is a circular arrangement of pebbles, gathered from up and down the mountain.
-They are all tinted differently, from steel blue to grey to almost pinkish.
+They are tinted in various shades of greys and pastels.
 
 A number of flowers have sprouted up around the memorial.
 Even through the wind and the cold, they still cling on and thrive.
