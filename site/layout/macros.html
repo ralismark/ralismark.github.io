@@ -32,10 +32,10 @@
 				{{ post.props.excerpt|e }}
 			</p>
 
-			{% set issue = recipe.posse_github("ralismark", "ralismark.github.io-comments", post.url) %}
+			{# {% set issue = recipe.posse_github("ralismark", "ralismark.github.io-comments", post.url) %}
 			{% if issue %}
 			<link class="u-syndication" href="{{ issue }}"/>
-			{% endif %}
+			{% endif %} #}
 		</article>
 	{% endfor %}
 {%- endmacro -%}
@@ -77,14 +77,14 @@
 			via toot 🐘
 		</a>
 
-		{% set issue = recipe.posse_github("ralismark", "ralismark.github.io-comments", page.url) %}
+		{# {% set issue = recipe.posse_github("ralismark", "ralismark.github.io-comments", page.url) %}
 		{% if issue %}
 			or
 
 			<a href="{{ issue }}#new_comment_field" class="u-syndication" role="button">
 				via github 🤖
 			</a>
-		{% endif %}
+		{% endif %} #}
 
 		or
 
