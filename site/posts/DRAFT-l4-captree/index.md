@@ -7,6 +7,102 @@ tags:
 reason: wip
 ---
 
+assumed knowledge: general computing (not specifically with seL4)
+
+I've been thinking on and off about capability-based microkernels, in particular seL4.
+One thing about seL4 that always confused me was how deriving capabilities from other capabilities and revoking them worked.
+
+# A Bit Of Background
+
+seL4 is build on the idea of [Capability-based security] and in particular the [Object-capability model], where instead of the standard ACL model with resources listing who can access them, actors (e.g. processes, users) hold special tokens -- capabilities -- which grant them access to resources.
+These tokens contain a reference to the resource (e.g. a chunk of memory), and a set of permissions describing how the token can be used (e.g. forbidding modifications to it), which the kernel enforces.
+To work with these capabilities (which I'll shorten to caps), there's a few extra operations you can do with them beyond accessing the resources they encapsulate:
+
+1. Derive: duplicating a capability into a copy that has the same or fewer permissions.
+	This is called Mint in seL4.
+2. Delegate: transferring a capability to another actor
+3. Revoke: invalidate all capabilities derived (including transitively derived) from a particular capability
+
+These operations naturally give rise to a _derivation tree_, describing what capabilities are derived from what, that gets used for revoke.
+In many capability-based kernels, this is also called a _mapping database_.
+
+# What seL4 Does
+
+To understand how seL4 handles these operations, we can have a look at [the relevant section of the (literate) Haskell model](https://github.com/seL4/l4v/blob/8f5e6540de315bf424b8a34f0bfc17ba7040d21d/spec/haskell/src/SEL4/Object/CNode.lhs#L617).
+In their words,
+
+> The MDB is a double-linked list that is equivalent to a prefix traversal of the derivation tree.
+
+.. admonition:: warn
+
+	This is an inaccurate simplification of the actual mechanism that elides some seL4-specific details.
+
+Each entry in this linked list also contains two extra flags:
+
+- `mdbRevocable`, whether the cap can be a parent in the first place
+- `mdbFirstBadged`, for distinguishing between sibling caps (for certain types of caps)
+
+They then define that capability A is the ancestor of the next capability B if:
+
+1. `mdbRevocable` is true for A; and
+2. The actual resource that B refers to is either A, a subset of A (e.g. if both are memory regions, A contains all of B); and
+3. `mdbFirstBadged` is true for A given that `mdbFirstBadged` is relevant for the kind of cap.
+
+Essentially, it looks like this.
+
+.. figure:: {{ recipe.graphviz("./mdb.dot", page.url + "/mdb.svg") }}
+
+
+
+
+This definition limits how deep the tree can be if we don't allow dividing capabilities.
+Since the "root" resource must have 
+
+
+(For type of capabilities that can be divided, such as regions of memory, we can just keep divigi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 I've been thinking on and off about microkernels, particularly seL4.
 One thing that bugged me about seL4 was how unclear the capability derivation mechanism is -- there's functionality to derive and revoke caps, but at the same time you're only allowed at most 1 level derivation.
 And so, it's not really clear how the two interact.
@@ -80,15 +176,15 @@ We would just need to update:
 Finally, we reach Revoke.
 This is the hardest operation to handle, since a cap can have potentially unbounded descendants, and we'll need to process all of them.
 This means that Revoke would normally have unbounded runtime, which is _bad_ in a kernel context, particularly with seL4's execution model and realtime guarantees.
-The way seL4 handles these kinds of operations is to require the task yield after $$O(1)$$ of work.
+The way seL4 handles these kinds of operations is to require the task yield after $O(1)$ of work.
 This means we'll need to leave the capability tree in a sensible state, as well as handle other threads making changes to it.
 
-Fortunately, seL4 gives us one trick to make this easier: zombie caps.
-They're a way to mark a cap as unusable, without completely deleting it yet.
-
 This is really tricky!
-The capability tree needs to be in a consistent state when we yield, and we also can't run for unbounded time.
-This means that deconstructing the derivation tree from top-down and reparenting things as necessary won't work, since we might not be able to find a place to graft nodes on in time.
+The naive method of simply iterating over all descendants and destroying things bottom-up violates the $O(1)$ requirement.
+Destroying it top-down and 
+
+
+These requirements mean that deconstructing the derivation tree from top-down and reparenting things as necessary won't work, since we might not be able to find a place to graft nodes on in time.
 <!-- TODO fix wording -->
 <!--TODO maybe like an initial idea?-->
 
