@@ -55,7 +55,7 @@ This is something that can only be fully exploited in custom keyboards -- see [/
 		In order: control, alt, layer, win, space, enter, shift, backspace, alt, down, up, control
 
 	My bottom row.
-	Made with [keyboard-layout-editor.com](http://www.keyboard-layout-editor.com/)>
+	Made with [keyboard-layout-editor.com](http://www.keyboard-layout-editor.com/).
 
 But, when done well, it's *extremely* comfortable.
 You'll essentially always have your fingers on the home row.
