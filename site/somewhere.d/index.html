@@ -25,7 +25,7 @@ excerpt: "Somewhere..."
 <main id="debug" class="content-width">
   {% for inp in recipe.readdir("./scenes") %}
     {% set name = inp.stem %}
-    <section id="{{ name }}">
+    <section id="{{ name }}" aria-label="{{ name }}">
       {% if inp.suffix == ".md" %}
         {% filter markdownify %}{% include inp|string %}{% endfilter %}
       {% elif inp.suffix == ".html" %}
