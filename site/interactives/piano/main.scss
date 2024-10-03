@@ -2,7 +2,7 @@
 	--white-key-gap: 0.1em;
 
 	--white-key-height: 6em;
-	--black-key-height: 4em;
+	--black-key-height: 3em;
 
 	--white-key-width: 1.5em;
 	--black-key-width: calc(var(--white-key-width) * 0.7);
@@ -17,15 +17,20 @@
 	gap: 1em 0;
 	justify-content: center;
 
+	user-select: none;
+	-webkit-user-select: none;
+
 	> .octave {
 		display: flex;
+		touch-action: none;
 	}
 
 	.key {
 		&[data-white] {
 			background: white;
 			&[aria-pressed=true] { background: #aaa; }
-			margin: 0 var(--white-key-gap);
+			border-left: var(--white-key-gap) solid var(--body-bg);
+			border-right: var(--white-key-gap) solid var(--body-bg);
 
 			width: var(--white-key-width);
 			height: var(--white-key-height);

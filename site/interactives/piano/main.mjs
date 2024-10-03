@@ -1,4 +1,4 @@
-import {keyNames, keymap, salamander} from "./data.mjs"
+import {keyNames, keymap, salamander, scaleDegreeNames} from "./data.mjs"
 import identify from "./chords.mjs"
 
 const map = (() => {
@@ -9,12 +9,16 @@ const map = (() => {
   return map
 })()
 
+// base keys for top and bottom rows of the keyboard
 window.base = [21, 28]
 
 // whether a distinct sharp exists and isn't just enharmonic to another scale
 // degree
 const hasSharp = [true, true, false, true, true, true, false]
 
+const keyNrToDegree = [0, 2, 4, 5, 7, 9, 11]
+
+// redo all the key labelling, for when mappings get moved
 window.relabel = function() {
   for (const label of document.querySelectorAll("[data-mapped]")) {
     label.remove()
@@ -37,41 +41,29 @@ window.relabel = function() {
 
 relabel()
 
-const pressed = new Set()
-
-const chordname = document.querySelector("#chordname")
-
+// load sound playing
 await import("https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.58/Tone.js")
-
 const synth = new Tone.Sampler(salamander).toDestination()
 await Tone.loaded()
-
 document.querySelector("#piano").setAttribute("data-ready", 1)
 
-const handle = async ev => {
-  const mapped = map[ev.code]
-  if (mapped === undefined) return
-  let [group, offset, sharp] = mapped
+// set of pitch numbers that are being pressed
+const pressed = new Set()
 
-  let keynr = base[group] + offset
-  if (sharp && !hasSharp[keynr % 7]) {
-    return
-    // keynr += 1
-    // sharp = false
-  }
+// element that shows the chord name
+const chordname = document.querySelector("#chordname")
 
-  const octave = Math.floor(keynr / 7)
-  const degree = keynr % 7
+async function handle(pitchNr, isDown) {
+  const octave = Math.floor(pitchNr / 12);
+  const pitchName = scaleDegreeNames[pitchNr % 12] + octave;
 
-  const pitchName = "CDEFGAB"[degree] + (sharp ? "#" : "") + octave
-  const pitchNr = octave * 12 + [0, 2, 4, 5, 7, 9, 11][degree] + (sharp ? 1 : 0)
-
-  const el = document.querySelector(`.key[data-pitch="${pitchName}"]`)
-  if (ev.type === "keydown") {
+  const el = document.querySelector(`.key[data-pitch="${pitchNr}"]`)
+  if (isDown) {
     if (pressed.has(pitchNr)) return
     pressed.add(pitchNr)
     if (el) el.setAttribute("aria-pressed", "true")
   } else {
+    if (!pressed.has(pitchNr)) return
     pressed.delete(pitchNr)
     if (el) el.setAttribute("aria-pressed", "false")
   }
@@ -80,12 +72,39 @@ const handle = async ev => {
 
   await Tone.start()
 
-  if (ev.type === "keydown") {
+  if (isDown) {
     synth.triggerAttack(pitchName)
   } else {
     synth.triggerRelease(pitchName)
   }
 }
 
-document.addEventListener("keydown", handle)
-document.addEventListener("keyup", handle)
+async function handleKeyEvent(ev) {
+  const mapped = map[ev.code]
+  if (mapped === undefined) return // not recognised key
+  let [group, offset, sharp] = mapped
+
+  let keynr = base[group] + offset
+  if (sharp && !hasSharp[keynr % 7]) return // black key event where none exists
+
+  const octave = Math.floor(keynr / 7)
+  await handle(octave * 12 + keyNrToDegree[keynr % 7] + sharp, ev.type === "keydown")
+}
+
+document.addEventListener("keydown", handleKeyEvent)
+document.addEventListener("keyup", handleKeyEvent)
+
+for (const keyEl of document.querySelectorAll("#piano .key")) {
+  const pitchNr = +keyEl.dataset.pitch
+
+  keyEl.addEventListener("pointerover", ev => {
+    if (ev.buttons === 0) return // hover doesn't count
+    if (pressed.has(pitchNr)) return // don't double-tap
+    handle(pitchNr, true)
+    ev.target.releasePointerCapture(ev.pointerId)
+    ev.preventDefault()
+  })
+  keyEl.addEventListener("pointerout", ev => {
+    handle(pitchNr, false)
+  })
+}
