@@ -34,7 +34,7 @@ const chords = {
 }
 
 // validate that we don't have any chords which are just rotations of each other
-for (const bmap of Object.keys(chords)) {
+/*for (const bmap of Object.keys(chords)) {
   for (let i = 1; i < 12; ++i) {
     if (bmap[i] !== "1") continue
     const inv = bmap.substring(i) + bmap.substring(0, i)
@@ -42,7 +42,7 @@ for (const bmap of Object.keys(chords)) {
       console.warn("duplicate chord fingerprint", bmap, inv)
     }
   }
-}
+}*/
 
 export default function identify(pitches) {
   if (pitches.size === 0) {
@@ -68,7 +68,6 @@ export default function identify(pitches) {
     const bmask = mask.join("")
 
     const suffix = chords[bmask]
-    console.log(bmask, suffix)
     if (suffix === undefined) continue
 
     // match!

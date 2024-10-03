@@ -9,7 +9,7 @@ tags:
 <section id="piano" tabindex="0">
 {% for octave in range(2, 6) %}
 <section class="octave" data-octave="{{ octave }}">
-	{% for idx, note, sharp in [
+	{% for keynr, note, sharp in [
 		(0, "C", false), (0, "C", true),
 		(1, "D", false), (1, "D", true),
 		(2, "E", false),
@@ -20,8 +20,8 @@ tags:
 	] %}
 	<div
 		class="key"
-		data-nr="{{ idx + octave * 7 }}"
-		data-pitch="{{ note }}{% if sharp %}#{% endif %}{{ octave }}"
+		data-nr="{{ keynr + octave * 7 }}"
+		data-pitch="{{ loop.index0 + octave * 12 }}"
 		aria-pressed="false"
 		data-{% if sharp %}black{% else %}white{% endif %}="1"
 	></div>

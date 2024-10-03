@@ -141,3 +141,13 @@ export const salamander = {
     "F#7": "Fs7.mp3",
   }
 }
+
+export const scaleDegreeNames = [
+  "C", "C#",
+  "D", "D#",
+  "E",
+  "F", "F#",
+  "G", "G#",
+  "A", "A#",
+  "B",
+]
