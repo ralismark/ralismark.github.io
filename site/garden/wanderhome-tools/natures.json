@@ -1,0 +1,794 @@
+{
+	"Farm": {
+		"desc": "A <i>farm</i> is a place where people live unremarkable lives, deeply rooted in the turning of the seasons and the work that must be done.",
+		"category": "Comfortable",
+		"can": [
+			"Describe the calm mundanity of everyday life.",
+			"Reveal the thin margins people live on.",
+			"Ask: <i>\"Hey, wanna help out?\"</i> Give them a token if they pitch in, in whatever way they can."
+		],
+		"aesthetic": [
+			"Rapscallions And Merrymakers",
+			"Crops As Far As The Eye Can See",
+			"Peaceful Livestock",
+			"Rusty Overgrown Weapons Of War",
+			"A House You Once Called Home",
+			"A Childhood Inspiration, Now Washed-Up And #Pensive"
+		],
+		"folklore": [
+			"The Scarecrow That Walked Away",
+			"The Rain Of A Hundred Days",
+			"The Apple-Girl And Her Loving Parents"
+		]
+	},
+	"Garden": {
+		"desc": "A <i>garden</i> is a place where everyone has plenty and the world is overflowing with gifts. When you arrive at this place, decide what it has in abundance.",
+		"category": "Comfortable",
+		"can": [
+			"Describe the abundance all around us.",
+			"Threaten the health and vitality of the abundance.",
+			"Ask: <i>\"What do you need most right now?\"</i> Give them a token if they can't find it here."
+		],
+		"aesthetic": [
+			"Trees Overburdened With Fruit",
+			"Outrageously Large Gourds",
+			"Prismatic Butterflies",
+			"Carefully-Trimmed Hedges",
+			"Irrigating Fountains",
+			"A #Friendly Soul Unfamiliar With The Hardship Of The World"
+		],
+		"folklore": [
+			"The Peach Tree's Prophetic Blossom",
+			"The Old God In The Old Tree",
+			"The Burning Of The Corn Woman"
+		]
+	},
+	"Market": {
+		"desc": "A <i>market</i> is a place where near-anything can be traded and bartered, and where people from across the H\u00e6th gather with supplies to exchange.",
+		"category": "Comfortable",
+		"can": [
+			"Describe what you can find here.",
+			"Reveal the consequences of theft.",
+			"Offer someone something they want, at an affordable price. Give them a token if they refuse the offer."
+		],
+		"aesthetic": [
+			"Show-Stopping Livestock",
+			"Foreign Wares",
+			"Confusing Currencies",
+			"Antique Relics",
+			"Distant Smells",
+			"A Familiar #Crafty Merchant"
+		],
+		"folklore": [
+			"The Eel Daemon And The Lutist",
+			"The Crow And The Thirty-Three Thieves",
+			"The Golden King And How He Lost His Heart"
+		]
+	},
+	"Monastery": {
+		"desc": "A <i>monastery</i> is a place where a community gathers to learn from the past and cultivate answers to the complicated questions of the world.",
+		"category": "Comfortable",
+		"can": [
+			"Describe the rhythm of daily life.",
+			"Show tensions caused by generational divide.",
+			"Ask: <i>\"Are you willing to wait to get the answer you seek?\"</i> Give them a token if they're here to wait. Do not tell them the answer either way."
+		],
+		"aesthetic": [
+			"The Hermit's Cottage",
+			"Booming Bells",
+			"A Simple Herb Garden",
+			"Scriptorium Filled With Knowledge",
+			"Underground Catacombs",
+			"A #Wise Elder Who Remembers You From When You Were Very Young"
+		],
+		"folklore": [
+			"The Generous Mentor And Her Betrayal",
+			"The Janitor And The Secret Lessons He Taught",
+			"The Alabaster Monk"
+		]
+	},
+	"Tower": {
+		"desc": "A <i>tower</i> is a place that reaches so high up to the sky that it feels like it scrapes against the clouds.",
+		"category": "Comfortable",
+		"can": [
+			"Describe something very small and far away.",
+			"Spread concern around structural stability.",
+			"Make someone dizzy or disoriented, and give them a token."
+		],
+		"aesthetic": [
+			"Narrow Barely-Stable Entrance",
+			"Winding Staircase All The Way To The Top",
+			"Shining Light Warning Of Danger",
+			"Roosting Moths In The Rafters",
+			"Not Enough Space For All The Clutter",
+			"A #Grieving Soul Responsible For Keeping Everything",
+			"In Working Order"
+		],
+		"folklore": [
+			"The Observatory Of The Lightning Dancers",
+			"The First Of The Moth-Towers",
+			"The Ghost That Walks The Stairs"
+		]
+	},
+	"Workshop": {
+		"desc": "A <i>workshop</i> is a place where fine crafts and wares are created and given life, and where people value their ability to breathe life into art.",
+		"category": "Comfortable",
+		"can": [
+			"Describe the process of creation.",
+			"Show conflict between expectations and demand.",
+			"Give someone a token if they work hard and sweat over their creation."
+		],
+		"aesthetic": [
+			"A Whirring Loom",
+			"A Chugging Factory",
+			"A Work Song",
+			"An Important Supply Line",
+			"A #Cunning Kid Too Young To Be Working",
+			"An #Imaginative Craftsperson Who Made One of Your Treasures"
+		],
+		"folklore": [
+			"The Crafter Who Made Herself A Bride",
+			"The Potter And The Goddess",
+			"The Neverending Tapestry"
+		]
+	},
+	"Field": {
+		"desc": "A <i>field</i> is a place to lie back, feel the breeze in your fur, and look up at the sky.",
+		"category": "Verdant",
+		"can": [
+			"Describe a gentle place to rest.",
+			"Show someone looking for something lost.",
+			"Ask: <i>\"Can we look at the clouds together?\"</i> Give them a token if they say yes."
+		],
+		"aesthetic": [
+			"Rustling Grass",
+			"A Babbling Brook",
+			"A Solitary Tree",
+			"Wild Plants And Herbs",
+			"Mossy Boulders",
+			"A #Friendly Shepherd And Their Flock"
+		],
+		"folklore": [
+			"The Lucky Shepherd's Friend",
+			"The Barrow-Ghosts",
+			"The Dance Of The Flower Goddess"
+		]
+	},
+	"Glen": {
+		"desc": "A <i>glen</i> is a place overflowing with creatures and bugs, alive with movement and presence.",
+		"category": "Verdant",
+		"can": [
+			"Describe a world teeming with life.",
+			"Show a conflict between wild creatures.",
+			"Introduce a new buggy creature. Give someone a token if they engage with it as an equal."
+		],
+		"aesthetic": [
+			"Chittering Mantises",
+			"Cautious Pillbugs",
+			"Massive Beetles",
+			"#Watchful Caterpillars",
+			"Soaring Dragonflies",
+			"A #Feral And Remarkable Creature That No One Has Seen For Hundreds Of Years"
+		],
+		"folklore": [
+			"The Meadow Of The Lightning Dancers",
+			"The Last Of The Monarch Butterflies",
+			"The Day The Woods Walked"
+		]
+	},
+	"Hallow": {
+		"desc": "A <i>hallow</i> is a sacred place, where gods and mortals mingle. When you arrive at this place, decide a rule that all must follow.",
+		"category": "Verdant",
+		"can": [
+			"Describe the gods that live here and their mystery.",
+			"Offer someone the chance to break this place's rules to make their life easier.",
+			"Give someone a token when they bend over backwards to respect this place's rules."
+		],
+		"aesthetic": [
+			"A Well-Tended Shrine",
+			"A Worn-Away Mask",
+			"#Watchful Eyes In The Shadows",
+			"An Unexplainable Miracle",
+			"Forgotten Offerings",
+			"An Old #Sturdy Caretaker-Priest"
+		],
+		"folklore": [
+			"The #Miraculous Teachings Of The Old Priest",
+			"The Fifteen Sleeping Gods",
+			"The Maiden And Her Salmon-Headed Daemon Love"
+		]
+	},
+	"Hillock": {
+		"desc": "A <i>hillock</i> is a place in the foothills of a great and looming presence.",
+		"category": "Verdant",
+		"can": [
+			"Describe what we stand in the shadows of.",
+			"Show a threat that's up ahead.",
+			"Ask: <i>\"What are you worried lies up ahead?\"</i> and give them a token if they're right."
+		],
+		"aesthetic": [
+			"A Sheltered Valley",
+			"Strange Piles Of Stones",
+			"A Deep Gorge",
+			"Scattered Fragments Of Civilization",
+			"Evidence Of Distant Strangeness",
+			"A #Quiet Foreigner From Higher-Up"
+		],
+		"folklore": [
+			"The Goat Who Slept For A Hundred Years",
+			"The Fallen Star And The Stories She Told",
+			"The Hidden Treasure Of The Hyena-King"
+		]
+	},
+	"Lagoon": {
+		"desc": "A <i>lagoon</i> is a place of contemplation, introspection, and self-reflection.",
+		"category": "Verdant",
+		"can": [
+			"Describe the water and all the tiny creatures that live in it.",
+			"Make matters worse through people's inaction.",
+			"Ask: <i>\"What have you been thinking about lately?\"</i> and give them a token for their thoughts."
+		],
+		"aesthetic": [
+			"Mossy Stones",
+			"A Hidden Grotto",
+			"A Glorious Waterfall",
+			"A Rare And Mysterious Flower",
+			"A Well-Worn Path",
+			"A #Watchful Creature Who Hides From The Outside"
+		],
+		"folklore": [
+			"The Gifting Of The Heavenblade",
+			"The Teacher Who Lives Within The Rocks",
+			"The Waterfall's Broken Heart"
+		]
+	},
+	"Swamp": {
+		"desc": "A <i>swamp</i> is a place where the air is as thick as the mud.",
+		"category": "Verdant",
+		"can": [
+			"Describe the heaviness of the world.",
+			"Show tension caused by stagnation.",
+			"Bog someone down, and give them a token."
+		],
+		"aesthetic": [
+			"Muck And Mire",
+			"A Pungent Stench",
+			"A Heavy Fog",
+			"Wriggling Worms",
+			"A Sinking Feeling",
+			"A #Cunning And Tricksy Spirit Offering To Help"
+		],
+		"folklore": [
+			"The Treacherous Lights Deep In The Dark",
+			"The Traveling Bog",
+			"The Shrewish Witch And Her Magic Cabin"
+		]
+	},
+	"Bridge": {
+		"desc": "A <i>bridge</i> is a passage from one place to the next.",
+		"category": "Liminal",
+		"can": [
+			"Describe the distance to the other side.",
+			"Push something off the edge.",
+			"Offer someone an easier way. Give someone a token if they don't take it."
+		],
+		"aesthetic": [
+			"Ancient Engineering",
+			"Rickety Planks",
+			"A Sudden Drop",
+			"A Tollbooth",
+			"Churning Waters Far Below",
+			"A #Mighty Creature Hiding Underneath"
+		],
+		"folklore": [
+			"The Bargain Of The Flat-Faced Bass Daemon",
+			"The Path Carved By The Giant-King",
+			"The Fox And Toad Crossing"
+		]
+	},
+	"Island": {
+		"desc": "An <i>island</i> is a place kept secret and separate from the rest of the H\u00e6th. When you arrive at this place, decide what makes it feel different than what you're used to.",
+		"category": "Liminal",
+		"can": [
+			"Describe the comfort of an isolated world.",
+			"Show conflict caused by isolation.",
+			"Give someone a token when they respect this place's difference."
+		],
+		"aesthetic": [
+			"A Concealed Entrance",
+			"A Forbidden Secret",
+			"A Hidden Gem",
+			"A Looming God",
+			"An #Inquisitive Kid Who Has Never Seen The Outside World",
+			"A #Proper Leader Who Is Afraid Of The Outside World"
+		],
+		"folklore": [
+			"The Cave Where The Storms Stay At Night",
+			"The First Survivor To Wash Ashore",
+			"The Faith Of The White Dress"
+		]
+	},
+	"Lake": {
+		"desc": "A <i>lake</i> is a vast body of water that spans an overwhelming distance.",
+		"category": "Liminal",
+		"can": [
+			"Describe the beauty of the water.",
+			"Wash something strange up on shore.",
+			"Bring someone somewhere completely unexpected, and give them a token."
+		],
+		"aesthetic": [
+			"Huge Churning Waves",
+			"Sandy Coastline",
+			"Flotsam And Jetsam",
+			"Striders Darting Across The Surface",
+			"Barnacle-Covered Rocks",
+			"A Nearby Vessel You Weren't Expecting To See"
+		],
+		"folklore": [
+			"The Kraken From The Deep",
+			"The Salmon With Three Wishes",
+			"The Hubris Of The Warthog Captain"
+		]
+	},
+	"Port": {
+		"desc": "A <i>port</i> is the gateway through which the whole world opens up to you.",
+		"category": "Liminal",
+		"can": [
+			"Describe the ships and where they go.",
+			"Show the dangers of a fragile lifestyle.",
+			"Ask: <i>\"Can I take you somewhere you've never been before?\"</i> Give them a token if they accept."
+		],
+		"aesthetic": [
+			"Chunky Barges",
+			"Hot Air Balloons",
+			"Jetties And Docks",
+			"Fidgeting Hoppers",
+			"Smug Captains",
+			"An #Adventurous Buddy You Once Wandered The World With"
+		],
+		"folklore": [
+			"The Headless Spirit Of The Dockyard",
+			"The Boat That Would Not Sink",
+			"The Eastern Mist And The Trouble It Brings"
+		]
+	},
+	"Road": {
+		"desc": "A <i>road</i> is a place that exists for traveling through.",
+		"category": "Liminal",
+		"can": [
+			"Describe something passing by.",
+			"Keep someone from getting where they're trying to go.",
+			"Push someone forward, and give them a token."
+		],
+		"aesthetic": [
+			"Cairns Along The Path",
+			"Litter In The Gutters",
+			"A Lively Waterway",
+			"Grooves In The Ground",
+			"A #Friendly Caravan",
+			"An Old #Chill Comrade Heading In A Different Direction"
+		],
+		"folklore": [
+			"The Day The Hounddog Met His Double",
+			"The Possum Made Of Mist",
+			"The Pact Of The Crossroads Shrine"
+		]
+	},
+	"Tavern": {
+		"desc": "A <i>tavern</i> is a place of simple comfort, often settled into while on the journey from one land to the next.",
+		"category": "Liminal",
+		"can": [
+			"Describe a small comfort.",
+			"Sow confusion amongst the disoriented.",
+			"Offer someone comfort and amenities, at a price. Give them a token if they refuse your offer."
+		],
+		"aesthetic": [
+			"Dry Places To Sleep",
+			"Huge Fireplace With A Big Pot Of Stew",
+			"Barrels And Barrels Of Mead",
+			"Great Hall Jam-Packed With Layabouts",
+			"Bar Rat With A Secret Identity",
+			"A #Cheerful Innkeep Who You Once Called Family"
+		],
+		"folklore": [
+			"The Night The Old King Drank Here",
+			"The Cat With The Magic Ale",
+			"How The Old Wombat Outdrank The Slobbering God"
+		]
+	},
+	"Carnival": {
+		"desc": "A <i>carnival</i> is a place full of celebration, decadence, and excitement.",
+		"category": "Sprawling",
+		"can": [
+			"Describe the lights and the crowds.",
+			"Demand attention and adoration.",
+			"Ask: <i>\"What will lure you deeper into the chaos?\"</i> Give them a token if they follow it."
+		],
+		"aesthetic": [
+			"Strange Actors",
+			"Extravagant Displays Of Excess",
+			"A Mysterious Performance",
+			"A Hungry Crowd",
+			"Masquerade Accoutrements",
+			"A #Glamorous Friend Who Has Reinvented Themself"
+		],
+		"folklore": [
+			"The Girl With A Thousand Masks",
+			"The Neverending Wine Glass",
+			"The Slobbering God And The Immorality Feast"
+		]
+	},
+	"Castle": {
+		"desc": "A <i>castle</i> is a place designed to keep everything else far outside its walls.",
+		"category": "Sprawling",
+		"can": [
+			"Describe the walls that surround us.",
+			"Spread worry about a distant threat.",
+			"Keep someone from entering, and give them a token."
+		],
+		"aesthetic": [
+			"Long Shadows",
+			"Trophies From Long-Forgotten Wars",
+			"Watchtowers",
+			"A Secret Heart",
+			"The Crest Of A Distant Monarch",
+			"A #Furious Administrator Who Oversees All"
+		],
+		"folklore": [
+			"The Murdered Brother",
+			"The Ghost On The Parapets",
+			"The Lost Empire Of The Brick-Layers"
+		]
+	},
+	"Furnace": {
+		"desc": "A <i>furnace</i> burns hot with the force of furious and creative fire.",
+		"category": "Sprawling",
+		"can": [
+			"Describe the stifling heat.",
+			"Raise tensions caused by intoleable conditions.",
+			"Ask: <i>\"Will you forge what once was broken?\"</i> Give them a token if they try their best."
+		],
+		"aesthetic": [
+			"Walls Of Iron Tools",
+			"Ornate Glassworks",
+			"A Legendary Blade, Left Unfinished",
+			"An #Imaginative Apprentice Still Learning The Craft",
+			"A #Mighty Smith With A Burning Grudge"
+		],
+		"folklore": [
+			"The Eternal Forge And Its Iron Servants",
+			"The Heavenblade And Its Construction",
+			"The Binding Of The Slobbering God"
+		]
+	},
+	"Metropolis": {
+		"desc": "A <i>metropolis</i> is a place where a lot of people live and where many communities sit side-by-side.",
+		"category": "Sprawling",
+		"can": [
+			"Describe the diversity and variety of people.",
+			"Show conflict between differing needs and worldviews.",
+			"Tell someone they're lost, and give them a token."
+		],
+		"aesthetic": [
+			"Tall Ramshackle Apartments",
+			"Curving Arches",
+			"Cobblestone Streets",
+			"Laundry Hanging From Windows",
+			"More People Than You've Ever Met Before",
+			"The Enclave Of A Community You're Proud To Consider Yourself Part Of"
+		],
+		"folklore": [
+			"The Truce Of The Three Gods",
+			"The Night-Goat Of Vermilion Street",
+			"The Giant Scorpions In The Sewer"
+		]
+	},
+	"Palace": {
+		"desc": "A <i>palace</i> is a place ruled by power. It is beautiful, yet empty. When you arrive at this place, decide who claims to rule it, and who really rules it.",
+		"category": "Sprawling",
+		"can": [
+			"Describe the stunning splendor of the world.",
+			"Show the aftermath of a conflict between its two rulers.",
+			"Ask: <i>\"What here makes you feel small?\"</i> and give them a token."
+		],
+		"aesthetic": [
+			"Glorious Halls",
+			"Many Colorful Flags",
+			"Resounding Trumpets",
+			"A Crystal Crown",
+			"A Gleaming Throne",
+			"The Young And #Royal Heir Dreaming Of Freedom"
+		],
+		"folklore": [
+			"The Throne Of Crystal And Its Many Lies",
+			"The King Who Killed A God",
+			"The Crumbling Dynasty Of The Floating Mountain"
+		]
+	},
+	"University": {
+		"desc": "A <i>university</i> is a place where many gather to learn from ancient texts.",
+		"category": "Sprawling",
+		"can": [
+			"Describe the vast amount of knowledge still eft to learn.",
+			"Show conflict between differing philosophies or viewpoints.",
+			"Ask: <i>\"Do you want to learn a difficult or painful truth?\"</i> Give them a token if they listen."
+		],
+		"aesthetic": [
+			"Grassy Campus Quad",
+			"Too-Small Dormitories",
+			"Vast Banquet Hall With Many Long Tables",
+			"Statues Of The Founders In All Their Glory",
+			"An #Inquisitive And Hopeful Kid Who Doesn't Want To Be Here",
+			"A #Witchy Professor Whom You Once Called A Mentor"
+		],
+		"folklore": [
+			"The Founders And Their Petty Squabbles",
+			"The Forbidden Society Of The Theatre Hall",
+			"That One Prank That Got Far Too Out Of Hand"
+		]
+	},
+	"Cave": {
+		"desc": "A <i>cave</i> is a place fundamentally connected to the core of the earth, its wisdom, and its tenebrous secrets.",
+		"category": "Lonely",
+		"can": [
+			"Describe the beauty of the deepest shadows of the world.",
+			"Swallow something into the dark.",
+			"Ask: <i>\"Will you wander ever deeper?\"</i> Give them a token if they say yes."
+		],
+		"aesthetic": [
+			"Darkness Deeper Than You Expected",
+			"A Bridge From This World To The Next",
+			"Petroglyphs",
+			"Countless Fungi",
+			"The Voice Of Faraway Winds",
+			"A #Cautious Hermit"
+		],
+		"folklore": [
+			"The Tapping On The Walls",
+			"The First Art And The Stories It Tells",
+			"The Sleeping God At The Bottom Of The World"
+		]
+	},
+	"Graveyard": {
+		"desc": "A <i>graveyard</i> is a place of death, where the lost are buried.",
+		"category": "Lonely",
+		"can": [
+			"Describe the weight of the past.",
+			"Show someone disrespecting the histor of this place.",
+			"Ask: <i>\"Will you tell us a story no one else could tell?\"</i> Give them a token if they do."
+		],
+		"aesthetic": [
+			"Scattered Cairns",
+			"Melted Candles",
+			"Gravestones",
+			"Mysterious Lights",
+			"Deep And Profound Silence",
+			"An Old Forgotten Friend, Now #Dead"
+		],
+		"folklore": [
+			"The Candlelit Council And Their Warning",
+			"The Day The Dead Danced With Us",
+			"The Mist Rabbit And Her Rictus Grin"
+		]
+	},
+	"Mirage": {
+		"desc": "A <i>mirage</i> is a place that doesn't really exist.",
+		"category": "Lonely",
+		"can": [
+			"Describe something too good to be true.",
+			"Show someone lost in their folly.",
+			"Decide if something in front of someone is real, and then ask: <i>\"Do you believe what you see?\"</i> Give them a token if they're wrong."
+		],
+		"aesthetic": [
+			"Too-Vivid Flowers",
+			"Too-Shining Ramparts",
+			"Too-Verdant Plantlife",
+			"Too-Satisfying Food",
+			"Too-Beautiful Music",
+			"Too-Friendly Memory Of A Person"
+		],
+		"folklore": [
+			"The Palace Of The Saccharine Dead",
+			"The City Of Restless Dreams",
+			"The Emperor's False Promise To His Adoring Lover"
+		]
+	},
+	"Mirror": {
+		"desc": "A <i>mirror</i> is a place that reflects you back onto yourself.",
+		"category": "Lonely",
+		"can": [
+			"Describe what looks back.",
+			"Reflect back something someone didn't want to see.",
+			"Ask: <i>\"What is it about your reflection that unnerves you?\"</i> and give them a token."
+		],
+		"aesthetic": [
+			"Glassy Water",
+			"Salt Flats",
+			"Perfect Calmness",
+			"Scratches In The Reflection",
+			"The Sensation Of An Unfinished World",
+			"Your Doppelganger"
+		],
+		"folklore": [
+			"The March Of The Countless Footsteps",
+			"The Ghost Whose Name Cannot Be Spoken",
+			"The Very Edge Of The World Itself"
+		]
+	},
+	"Moor": {
+		"desc": "A <i>moor</i> is a quiet place, where sharp winds whistle through a stretched-out landscape.",
+		"category": "Lonely",
+		"can": [
+			"Describe what makes someone feel lonely.",
+			"Hint at something eerie.",
+			"Ask: <i>\"What weighs on your mind?\"</i> Give them a token if they give a satisfying answer."
+		],
+		"aesthetic": [
+			"Distant Wasp-Caws",
+			"Patches Of Wetland",
+			"A Thin Mist",
+			"Gnarled Trees",
+			"A Shiver Down Your Back",
+			"A #Nervous Teen Sneaking Away For Their Love"
+		],
+		"folklore": [
+			"The Devil-Dog And Its Prey",
+			"The Heron And Her Murdered Lover",
+			"The Lost Army Of The First Queen"
+		]
+	},
+	"Wilderness": {
+		"desc": "A <i>wilderness</i> is a place that holds nature close to its heart, closer than any mortal that dwells within.",
+		"category": "Lonely",
+		"can": [
+			"Describe something massive, sublime, and uncaring.",
+			"Show the challenges caused by living with nature",
+			"Say: <i>\"Get out of the way!\"</i> and give everyone who does a token. Describe what enormous thundering force nearly strikes them down."
+		],
+		"aesthetic": [
+			"Tangled Undergrowth",
+			"Trees Older Than Any Empire",
+			"Something Bigger Than You've Ever Imagined",
+			"Territorial Bugs",
+			"A Pristine Waterfall",
+			"A Creature Assumed To Be Extinct"
+		],
+		"folklore": [
+			"The God Of All The Forests",
+			"The Forest Spirits And Their Mockery",
+			"The Song At The Heart Of All Things"
+		]
+	},
+	"Desert": {
+		"desc": "A <i>desert</i> is an empty place, without any of what you want or need.",
+		"category": "Desolate",
+		"can": [
+			"Describe the emptiness of the world.",
+			"Show someone lost and wandering.",
+			"Tell someone the path will be longer and more treacherous than they thought, and give them a token."
+		],
+		"aesthetic": [
+			"Sand That Goes On Forever",
+			"Floating Pillars Of Stone",
+			"A Bitter Chill",
+			"The Harsh Sun",
+			"The Horizon Line",
+			"A #Starving Pilgrim With Murky Intentions"
+		],
+		"folklore": [
+			"The Ghost-Storm And The Lost Caravan",
+			"The Opah Daemon's Whispers To The Wandering Prophet",
+			"The Impossible Rain"
+		]
+	},
+	"Labyrinth": {
+		"desc": "A <i>labyrinth</i> is a tangled maze used to trick, imprison, and confuse.",
+		"category": "Desolate",
+		"can": [
+			"Describe the vast sprawl of the maze.",
+			"Disorient and confuse those attempting to travel.",
+			"Give someone two options, neither of which is correct, and give them a token."
+		],
+		"aesthetic": [
+			"Stone Walls",
+			"Tangled Paths",
+			"Unexpected Hazards",
+			"Chalk-Marked Directions",
+			"A #Lost Innocent At The Heart Of It All",
+			"A #Heroic Guide Who Might Not Be Helpful"
+		],
+		"folklore": [
+			"The Crow Inventor And Her Wax Wings",
+			"The Paths That Grow Of Their Own Accord",
+			"The Ninety-Nine Wailing Minnow Daemons"
+		]
+	},
+	"Maelstrom": {
+		"desc": "A <i>maelstrom</i> is a great and chaotic storm, full of winds and terrifying forces.",
+		"category": "Desolate",
+		"can": [
+			"Describe the storm that threatens us.",
+			"Smash something against the rocks.",
+			"Rip something away from someone, and give them a token."
+		],
+		"aesthetic": [
+			"Churning Skies",
+			"Howling Winds",
+			"Screeching Wasps",
+			"Bolts Of Lightning",
+			"Flying Debris",
+			"A #Mighty God Spotted Only In Brief Moments"
+		],
+		"folklore": [
+			"The Fury Of The North Wind God",
+			"The Lightning Dancers And Their Beautiful War",
+			"The Queen Who Ripped A Hole In The World"
+		]
+	},
+	"Mountain": {
+		"desc": "A <i>mountain</i> is a place where the earth meets the sky.",
+		"category": "Desolate",
+		"can": [
+			"Describe what can be seen from way up here.",
+			"Show someone pushed to desperate extremes.",
+			"Isolate someone from everyone else, and give them a token."
+		],
+		"aesthetic": [
+			"Sharp Cliffs",
+			"A Treacherous Path",
+			"A Lonely Flower",
+			"A Sign Someone Was Here Once",
+			"An Even Higher Summit",
+			"A #Cautious Creature Hiding Just Out Of Sight"
+		],
+		"folklore": [
+			"The Elk King Feasting Beneath The Hills",
+			"The North Wind God And What He Taught Us",
+			"Where The Gentle Giants Fought"
+		]
+	},
+	"Ruin": {
+		"desc": "A <i>ruin</i> is a once-gleaming place that has fallen into disrepair and collapse.",
+		"category": "Desolate",
+		"can": [
+			"Describe what used to be here before",
+			"Show consequences for the action of the past.",
+			"Ask: <i>\"Do you know what once mattered here?\"</i> Give them a token if they don't."
+		],
+		"aesthetic": [
+			"Crumbling Pillars",
+			"Fragments Of Pottery And Bone",
+			"Abandoned Blades",
+			"Monuments To Arrogance",
+			"The Foundations Of Something Massive",
+			"The Last #Grieving Survivor Of An Ancient Time"
+		],
+		"folklore": [
+			"The Snowblanket Estate Of The Last Great Empress",
+			"The Crypt Of The Dragons",
+			"The Desecrated Temple Of The Slobbering God"
+		]
+	},
+	"Waste": {
+		"desc": "A <i>waste</i> is a place that life has abandoned.",
+		"category": "Desolate",
+		"can": [
+			"Describe the barren earth.",
+			"Keep something from growing or changing.",
+			"Ask: <i>\"What do you see here that breaks your heart?\"</i> and give them a token."
+		],
+		"aesthetic": [
+			"Dead Trees",
+			"Tiny Struggling Saplings",
+			"Dull Skies",
+			"Craters Blasted In The Ground",
+			"Wisps Of Smoke",
+			"A Fragile People Wandering The Lonely World"
+		],
+		"folklore": [
+			"The Curse Of The Lonely King",
+			"The Corpse Of The Slobbering God Itself",
+			"Where The Apocalypse Will Someday Ignite"
+		]
+	}
+}

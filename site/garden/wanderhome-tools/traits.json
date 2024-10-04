@@ -1,0 +1,482 @@
+{
+	"Crafty": {
+		"category": "Artistic",
+		"desc": "A <i>crafty</i> kith is very skilled at putting all the pieces together in an unconventional way. They are often tinkers, mongers, and magicians, among others.",
+		"can": [
+			"Invent something totally new.",
+			"Propose an alternate approach.",
+			"Reveal that a plan they've had in motion has paid off."
+		],
+		"type": "regular"
+	},
+	"Dramatic": {
+		"category": "Artistic",
+		"desc": "A <i>dramatic</i> kith loves to show off to impress and please others. They are often singers, harkers, and socialites, among others.",
+		"can": [
+			"Put on a big show, with heightened emotions and histrionics.",
+			"Distract someone with a talented display.",
+			"Play up your emotions to absurd levels."
+		],
+		"type": "regular"
+	},
+	"Imaginative": {
+		"category": "Artistic",
+		"desc": "An <i>imaginative</i> kith's head is always up in the clouds. They are often artists, glaziers, and dreamers, among others.",
+		"can": [
+			"Explain a way things could be better.",
+			"Forget about something really important.",
+			"Describe an everyday object in a way no one's ever thought about it before."
+		],
+		"type": "regular"
+	},
+	"Poetic": {
+		"category": "Artistic",
+		"desc": "A <i>poetic</i> kith has a deep love for wordplay and lyricism. They are often authors, rimesters, and astrologers, among others.",
+		"can": [
+			"Wax metaphorical.",
+			"Get caught up in the big picture.",
+			"Give advice on what someone else should say."
+		],
+		"type": "regular"
+	},
+	"Glamorous": {
+		"category": "Artistic",
+		"desc": "A <i>glamorous</i> kith has a beguiling and enchanting appearance that is both beautiful and impossible. They are often kaleidoscopic insects, flirtatious daemons, and especially skilled makeup artists, among others.",
+		"can": [
+			"Dazzle and stun everyone who beholds you.",
+			"Reveal the appearance you hide underneath.",
+			"Tell someone to look at you. If they want to look away, they're going to need to spend a token."
+		],
+		"type": "magical"
+	},
+	"Miraculous": {
+		"category": "Artistic",
+		"desc": "A <i>miraculous</i> kith can do things no one else can do. They are often great and mighty gods, powerful wizards, and wish-granting fish, among others.",
+		"can": [
+			"Make possible the impossible.",
+			"Take someone's hand and fly with them.",
+			"Offer to grant someone's wish, in a way that won't work out how they want. If they want to reject your offer, they're going to need to spend a token."
+		],
+		"type": "magical"
+	},
+	"Honest": {
+		"category": "Grounded",
+		"desc": "An <i>honest</i> kith always says what's on their mind. They are often bayweavers, bookbinders, and clerks, among others.",
+		"can": [
+			"Lay out the facts, as you see it.",
+			"Point out the truth everyone else has been ignoring.",
+			"Ask: <i>\"Do you want my opinion?\"</i>"
+		],
+		"type": "regular"
+	},
+	"Quiet": {
+		"category": "Grounded",
+		"desc": "A <i>quiet</i> kith doesn't have much to say. They are often colporteurs, glassblowers, and wallflowers, among others.",
+		"can": [
+			"Tap on someone's shoulder.",
+			"Stare at someone until they get the point.",
+			"Non-verbally ask: \"Are you okay?\""
+		],
+		"type": "regular"
+	},
+	"Watchful": {
+		"category": "Grounded",
+		"desc": "A <i>watchful</i> kith keeps a close eye on the world around them. They are often guards, astronomers, and scribes, among others.",
+		"can": [
+			"Point out something people missed.",
+			"Guard the exits.",
+			"Ask: <i>\"What's that you're hiding?\"</i>"
+		],
+		"type": "regular"
+	},
+	"Wise": {
+		"category": "Grounded",
+		"desc": "A <i>wise</i> kith has learned a lot from listening and moving through the world. They are often monks, herbalists, and janitors, among others.",
+		"can": [
+			"Reflect on what someone else has said.",
+			"Propose a path quite unlike those that others have suggested.",
+			"Ask: <i>\"What are your feelings on the matter?\"</i>"
+		],
+		"type": "regular"
+	},
+	"Intertwined": {
+		"category": "Grounded",
+		"desc": "An <i>intertwined</i> kith is rooted in the world around them, and is just as much a part of the trees and the sky as they are themself. They are often contemplative shamans, gods of hidden places, and anyone who listens to the land, among others.",
+		"can": [
+			"Show how two things are connected in an unexpected way.",
+			"Take your time and move very carefully.",
+			"Help someone ask the world around them for guidance. If they want to know the answer, they're going to need to spend a token."
+		],
+		"type": "magical"
+	},
+	"Invisible": {
+		"category": "Grounded",
+		"desc": "An <i>invisible</i> kith cannot be seen. They are often ghostly spirits, terrified gods, and tiny scuttling creatures, among others.",
+		"can": [
+			"Have been somewhere the whole time.",
+			"Move right past people who should've spotted you.",
+			"Vanish. If someone wants to find you again, they're going to need to spend a token."
+		],
+		"type": "magical"
+	},
+	"Ambitious": {
+		"category": "Intellectual",
+		"desc": "An <i>ambitious</i> kith has goals and aspirations beyond where they are in life. They are often scribblers, scullions, and apprentices, among others.",
+		"can": [
+			"Take a calculated risk.",
+			"Explain how you're the only person who can handle this.",
+			"Ask: <i>\"How would you make things better?\"</i>"
+		],
+		"type": "regular"
+	},
+	"Cunning": {
+		"category": "Intellectual",
+		"desc": "A <i>cunning</i> kith is skilled at turning events and situations in their favor. They are often guttersnipes, wainwrights, and con artists, among others.",
+		"can": [
+			"Get somewhere you're not supposed to be.",
+			"Tell a compelling lie.",
+			"Ask: <i>\"What's your real goal here?\"</i>"
+		],
+		"type": "regular"
+	},
+	"Inquisitive": {
+		"category": "Intellectual",
+		"desc": "An <i>inquisitive</i> kith grabs hold of all the information that they can. They are often journalists, alchemists, and enumerators, among others.",
+		"can": [
+			"Focus on an irrelevant detail.",
+			"Hold something up to the light.",
+			"Ask: <i>\"What's this?\"</i>"
+		],
+		"type": "regular"
+	},
+	"Learned": {
+		"category": "Intellectual",
+		"desc": "A <i>learned</i> kith has spent plenty of time with texts and traditional learning. They are often professors, librarians, and apothecaries, among others.",
+		"can": [
+			"Reference a text no one else here has read.",
+			"Know something useful that applies to the situation.",
+			"Ask: <i>\"Do you want my advice?\"</i>"
+		],
+		"type": "regular"
+	},
+	"Oracular": {
+		"category": "Intellectual",
+		"desc": "An <i>oracular</i> kith can see the future, for better or for worse. They are often venerated sages, enigmatic gods, and star-gazers, among others.",
+		"can": [
+			"Make a vague and unclear reference to something that hasn't happened yet.",
+			"Say: <i>\"I told you so.\"</i>",
+			"Tell someone the bad news about what their future holds. If they want to defy you, they'll need to spend a token."
+		],
+		"type": "magical"
+	},
+	"Witchy": {
+		"category": "Intellectual",
+		"desc": "A <i>witchy</i> kith is skilled at quiet and tricksy magics. They are often healers, court magicians, and kind old ladies that live in the swamp, among others.",
+		"can": [
+			"Cackle.",
+			"Mix assorted components to create something new.",
+			"Point out a personality flaw someone hasn't been dealing with. If you're right, put a curse on them. If they want to get rid of the curse, they're going to need to address their flaw."
+		],
+		"type": "magical"
+	},
+	"Cheerful": {
+		"category": "Personal",
+		"desc": "A <i>cheerful</i> kith is happy and positive. They are often bakers, friars, and cooks, among others.",
+		"can": [
+			"Look on the bright side.",
+			"Whistle a chipper tune.",
+			"Gallivant into an awkward situation."
+		],
+		"type": "regular"
+	},
+	"Chill": {
+		"category": "Personal",
+		"desc": "A <i>chill</i> kith is relaxed and perpetually calm. They are often fishers, brewsters, and dilly-dalliers, among others.",
+		"can": [
+			"Go with the flow.",
+			"Remind everyone to take a step back.",
+			"Ask: <i>\"Do you wanna talk about it?\"</i>"
+		],
+		"type": "regular"
+	},
+	"Confident": {
+		"category": "Personal",
+		"desc": "A <i>confident</i> kith knows exactly who they are and who they want to be. They are often blacksmiths, plumbers, and drovers, among others.",
+		"can": [
+			"Jump headfirst into action.",
+			"Charge into a situation without understanding the risks.",
+			"Say: <i>\"I've got it covered.\"</i>"
+		],
+		"type": "regular"
+	},
+	"Pensive": {
+		"category": "Personal",
+		"desc": "A <i>pensive</i> kith has a lot of heavy things on their mind. They are often printers, vintners, and bellringers, among others.",
+		"can": [
+			"Rain on someone's parade.",
+			"Stare off into the distance mournfully.",
+			"Ask: <i>\"What else can we do?\"</i>"
+		],
+		"type": "regular"
+	},
+	"Luminescent": {
+		"category": "Personal",
+		"desc": "A <i>luminescent</i> kith is full of light that casts a glow across the world. They are often motes of light, fallen stars, and fireflies, among others.",
+		"can": [
+			"Shed light on the shadows of the world.",
+			"Lead the way.",
+			"Non-verbally ask: \"What is true about you that you keep from everyone?\" If they want to withhold an answer from you, they're going to need to spend a token."
+		],
+		"type": "magical"
+	},
+	"Venerable": {
+		"category": "Personal",
+		"desc": "A <i>venerable</i> kith is as old as the hills and the earth. They are often mountain gods, isopods from an ancient time, and beings deep in the old dark, among others.",
+		"can": [
+			"Offer something that hasn't been seen in a very long time.",
+			"Show what things were like in more grim times.",
+			"Tell someone how they will repeat the mistakes of the past. If they want to prove you wrong, they're going to need to spend a token."
+		],
+		"type": "magical"
+	},
+	"Adventurous": {
+		"category": "Physical",
+		"desc": "An <i>adventurous</i> kith always wants to be getting tangled up in something new. They are often aeronauts, sailors, and itinerants, among others.",
+		"can": [
+			"Declare where you're going next.",
+			"Charge headfirst into trouble.",
+			"Have circumstances improbably work out for you."
+		],
+		"type": "regular"
+	},
+	"Passionate": {
+		"category": "Physical",
+		"desc": "A <i>passionate</i> kith is full of intense and explosive emotions. They are often mail-carriers, writers, and fl\u00e2uners, among others.",
+		"can": [
+			"Explain why this matters to you.",
+			"Say exactly what's on your mind right now.",
+			"Lose your temper and damage something important."
+		],
+		"type": "regular"
+	},
+	"Resolute": {
+		"category": "Physical",
+		"desc": "A <i>resolute</i> kith cannot be swayed from their current path, no matter what. They are often architects, caulkers, and arkwrights, among others.",
+		"can": [
+			"Keep at something that others would give up at.",
+			"Reject what's right in front of your eyes.",
+			"Refuse to yield under pressure."
+		],
+		"type": "regular"
+	},
+	"Sturdy": {
+		"category": "Physical",
+		"desc": "A <i>sturdy</i> kith can be depended on when times are tough. They are often carpenters, spinsters, and dockhands, among others.",
+		"can": [
+			"Support something in danger of collapse.",
+			"Push something concerning aside.",
+			"Exert yourself to protect someone else."
+		],
+		"type": "regular"
+	},
+	"Feral": {
+		"category": "Physical",
+		"desc": "A <i>feral</i> kith rejects traditional society and embraces monstrosity. They are often fearsome insects, hungry gods, and kids raised by the wilderness itself, among others.",
+		"can": [
+			"Call out to the wild, and hear it respond.",
+			"Ask: <i>\"What's stopping you?\"</i>",
+			"Show all your teeth and bite. If someone doesn't want to get bit, they're going to need to spend a token."
+		],
+		"type": "magical"
+	},
+	"Mighty": {
+		"category": "Physical",
+		"desc": "A <i>mighty</i> kith has a strength that is beyond normal capacity. They are often great warriors, herculean gods, and beasts of forgotten legend, among others.",
+		"can": [
+			"Take on a heavy burden.",
+			"Move the unmovable.",
+			"Anchor something in the ground. If someone wants to move it even the slightest bit, they're going to need to spend a token."
+		],
+		"type": "magical"
+	},
+	"Caring": {
+		"category": "Social",
+		"desc": "A <i>caring</i> kith is willing to die to keep someone else safe. They are often doctors, farmers, and coroners, among others.",
+		"can": [
+			"Protect someone else from the world.",
+			"Inconvenience yourself to help someone else.",
+			"Ask: <i>\"What do you need right now?\"</i>"
+		],
+		"type": "regular"
+	},
+	"Friendly": {
+		"category": "Social",
+		"desc": "A <i>friendly</i> kith gets along well with folk from all over. They are often innkeeps, barbers, and bards, among others.",
+		"can": [
+			"Start up a conversation with someone else.",
+			"Introduce someone to an old friend of yours.",
+			"Get really attached to an inanimate object."
+		],
+		"type": "regular"
+	},
+	"Proper": {
+		"category": "Social",
+		"desc": "A <i>proper</i> kith sticks with formality and tradition. They are often butlers, grocers, and chamberlains, among others.",
+		"can": [
+			"Explain how things have been handled in the past.",
+			"Judge something for its inappropriateness.",
+			"Struggle to get something new."
+		],
+		"type": "regular"
+	},
+	"Raucous": {
+		"category": "Social",
+		"desc": "A <i>raucous</i> kith is always looking for a good time. They are often revelers, jesters, and roustabouts, among others.",
+		"can": [
+			"Find the fun in a dull task.",
+			"Get lost in the excitement.",
+			"Know exactly where a better party is."
+		],
+		"type": "regular"
+	},
+	"Empathetic": {
+		"category": "Social",
+		"desc": "An <i>empathetic</i> kith can connect with and understand things no one else can. They are often gentle teachers, affectionate spirits, and anyone who has a knack for getting it, among others.",
+		"can": [
+			"Communicate with something that can't normally talk.",
+			"Express a concept in a way everyone understands.",
+			"Non-verbally ask: \"What are you feeling?\" If they don't want to answer you truthfully, they're going to need to spend a token."
+		],
+		"type": "magical"
+	},
+	"Many-Faced": {
+		"category": "Social",
+		"desc": "A <i>many-faced</i> kith is a shapeshifter, who can adopt other forms. They are often trickster gods, sneaky thieves with a little bit of magic, and skilled mimics, among others.",
+		"can": [
+			"Change dramatically, and become something new.",
+			"Reveal another kith to have been them this whole time.",
+			"Look exactly like another character. If someone wants to spot the difference, they're going to need to spend a token."
+		],
+		"type": "magical"
+	},
+	"Cautious": {
+		"category": "Traumatized",
+		"desc": "A <i>cautious</i> kith spent the last of their trust a long time ago. They are often exhausted widows, cold-hearted farmers, and those who have seen first-hand the harshness of the world, among others.",
+		"can": [
+			"Point out a danger, real or imagined.",
+			"Refuse to open up to someone else.",
+			"Step out of your comfort zone, even slightly."
+		],
+		"type": "traumatised"
+	},
+	"Empty": {
+		"category": "Traumatized",
+		"desc": "An <i>empty</i> kith feels like there's just not much left to them anymore. They are often war-blasted survivors, haunted veterans, and those hollowed out by pain, among others.",
+		"can": [
+			"Sigh and gaze blankly.",
+			"Ask: <i>\"Does it matter?\"</i>",
+			"Display an emotion you thought you couldn't anymore."
+		],
+		"type": "traumatised"
+	},
+	"Frantic": {
+		"category": "Traumatized",
+		"desc": "A <i>frantic</i> kith is struggling to get everything done. They are often overburdened caretakers, manic intellectuals, and those desperate to please, among others.",
+		"can": [
+			"Agree to something dangerous or risky.",
+			"Try to say too many things all at once.",
+			"Push against your instincts and take a break."
+		],
+		"type": "traumatised"
+	},
+	"Furious": {
+		"category": "Traumatized",
+		"desc": "A <i>furious</i> kith cannot hold back their rage. They are often vengeful mothers, soldiers with fuming eyes, and those forged into a weapon by the pain in their heart, among others.",
+		"can": [
+			"Lash out without meaning to.",
+			"Bottle everything up and seethe.",
+			"Express your rage in a constructive manner."
+		],
+		"type": "traumatised"
+	},
+	"Grieving": {
+		"category": "Traumatized",
+		"desc": "A <i>grieving</i> kith freshly mourns the loss of their love. They are often heartbroken parents, terrified exiles, and those promised greatness, among others.",
+		"can": [
+			"Overflow with emotion.",
+			"Hold tight to comfort and refuse to let go.",
+			"Ask: <i>\"Are you in a place to listen right now?\"</i>"
+		],
+		"type": "traumatised"
+	},
+	"Hurt": {
+		"category": "Traumatized",
+		"desc": "A <i>hurt</i> kith nurses wounds that will never fully heal. They are often old heroes, aching patients, and those marked by pain, among others.",
+		"can": [
+			"Flinch at someone else's actions.",
+			"Re-open an old wound.",
+			"Articulate a step on the path towards healing."
+		],
+		"type": "traumatised"
+	},
+	"Lost": {
+		"category": "Traumatized",
+		"desc": "A <i>lost</i> kith has forgotten how to get back home. They are often lonely travelers, confused prophets, and those disassociated from this world, among others.",
+		"can": [
+			"Wander deep into the darkness.",
+			"Express the disconnect between yourself and the world around you.",
+			"Seek out the help of someone else to anchor you."
+		],
+		"type": "regular"
+	},
+	"Nervous": {
+		"category": "Traumatized",
+		"desc": "A <i>nervous</i> kith is very stressed out. They are often freaked-out kids, princes out of their depth, and those overwhelmed by the many dangers of the world, among others.",
+		"can": [
+			"Worry about something you don't have control over.",
+			"Say: <i>\"I'm sorry.\"</i>",
+			"Ask: <i>\"Is everything okay?\"</i>"
+		],
+		"type": "traumatised"
+	},
+	"Starving": {
+		"category": "Traumatized",
+		"desc": "A <i>starving</i> kith has been denied their hunger for too long, and it's burning them up inside. They are often hungry ghouls, spiteful wardens, and the shadows of monstrous gods, among others.",
+		"can": [
+			"Gnaw on what's left.",
+			"Blame the wrong person for your hunger.",
+			"Name a person, place, object, or secret. If someone wants to hide it from you, they're going to need to spend a token."
+		],
+		"type": "traumatised"
+	},
+	"Dead": {
+		"category": "Traumatized",
+		"desc": "A <i>dead</i> kith was once alive, but isn't anymore. They are often spectral lights, wandering souls, and the last remnants of a forgotten time, among others.",
+		"can": [
+			"Provide a bridge from one life to the other.",
+			"Send a chill down someone's spine.",
+			"Show someone something they truly don't want to grapple with. If they want to avoid thinking about it, they're going to need to spend a token."
+		],
+		"type": "traumatised"
+	},
+	"Heroic": {
+		"category": "Traumatized",
+		"desc": "A <i>heroic</i> kith believes they are the savior of the world. What a cruel fate indeed. They are often dragon-slayers, leaders of the rebellion, and those arrogant enough to seek out power, among others.",
+		"can": [
+			"Know what's best for everyone else.",
+			"Present a perfect persona to the world.",
+			"Declare someone fundamentally good or irredeemably evil. If anyone wants to prove you wrong, they're going to need to spend a token."
+		],
+		"type": "traumatised"
+	},
+	"Royal": {
+		"category": "Traumatized",
+		"desc": "A <i>royal</i> kith rules over this land with authority and lonely gravitas. They are often arrogant kings, towering giants, or those destined to be undone by their own glory, among others.",
+		"can": [
+			"Engage in a petty and useless display of power.",
+			"Inflict your will on the world around you.",
+			"Make a sweeping proclamation. If someone wants to openly defy you, they're going to need to spend a token."
+		],
+		"type": "traumatised"
+	}
+}

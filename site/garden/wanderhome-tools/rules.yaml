@@ -1,0 +1,31 @@
+- id: tokens
+  name: Tokens
+  entries:
+    - id: source
+      short: "Get when..."
+      title: "Get A Token Whenever You:"
+      content: |
+        <ul>
+          <li>Inconvenience yourself to help someone else.</li>
+          <li>Give away something you hold dear.</li>
+          <li>Pause for a moment and get some rest.</li>
+          <li>Leave an offering to a small or forgotten god.</li>
+          <li>Speak your true feelings on a subject.</li>
+          <li>Take a moment to bask in the grandeur of the world, and describe it to the table.</li>
+          <li>Take a moment to watch a tiny moment of beauty, and describe it to the table.</li>
+          <li>Take a moment to marvel at something no one has ever seen before, and ask the table to describe it.</li>
+        </ul>
+    - id: spend
+      short: "Spend to..."
+      title: "Spend A Token In Order To:"
+      content: |
+        <ul>
+          <li>Provide a solution for an aspect of a material or immediate problem.</li>
+          <li>Ease someone’s pain, if only for a moment.</li>
+          <li>Keep someone safe from the difficulties of the world.</li>
+          <li>Offer someone the chance to connect with you on a personal level.</li>
+          <li>Find what someone needs to give them a chance to change fundamentally.</li>
+          <li>Reveal something hidden about the person in front of you, and ask them what it is.</li>
+          <li>Know something important about the place you’re in, and tell the table about it.</li>
+          <li>Listen to the shared wisdom of the many small and forgotten gods, and ask the table what they tell you.</li>
+        </ul>

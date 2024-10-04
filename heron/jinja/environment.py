@@ -2,14 +2,16 @@
 Subclasses of jinja types to alter their behaviour.
 """
 
+from pathlib import Path
 import datetime as dt
+import json
 import os
 import re
 import typing as t
 import warnings
-from pathlib import Path
 
 import jinja2
+import yaml
 
 from .. import core, util
 from .registry import RECIPE_FILTERS
@@ -123,6 +125,16 @@ def jinja_re_sub(string: str, pattern: str, repl: str, count: int = 0) -> str:
 @util.setitem(base_env.filters, "re.split")
 def jinja_re_split(string: str, pattern: str, maxsplit: int = 0) -> list[str]:
     return re.split(pattern, string, maxsplit)
+
+
+@util.setitem(base_env.filters, "parse_json")
+def jinja_parse_json(string: str) -> t.Any:
+    return json.loads(string)
+
+
+@util.setitem(base_env.filters, "parse_yaml")
+def jinja_parse_yaml(string: str) -> t.Any:
+    return yaml.safe_load(string)
 
 
 @util.setitem(base_env.filters, "markdownify")

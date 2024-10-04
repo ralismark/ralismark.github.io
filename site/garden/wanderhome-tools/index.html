@@ -1,0 +1,228 @@
+---
+layout: standalone-wide
+title: Wanderhome.tools
+excerpt: Quick reference for Wanderhome
+date: 2024-10-04
+tags:
+---
+
+<div style="grid-column: 1 / 3">
+	<div class="content-width">
+{% filter markdownify %}
+.. admonition:: say
+
+	Heya!
+
+	This should help you quickly find the information you need during play, such as traits and natures.
+	It's not meant as a replacement for the official materials, and won't have a lot of the rules, for example.
+
+	If you play D&D a lot, you might know of the great 5e.tools.
+	Well, this is like that but for Wanderhome.
+
+	To be completely honest, this reference reproducing so much of the official material is a bit sketchy...
+	but I don't have a way to make this not public at the moment...
+	so if this is a problem please let me know and I'll take this down...
+{% endfilter %}
+	</div>
+</div>
+
+{% set rules = recipe.read("./rules.yaml") | parse_yaml %}
+{% set traits = recipe.read("./traits.json") | parse_json %}
+{% set natures = recipe.read("./natures.json") | parse_json %}
+
+{% set menu %}
+<menu class="Wide">
+	<li><a href="#">^</a></li>
+	<li><a href="#rules">Rules</a></li>
+	<li><a href="#traits">Traits</a></li>
+	<li><a href="#natures">Natures</a></li>
+	<li><a href="#end">$</a></li>
+</menu>
+{% endset %}
+
+{{ menu }}
+
+<h1 class="Wide">Rules</h1>
+
+<div class="Left">
+	<div class="Toc">
+		<table>
+			<tbody>
+				{% for category in rules %}
+					<tr><th>{{ category.name }}</th><td>
+					{% for section in category.entries %}
+						<a href="#rule-{{ category.id }}-{{ section.id }}">{{ section.short | replace(" ", "&nbsp") }}</a>
+					{% endfor %}
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<br style="margin-top: 30vh">
+	</div>
+</div>
+
+<div id="rules" class="Right">
+	{% for category in rules %}
+		{% for section in category.entries %}
+			<h2 id="rule-{{ category.id }}-{{ section.id }}">{{ section.title }}</h2>
+			{{ section.content }}
+		{% endfor %}
+	{% endfor %}
+</div>
+
+<h1 class="Wide">Traits</h1>
+
+<div class="Left">
+	<div class="Toc">
+		<table>
+			<tbody>
+				{% for name, trait in traits.items() %}
+					{% if loop.changed(trait.category) %}
+						<tr><th>{{ trait.category }}</th><td>
+					{% endif %}
+					<a href="#trait-{{ name }}" data-trait="{{ name }}">{{ name }}</a>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<br style="margin-top: 30vh">
+	</div>
+</div>
+
+<div id="traits" class="Right">
+	{% for name, trait in traits.items() %}
+		<h2 id="trait-{{ name }}" data-trait="{{ name }}">{{ name }}</h2>
+		<p>{{ trait.desc }}</p>
+		<p>Choose 1-2 they can always do.</p>
+		<ul>
+			{% for can in trait.can %}
+				<li>{{ can }}</li>
+			{% endfor %}
+		</ul>
+	{% endfor %}
+</div>
+
+<h1 class="Wide">Natures</h1>
+
+<div class="Left">
+	<div class="Toc">
+		<table>
+			<tbody>
+				{% for name, nature in natures.items() %}
+					{% if loop.changed(nature.category) %}
+						<tr><th>{{ nature.category }}</th><td>
+					{% endif %}
+					<a href="#nature-{{ name }}">{{ name }}</a>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div id="natures" class="Right">
+	{% for name, nature in natures.items() %}
+		<h2 id="nature-{{ name }}">{{ name }}</h2>
+		<p>{{ nature.desc }}</p>
+		<p>This place can always:</p>
+		<ul>
+			{% for can in nature.can %}
+				<li>{{ can }}</li>
+			{% endfor %}
+		</ul>
+		<p>Choose 2 aesthetic elements.</p>
+		<ul>
+			{% for aesthetic in nature.aesthetic %}
+				<li>{{ aesthetic | re.sub("#([A-Za-z-]+)", '<a href="#trait-\\1" data-trait="\\1">\\1</a>') }}</li>
+			{% endfor %}
+			<li>Something Else Of Your Own Invention</li>
+		</ul>
+		<p>Choose 1 folklore about this place.</p>
+		<ul>
+			{% for folklore in nature.folklore %}
+				<li>{{ folklore }}</li>
+			{% endfor %}
+			<li>Something Else Of Your Own Invention</li>
+		</ul>
+	{% endfor %}
+</div>
+
+<br id="end">
+
+<style>
+{% set markers = {
+	"regular": "none",
+	"traumatised": '"‡"',
+	"magical": '"⁂"',
+} %}
+{% for name, trait in traits.items() %}
+[data-trait="{{ name }}"]::before { content: {{ markers[trait.type] }} }
+{% endfor %}
+
+a[data-trait] {
+	font-style: italic;
+}
+
+main {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	font-size: 90%;
+
+	--navbar-height: 2rem;
+}
+
+main * {
+	scroll-margin-top: var(--navbar-height);
+}
+
+.Wide {
+	text-align: center;
+}
+main > .Wide {
+	grid-column: 1 / 3;
+}
+main > .Left {
+	grid-column: 1 / 2;
+	position: relative;
+}
+main > .Right { grid-column: 2 / 3; }
+
+
+.Toc {
+	position: sticky;
+	top: var(--navbar-height);
+
+	max-height: calc(100vh - var(--navbar-height));
+	overflow-y: scroll;
+
+	line-height: 1.3em;
+}
+
+.Toc table {
+	display: table !important;
+	width: 100% !important;
+}
+
+.Toc th, .Toc td {
+	padding: 0.25em !important;
+}
+
+.Toc th {
+	writing-mode: vertical-lr;
+	min-width: 1lh;
+}
+
+menu {
+	margin: 0;
+	height: var(--navbar-height);
+	line-height: var(--navbar-height);
+
+	position: sticky;
+	top: 0;
+
+	background-color: var(--body-bg);
+	border-top: 1px solid var(--stroke);
+	border-bottom: 1px solid var(--stroke);
+
+	z-index: 1;
+}
+</style>
