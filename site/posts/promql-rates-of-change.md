@@ -12,7 +12,7 @@ So I've made a table.
 
 <!--more-->
 
-||Counter<br>(non-decreasing)|Gauge<br>(up and down)|
+| |Counter<br>(non-decreasing)|Gauge<br>(up and down)|
 |-
 |**Average slope in time period**|[rate()]|[deriv()]|
 |**Difference between last two samples**|[irate()]|[idelta()]|

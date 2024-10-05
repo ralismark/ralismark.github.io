@@ -11,15 +11,15 @@ tags:
 	<button type="submit" onclick="fortune()">I'm Feeling Lucky</button>
 </form>
 
-<br style="margin: 0.5rem 0">
+<br>
 
 .. admonition:: fortune
 	:image: {{ recipe.copy("./fortune.png", "/assets/fortune.png") }}
-	:alt: "fortune cookie"
+	:alt: fortune cookie
 
 	Ask again later...
 
-<br style="margin: 0.5rem 0">
+<br>
 
 <script>
 // load ?fortfile=
@@ -79,9 +79,11 @@ fortune();
 
 <hr>
 
-This is an adaptation of [fortune(6)](https://en.wikipedia.org/wiki/Fortune_(Unix)), adapted for a webpage.
+This is an adaptation of [fortune(6)], adapted for a webpage.
 To use this, enter the URL of a plaintext fortune file, consisting of individual messages separated by a line consisting of a single `%`.
 For example:
+
+[fortune(6)]: https://en.wikipedia.org/wiki/Fortune_(Unix)
 
 ```
 Nobody will buy or use your compilers.

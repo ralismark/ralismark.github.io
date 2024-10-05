@@ -18,7 +18,7 @@ class SassRecipe(inout.InoutRecipeBase):
         # could change what was imported
 
         def handle_import(name: str, resolved: str):
-            ctx.input(Path(resolved))
+            ctx.input(Path(resolved).parent / (name + ".scss"))
 
         content = sass.compile(
             filename=str(ctx.input(self.path)),
