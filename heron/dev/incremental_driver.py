@@ -94,6 +94,9 @@ class IncrementalDriver(core.Driver):
                         "miss (subrecipe manifest changed: %s): %s", ev.recipe, recipe
                     )
                     return False
+            elif isinstance(ev, core.Manifest.Trace):
+                # debug output doesn't matter
+                pass
             else:
                 t.assert_never(ev)
 
