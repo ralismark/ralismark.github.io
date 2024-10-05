@@ -1,0 +1,483 @@
+- name: Leap
+  months:
+    - name: Tillsoil
+      desc: "Tillsoil is the first month of the year in the season of Leap, after Chill has ended, when the ground is just warm enough for planting."
+      vibes:
+        - "Fertile Soil"
+        - "Constant And Challenging Work"
+        - "Gentle Rain"
+        - "The Occasional Chilly Day"
+      signs:
+        - "A Rhythmic Work Song"
+        - "Piles Of Quickly-Melting Snow"
+        - "Muddy Pant Legs"
+        - "Tattered Decorations Left Over From New Years"
+        - "Butterflies Up Above"
+        - "Fluffy Clouds"
+        - "Bugs Running Through The Fields"
+        - "Lovesick Teenagers"
+        - "Wide-Brimmed Hats"
+        - "A Sowing Festival Praising The Local Fertility God"
+        - "A Positive Outlook"
+    - name: Monsoon
+      desc: "Monsoon is the second month of Leap, when great rains come and bring water to the Hæth."
+      vibes:
+        - "Torrential Rain"
+        - "Brief Moments Of Clear Skies"
+        - "Beautifully Green Plantlife"
+        - "Brooding Clouds"
+      signs:
+        - "Dancing In The Rain"
+        - "Heavy Quilt Blankets"
+        - "Lots Of Tea"
+        - "The Clean Smell Of Soil After The Rain"
+        - "Jumping In Giant Puddles"
+        - "Enveloping Mists"
+        - "Overflowing Rivers"
+        - "Distinctive Rain Jackets"
+        - "Bored Kids"
+        - "A Great Sacrifice For The North Wind God"
+        - "A Dreary State Of Mind"
+  holidays:
+    - name: The Sun Parade
+      desc: "The Sun Parade celebrates the end of Leap and the start of Bright, with a holiday of cheer and merriment."
+      traditions:
+        - "A Huge Parade Through The Streets"
+        - "Streamers And Banners"
+        - "The Election Of The Bloom Queen"
+        - "Gifts Of Fake Golden Keys"
+        - "Ritual Face-Painting"
+        - "Wreaths Of Flowers"
+        - "Beautiful Dresses"
+      can_when: During the Sun Parade
+      can:
+        - "Get a token whenever you help out with the festivities."
+        - "Spend a token to find a pretty dress, trinket, or new friend."
+        - "Cool off in the shade."
+      alt:
+        - "They celebrate the Sun Parade in a familiar way."
+        - "They celebrate the Sun Parade, but their traditions are focused on a symbolic murder of the Sun Queen."
+        - "They celebrate the Sun Parade, but their traditions are focused on gift-giving and good luck."
+        - "They celebrate the Sun Parade, but their traditions are unfamiliar to you."
+        - "Instead of the Sun Parade, they celebrate Restlie; a holiday dedicated to sleep and care."
+        - "Instead of the Sun Parade, they celebrate Ablution; a holiday dedicated to freedom and tidying."
+        - "Instead of the Sun Parade, they celebrate a holiday you've never heard of before. Ask the locals for its name, and discover its traditions together."
+        - "Only a few households here celebrate the Sun Parade."
+        - "They don't celebrate any holidays at this time, so we'll need to mark the passage of the seasons in our own way."
+    - name: Restle
+      desc: "Restlie commemorates the end of Leap and the start of Bright, and is spent caring for your- self and others."
+      traditions:
+        - "Naps All Day"
+        - "Enormous Fans"
+        - "Feast Without Cooking"
+        - "Massages"
+        - "Fresh-Picked Fruit"
+        - "Lazily Created Artwork"
+        - "Long Meandering Tales"
+      can_when: Restle
+      can:
+        - "Get a token whenever you decide not to do something you could be doing."
+        - "Spend a token to find joy in doing something you're not very good at."
+        - "Fall asleep."
+    - name: Abultion
+      desc: "Ablution generally falls at the end of Leap, before Bright begins, with a raucous delight in new beginnings."
+      traditions:
+        - "The Ritual Retelling Of An Old Story"
+        - "A Whole Day Of Cleaning And Reorganizing"
+        - "Songs Of Freedom And Hope"
+        - "Ceremonial Washing Of Hands"
+        - "Swimming And Bathing"
+        - "Special Roles For The Youngest Children"
+        - "A Scavenger Hunt"
+      can_when: Abultion
+      can:
+        - "Get a token whenever you ask a question to learn more about the customs of this day."
+        - "Spend a token to let go of something you've been carrying that you no longer need."
+        - "Listen patiently."
+- name: Bright
+  months:
+    - name: Bloommeadow
+      desc: "Bloommeadow is the first month of Bright, when all the flowers bloom and pollen fills the air."
+      vibes:
+        - "Time To Relax"
+        - "Sunny Skies"
+        - "Good Cheer"
+        - "The Occasional Soggy Day"
+      signs:
+        - "Bright Yellow And White Flowers"
+        - "Soft Pink And Turquoise Flowers"
+        - "Vivid Red And Orange Flowers"
+        - "Deep Purple And Blue Flowers"
+        - "Flower Crowns"
+        - "Everyone's Finest Outfits"
+        - "Baskets Of Ripe Fruit"
+        - "Waves Of Pollen"
+        - "Kids Making Daisy Chains"
+        - "A Festival Mourning A Mythical Creature Long Gone From This Place"
+        - "The Distant Sound Of Laughter"
+    - name: Devildays
+      desc: "Devildays is the second month of Bright, when the sun's heat becomes near-unbearable."
+      vibes:
+        - "Parched Soil"
+        - "Dry Grass"
+        - "A Calming Breeze"
+        - "The Cruel Bright Sun"
+      signs:
+        - "Hidden Swimming Holes"
+        - "Sweat-Soaked Clothes"
+        - "Tart Fruit Juice"
+        - "Paper Fans"
+        - "Creaky Porch Chairs"
+        - "A Lonely Lute-Player"
+        - "Fishing And Gossiping"
+        - "Long Thin Clouds"
+        - "Lazy Teens"
+        - "A Festival Remembering A Local Folk Hero And Their Adventures"
+        - "Plenty Of Naps"
+  holidays:
+    - name: The Day of Song
+      desc: "The Day of Song ushers away Bright and welcomes in Breathe, and is remembered by the endless music in the air."
+      traditions:
+        - "A Elaborate Orchestral Performance"
+        - "An Amateur Talent Show"
+        - "Historical Reenactments"
+        - "Dancing And Singing Long Into The Night"
+        - "A Few Songs Everyone Seems To Know"
+        - "A Special Drink Served Only During This Holiday"
+        - "Everyone Going Swimming"
+      can_when: During the Day of Song
+      can:
+        - "Get a token whenever you take some time to listen to the music and describe how it makes you feel."
+        - "Spend a token to sing or make music, from the heart."
+        - "Practice a song with someone."
+      alt:
+        - "They celebrate the Day of Song in a familiar way."
+        - "They celebrate the Day of Song, but their traditions are focused on a single, mournful melody."
+        - "They celebrate the Day of Song, but the small and forgotten gods sing with them."
+        - "They celebrate the Day of Song, but their traditions are unfamiliar to you."
+        - "Instead of the Day of Song, they celebrate Callaleah; an enormous carnival holiday."
+        - "Instead of the Day of Song, they celebrate Old Api's Fair; a holiday devoted to shepherds and their bumbles."
+        - "Instead of the Day of Song, they celebrate a holiday you've never heard of before. Ask the locals for its name, and discover its traditions together."
+        - "Only a few households here celebrate the Day of Song."
+        - "They don't celebrate any holidays at this time, so we'll need to mark the passage of the seasons in our own way."
+    - name: Callaleah
+      desc: "Callaleah is held in the last week of Devildays before the start of Breathe, and is an enormous carnival spectacle."
+      traditions:
+        - "Carnival Games"
+        - "A Costume Contest"
+        - "A Farcical Play With A Raucous Audience"
+        - "Sending Gifts To Friends"
+        - "Drinks For Everyone"
+        - "Children With Noisemakers"
+        - "Lots Of Pranks"
+      can_when: During Callaleah
+      can:
+        - "Get a token whenever you try something new and describe how it feels."
+        - "Spend a token to give someone the perfect gift, compliment, or reassurance."
+        - "Make a lot of noise."
+    - name: Old Api's Fair
+      desc: "Old Api's Fair is held on the first day of Swarming as Bright fades away, and is focused on the bumblebees and all the gifts they have to give."
+      traditions:
+        - "Bumble Beauty Contest (With Prizes!)"
+        - "Honey Cakes And Drinks"
+        - "Kebabs And Roasts"
+        - "Smooth Stones Offered To A Shepherd's Shrine"
+        - "Songs Sung Across Vast Distances"
+        - "Bumble-Herding Instruments"
+        - "Hand-Carved Pipes"
+      can_when: During Old Api's Fair
+      can:
+        - "Get a token whenever you pay respect to the herds or their shepherds."
+        - "Spend a token to procure some one-of-a-kind honey."
+        - "Make a new bumbly friend."
+- name: Breathe
+  months:
+    - name: Swarming
+      desc: "The first month of Breathe, Swarming is when the air is filled with the buzzing of countless bugs."
+      vibes:
+        - "Dewdrops On Leaf Tips"
+        - "Constant Distant Buzzing"
+        - "Ornate And Elaborate Displays"
+        - "Poachers And Hunters Afoot"
+      signs:
+        - "A Whistled Tune"
+        - "Fireflies At Twilight"
+        - "Moths Everywhere"
+        - "Shepherds And Their Flocks"
+        - "The Building Of Cairns"
+        - "Mossy Fields"
+        - "Teens Cuddling And Watching The Sunset"
+        - "Merchants From Distant Lands"
+        - "Construction And Repairs"
+        - "A Festival Honoring The Local Herds And The Sustenance They Provide"
+        - "Long Walks In The Evening"
+    - name: Gateling
+      desc: "Gateling is the shortest month, and brings Breathe to a close with hot days and cool evenings."
+      vibes:
+        - "Clear Starry Skies"
+        - "A Constant Breeze"
+        - "Cold Cold Nights"
+        - "The Smell You Imagine Home Would Smell Like"
+      signs:
+        - "Bonfires"
+        - "Rugged And Practical Clothes"
+        - "A Beautiful Golden Moon"
+        - "Buildings Swallowed In Vines"
+        - "The First Few Orange Leaves"
+        - "Sweet Treats"
+        - "Strange Subtle Magics"
+        - "A Thin Ambling Fog"
+        - "Kids Camping Out In Tents"
+        - "A Festival For A Secret And Mysterious God"
+        - "Not Enough Time For Everything You Want"
+  holidays:
+    - name: The Moon Dance
+      desc: "The last night of Breathe is the Moon Dance, when communities gather to dance beneath the light of the moon and welcome Silt."
+      traditions:
+        - "Everyone Staying Up Until The Sun Rises"
+        - "A Bonfire Burning Blue"
+        - "Ethereal White Robes"
+        - "The Ceremonial Marriage Of The Moon"
+        - "Thin Metal Crowns"
+        - "A Somber And Esoteric Waltz"
+        - "A Quiet And Caring Ballet"
+      can_when: During the Moon Dance
+      can:
+        - "Get a token whenever you spot a constellation in the sky, describe its shape, and tell everyone what you call it."
+        - "Spend a token to make a promise you never want to break."
+        - "Feel the dance's rhythm in your bones."
+      alt:
+        - "They celebrate the Moon Dance in a familiar way."
+        - "They celebrate the Moon Dance, but when they dance, their ancestors join them."
+        - "They celebrate the Moon Dance, but it is full of cheerful and merry jigs."
+        - "They celebrate the Moon Dance, but their traditions are unfamiliar to you."
+        - "Instead of the Moon Dance, they celebrate Reflections Day; a day for making amends and forgiveness."
+        - "Instead of the Moon Dance, they celebrate Pyre; a holiday of burning branches and dressing up as monsters."
+        - "Instead of the Moon Dance, they celebrate a holiday you've never heard of before. Ask the locals for its name, and discover its traditions together."
+        - "Only a few households here celebrate the Moon Dance."
+        - "They don't celebrate any holidays at this time, so we'll need to mark the passage of the seasons in our own way."
+    - name: Reflections Day
+      desc: "The last day of Breathe here is Reflections Day, a day for considering the past year, making amends, and forgiving others and yourself."
+      traditions:
+        - "Moments Of Silence"
+        - "Fasting"
+        - "A Huge Feast For Everyone"
+        - "Journaling"
+        - "A Special Greeting"
+        - "Throwing Our Worries Into The River"
+        - "Conversations With People You Haven't Seen In A While"
+      can_when: During Reflections Day
+      can:
+        - "Get a token whenever you apologize without expecting anything in return."
+        - "Wish someone the best for the coming harvest, and give them one of your tokens."
+        - "Take a moment of quiet to yourself."
+    - name: Pyre
+      desc: "Pyre concludes Gateling and welcomes Firetop with a week of countless bonfires, treats, and tricks."
+      traditions:
+        - "Tossing Worries Into The Fire"
+        - "Roasted Sweets On Sticks"
+        - "Spooky Masks And Costumes"
+        - "Ghost Stories"
+        - "Learning How To Light Fires"
+        - "Buckets Of Candy"
+        - "Commemorative Carved Figures"
+      can_when: During Pyre
+      can:
+        - "Take a token from someone else and give them a delightful treat in exchange."
+        - "Play a cunning trick on someone, and give them one of your tokens."
+        - "Sit by the fire and stay warm."
+- name: Silt
+  months:
+    - name: Firetop
+      desc: "Firetop is the center of Silt, when the trees are so bright and red that you'd be forgiven for assuming the forest itself was on fire."
+      vibes:
+        - "Brilliantly Colorful Leaves"
+        - "Crisp Evening Air"
+        - "Hearty Food"
+        - "Long Dark Shadows"
+      signs:
+        - "Gourds Of Various Sizes"
+        - "Spooky Masks"
+        - "Mulled Cider"
+        - "Lonesome Winds"
+        - "Comfortable Clothes"
+        - "Musicians Practicing"
+        - "Plumes Of Smoke"
+        - "Larders Stocked Full Of Crops"
+        - "Teens Engaged In Secret Mischief"
+        - "A Festival Celebrating The Harvest"
+        - "A Jolly Good Time"
+    - name: Grasping
+      desc: "Grasping is a cold and difficult month, when the leaves have fallen from the trees and the Silt air becomes uncomfortably cold."
+      vibes:
+        - "Leafless Trees"
+        - "Cold And Rocky Soil"
+        - "Fogbanks Rolling In"
+        - "An Alien And Unfamiliar Sky"
+      signs:
+        - "Sweaters And Scarves"
+        - "Strange Yellow Sunsets"
+        - "Sharing Smokes"
+        - "Bowls Of Soup"
+        - "Half-Frozen Lakes"
+        - "Faraway Screech Of Distant Scorpion Packs"
+        - "Muddy Leaves Across The Ground"
+        - "Gifts Of Food For The Hungry"
+        - "Kids Anxiously Watching The Shadows"
+        - "A Somber Festival Paying Respects To The Dead"
+        - "A Creeping Sense Of Unease"
+  holidays:
+    - name: Candlefeast
+      desc: "As everyone says goodbye to Silt and welcomes in the icy Chill, Candlefeast is a time when people can honor their families (both blood and found) and give each other hope in a dark time."
+      traditions:
+        - "Candles In Every Window"
+        - "All The Locals At One Long Table"
+        - "Massive Plates Overflowing With Food"
+        - "Ceremonies Associated With Each Course"
+        - "Long Stories About The Ancient Times"
+        - "An Offering Of Food For The House God"
+        - "Copious Amounts Of Wine"
+      can_when: During Candlefeast
+      can:
+        - "Get a token whenever you invite someone to sit with you."
+        - "Spend a token to ask: <i>\"Is there anything else you need?\"</i>"
+        - "Help out in the kitchen."
+      alt:
+        - "They celebrate Candlefeast in a familiar way."
+        - "They celebrate Candlefeast, but a plate is always set aside for any daemons passing by."
+        - "They celebrate Candlefeast, but it is the same candles every year, passed down through generations."
+        - "They celebrate Candlefeast, but their traditions are unfamiliar to you."
+        - "Instead of Candlefeast, they celebrate the Rime Gala; a time for your finest outfits and more beautiful fashions."
+        - "Instead of Candlefeast, they celebrate the Nameless Day; a cruel holiday of ceremonially hiding from the Slobbering God."
+        - "Instead of Candlefeast, they celebrate a holiday you've never heard of before. Ask the locals for its name, and discover its traditions together."
+        - "Only a few households here celebrate Candlefeast."
+        - "They don't celebrate any holidays at this time, so we'll need to mark the passage of the seasons in our own way."
+    - name: Rime Gala
+      desc: "The Rime Gala is an enormous spectacle of a holiday, when the first snow of Chill gives all the chance to show off their finest outfits."
+      traditions:
+        - "Ice Skating"
+        - "Frozen Sculptures"
+        - "Shimmering Gowns"
+        - "Fancy Cocktails"
+        - "Masquerades"
+        - "Colorful Suits"
+        - "Merriment And Laughter"
+      can_when: During the Rime Gala
+      can:
+        - "Get a token whenever you compliment someone on their outfit."
+        - "Ask: <i>\"May I have this dance?\"</i> and give them one of your tokens, regardless of their answer."
+        - "Appreciate how you look in a mirror."
+    - name: Nameless Day
+      desc: "In rare and cursed places, no one speaks of the last day of Silt. The Slobbering God might be long dead, but she is not yet forgotten."
+      traditions:
+        - "Locked Doors"
+        - "Symbols Painted On Walls"
+        - "Straw Scapegoats"
+        - "Raw Bug Meat Left On Windowsills"
+        - "Ringing Bells"
+        - "Knives Under Pillows"
+        - "Whispered Prayers"
+      can_when: During the Nameless Day
+      can:
+        - "Get a token whenever you describe the length of the shadows, a distant howling, or the feeling of something watching you."
+        - "Spend a token to remind everyone that the Slobbering God is dead, and that she cannot harm you."
+        - "Hide."
+- name: Chill
+  months:
+    - name: Snowblanket
+      desc: "Snowblanket is the calmer of the months of Chill, when the snows are heavy and the air becomes so quiet at night that you feel like you can hear the whispers of the world."
+      vibes:
+        - "Snow Up To Your Waist"
+        - "Light Of A White Sun"
+        - "Unbearably Bitter Cold"
+        - "The Silence Of A Sleeping World"
+      signs:
+        - "Many Layers Of Clothing"
+        - "Frozen-Over Creeks"
+        - "Red Flowers Peeking Through Snow"
+        - "Smoke Rising From Chimneys"
+        - "Mugs Of Steaming Drink"
+        - "Countless Stars In The Crisp Sky"
+        - "Numb Fingers Hidden In Pockets"
+        - "Warm And Comfortable Hearths"
+        - "Kids Building Snow-Folk"
+        - "A Festival Where You Build A Big Bonfire"
+        - "A Sense Of Family"
+    - name: Frostbite
+      desc: "Frostbite is a miserable month, when the beauty of snow has given way to the uncomfortable presence of ice and frost."
+      vibes:
+        - "Your Breath Clinging In The Air"
+        - "Light Diffusing Across A Leaden Sky"
+        - "An Inescapable Chill"
+        - "A Barren And Inhospitable World"
+      signs:
+        - "Icicles On Every Surface"
+        - "Huge Mounds Of Muddy Snow"
+        - "Strangers At The Door"
+        - "A Howling Gale"
+        - "Perpetually-Bubbling Stew"
+        - "Barns Full Of Sleeping Bugs"
+        - "Chattering Teeth"
+        - "Chapped And Cracked Lips"
+        - "Teens Huddled Together For Comfort"
+        - "A Festival Warding Off An Evil God"
+        - "A Profound Melancholy"
+  holidays:
+    - name: New Years
+      desc: "New Years is the end of the year, a solid week of celebration that is a time for radical change and transformation."
+      eoy_prompt: At the end of New Years
+      traditions:
+        - "A Week Of Hopeful Revelry"
+        - "Raucous Fireworks"
+        - "Festival Stalls With Lots Of Snacks"
+        - "Gift-Giving"
+        - "Elaborate And Ornate Costumes"
+        - "Special Performances"
+        - "Letters Written For All Your Friends"
+      can_when: During New Years
+      can:
+        - "Get a token whenever you give someone something they really wanted."
+        - "Spend a token to make a promise to yourself that you're determined to keep."
+        - "Try out a new name, look, or gender."
+      alt:
+        - "They celebrate New Years in a familiar way."
+        - "They celebrate New Years, but it is a decadent and sensuous holiday here."
+        - "They celebrate New Years, but it is a private and personal holiday here."
+        - "They celebrate New Years, but their traditions are unfamiliar to you."
+        - "Instead of New Years, they celebrate the Bloody Night; the honoring of the tragedy of war and times otherwise forgotten."
+        - "Instead of New Years, they celebrate the Sunrise; when the last beams of light from the old year brush against the skin of the new."
+        - "Instead of New Years, they celebrate a holiday you've never heard of before. Ask the locals for its name, and discover its traditions together."
+        - "Only a few households here celebrate New Years."
+        - "They don't celebrate any holidays at this time, so we'll need to mark the passage of the seasons in our own way."
+    - name: Bloody Night
+      desc: "The Bloody Night is not a celebration, but instead a time of mourning. You cannot lionize those who died for a useless cause&emdash;all you can do is thank all the gods that things are better now."
+      eoy_prompt: At the end of the Bloody Night
+      traditions:
+        - "Destroying Statues"
+        - "Symbolic War Paint"
+        - "Leaving Orchids On Graves"
+        - "Recounting The Dead"
+        - "Lonely Walks At Night"
+        - "Old Rebel War Songs"
+        - "Sobbing"
+      can_when: During the Bloody Night
+      can:
+        - "Get a token whenever you tell a story about something you try not to think about."
+        - "Spend a token to speak directly the name of someone you lost to violence."
+        - "Curse the King of the Floating Mountain's name."
+    - name: Sunrise
+      desc: "The last flickering stars of the old year brush against the hopeful youth of the new. Most people are asleep as the morning dawn welcomes something new to us, but for the lucky few that stay up...it can mean everything."
+      eoy_prompt: When the sun rises
+      traditions:
+        - "Blankets On The Ground"
+        - "Rambling Jokes"
+        - "Makeup Parties"
+        - "Mock Fights"
+        - "Whispered Confessions"
+        - "Lying In Piles"
+        - "Sneaking Away"
+      can_when: As the sun rises
+      can:
+        - "Get a token whenever you have fun with the people you care about, even if you only just met them."
+        - "Spend a token to spot something fantastical and impossible, that no one should ever get to see."
+        - "Smile."

@@ -1,5 +1,4 @@
-- id: tokens
-  name: Tokens
+- name: Token
   entries:
     - id: source
       short: "Get when..."

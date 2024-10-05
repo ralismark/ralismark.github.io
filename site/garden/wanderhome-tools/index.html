@@ -29,6 +29,7 @@ tags:
 {% set rules = recipe.read("./rules.yaml") | parse_yaml %}
 {% set traits = recipe.read("./traits.json") | parse_json %}
 {% set natures = recipe.read("./natures.json") | parse_json %}
+{% set calendar = recipe.read("./calendar.yaml") | parse_yaml %}
 
 {% set menu %}
 <menu class="Wide">
@@ -36,6 +37,7 @@ tags:
 	<li><a href="#rules">Rules</a></li>
 	<li><a href="#traits">Traits</a></li>
 	<li><a href="#natures">Natures</a></li>
+	<li><a href="#calendar">Calendar</a></li>
 	<li><a href="#end">$</a></li>
 </menu>
 {% endset %}
@@ -51,7 +53,7 @@ tags:
 				{% for category in rules %}
 					<tr><th>{{ category.name }}</th><td>
 					{% for section in category.entries %}
-						<a href="#rule-{{ category.id }}-{{ section.id }}">{{ section.short | replace(" ", "&nbsp") }}</a>
+						<a href="#rule-{{ category.name }}-{{ section.id }}">{{ section.short | replace(" ", "&nbsp") }}</a>
 					{% endfor %}
 				{% endfor %}
 			</tbody>
@@ -64,7 +66,9 @@ tags:
 <div id="rules" class="Right">
 	{% for category in rules %}
 		{% for section in category.entries %}
-			<h2 id="rule-{{ category.id }}-{{ section.id }}">{{ section.title }}</h2>
+			<h2 id="rule-{{ category.name }}-{{ section.id }}">
+				{{ section.title }}
+			</h2>
 			{{ section.content }}
 		{% endfor %}
 	{% endfor %}
@@ -91,7 +95,10 @@ tags:
 
 <div id="traits" class="Right">
 	{% for name, trait in traits.items() %}
-		<h2 id="trait-{{ name }}" data-trait="{{ name }}">{{ name }}</h2>
+		<h2 id="trait-{{ name }}" data-trait="{{ name }}">
+			<small>{{ trait.category }} Trait</small>
+			{{ name }}
+		</h2>
 		<p>{{ trait.desc }}</p>
 		<p>Choose 1-2 they can always do.</p>
 		<ul>
@@ -121,7 +128,10 @@ tags:
 
 <div id="natures" class="Right">
 	{% for name, nature in natures.items() %}
-		<h2 id="nature-{{ name }}">{{ name }}</h2>
+		<h2 id="nature-{{ name }}">
+			<small>{{ nature.category }} Nature</small>
+			{{ name }}
+		</h2>
 		<p>{{ nature.desc }}</p>
 		<p>This place can always:</p>
 		<ul>
@@ -143,6 +153,85 @@ tags:
 			{% endfor %}
 			<li>Something Else Of Your Own Invention</li>
 		</ul>
+	{% endfor %}
+</div>
+
+<h1 class="Wide">Calendar</h1>
+
+<div class="Left">
+	<div class="Toc">
+		<table>
+			<tbody>
+				{% for season in calendar %}
+					<tr><th>{{ season.name }}</th><td>
+					{% for month in season.months %}
+						<a href="#month-{{ month.name }}">{{ month.name }}</a>
+					{% endfor %}
+					<tr><th>∗</th><td>
+					{% for holiday in season.holidays %}
+						<a href="#holiday-{{ holiday.name }}">{{ holiday.name }}</a>
+					{% endfor %}
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div id="calendar" class="Right">
+	{% for season in calendar %}
+		{% for month in season.months %}
+			<h2 id="month-{{ month.name }}">
+				<small>{{ season.name }} Month</small>
+				{{ month.name }}
+			</h2>
+			<p>{{ month.desc }}</p>
+			<p>Choose 1 that this place lacks. The others are all present.</p>
+			<ul>
+				{% for vibe in month.vibes %}
+					<li>{{ vibe }}</li>
+				{% endfor %}
+			</ul>
+			<p>Choose 3-4 signs of the month found in this place.</p>
+			<ul>
+				{% for sign in month.signs %}
+					<li>{{ sign }}</li>
+				{% endfor %}
+				<li>Something Else Of Your Own Invention</li>
+			</ul>
+		{% endfor %}
+		{% for holiday in season.holidays %}
+			<h2 id="holiday-{{ holiday.name }}">
+				<small>{{ season.name }} Holiday{% if not loop.first %} (Alt){% endif %}</small>
+				{{ holiday.name }}
+			</h2>
+
+			<p>{{ holiday.desc }}</p>
+			{% if holiday.eoy_prompt %}
+			<blockquote>
+				{{ holiday.eoy_prompt }}, go around and ask 1 question to your left and 1 question to your right, using those questions in your playbook from the start of your journey. It's okay and expected for the answers to have changed.
+			</blockquote>
+			{% endif %}
+			<p>Choose 2 traditions that this place doesn't engage in. The rest all happen.</p>
+			<ul>
+				{% for tradition in holiday.traditions %}
+					<li>{{ tradition }}</li>
+				{% endfor %}
+			</ul>
+			<p>{{ holiday.can_when }}, everyone can always:</p>
+			<ul>
+				{% for can in holiday.can %}
+					<li>{{ can }}</li>
+				{% endfor %}
+			</ul>
+			{% if holiday.alt %}
+			<p>if you've celebrated {{ holiday.name }} before, choose how this place spends this time:</p>
+			<ul>
+				{% for alt in holiday.alt %}
+					<li>{{ alt }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+		{% endfor %}
 	{% endfor %}
 </div>
 
@@ -184,8 +273,10 @@ main > .Left {
 	grid-column: 1 / 2;
 	position: relative;
 }
-main > .Right { grid-column: 2 / 3; }
-
+main > .Right {
+	grid-column: 2 / 3;
+	padding: 0 0.5em;
+}
 
 .Toc {
 	position: sticky;
@@ -224,5 +315,10 @@ menu {
 	border-bottom: 1px solid var(--stroke);
 
 	z-index: 1;
+}
+
+small {
+	font-style: italic;
+	float: right;
 }
 </style>
