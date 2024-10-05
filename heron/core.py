@@ -72,15 +72,14 @@ class Manifest(t.Generic[_R]):
         manifest: "Manifest"
 
     @dataclasses.dataclass(frozen=True)
-    class Var:
+    class Trace:
         """
-        A global variable was retrieved.
+        A debug log
         """
 
-        key: t.Any
-        value: t.Any
+        data: t.Any = dataclasses.field(compare=False)
 
-    Entry: t.ClassVar = t.Union[Input, Output, SubRecipe]
+    Entry: t.ClassVar = t.Union[Input, Output, SubRecipe, Trace]
 
     # the actual dataclass content
 
@@ -95,17 +94,6 @@ class Manifest(t.Generic[_R]):
         for entry in self.log:
             if isinstance(entry, entry_type):
                 yield entry
-
-    def __eq__(self, o):
-        if not isinstance(o, Manifest):
-            return False
-
-        return (
-            self.recipe == o.recipe
-            and self.value == o.value
-            and set(self.log) == set(o.log)
-        )
-
 
 class BuildFailure(Exception):
     """
@@ -227,6 +215,12 @@ class BuildContext:
         path = self._driver.input(path)
         self._log.append(Manifest.Input(path))
         return path
+
+    def trace(self, data: t.Any):
+        """
+        Emit a debug trace.
+        """
+        self._log.append(Manifest.Trace(data))
 
 
 def current_ctx() -> BuildContext:
