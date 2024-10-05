@@ -2,8 +2,7 @@
  * Colour scheme & other variable declarations
  */
 
-$accent: #DB5599;
-$accent-bg: #990461;
+$filled-bg: #990461
 
 :root { // for non-sass use
 	// based on <https://github.com/system-fonts/modern-font-stacks>
@@ -25,15 +24,15 @@ $accent-bg: #990461;
 	// TODO switch these over to use color-mix at some point
 
 	// background of boxes/etc
-	--box-tint: #{fade-out($accent, 0.95)};
-	--button-tint: #{fade-out($accent, 0.8)};
+	--box-tint: color-mix(in srgb, var(--primary), var(--body-bg) 95%);
+	--button-tint: color-mix(in srgb, var(--primary), var(--body-bg) 80%);
 
 	// filled in UI elements
 	--filled-fg: white;
-	--filled-bg: #{$accent-bg};
+	--filled-bg: #{$filled-bg};
 
 	// text colours
-	--primary: #{$accent};
+	--primary: #DB5599;
 	--secondary: #A747FF;
 	--tertiary: #939C28;
 
