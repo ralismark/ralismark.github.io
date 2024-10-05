@@ -4,6 +4,7 @@ import argparse
 import logging
 from pathlib import Path
 import shutil
+import http.server
 
 from . import core, dev, recipe
 
@@ -130,6 +131,93 @@ def cmd_dev(args: argparse.Namespace):
     from watchdog.observers import Observer
     import time
 
+    class DevRequestHandler(dev.RequestHandler):
+        def __init__(self, *args, driver: dev.IncrementalDriver, **kwargs):
+            self.driver = driver
+            super().__init__(*args, **kwargs)
+
+        def do_response(self, send_content: bool):
+            if not self.path.startswith("/$"):
+                super().do_response(send_content)
+                return
+
+            if self.path == "/$":
+                self.send_response(http.HTTPStatus.OK)
+                self.send_header("Content-Type", "text/html")
+                self.end_headers()
+
+                for part in self.gen_index():
+                    self.wfile.write(part.encode())
+            else:
+                self.send_response(http.HTTPStatus.NOT_FOUND)
+                self.end_headers()
+                self.wfile.write("Not a valid debug endpoint".encode())
+
+        def gen_index(self):
+            yield f"""<!doctype html>
+                <head>
+                <style>
+                .summary {{ background: lightgrey; }}
+                .summary:target {{ background: skyblue; }}
+                .manifest {{ margin: 0 2rem; }}
+                </style>
+                <body>
+
+                <h1>Heron</h1>
+
+                <a href="#{hash(r)}">Root Recipe</a>
+
+                <hr>
+            """
+
+            def rcp_name(rcp: core.Recipe):
+                name = type(rcp).__name__
+                if isinstance(rcp, recipe.InputMixin):
+                    name += f' from <tt>{rcp.path}</tt>'
+                if isinstance(rcp, recipe.OutputMixin):
+                    name += f' to <tt>{rcp.opath}</tt>'
+                return name
+
+            for rcp, mf in self.driver.cache.items():
+                yield f"""
+                <div class="summary" id="{hash(rcp)}">
+                    <a href="#{hash(rcp)}">{rcp_name(rcp)}</a>
+                </div>
+                <div class="manifest">
+                    """
+                if isinstance(rcp, recipe.OutputMixin):
+                    live_path = str(rcp.opath)
+                    if live_path.endswith(".html"):
+                        live_path = live_path[:-5]
+                    if live_path.endswith("index"):
+                        live_path = live_path[:-5]
+                    yield f'&rarr; <a href="/{live_path}">{live_path}</a><br>'
+                yield """
+                    <table>
+                    <tbody>
+                """
+
+                for log in mf.log:
+                    yield f"\n<tr><tr><td>{type(log).__name__}</td><td>"
+                    if isinstance(log, core.Manifest.Input):
+                        yield f"<tt>{log.path}</tt>"
+                    elif isinstance(log, core.Manifest.Output):
+                        yield f"<tt>{log.path}</tt>"
+                    elif isinstance(log, core.Manifest.SubRecipe):
+                        yield f'''
+                            <a href="#{hash(log.recipe)}">{rcp_name(log.recipe)}</a>
+                        '''
+                    elif isinstance(log, core.Manifest.Trace):
+                        yield f"{log.data}"
+                    else:
+                        yield "?"
+
+                yield """
+                    </table>
+                </div>
+                """
+
+
     class Handler(FileSystemEventHandler):
         def __init__(self):
             self.last_time = 0
@@ -151,7 +239,14 @@ def cmd_dev(args: argparse.Namespace):
     observer.start()
 
     try:
-        dev.serve_http(args.out, port=args.port)
+        directory = args.out
+        with http.server.HTTPServer(
+            ("", args.port),
+            lambda *args, **kwargs: DevRequestHandler(*args, **kwargs, directory=directory, driver=driver),
+        ) as srv:
+            actual_host, actual_port = srv.server_address
+            print(f"Serving {directory} on {actual_host}:{actual_port}")
+            srv.serve_forever()
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
