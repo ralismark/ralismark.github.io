@@ -12,13 +12,9 @@
         pkgs = import nixpkgs { inherit system; };
       in
       rec {
-        packages.default = pkgs.stdenv.mkDerivation {
-          pname = "heron";
-          version = "0.1.0";
-          src = ./.;
-          site = ./site;
-
-          buildInputs = [
+        packages.heron = pkgs.writeShellApplication {
+          name = "heron";
+          runtimeInputs = [
             pkgs.graphviz
             pkgs.nodePackages.katex
             (pkgs.python3.withPackages (p: with p; [
@@ -33,24 +29,26 @@
             ]))
           ];
 
-          buildPhase = ''
-            PYTHONPATH=.
-            python -m heron build -o $out $site/main.py
-          '';
-
-          shellHook = ''
-            export PYTHONPATH=.:
+          text = ''
+            export PYTHONPATH=''${HERONPATH-.}''${PYTHONPATH:+:}''${PYTHONPATH-}
+            exec python -m heron "$@"
           '';
         };
 
         apps.default = {
           type = "app";
-          program = builtins.toString (pkgs.writeScript "heron" ''
-            #!/bin/sh
-            export PATH=${pkgs.lib.makeBinPath packages.default.buildInputs}:$PATH
-            export PYTHONPATH=.
-            exec python -m heron "$@"
-          '');
+          program = pkgs.lib.getExe packages.heron;
+        };
+
+        lib.mkHeron = { name, src }: pkgs.runCommand name {
+          buildInputs = [ packages.heron ];
+        } ''
+          HERONPATH=${./.} heron build ${src} -o $out
+        '';
+
+        packages.default = lib.mkHeron {
+          name = "ralismark.xyz";
+          src = "${./.}/site/main.py";
         };
 
       });
