@@ -50,7 +50,7 @@ jobs:
       run: "nix run . -- build -o _site kwellig.garden/main.py"
 
     - name: "Deploy to kwellig.garden-deploy"
-      uses: JamesIves/github-pages-deploy-action@4.7.2
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: _site
         token: ${{ secrets.KWELLIG_GARDEN_GITHUB_TOKEN }}
