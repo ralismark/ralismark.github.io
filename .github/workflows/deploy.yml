@@ -10,6 +10,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  deployments: write
 
 # Allow one concurrent deployment
 concurrency:
@@ -49,11 +50,10 @@ jobs:
     - name: "Build site"
       run: "nix run . -- build -o _site kwellig.garden/main.py"
 
-    - name: "Deploy to kwellig.garden-deploy"
-      uses: JamesIves/github-pages-deploy-action@v4
+    - name: "Deploy to kwellig.garden"
+      uses: cloudflare/wrangler-action@v3
       with:
-        folder: _site
-        token: ${{ secrets.KWELLIG_GARDEN_GITHUB_TOKEN }}
-        repository-name: ralismark/kwellig.garden-deploy
-        branch: main
-        single-commit: true
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        command: pages deploy _site --project-name=kwellig-garden
+        gitHubToken: ${{ secrets.GITHUB_TOKEN }}
