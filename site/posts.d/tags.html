@@ -6,7 +6,7 @@ title: Tags
 {% set ns = namespace(tags=dict(),untagged=[]) %}
 {% for post in site.series.posts %}
 	{% set post = recipe.build(post.meta) %}
-	{% for tag in parse_tags(post) %}
+	{% for tag in parse_tags(post.props) %}
 		{% do ns.tags.setdefault(tag, []).append(post) %}
 	{% else %}
 		{% do ns.untagged.append(post) %}
