@@ -1,0 +1,450 @@
+---
+layout: post
+title: pong.html
+excerpt: My first game, a customisable pong game with local multiplayer from 2015
+date: 2024-12-05
+tags:
+series: webgames
+---
+
+{% filter markdownify %}
+
+I first learned how to program via the frontend triple of HTML/CSS/JS, wayyyy back in 2015, and this was more or less my first proper project!
+
+No frameworks or build systems or any of the stuff that comes with modern frontend is here, just my scrappy pre-ES6 javascript.
+Which also means that the code is all here in this page and should be easy to play around with :)
+
+---
+
+Controls:
+
+- Space to release ball
+- Enter for pause & options & to unpause
+- 1 Player: W up/S down
+- 2 Player: W/S and O/L
+- 4 Player: W/S and R/F; U/J and O/L
+
+{% endfilter %}
+
+<hr>
+
+Controls:
+
+<ul>
+	<li>Space to release ball</li>
+	<li>Enter for pause &amp; options &amp; to unpause</li>
+	<li>1 Player: W up/S down</li>
+	<li>2 Player: W/S and O/L</li>
+	<li>4 Player: W/S and R/F; U/J and O/L</li>
+</ul>
+
+<canvas style="width: 100%"></canvas>
+
+<script>
+
+var ctx = document.querySelector('canvas').getContext('2d'),
+	p1 = {
+		score: 0,
+		y: 0,
+		dir: 0,
+	},
+	p2 = {
+		score: 0,
+		y: 0,
+		dir: 0,
+	},
+	p3 = {
+		y: 0,
+		dir: 0,
+	},
+	p4 = {
+		y: 0,
+		dir: 0,
+	},
+	b = {
+		x: 400,
+		y: 200,
+		xv: 0,
+		yv: 0,
+		rad: 5,
+	},
+	def = {
+		x: 800,
+		y: 400,
+		pSpeed: 2,
+		bSpeed: 1,
+		size: 100,
+		players: 4,
+		sel: 1,
+		// effect: [
+		// 	'normal',
+		// 	'slow',
+		// ]
+	},
+	state = 1,
+	effect = 0;
+
+ctx.canvas.width = def.x;
+ctx.canvas.height = def.y;
+
+function clamp(x, min, max) {
+	if(x < min) {
+		return min;
+	}
+	if(x > max) {
+		return max;
+	}
+	return x;
+}
+
+function cpu(pl) {
+	if(pl == 1) {
+		if(p1.y + def.size / 2 < b.y) {
+			p1.dir = 1;
+		} else {
+			p1.dir = -1;
+		}
+	} else if(pl == 2) {
+		if(p2.y + def.size / 2 < b.y) {
+			p2.dir = 1;
+		} else {
+			p2.dir = -1;
+		}
+	} else if(pl == 3) {
+		if(p3.y + def.size / 2 < b.y) {
+			p3.dir = 1;
+		} else {
+			p3.dir = -1;
+		}
+	} else if(pl == 4) {
+		if(p4.y + def.size / 2 < b.y) {
+			p4.dir = 1;
+		} else {
+			p4.dir = -1;
+		}
+	} else {
+		throw TypeError('Invalid input')
+	}
+}
+
+function tickPos() {
+	// P1 Tick
+	p1.y = clamp(p1.y + p1.dir * def.pSpeed, 0, def.y - def.size);
+	// P2 Tick
+	p2.y = clamp(p2.y + p2.dir * def.pSpeed, 0, def.y - def.size);
+	// P3 Tick
+	p3.y = clamp(p3.y + p3.dir * def.pSpeed, 0, def.y - def.size);
+	// P4 Tick
+	p4.y = clamp(p4.y + p4.dir * def.pSpeed, 0, def.y - def.size);
+	// Ball
+	b.x += b.xv * def.bSpeed;
+	b.y += b.yv * def.bSpeed;
+	// Ball bounce
+		// Wall
+	if(b.y < b.rad || b.y > def.y - b.rad) {
+		b.y = clamp(b.y, b.rad, def.y - b.rad);
+		b.yv *= -1;
+	}
+	// P1	Bounce / Kill
+	if(b.x - b.rad < 20) {
+		if(b.y + b.rad > p1.y && b.y - b.rad < p1.y + def.size) {
+			b.xv *= -1;
+			b.xv += Math.random() / 2;
+			b.yv += (Math.abs(b.yv) / b.yv) * Math.random() * 0.1;
+			b.yv += p1.dir / 2;
+			b.x = 20 + b.rad;
+		} else {
+			kill(1);
+		}
+	// P2 Bounce / Kill
+	} else if(b.x + b.rad > def.x - 20) {
+		if(b.y + b.rad > p2.y && b.y - b.rad < p2.y + def.size) {
+			b.xv *= -1;
+			b.xv -= Math.random() / 2;
+			b.yv += (Math.abs(b.yv) / b.yv) * Math.random() * 0.1;
+			b.yv += p2.dir / 2;
+			b.x = def.x - 20 - b.rad;
+		} else {
+			kill(2);
+		}
+	}
+	if(def.players == 4) {
+		// P3
+		if(b.x - b.rad < 120 && b.x + b.rad > 110 && b.y + b.rad > p3.y && b.y - b.rad < p3.y + def.size && b.xv < 0) {
+			b.xv *= -1;
+			b.xv += Math.random() / 2;
+			b.yv += (Math.abs(b.yv) / b.yv) * Math.random() * 0.5;
+			b.yv += p3.dir / 2;
+			b.x = 120 + b.rad;
+		// P4
+		} else if(b.x + b.rad > def.x - 120 && b.x - b.rad < def.x - 110 && b.y + b.rad > p4.y && b.y - b.rad < p4.y + def.size && b.xv > 0) {
+			b.xv *= -1;
+			b.xv -= Math.random() / 2;
+			b.yv += (Math.abs(b.yv) / b.yv) * Math.random() * 0.5;
+			b.yv += p4.dir / 2;
+			b.x = def.x - 120 - b.rad;
+		}
+	}
+}
+
+function render() {
+	ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+	ctx.fillRect(0, 0, def.x, def.y);
+	ctx.fillStyle = '#aaa';
+	ctx.font = '24px monospace';
+	var score = p1.score + ' : ' + p2.score;
+	ctx.fillText(score, def.x / 2 - score.length * 6.5, 20);
+	ctx.fillStyle = '#fff';
+	// Ball
+	//ctx.fillStyle = '#ff0'
+	ctx.fillRect(b.x - b.rad, b.y - b.rad, 2 * b.rad, 2 * b.rad);
+	// P1
+	ctx.fillRect(10, p1.y, 10, def.size);
+	// P2
+	ctx.fillRect(def.x - 20, p2.y, 10, def.size);
+	if(def.players == 4) {
+		// P3
+		ctx.fillRect(110, p3.y, 10, def.size);
+		// P4
+		ctx.fillRect(def.x - 120, p4.y, 10, def.size);
+	}
+	if(state != 1) {
+		ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+		ctx.fillRect(0, 0, def.x, def.y);
+		ctx.fillStyle = '#fff';
+	}
+	if(state == 2) {
+		ctx.font = '30px monospace';
+		ctx.fillText('Paused!', def.x / 2 - 115 / 2, 100);
+		ctx.font = '24px monospace';
+		ctx.fillText('space for options', 300, 130);
+		ctx.fillText('1. reset score', 250, 190);
+	} else if(state == 3) {
+		ctx.font = '30px monospace';
+		ctx.fillText('Options', def.x / 2 - 115 / 2, 100);
+		ctx.font = '24px monospace';
+		ctx.fillText('1. Players:      ' + def.players, 250, 130);
+		ctx.fillText('2. Slider size:  ' + def.size, 250, 160);
+		ctx.fillText('3. Ball size:    ' + b.rad, 250, 190);
+		ctx.fillText('4. Slider speed: ' + def.pSpeed, 250, 220);
+		ctx.fillText('5. Ball speed:   ' + def.bSpeed, 250, 250);
+	}
+}
+
+document.addEventListener('keydown', function(e) {
+	var k = e.keyCode
+	if(state == 2) {
+		// 1
+		if(k == 49) {
+			p1.score = 0;
+			p2.score = 0;
+		}
+	} else if(state == 3) {
+		if(k == 49) {
+			switch(def.players) {
+				case 1:
+					def.players = 2;
+					break;
+				case 2:
+					def.players = 4;
+					break;
+				default:
+					def.players = 1;
+			}
+		} else if(k == 50) {
+			switch(def.size) {
+				case 200:
+					def.size = 1;
+					break;
+				case 1:
+					def.size = 10;
+					break;
+				case 10:
+					def.size = 25;
+					break;
+				case 25:
+					def.size = 50;
+					break;
+				case 50:
+					def.size = 100;
+					break;
+				default:
+					def.size = 200;
+			}
+		} else if(k == 51) {
+			switch(b.rad) {
+				case 10:
+					b.rad = 25;
+					break;
+				case 25:
+					b.rad = 50;
+					break;
+				case 50:
+					b.rad = 100;
+					break;
+				case 100:
+					b.rad = 1;
+					break;
+				default:
+					b.rad = 10;
+			}
+		} else if(k == 52) {
+			switch(def.pSpeed) {
+				case 1:
+					def.pSpeed = 2;
+					break;
+				case 2:
+					def.pSpeed = 5;
+					break;
+				case 5:
+					def.pSpeed = 0.5;
+					break;
+				default:
+					def.pSpeed = 1;
+			}
+		} else if(k == 53) {
+			switch(def.bSpeed) {
+				case 1:
+					def.bSpeed = 2;
+					break;
+				case 2:
+					def.bSpeed = 5;
+					break;
+				case 5:
+					def.bSpeed = 0.5;
+					break;
+				default:
+					def.bSpeed = 1;
+			}
+		}
+	}
+});
+
+function kill(player) {
+	if(player == 1) {
+		p2.score++;
+	} else {
+		p1.score++;
+	}
+	// Reset pos
+	b.x = def.x / 2;
+	b.y = def.y / 2;
+	b.xv = 0;
+	b.yv = 0;
+}
+
+function start() {
+	//b.x = 400;
+	//b.y = 200;
+	b.xv = Math.floor(Math.random() * 2) * 4 - 2;
+	b.yv = Math.floor(Math.random() * 2) * 4 - 2;
+}
+
+document.addEventListener('keyup', function(e) {
+	if((e.keyCode == 87 && p1.dir == -1) || (e.keyCode == 83 && p1.dir == 1)) {
+		p1.dir = 0;
+	} else if((e.keyCode == 79 && p2.dir == -1) || (e.keyCode == 76 && p2.dir == 1)) {
+		p2.dir = 0;
+	} else if((e.keyCode == 82 && p3.dir == -1) || (e.keyCode == 70 && p3.dir == 1)) {
+		p3.dir = 0;
+	} else if((e.keyCode == 85 && p4.dir == -1) || (e.keyCode == 74 && p4.dir == 1)) {
+		p4.dir = 0;
+	}
+});
+
+document.addEventListener('keypress', function(e) {
+	switch(e.keyCode) {
+		case 32:
+			if(state == 1) {
+				start();
+			} else if(state == 2) {
+				state = 3;
+			} else if(state == 3) {
+				state = 2;
+			}
+			break;
+		case 119:
+			p1.dir = -1;
+			break;
+		case 115:
+			p1.dir = 1;
+			break;
+		case 111:
+			p2.dir = -1;
+			break;
+		case 108:
+			p2.dir = 1;
+			break;
+		case 114:
+			p3.dir = -1;
+			break;
+		case 102:
+			p3.dir = 1;
+			break;
+		case 117:
+			p4.dir = -1;
+			break;
+		case 106:
+			p4.dir = 1;
+			break;
+	}
+});
+
+document.addEventListener('keydown', function(e) {
+	if(e.keyCode == 13) {
+		if(state == 1) {
+			state = 2;
+		} else {
+			state = 1;
+		}
+	}
+})
+
+setInterval(function() {
+	if(def.players == 0) {
+		cpu(1);
+		cpu(2);
+	}
+	if(def.players % 2 == 1) {
+		cpu(2);
+	}
+	//cpu(3);
+	//cpu(4);
+	if(state == 1) {
+		tickPos();
+	}
+	render();
+})
+
+function speed(val) {
+	def.bSpeed *= val;
+	def.pSpeed *= val;
+}
+
+setInterval(function() {
+	if(state == 1) {
+		var rand = Math.floor(Math.random() * 5);
+		if(rand == 1) {
+			effect = 1;
+			//util.slow(1000);
+			effect = 0;
+		}
+	}
+}, 5000)
+
+var util = {
+	slow: function(time) {
+		var startP = def.pSpeed.valueOf(),
+			startB = def.bSpeed.valueOf();
+
+		def.bSpeed *= 0.1;
+		def.pSpeed *= 0.1;
+
+		setTimeout(function() {
+
+			def.bSpeed = startB;
+			def.pSpeed = startP;
+		}, time);
+	}
+}
+</script>

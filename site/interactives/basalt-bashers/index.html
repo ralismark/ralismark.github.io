@@ -1,0 +1,69 @@
+---
+layout: post
+title: Basalt Bashers
+excerpt: A 2020 web port of my game from 2017
+date: 2024-12-08
+tags:
+series: webgames
+---
+
+{% filter markdownify %}
+.. figure:: {{ page.url }}/title.png
+
+The original _Basalt Bashers_ was my project as part of the Software Design and Development HSC subject.
+It's in C++ and the code is genuinely dreadful, but [it's available on github](https://github.com/ralismark/sd2/tree/game) if you want to look/laugh at it.
+
+This here is a web port of that, made about 2 years after, in 2020, so it's a few years after the [pong.html](pong.html) and [ship.html](ship.html).
+The code is a corresponding amount more sensible.
+
+.. details:: The original game also had a couple of tutorial pages, as was required by the assignment spec
+
+	.. figure:: {{ page.url }}/ref-userinterface.png
+
+	.. figure:: {{ page.url }}/ref-movement.png
+
+	.. figure:: {{ page.url }}/ref-pieces.png
+
+There's also a secret level with these fellas
+
+.. figure:: {{ page.url }}/dragon.png
+
+Let me know if you find them :>
+
+---
+
+{% endfilter %}
+
+{% for path in recipe.readdir(".") %}
+	{% if path.suffix != ".html" %}
+		{% do recipe.copy(path, page.url + "/" + path.name) %}
+	{% endif %}
+{% endfor %}
+
+<script>
+	const RESOLVE_IMAGE_URL = (p => "{{ page.url }}/" + p)
+</script>
+
+<script src="{{ page.url }}/vector.js"></script>
+<script src="{{ page.url }}/spritesheet.js"></script>
+<script src="{{ page.url }}/tween.js"></script>
+<script src="{{ page.url }}/board.js"></script>
+<script src="{{ page.url }}/ai.js"></script>
+
+<style>
+	/* get better rendering */
+	canvas {
+		image-rendering: optimizeSpeed;             /* Older versions of FF          */
+		image-rendering: -moz-crisp-edges;          /* FF 6.0+                       */
+		image-rendering: -webkit-optimize-contrast; /* Safari                        */
+		image-rendering: -o-crisp-edges;            /* OS X & Windows Opera (12.02+) */
+		image-rendering: pixelated;                 /* Awesome future-browsers       */
+		-ms-interpolation-mode: nearest-neighbor;   /* IE                            */
+	}
+</style>
+
+<canvas width="800" height="480" style="width: 100%"></canvas>
+
+<!-- Putting this at the bottom makes everything easier, as we don't need to
+     worry about the DOM loading first -->
+<script src="{{ page.url }}/main.js"></script>

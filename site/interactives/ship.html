@@ -1,0 +1,536 @@
+---
+layout: post
+title: ship.html
+excerpt: A scrappy singleplayer ship game/toy from 2015
+date: 2024-12-07
+tags:
+series: webgames
+---
+
+{% filter markdownify %}
+
+This is a smol ship game inspired by [Astro Party](https://rustymoyher.com/astroparty/), a game that I played _heavily_ with friends home from high school.
+
+I never got around to coding up a proper configuration UI, unlike [pong.html](pong.html), but you can customise the game quite a lot from the code.
+All the ships are declared in the `pl` variable, and in fact you can get local multiplayer just by declaring more players (e.g. just appending `p2` to `pl`)!
+
+Though if you do look into the code, be warned that this is the doing of a self-taught highschooler with less than a year of coding experience -- it's very unreadable.
+There's a bug where some AI ships simply don't work, but I genuinely could not figure out how they're implemented, let alone what the issue is...
+
+---
+
+Controls:
+
+- S to turn
+- A to shoot
+- Z to pause
+- X to resume
+
+{% endfilter %}
+
+<canvas width=1200 height=800 style="width: 100%"></canvas>
+
+<script>
+var st = (new Date()).getTime();
+
+var tpl = {
+	equiTri: [
+		[0,1],
+		[120,1],
+		[240,1]
+	],
+	isocTri: [
+		[0,1],
+		[135,1],
+		[225,1]
+	],
+	sqr: [
+		[45,1],
+		[135,1],
+		[225,1],
+		[315,1],
+	],
+	rect: [
+		[10,1],
+		[170,1],
+		[190,1],
+		[350,1],
+	],
+	stick: [
+		[0.1,1],
+		[90,0.002],
+		[270,0.002],
+		[359.9,1],
+	],
+	test: [
+		[0,1],
+		[135,1],
+		[225,1],
+		[225,0.95],
+		[135,0.95],
+		[0,0.95],
+		[225,0.95],
+		[225,1],
+	],
+};
+
+function Ship(ind) {
+	return {
+		x: 100 + Math.random() * 1000,
+		y: 100 + Math.random() * 400,
+		r: Math.random() * 360,
+		vx: 0,
+		vy: 0,
+		vr: 0,
+
+		s: 20,
+		sh: tpl.isocTri,
+		h: 100,
+		th: 100,
+		a: 0,
+		rr: 1,
+		ac: 2,
+		g: 0,
+		gr: 0.9,
+		d: 1,
+
+		c: [parseInt('3' + ind + 0), parseInt('4' + ind + 0)],
+		n: 'p2',
+		t: [],
+		dc: '#fff',
+		sc: '#fff',
+
+		cs: 'charge',
+	}
+}
+
+var p1 = {
+		x: 301, // X Pos
+		y: 300, // Y Pos
+		r: 0, // Rotation
+		vx: 0, // X Vel
+		vy: 0, // Y Vel
+		vr: 0, // Rotation Vel
+
+		s: 20, // Size
+		sh: tpl.test, // Shape
+		h: 10000, // Health
+		th: 10000, // Total health
+		a: 0, // Ammunition
+		rr: 0.05, // Reload rate
+		ac: 3, // Ammo cap
+		g: 0, // Gun progress
+		gr: 0.2, // Gun rate
+		d: 1, // Damage
+
+		c: [83, 65], // Controls: turn, shoot // 83, 65
+		n: 'p1', // Name
+		t: 'Player', // Team ID / name
+		dc: '#f00', // Display colour
+		sc: '#f00', // Shot colour
+
+		cs: 'charge', // CPU State
+	},
+	p2 = {
+		x: 301, // X Pos
+		y: 300, // Y Pos
+		r: 0, // Rotation
+		vx: 0, // X Vel
+		vy: 0, // Y Vel
+		vr: 0, // Rotation Vel
+
+		s: 20, // Size
+		sh: tpl.isocTri, // Shape
+		h: 100, // Health
+		th: 100, // Total health
+		a: 0, // Ammunition
+		rr: 0.9, // Reload rate
+		ac: Infinity, // Ammo cap
+		g: 0, // Gun progress
+		gr: 0.9, // Gun rate
+		d: 1, // Damage
+
+		c: [86, 67], // 86, 67
+		n: 'p2',
+		t: 'Team 1',
+		dc: '#fff',
+		sc: '#fff',
+
+		cs: 'charge',
+	},
+	p3 = {
+		x: 300,
+		y: 300,
+		r: 0,
+		vx: 0,
+		vy: 0,
+		vr: 0,
+
+		s: 20,
+		sh: tpl.isocTri,
+		h: 100,
+		th: 100,
+		a: 0,
+		rr: 0.03,
+		ac: 2,
+		g: 0,
+		gr: 0.05,
+		d: 5,
+
+		c: [320,420],
+		n: 'p3',
+		t: 'Team 1',
+		dc: '#fff',
+		sc: '#fff',
+
+		cs: 'charge',
+	},
+	proj = [
+		/* {
+			x: 0,
+			y: 0,
+			vx: 0,
+			vy: 0,
+			t: owner team
+			o: shooter
+		} */
+	];
+
+var pl = [p1, Ship(1), Ship(2), Ship(3)];
+
+for(var i = 0; i < 9; i++) {
+	pl.push(Ship(pl.length));
+}
+
+var tickSpeed = 10;
+
+function clamp(x, min, max) {
+	return Math.max(min, Math.min(x, max));
+}
+
+function place(x, y, r, m, p) {
+	var p = p || [],
+		m = m || 0;
+	return p.map(function(i) {
+		var angle = (r + i[0] - 90) * Math.PI / 180;
+		var xPos = ((Math.cos(angle) * i[1] * m + x) / 10) * 10,
+			yPos = ((Math.sin(angle) * i[1] * m + y) / 10) * 10;
+		return [xPos, yPos];
+	});
+}
+
+function arrayPath(points) {
+	var path = new Path2D();
+	path.moveTo(points[0][0], points[0][1]);
+	points.forEach(function(i) {
+		path.lineTo(i[0], i[1]);
+	});
+	return path;
+}
+
+function init() {
+	var canvas = document.querySelector("canvas");
+	this.canvas = canvas;
+	this.ctx = canvas.getContext('2d');
+	ctx.fillStyle = '#fff';
+	function loop() {
+		reset();
+		tick();
+		aiTick();
+		setTimeout(function() {
+			loop();
+		}, tickSpeed);
+	}
+	loop();
+}
+
+function tick() {
+	if(b[90] && pl.length != 0) {
+		ss.pause();
+	}
+	if(b[88] && pl.length == 0) {
+		ss.resume();
+	}
+	pl.forEach(function(p) {
+		if(p === null) {
+			return;
+		}
+		// Controls
+			// Turning / Moving
+		if(b[p.c[0]]) {
+			p.vr = 2;
+		} else {
+			p.vr = 0;
+			p.vx += Math.cos((p.r - 90) * Math.PI / 180) * 0.1;
+			p.vy += Math.sin((p.r - 90) * Math.PI / 180) * 0.1;
+		}
+			// Shooting
+		if(b[p.c[1]] && p.a >= 1 && p.g >= 1) {
+			proj.push({
+				x: p.x,
+				y: p.y,
+				vx: Math.cos((p.r - 90) * Math.PI / 180) * 9 + p.vx,
+				vy: Math.sin((p.r - 90) * Math.PI / 180) * 9 + p.vy,
+				r: p.r,
+				p: p,
+			});
+			p.a--;
+			p.g--;
+		}
+
+		// Ammo
+		p.a = clamp(p.a + p.rr, 0, p.ac);
+		p.g = clamp(p.g + p.gr, 0, 1);
+
+		// Movement
+		p.vx *= 0.99 //clamp(p.vx, -2, 2);
+		p.vy *= 0.99 //clamp(p.vy, -2, 2);
+		p.x = /*p.x + p.vx*/clamp(p.x + p.vx, 0, canvas.width);
+		p.y = /*p.y + p.vy*/clamp(p.y + p.vy, 0, canvas.height);
+		p.r += p.vr;
+
+		if(p.x <= 0 || p.x >= canvas.width) {
+			p.vx = 0//(p.x + canvas.width) % canvas.width;
+			//ctx.fillStyle = '#f00';
+		}
+		if(p.y <= 0 || p.y >= canvas.height) {
+			p.vy = 0//(p.y + canvas.height) % canvas.height;
+			//ctx.fillStyle = '#f00';
+		}
+
+		ctx.fillStyle = hsv(p.h / p.th * 360 - 1, 1, 1)//p.dc || '#fff';
+		// Draw
+		ctx.fill(arrayPath(place(p.x, p.y, p.r, p.s, p.sh)));
+	});
+	proj.forEach(function(i, ind) {
+		i.x += i.vx;
+		i.y += i.vy;
+
+		//i.vx *= 0.99;
+		//i.vy *= 0.99;
+
+		ctx.fillStyle = i.p.sc || '#fff';
+		ctx.fill(arrayPath(place(i.x, i.y, i.r, i.p.s * 0.4, tpl.rect)));
+		if(i.x < 0 || i.x > canvas.width
+		|| i.y < 0 || i.y > canvas.height) {
+			proj.splice(ind, 1);
+		}
+		pl.forEach(function(p) {
+			if(p === null) {
+				return;
+			}
+			if(Math.pow(p.x - i.x, 2) + Math.pow(p.y - i.y, 2) < p.s * p.s / 2
+			&& i.p.t != p.t) {
+				//ctx.fillRect(0, 0, canvas.width, canvas.height);
+				proj.splice(ind, 1);
+				p.h -= i.p.d;
+				if(p.h <= 0) {
+					pl[pl.indexOf(p)] = null;
+				}
+				// console.log(i.p.n + ' > ' + p.n + ' at ' + ((new Date()).getTime() - st) / 1000 + 's');
+			}
+		})
+	});
+};
+
+function aiTick() {
+	pl.forEach(function(p) {
+		if(p === null) {
+			return;
+		}
+		if(p.c[0] >= 300 && p.c[0] < 400) {
+			b[p.c[0]] = ai.seek(p, pl[p.c[0].toString()[2]]);
+		}
+		if(p.c[1] >= 400 && p.c[1] < 500) {
+			b[p.c[1]] = ai.shoot(p, pl[p.c[1].toString()[2]]);
+		}
+	});
+}
+
+function hsv(h, s, v) {
+	var c = v * s,
+		h1 = h / 60;
+	var x = c * (1 - Math.abs(h1 % 2 - 1)),
+		m = v - c;
+	var rgb;
+	switch(Math.floor(h1)) {
+		case 0:
+			rgb = [c,x,0];
+			break;
+		case 1:
+			rgb = [x,c,0];
+			break;
+		case 2:
+			rgb = [0,c,x];
+			break;
+		case 3:
+			rgb = [0,x,c];
+			break;
+		case 4:
+			rgb = [x,0,c];
+			break;
+		case 5:
+			rgb = [c,0,x];
+			break;
+		default:
+			rgb = [0,0,0];
+	}
+	return '#' + rgb.map(function(x) {
+		return ('00' + Math.floor((x + m) * 255).toString(16)).slice(-2);
+	}).join('');
+}
+
+var opac = 0.2;
+
+function reset() {
+	var prevColor = ctx.fillStyle;
+	//ctx.fillStyle = 'rgba(0, 66, 132, 0.1)';
+	ctx.fillStyle = 'rgba(0, 0, 0, ' + opac + ')';
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = prevColor;
+}
+
+ss = {
+	pl: [],
+	proj: [],
+	opac: 0,
+	pause: function() {
+		this.pl = pl;
+		pl = [];
+		this.proj = proj;
+		proj = [];
+		this.opac = opac;
+		opac = 0;
+	},
+	resume: function() {
+		pl = this.pl;
+		this.pl = [];
+		proj = this.proj;
+		this.proj = [];
+		opac = this.opac;
+		this.opac = 0;
+	}
+}
+
+function srand(seed) {
+	var x = Math.sin(seed++) * 10000;
+	return x - Math.floor(x);
+}
+
+var b = {};
+
+document.addEventListener('keydown', function(e) {
+	if(!b[e.keyCode]) {
+		b[e.keyCode] = true;
+	}
+});
+
+document.addEventListener('keyup', function(e) {
+	// console.log(e.keyCode, String.fromCharCode(e.keyCode));
+	if(b[e.keyCode]) {
+		b[e.keyCode] = false;
+	}
+});
+
+var ai = {
+	err: function(seed) {
+		//return 0;
+		return srand(Math.floor((new Date()).getTime() / 2000) + seed) * 2 - 1 + Math.random() - 0.5;
+	},
+	seek: function(p, i) {
+		if(i === null) {
+			return true;
+		}
+		var ang = p.r % 360,
+			dist = Math.sqrt(Math.pow(p.x - i.x, 2) + Math.pow(p.y - i.y, 2)),
+			lead = Math.floor(Math.abs(this.err(pl.indexOf(p))) * 5) + 3;
+		var rand = dist * this.err(pl.indexOf(p)) / 50;
+		var tgtDir = (-Math.atan2(p.x-i.x + (p.vx-i.vx) * dist / lead, p.y-i.y + (p.vy-i.vy) * dist / lead) * 180 / Math.PI - ang + 360) % 360 + rand;
+		var strDir = (-Math.atan2(p.x-i.x, p.y-i.y) * 180 / Math.PI - ang + 360) % 360;
+
+
+
+		/*if(!b[90]) {
+			p.cs = 'charge';
+		} else {
+			p.cs = 'idle';
+		}*/
+
+		// ctx.fill(arrayPath(place(p.x, p.y, strDir + ang, dist, tpl.stick)));
+		function calc() {
+			if(p.cs == 'charge') {
+				return charge();
+			} else if(p.cs == 'flee') {
+				return flee();
+			} else if(p.cs == 'idle') {
+				return true;
+			//} else if(p.cs == 'orbit') {
+			//	return orbit();
+			} else {
+				return false;
+			}
+		}
+
+		return calc();
+
+		function charge() {
+			if(tgtDir > 60 && tgtDir < 135){
+				return true;
+			}
+			if(dist < 200 && tgtDir > 30 && tgtDir < 330) {
+				return true;
+			}
+			return tgtDir > 0 && tgtDir < 225;
+		}
+
+		function flee() {
+			return tgtDir < 135 || tgtDir > 225;
+		}
+
+		function edge() {
+			// Edge
+			var er = false; // Edge Rot
+			if(p.y == 0) {
+				er = er || ang < 105 || ang > 165;
+			} else if(p.y == canvas.height) {
+				er = er || (ang > 75 && ang < 285);
+			}
+			if(p.x == 0) {
+				er = er || ang < 15 || ang > 165;
+			} else if(p.x == canvas.width) {
+				er = er || (ang > 335 || ang > 0 && ang < 195);
+			}
+			if(er) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+	},
+	shoot: function(p, i) {
+		if(p == null) {
+			return;
+		}
+		if(i == null) {
+			return false;
+		}
+		//return true;
+		var ang = p.r % 360,
+			dist = Math.sqrt(Math.pow(p.x - i.x, 2) + Math.pow(p.y - i.y, 2)),
+			lead = Math.floor(this.err(pl.indexOf(p) + 10) * 7) + 2;
+		var rand = dist * this.err(pl.indexOf(p) + 10) / 50;
+		var tgtDir = (-Math.atan2(p.x-i.x + (p.vx-i.vx) * dist / lead, p.y - i.y + (p.vy-i.vy) * dist / lead) * 180 / Math.PI - ang + 360) % 360 + rand;
+		if(p.cs == 'charge') {
+			if((tgtDir > 345 || tgtDir < 15) && p.a >= 1 && dist < 400) {
+				if(Math.random() > 0.8) {
+					return true;
+				}
+			};
+		}
+		return false;
+	}
+}
+
+init();
+</script>
