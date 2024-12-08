@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>{% if page.props.title %}{{ page.props.title }} - {% endif %}kwellig.garden</title>
+		<meta name="description" content="{{ page.props.excerpt | default("Where temmie puts her (new) internet things!") }}">
+
+		<meta name="robots" content="noindex">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	</head>
+	<body>
+		{% block body %}
+		{{ content }}
+		{% endblock %}
+	</body>
+</html>

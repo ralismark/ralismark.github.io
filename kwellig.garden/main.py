@@ -1,15 +1,22 @@
+from pathlib import Path
+
 import heron
+
+here = Path(__file__).parent
+
+jenv = heron.jinja.base_env.overlay(
+    loader=heron.jinja.Loader(here),
+)
 
 
 def inner_main(ctx: heron.core.BuildContext):
-    yield heron.recipe.WriteRecipe(
-        "index.html",
-        """
-<!doctype html>
-<body>
-Hello world!!
-        """)
-    yield heron.recipe.WriteRecipe(".nojekyll", "")
+    for root_page_glob in ["*.html", "*.md", "*.d"]:
+        for path in ctx.input(here).glob(root_page_glob):
+            yield heron.recipe.PageRecipe(path, f"/{path.stem}.html", jenv)
+
+    # extra stuff
+
+    yield heron.recipe.CopyRecipe(here / "robots.txt", "/robots.txt")
 
 
 @heron.recipe.FnRecipe
