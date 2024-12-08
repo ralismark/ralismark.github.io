@@ -36,14 +36,8 @@ def one(x: t.Iterable):
 
 @heron.util.setitem(jenv.globals, "parse_tags")
 def parse_tags(
-    page: t.Union[heron.recipe.PageRecipe, heron.recipe.PageInout, t.Mapping]
+    page: t.Mapping
 ):
-    if isinstance(page, heron.core.Recipe):
-        page = heron.core.current_ctx().build(page)
-    if isinstance(page, heron.recipe.PageInout):
-        page = page.props
-    page = t.cast(t.Mapping, page)
-
     tags = page.get("tags")
     if tags is None:
         return []

@@ -42,7 +42,7 @@
 				<abbr title="{{ wc }} total words">{{ readtime }} min{% if readtime != 1 %}s{% endif %} to read</abbr>
 			</li>
 
-			{% set tags = parse_tags(page) %}
+			{% set tags = parse_tags(page.props) %}
 			{% if tags %}
 			<li>
 				<span id="post-tag-label">Tags:</span>
