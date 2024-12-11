@@ -76,10 +76,13 @@ function squareFromCoords(c)
 	if(arguments.length > 1) {
 		return squareFromCoords(new Vector(...arguments));
 	}
+
+	// convert from screen-space coords to canvas coords
+	let canvasPos = c.div(canvas.offsetWidth, canvas.offsetHeight).mul(canvasSize())
 	let boardSize = W.ssize.mul(W.gdims);
 	let origin = canvasSize().div(2).sub(boardSize.div(2));
 
-	let square = c.sub(origin).div(W.ssize).map(Math.floor);
+	let square = canvasPos.sub(origin).div(W.ssize).map(Math.floor);
 	if(square.x < 0 || W.gdims.x <= square.x
 	   || square.y < 0 || W.gdims.y <= square.y) {
 		return null;
