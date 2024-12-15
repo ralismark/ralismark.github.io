@@ -31,7 +31,12 @@ tags:
 {% set natures = recipe.read("./natures.json") | parse_json %}
 {% set calendar = recipe.read("./calendar.yaml") | parse_yaml %}
 
-{% set menu %}
+<script>
+	function diceroll(options) {
+		location = "#" + options[Math.floor(Math.random() * options.length)]
+	}
+</script>
+
 <menu class="Wide">
 	<li><a href="#">^</a></li>
 	<li><a href="#rules">Rules</a></li>
@@ -40,9 +45,6 @@ tags:
 	<li><a href="#calendar">Calendar</a></li>
 	<li><a href="#end">$</a></li>
 </menu>
-{% endset %}
-
-{{ menu }}
 
 <h1 class="Wide">Rules</h1>
 
@@ -58,8 +60,6 @@ tags:
 				{% endfor %}
 			</tbody>
 		</table>
-
-		<br style="margin-top: 30vh">
 	</div>
 </div>
 
@@ -87,9 +87,22 @@ tags:
 					<a href="#trait-{{ name }}" data-trait="{{ name }}">{{ name }}</a>
 				{% endfor %}
 			</tbody>
-		</table>
 
-		<br style="margin-top: 30vh">
+			<tfoot>
+				<tr><th>RNG</th><td>
+					<script>
+						{% for type in ["regular", "traumatised", "magical"] %}
+						const {{ type }}TraitAnchors = [ {% for name, trait in traits.items() %}{% if trait.type == type %}"trait-{{ name }}",{% endif %}{% endfor %} ]
+						{% endfor %}
+					</script>
+
+
+					<a href="javascript:diceroll(regularTraitAnchors.concat(magicalTraitAnchors, traumatisedTraitAnchors))">all</a>
+					<a href="javascript:diceroll(regularTraitAnchors)">regular</a>
+					<a href="javascript:diceroll(regularTraitAnchors.concat(magicalTraitAnchors))">non-trauma</a>
+				</td></tr>
+			</tfoot>
+		</table>
 	</div>
 </div>
 
@@ -122,6 +135,15 @@ tags:
 					<a href="#nature-{{ name }}">{{ name }}</a>
 				{% endfor %}
 			</tbody>
+
+			<tfoot>
+				<tr><th>RNG</th><td>
+					<script>
+						const natureAnchors = [ {% for name in natures %}"nature-{{ name }}",{% endfor %} ]
+					</script>
+					<a href="javascript:diceroll(natureAnchors)">all</a>
+				</td></tr>
+			</tfoot>
 		</table>
 	</div>
 </div>
@@ -173,6 +195,19 @@ tags:
 					{% endfor %}
 				{% endfor %}
 			</tbody>
+
+			<tfoot>
+				<tr><th>RNG</th><td>
+					<script>
+						const monthAnchors = [
+							{% for season in calendar %}
+								{% for month in season.months %}"month-{{ month.name }}",{% endfor %}
+							{% endfor %}
+						]
+					</script>
+					<a href="javascript:diceroll(monthAnchors)">months</a>
+				</td></tr>
+			</tfoot>
 		</table>
 	</div>
 </div>
