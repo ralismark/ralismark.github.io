@@ -1,0 +1,99 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8">
+	<!--
+	 color-scheme: light dark does a number of things:
+	 1. It makes it so that a background isn't added to the iframe. This isn't
+	    actually documented anywhere (wtf), but see https://fvsch.com/transparent-iframes.
+	 2. It tells the browser to use appropriate font colours if the <iframe> has
+	    color-scheme: dark
+	-->
+	<meta name="color-scheme" content="light dark">
+	<base target="_parent">
+</head>
+<body>
+	<style>
+html, body {
+	box-sizing: border-box;
+	height: 100%;
+	margin: 0;
+}
+
+body {
+	padding: 1.5% 1.5%;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: auto auto auto;
+
+	align-items: center;
+	justify-items: center;
+
+	text-align: center;
+}
+
+.stop {
+	grid-row: 1 / span 1;
+	position: relative;
+}
+
+.ball {
+	grid-row: 2 / span 1;
+
+	width: 1.1rem;
+	height: 1.1rem;
+
+	border-radius: 50%;
+	background: Canvas;
+	border: 0.2rem solid CanvasText;
+}
+
+.segment {
+	grid-row: 2 / span 1;
+
+	width: 100%;
+	height: 0.3rem;
+
+	border-color: hsl(290, 50%, 50%);
+	border-style: solid;
+	border-width: 0.2rem 0;
+}
+
+.segment.dotted {
+	border-style: dashed;
+}
+	</style>
+
+	
+	
+
+	
+	
+
+	<div class="stop" style="grid-column: 1 / span 2">
+		<a title="Violet Tea House" href="https://www.violetteahouse.com/">Violet Tea House</a>
+	</div>
+	<div class="stop" style="grid-column: 3 / span 2">
+		<em>julia's space</em>
+	</div>
+	<div class="stop" style="grid-column: 5 / span 2">
+		<a title="ralismark" href="https://www.ralismark.xyz">ralismark</a>
+	</div>
+
+	<div class="segment dotted" style="grid-column: 1 / 2"></div>
+	<div class="segment" style="grid-column: 2 / 3"></div>
+	<div class="segment" style="grid-column: 3 / 4"></div>
+	<div class="segment" style="grid-column: 4 / 5"></div>
+	<div class="segment" style="grid-column: 5 / 6"></div>
+	<div class="segment dotted" style="grid-column: 6 / 7"></div>
+
+	<div class="ball" style="grid-column: 1 / span 2"></div>
+	<div class="ball" style="grid-column: 3 / span 2"></div>
+	<div class="ball" style="grid-column: 5 / span 2"></div>
+
+	<div style="grid-column: 1 / 7; grid-row: 3 / 4">
+		<a href="http://www.ralismark.xyz/the-fruit-loop/">The Fruit Loop</a>
+	</div>
+
+	
+</body>

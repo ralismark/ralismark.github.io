@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="color-scheme" content="light dark">
+
+		<title>The Fruit Loop - The Fruit Loop</title>
+		<style>
+body {
+	max-width: 600px;
+	margin: 2em auto;
+	padding: 0 2em;
+	line-height: 1.5;
+}
+
+body > * {
+	overflow-x: auto;
+}
+
+div.highlighter-rouge {
+	border: 1px solid grey;
+	padding: 0.5rem;
+}
+
+pre {
+	margin: 0;
+}
+
+img {
+	max-width: 100%;
+}
+		</style>
+	</head>
+	<body>
+		<h1 id="the-fruit-loop">The Fruit Loop</h1>
+
+<p>The Fruit Loop is based on the <a href="https://github.com/ralismark/wreath-webring-template">Wreath Webring Template</a>, a template for building a <a href="https://en.wikipedia.org/wiki/Webring">webrings</a> with Jekyll on GitHub Pages.</p>
+
+<h2 id="joining">Joining</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>⚠️ Warning!</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>This webring is invite-only and <strong>not open to the public</strong>. PRs to add people that have not been explicitly invited will be rejected.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>To add a person to the webring, create a file in the <code class="language-plaintext highlighter-rouge">_ring</code> folder named <code class="language-plaintext highlighter-rouge">YOUR_NAME.html</code> – this name won’t be used anywhere except for in the URL of the navbar widget.
+Its content should be like this:</p>
+
+<div class="language-md highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">href</span><span class="pi">:</span> <span class="s2">"</span><span class="s">&lt;url&gt;"</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">&lt;name&gt;"</span>
+<span class="na">blurb</span><span class="pi">:</span> <span class="pi">|</span>
+  <span class="s">&lt;description&gt;</span>
+<span class="s">---</span>
+
+<span class="nt">&lt;extra</span> <span class="na">html</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>where:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">&lt;url&gt;</code> is the URL of their website, that links in the webring for your website will point to.</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;name&gt;</code> is the name shown in the navbar widget, and on the index page.</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;description&gt;</code> is a brief description, used in the listing on the index page.</li>
+</ul>
+
+<p>You can also have a look at existing entries to see examples</p>
+
+<h2 id="how-to-embed-the-navbar">How to embed the navbar</h2>
+
+<p>Once you’re part of this webring, it’s highly recommended that you add the navbar widget to your website.
+To do so, include the following html snippet, replacing <code class="language-plaintext highlighter-rouge">YOUR_NAME</code> with the username you registered with.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;iframe</span>
+  <span class="na">style=</span><span class="s">"
+    width: 100%;
+    max-width: 25rem;
+    display: block;
+    margin: 0 auto;
+    height: 6rem;
+    border: none;
+  "</span>
+  <span class="na">src=</span><span class="s">"https://www.ralismark.xyz/the-fruit-loop/embed/YOUR_NAME"</span>
+<span class="nt">&gt;&lt;/iframe&gt;</span>
+</code></pre></div></div>
+
+<!-- -->
+
+<p>Here’s an example of what it looks like (with an added border so you can see the size):</p>
+
+<iframe style="
+    width: 100%;
+    max-width: 25rem;
+    display: block;
+    margin: 0 auto;
+    height: 6rem;
+    border: 1px solid grey;
+  " src="https://www.ralismark.xyz/the-fruit-loop/embed/julias-space"></iframe>
+
+<!-- -->
+
+<p>Feel free to tweak the style attribute – these are just defaults that work for most people.</p>
+
+<p>You can specify <code class="language-plaintext highlighter-rouge">&lt;extra html&gt;</code> to inject extra CSS to your widget to make it fit in better with your website.</p>
+
+<h2 id="a-note-about-dark-themed-website-and-iframe-backgrounds">A note about dark-themed website and iframe backgrounds</h2>
+
+<p>The embed is capable of rendering in both light or dark mode.
+However, unless you website is correctly configured for it, it may be styled incorrectly:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Additional background</th>
+      <th>Unreadable text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/the-fruit-loop/assets/color-scheme-1.png" alt="Widget with extra grey background" /></td>
+      <td><img src="/the-fruit-loop/assets/color-scheme-2.png" alt="Widget with black text on dark background" /></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The cause of this is that the browser, by default, assumes your website is light-themed, and either <a href="https://github.com/w3c/csswg-drafts/issues/4772">inserts a background</a> (case 1), or uses colours suitable for light-themed websites (case 2).
+As such, these problems are also more likely to occur in dark-themed websites.</p>
+
+<p>If you already have <code class="language-plaintext highlighter-rouge">&lt;meta name="color-scheme" content="dark light"&gt;</code>, or have <code class="language-plaintext highlighter-rouge">color-scheme: dark light</code> in your CSS (or similar two-valued <code class="language-plaintext highlighter-rouge">color-scheme</code>), you shouldn’t need to do anything!</p>
+
+<p>Otherwise, if your website:</p>
+
+<ul>
+  <li>
+    <p><strong>is always dark-themed</strong>, add <code class="language-plaintext highlighter-rouge">&lt;meta name="color-scheme" content="dark"&gt;</code> to the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> of your pages.</p>
+  </li>
+  <li>
+    <p><strong>is always light-themed</strong>, add <code class="language-plaintext highlighter-rouge">&lt;meta name="color-scheme" content="light"&gt;</code> to the <code class="language-plaintext highlighter-rouge">&lt;head&gt;</code> of your pages.</p>
+  </li>
+  <li>
+    <p><strong>supports both light and dark theme</strong> (e.g. via a theme toggle, or because you respect <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme"><code class="language-plaintext highlighter-rouge">prefers-color-scheme</code></a>), then you need to apply certain CSS rules depending on whether your website is in light or dark mode:</p>
+
+    <ul>
+      <li>In light mode, apply <code class="language-plaintext highlighter-rouge">color-scheme: light</code> to <code class="language-plaintext highlighter-rouge">:root</code> or <code class="language-plaintext highlighter-rouge">html</code> or <code class="language-plaintext highlighter-rouge">body</code></li>
+      <li>In dark mode, apply <code class="language-plaintext highlighter-rouge">color-scheme: dark</code> to <code class="language-plaintext highlighter-rouge">:root</code> or <code class="language-plaintext highlighter-rouge">html</code> or <code class="language-plaintext highlighter-rouge">body</code></li>
+    </ul>
+
+    <p>Make sure they are also correct for the default theme you use!</p>
+  </li>
+</ul>
+
+
+	</body>
+</html>

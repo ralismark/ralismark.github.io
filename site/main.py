@@ -4,6 +4,7 @@ import typing as t
 from pathlib import Path
 import os
 import re
+import dataclasses
 
 from frozendict import frozendict
 
@@ -138,6 +139,18 @@ def inner_main(ctx: heron.core.BuildContext):
         "/assets/foundation.css",
         include_paths=(str(here / "layout/css"),),
     )
+
+    yield RecursiveCopy(here / "the-fruit-loop", "/the-fruit-loop")
+
+
+@dataclasses.dataclass(frozen=True)
+class RecursiveCopy(heron.recipe.InoutRecipeBase):
+    def build_impl(self, ctx: heron.core.BuildContext):
+        if ctx.input(self.path).is_dir():
+            for entry in ctx.input(self.path).iterdir():
+                ctx.build(RecursiveCopy(entry, self.opath / entry.name))
+        else:
+            ctx.build(heron.recipe.CopyRecipe(self.path, self.opath))
 
 
 @heron.recipe.FnRecipe
