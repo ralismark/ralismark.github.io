@@ -140,8 +140,6 @@ def inner_main(ctx: heron.core.BuildContext):
         include_paths=(str(here / "layout/css"),),
     )
 
-    yield RecursiveCopy(here / "the-fruit-loop", "/the-fruit-loop")
-
 
 @dataclasses.dataclass(frozen=True)
 class RecursiveCopy(heron.recipe.InoutRecipeBase):
