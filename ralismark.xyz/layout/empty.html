@@ -33,9 +33,12 @@
 		<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" {{ katex_attrs }}>
 		<noscript><link rel="stylesheet" {{ katex_attrs }}></noscript>
 
+		{% if site.shorturl == "ralismark.xyz" %}
 		<!-- indieweb -->
-		<link rel="webmention" href="https://webmention.io/www.ralismark.xyz/webmention" />
-		<link rel="pingback" href="https://webmention.io/www.ralismark.xyz/xmlrpc" />
+		{% set fqdn = site.url | re.sub("https?://", "") %}
+		<link rel="webmention" href="https://webmention.io/{{ fqdn }}/webmention" />
+		<link rel="pingback" href="https://webmention.io/{{ fqdn }}/xmlrpc" />
+		{% endif %}
 
 		<script>
 			// do it in head so we don't get flash of wrong style
