@@ -65,7 +65,7 @@ The actual day of April Fools rolled around, and I had a bit of fun with it and 
 
 .. admonition:: aside
 
-	Personally, despite the custom for fooling to stop after noon, it's much more fun  (and accomodating for people with later sleep schedules) if pranks last the whole day!
+	Personally, despite the custom for fooling to stop after noon, it's much more fun (and accomodating for people with later sleep schedules) if pranks last the whole day!
 
 While originally these changes weren't meant to stay, it turns out that April Fools is actually a pretty good excuse to trial-run names (of any kind) without any commitment!
 After using them and seeing them for the day, they started to grow on me.

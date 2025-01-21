@@ -1,9 +1,14 @@
 {% set placeholder_img = recipe.copy("../assets/tem-placeholder.png", "/assets/tem-placeholder.png") %}
+{#
+- warn: self descriptive. something the reader should pay attention to and keep in mind while reading the subsequent content
+- aside: an interesting tidbit that's tangential to the content -- it doesn't particularly fit into the flow of the text. This includes "author's notes" and such, and has quite a bit of overlap with footnotes. Speaking _as the author_.
+- ask: when speaking _as if_ another character, or another writer.
+
+#}
 {% set preset = {
-	"ask": (placeholder_img, "tem is asking"),
-	"say": (placeholder_img, "tem is saying"),
-	"aside": (placeholder_img, "tem is thinking"),
 	"warn": (placeholder_img, "tem is warning"),
+	"aside": (placeholder_img, "tem is thinking"),
+	"ask": (placeholder_img, "tem is asking"),
 }.get(title, (None, None)) %}
 {% set image = options.image | default(preset[0]) %}
 {% set alt = options.alt | default(preset[1]) | default("") %}
