@@ -4,6 +4,7 @@ Subclasses of jinja types to alter their behaviour.
 
 from pathlib import Path
 import datetime as dt
+import math
 import json
 import os
 import re
@@ -105,6 +106,7 @@ base_env = Environment(
     ],
 )
 base_env.globals["dt"] = dt
+base_env.globals["math"] = math
 base_env.filters["repr"] = repr
 base_env.tests["recipe"] = lambda v: isinstance(v, core.Recipe)
 

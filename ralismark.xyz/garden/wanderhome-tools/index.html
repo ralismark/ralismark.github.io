@@ -171,7 +171,7 @@ tags:
 		<p>Choose 1 folklore about this place.</p>
 		<ul>
 			{% for folklore in nature.folklore %}
-				<li>{{ folklore }}</li>
+				<li>{{ folklore | re.sub("#([A-Za-z-]+)", '<a href="#trait-\\1" data-trait="\\1">\\1</a>') }}</li>
 			{% endfor %}
 			<li>Something Else Of Your Own Invention</li>
 		</ul>
