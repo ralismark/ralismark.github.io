@@ -27,4 +27,4 @@ class KatexRecipe(core.Recipe[str]):
             input=self.content,
             capture_output=True,
         )
-        return proc.stdout
+        return proc.stdout.strip()
