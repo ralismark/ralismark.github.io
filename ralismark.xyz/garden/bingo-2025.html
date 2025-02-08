@@ -1,0 +1,238 @@
+---
+layout: standalone
+title: 2025 New Year's <s>Resolution</s> Super-Bingo
+---
+
+{% set goals = [
+	(0, 1, "HSK3"),
+	(0, 50, "50 ASL signs"),
+	(0, 1, "new bike"),
+	(0, 7, "7 continuous days no work"),
+	(0, 1, "skirt i regularly wear"),
+	(0, 1, "string ensemble"),
+	(0, 1, "learn pasta cooking"),
+	(0, 1, "dye hair"),
+	(0, 1, "stargazing"),
+	(0, 2, "make 2 clothes"),
+	(0, 1, "draw 1 art per blorbo"),
+	(0, 19, "makeup 19 times"),
+	(0, 1, "commission art"),
+	(0, 1, "move out!"),
+	(0, 1, "progress towards bottom surgery"),
+	(0, 2, "2 new shoes"),
+	(0, 1, "offhand chopsticks"),
+	(1, 1, "swimwear"),
+	(0, 6, "6 entries of (writing project)"),
+	(0, 1, "B2"),
+	(0, 6, "6 glob posts"),
+	(0, 6, "6 musicals"),
+	(0, 3, "organise 3 picnics"),
+	(0, 1, "complete outer wilds"),
+	(0, 1, "leave the state"),
+	(0, 1, "complete deltarune ch.2"),
+	(1, 1, "set up kwellig.garden"),
+	(0, 1, "?"),
+	(0, 1, "?"),
+	(0, 1, "?"),
+	(0, 1, "?"),
+	(1, 1, "Take every form of estradiol medication"),
+] %}
+
+<section id="bingo">
+	<div class="head">2</div>
+	<div class="head">0</div>
+	<div class="head">❤</div>
+	<div class="head">2</div>
+	<div class="head">5</div>
+
+	<div class="tile free">
+		be me &lt;3
+	</div>
+
+	{% for progress, total, goal in goals %}
+		<div
+			class="tile"
+			{% if progress == total %}
+			data-completed
+			{% endif %}
+		>
+			{{ goal }}
+		</div>
+	{% endfor %}
+</section>
+
+<style>
+#bingo {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: auto repeat(7, 1fr);
+
+	border-bottom: 4px solid purple;
+	text-align: center;
+
+	> div {
+		align-content: center;
+	}
+
+	.head {
+		grid-row: 0 / span 1;
+		background: purple;
+	}
+
+	.free {
+		background: purple;
+		grid-area: 4 / 3 / 7 / 4;
+	}
+
+	.tile {
+		padding: 0.25rem;
+		position: relative; /* to establish positioning root */
+	}
+
+	.tile[data-completed]::before {
+		content: "⭐";
+
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%) rotate(calc(var(--random) * 36deg + 10deg));
+
+		font-size: 300%;
+		opacity: 50%;
+		pointer-events: none;
+	}
+
+}
+
+</style>
+
+<br style="margin: 5rem">
+
+{% set star_svg %}<?xml version="1.0" encoding="UTF-8"?>
+
+{% macro tracestar(outer, inner) -%}
+M0 -{{outer}}
+{% for i in range(1, 6) %}
+	L{{ math.sin(math.tau * (i - 0.5)/5)*inner }} {{ -math.cos(math.tau * (i - 0.5)/5)*inner }}
+	L{{ math.sin(math.tau * i/5)*outer }} {{ -math.cos(math.tau * i/5)*outer }}
+{% endfor %}
+Z
+{%- endmacro %}
+
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	viewBox="-100 -100 200 200"
+	fill="none"
+>
+	<path
+		stroke-width="18"
+		stroke-linejoin="round"
+		stroke="#f69228"
+		fill="#f69228"
+		d="{{ tracestar(90, 40) }}"
+	/>
+
+	<path
+		stroke="#fbc21a"
+		fill="#fbc21a"
+		d="{{ tracestar(70, 30) }}"
+	/>
+
+</svg>
+{% endset %}
+{% set star_svg = recipe.write(star_svg, "/assets/star.svg") %}
+
+<div class="Task" style="--progress: 1/1">
+	<time class="paper" datetime="2025-01-21">21 Jan</time>
+	<div>
+		<p>
+			Set up kwellig.garden
+		</p>
+	</div>
+</div>
+<div class="Task" style="--progress: 1/6">
+	<div>
+		<p>
+			Watch 6 theatre productions
+		</p>
+		<ol>
+			<li>
+				<time class="paper" datetime="2025-01-20">20 Jan</time>
+				Ghost Quartet
+			</li>
+		</ol>
+	</div>
+</div>
+<div class="Task" style="--progress: 1/1">
+	<time class="paper" datetime="2025-01-25">25 Jan</time>
+	<p>Get swimwear & go swimming :3</p>
+</div>
+<div class="Task" style="--progress: 14/16">
+	<p>Finish <a href="https://pactwebserial.wordpress.com/">Pact by Wildbow</a></p>
+</div>
+<div class="Task" style="--progress: 1/6">
+	<div>
+		<p>6 blog posts</p>
+		<ol>
+			<li><time class="paper" datetime="2025-01-26">26 Jan</time><a href="/posts/swimming">Notes from swimming for the first time in ~3 years</a></li>
+		</ol>
+	</div>
+</div>
+<div class="Task" style="--progress: 1">
+	<time class="paper" datetime="2025-01-17">17 Jan</time>
+	<p>Take every form of estradiol medication</p>
+</div>
+
+<style>
+.Task {
+	display: grid;
+
+	margin: 1em 0;
+
+	--star-size: 4.4rem;
+
+	grid-template-columns: var(--star-size) 1fr;
+	column-gap: 0.5rem;
+	grid-template-areas:
+		"star description";
+
+	& > div, & > p {
+		align-self: center;
+	}
+
+	& > p, & > div > * {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	&::before {
+		content: "";
+		display: block;
+
+		grid-area: star;
+
+		width: var(--star-size);
+		height: var(--star-size);
+
+		background-image: url("{{ star_svg }}");
+		mask-image: conic-gradient(
+			#000 0%,
+			#000 calc(100% * var(--progress, 0)),
+			#0003 calc(100% * var(--progress, 0))
+		);
+		transform: rotate(calc((var(--random) - 50) / 100 * 60deg));
+	}
+
+	& > time {
+		grid-area: star;
+		justify-self: center;
+		align-self: start;
+
+		margin-top: calc(var(--star-size) / 2 - 0.5lh - 4px);
+
+		padding: 4px;
+		line-height: 1em;
+	}
+
+}
+</style>
