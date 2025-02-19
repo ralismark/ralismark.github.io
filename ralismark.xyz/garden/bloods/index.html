@@ -1,0 +1,56 @@
+---
+layout: standalone-wide
+title: Pathology
+---
+
+{% set data = recipe.read("data.yaml") | parse_yaml %}
+{% set results = data.events | selectattr("measurements") | list %}
+
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Date</th>
+			{% for abbr, test in data.tests.items() %}
+			<th>{{ test.name }}<br>{{ test.unit }}</th>
+			{% endfor %}
+			<th>Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for ev in data.events %}
+		<tr>
+			<th scope="row">
+				<time datetime="{{ ev.date.strftime("%Y-%m-%d") }}">
+					{{ ev.date.strftime("%Y-%m-%d") }}
+				</time>
+			</th>
+			{% for abbr in data.tests %}
+			<td>
+				{% if ev.measurements %}
+					{{ ev.measurements[abbr] }}
+				{% endif %}
+			</td>
+			{% endfor %}
+			<td>{{ ev.notes }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+<style>
+table {
+	position: relative;
+	overflow-x: revert !important;
+}
+
+thead {
+	position: sticky;
+	top: 0;
+	color: var(--filled-fg);
+	background: var(--filled-bg);
+}
+
+tr:nth-child(2n) {
+	background: rgba(128, 128, 128, 0.2);
+}
+</style>

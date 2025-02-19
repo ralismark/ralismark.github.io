@@ -1,0 +1,98 @@
+tests:
+  t:
+    name: "testosterone"
+    unit: "nmol/L"
+  e2:
+    name: "estradiol"
+    unit: "pmol/L"
+  p:
+    name: "progesterone"
+    unit: "nmol/L"
+  shbg:
+    name: "SHGB"
+    unit: "nmol/L"
+  fai:
+    name: "free androgen index"
+    unit: "%"
+  prolactin:
+    name: "prolactin"
+    unit: "mIU/L"
+  prolactin_recovery:
+    name: "%recovery of prolactin"
+    unit: "%"
+
+events:
+  - date: 2021-11-17
+    notes: >
+      pre-HRT
+    measurements:
+      t: 25 # "(Siemens)"
+      e2: 153 # "Oestradiol by Siemens Atellica assay"
+      fsh: 6 # iu/L
+      lh: 4.3 # iu/L
+
+  - date: 2022-01-17
+    notes: >
+      Commencement of HRT :>
+
+  - date: 2022-04-12
+    notes: >
+      50mcg/day patches. Subsequent results are on 100mcg/day patch.
+    measurements:
+      t: 0.6
+      e2: 537
+
+  - date: 2022-07-22
+    measurements:
+      t: 0.4
+      e2: 934
+
+  - date: 2022-11-19
+    measurements:
+      t: 0.4
+      e2: 442
+
+  - date: 2023-06-02
+    measurements:
+      t: 0.5
+      e2: 308
+
+  - date: 2023-10-31
+    notes: >
+      This may have been around the patch shortage, when my dosage was
+      inconsistent.
+    measurements:
+      t: 4.9
+      e2: 133
+      p: 2.8
+
+  - date: 2024-01-08
+    notes: >
+      Implant of 2x 100mg stenlake pellets.
+
+  - date: 2024-06-06
+    measurements:
+      t: 0.4
+      e2: 291
+
+  - date: 2024-09-02
+    notes: >
+      Implant of 2x 100mg ballina pellets.
+
+  - date: 2024-11-21
+    measurements:
+      e2: 867
+      p: 16.5
+      t: 0.9
+      shbg: 39
+      fai: 2.3
+      prolactin: 540
+      prolactin_recovery: 91
+
+  - date: 2025-01-17
+    measurements:
+      t: 0.6
+      shbg: 53
+      fai: 1.1
+      e2: 559
+      p: 7.6
