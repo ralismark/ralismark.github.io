@@ -1,0 +1,190 @@
+---
+layout: post
+title: Writing Chinese With Hangul
+excerpt: A joke involving a constructed language in a constructed world.
+date: 2025-02-26
+tags:
+---
+
+{% filter markdownify %}
+I've just joined this D&D campaign that has some really cool and unique worldbuilding -- it throws out almost all of the existing D&D lore and replaces it with its own.
+Notably, Elvish and Sylvan have been replaced with _Hanseo_:
+
+> _A character based language originating from pictographic representations of basic concepts, it has multiple scripts._
+>
+> _The first being_ Traditional Hanseo, _which is also the oldest -- individual stylised characters for each concept and idea with combinations forming new words._
+>
+> _The second script is_ Simplified Hanseo _which has a much easier writing system with small characters that when put together in a block mimic the pronunciations used in_ Traditional Hanseo, _so that words are still pronounced the same._
+>
+> --- Twilight Isles Primer
+
+Clearly, _Traditional Hanseo_ is Chinese, and _Simplified Hanseo_ is Korean.
+So let's write Chinese in Hangul.
+{% endfilter %}
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Pinyin</th>
+			<th></th>
+			<th>Hangul</th>
+		</tr>
+	<tbody>
+		<tr>
+			<td>
+				<input
+					type="text"
+					id="p2h-in"
+					placeholder="bing1qi1ling2"
+					oninput="document.getElementById('p2h-out').value = p2h(this.value)"
+				>
+			</td>
+			<td>
+				<div data-column=2>&longrightarrow;</div>
+			</td>
+			<td>
+				<input
+					type="text"
+					id="p2h-out"
+				>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<style>
+table.table {
+	display: table !important;
+	width: 100% !important;
+}
+
+.table input {
+	width: 100%;
+}
+</style>
+
+{% filter markdownify %}
+...I may have gone a little too far with this.
+It handles a bunch of edge cases in Mandarin pronunciation, like palatisation and &lt;i&gt; corresponding to different phonemes depending on consonant.
+{% endfilter %}
+
+<script>
+
+// For how Hangul works in unicode, see: https://ashedow.github.io/documents/Korean_Hangul_Syllabary_in_Unicode.pdf
+
+const onsetConvert = {
+	// TODO figure out unambiguous z zh j / c ch q
+	"":   0x110b,
+	"b":  0x1107,
+	"p":  0x1111,
+	"m":  0x1106,
+	"f":  0x1157, // archaic
+	"d":  0x1103,
+	"t":  0x1110,
+	"n":  0x1102,
+	"z":  0x110c, // approx: z = zh = j (overlap!)
+	"c":  0x110e, // approx: c = ch = q (overlap!)
+	"s":  0x1109, // (duplicated)
+	"l":  0x111b, // repurpose of archaic r variant
+	"zh": 0x110c, // approx: z = zh = j (overlap!)
+	"ch": 0x110e, // approx: c = ch = q (overlap!)
+	"sh": 0x110a, // repurpose of ss
+	"r":  0x1105,
+	"j":  0x110c, // (duplicated)
+	"q":  0x110e, // (duplicated)
+	"x":  0x113c, // archaic variant of s
+	"g":  0x1100,
+	"k":  0x110f,
+	"h":  0x1112,
+}
+
+const nucleusConvert = {
+	"e":   0x1166, // e (/e/)
+	"a":   0x1161, // a (/a/)
+	"ei":  0x1173, // eu (/ɯ/)
+	"ai":  0x1162, // ae (/ɛ/)
+	"ou":  0x1169, // o (/o/)
+	"ao":  0x1162, // eo (/ʌ/)
+
+	"i":   0x1175, // i (/i/)
+	"ie":  0x1168, // ye (/je/)
+	"ia":  0x1163, // ya (/ja/)
+	"iou": 0x116d, // yo (/jo/)
+	"iao": 0x1167, // yeo (/jʌ/), kinda shit approx
+
+	"u":   0x116e, // u (/u/)
+	"uo":  0x116f, // wo (/wʌ/)
+	"ua":  0x116a, // wa (/wa/)
+	"uei": 0x1170, // we (/we/)
+	"uai": 0x116b, // wae (/wɛ/)
+
+	"v":   0x1171, // wi (/y/ ~ /ɥi/)
+	"ve":  0x1174, // ui / yi (/ɰi/)
+
+	// lower i, depends on onset
+	"_i": 0x116c, // oe (/ø/ ~ [we])
+
+	// unused:
+	// 0x1164, // yae (/jɛ/)
+	// 0x1172, // yu (/ju/)
+}
+
+const codaConvert = {
+	"":   0,      // don't emit a codepoint for null coda
+	"n":  0x11ab, // n (/n/)
+	"ng": 0x11bc, // ng (/ŋ/)
+	"r":  0x11af, // l (/ɭ/)
+}
+
+const toneConvert = {
+	"": 0,
+	"1": 0x304,
+	"2": 0x301,
+	"3": 0x30c,
+	"4": 0x300,
+}
+
+let pinyin_word_re = /([zcs]h|[wpbmfdtnzcslrjqxgkhy]|)([aeiouv]+)(ng|r|n|)([1234]?)/ig
+
+function p2h_one(match, onset, nucleus, coda, tone) {
+	// palatisation of nucleus following palatal onsets
+	if (["j", "q", "x"].includes(onset) && nucleus[0] === "u") {
+		nucleus = "v" + nucleus.substring(1)
+	}
+	if (onset === "y" && nucleus.startsWith("u")) {
+		onset = ""
+		nucleus = "v" + nucleus.substring(1)
+	}
+
+	// convert semivowels to diphthongs
+	if (onset === "y") {
+		onset = ""
+		if (nucleus !== "i") nucleus = "i" + nucleus
+	}
+	if (onset === "w") {
+		onset = ""
+		if (nucleus !== "u") nucleus = "u" + nucleus
+	}
+
+	// special case of zi, ci, si, zhi, chi, shi, ri
+	if (nucleus === "i" && ["z", "c", "s", "zh", "ch", "sh", "r"].includes(onset)) {
+		nucleus = "_i"
+	}
+
+	let onsetJamo = onsetConvert[onset]
+	let nucleusJamo = nucleusConvert[nucleus]
+	let codaJamo = codaConvert[coda]
+	let toneCP = toneConvert[tone]
+
+	if (onsetJamo === undefined || nucleusJamo === undefined || codaJamo === undefined || toneCP === undefined) {
+		return match // invalid input
+	}
+
+	return String.fromCodePoint(...[onsetJamo, nucleusJamo, codaJamo, toneCP].filter(x => x !== 0))
+}
+
+function p2h(input) {
+	return input.replace(pinyin_word_re, p2h_one)
+}
+
+</script>
