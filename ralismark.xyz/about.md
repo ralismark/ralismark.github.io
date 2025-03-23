@@ -25,7 +25,9 @@ Outside of tech, I play violin and am trying to memorise more Chinese, and I lik
 
 1. Prominent Rust blogger [Amos / fasterthanli.me](https://fasterthanli.me) gave me a shout out on [one of his posts](https://fasterthanli.me/series/making-our-own-executable-packer/part-12#:~:text=Thanks%20to%20ralismark)!
 2. [My keyboard](posts/keyboard) is featured [in the Sydney Morning Herald](https://12ft.io/https://www.smh.com.au/technology/people-are-spending-7500-on-keyboards-maybe-you-should-too-20220524-p5ao6h.html#:~:text=Keyboards%20can%20cost%20hundreds%20or%20even%20thousands%20of%20dollars), with an incorrect caption!
-3. I have [contributed](https://github.com/shlomif/fortune-mod/commits?author=ralismark) to a piece of software that is [over 40 years old](https://en.wikipedia.org/wiki/Fortune_(Unix))!
+3. I have [contributed](https://github.com/shlomif/fortune-mod/commits?author=ralismark) to a piece of software that is [over 40 years old][fortune]!
+
+[fortune]: https://en.wikipedia.org/wiki/Fortune_(Unix)
 
 # colophon
 

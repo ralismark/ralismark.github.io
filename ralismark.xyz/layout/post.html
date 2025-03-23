@@ -5,12 +5,12 @@
 
 {% set post_nav %}
 	<nav class="my-1 content-width">
-		{% if prev() %}
+		{% if prev and prev() %}
 			{% set prev = recipe.build(prev().meta) %}
 			<a style="float: left; text-align: left" href="{{ prev }}">&laquo; {{ prev.props.title | e }}</a>
 		{% endif %}
 
-		{% if next() %}
+		{% if next and next() %}
 			{% set next = recipe.build(next().meta) %}
 			<a style="float: right; text-align: right" href="{{ next }}">{{ next.props.title | e }} &raquo;</a>
 		{% endif %}

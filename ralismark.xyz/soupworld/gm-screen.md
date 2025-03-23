@@ -14,7 +14,7 @@ There is one principle underlying all "supernatural" phenomena in the world:
 
 	.. html:: center
 
-		If you believe something to be true, the it nudges the world towards one where it is.
+		If you believe something to be true, then the world is nudged towards one where it is.
 
 Some examples of this:
 
@@ -43,11 +43,14 @@ Basically, I can put whatever I want into the world and chalk it up to "local cu
 # Rule of Reversal
 
 **Power is belief**.
-Powerful things are those that influence your beliefs and feelings.
+
+Powerful things can influence your beliefs and feelings.
 
 - A powerful beast may supernaturally make you doubt yourself.
 
-- When you come across a powerful magic, you might immediately know what it can do, with no idea where you came to know that -- its innate power leaking into the beliefs of those nearby.
+- Supernatural abilities might feel completely normal until you reflect on the experience later, away from it's influence.
+
+When you come across a powerful magic, you might immediately know what it can do, with no idea where you came to know that -- its innate power leaking into the beliefs of those nearby.
 
 # The Stars
 
