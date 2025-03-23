@@ -41,28 +41,31 @@
 	justify-content: center;
 	gap: 1rem 0.5rem;
 
-	.paper[aria-current] {
-		background: var(--filled-bg);
-		color: var(--filled-fg);
-	}
+	.paper {
+		&[aria-current] {
+			background: var(--filled-bg);
+			color: var(--filled-fg);
+		}
 
-	// TODO make paper not be transparent
-	.paper::after {
-		content: "";
+		&::after {
+			content: "";
 
-		display: block;
-		position: absolute;
-		left: 50%;
-		bottom: 100%;
-		width: 0.15em;
-		height: 20rem;
+			display: block;
+			position: absolute;
+			left: 50%;
+			bottom: 100%;
+			width: 0.15em;
+			height: 20rem;
 
-		background-color: var(--stroke);
+			background-color: var(--stroke);
 
-		transform: rotate(calc(-1 * var(--angle)));
-		transform-origin: center bottom;
+			transform: rotate(calc(-1 * var(--angle)));
+			transform-origin: center bottom;
 
-		pointer-events: none;
+			pointer-events: none;
+		}
+
+		transform-origin: center top;
 	}
 }
 

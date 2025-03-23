@@ -6,9 +6,9 @@
 
 #}
 {% set preset = {
-	"warn": (placeholder_img, "tem is warning"),
-	"aside": (placeholder_img, "tem is thinking"),
-	"ask": (placeholder_img, "tem is asking"),
+	"warn": (placeholder_img, "tem warns"),
+	"aside": (placeholder_img, "tem says"),
+	"ask": (placeholder_img, "tem asks"),
 }.get(title, (None, None)) %}
 {% set image = options.image | default(preset[0]) %}
 {% set alt = options.alt | default(preset[1]) | default("") %}
