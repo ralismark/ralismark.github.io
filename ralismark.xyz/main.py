@@ -141,6 +141,13 @@ def inner_main(ctx: heron.core.BuildContext):
         include_paths=(str(here / "layout/css"),),
     )
 
+    for path in ctx.input(here / "soupworld").iterdir():
+        if path.stem.startswith("_"):
+            continue
+        yield heron.recipe.PageRecipe(
+            path, f"/soupworld/{path.stem}.html", jenv
+        )
+
 
 @dataclasses.dataclass(frozen=True)
 class RecursiveCopy(heron.recipe.InoutRecipeBase):
