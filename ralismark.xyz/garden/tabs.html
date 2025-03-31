@@ -1,0 +1,67 @@
+---
+layout: standalone
+title: Tabbed Layout
+---
+
+<div role="tablist">
+	<label role="tab">
+		<input type="radio" name="tab" checked>
+		What happens if we have
+	</label>
+	<section role="tabpanel">
+		Contents
+	</section>
+
+	<label role="tab">
+		<input type="radio" name="tab">
+		really really long tab names
+	</label>
+	<section role="tabpanel">
+		More stuff
+	</section>
+
+	<label role="tab">
+		<input type="radio" name="tab">
+		so that it's forced to wrap around?
+	</label>
+	<section role="tabpanel">
+		Wahoo
+	</section>
+</div>
+
+<style>
+[role=tablist] {
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: 0.1rem;
+
+	input[type=radio] {
+		display: none;
+	}
+
+	[role=tab] {
+		cursor: pointer;
+		background: var(--button-tint);
+		margin-top: 0.1rem;
+		padding: 0 1rem;
+		border-radius: 0.5rem 0.5rem 0 0;
+
+		&:has(:checked) {
+			background: var(--filled-bg);
+			color: var(--filled-fg);
+		}
+	}
+
+	[role=tabpanel] {
+		border-top: 0.1rem solid var(--filled-bg);
+		order: 1;
+		flex-basis: 100%;
+
+		display: none;
+	}
+
+	[role=tab]:has(:checked) + [role=tabpanel] {
+		display: block;
+	}
+}
+</style>
