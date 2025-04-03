@@ -70,7 +70,18 @@
 }
 
 #site-footer {
-	margin: 1rem auto;
+	border: none;
+	margin: 1rem 0 0;
+
+	height: 12em;
+	max-height: 15vw; // enforce at least 10:3 aspect ratio
+	background: linear-gradient(var(--button-tint) 00%, var(--primary) 80%);
+
+	mask-image: url("/assets/telegraph.svg");
+	mask-repeat: repeat-x;
+	mask-position: bottom center;
+	mask-size: contain;
+
 	font-size: 80%;
 
 	@media print { display: none; }
