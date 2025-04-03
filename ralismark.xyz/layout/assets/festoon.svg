@@ -3,12 +3,12 @@
 {% set wiring = "#444" %}
 
 <!--
-	plain: fec
+	plain: cba
 	christmas: c00 0a0
 	trans: 4bf f8a ccc
 -->
 {% set colours = [
-	"#cba",
+	"#4bf", "#f8a", "#ccc"
 ] %}
 
 <svg
