@@ -6,7 +6,6 @@
 		("index", "/"),
 		("posts", "/posts"),
 		("toys", "/interactives"),
-		("about", "/about"),
 	] %}
 		<a
 			class="paper"
@@ -58,26 +57,8 @@
 </article>
 {% endblock content %}
 
-<hr>
-
-<footer id="site-footer" style="text-align: center" class="content-width">
-	<p>
-		Copyright &copy; Temmie Yao {{ dt.datetime.now().year }}
-		<br>
-		This site grown with 💜 on <a href="https://github.com/ralismark/ralismark.github.io">Github</a>!
-	</p>
-
-	<iframe
-		style="
-			width: 35em;
-			max-width: 100%;
-			display: block;
-			margin: 0 auto;
-			height: 6rem;
-			border: none;
-		"
-		src="https://the-fruit-loop.kwellig.garden/embed/ralismark"
-	></iframe>
-</div>
+{% do recipe.page("assets/telegraph.svg", "/assets/telegraph.svg") %}
+<footer id="site-footer">
+</footer>
 
 {% endblock body %}

@@ -17,6 +17,7 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
         ".css": "text/css",
         ".js": "text/javascript",
         ".mjs": "text/javascript",
+        ".svg": "image/svg+xml",
     }
 
     def __init__(self, *args, directory: Path, **kwargs):

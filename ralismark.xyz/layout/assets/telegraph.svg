@@ -1,12 +1,15 @@
 ---
+{}
 ---
+
+{%- set w = 1000 -%}
 
 <?xml version="1.0" encoding="UTF-8"?>
 <svg
   xmlns="http://www.w3.org/2000/svg"
-  width="500"
+  width="{{w}}"
   height="250"
-  viewBox="0 50 500 250"
+  viewBox="0 100 {{w}} 50"
   fill="none"
   stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
 >
@@ -17,8 +20,8 @@
     stroke-width="8"
   />
   <line
-    x1="500" y1="70"
-    x2="500" y2="300"
+    x1="{{w}}" y1="70"
+    x2="{{w}}" y2="300"
     stroke-width="8"
   />
 
@@ -27,127 +30,88 @@
     x2="44" y2="89"
     stroke-width="4"
   />
-
   <line
-    x1="-40" y1="120"
-    x2="-40" y2="130"
-    stroke-width="6"
-  />
-  <line
-    x1="12" y1="94"
-    x2="12" y2="104"
-    stroke-width="6"
-  />
-  <line
-    x1="40" y1="80"
-    x2="40" y2="90"
-    stroke-width="6"
-  />
-
-  <line
-    x1="456" y1="133"
-    x2="544" y2="89"
+    x1="{{w - 44}}" y1="133"
+    x2="{{w + 44}}" y2="89"
     stroke-width="4"
   />
 
-  <line
-    x1="460" y1="120"
-    x2="460" y2="130"
-    stroke-width="6"
-  />
-  <line
-    x1="512" y1="94"
-    x2="512" y2="104"
-    stroke-width="6"
-  />
-  <line
-    x1="540" y1="80"
-    x2="540" y2="90"
-    stroke-width="6"
-  />
+  {% set droop = 20 %}
+  {% for x, y in [ (-40, 130), (12, 104), (40, 90) ] %}
+    <line
+      x1="{{x}}" y1="{{y}}"
+      x2="{{x}}" y2="{{y - 10}}"
+      stroke-width="6"
+    />
+    <line
+      x1="{{w + x}}" y1="{{y}}"
+      x2="{{w + x}}" y2="{{y - 10}}"
+      stroke-width="6"
+    />
 
-  <path
-    d="
-      M-40 120
-      m-250 20
-      c150 0, 250 -20, 250 -20
-      c0 0, 100 20, 250 20
-      c150 0, 250 -20, 250 -20
-      c0 0, 100 20, 250 20
-    "
-  />
-  <path
-    d="
-      M40 80
-      m-250 20
-      c150 0, 250 -20, 250 -20
-      c0 0, 100 20, 250 20
-      c150 0, 250 -20, 250 -20
-      c0 0, 100 20, 250 20
-    "
-  />
-  <path
-    d="
-      M12 94
-      m-250 20
-      c150 0, 250 -20, 250 -20
-      c0 0, 100 20, 250 20
-      c150 0, 250 -20, 250 -20
-      c0 0, 100 20, 250 20
-    "
-  />
+    <path
+      d="
+        M{{x}} {{y-10}}
+        m-{{w / 2}} {{droop}}
+        {% for i in range(2) %}
+          c{{w / 10 * 3}} 0, {{w / 2}} -{{droop}}, {{w / 2}} -{{droop}}
+          c0 0, {{w / 2 - w / 10 * 3}} {{droop}}, {{w / 2}} {{droop}}
+        {% endfor %}
+      "
+    />
+  {% endfor %}
 
   <!-- bird 1 -->
 
-  {% assign x = 100 %}
-  {% assign y = 85 %}
+  {% set x = w / 5 %}
+  {% set y = 85 %}
   <g fill="white">
     <ellipse
       cx="{{x}}" cy="{{y}}"
       rx="5" ry="8"
     />
     <ellipse
-      cx="{{x}}" cy="{{y|minus:9}}"
+      cx="{{x}}" cy="{{y - 9}}"
       rx="4" ry="4"
     />
     <ellipse
-      cx="{{x|minus:2}}" cy="{{y|minus:10}}"
+      cx="{{x - 2}}" cy="{{y - 10}}"
       rx="6" ry="1"
-      transform="rotate(30 {{x|minus:2}} {{y|minus:10}})"
+      transform="rotate(30 {{x - 2}} {{y - 10}})"
     />
     <path
-      d="M{{x|plus:1}} {{y|plus:17}} l0 -18 l7 17 z"
+      d="M{{x + 1}} {{y + 17}} l0 -18 l7 17 z"
     />
   </g>
 
-  {% assign x = 200 %}
-  {% assign y = 135 %}
+  {% set x = w / 5 * 2 %}
+  {% set y = 135 %}
   <g fill="white">
     <ellipse
-      cx="{{x|plus:0.5}}" cy="{{y}}"
+      cx="{{x + 0.5}}" cy="{{y}}"
       rx="4" ry="7"
     />
     <ellipse
-      cx="{{x|plus:2}}" cy="{{y|minus:11}}"
+      cx="{{x + 2}}" cy="{{y - 11}}"
       rx="3" ry="4"
-      transform="rotate(30 {{x|plus:2}} {{y|minus:11}})"
+      transform="rotate(30 {{x + 2}} {{y - 11}})"
     />
     <ellipse
-      cx="{{x|plus:5}}" cy="{{y|minus:12.5}}"
+      cx="{{x + 5}}" cy="{{y - 12.5}}"
       rx="2" ry="0.5"
     />
     <ellipse
-      cx="{{x|minus:1}}" cy="{{y|minus:12}}"
+      cx="{{x - 1}}" cy="{{y - 12}}"
       rx="1" ry="4"
-      transform="rotate(-60 {{x|minus:1}} {{y|minus:12}})"
+      transform="rotate(-60 {{x - 1}} {{y - 12}})"
     />
     <ellipse
-      cx="{{x}}" cy="{{y|minus:13}}"
+      cx="{{x}}" cy="{{y - 13}}"
       rx="1" ry="4"
-      transform="rotate(-30 {{x}} {{y|minus:13}})"
+      transform="rotate(-30 {{x}} {{y - 13}})"
     />
     <path
-      d="M{{x|plus:1}} {{y|plus:1}} l-6 14 l4 -2 l2 4z"
+      d="M{{x + 1}} {{y + 1}} l-6 14 l4 -2 l2 4z"
     />
   </g>
 

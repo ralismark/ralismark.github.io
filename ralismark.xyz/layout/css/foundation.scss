@@ -134,13 +134,14 @@ hr {
 	border-top: 1px solid var(--stroke);
 }
 
-details:not([role=tabpanel]) {
+details {
 	@include card;
 
 	padding: 0 0.5em 0; // relying on inner margins for vertical padding
 
 	summary {
 		cursor: pointer;
+
 		font-size: 0.9;
 		margin: .5em;
 	}
@@ -278,6 +279,65 @@ hr.lit {
 	height: 3em;
 }
 
+/*
+Tablists are a very complicated layout
+
+<div role="tablist">
+	<label role="tab">
+		<input type="radio" name="name...">
+		tabname...
+	</label>
+	<div role="tabpanel">
+		contents...
+	</div>
+	...
+</div>
+
+ */
+[role=tablist] {
+	display: flex;
+	flex-wrap: wrap;
+	column-gap: 0.1rem;
+
+	> label[role=tab] {
+		cursor: pointer;
+		background: var(--button-tint);
+		margin-top: 0.1rem;
+		padding: 0 1rem;
+		border-radius: 0.5rem 0.5rem 0 0;
+
+		border: .1em solid var(--stroke);
+		border-bottom: none;
+
+		> input[type=radio] {
+			display: none;
+		}
+
+		&:has(> input[type=radio]:checked) {
+			background: var(--filled-bg);
+			color: var(--filled-fg);
+
+			& + [role=tabpanel] {
+				display: block;
+			}
+		}
+	}
+
+	&::before {
+		content: "";
+		order: 1;
+		flex-basis: 100%;
+		border-top: 0.1rem solid var(--filled-bg);
+	}
+
+	> [role=tabpanel] {
+		order: 2;
+		flex-basis: 100%;
+
+		display: none;
+	}
+}
+
 // Layout ---------------------------------------------------------------- @@@1
 
 // Layout: Vertical ------------------------------------------------------ @@@2
@@ -287,13 +347,18 @@ pre {
 	margin-bottom: 0;
 }
 
+h1, h2, h3, h4, h5, h6
+{
+	// we rely on margin collapse
+	margin: 0.5em 0;
+}
+
 p, pre,
-h1, h2, h3, h4, h5, h6,
 details,
 ol, ul
 {
-	// Use margin collapse
-	margin: 0.5em 0;
+	// we rely on margin collapse
+	margin: 1em 0;
 }
 
 // to cancel the above when they're in a list
@@ -423,4 +488,11 @@ html .mx-auto { margin-left: auto !important; margin-right: auto !important; }
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+}
+
+.clearfix-end::after {
+	content: "";
+	display: block;
+	height: 0;
+	clear: both;
 }
