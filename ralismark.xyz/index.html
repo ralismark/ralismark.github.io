@@ -36,9 +36,7 @@ layout: default
 
 		{% filter markdownify %}
 {{ site.title }} "kwellig's garden" (**they/them**) is the home of my internet things!
-They hold around {{ dt.datetime.now().year - 2017 }} sporadic years of writing, as well as a lot of other fun and silly things.
-
-They run off of Cloudflare Pages -- they're almost entirely static -- and built with my own mess of a static site generator (previously Jekyll) that primarily uses [Jinja](https://jinja.palletsprojects.com/) and [Mistune](https://mistune.lepture.com/).
+They hold around {{ dt.datetime.now().year - 2017 }} sporadic years of writing, as well as a lot of other nice things.
 
 They're part of this webring I run for friends!
 		{% endfilter %}
@@ -116,6 +114,23 @@ _This list is incomplete; you can help by expanding it_\*
 > yet
 >
 > <p style="text-align: right">&mdash; maya, March 2025</p>
+		{% endfilter %}
+	</section>
+
+	<label role="tab">
+		<input type="radio" name="tabs-main">
+		Colophon
+	</label>
+	<section role="tabpanel">
+		{% filter markdownify %}
+{{ site.title }} is hosted on Cloudflare Pages, and built in GitHub Actions.
+They're generated using my own mess of a static site generator that uses [Jinja](https://jinja.palletsprojects.com/) and [Mistune](https://mistune.lepture.com/).
+
+Unless otherwise noted, all work on this site is under *copyright*, all rights reserved.
+In particular, use of any material with generative AI, including but not limited to training of models and in prompts, is strictly prohibited...
+<small>though practically this probably has no effect.</small>
+However, if you do want to use the content for anything else, feel free to ask me!
+
 		{% endfilter %}
 	</section>
 
