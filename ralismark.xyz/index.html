@@ -5,7 +5,7 @@ layout: default
 <link rel="feed" href="/posts">
 
 <main class="h-card content-width">
-	<section id="aboutme">
+	<div id="aboutme">
 		<h1>Call me <em class="p-name">Temmie</em></h1>
 
 		<p>I'm a lot of things...</p>
@@ -15,9 +15,9 @@ layout: default
 			<br>&ndash; and often unprofessionally
 			<br>My adjectives are whimsical and cute 💜
 		</p>
-	</section>
+	</div>
 
-	<section id="socials">
+	<div id="socials">
 		<h1><em class="p-nickname">kwellig</em> is me</h1>
 
 		<p>...in many places</p>
@@ -29,9 +29,9 @@ layout: default
 			<dt>toots</dt>
 			<dd><a href="https://cathode.church/@ralismark" rel="me">@ralismark@cathode.church</a></dd>
 		</dl>
-	</section>
+	</div>
 
-	<section id="here">
+	<div id="here">
 		<h1 style="text-align: center">You're at <em class="">{{ site.title }}</em></h1>
 
 		{% filter markdownify %}
@@ -41,19 +41,19 @@ They hold around {{ dt.datetime.now().year - 2017 }} sporadic years of writing, 
 They're part of this webring I run for friends!
 		{% endfilter %}
 
-<iframe
-	style="
-		width: 35em;
-		max-width: 100%;
-		display: block;
-		margin: 0 auto;
-		height: 6rem;
-		border: none;
-	"
-	src="https://the-fruit-loop.kwellig.garden/embed/ralismark"
-></iframe>
+		<iframe
+			style="
+				width: 35em;
+				max-width: 100%;
+				display: block;
+				margin: 0 auto;
+				height: 6rem;
+				border: none;
+			"
+			src="https://the-fruit-loop.kwellig.garden/embed/ralismark"
+		></iframe>
 
-	</section>
+	</div>
 
 </main>
 
@@ -61,21 +61,18 @@ They're part of this webring I run for friends!
 
 <div id="belowthefold" role="tablist" class="content-width">
 
-	<label role="tab">
-		<input type="radio" name="tabs-main" checked>
-		Guestbook
-	</label>
-	<section role="tabpanel">
-		{% import "layout/macros.html" as macros with context %}
-		{{ macros.comments() }}
-	</section>
+	<details name="tabs-main" open>
+		<summary role="tab">Guestbook</summary>
+		<div role="tabpanel">
+			{% import "layout/macros.html" as macros with context %}
+			{{ macros.comments() }}
+		</div>
+	</details>
 
-	<label role="tab">
-		<input type="radio" name="tabs-main">
-		More about me
-	</label>
-	<section role="tabpanel">
-		{% filter markdownify %}
+	<details name="tabs-main">
+		<summary role="tab">More about me</summary>
+		<div role="tabpanel">
+			{% filter markdownify %}
 fun facts:
 
 1. Prominent Rust blogger [Amos / fasterthanli.me](https://fasterthanli.me) gave me a shout out on [one of his posts](https://fasterthanli.me/series/making-our-own-executable-packer/part-12#:~:text=Thanks%20to%20ralismark)
@@ -114,15 +111,14 @@ _This list is incomplete; you can help by expanding it_\*
 > yet
 >
 > <p style="text-align: right">&mdash; maya, March 2025</p>
-		{% endfilter %}
-	</section>
+			{% endfilter %}
+		</div>
+	</details>
 
-	<label role="tab">
-		<input type="radio" name="tabs-main">
-		Colophon
-	</label>
-	<section role="tabpanel">
-		{% filter markdownify %}
+	<details name="tabs-main">
+		<summary role="tab">Colophon</summary>
+		<div role="tabpanel">
+			{% filter markdownify %}
 {{ site.title }} is hosted on Cloudflare Pages, and built in GitHub Actions.
 They're generated using my own mess of a static site generator that uses [Jinja](https://jinja.palletsprojects.com/) and [Mistune](https://mistune.lepture.com/).
 
@@ -130,9 +126,9 @@ Unless otherwise noted, all work on this site is under *copyright*, all rights r
 In particular, use of any material with generative AI, including but not limited to training of models and in prompts, is strictly prohibited...
 <small>though practically this probably has no effect.</small>
 However, if you do want to use the content for anything else, feel free to ask me!
-
-		{% endfilter %}
-	</section>
+			{% endfilter %}
+		</div>
+	</details>
 
 </div>
 
