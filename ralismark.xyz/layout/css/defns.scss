@@ -2,8 +2,6 @@
  * Colour scheme & other variable declarations
  */
 
-$filled-bg: #990461
-
 :root { // for non-sass use
 	// based on <https://github.com/system-fonts/modern-font-stacks>
 	--main-font-family: Merriweather, "Iowan Old Style", "Palatino Linotype", "URW Palladio L", "P052", serif;
@@ -29,7 +27,7 @@ $filled-bg: #990461
 
 	// filled in UI elements
 	--filled-fg: white;
-	--filled-bg: #{$filled-bg};
+	--filled-bg: #990461;
 
 	// text colours
 	--primary: #DB5599;
