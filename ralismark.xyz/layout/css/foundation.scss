@@ -283,58 +283,52 @@ hr.lit {
 Tablists are a very complicated layout
 
 <div role="tablist">
-	<label role="tab">
-		<input type="radio" name="name...">
-		tabname...
-	</label>
-	<div role="tabpanel">
-		contents...
-	</div>
+	<details name="...">
+		<summary role="tab">...</summary>
+		<div role="tabpanel">
+			...
+		</div>
+	</details>
 	...
 </div>
-
  */
 [role=tablist] {
 	display: flex;
 	flex-wrap: wrap;
-	column-gap: 0.1rem;
 
-	> label[role=tab] {
-		cursor: pointer;
-		background: var(--button-tint);
-		margin-top: 0.1rem;
-		padding: 0 1rem;
-		border-radius: 0.5rem 0.5rem 0 0;
+	> details {
+		display: contents;
 
-		border: .1em solid var(--stroke);
-		border-bottom: none;
+		> summary {
+			cursor: pointer;
 
-		> input[type=radio] {
-			display: none;
+			list-style: none;
+			margin: 0.1rem 0 0;
+			padding: 0 1rem;
+			border-radius: 0.5rem 0.5rem 0 0;
+
+			background: var(--button-tint);
+			border: .1em solid var(--stroke);
+			border-bottom: none;
 		}
 
-		&:has(> input[type=radio]:checked) {
-			background: var(--filled-bg);
-			color: var(--filled-fg);
-
-			& + [role=tabpanel] {
-				display: block;
-			}
+		> [role=tabpanel] {
+			order: 2;
+			flex-basis: 100%;
 		}
+	}
+
+	> details[open] > summary {
+		background: var(--filled-bg);
+		color: var(--filled-fg);
 	}
 
 	&::before {
 		content: "";
 		order: 1;
 		flex-basis: 100%;
+
 		border-top: 0.1rem solid var(--filled-bg);
-	}
-
-	> [role=tabpanel] {
-		order: 2;
-		flex-basis: 100%;
-
-		display: none;
 	}
 }
 
