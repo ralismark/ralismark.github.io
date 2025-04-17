@@ -450,7 +450,7 @@
         - "Only a few households here celebrate New Years."
         - "They don't celebrate any holidays at this time, so we'll need to mark the passage of the seasons in our own way."
     - name: Bloody Night
-      desc: "The Bloody Night is not a celebration, but instead a time of mourning. You cannot lionize those who died for a useless cause&emdash;all you can do is thank all the gods that things are better now."
+      desc: "The Bloody Night is not a celebration, but instead a time of mourning. You cannot lionize those who died for a useless cause&ndash;all you can do is thank all the gods that things are better now."
       eoy_prompt: At the end of the Bloody Night
       traditions:
         - "Destroying Statues"
