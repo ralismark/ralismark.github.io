@@ -2,23 +2,24 @@
 Basic types that everything else is built on.
 """
 
-import typing as t
-import dataclasses
-import contextvars
 from pathlib import Path, PurePosixPath
 import abc
+import contextvars
+import dataclasses
 import logging
 import time
+import typing as t
 
-
-_E = t.TypeVar("_E")
-_R = t.TypeVar("_R", bound=t.Hashable)
+__all__ = [
+    "Recipe", "Manifest", "BuildFailure", "Driver", "BuildContext",
+    "current_ctx",
+]
 
 
 logger = logging.getLogger(__name__)
 
 
-class Recipe(abc.ABC, t.Generic[_R]):
+class Recipe[R](abc.ABC, t.Hashable):
     """
     Recipe represents a single build task.
 
@@ -28,7 +29,7 @@ class Recipe(abc.ABC, t.Generic[_R]):
     """
 
     @abc.abstractmethod
-    def build_impl(self, ctx: "BuildContext") -> _R:
+    def build_impl(self, ctx: "BuildContext") -> R:
         """
         Perform the build step.
 
@@ -39,7 +40,7 @@ class Recipe(abc.ABC, t.Generic[_R]):
 
 
 @dataclasses.dataclass(frozen=True)
-class Manifest(t.Generic[_R]):
+class Manifest[R]:
     """
     Manifest is a record of the details of a single build run, including
     information to allow for dependency tracking and other behaviour.
@@ -83,17 +84,18 @@ class Manifest(t.Generic[_R]):
 
     # the actual dataclass content
 
-    recipe: Recipe  # the recipe that was built
-    value: _R  # the return value of the recipe's build_impl
+    recipe: Recipe[R]  # the recipe that was built
+    value: R  # the return value of the recipe's build_impl
     log: tuple[Entry, ...]  # events that ocurred during build
 
-    def filter(self, entry_type: t.Type[_E]) -> t.Iterable[_E]:
+    def filter[E: Manifest.Entry](self, entry_type: t.Type[E]) -> t.Iterable[E]:
         """
         Get log entries of a specific type.
         """
         for entry in self.log:
             if isinstance(entry, entry_type):
                 yield entry
+
 
 class BuildFailure(Exception):
     """
@@ -123,7 +125,7 @@ class Driver:
     def __init__(self, builddir: Path):
         self.builddir = builddir
 
-    def build(self, recipe: Recipe[_R]) -> Manifest[_R]:
+    def build[R](self, recipe: Recipe[R]) -> Manifest[R]:
         """
         Turn a Recipe into its resulting Manifest.
         """
@@ -191,7 +193,7 @@ class BuildContext:
     _driver: Driver
     _log: list[Manifest.Entry] = dataclasses.field(default_factory=list)
 
-    def build(self, recipe: Recipe[_R]) -> _R:
+    def build[R](self, recipe: Recipe[R]) -> R:
         """
         Build a sub-recipe.
         """
@@ -224,4 +226,7 @@ class BuildContext:
 
 
 def current_ctx() -> BuildContext:
+    """
+    Get the current BuildContext
+    """
     return BuildContext.Current.get()
