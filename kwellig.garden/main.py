@@ -14,13 +14,10 @@ here = Path(__file__).parent
 
 site = {
     "drafts": os.getenv("HERON_ENV") == "development",
-    "url": "https://www.ralismark.xyz",
-    "fqdn": "ralismark.xyz",
-    "title": "ralismark.xyz",
+    "url": "https://kwellig.garden",
+    "fqdn": "kwellig.garden",
+    "title": "Kwellig's Garden",
     "description": "Where temmie puts her internet things!",
-    "me": {
-        "email": "tem@ralismark.xyz",
-    },
 }
 
 jenv = heron.jinja.base_env.overlay(
