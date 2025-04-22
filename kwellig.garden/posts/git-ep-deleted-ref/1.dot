@@ -4,19 +4,30 @@ digraph G {
 	node [label="",shape="circle"];
 
 	subgraph cluster_m {
+		color="none";
+
 		m0 -> m1 -> m2 -> m3;
 		m4 -> m5 [color="grey",style="dotted"];
 		m3 -> m5 [constraint=false];
 		m4 [color="grey"];
 		m3 -> m4 [color="grey"];
-		color="none";
+
+		master [label="master", shape="none"];
+		{ rank=same; master -> m5 [constraint=false]; }
+
+		master2 [label="master@{1}", shape="none", color="grey", fontcolor="grey"];
+		{ rank=same; master2 -> m4 [constraint=false,color="grey"]; }
 	}
 	subgraph cluster_b {
 		node [color="grey"];
 		edge [color="grey"];
-		m1 -> b1 -> b2 -> m4;
 		color="none";
+
+		m1 -> b1 -> b2 -> m4;
+
+		feature [label="feature", shape="none", color="grey", fontcolor="grey"];
+		{ rank=same; feature -> b2; }
 	}
-	{ rank=same; master -> m5 [constraint=false]; master [label="master",shape="none"] }
-	{ rank=same; b2 -> feature [dir=back,constraint=false,color="grey"]; feature [label="feature",shape="none",color="grey",fontcolor="grey"] }
+
+
 }
