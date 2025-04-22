@@ -15,7 +15,7 @@ here = Path(__file__).parent
 site = {
     "drafts": os.getenv("HERON_ENV") == "development",
     "url": "https://www.ralismark.xyz",
-    "shorturl": "ralismark.xyz",
+    "fqdn": "ralismark.xyz",
     "title": "ralismark.xyz",
     "description": "Where temmie puts her internet things!",
     "me": {

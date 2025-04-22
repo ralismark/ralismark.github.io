@@ -34,12 +34,12 @@ layout: default
 	<div id="here">
 		<h1 style="text-align: center">You're at <em class="">{{ site.title }}</em></h1>
 
-		{% filter markdownify %}
-{{ site.title }} "kwellig's garden" (**they/them**) is the home of my internet things!
+		{% filter markdownify -%}
+{{ site.fqdn }} "{{ site.title }}" is the home of my internet things!
 They hold around {{ dt.datetime.now().year - 2017 }} sporadic years of writing, as well as a lot of other nice things.
 
 They're part of this webring I run for friends!
-		{% endfilter %}
+		{%- endfilter %}
 
 		<iframe
 			style="
