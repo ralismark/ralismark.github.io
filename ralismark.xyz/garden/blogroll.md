@@ -3,6 +3,8 @@ layout: standalone
 title: Booklist
 ---
 
+- [Numbers Story](https://numbersstory.com)
+
 (last updated 2023-04-19)
 
 in no particular order:
