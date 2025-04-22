@@ -232,9 +232,7 @@ I suppose you could say that they're a product of their time, but it's incredibl
 
 At least this version doesn't have incredibly vile homophobia, racism, and Hitler quotes that the offensive collection would later gain..?
 
-<div class="flex-centre">
-<iframe src="https://tacobelllabs.net/@atomicthumbs/109349923317496233/embed" class="mastodon-embed" style="max-width: 100%; border: 0" width="400" allowfullscreen="allowfullscreen"></iframe><script src="https://tacobelllabs.net/embed.js" async="async"></script>
-</div>
+<iframe src="https://tacobelllabs.net/@atomicthumbs/109349923317496233/embed" class="mastodon-embed" frameborder="0" width="400" allowfullscreen="allowfullscreen"></iframe><script src="https://tacobelllabs.net/embed.js" async="async"></script>
 
 <br>
 

@@ -6,9 +6,8 @@ excerpt: "Temmie's Worldbuilding Art Project"
 
 Hi there, and welcome to _Soupworld_, a kitchen sink world that's a playground for me to rotate ideas and be creative in!
 
-<div class="paper">
-	<a href="gm-screen">Behind the GM's Screen</a>
-</div>
+<a class="paper" href="gm-screen">Behind the GM's Screen</a>
+<a class="paper" href="spring-has-come">Spring Has Come!</a>
 
 # Where this all started...
 
