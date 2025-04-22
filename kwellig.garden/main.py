@@ -16,12 +16,9 @@ there = Path(__file__).parent.parent / "ralismark.xyz"
 site = {
     "drafts": os.getenv("HERON_ENV") == "development",
     "url": "https://kwellig.garden",
-    "shorturl": "kwellig.garden",
-    "title": "kwellig.garden",
+    "fqdn": "kwellig.garden",
+    "title": "Kwellig's Garden",
     "description": "Where temmie puts her internet things!",
-    "me": {
-        "email": "tem@ralismark.xyz",
-    },
 }
 
 jenv = heron.jinja.base_env.overlay(

@@ -1,7 +1,7 @@
 <p style="text-align: center">
 	P: <a href="tel:+61000000000">[phone nr redacted]</a>
-	⋄ E: <a href="mailto:{{ site.me.email }}">{{ site.me.email }}</a>
-	⋄ Website: <a href="{{ site.url }}">{{ site.shorturl }}</a>
+	⋄ E: <a href="mailto:hi@{{ site.fqdn }}">hi@{{ site.fqdn }}</a>
+	⋄ Website: <a href="{{ site.url }}">{{ site.fqdn }}</a>
 </p>
 
 <table id="resume">
@@ -134,8 +134,8 @@
 
 		<h3>
 			<strong>Personal Website &amp; Blog</strong>
-			| Docker, JS, SCSS
-			| <a href="{{ site.url }}">{{ site.shorturl }}</a>
+			| HTML/CSS/JS
+			| <a href="{{ site.url }}">{{ site.fqdn }}</a>
 		</h3>
 		<ul>
 			<li>Explained competitive programming techniques; used as supplementary reference for official Australian informatics training</li>
