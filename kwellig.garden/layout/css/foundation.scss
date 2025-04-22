@@ -417,7 +417,7 @@ textarea {
 	min-width: 100%;
 }
 
-img:not(.icon), svg:not(.icon) {
+img:not(.icon), svg:not(.icon), iframe {
 	// centre align
 	display: block;
 	margin: 0 auto;
