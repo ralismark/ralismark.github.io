@@ -58,6 +58,14 @@ One final thing.
 
 The stars are the embodiment of _me_, the author.
 They're everywhere and they see everything :)
+And they're nice
+
+.. admonition:: me/say
+
+	If I had a dollar for every D&D campaign I've been in where the stars have been malevolent entities, I'd have two dollars.
+	Which isn't a lot, but it's weird it happened twice.
+
+	And I want to make sure that doesn't also happen here.
 
 # What's Left?
 
@@ -65,7 +73,7 @@ There's a few things I haven't decided on yet:
 
 - What are the Sun and Moon, what do they represent?
 
-- What's the cosmology?
+- What's the planar cosmology?
 	What's the shape of the world, what is there if keep going up into the sky?
 
 	To be honest, I want to tell stories that are less grounded in our physical understanding of the world.
