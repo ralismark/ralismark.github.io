@@ -11,18 +11,20 @@ from frozendict import frozendict
 import heron
 
 here = Path(__file__).parent
-there = Path(__file__).parent.parent / "ralismark.xyz"
 
 site = {
     "drafts": os.getenv("HERON_ENV") == "development",
-    "url": "https://kwellig.garden",
-    "fqdn": "kwellig.garden",
-    "title": "Kwellig's Garden",
+    "url": "https://www.ralismark.xyz",
+    "fqdn": "ralismark.xyz",
+    "title": "ralismark.xyz",
     "description": "Where temmie puts her internet things!",
+    "me": {
+        "email": "tem@ralismark.xyz",
+    },
 }
 
 jenv = heron.jinja.base_env.overlay(
-    loader=heron.jinja.Loader(there),
+    loader=heron.jinja.Loader(here),
 )
 jenv.globals["site"] = heron.util.Impurity(lambda: site)
 
@@ -102,7 +104,7 @@ def inner_main(ctx: heron.core.BuildContext):
         ctx,
         (
             heron.recipe.PageRecipe(path, f"/posts/{path.stem}.html", jenv)
-            for path in ctx.input(there / "posts").iterdir()
+            for path in ctx.input(here / "posts").iterdir()
         ),
     )
     yield from posts
@@ -111,7 +113,7 @@ def inner_main(ctx: heron.core.BuildContext):
         ctx,
         (
             heron.recipe.PageRecipe(path, f"/interactives/{path.stem}.html", jenv)
-            for path in ctx.input(there / "interactives").iterdir()
+            for path in ctx.input(here / "interactives").iterdir()
         ),
     )
     yield from interactives
@@ -120,26 +122,26 @@ def inner_main(ctx: heron.core.BuildContext):
         heron.recipe.PageRecipe(
             path, f"/garden/{path.stem}.html", jenv, props=frozendict(noindex=True)
         )
-        for path in ctx.input(there / "garden").iterdir()
+        for path in ctx.input(here / "garden").iterdir()
     )
     yield from garden
 
     # root pages
 
     for root_page_glob in ["*.html", "*.md", "*.d"]:
-        for path in ctx.input(there).glob(root_page_glob):
+        for path in ctx.input(here).glob(root_page_glob):
             yield heron.recipe.PageRecipe(path, f"/{path.stem}.html", jenv)
 
     # extra stuff
 
-    yield heron.recipe.CopyRecipe(there / "robots.txt", "/robots.txt")
+    yield heron.recipe.CopyRecipe(here / "robots.txt", "/robots.txt")
     yield heron.recipe.SassRecipe(
-        there / "layout/css/main-foundation.scss",
+        here / "layout/css/main-foundation.scss",
         "/assets/foundation.css",
-        include_paths=(str(there / "layout/css"),),
+        include_paths=(str(here / "layout/css"),),
     )
 
-    for path in ctx.input(there / "soupworld").iterdir():
+    for path in ctx.input(here / "soupworld").iterdir():
         if path.stem.startswith("_"):
             continue
         yield heron.recipe.PageRecipe(

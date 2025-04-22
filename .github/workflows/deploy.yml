@@ -1,4 +1,4 @@
-name: Deploy to Github Pages
+name: Deploy
 
 on:
   workflow_dispatch: # allow manually running
@@ -18,25 +18,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build_ralismark_xyz:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - uses: DeterminateSystems/nix-installer-action@v4
-
-    - uses: DeterminateSystems/magic-nix-cache-action@v2
-
-    - name: "Build site"
-      run: "nix run . -- build -o _site ralismark.xyz/main.py"
-
-    - name: Upload built site
-      uses: actions/upload-pages-artifact@v3
-
-    - name: Deploy to gh-pages
-      uses: actions/deploy-pages@v4
-
   build_kwellig_garden:
     runs-on: ubuntu-latest
     steps:

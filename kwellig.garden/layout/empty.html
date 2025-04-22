@@ -33,11 +33,11 @@
 		<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" {{ katex_attrs }}>
 		<noscript><link rel="stylesheet" {{ katex_attrs }}></noscript>
 
-		{% if site.fqdn == "ralismark.xyz" %}
+{#
 		<!-- indieweb -->
 		<link rel="webmention" href="https://webmention.io/{{ site.fqdn }}/webmention" />
 		<link rel="pingback" href="https://webmention.io/{{ site.fqdn }}/xmlrpc" />
-		{% endif %}
+#}
 
 		<script>
 			// do it in head so we don't get flash of wrong style
