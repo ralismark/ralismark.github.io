@@ -12,6 +12,8 @@ reason: wip
 > all observable behaviors of your system\ 
 > will be depended on by somebody.\ 
 
-# Go's Random Maps
-
 # ABC Challenge
+
+# Heap Alternation
+
+# Go's Random Maps

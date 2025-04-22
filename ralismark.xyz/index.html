@@ -63,16 +63,16 @@ They're part of this webring I run for friends!
 
 	<details name="tabs-main" open>
 		<summary role="tab">Guestbook</summary>
-		<div role="tabpanel">
+		<section role="tabpanel">
 			{% import "layout/macros.html" as macros with context %}
 			{{ macros.comments() }}
-		</div>
+		</section>
 	</details>
 
 	<details name="tabs-main">
 		<summary role="tab">More about me</summary>
-		<div role="tabpanel">
-			{% filter markdownify %}
+		<section role="tabpanel">
+			{% filter markdownify -%}
 fun facts:
 
 1. Prominent Rust blogger [Amos / fasterthanli.me](https://fasterthanli.me) gave me a shout out on [one of his posts](https://fasterthanli.me/series/making-our-own-executable-packer/part-12#:~:text=Thanks%20to%20ralismark)
@@ -111,23 +111,49 @@ _This list is incomplete; you can help by expanding it_\*
 > yet
 >
 > <p style="text-align: right">&mdash; maya, March 2025</p>
-			{% endfilter %}
-		</div>
+			{%- endfilter %}
+		</section>
 	</details>
 
 	<details name="tabs-main">
 		<summary role="tab">Colophon</summary>
-		<div role="tabpanel">
-			{% filter markdownify %}
-{{ site.title }} is hosted on Cloudflare Pages, and built in GitHub Actions.
-They're generated using my own mess of a static site generator that uses [Jinja](https://jinja.palletsprojects.com/) and [Mistune](https://mistune.lepture.com/).
-
+		<section role="tabpanel">
+			{% filter markdownify -%}
 Unless otherwise noted, all work on this site is under *copyright*, all rights reserved.
 In particular, use of any material with generative AI, including but not limited to training of models and in prompts, is strictly prohibited...
 <small>though practically this probably has no effect.</small>
 However, if you do want to use the content for anything else, feel free to ask me!
-			{% endfilter %}
-		</div>
+
+# Services
+
+{{ site.fqdn }} is hosted on Cloudflare Pages, and built in GitHub Actions.
+They're generated using my own mess of a static site generator that uses [Jinja](https://jinja.palletsprojects.com/) and [Mistune](https://mistune.lepture.com/).
+
+## GitHub
+
+- Storing my code
+- CI/CD to build and deploy everything (via GitHub Actions)
+- Hosting some of subdomains (via GitHub Pages)
+
+## Cloudflare
+
+- Domain registration
+- DNS
+- Hosting a lot of my stuff (via Cloudflare Pages)
+
+## Webmention.io
+
+- Receiving and holding all the comments (and other interactions)
+
+## brid.gy
+
+- Looking at the fediverse and converting those to comments
+
+## commentpara.de + quill.p3k.io
+
+- Creating and hosting anonymous comments
+			{%- endfilter %}
+		</section>
 	</details>
 
 </div>

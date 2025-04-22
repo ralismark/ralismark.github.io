@@ -28,11 +28,13 @@ class Preamble:
             if not m:
                 raise ValueError("Unterminated YAML preamble")
             preamble = yaml.safe_load(m.group(1))
+            if preamble is None:
+                preamble = dict()
             if not isinstance(preamble, dict):
                 raise TypeError("YAML preamble is not an object")
 
             return cls(
-                content=content[m.end() :],
+                content=content[m.end():],
                 preamble=preamble,
                 line_offset=content.count("\n", *m.span()),
             )
