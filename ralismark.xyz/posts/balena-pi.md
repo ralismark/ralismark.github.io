@@ -6,7 +6,7 @@ date: 2022-05-08
 tags:
 ---
 
-.. admonition:: warn
+.. admonition:: me/warn
 
 	By late 2022, I no longer had anything that needed to be run on a raspberry pi, and I've now decommissioned my raspberry pi.
 	While I still have the infra configurations (including GitHub Actions deploy workflows), alas I cannot vouch for whether this is post is still up to date.
@@ -31,7 +31,7 @@ The entire infrastructure stack, which typically includes the balena cloud platf
 [balenaEngine]: https://www.balena.io/engine/
 [its docs]: https://www.balena.io/docs/learn/welcome/introduction/
 
-.. admonition:: say
+.. admonition:: kith/say
 
 	balenaOS being another [free] component of a fully functioning balena platform?
 	[Where have I heard that before](https://wiki.installgentoo.com/index.php/Interjection)?
@@ -43,7 +43,7 @@ I also want to highlight the [massive list of example project] (and [even more c
 [even more community ones]: https://hub.balena.io/projects
 [massive list of example project]: https://www.balena.io/docs/learn/more/examples/seed-projects/
 
-.. admonition:: ask
+.. admonition:: kith/ask
 
 	By the way, can you use balenaOS without balena cloud?
 

@@ -11,7 +11,7 @@ I'd describe it as basically the antithesis of D&D -- exploring characters' jour
 And it has approximately _1 (one)_ gameplay mechanic -- the token system -- and it's really simple: you (as a _player_, not as the character) gain one from certain things, and you can spend one for certain things.
 So it's pretty interesting to have a look at what these things are, how they guide play, and what kinds of stories they encourages us to tell.
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	Despite Wanderhome taking up permanent residence in both my mind and my heart, I've not actually _played_ that much of it.
 	Mostly just due to chance, scheduling, finding people, and other real-world enemies of TTRPG campaigns.

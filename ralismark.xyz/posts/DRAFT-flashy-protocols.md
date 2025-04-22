@@ -21,7 +21,7 @@ Projects that have overly complex technology/algorithms, promising things like "
 However, looking into them, they feel more and more like just a facade meant to give the appearance of soundness and security, rather than actually, demonstrably, providing some useful functionality.
 Often times, they're just not used, or even not implemented, instead deferred to the future.
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	I just wanna make a point that I don't support cryptocurrency and blockchain community.
 	It's pretty much all fraud, scams, insecurity, and other things to make you lose your money, and that's not even getting into the environmental problems and the gross misapplication of tech to non-technical issues.

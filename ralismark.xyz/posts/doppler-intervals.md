@@ -10,7 +10,7 @@ As a vehicle speeds past you, you'll hear a drop in frequency due to the [Dopple
 Since the frequency you hear is the original frequency multiplied by some value related to the speed, for the same speed the drop will always be the same _musical interval_.
 Which means that, if you're good at identifying musical intervals, you can estimate the speed of the vehicle!
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	I remember seeing the table for this at some point -- it's the direct inspiration for this post -- but alas I forgot where I found it and I cannot find it again.
 

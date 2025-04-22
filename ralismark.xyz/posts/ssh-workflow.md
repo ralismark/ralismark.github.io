@@ -204,9 +204,9 @@ However, if you're not a fan of polluting the home directory, and you use [zsh],
 
 [zsh]: https://wiki.archlinux.org/title/Zsh
 
-.. admonition:: aside
+.. admonition:: kith/say
 
-	As you might be able to tell, it's going to get more and more tailored to me as we go.
+	As you might be able to tell, it's going to get less and less generally useful as we go.
 
 I currently have all my mounts as subdirectories of `~/.local/mount/`.
 To avoid the pain of having to type out `~/.local/mount/remote/...` each time, I've set up zsh so that `~remote` points there, so you can just do `cd ~remote` to go to the mount for that server.

@@ -33,7 +33,7 @@ In their words,
 
 > The MDB is a double-linked list that is equivalent to a prefix traversal of the derivation tree.
 
-.. admonition:: warn
+.. admonition:: me/warn
 
 	This is an inaccurate simplification of the actual mechanism that elides some seL4-specific details.
 
@@ -158,7 +158,7 @@ From this, we know that when our current cap is deleted, this new derived node m
 Interestingly enough, there's another way to derive caps -- you can also create a new _sibling_ instead of a new child.
 This creates a copy of your cap with a lifetime that is tied to your _parent_, allowing the original cap to be deleted without affecting the new cap, which can be handy sometimes?
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	I will admit I'm not familiar with capability systems enough to know usecases for these two kind of derive, so please let me know if you know more!
 

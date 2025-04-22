@@ -11,7 +11,7 @@ Here, I'll provide a third, albeit rather unusual, approach.
 
 <!--more-->
 
-.. admonition:: warn
+.. admonition:: me/warn
 
 	Despite the wide range of standards, there is one universal rule regarding indentation: if you're contributing to a project **always use the style that's there** - never ever mix styles.
 

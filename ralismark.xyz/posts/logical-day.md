@@ -24,7 +24,7 @@ To summarise a part of that video, in Japan, times past midnight are sometimes c
 The [Wikipedia page](https://en.wikipedia.org/wiki/Date_and_time_notation_in_Japan#Time) also elaborates on this, giving examples of usages in late-night bars and television scheduling.
 And from a quick search online, it seems that many societies in history have had day start at sunset, with night being part of the next day, or sunrise, with night being part of the previous day.
 
-.. admonition:: aside
+.. admonition:: kith/say
 
 	Similarly, for many cultures and much of history, [a year didn't start on January 1](https://en.wikipedia.org/wiki/New_Year#Adoptions_of_January_1)!
 	25 of March was used in several countries during the Middle Ages, for example.

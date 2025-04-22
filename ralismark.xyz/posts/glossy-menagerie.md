@@ -16,7 +16,7 @@ They're also pending some better art, though credits to [spdskatr] for the curre
 
 [spdskatr]: https://violetteahouse.com/
 
-.. admonition:: say
+.. admonition:: kith/say
 
 	You should really get onto that!
 
