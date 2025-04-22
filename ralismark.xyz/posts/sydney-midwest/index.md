@@ -10,7 +10,7 @@ The Inner West is the area of Sydney pretty much immediately west of the city.
 While the northern and southern boundaries are pretty well-defined, being the Paramatta River and the Cook River, there aren't as clear boundaries for the east and the west.
 I don't have any strong opinions about the eastern side, but with the western side I do, and that will be the focus of this post.
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	Don't take this post too seriously :^)
 

@@ -14,7 +14,7 @@ I've been using Vim (well, Neovim) for several years now and I've developed some
 
 <!--more-->
 
-.. admonition:: warn
+.. admonition:: me/warn
 
 	This not intended as a guide on how to learn or use Vim -- it's how *I* use Vim, not how you should use Vim.
 	This is a sample of the things I do and use.

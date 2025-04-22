@@ -12,7 +12,7 @@ While service management is usually done at a system-wide level and require root
 
 [systemd]: https://systemd.io/
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	I've used systemd a bunch on my laptop (including running my graphical environment) under it, so I might write more on it.
 

@@ -22,7 +22,7 @@ A major theorem in this area is Alpern and Schneider’s Theorem:
 I've seen this theorem alluded to in a bunch of other computing courses, but this is the first time I've been properly introduced to it.
 And so, I'm gonna have some fun and take you on a journey to formally proving that!
 
-.. admonition:: warn
+.. admonition:: me/warn
 
 	I'll be assuming a basic understanding of (first order) logic and set theory.
 	We'll also be diving right into Isabelle, so if you're looking for an introduction, this isn't the place unfortunately.
@@ -46,7 +46,7 @@ This was proven in their 1984 paper ["Defining Liveness"][alpern1984], and we'll
 
 Now that the basics are out of the way, let's boot up Isabelle!
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	Unfortunately, there's no syntax highlighting for Isabelle right now :(.
 	[It's been implemented upstream](https://github.com/rouge-ruby/rouge/pull/1682), but I'm still on an old version of Jekyll and haven't figured out how to update that dependency.
@@ -308,7 +308,7 @@ theorem liveness_dense[simp]: "liveness P = dense P"
   using dense_is_liveness liveness_is_dense by blast
 ```
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	Strictly, we don't actually need the "safety implies limit-closed" and "liveness implies dense" directions, but we'll still prove those for fun.
 
@@ -400,7 +400,7 @@ That wasn't so bad!
 
 Now for the other direction of this.
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	If you wanna see an outtake where I messed up a definition and went finding it, see [Let's Prove #2](lets-prove-2)!
 
@@ -526,13 +526,13 @@ lemma safety_is_closed: "safety P ⟹ limit_closed P"
 Now that's quite a mess, and the negations scare me a little.
 The obvious thing is to get rid of the foralls in the goal with `allI`, and-
 
-.. admonition:: say
+.. admonition:: me/say
 
 	*psst*
 
 Hm?
 
-.. admonition:: say
+.. admonition:: me/say
 
 	Use sledgehammer!
 
@@ -690,7 +690,7 @@ leaving us with a very clean goal.
 The next step of my midnight plan is to show that $\sigma$ has a prefix that isn't a prefix of anything satisfying $P$.
 We'll do that in a separate lemma, though using the size of the prefix instead of the contents of the prefix.
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	It turns out that it's an full-blown iff and not just an implication, since it's pretty much just a consequence of quantifier De Morgan's.
 
@@ -708,7 +708,7 @@ There's a couple of ways of applying this:
 2. Forming an meta-implication using `iffD1` then doing a forward proof step with `drule not_limit_closure[THEN iffD1]` ([IIRM §9.2.1](https://isabelle.in.tum.de/doc/isar-ref.pdf#method.drule)).
 3. You can also do the same with `frule` instead ([IIRM §9.2.1](https://isabelle.in.tum.de/doc/isar-ref.pdf#method.frule)), or combine those two theorem with `iffD1[OF not_limit_closure]` ([IIRM §6.4.3](https://isabelle.in.tum.de/doc/isar-ref.pdf#attribute.OF)), for `frule iffD1[OF not_limit_closure]`!
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	To be honest, I just wanted to show off a bit :)
 

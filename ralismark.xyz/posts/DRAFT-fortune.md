@@ -34,7 +34,7 @@ So that's what this post is[^why] -- stitching the pieces I could find together 
 In researching this, I've managed to assemble a pretty comprehensive code history in <https://github.com/ralismark/fortune-history>.
 So have a look if you wanna have a look around!
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	I'm also going to be focusing on just the fortune *programs* here -- mainly `fortune` and `strfile`.
 	The actual fortunes strings that come bundled with it have their own story, but that's mostly for another time.
@@ -146,7 +146,7 @@ Yep, this format is pretty non-portable between systems.
 I'm not really sure why some fields are `int`s while others are `long`s, or whether there even is a difference on the systems that 4BSD was run on.
 Anyways, when making the datafile, `strfile` would keep a counter of the number of fortunes, and when it saw a `%-`, it would put that counter into one of the `str_delims` fields.
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	4BSD `strfile` also had two bugs in the delimiter processing code -- a _guaranteed_ null dereference, and an uninitialised variable -- that causes it to always crash on my system.
 	The first was fixed in 4.2BSD as the only change to any of C code <!--REWORD-->, and the second in 4.3BSD by converting it into a global variable.
@@ -366,7 +366,7 @@ And there was always some cross-pollination between the individual contributors'
 
 <!--TODO get quotes-->
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	Within Debian, I only ended up going digging for the history of the fortune-mod package, and not the original fortune.
 	The former only goes up to the origin of that name -- Amy's "9510" version.

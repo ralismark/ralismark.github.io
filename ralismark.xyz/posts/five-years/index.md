@@ -18,7 +18,7 @@ So here's a tour through its history.
 Here's what my first ever iteration of this website looked like.
 It's only because of using git from the very start that this is even possible -- I only had to checkout the appropriate commit, copy over the latest Dockerfile and test script, and run it.
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	Fun fact: Originally there was a janky Makefile that was used to manage the docker container for local testing.
 	It did some awkward stuff to try to be compatible with both Linux make and Windows nmake, including using temp files to track docker state.
@@ -101,7 +101,7 @@ The cute garden from 2020, the webmention comments, even some of my posts -- suc
 [uses]: uses
 [sidenotes]: inline-notes
 
-.. admonition:: say
+.. admonition:: me/say
 
 	And more recently, I'd make myself home on these blog posts too, inspired by [Amos's Cool Bear] and [Xe's Mara (and co)].
 

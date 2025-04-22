@@ -50,7 +50,7 @@ The origin of those two notes, and hence the etymology of _lycheeleaves_, is act
 So where did _lesley_ come from?
 Honestly, it, and leslie (pronounced identically) are just names I think are kinda neat.
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	(Insert "I just think they're neat" meme template)
 
@@ -63,7 +63,7 @@ Either way, Lesley, the generally feminine variant of the name, has been living 
 
 The actual day of April Fools rolled around, and I had a bit of fun with it and even really confused a person -- sorry areeb!
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	Personally, despite the custom for fooling to stop after noon, it's much more fun (and accomodating for people with later sleep schedules) if pranks last the whole day!
 

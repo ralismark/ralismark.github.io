@@ -6,7 +6,7 @@ date: 2024-03-05
 tags:
 ---
 
-.. admonition:: warn
+.. admonition:: me/warn
 
 	For most of this post, there are no spoilers for the Return of the Obra Dinn.
 
@@ -39,7 +39,7 @@ And this:
 
 That's not a real violin.
 
-.. admonition:: aside
+.. admonition:: me/say
 
 	Okay, I'm going to be spending a lot of words kinda breaking down what sounds off about it, so I'm going to preempt that by saying that this is _genuinely a non-issue_ and in no way detracts from the wonderful work of art that is this game.
 
@@ -121,7 +121,7 @@ So if you do know how to please let me know :) I would really appreciate it.
 I had way too many thoughts about this.
 So here they are.
 
-.. admonition:: warn
+.. admonition:: me/warn
 
 	.. sparkle::
 

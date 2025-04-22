@@ -56,7 +56,7 @@ module Kramdown
 end
 ```
 
-.. admonition:: warn
+.. admonition:: me/warn
 
 	This class must be in the `Kramdown::Converter` module, and the actual name of the class is used in a method name -- I'll point this out when it turns up.
 

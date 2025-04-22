@@ -13,7 +13,7 @@ tags:
 
 <br>
 
-.. admonition:: fortune
+.. admonition::
 	:image: {{ recipe.copy("./fortune.png", "/assets/fortune.png") }}
 	:alt: fortune cookie
 
