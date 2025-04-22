@@ -29,12 +29,12 @@
 	justify-content: center;
 	gap: 1rem 0.5rem;
 
-	.paper {
-		&[aria-current] {
-			background: var(--filled-bg);
-			color: var(--filled-fg);
-		}
+	[aria-current] .paper {
+		background: var(--filled-bg);
+		color: var(--filled-fg);
+	}
 
+	.paper {
 		&::after {
 			content: "";
 
@@ -48,13 +48,16 @@
 			background-color: var(--stroke);
 
 			transform: rotate(calc(-1 * var(--angle)));
-			transform-origin: center bottom;
+			transform-origin: center 21rem;
 
 			pointer-events: none;
 		}
-
-		transform-origin: center top;
+		transform-origin: center 1rem;
 	}
+}
+
+.paper:hover {
+	--angle: 3deg !important;
 }
 
 #site-footer {
