@@ -1,27 +1,21 @@
 {% set placeholder_img = recipe.copy("../assets/tem-placeholder.png", "/assets/tem-placeholder.png") %}
 {% set bee_img = recipe.copy("../assets/bee.svg", "/assets/bee.svg") %}
-{#
-- warn: self descriptive. something the reader should pay attention to and keep in mind while reading the subsequent content
-- aside: an interesting tidbit that's tangential to the content -- it doesn't particularly fit into the flow of the text. This includes "author's notes" and such, and has quite a bit of overlap with footnotes. Speaking _as the author_.
-- ask: when speaking _as if_ another character, or another writer.
-
-#}
-{% set preset = {
+{% set image, alt = {
 	"kith/say": (bee_img, "someone says"),
 	"kith/ask": (bee_img, "someone asks"),
 
-	"me/warn": (placeholder_img, "tem warns"),
-	"me/say": (placeholder_img, "tem says"),
+	"me/say": (recipe.copy("../assets/me_say.svg", "/assets/me_say.svg"), "tem says"),
+	"me/warn": (recipe.copy("../assets/me_warn.svg", "/assets/me_warn.svg"), "tem warns"),
 
 	"bee/say": (bee_img, "cute bee says"),
-}.get(title, (None, None)) %}
-{% if title and preset == (None, None) %}{{ raise("'" + title + "' is not a valid admonition ") }}{% endif %}
-{% set image = options.image | default(preset[0]) %}
-{% set alt = options.alt | default(preset[1]) | default("") %}
+}.get(title, (options.image, options.alt)) %}
+{% if title and (not image or not alt) %}{{ raise("'" + title + "' is not a valid admonition ") }}{% endif %}
 <blockquote admonition="{{ title }}">
-	{% with src=image, alt=alt, title=alt %}
-		{% include "./img.html" %}
-	{% endwith %}
+	{% if image %}
+		{% with src=image, alt=alt, title=alt %}
+			{% include "./img.html" %}
+		{% endwith %}
+	{% endif %}
 
 	{{ content }}
 </blockquote>

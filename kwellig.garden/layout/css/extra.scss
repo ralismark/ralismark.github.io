@@ -92,9 +92,9 @@ blockquote[admonition] {
 	 *   |<--3-->               |
 	 *   |                      |
 	 */
-	$padding: 1rem; // 1. text padding
-	$gap: 1rem; // 2. space between image and text
-	$size: 4rem; // 3. image size
+	$padding: 1em; // 1. text padding
+	$gap: 0em; // 2. space between image and text
+	$size: 5em; // 3. image size
 
 	// TODO media query for if page is too narrow?
 
