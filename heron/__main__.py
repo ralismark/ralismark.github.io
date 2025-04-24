@@ -85,8 +85,14 @@ def cmd_build(args: argparse.Namespace):
     if args.rm:
         shutil.rmtree(args.out)
     driver = LoggingDriver(args.out)
+
+    r: core.Recipe = recipe.FnRecipe(
+        lambda ctx:
+        ctx.build(ctx.build(recipe.LoadRecipe(*args.recipe)))
+    )
+
     print("building...", end="\r")
-    driver.build(recipe.LoadRecipe(*args.recipe).join())
+    driver.build(r)
     print("built successfully")
 
 
@@ -108,7 +114,10 @@ def cmd_dev(args: argparse.Namespace):
         shutil.rmtree(args.out)
     driver = dev.IncrementalDriver(args.out)
 
-    r = recipe.LoadRecipe(*args.recipe).join()
+    r: core.Recipe = recipe.FnRecipe(
+        lambda ctx:
+        ctx.build(ctx.build(recipe.LoadRecipe(*args.recipe)))
+    )
 
     def run_build():
         successful = False

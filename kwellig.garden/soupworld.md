@@ -6,8 +6,10 @@ excerpt: "Temmie's Worldbuilding Art Project"
 
 Hi there, and welcome to _Soupworld_, a kitchen sink world that's a playground for me to rotate ideas and be creative in!
 
-<a class="paper" href="gm-screen">Behind the GM's Screen</a>
-<a class="paper" href="spring-has-come">Spring Has Come!</a>
+{% for page in site.collections.soupworld -%}
+{% set page = recipe.build(page) -%}
+<a class="paper" href="{{ page.url }}">{{ page.props.title|e }}</a>
+{% endfor %}
 
 # Where this all started...
 

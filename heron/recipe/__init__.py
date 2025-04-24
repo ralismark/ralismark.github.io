@@ -24,7 +24,6 @@ from .graph import (
     GraphvizRecipe,
 )
 from .exec import (
-    Join,
     LoadRecipe,
 )
 from .posse import (

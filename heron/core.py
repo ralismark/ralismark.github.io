@@ -19,7 +19,8 @@ __all__ = [
 logger = logging.getLogger(__name__)
 
 
-class Recipe[R](abc.ABC, t.Hashable):
+@t.runtime_checkable
+class Recipe[R](t.Protocol):
     """
     Recipe represents a single build task.
 
