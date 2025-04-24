@@ -35,14 +35,39 @@ class Template(jinja2.Template):
             if self.filename is not None:
                 ctx.input(Path(self.filename))
         else:
-            warnings.warn("template rendered outside of build context")
+            warnings.warn(
+                "template rendered outside of build context",
+                stacklevel=4,  # caller of caller
+            )
 
     def alt_root_render_func(self, context: jinja2.runtime.Context):
         self.mark_as_input()
-
         assert self.filename is not None
+
+        # save old __file__
+        context_has_file = "__file__" in context.vars
+        context_file = context.vars.get("__file__")
+
         context.vars["__file__"] = Path(self.filename)
         yield from self.__root_render_fn(context)
+
+        if context.vars["__file__"] != Path(self.filename):
+            warnings.warn(
+                f"template variable __file__ was modified: {self.filename} -> {context.vars['__file__']}",
+                stacklevel=3,  # caller
+            )
+
+        # restore old __file__
+        if context_has_file:
+            context.vars["__file__"] = context_file
+        else:
+            del context.vars["__file__"]
+
+    def new_context(self, *args, **kwargs):
+        # for when we're being imported
+        ctx = super().new_context(*args, **kwargs)
+        ctx.vars["__file__"] = Path(self.filename)
+        return ctx
 
     @property
     def root_render_func(self):
