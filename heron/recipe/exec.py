@@ -4,23 +4,11 @@ import dataclasses
 from .. import core
 from .basic import InputMixin
 
-_R = t.TypeVar("_R")
+_F = t.TypeVar("_F")
 
 
 @dataclasses.dataclass(frozen=True)
-class Join(core.Recipe[_R]):
-    """
-    Monadic join, for processing recipes that produce a recipe.
-    """
-
-    recipe: core.Recipe[core.Recipe[_R]]
-
-    def build_impl(self, ctx: core.BuildContext) -> _R:
-        return ctx.build(ctx.build(self.recipe))
-
-
-@dataclasses.dataclass(frozen=True)
-class LoadRecipe(core.Recipe[core.Recipe], InputMixin):
+class LoadRecipe(core.Recipe[_F], InputMixin):
     """
     Load a recipe from a file.
 
@@ -30,7 +18,7 @@ class LoadRecipe(core.Recipe[core.Recipe], InputMixin):
 
     name: str = "main"
 
-    def build_impl(self, ctx: core.BuildContext) -> core.Recipe:
+    def build_impl(self, ctx: core.BuildContext) -> _F:
         ns: dict = {
             "__file__": str(self.path),
             "__name__": "__heron_main__",  # intentionally not __main__ to allow scripts to keep working
@@ -41,10 +29,4 @@ class LoadRecipe(core.Recipe[core.Recipe], InputMixin):
 
         if self.name not in ns:
             raise KeyError(f"nothing named {self.name!r} in {self.path}")
-        recipe = ns[self.name]
-        if not isinstance(recipe, core.Recipe):
-            raise TypeError(f"{self.name!r} is not a heron.core.Recipe")
-        return recipe
-
-    def join(self) -> core.Recipe:
-        return Join(self)
+        return ns[self.name]

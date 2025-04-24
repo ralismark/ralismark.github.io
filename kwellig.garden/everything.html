@@ -13,7 +13,7 @@ title: Everything
 
 	<details><summary>Table of Contents</summary>
 		<ul>
-			{% for post in site.series.posts|reverse %}
+			{% for post in site.collections.posts|reverse %}
 				{% set post = recipe.build(post) %}
 				<li>
 					<a href="#{{ loop.index }}">{{ post.props.title|e }}</a>
@@ -23,7 +23,7 @@ title: Everything
 	</details>
 </header>
 
-{% for post in site.series.posts|reverse %}
+{% for post in site.collections.posts|reverse %}
 	{% set post = recipe.build(post) %}
 	<article>
 		<h1 id="{{ loop.index }}" class="fence-y" style="text-align: center">

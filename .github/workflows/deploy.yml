@@ -29,7 +29,7 @@ jobs:
     - uses: DeterminateSystems/magic-nix-cache-action@v2
 
     - name: "Build site"
-      run: "nix run . -- build -o _site kwellig.garden/main.py"
+      run: "nix run . -- build -o _site kwellig.garden/_heron.py"
 
     - name: "Deploy to kwellig.garden"
       uses: cloudflare/wrangler-action@v3
