@@ -10,7 +10,7 @@ def main(
     make_collection,
     jenv,
 ):
-    interactives = make_collection(
+    interactives = yield from make_collection(
         ctx,
         (
             heron.recipe.PageRecipe(path, f"/interactives/{path.stem}.html", jenv)
@@ -19,6 +19,5 @@ def main(
         ),
         require_date=False,
     )
-    yield from interactives
 
     return interactives
