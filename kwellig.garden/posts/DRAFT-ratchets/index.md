@@ -57,7 +57,7 @@ This kind of emphasis on your own shortfalls over your strengths is also a centr
 
 [imposter syndrome]: https://en.wikipedia.org/wiki/Impostor_syndrome
 
-.. figure:: {{ recipe.copy("./imposter-syndrome.png", "/assets/imposter-syndrome.png") }}
+.. figure:: {{ recipe.copy("/assets/imposter-syndrome.png", "./imposter-syndrome.png") }}
 	:alt: Two sets of circles.
 		The left group is labelled "Imposter Syndrome" and shows a small blue circle with "What I know", completely contained inside a larger yellow circle "What I think others know".
 		The right group, labelled "Reality", consists of a central blue circle "What I know" surrounded by and slightly overlapping yellow circles of the same size as blue one.

@@ -4,16 +4,15 @@ from pathlib import Path, PurePosixPath
 
 import sass
 
-from .. import core
+from .. import core, recipe
 from ..jinja.registry import jinja_recipe_builder
-from . import inout
 
 
 @dataclasses.dataclass(frozen=True)
-class SassRecipe(inout.InoutRecipeBase):
+class SassRecipe(core.InoutMixin):
     include_paths: tuple[str, ...] = tuple()
 
-    def build_impl(self, ctx: core.BuildContext) -> inout.Inout:
+    def build_impl(self, ctx: core.BuildContext) -> core.Inout:
         # TODO there is an impurity with importing here, since adding a file
         # could change what was imported
 

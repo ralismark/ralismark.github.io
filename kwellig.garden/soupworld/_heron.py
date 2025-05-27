@@ -13,7 +13,7 @@ def main(
     interactives = yield from make_collection(
         ctx,
         (
-            heron.recipe.PageRecipe(path, f"/interactives/{path.stem}.html", jenv)
+            heron.PageRecipe(path, f"/soupworld/{path.stem}.html", jenv)
             for path in ctx.input(here).iterdir()
             if not path.stem.startswith("_")
         ),

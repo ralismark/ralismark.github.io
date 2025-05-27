@@ -12,7 +12,6 @@ available:
   This is useful for resolving relative paths.
 """
 
-from .utils import pass_heron
 from .environment import (
     Template,
     Environment,

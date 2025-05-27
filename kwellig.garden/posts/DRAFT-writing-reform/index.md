@@ -34,7 +34,7 @@ However, you *could* spell /fɪʃ/ as ["pfysche"](https://youtu.be/TEsqY4MH40s?t
 [^2]: There are many characters composed of a radical to indicate meaning and another character for pronunciation, like 运 (yùn, "to ship") being composed of 云 (yún, "cloud"), which has no semantic relation, and 辶, the radical for walking or movement.
 	So you can kind of guess the pronunciation of new characters, but not really.
 
-.. figure:: {{ recipe.copy("./xing2-homophones.png", "/assets/xing2-homophones.png") }}
+.. figure:: {{ recipe.copy("/assets/xing2-homophones.png", "./xing2-homophones.png") }}
 	:alt: Wiktionary entry for xíng.
 		A large number of entries are shown, each stating that xíng is the Pinyin transcription of a different character
 

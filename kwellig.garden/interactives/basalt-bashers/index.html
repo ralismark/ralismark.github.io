@@ -36,7 +36,7 @@ Let me know if you find them :>
 
 {% for path in recipe.readdir(".") %}
 	{% if path.suffix != ".html" %}
-		{% do recipe.copy(path, page.url + "/" + path.name) %}
+		{% do recipe.copy(page.url + "/" + path.name, path) %}
 	{% endif %}
 {% endfor %}
 

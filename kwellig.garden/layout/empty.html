@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title>{% if page.props.title %}{{ page.props.title | striptags }} - {% endif %}{{ site.title }}</title>
 		<meta name="description" content="{{ page.props.excerpt | default(site.description) }}">
-		<link rel="icon" type="image/png" sizes="32x32" href="{{ recipe.copy("assets/logo-32.png", "/assets/logo-32.png") }}">
+		<link rel="icon" type="image/png" sizes="32x32" href="{{ recipe.copy("/assets/logo-32.png", "assets/logo-32.png") }}">
 		<link rel="canonical" href="{{ site.url }}{{ page.url }}">
 		<link type="application/atom+xml" rel="alternate" href="/feed.xml" />
 

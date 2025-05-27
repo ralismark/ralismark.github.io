@@ -7,7 +7,6 @@ from frozendict import frozendict
 
 from .. import core, util
 from ..jinja.registry import RECIPE_FILTERS, jinja_recipe_builder
-from . import inout
 
 
 def main_file(ctx: core.BuildContext, path: Path) -> Path:
@@ -27,7 +26,7 @@ def main_file(ctx: core.BuildContext, path: Path) -> Path:
 
 
 @dataclasses.dataclass(frozen=True)
-class PageInout(inout.Inout):
+class PageInout(core.Inout):
     props: frozendict[str, t.Hashable]
     recipe_props: frozendict[str, t.Hashable]
     content: t.Optional[str]
@@ -37,7 +36,7 @@ class PageInout(inout.Inout):
 
 
 @dataclasses.dataclass(frozen=True)
-class PageMetaRecipe(inout.InoutRecipeBase[PageInout]):
+class PageMetaRecipe(core.InoutMixin[PageInout]):
     props: frozendict[str, t.Hashable] = frozendict()
 
     def build_impl(self, ctx: core.BuildContext) -> PageInout:
@@ -100,7 +99,7 @@ class JMarkdownStage(core.Recipe[str]):
 
 
 @dataclasses.dataclass(frozen=True)
-class PageRecipe(inout.InoutRecipeBase[PageInout]):
+class PageRecipe(core.InoutMixin[PageInout]):
     jenv: jinja2.Environment
     ext: t.Optional[str] = None
     props: frozendict[str, t.Hashable] = frozendict()

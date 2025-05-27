@@ -1,44 +1,73 @@
 """
-Implementation of Driver that has dynamic caching for use when live-previewing a
-site.
+Implementations of Driver with additional functionality.
 """
 
-import typing as t
 import logging
-from pathlib import Path, PurePosixPath
+import typing as t
 import warnings
+from pathlib import Path, PurePosixPath
 
-from .. import core
+from .kernel import Driver, DriverWrapper, Manifest, Recipe
+
+__all__ = [
+    "CachingDriver",
+    "GenerationalDriver",
+    "LoggingDriver",
+]
 
 logger = logging.getLogger(__name__)
 
 logger_hit_miss = logger.getChild("hit_miss")
 
 
-class IncrementalDriver(core.Driver):
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
+class CachingDriver(DriverWrapper):
+    """
+    Driver with basic caching of repeated recipes.
+    """
+
+    def __init__(self, driver: Driver):
+        super().__init__(driver)
 
         # general cache of recipes
-        self.cache: dict[core.Recipe, core.Manifest] = dict()
+        self.cache: dict[Recipe, Manifest] = dict()
+
+    def build(self, recipe):
+        mf = self.cache.get(recipe)
+        if mf is not None:
+            return mf
+        self.cache[recipe] = mf = super().build(recipe)
+        return mf
+
+
+class GenerationalDriver(DriverWrapper):
+    """
+    Driver with a clearable cache, for use when live-previewing a recipe.
+    """
+
+    def __init__(self, driver: Driver):
+        super().__init__(driver)
+
+        # general cache of recipes
+        self.cache: dict[Recipe, Manifest] = dict()
 
         # recipes in cache that are run this generation i.e. we can shortcircuit
         # the expired check
-        self.gen_cached: set[core.Recipe] = set()
+        self.gen_cached: set[Recipe] = set()
 
         # map from output files to the recipe that made them, so we can know
         # when recipes get invalidated because their outputs are overwritten
         #
         # Note: this may contain entries which refer to invalidated recipes!
-        self.output_files: dict[Path, core.Recipe] = dict()
+        self.output_files: dict[Path, Recipe] = dict()
 
     def finish(self, flush: bool = False) -> None:
         """
         Mark a generation as complete.
 
-        If `flush` is True, all recipes not built after the previous `finish`
+        If `flush` is True, all recipes not built since the previous `finish`
         are dropped from the cache.
         """
+        # TODO explain how to use this
 
         if flush:
             self.cache = {k: v for k, v in self.cache.items() if k in self.gen_cached}
@@ -46,14 +75,12 @@ class IncrementalDriver(core.Driver):
         self.gen_cached.clear()
 
     @t.overload
-    def is_cache_hit(self, recipe: core.Recipe, mf: None) -> t.Literal[False]:
-        ...
+    def is_cache_hit(self, recipe: Recipe, mf: None) -> t.Literal[False]: ...
 
     @t.overload
-    def is_cache_hit(self, recipe: core.Recipe, mf: core.Manifest) -> bool:
-        ...
+    def is_cache_hit(self, recipe: Recipe, mf: Manifest) -> bool: ...
 
-    def is_cache_hit(self, recipe: core.Recipe, mf: t.Optional[core.Manifest]) -> bool:
+    def is_cache_hit(self, recipe: Recipe, mf: t.Optional[Manifest]) -> bool:
         """
         Check if a recipe must be rebuilt, or if we can simply reuse the cached
         version.
@@ -64,7 +91,7 @@ class IncrementalDriver(core.Driver):
             return False
 
         for ev in mf.log:
-            if isinstance(ev, core.Manifest.Input):
+            if isinstance(ev, Manifest.Input):
                 try:
                     mtime = ev.path.stat().st_mtime
                 except FileNotFoundError:
@@ -78,14 +105,14 @@ class IncrementalDriver(core.Driver):
                         "miss (input changed: %s): %s", ev.path, recipe
                     )
                     return False
-            elif isinstance(ev, core.Manifest.Output):
+            elif isinstance(ev, Manifest.Output):
                 if self.output_files.get(ev.path) not in (None, recipe):
                     # another recipe overwrote the output path so we gotta recreate it
                     logger_hit_miss.debug(
                         "miss (output overwritten: %s): %s", ev.path, recipe
                     )
                     return False
-            elif isinstance(ev, core.Manifest.SubRecipe):
+            elif isinstance(ev, Manifest.SubRecipe):
                 # since recipes should be "pure", it is safe to reuse
                 # subrecipes if all preceeding subrecipes have the same output.
                 new_mf = self.build(ev.recipe)
@@ -94,7 +121,7 @@ class IncrementalDriver(core.Driver):
                         "miss (subrecipe manifest changed: %s): %s", ev.recipe, recipe
                     )
                     return False
-            elif isinstance(ev, core.Manifest.Trace):
+            elif isinstance(ev, Manifest.Trace):
                 # debug output doesn't matter
                 pass
             else:
@@ -121,7 +148,7 @@ class IncrementalDriver(core.Driver):
 
         return path
 
-    def build(self, recipe: core.Recipe) -> core.Manifest:
+    def build(self, recipe: Recipe) -> Manifest:
         try:
             hash(recipe)
         except TypeError:
@@ -137,9 +164,50 @@ class IncrementalDriver(core.Driver):
         if not self.is_cache_hit(recipe, mf):
             mf = super().build(recipe)
             self.cache[recipe] = mf
-            for output in mf.filter(core.Manifest.Output):
+            for output in mf.filter(Manifest.Output):
                 assert output.path not in self.output_files
                 self.output_files[output.path] = recipe
 
         self.gen_cached.add(recipe)
-        return t.cast(core.Manifest, mf)
+        return t.cast(Manifest, mf)
+
+
+class LoggingDriver(DriverWrapper):
+    """
+    Configurable logging driver
+
+    Arguments:
+
+    * `outputs`:
+        True: log files being written to (i.e. Output manifest entries)
+
+    * `recipes`:
+        "type": log type of recipes being built
+    """
+
+    def __init__(
+        self,
+        driver: Driver,
+        *,
+        logger: logging.Logger = logger,
+        outputs: t.Literal[False, True] = False,
+        recipes: t.Literal[False, "type"] = False,
+    ):
+        super().__init__(driver)
+
+        self.logger = logger
+
+        self.log_outputs = outputs
+        self.log_recipes = recipes
+
+    def build(self, recipe):
+        if self.log_recipes:
+            if self.log_recipes == "type":
+                self.logger.info("building %s", recipe.__class__.__name__)
+
+        mf = super().build(recipe)
+        for e in mf.log:
+            if self.log_outputs and isinstance(e, Manifest.Output):
+                self.logger.info("wrote %s", e.path.relative_to(self.builddir))
+
+        return mf

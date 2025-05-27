@@ -57,7 +57,7 @@
 			</body>
 		</html>
 	{% endset %}
-	{% do recipe.write(content, opath) %}
+	{% do recipe.write(opath, content) %}
 {%- endmacro -%}
 
 {%- macro comments() -%}
@@ -107,6 +107,6 @@
 
 	<section style="padding: 0 2rem">
 		<noscript>Sorry! JavaScript is required to load comments</noscript>
-		<script data-url="https://www.ralismark.xyz{{ page.url }}" src="{{ recipe.copy("assets/webmention.js", "/assets/webmention.js").url }}" async></script>
+		<script data-url="https://www.ralismark.xyz{{ page.url }}" src="{{ recipe.copy("/assets/webmention.js", "assets/webmention.js").url }}" async></script>
 	</section>
 {%- endmacro -%}

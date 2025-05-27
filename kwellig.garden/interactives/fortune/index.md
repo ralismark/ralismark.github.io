@@ -14,7 +14,7 @@ tags:
 <br>
 
 .. admonition::
-	:image: {{ recipe.copy("./fortune.png", "/assets/fortune.png") }}
+	:image: {{ recipe.copy("/assets/fortune.png", "./fortune.png") }}
 	:alt: fortune cookie
 
 	Ask again later...
@@ -100,7 +100,7 @@ You can also use some existing public fortune collections:
 .. details:: my own ones
 
 	<button onclick="setfortfile('https://raw.githubusercontent.com/ralismark/nixfiles/main/assets/fortunes')">My personal collection</button>
-	<button onclick="setfortfile('{{ recipe.copy("./jingling.txt", "/assets/fortune:jingling") }}')">Compilers</button>
+	<button onclick="setfortfile('{{ recipe.copy("/assets/fortune:jingling", "./jingling.txt") }}')">Compilers</button>
 
 .. details:: fortune-mod
 

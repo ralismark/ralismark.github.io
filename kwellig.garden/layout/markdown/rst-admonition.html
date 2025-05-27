@@ -1,11 +1,11 @@
-{% set placeholder_img = recipe.copy("../assets/tem-placeholder.png", "/assets/tem-placeholder.png") %}
-{% set bee_img = recipe.copy("../assets/bee.svg", "/assets/bee.svg") %}
+{% set placeholder_img = recipe.copy("/assets/tem-placeholder.png", "../assets/tem-placeholder.png") %}
+{% set bee_img = recipe.copy("/assets/bee.svg", "../assets/bee.svg") %}
 {% set image, alt = {
 	"kith/say": (bee_img, "someone says"),
 	"kith/ask": (bee_img, "someone asks"),
 
-	"me/say": (recipe.copy("../assets/me_say.svg", "/assets/me_say.svg"), "tem says"),
-	"me/warn": (recipe.copy("../assets/me_warn.svg", "/assets/me_warn.svg"), "tem warns"),
+	"me/say": (recipe.copy("/assets/me_say.svg", "../assets/me_say.svg"), "tem says"),
+	"me/warn": (recipe.copy("/assets/me_warn.svg", "../assets/me_warn.svg"), "tem warns"),
 
 	"bee/say": (bee_img, "cute bee says"),
 }.get(title, (options.image, options.alt)) %}

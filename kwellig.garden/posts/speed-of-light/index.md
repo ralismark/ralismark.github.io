@@ -73,7 +73,7 @@ $ dvisvgm em-wave.dvi -p1 -n -o em-wave.svg
 
 #}
 
-.. figure:: {{ recipe.copy("./em-wave.svg", "/assets/speed-of-light:em-wave.svg") }}
+.. figure:: {{ recipe.copy("/assets/speed-of-light:em-wave.svg", "./em-wave.svg") }}
 	:alt: A diagram of EM wave, with a red sine wave, labelled E, along the X-Y plane and a blue sine wave, labelled B, along the X-Z plane
 
 	Electromagnetic wave.

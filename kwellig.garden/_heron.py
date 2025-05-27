@@ -47,8 +47,8 @@ def parse_tags(
 
 @dataclasses.dataclass(frozen=True)
 class Collection:
-    pages: tuple[heron.recipe.PageRecipe, ...]
-    series: frozendict[str, tuple[heron.recipe.PageRecipe, ...]]
+    pages: tuple[heron.PageRecipe, ...]
+    series: frozendict[str, tuple[heron.PageRecipe, ...]]
 
     def __len__(self):
         return len(self.pages)
@@ -59,10 +59,10 @@ class Collection:
 
 def make_collection(
     ctx: heron.core.BuildContext,
-    pages: t.Iterable[heron.recipe.PageRecipe],
+    pages: t.Iterable[heron.PageRecipe],
     require_date: bool = True,
-) -> Collection:
-    def post_date(meta: heron.recipe.PageInout):
+) -> t.Generator[heron.Recipe, None, Collection]:
+    def post_date(meta: heron.PageInout):
         date = meta.props.get("date")
         if date is None:
             if require_date:
@@ -80,7 +80,7 @@ def make_collection(
     out: Collection
 
     # do the filtering and ordering
-    pairs: t.Iterable[tuple[heron.recipe.PageRecipe, heron.recipe.PageInout]]
+    pairs: t.Iterable[tuple[heron.PageRecipe, heron.PageInout]]
     pairs = ((page.extend_props(draft=extract_draft(page.path)), ctx.build(page.meta)) for page in pages)
     pairs = ((page, meta) for page, meta in pairs if site["drafts"] or not page.props["draft"])
     pairs = sorted(pairs, key=lambda p: post_date(p[1]))
@@ -103,7 +103,7 @@ def make_collection(
     )
     pairs = tuple(pairs)
 
-    series: dict[str, list[heron.recipe.PageRecipe]] = dict()
+    series: dict[str, list[heron.PageRecipe]] = dict()
     for page, meta in pairs:
         s = meta.props.get("series")
         if not s:
@@ -121,12 +121,12 @@ def make_collection(
 
 
 def inner_main(ctx: heron.core.BuildContext):
-    load: t.Callable = lambda path: ctx.build(heron.recipe.LoadRecipe(here / path))
+    load: t.Callable = lambda path: ctx.build(heron.LoadRecipe(here / path))
 
     posts = yield from make_collection(
         ctx,
         (
-            heron.recipe.PageRecipe(path, f"/posts/{path.stem}.html", jenv)
+            heron.PageRecipe(path, f"/posts/{path.stem}.html", jenv)
             for path in ctx.input(here / "posts").iterdir()
         ),
     )
@@ -134,7 +134,7 @@ def inner_main(ctx: heron.core.BuildContext):
     interactives = yield from make_collection(
         ctx,
         (
-            heron.recipe.PageRecipe(path, f"/interactives/{path.stem}.html", jenv)
+            heron.PageRecipe(path, f"/interactives/{path.stem}.html", jenv)
             for path in ctx.input(here / "interactives").iterdir()
         ),
     )
@@ -142,7 +142,7 @@ def inner_main(ctx: heron.core.BuildContext):
     garden = yield from make_collection(
         ctx,
         (
-            heron.recipe.PageRecipe(
+            heron.PageRecipe(
                 path, f"/garden/{path.stem}.html", jenv, props=frozendict(noindex=True)
             )
             for path in ctx.input(here / "garden").iterdir()
@@ -165,12 +165,12 @@ def inner_main(ctx: heron.core.BuildContext):
 
     for root_page_glob in ["*.html", "*.md", "*.d"]:
         for path in ctx.input(here).glob(root_page_glob):
-            yield heron.recipe.PageRecipe(path, f"/{path.stem}.html", jenv)
+            yield heron.PageRecipe(path, f"/{path.stem}.html", jenv)
 
     # extra stuff
 
-    yield heron.recipe.CopyRecipe(here / "robots.txt", "/robots.txt")
-    yield heron.recipe.SassRecipe(
+    yield heron.CopyRecipe("/robots.txt", here / "robots.txt")
+    yield heron.SassRecipe(
         here / "layout/css/main-foundation.scss",
         "/assets/foundation.css",
         include_paths=(str(here / "layout/css"),),
@@ -178,16 +178,16 @@ def inner_main(ctx: heron.core.BuildContext):
 
 
 @dataclasses.dataclass(frozen=True)
-class RecursiveCopy(heron.recipe.InoutRecipeBase):
+class RecursiveCopy(heron.InoutMixin):
     def build_impl(self, ctx: heron.core.BuildContext):
         if ctx.input(self.path).is_dir():
             for entry in ctx.input(self.path).iterdir():
                 ctx.build(RecursiveCopy(entry, self.opath / entry.name))
         else:
-            ctx.build(heron.recipe.CopyRecipe(self.path, self.opath))
+            ctx.build(heron.CopyRecipe(self.opath, self.path))
 
 
-@heron.recipe.FnRecipe
+@heron.FnRecipe
 def main(ctx: heron.core.BuildContext):
     recipes = [r for r in inner_main(ctx)]
     for r in recipes:

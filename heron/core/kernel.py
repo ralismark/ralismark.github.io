@@ -2,21 +2,21 @@
 Basic types that everything else is built on.
 """
 
-from pathlib import Path, PurePosixPath
-import abc
 import contextvars
 import dataclasses
-import logging
 import time
 import typing as t
+from pathlib import Path, PurePosixPath
 
 __all__ = [
-    "Recipe", "Manifest", "BuildFailure", "Driver", "BuildContext",
+    "BuildContext",
+    "BuildFailure",
+    "Driver",
+    "DriverWrapper",
+    "Manifest",
+    "Recipe",
     "current_ctx",
 ]
-
-
-logger = logging.getLogger(__name__)
 
 
 @t.runtime_checkable
@@ -29,7 +29,6 @@ class Recipe[R](t.Protocol):
     This fact is used by the builder to deduplicate recipes.
     """
 
-    @abc.abstractmethod
     def build_impl(self, ctx: "BuildContext") -> R:
         """
         Perform the build step.
@@ -121,22 +120,30 @@ class Driver:
     Mediator for builds.
     """
 
-    logger = logger.getChild("Driver")
-
     def __init__(self, builddir: Path):
-        self.builddir = builddir
+        self.builddir: Path = builddir
+        self.prev_driver: Driver | None = None
+
+    @property
+    def outermost_driver(self):
+        d = self
+        while d.prev_driver is not None:
+            d = d.prev_driver
+        return d
 
     def build[R](self, recipe: Recipe[R]) -> Manifest[R]:
         """
         Turn a Recipe into its resulting Manifest.
         """
+        # TODO the driver argument is a horrible hack to make composition work
+
         try:
             hash(recipe)
         except TypeError:
             # catch this early before we run into it later
             raise TypeError(f"unhashable recipe: {recipe!r}")
 
-        ctx = BuildContext(self)
+        ctx = BuildContext(self.outermost_driver)
 
         tok = BuildContext.Current.set(ctx)
         try:
@@ -148,12 +155,6 @@ class Driver:
         finally:
             BuildContext.Current.reset(tok)
 
-        # logger.debug(
-        #     "built %s%s",
-        #     recipe,
-        #     "".join(f"\n * {x}" for x in ctx._log if not isinstance(x, Manifest.SubRecipe))
-        # )
-
         return Manifest(
             recipe=recipe,
             value=val,
@@ -164,6 +165,7 @@ class Driver:
         """
         Transform input paths, if needed.
         """
+
         path = path.resolve()
         return path
 
@@ -172,6 +174,7 @@ class Driver:
         Resolve an output path to the concrete path, performing any additional
         operation as needed.
         """
+
         if opath.is_absolute():
             raise ValueError("output path must be relative")
         # TODO validate that opath doesn't have too many .. components?
@@ -179,6 +182,28 @@ class Driver:
         path = self.builddir / opath
         path.parent.mkdir(parents=True, exist_ok=True)
         return path
+
+
+class DriverWrapper(Driver):
+    """
+    Helper class for creating drivers that extend other drivers.
+    """
+
+    def __init__(self, driver: Driver):
+        super().__init__(driver.builddir)
+        self.next_driver: Driver = driver
+
+        assert driver.prev_driver is None, "Attempting to wrap already wrapped driver"
+        driver.prev_driver = self
+
+    def build[R](self, recipe: Recipe[R]) -> Manifest[R]:
+        return self.next_driver.build(recipe)
+
+    def input(self, path: Path) -> Path:
+        return self.next_driver.input(path)
+
+    def output(self, opath: PurePosixPath) -> Path:
+        return self.next_driver.output(opath)
 
 
 @dataclasses.dataclass
@@ -189,7 +214,10 @@ class BuildContext:
     This should not be subclassed. Instead, to modify behaviour subclass
     Driver.
     """
-    Current: t.ClassVar[contextvars.ContextVar[t.Self]] = contextvars.ContextVar("BuildContext.Current")
+
+    Current: t.ClassVar[contextvars.ContextVar[t.Self]] = contextvars.ContextVar(
+        "BuildContext.Current"
+    )
 
     _driver: Driver
     _log: list[Manifest.Entry] = dataclasses.field(default_factory=list)
@@ -200,6 +228,7 @@ class BuildContext:
         """
         mf = self._driver.build(recipe)
         self._log.append(Manifest.SubRecipe(recipe, mf))
+        assert mf, f"{self._driver!r}"
         return mf.value
 
     def output(self, opath: PurePosixPath) -> Path:
