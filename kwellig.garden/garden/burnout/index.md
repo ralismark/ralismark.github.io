@@ -14,7 +14,7 @@ Compared to some other cases of burnout, that's quite a low amount of work.
 Plus, I didn't feel too stressed at the time.
 But, turns out that my mental limits were *way* lower than I'd imagined.
 
-.. figure:: {{ recipe.copy("./anki.png", "/assets/burnout:anki.png") }}
+.. figure:: {{ recipe.copy("/assets/burnout:anki.png", "./anki.png") }}
 	:alt: Anki review graph.
 
 	You can my mental wellbeing reflected in the amount of Anki reviews I do each day.

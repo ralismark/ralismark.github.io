@@ -115,7 +115,7 @@ Also I want to combine it with the rest of the orchestra, but I haven't found a 
 So if you do know how to please let me know :) I would really appreciate it.
 
 <figure>
-	<audio controls src="{{ recipe.copy("./bargain.mp3", "/assets/bargain:bargain.mp3") }}"></audio>
+	<audio controls src="{{ recipe.copy("/assets/bargain:bargain.mp3", "./bargain.mp3") }}"></audio>
 </figure>
 
 I had way too many thoughts about this.

@@ -28,7 +28,7 @@ However, a (non-exhaustive) number of suburbs are different, with Asian culture 
 In this respect, these suburbs on the west have more in common with each other than with the rest of the Inner West (particularly the eastern side).
 And so I don't think it makes much sense to draw the western edge anywhere through these suburbs.
 
-.. figure:: {{ recipe.copy("./boundary.png", "/assets/sydney-midwest:boundary.png") }}
+.. figure:: {{ recipe.copy("/assets/sydney-midwest:boundary.png", "./boundary.png") }}
 
 	Map of what I think is inside and outside the Inner West.
 
@@ -42,6 +42,6 @@ Make this cluster of suburbs is its own distinct region: the Midwest[^why-name].
 
 [^why-name]: Yes, the name is a reference/joke about the [American Midwest](https://en.wikipedia.org/wiki/Midwest).
 
-.. figure:: {{ recipe.copy("./midwest.png", "/assets/sydney-midwest:midwest.png") }}
+.. figure:: {{ recipe.copy("/assets/sydney-midwest:midwest.png", "./midwest.png") }}
 
 	The Midwest!

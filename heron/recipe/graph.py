@@ -4,13 +4,12 @@ from pathlib import Path, PurePosixPath
 
 from .. import core
 from ..jinja.registry import jinja_recipe_builder
-from . import inout
 
 FG_SUBST = "#fffff2"
 
 
 @dataclasses.dataclass(frozen=True)
-class GraphvizRecipe(inout.InoutRecipeBase):
+class GraphvizRecipe(core.InoutMixin):
     engine: str
 
     def svg_args(self) -> tuple[str, ...]:
@@ -41,7 +40,7 @@ class GraphvizRecipe(inout.InoutRecipeBase):
         """)
         return svg
 
-    def build_impl(self, ctx: core.BuildContext) -> inout.Inout:
+    def build_impl(self, ctx: core.BuildContext) -> core.Inout:
         outfmt = self.opath.suffix.lstrip(".")
         if outfmt == "":
             raise ValueError(f"opath {self.opath} not valid")

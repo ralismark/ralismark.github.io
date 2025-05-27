@@ -29,6 +29,6 @@ Unlike the others, this uses one external library -- jQuery :)
 
 {% for path in recipe.readdir(".") %}
 	{% if path.suffix != ".md" %}
-		{% do recipe.copy(path, page.url + "/" + path.name) %}
+		{% do recipe.copy(page.url + "/" + path.name, path) %}
 	{% endif %}
 {% endfor %}

@@ -7,18 +7,18 @@ tags:
 ---
 
 Pretty much as the subtitle says -- I spent most of today figuring out how to generate a nicely typeset pdf from `xetex.web`.
-Here's it is -- [XeTeX source documentation for v0.999992]({{ recipe.copy("./xetex.pdf", "/assets/xetex.pdf") }})!
+Here's it is -- [XeTeX source documentation for v0.999992]({{ recipe.copy("/assets/xetex.pdf", "./xetex.pdf") }})!
 
 <!--more-->
 
 I've also taken the opportunity to weave some more related files:
 
-- [tangle v4.6]({{ recipe.copy("./tangle.pdf", "/assets/tangle.pdf") }}), from <https://www.ctan.org/pkg/tangle>
-- [weave v4.5]({{ recipe.copy("./weave.pdf", "/assets/weave.pdf") }}), from <https://www.ctan.org/pkg/weave>
-- The original [TeX v3.14159265]({{ recipe.copy("./tex.pdf", "/assets/tex.pdf") }})
-- [ε-TeX v2.6]({{ recipe.copy("./etex.pdf", "/assets/etex.pdf") }}) (using `weave tex.web etexdir/etex.ch`)
-- [bibtex v0.99d]({{ recipe.copy("./bibtex.pdf", "/assets/bibtex.pdf") }}), from <https://ctan.org/pkg/bibtex> (I had to `sed 's/\\ETs/, and~/'` the .tex file to fix a compile error -- I think pdftex was somehow reading it as `\E Ts` due to there being a `\E` macro for exponentials)
-- And [XeTeX v0.999992]({{ recipe.copy("./xetex.pdf", "/assets/xetex.pdf") }}) from above
+- [tangle v4.6]({{ recipe.copy("/assets/tangle.pdf", "./tangle.pdf") }}), from <https://www.ctan.org/pkg/tangle>
+- [weave v4.5]({{ recipe.copy("/assets/weave.pdf", "./weave.pdf") }}), from <https://www.ctan.org/pkg/weave>
+- The original [TeX v3.14159265]({{ recipe.copy("/assets/tex.pdf", "./tex.pdf") }})
+- [ε-TeX v2.6]({{ recipe.copy("/assets/etex.pdf", "./etex.pdf") }}) (using `weave tex.web etexdir/etex.ch`)
+- [bibtex v0.99d]({{ recipe.copy("/assets/bibtex.pdf", "./bibtex.pdf") }}), from <https://ctan.org/pkg/bibtex> (I had to `sed 's/\\ETs/, and~/'` the .tex file to fix a compile error -- I think pdftex was somehow reading it as `\E Ts` due to there being a `\E` macro for exponentials)
+- And [XeTeX v0.999992]({{ recipe.copy("/assets/xetex.pdf", "./xetex.pdf") }}) from above
 
 The build process for the most of these is just `weave <input.web> && pdftex <input.tex>`.
 

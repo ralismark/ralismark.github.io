@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 
-import typing as t
-import shutil
-import urllib.parse
 import http
 import http.server
+import shutil
+import urllib.parse
 from pathlib import Path, PurePosixPath
 
+__all__ = [
+    "HTTPRequestHandler",
+    "http_serve",
+]
 
-class RequestHandler(http.server.BaseHTTPRequestHandler):
+
+class HTTPRequestHandler(http.server.BaseHTTPRequestHandler):
     NOT_FOUND_MSG = "404 Not Found."
 
     MIME_FOR_SUFFIX = {
@@ -92,17 +96,19 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
         return p, trailing_slash
 
 
-def serve_http(
+def http_serve(
     directory: Path,
     host: str = "",
     port: int = 0,
 ):
     with http.server.HTTPServer(
         (host, port),
-        lambda *args, **kwargs: RequestHandler(*args, **kwargs, directory=directory),
+        lambda *args, **kwargs: HTTPRequestHandler(
+            *args, **kwargs, directory=directory
+        ),
     ) as srv:
         actual_host, actual_port = srv.server_address
-        print(f"Serving {directory} on {actual_host}:{actual_port}")
+        print(f"Serving {directory} on {str(actual_host)}:{actual_port}")
         srv.serve_forever()
 
 
@@ -127,4 +133,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    serve_http(args.path, port=args.port)
+    http_serve(args.path, port=args.port)

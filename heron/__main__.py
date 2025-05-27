@@ -6,7 +6,7 @@ from pathlib import Path
 import shutil
 import http.server
 
-from . import core, dev, recipe
+import heron
 
 logger = logging.getLogger(__name__)
 
@@ -60,22 +60,6 @@ def add_driver_args(parser: argparse.ArgumentParser):
 # -----------------------------------------------------------------------------
 
 
-class LoggingDriver(core.Driver):
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
-        self.cache: dict[core.Recipe, core.Manifest] = dict()
-
-    def build(self, recipe):
-        mf = self.cache.get(recipe)
-        if mf is not None:
-            return mf
-        self.cache[recipe] = mf = super().build(recipe)
-
-        for o in mf.filter(core.Manifest.Output):
-            logger.info("wrote %s", o.path.relative_to(self.builddir))
-        return mf
-
-
 parser_build = subparser.add_parser("build", help="Build site")
 add_driver_args(parser_build)
 
@@ -84,12 +68,12 @@ add_driver_args(parser_build)
 def cmd_build(args: argparse.Namespace):
     if args.rm:
         shutil.rmtree(args.out)
-    driver = LoggingDriver(args.out)
-
-    r: core.Recipe = recipe.FnRecipe(
-        lambda ctx:
-        ctx.build(ctx.build(recipe.LoadRecipe(*args.recipe)))
+    driver = heron.LoggingDriver(
+        heron.Driver(args.out),
+        outputs=True,
     )
+
+    r = heron.FnRecipe(lambda ctx: ctx.build(ctx.build(heron.LoadRecipe(*args.recipe))))
 
     print("building...", end="\r")
     driver.build(r)
@@ -112,12 +96,15 @@ parser_dev.add_argument(
 def cmd_dev(args: argparse.Namespace):
     if args.rm:
         shutil.rmtree(args.out)
-    driver = dev.IncrementalDriver(args.out)
-
-    r: core.Recipe = recipe.FnRecipe(
-        lambda ctx:
-        ctx.build(ctx.build(recipe.LoadRecipe(*args.recipe)))
+    driver = heron.GenerationalDriver(
+        heron.LoggingDriver(
+            heron.Driver(args.out),
+            outputs=True,
+            recipes="type",
+        )
     )
+
+    r = heron.FnRecipe(lambda ctx: ctx.build(ctx.build(heron.LoadRecipe(*args.recipe))))
 
     def run_build():
         successful = False
@@ -125,7 +112,7 @@ def cmd_dev(args: argparse.Namespace):
         print("building...", end="\r")
         try:
             driver.build(r)
-        except core.BuildFailure as e:
+        except heron.BuildFailure as e:
             logger.exception("Failed to build %s", e.recipe, exc_info=e.__context__)
         except Exception:
             logger.exception("error")
@@ -140,8 +127,8 @@ def cmd_dev(args: argparse.Namespace):
     from watchdog.observers import Observer
     import time
 
-    class DevRequestHandler(dev.RequestHandler):
-        def __init__(self, *args, driver: dev.IncrementalDriver, **kwargs):
+    class DevRequestHandler(heron.HTTPRequestHandler):
+        def __init__(self, *args, driver: heron.GenerationalDriver, **kwargs):
             self.driver = driver
             super().__init__(*args, **kwargs)
 
@@ -179,11 +166,11 @@ def cmd_dev(args: argparse.Namespace):
                 <hr>
             """
 
-            def rcp_name(rcp: core.Recipe):
+            def rcp_name(rcp: heron.Recipe):
                 name = type(rcp).__name__
-                if isinstance(rcp, recipe.InputMixin):
+                if isinstance(rcp, heron.InputMixin):
                     name += f' from <tt>{rcp.path}</tt>'
-                if isinstance(rcp, recipe.OutputMixin):
+                if isinstance(rcp, heron.OutputMixin):
                     name += f' to <tt>{rcp.opath}</tt>'
                 return name
 
@@ -194,7 +181,7 @@ def cmd_dev(args: argparse.Namespace):
                 </div>
                 <div class="manifest">
                     """
-                if isinstance(rcp, recipe.OutputMixin):
+                if isinstance(rcp, heron.OutputMixin):
                     live_path = str(rcp.opath)
                     if live_path.endswith(".html"):
                         live_path = live_path[:-5]
@@ -208,15 +195,15 @@ def cmd_dev(args: argparse.Namespace):
 
                 for log in mf.log:
                     yield f"\n<tr><tr><td>{type(log).__name__}</td><td>"
-                    if isinstance(log, core.Manifest.Input):
+                    if isinstance(log, heron.Manifest.Input):
                         yield f"<tt>{log.path}</tt>"
-                    elif isinstance(log, core.Manifest.Output):
+                    elif isinstance(log, heron.Manifest.Output):
                         yield f"<tt>{log.path}</tt>"
-                    elif isinstance(log, core.Manifest.SubRecipe):
+                    elif isinstance(log, heron.Manifest.SubRecipe):
                         yield f'''
                             <a href="#{hash(log.recipe)}">{rcp_name(log.recipe)}</a>
                         '''
-                    elif isinstance(log, core.Manifest.Trace):
+                    elif isinstance(log, heron.Manifest.Trace):
                         yield f"{log.data}"
                     else:
                         yield "?"
@@ -225,7 +212,6 @@ def cmd_dev(args: argparse.Namespace):
                     </table>
                 </div>
                 """
-
 
     class Handler(FileSystemEventHandler):
         def __init__(self):

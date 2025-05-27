@@ -13,7 +13,7 @@ Its nonstandard design and the abundance of keys on the bottom row has led me to
 
 <!--more-->
 
-.. figure:: {{ recipe.copy("./own.png", "/assets/keyboard:own.png") }}
+.. figure:: {{ recipe.copy("/assets/keyboard:own.png", "./own.png") }}
 	:alt: A photo of my keyboard {# TODO better alt #}
 
 	My keyboard.
@@ -25,7 +25,7 @@ The capslock key is useless so let's replace it with something useful -- I'm a V
 
 # Palm Keys
 
-.. figure:: {{ recipe.copy("./palm-key.jpg", "/assets/keyboard:palm-key.jpg") }}
+.. figure:: {{ recipe.copy("/assets/keyboard:palm-key.jpg", "./palm-key.jpg") }}
 	:alt: Regular keyboard, but with key-sized wooden blocks glued on top of the two control keys
 
 	Wooden Palm Keys.
@@ -50,7 +50,7 @@ This is something that can only be fully exploited in custom keyboards -- see [/
 
 [^2]: I can't believe wide spacebars are standard. It's such a waste of prime keyboard real estate. Most people only use at most 2 key widths of it.
 
-.. figure:: {{ recipe.copy("./layout.png", "/assets/keyboard:layout.png") }}
+.. figure:: {{ recipe.copy("/assets/keyboard:layout.png", "./layout.png") }}
 	:alt: 12 keys in a row, with a gap between the 6th and the 7th.
 		In order: control, alt, layer, win, space, enter, shift, backspace, alt, down, up, control
 

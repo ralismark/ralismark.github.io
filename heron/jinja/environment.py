@@ -15,8 +15,7 @@ import jinja2
 import yaml
 
 from .. import core, util
-from .registry import RECIPE_FILTERS
-from .utils import GetItemWrapper
+from .registry import RecipeBook
 
 
 class Template(jinja2.Template):
@@ -136,7 +135,7 @@ base_env.filters["repr"] = repr
 base_env.tests["recipe"] = lambda v: isinstance(v, core.Recipe)
 
 
-base_env.globals["recipe"] = GetItemWrapper(RECIPE_FILTERS)
+base_env.globals["recipe"] = RecipeBook()
 
 
 @util.setitem(base_env.globals, "raise")

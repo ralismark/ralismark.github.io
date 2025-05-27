@@ -24,7 +24,7 @@ It's only because of using git from the very start that this is even possible --
 	It did some awkward stuff to try to be compatible with both Linux make and Windows nmake, including using temp files to track docker state.
 	Nowadays, everything is handled by a 15-line shell script.
 
-.. figure:: {{ recipe.copy("./1.png", "/assets/five-years:1.png") }}
+.. figure:: {{ recipe.copy("/assets/five-years:1.png", "./1.png") }}
 	:alt: The main post listing page in an early version of this website.
 		There is a big banner image of a white cherry blossom tree spanning the whole width, and an equally wide black bar just below with links to "Blog" and "Tags".
 		Above this heading, on the left is the name of the blog "Triple Except" and on the right is the description "Discussion from all depths of computer science".
@@ -50,7 +50,7 @@ In the first month I also made two further posts that I've since hidden for priv
 
 The next step on the website's evolution was a complete overhaul into Bootstrap v4.0 in August of that year.
 
-.. figure:: {{ recipe.copy("./2.png", "/assets/five-years:2.png") }}
+.. figure:: {{ recipe.copy("/assets/five-years:2.png", "./2.png") }}
 	:alt: The post list page in a later version of this website.
 		At the top is a grey navbar, with only the title 'Triple Except' on the left and a hamburger menu button on the right.
 		Below is a big heading "Posts", followed by three blog posts entries:
@@ -66,7 +66,7 @@ The next step on the website's evolution was a complete overhaul into Bootstrap 
 And that general look would last all the way to the end of 2020, through several design updates, Jekyll tweaks, and overall refactors.
 It'd get a separate landing page, a proper footer, and many more posts, but you can still trace the lineage back to the 2017 one.
 
-.. figure:: {{ recipe.copy("./3.png", "/assets/five-years:3.png") }}
+.. figure:: {{ recipe.copy("/assets/five-years:3.png", "./3.png") }}
 	:alt: Two screenshots of the website, in a similar style to before.
 		The one on the left is of the Index page, which reads
 		"Hi, I'm [redacted]. Welcome to my website.
@@ -112,7 +112,7 @@ So shoutout to the countless blogs and personal websites I've seen over the year
 
 And with that, we reach January 2021, where I redid the design one "final" time -- this time more of an original theme -- to bring us to what we have today.
 
-.. figure:: {{ recipe.copy("./4.png", "/assets/five-years:4.png") }}
+.. figure:: {{ recipe.copy("/assets/five-years:4.png", "./4.png") }}
 	:alt: A screenshot of the index page in the style of this website.
 		In the centre at the top is the website logo, a spiral of colour, atop a square of purple.
 		Together with the links on its left and right, 'tools' and 'posts' respectively, they form the navbar.

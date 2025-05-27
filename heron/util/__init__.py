@@ -7,8 +7,3 @@ from .misc import (
 from .preamble import (
     Preamble,
 )
-from .url import (
-    Pathish,
-    canonicalise_opath,
-    permalink,
-)

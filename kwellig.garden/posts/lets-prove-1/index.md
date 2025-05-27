@@ -829,7 +829,7 @@ And thus, just so I get to reuse this cute theorem styling[^css], we have proven
 
 	Every property is the intersection of a safety and a liveness property.
 
-For completeness, here's the [full theory]({{ recipe.copy("./Full.thy", "/assets/lets-prove-1:Full.thy") }}) with with everything we've done.
+For completeness, here's the [full theory]({{ recipe.copy("/assets/lets-prove-1:Full.thy", "./Full.thy") }}) with with everything we've done.
 
 # Reflections
 
