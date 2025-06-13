@@ -1,16 +1,18 @@
 {% extends "./empty.html" %}
 
 {% block body %}
+
 <header id="site-nav">
 	{% for name, url in [
 		("index", "/"),
 		("posts", "/posts"),
 		("toys", "/interactives"),
+		("links", "/links/"),
 		("soup", "/soupworld/"),
 	] %}
 		<a
 			class="paper"
-			{% if page.url == url %}aria-current="page"{% endif %}
+			{% if url != "/" and page.url.startswith(url) %}aria-current="page"{% endif %}
 			href="{{ url }}"
 			{# TODO change this to use --random? #}
 			style="--angle: {{ (loop.index + 2) * 2 % 5 - 2 }}deg"

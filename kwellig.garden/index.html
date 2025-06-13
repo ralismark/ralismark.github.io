@@ -34,20 +34,32 @@ layout: default
 	<div id="here">
 		<h1 style="text-align: center">You're at <em class="">{{ site.title }}</em></h1>
 
-		{% filter markdownify -%}
-{{ site.fqdn }} "{{ site.title }}" is the home of my internet things!
-They hold around {{ dt.datetime.now().year - 2017 }} sporadic years of writing, as well as a lot of other nice things.
+		<p>
+			{{ site.fqdn }} "{{ site.title }}" is the home of my internet things!
+			They hold around {{ dt.datetime.now().year - 2017 }} sporadic years of my irregular writing, as well as a lot of other nice things.
+		</p>
+		<p>
+			Here's their 88x31:
+		</p>
 
-They're part of this webring I run for friends!
-		{%- endfilter %}
+		<img
+			src="{{ recipe.copy("/88x31.png", "layout/assets/88x31.png") }}"
+			width="88"
+			height="31"
+			style="image-rendering: pixelated"
+		>
+
+		<p>
+			They're part of this webring I run for friends!
+		</p>
 
 		<iframe
 			style="
 				width: 35em;
 				max-width: 100%;
 				display: block;
-				margin: 0 auto;
-				height: 6rem;
+				margin: 2em auto;
+				height: 6em;
 				border: none;
 			"
 			src="https://the-fruit-loop.kwellig.garden/embed/ralismark"

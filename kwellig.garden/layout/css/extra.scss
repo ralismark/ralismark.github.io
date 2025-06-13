@@ -29,7 +29,7 @@
 	justify-content: center;
 	gap: 1rem 0.5rem;
 
-	[aria-current] .paper {
+	[aria-current].paper {
 		background: var(--filled-bg);
 		color: var(--filled-fg);
 	}

@@ -2,7 +2,7 @@
  * Colour scheme & other variable declarations
  */
 
-:root { // for non-sass use
+html { // for non-sass use
 	// based on <https://github.com/system-fonts/modern-font-stacks>
 	--main-font-family: Merriweather, "Iowan Old Style", "Palatino Linotype", "URW Palladio L", "P052", serif;
 	--main-font: 300 1em / 1.9 var(--main-font-family);
@@ -19,8 +19,6 @@
 	// ui lines
 	--stroke: rgba(127.5, 127.5, 127.5, 0.4);
 	
-	// TODO switch these over to use color-mix at some point
-
 	// background of boxes/etc
 	--box-tint: color-mix(in srgb, var(--primary), var(--body-bg) 95%);
 	--button-tint: color-mix(in srgb, var(--primary), var(--body-bg) 80%);

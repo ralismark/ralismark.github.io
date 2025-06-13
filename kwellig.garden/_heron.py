@@ -152,12 +152,15 @@ def inner_main(ctx: heron.core.BuildContext):
 
     soupworld: Collection = yield from load("soupworld/_heron.py")(ctx, make_collection, jenv)
 
+    links: Collection = yield from load("links/_heron.py")(ctx, make_collection, jenv)
+
     site["collections"] = heron.util.Impurity(
         lambda: {
             "posts": posts,
             "interactives": interactives,
             "garden": garden,
             "soupworld": soupworld,
+            "links": links,
         }
     )
 

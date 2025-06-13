@@ -1,0 +1,56 @@
+{% extends "./default.html" %}
+
+{% block content %}
+<article id="site-content" class="h-entry">
+
+{% set post_nav %}
+	<nav class="my-1 content-width">
+		{% if prev and prev() %}
+			{% set prev = recipe.build(prev().meta) %}
+			<a style="float: left; text-align: left" href="{{ prev }}">&laquo; {{ prev.props.title | e }}</a>
+		{% endif %}
+
+		{% if next and next() %}
+			{% set next = recipe.build(next().meta) %}
+			<a style="float: right; text-align: right" href="{{ next }}">{{ next.props.title | e }} &raquo;</a>
+		{% endif %}
+
+		<div role="none" style="clear: both"></div>
+	</nav>
+{% endset %}
+
+{{ post_nav}}
+
+<header class="content-width">
+	<dl>
+		<dt>title</dt>
+		<dd class="p-name">{{ page.props.title }}</dd>
+
+		<dt>url</dt>
+		<dd><a class="u-bookmark-of" href="{{ page.props.url }}">{{ page.props.url }}</a></dd>
+
+		<dt>date added</dt>
+		<dd>
+			<a class="u-url" href="{{ page.url }}">
+				<time datetime="{{ page.props.date.strftime("%Y-%m-%d") }}" class="dt-published">
+					{{ page.props.date.strftime("%-d %b %Y") }}
+				</time>
+			</a>
+		</dd>
+
+		{% set tags = parse_tags(page.props) %}
+		{% if tags %}
+			<dt>tags</dt>
+			<dd>{% for tag in tags %}{{tag}} {% endfor %}</dd>
+		{% endif %}
+	</dl>
+</header>
+
+{% block post_content %}
+<main class="e-content content-width">
+	{{ content }}
+</main>
+{% endblock post_content %}
+
+</article>
+{% endblock content %}
