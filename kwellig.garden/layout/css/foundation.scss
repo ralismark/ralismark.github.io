@@ -173,6 +173,10 @@ abbr {
 	}
 }
 
+dt {
+	font-weight: 700;
+}
+
 // Elements: Inputs ------------------------------------------------------ @@@2
 
 // typed things
@@ -308,8 +312,9 @@ Tablists are a very complicated layout
 			border-radius: 0.5rem 0.5rem 0 0;
 
 			background: var(--button-tint);
-			border: .1em solid var(--stroke);
-			border-bottom: none;
+			border-top: .1em solid var(--stroke);
+			border-left: .1em solid var(--stroke);
+			border-right: .1em solid var(--stroke);
 		}
 
 		> [role=tabpanel] {

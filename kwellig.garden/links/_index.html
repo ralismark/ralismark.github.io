@@ -1,0 +1,40 @@
+---
+layout: default
+title: Links
+---
+
+<p class="content-width">
+	These are things on the internet that I find pretty cool!
+</p>
+
+<hr class="lit">
+
+<main class="content-width">
+	<table>
+		<tbody>
+		{% for post in site.collections.links | reverse %}
+			{% set post = recipe.build(post.meta) %}
+			<tr>
+				<td>
+					{{ post.props.title }}
+				</td>
+				<td>
+					<a href="{{ post.props.url }}">
+						link
+					</a>
+				</td>
+				<td>
+					<a href="{{ post.url }}">
+						notes
+					</a>
+				</td>
+				<td>
+					<time class="dt-published" datetime="{{ post.props.date.strftime("%Y-%m-%d") }}">
+						{{ post.props.date.strftime("%e %b '%y") }}
+					</time>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+</main>

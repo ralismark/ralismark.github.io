@@ -11,15 +11,15 @@ def main(
     jenv,
 ):
     yield heron.PageRecipe(
-        here / "_index.md",
-        "/soupworld/index.html",
+        here / "_index.html",
+        "/links/index.html",
         jenv,
     )
 
     interactives = yield from make_collection(
         ctx,
         (
-            heron.PageRecipe(path, f"/soupworld/{path.stem}.html", jenv)
+            heron.PageRecipe(path, f"/links/{path.stem}.html", jenv)
             for path in ctx.input(here).iterdir()
             if not path.stem.startswith("_")
         ),

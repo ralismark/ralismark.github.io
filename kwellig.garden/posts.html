@@ -9,8 +9,6 @@ title: Blog
 	{% set ns.wc = ns.wc + (post.content | striptags | wordcount) %}
 {% endfor %}
 
-<h1>{{ page.title | e }}</h1>
-
 <p class="content-width">
 	Irregularly I have things I want to write about!
 	As a fun statistic, there's <strong>{{ site.collections.posts | length }} posts</strong>, totalling <strong>{{ ns.wc }} words</strong>!
