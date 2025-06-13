@@ -96,3 +96,18 @@ events:
       fai: 1.1
       e2: 559
       p: 7.6
+
+  - date: 2025-03-21
+    notes: >
+      Additional 1mg/24h of estradiol gel (sandrena).
+    measurements:
+      t: 0.4
+      shbg: 52
+      fai: 0.8
+      e2: 1315
+      p: 15.5
+      prolactin: 537
+
+  - date: 2025-04-01
+    notes: >
+      Implant of 2x 100mg stenlake pellets.
