@@ -42,12 +42,18 @@ layout: default
 			Here's their 88x31:
 		</p>
 
-		<img
-			src="{{ recipe.copy("/88x31.png", "layout/assets/88x31.png") }}"
-			width="88"
-			height="31"
-			style="image-rendering: pixelated"
-		>
+		<figure>
+			{% set stamp = recipe.copy("/88x31.png", "layout/assets/88x31.png") %}
+			<img
+				src="{{ stamp }}"
+				width="88"
+				height="31"
+				style="image-rendering: pixelated"
+			>
+			<figcaption>
+				Hotlink via <a href="{{ site.url }}{{ stamp }}">{{ site.url }}{{ stamp }}</a>!
+			</figcaption>
+		</figure>
 
 		<p>
 			They're part of this webring I run for friends!
