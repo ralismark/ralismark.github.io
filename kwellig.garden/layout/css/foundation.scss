@@ -303,8 +303,25 @@ Tablists are a very complicated layout
 	> details {
 		display: contents;
 
+		// See: https://issues.chromium.org/issues/379214835
+		//
+		// The correct behaviour is to treat the <details>'s contents as a
+		// separate pseudo-element with display: block. However, firefox
+		// currently defaults to display: contents, which this was originally
+		// made with. To make it work with both I've made all browsers use the
+		// "legacy" behaviour of having the details-content be display:
+		// contents.
+		//
+		// TODO When Firefox changes the default behaviour, look into cleaning
+		// this up.
+		&[open]::details-content {
+			display: contents;
+		}
+
 		> summary {
 			cursor: pointer;
+
+			order: -1;
 
 			list-style: none;
 			margin: 0.1rem 0 0;
@@ -318,7 +335,6 @@ Tablists are a very complicated layout
 		}
 
 		> [role=tabpanel] {
-			order: 2;
 			flex-basis: 100%;
 		}
 	}
@@ -330,7 +346,7 @@ Tablists are a very complicated layout
 
 	&::before {
 		content: "";
-		order: 1;
+		order: 0;
 		flex-basis: 100%;
 
 		border-top: 0.1rem solid var(--filled-bg);
