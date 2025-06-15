@@ -303,20 +303,24 @@ Tablists are a very complicated layout
 	> details {
 		display: contents;
 
+		// Fun fact: <details>'s contents are actually a separate pseudo-element
+		// with display: block! This previously caused a bug with tablist, where
+		// the order property of the tabpanels wasn't being applied. However,
+		// Firefox (where I did most of my development work), had the old
+		// behaviour of treating it as display: contents, meaning I didn't
+		// realise it was broken in Chrome for quite a while.
+		//
 		// See: https://issues.chromium.org/issues/379214835
 		//
-		// The correct behaviour is to treat the <details>'s contents as a
-		// separate pseudo-element with display: block. However, firefox
-		// currently defaults to display: contents, which this was originally
-		// made with. To make it work with both I've made all browsers use the
-		// "legacy" behaviour of having the details-content be display:
-		// contents.
+		// The workaround to this was:
 		//
-		// TODO When Firefox changes the default behaviour, look into cleaning
-		// this up.
-		&[open]::details-content {
-			display: contents;
-		}
+		// ```
+		// &[open]::details-content {
+		//     display: contents;
+		// }
+		// ```
+		//
+		// But having <summary> be at order -1 also fixes it.
 
 		> summary {
 			cursor: pointer;
