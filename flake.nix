@@ -11,7 +11,27 @@
       let
         pkgs = import nixpkgs { inherit system; };
 
+        node_modules =
+          let
+            packageJsons = pkgs.importNpmLock {
+              package = builtins.fromJSON (builtins.readFile ./package.json);
+              packageLock = builtins.fromJSON (builtins.readFile ./package-lock.json);
+            };
+          in
+            pkgs.runCommand "node_modules" {
+              nativeBuildInputs = [ pkgs.nodejs ];
+            } ''
+              # npm expects ~ to be writeable
+              export HOME=$PWD/.home
+
+              cp ${packageJsons}/* .
+              npm ci
+              cp -r node_modules $out
+            '';
+
         deps = [
+          pkgs.nodejs
+
           pkgs.graphviz
           pkgs.nodePackages.katex
           (pkgs.python3.withPackages (p: with p; [
@@ -44,6 +64,11 @@
 
         devShells.default = pkgs.mkShell {
           buildInputs = deps;
+
+          shellHook = ''
+            export PYTHONPATH=$PWD
+            PATH=$PWD/node_modules/.bin:$PATH
+          '';
         };
 
       });

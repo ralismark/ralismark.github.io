@@ -230,7 +230,7 @@ def cmd_dev(args: argparse.Namespace):
             self.last_time = time.time()
 
     observer = Observer(timeout=0.1)
-    observer.schedule(Handler(), path=args.recipe[0].parent, recursive=True)
+    observer.schedule(Handler(), path=str(Path.cwd()), recursive=True)
     observer.start()
 
     try:
