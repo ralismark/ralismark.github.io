@@ -1,5 +1,5 @@
 from .core import *
-from .recipe import (
+from .recipes import (
     PageInout,
     PageMetaRecipe,
     PageRecipe,
