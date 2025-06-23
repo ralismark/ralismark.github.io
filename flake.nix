@@ -29,47 +29,55 @@
               cp -r node_modules $out
             '';
 
-        deps = [
-          pkgs.nodejs
+        devshell = { ci }: pkgs.mkShellNoCC {
+          packages = [
+            pkgs.nodejs
+            pkgs.graphviz
+            pkgs.nodePackages.katex
+            (pkgs.python3.withPackages (p: with p; [
+              frozendict
+              jinja2
+              libsass
+              mistune
+              pygments
+              pyyaml
+              requests
+              watchdog
+            ]))
 
-          pkgs.graphviz
-          pkgs.nodePackages.katex
-          (pkgs.python3.withPackages (p: with p; [
-            frozendict
-            jinja2
-            libsass
-            mistune
-            pygments
-            pyyaml
-            requests
-            watchdog
-          ]))
-        ];
+            (pkgs.writeScriptBin "heron" ''
+              #!/bin/sh
+              exec python3 -m heron "$@"
+            '')
+          ];
+
+          shellHook = builtins.concatStringsSep "\n" [
+            # python setup
+            ''
+              export PYTHONPATH=$PWD
+            ''
+
+            # npm setup
+            (if ci
+              then ''
+                ln -s ${node_modules} node_modules
+              ''
+              else ''
+                [ -e node_modules ] || npm ci
+              '')
+            ''
+              PATH=$PWD/node_modules/.bin:$PATH
+            ''
+
+            # misc
+            ''
+              PATH=$PWD/bin:$PATH
+            ''
+          ];
+        };
       in
-      rec {
-        packages.heron = pkgs.writeShellApplication {
-          name = "heron";
-          runtimeInputs = deps;
-
-          text = ''
-            export PYTHONPATH=''${HERONPATH-.}''${PYTHONPATH:+:}''${PYTHONPATH-}
-            exec python -m heron "$@"
-          '';
-        };
-
-        apps.default = {
-          type = "app";
-          program = pkgs.lib.getExe packages.heron;
-        };
-
-        devShells.default = pkgs.mkShell {
-          buildInputs = deps;
-
-          shellHook = ''
-            export PYTHONPATH=$PWD
-            PATH=$PWD/node_modules/.bin:$PATH
-          '';
-        };
-
+      {
+        devShells.default = devshell { ci = false; };
+        devShells.ci = devshell { ci = true; };
       });
 }
