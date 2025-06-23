@@ -68,9 +68,11 @@ add_driver_args(parser_build)
 def cmd_build(args: argparse.Namespace):
     if args.rm:
         shutil.rmtree(args.out)
-    driver = heron.LoggingDriver(
-        heron.Driver(args.out),
-        outputs=True,
+    driver = heron.CachingDriver(
+        heron.LoggingDriver(
+            heron.Driver(args.out),
+            outputs=True,
+        )
     )
 
     r = heron.FnRecipe(lambda ctx: ctx.build(ctx.build(heron.LoadRecipe(*args.recipe))))
