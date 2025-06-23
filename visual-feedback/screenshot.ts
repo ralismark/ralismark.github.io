@@ -262,7 +262,8 @@ export async function screenshot(): Promise<HTMLCanvasElement> {
 	// convert svg to HTMLImageElement
 
 	const svgString = new XMLSerializer().serializeToString(svg)
-	const svgUrl = URL.createObjectURL(new Blob([svgString], {type: "image/svg+xml"}))
+	console.log(svgString)
+	const svgUrl = `data:image/svg+xml,${encodeURIComponent(svgString)}`
 
 	const img = await new Promise<HTMLImageElement>((resolve, reject) => {
 		const img = new Image()

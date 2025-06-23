@@ -25,9 +25,7 @@ This persistent partition has:
 
 [^zfs-send]: Well, it was a bit complicated, but only from trying to transfer 50GB in a reasonable time.
 	Doing it over the network wasn't feasible -- my WiFi was too bad, and neither of my laptops have an ethernet port.
-	What I ended up doing was writing `zfs send` into a file, copying it onto a harddrive (after splitting it up using [split(1)] to get around FAT32's filesize limits), then piecing everything together with `cat`, before finally feeding it into `zfs recv`.
-
-[split(1)]: https://man.archlinux.org/man/split.1
+	What I ended up doing was writing `zfs send` into a file, copying it onto a harddrive (after splitting it up using [split(1)](https://man.archlinux.org/man/split.1) to get around FAT32's filesize limits), then piecing everything together with `cat`, before finally feeding it into `zfs recv`.
 
 However, that doesn't actually provide a working OS on the new system.
 
