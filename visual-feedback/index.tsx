@@ -1,19 +1,122 @@
 import React from "./not-react"
+import { clarify } from "./obscure"
 import { screenshot } from "./screenshot"
 import css from "./ui.css"
 
-export function UI() {
-	const canvas = <canvas/>
+// I don't want the url to be visible in the code
+const WEBHOOK = clarify({
+	"key": "jIgMBuuYlmB2tat1numz2+7dCfsivYrdSISa5CB8CJo=",
+	"iv": "1XCPUG+EzREIMSfe",
+	"ciphertext": "8o1iQKh2vDGsy17R8FbrbfUtablzrg7ZL/kBSH9M25MNgOyQNFFdgKBlniws8VmNofnV4zZ+I9AgDuQ5AIxQlwjCdrpWulJTdT48xEfr3H/MgV1oMQO9/TRRWsTLLVrOtcf7onwmUhO6jQ9CxHGSczJX7/tAilsUnW9PlV13Cl2+IfD3cZpF05o="
+})
 
-	const dialog = <dialog>
-		{/*<details open>
-			<summary>feedback</summary>
-			<form method="dialog">
-				<input style="grid-area: title" name="title" placeholder="Title" />
-				<button style="grid-area: submit">Submit</button>
-				<textarea style="grid-area: description" name="description" placeholder="Describe the issue here"></textarea>
-			</form>
-		</details>*/}
+
+async function submit_issue({ description, canvas }: { description: string, canvas: HTMLCanvasElement }) {
+	const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve))
+
+	const formdata = new FormData()
+	formdata.append("payload_json", JSON.stringify({
+		content: `URL: ${location}
+User Agent: \`${navigator.userAgent}\`
+>>> ${description}`,
+		attachments: [
+			{
+				id: 0,
+				filename: "screenshot.png",
+			}
+		]
+	}))
+	formdata.append("files[0]", blob!)
+
+	await fetch(await WEBHOOK, {
+		method: "POST",
+		body: formdata,
+	})
+}
+
+function Form({ getcanvas }: { getcanvas: () => HTMLCanvasElement }) {
+	const description = <textarea
+		style="grid-area: description"
+		name="description"
+		placeholder="Describe the issue here"
+	/>
+
+	return <form
+		method="dialog"
+		onsubmit={() => {
+			submit_issue({
+				description: description.value,
+				canvas: getcanvas(),
+			})
+		}}
+	>
+		{description}
+		<button
+			style="grid-area: cancel"
+			type="button"
+			onclick={(e: PointerEvent) => {
+				(document.querySelector("#visual-feedback") as HTMLDialogElement).close()
+				e.preventDefault()
+			}}
+		>Cancel</button>
+		<button style="grid-area: submit">Submit</button>
+	</form>
+}
+
+// use pointer events to draw on canvas
+function make_drawable(canvas: HTMLCanvasElement) {
+	const ctx = canvas.getContext("2d")!
+
+	ctx.lineWidth = 3
+	ctx.lineCap = "round"
+	ctx.strokeStyle = "purple"
+
+	const lastPoint = new Map<number, [number, number]>()
+
+	function strokeTo(e: PointerEvent) {
+		const last = lastPoint.get(e.pointerId)
+		if (!last) return
+
+		ctx.beginPath()
+		ctx.moveTo(last[0], last[1])
+		ctx.lineTo(e.offsetX, e.offsetY)
+		ctx.stroke()
+		lastPoint.set(e.pointerId, [e.offsetX, e.offsetY])
+	}
+
+	canvas.addEventListener("pointerdown", e => {
+		lastPoint.set(e.pointerId, [e.offsetX, e.offsetY])
+		e.preventDefault()
+	})
+
+	canvas.addEventListener("pointermove", e => {
+		strokeTo(e)
+	})
+
+	canvas.addEventListener("pointerup", e => {
+		strokeTo(e)
+		lastPoint.delete(e.pointerId)
+	})
+
+	canvas.addEventListener("pointercancel", e => {
+		lastPoint.delete(e.pointerId)
+	})
+
+	canvas.addEventListener("pointerleave", e => {
+		lastPoint.delete(e.pointerId)
+	})
+}
+
+export function UI() {
+	let canvas = <canvas />
+
+	const dialog = <dialog id="visual-feedback">
+		<details open>
+			<summary>Feedback</summary>
+			<Form
+				getcanvas={() => canvas}
+			/>
+		</details>
 		{canvas}
 	</dialog>
 
@@ -24,7 +127,10 @@ export function UI() {
 			type="button"
 			onclick={async () => {
 				const viewport = await screenshot()
+				make_drawable(viewport)
+
 				canvas.replaceWith(viewport)
+				canvas = viewport
 				dialog.showModal()
 			}}
 		>
@@ -34,12 +140,7 @@ export function UI() {
 	</>
 }
 
-// create shadow root
-window.addEventListener("load", () => {
-	const host = document.createElement("kwellig-visual-feedback")
-	const shadow = host.attachShadow({mode: "open"})
-	shadow.appendChild(UI())
-
-	document.body.appendChild(host)
-	console.log("visual-feedback loaded")
-})
+const host = document.createElement("kwellig-visual-feedback")
+// const shadow = host.attachShadow({mode: "open"})
+host.appendChild(UI())
+document.currentScript!.insertAdjacentElement("afterend", host)

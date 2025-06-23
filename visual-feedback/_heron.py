@@ -13,16 +13,20 @@ here = Path(__file__).parent
 def main(ctx: heron.BuildContext, out: str) -> str:
     opath = heron.canonicalise_opath(out)
 
+    args = [
+        here / "../node_modules/.bin/esbuild",
+        here / "./index.tsx",
+        f"--outfile={ctx.output(opath)}",
+        "--bundle",
+        # TODO using /dev/stdout like this is a bit cheeky, we probably wanna use a fifo or sth
+        "--metafile=/dev/stdout",
+        "--loader:.css=text",
+        "--sourcemap=linked",
+        "--minify",
+    ]
+
     proc = subprocess.run(
-        [
-            here / "../node_modules/.bin/esbuild",
-            here / "./index.tsx",
-            f"--outfile={ctx.output(opath)}",
-            "--bundle",
-            # TODO using /dev/stdout like this is a bit cheeky, we probably wanna use a fifo or sth
-            "--metafile=/dev/stdout",
-            "--loader:.css=text",
-        ],
+        [str(x) for x in args if x],
         check=True,
         stdout=subprocess.PIPE,
     )

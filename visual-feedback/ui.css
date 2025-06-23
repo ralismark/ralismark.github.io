@@ -6,14 +6,13 @@ body:has(dialog[open]) {
 #feedback-button {
 	position: fixed;
 	right: 0;
-	top: 50%;
-	transform: translateY(-50%);
+	bottom: 1rem;
 
 	writing-mode: vertical-rl;
 	line-height: 1;
 }
 
-dialog#feedback {
+dialog#visual-feedback {
 	position: fixed;
 	top: 0;
 	width: 100%;
@@ -29,9 +28,13 @@ dialog#feedback {
 
 	details {
 		position: absolute;
-		width: 100%;
-		padding: 0 calc(50% - var(--content-width) / 2);
+		bottom: 0;
+		right: 0;
+
 		margin: 0;
+
+		width: 90%;
+		max-width: 20rem;
 
 		background: var(--body-bg);
 		opacity: 95%;
@@ -40,11 +43,12 @@ dialog#feedback {
 
 	form {
 		display: grid;
-		grid-template-columns: 1fr 5rem;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.5rem;
 		grid-template-rows: auto;
 		grid-template-areas:
-			"title submit"
-			"description description";
+			"description description"
+			"cancel submit";
 
 		> * {
 			width: 100%;
@@ -55,5 +59,7 @@ dialog#feedback {
 		width: 100%;
 		display: block;
 		margin: auto;
+
+		touch-action: none;
 	}
 }
