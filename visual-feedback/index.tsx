@@ -10,7 +10,6 @@ const WEBHOOK = clarify({
 	"ciphertext": "8o1iQKh2vDGsy17R8FbrbfUtablzrg7ZL/kBSH9M25MNgOyQNFFdgKBlniws8VmNofnV4zZ+I9AgDuQ5AIxQlwjCdrpWulJTdT48xEfr3H/MgV1oMQO9/TRRWsTLLVrOtcf7onwmUhO6jQ9CxHGSczJX7/tAilsUnW9PlV13Cl2+IfD3cZpF05o="
 })
 
-
 async function submit_issue({ description, canvas }: { description: string, canvas: HTMLCanvasElement }) {
 	const blob = await new Promise<Blob | null>(resolve => canvas.toBlob(resolve))
 
@@ -39,6 +38,8 @@ function Form({ getcanvas }: { getcanvas: () => HTMLCanvasElement }) {
 		style="grid-area: description"
 		name="description"
 		placeholder="Describe the issue here"
+		minlength={10}
+		required
 	/>
 
 	return <form
@@ -126,7 +127,27 @@ export function UI() {
 			id="feedback-button"
 			type="button"
 			onclick={async () => {
-				const viewport = await screenshot()
+				let viewport: HTMLCanvasElement
+				try {
+					viewport = await screenshot()
+				} catch(e) {
+					fetch(await WEBHOOK, {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({
+							content: `**Failed to take screenshot!**
+URL: ${location}
+User Agent: \`${navigator.userAgent}\`
+\`\`\`
+${e}
+\`\`\``,
+						})
+					})
+					alert("We couldn't take a screenshot :(\n\n" + e)
+					return
+				}
 				make_drawable(viewport)
 
 				canvas.replaceWith(viewport)

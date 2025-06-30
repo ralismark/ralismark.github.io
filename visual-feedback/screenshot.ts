@@ -191,7 +191,15 @@ async function preserveStylesheet() {
 	const fragment = document.createDocumentFragment()
 
 	for (const stylesheet of document.styleSheets) {
+		try {
+			stylesheet.cssRules
+		} catch(e) {
+			console.warn("Failed to read rules", stylesheet, e)
+			continue
+		}
+
 		const style = document.createElement("style")
+
 		for (const rule of stylesheet.cssRules) {
 			let text = rule.cssText
 
