@@ -7,7 +7,7 @@ tags: blogroll fiction
 ---
 
 Incredible fiction.
-And unfiction (fictional media pretending to be real) at https://suricrasia.online/unfiction/!
+And unfiction (fictional media pretending to be real) at <https://suricrasia.online/unfiction/>!
 Highlights:
 
 - [Basilisk Collection](https://suricrasia.online/unfiction/basilisk/)

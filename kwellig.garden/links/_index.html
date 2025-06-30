@@ -4,37 +4,86 @@ title: Links
 ---
 
 <p class="content-width">
-	These are things on the internet that I find pretty cool!
+	These are places on the internet that I find pretty cool!
 </p>
 
 <hr class="lit">
 
-<main class="content-width">
-	<table>
-		<tbody>
-		{% for post in site.collections.links | reverse %}
-			{% set post = recipe.build(post.meta) %}
-			<tr>
-				<td>
-					{{ post.props.title }}
-				</td>
-				<td>
-					<a href="{{ post.props.url }}">
-						link
+<main class="content-width h-feed">
+	{% for post in site.collections.links | reverse %}
+		{% set post = recipe.build(post) %}
+
+		{% set post_year = post.props.date.year %}
+		{% if loop.changed(post_year) and not loop.first %}
+			<div
+				class="fence-t"
+				style="text-align: right; font-size: 1.2em; color: grey; width: 100%"
+				role="separator"
+			>
+				{{ post_year }}
+			</div>
+		{% endif %}
+
+		<details name="h-entry" class="h-entry">
+			<summary class="paper p-name">
+				{{ post.props.title }}
+			</summary>
+
+			<div>
+				<dt>url</dt>
+				<dd><a class="u-bookmark-of" href="{{ post.props.url }}">{{ post.props.url }}</a></dd>
+
+				<dt>date added</dt>
+				<dd>
+					<a class="u-url" href="{{ post.url }}">
+						<time datetime="{{ post.props.date.strftime("%Y-%m-%d") }}" class="dt-published">
+							{{ post.props.date.strftime("%-d %b %Y") }}
+						</time>
 					</a>
-				</td>
-				<td>
-					<a href="{{ post.url }}">
-						notes
-					</a>
-				</td>
-				<td>
-					<time class="dt-published" datetime="{{ post.props.date.strftime("%Y-%m-%d") }}">
-						{{ post.props.date.strftime("%e %b '%y") }}
-					</time>
-				</td>
-			</tr>
-		{% endfor %}
-		</tbody>
-	</table>
+				</dd>
+
+				{% set tags = parse_tags(post.props) %}
+				{% if tags %}
+					<dt>tags</dt>
+					<dd>{% for tag in tags %}{{tag}} {% endfor %}</dd>
+				{% endif %}
+
+				<section class="e-content">
+					{{ post.content }}
+				</section>
+			</div>
+		</details>
+	{% endfor %}
 </main>
+
+<style>
+.h-feed {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+details.h-entry {
+	background: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+
+	display: contents;
+
+	> summary {
+		display: inline-block;
+		--angle: calc((var(--random) - 50) * 0.03deg);
+	}
+
+	&[open] > summary {
+		background: var(--filled-bg);
+		color: var(--filled-fg);
+
+		--angle: calc((var(--random) - 50) * -0.05deg);
+	}
+
+	> div {
+		width: 100%;
+	}
+}
+</style>
