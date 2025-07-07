@@ -17,7 +17,7 @@ title: Links
 		{% if loop.changed(post_year) and not loop.first %}
 			<div
 				class="fence-t"
-				style="text-align: right; font-size: 1.2em; color: grey; width: 100%"
+				style="text-align: right; font-size: 1.2em; color: grey; width: 100%; margin-top: 1em"
 				role="separator"
 			>
 				{{ post_year }}
@@ -29,7 +29,7 @@ title: Links
 				{{ post.props.title }}
 			</summary>
 
-			<div>
+			<div role="none">
 				<dt>url</dt>
 				<dd><a class="u-bookmark-of" href="{{ post.props.url }}">{{ post.props.url }}</a></dd>
 
