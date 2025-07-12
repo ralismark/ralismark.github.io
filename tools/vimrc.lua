@@ -22,10 +22,15 @@ if ls then
 	local lambda = require("luasnip.extras").l
 	local rep = require("luasnip.extras").rep
 
+	local show_condition = function(before)
+		return before:match("^%s*%.%.")
+	end
+
 	-- snippets
 	ls.add_snippets("pandoc", {
 		s({
 			trig = ".. details::",
+			show_condition = show_condition,
 		}, {
 			t({ ".. details:: " }), i(1), t({ "",
 				"",
@@ -33,6 +38,7 @@ if ls then
 		}),
 		s({
 			trig = ".. figure::",
+			show_condition = show_condition,
 		}, {
 			t({ ".. figure:: " }), i(1), t({ "",
 				"\t:alt: ", }), i(2), t({ "",

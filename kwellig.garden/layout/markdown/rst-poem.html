@@ -1,0 +1,1 @@
+{{ content_raw | re.sub("(.)\n", "\\1  \n") | markdownify | re.sub("<p", '<p style="text-indent: 1em hanging each-line"') }}
