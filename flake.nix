@@ -71,7 +71,7 @@
 
             # misc
             ''
-              PATH=$PWD/bin:$PATH
+              PATH=$PWD/tools:$PATH
             ''
           ];
         };
