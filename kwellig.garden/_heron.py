@@ -172,6 +172,7 @@ def inner_main(ctx: heron.core.BuildContext):
 
     # extra stuff
 
+    yield heron.CopyRecipe("/favicon.ico", here / "favicon.ico")
     yield heron.CopyRecipe("/robots.txt", here / "robots.txt")
     yield heron.SassRecipe(
         here / "layout/css/main-foundation.scss",
