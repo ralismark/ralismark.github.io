@@ -92,6 +92,14 @@ img.icon, svg.icon {
 	vertical-align: middle;
 }
 
+ins {
+	background: rgba(0, 255, 0, 0.3);
+}
+
+del {
+	background: rgba(255, 0, 0, 0.3);
+}
+
 // Elements -------------------------------------------------------------- @@@1
 
 @mixin card($inset: false) {
