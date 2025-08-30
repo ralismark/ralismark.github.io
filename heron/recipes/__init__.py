@@ -3,6 +3,9 @@ from .page import (
     PageMetaRecipe,
     PageRecipe,
 )
+from .contentaddressed import (
+    CopyCaRecipe,
+)
 from .css import (
     SassRecipe,
 )
