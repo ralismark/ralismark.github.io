@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "kwellig-garden",
+  "compatibility_date": "2025-08-31",
+  "assets": {
+    "directory": "dist",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    {
+      "pattern": "kwellig.garden",
+      "custom_domain": true
+    }
+  ]
+}

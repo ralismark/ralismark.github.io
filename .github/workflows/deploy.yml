@@ -5,14 +5,13 @@ on:
   push:
     branches: ["master"] # run on pushes
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   deployments: write
 
 # Allow one concurrent deployment
 concurrency:
-  group: "pages"
+  group: "deploy"
   cancel-in-progress: true
 
 jobs:
@@ -28,12 +27,10 @@ jobs:
         devShell: .#ci
 
     - name: "Build site"
-      run: "heron build -o _site kwellig.garden/_heron.py"
+      run: "heron build -o dist kwellig.garden/_heron.py"
 
     - name: "Deploy to kwellig.garden"
-      uses: cloudflare/wrangler-action@v3
-      with:
-        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        command: pages deploy _site --project-name=kwellig-garden
-        gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+      run: "wrangler deploy"
+      env:
+        CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
