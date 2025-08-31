@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "devDependencies": {
+    "esbuild": "^0.25.5",
     "typescript": "^5.8.3",
-    "esbuild": "^0.25.5"
+    "wrangler": "^4.33.1"
   }
 }
