@@ -11,29 +11,16 @@
       let
         pkgs = import nixpkgs { inherit system; };
 
-        node_modules =
-          let
-            packageJsons = pkgs.importNpmLock {
-              package = builtins.fromJSON (builtins.readFile ./package.json);
-              packageLock = builtins.fromJSON (builtins.readFile ./package-lock.json);
-            };
-          in
-            pkgs.runCommand "node_modules" {
-              nativeBuildInputs = [ pkgs.nodejs ];
-            } ''
-              # npm expects ~ to be writeable
-              export HOME=$PWD/.home
-
-              cp ${packageJsons}/* .
-              npm ci
-              cp -r node_modules $out
-            '';
+        npmDeps = pkgs.importNpmLock.buildNodeModules {
+          nodejs = pkgs.nodejs;
+          package = builtins.fromJSON (builtins.readFile ./package.json);
+          packageLock = builtins.fromJSON (builtins.readFile ./package-lock.json);
+        };
 
         devshell = { ci }: pkgs.mkShellNoCC {
           packages = [
             pkgs.nodejs
             pkgs.graphviz
-            pkgs.nodePackages.katex
             (pkgs.python3.withPackages (p: with p; [
               frozendict
               jinja2
@@ -49,6 +36,8 @@
               #!/bin/sh
               exec python3 -m heron "$@"
             '')
+
+            pkgs.importNpmLock.hooks.linkNodeModulesHook
           ];
 
           shellHook = builtins.concatStringsSep "\n" [
@@ -60,7 +49,9 @@
             # npm setup
             (if ci
               then ''
-                ln -s ${node_modules} node_modules
+                rm -rf node_modules
+                mkdir node_modules
+                ln -s ${npmDeps}/node_modules/* ${npmDeps}/node_modules/.* -t node_modules/
               ''
               else ''
                 [ -e node_modules ] || npm ci
