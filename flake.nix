@@ -16,6 +16,30 @@
           package = builtins.fromJSON (builtins.readFile ./package.json);
           packageLock = builtins.fromJSON (builtins.readFile ./package-lock.json);
         };
+        # create node_modules such that it can work with regular npm-install
+        node_modules = pkgs.runCommand "node_modules" {} ''
+          mkdir $out
+
+          for f in ${npmDeps}/node_modules/*; do
+            echo "$f"
+            basename=$(basename "$f")
+            case "$basename" in
+              @*) # scoped package of the form @scope/pkg
+                mkdir "$out/$basename"
+                for scoped_pkg in "$f"/*; do
+                  ln -s "$scoped_pkg" -t "$out/$basename"
+                done
+                ;;
+
+              *) # unscoped package
+                ln -s "$f" -t $out
+                ;;
+            esac
+          done
+
+          # miscellaneous bits
+          cp -r ${npmDeps}/node_modules/.* -t $out
+        '';
 
         devshell = { ci }: pkgs.mkShellNoCC {
           packages = [
@@ -47,16 +71,11 @@
             ''
 
             # npm setup
-            (if ci
-              then ''
-                rm -rf node_modules
-                mkdir node_modules
-                ln -s ${npmDeps}/node_modules/* ${npmDeps}/node_modules/.* -t node_modules/
-              ''
-              else ''
-                [ -e node_modules ] || npm ci
-              '')
             ''
+              rm -rf node_modules
+              cp -r --no-preserve=all ${node_modules} node_modules
+              chmod +w -R node_modules
+
               PATH=$PWD/node_modules/.bin:$PATH
             ''
 
