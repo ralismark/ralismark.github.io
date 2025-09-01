@@ -26,6 +26,9 @@ html {
 	background-color: var(--body-bg);
 	font: var(--main-font);
 	text-align: left;
+
+	font-size-adjust: ex-height 0.53; // 0.53 is the metric of Helvetica
+	line-height: 1.9;
 }
 
 pre, code {
@@ -45,11 +48,6 @@ strong {
 h1 {
 	text-align: center;
 	font-size: 2em;
-}
-
-// make KaTeX the right size
-.katex {
-	font-size: 1.1em !important;
 }
 
 // a better colour for links
@@ -479,18 +477,19 @@ table:not(.rouge-line-table):not(.rouge-table) {
 html {
 	$breaking-width: 55rem; // "clamp" page width to this if above. Used to transition between desktop-like and mobile-like sizing
 	$content-frac: .90; // maximum proportion of page width to use for content (i.e. remaining space is margin)
+	$bleed-frac: .75; // amount of margin to include in bleed
 
 	// --content-width is width of content
 	// --inset-margin is extra margin for "inset" thing (e.g. admonitions)
 	// --bleed-size is "negative margin" for bleed elements
 
 	--content-width: #{$breaking-width * $content-frac};
-	--bleed-size: calc(25vw - #{$breaking-width * $content-frac / 4});
+	--bleed-size: calc(#{$bleed-frac} * 50vw - #{$bleed-frac} * #{$breaking-width * $content-frac / 2});
 	// --inset-margin: 1rem;
 
 	@media(max-width: $breaking-width) {
 		--content-width: #{$content-frac * 100}vw;
-		--bleed-size: #{(1 - $content-frac) * 100 / 4}vw;
+		--bleed-size: #{$bleed-frac * (1 - $content-frac) * 100 / 2}vw;
 		// --inset-margin: 0rem;
 	}
 }
