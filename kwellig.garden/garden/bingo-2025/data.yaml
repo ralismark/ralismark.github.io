@@ -1,0 +1,163 @@
+- text: "HSK3"
+  target: 1
+  progress: []
+
+- text: "50 ASL signs"
+  target: 50
+  progress: []
+
+- text: "new bike"
+  target: 1
+  progress: []
+
+- text: "7 continuous days no work"
+  target: 1
+  progress:
+    - at: 2025-05-20
+
+- text: "skirt i regularly wear"
+  target: 1
+  progress:
+    - at: 2025-02-25
+
+- text: "string ensemble"
+  target: 1
+  progress: []
+
+- text: "learn pasta cooking"
+  target: 1
+  progress:
+    - text: "Thanks Alice!"
+      at: 2025-09-02
+
+- text: "dye hair"
+  target: 1
+  progress: []
+
+- text: "stargazing"
+  target: 1
+  progress:
+    - text: "Thanks en!"
+      at: 2025-02-22
+
+- text: "make 2 clothes"
+  target: 2
+  progress: []
+
+- text: "get into drawing"
+  target: 1
+  progress:
+    - text: "Mayvian!"
+      at: 2025-06-30
+
+- text: "makeup 19 times"
+  target: 19
+  progress: []
+
+- text: "commission art"
+  target: 1
+  progress: []
+
+- text: "move out!"
+  target: 1
+  progress: []
+
+- text: "progress towards bottom surgery"
+  target: 1
+  progress: []
+
+- text: "2 new shoes"
+  target: 2
+  progress:
+    - at: 2025-06-08
+
+- text: "offhand chopsticks"
+  target: 1
+  progress: []
+
+- text: "swimwear"
+  target: 1
+  progress:
+    - text: "Thanks G & friends!"
+      at: 2025-01-25
+
+- text: "6 entries of (writing project)"
+  target: 6
+  progress:
+    - text: "GM Screen"
+      at: 2025-03-23
+    - text: "Spring Has Come"
+      at: 2025-04-22
+    - text: "Quetzal"
+      at: 2025-07-12
+
+- text: "B2"
+  target: 1
+  progress: []
+
+- text: "6 glob posts"
+  target: 6
+  progress:
+    - text: "[Swimming for the first time in ~3 years](/posts/swimming)"
+      at: 2025-01-25
+    - text: "[Estimating speed with musical intervals](/posts/doppler-intervals)"
+      at: 2025-02-08
+    - text: "[They Did Surgery On An (Ephemeral) NixOS](/posts/nix-surgery)"
+      at: 2025-06-14
+    - text: "[A Draw Hobby Takes Flight](/posts/mayvian)"
+      at: 2025-08-30
+
+- text: "6 theatre things"
+  target: 6
+  progress:
+    - text: "Ghost Quartet"
+      at: 2025-01-20
+    - text: "Hadestown"
+      at: 2025-02-19
+    - text: "(MTS) Merrily We Roll Along"
+      at: 2025-07-12
+
+- text: "organise 3 picnics"
+  target: 3
+  progress:
+    - at: 2025-08-16
+
+- text: "complete outer wilds"
+  target: 1
+  progress: []
+
+- text: "leave the state"
+  target: 1
+  progress: []
+
+- text: "complete deltarune ch.2"
+  target: 1
+  progress: []
+
+- text: "set up kwellig.garden"
+  target: 1
+  progress:
+    - at: 2025-01-21
+
+- text: "finish reading pact by wildbow"
+  target: 1
+  progress:
+    - at: 2025-02-06
+
+- text: "?"
+  target: 1
+  progress: []
+
+- text: "?"
+  target: 1
+  progress: []
+
+- text: "?"
+  target: 1
+  progress: []
+
+- text: "take every form of estradiol medication"
+  target: 1
+  progress:
+    - at: 2025-01-17
+
