@@ -3,40 +3,7 @@ layout: standalone
 title: 2025 New Year's <s>Resolution</s> Super-Bingo
 ---
 
-{% set goals = [
-	(0, 1, "HSK3"),
-	(0, 50, "50 ASL signs"),
-	(0, 1, "new bike"),
-	(7, 7, "7 continuous days no work"),
-	(1, 1, "skirt i regularly wear"),
-	(0, 1, "string ensemble"),
-	(0, 1, "learn pasta cooking"),
-	(0, 1, "dye hair"),
-	(1, 1, "stargazing"),
-	(0, 2, "make 2 clothes"),
-	(1, 1, "get into drawing"),
-	(0, 19, "makeup 19 times"),
-	(0, 1, "commission art"),
-	(0, 1, "move out!"),
-	(0, 1, "progress towards bottom surgery"),
-	(1, 2, "2 new shoes"),
-	(0, 1, "offhand chopsticks"),
-	(1, 1, "swimwear"),
-	(2, 6, "6 entries of (writing project)"),
-	(0, 1, "B2"),
-	(2, 6, "6 glob posts"),
-	(2, 6, "6 musicals"),
-	(0, 3, "organise 3 picnics"),
-	(0, 1, "complete outer wilds"),
-	(0, 1, "leave the state"),
-	(0, 1, "complete deltarune ch.2"),
-	(1, 1, "set up kwellig.garden"),
-	(16, 16, "finish reading pact"),
-	(0, 1, "?"),
-	(0, 1, "?"),
-	(0, 1, "?"),
-	(1, 1, "Take every form of estradiol medication"),
-] %}
+{% set goals = recipe.read("data.yaml") | parse_yaml %}
 
 <section id="bingo">
 	<div class="head">2</div>
@@ -49,12 +16,12 @@ title: 2025 New Year's <s>Resolution</s> Super-Bingo
 		be me &lt;3
 	</div>
 
-	{% for progress, total, goal in goals %}
+	{% for goal in goals %}
 		<div
 			class="tile"
-			style="--progress: {{ progress }}/{{ total }};"
+			style="--progress: {{ goal.progress | length }}/{{ goal.target }};"
 		>
-			{{ goal }}
+			{{ goal.text }}
 		</div>
 	{% endfor %}
 </section>
@@ -75,11 +42,13 @@ title: 2025 New Year's <s>Resolution</s> Super-Bingo
 	.head {
 		grid-row: 0 / span 1;
 		background: purple;
+		color: white;
 	}
 
 	.free {
-		background: purple;
 		grid-area: 4 / 3 / 7 / 4;
+		background: purple;
+		color: white;
 	}
 
 	.tile {
@@ -146,62 +115,35 @@ Z
 {% endset %}
 {% set star_svg = recipe.write("/assets/star.svg", star_svg) %}
 
-<div class="Task" style="--progress: 1/1">
-	<time class="paper" datetime="2025-01-21">21 Jan</time>
-	<div>
-		<p>
-			Set up kwellig.garden
-		</p>
-	</div>
-</div>
-<div class="Task" style="--progress: 1/6">
-	<div>
-		<p>
-			Watch 6 theatre productions
-		</p>
-		<ol>
-			<li>
-				<time class="paper" datetime="2025-01-20">20 Jan</time>
-				Ghost Quartet
-			</li>
-			<li>
-				<time class="paper" datetime="2025-02-19">19 Feb</time>
-				Hadestown!
-			</li>
-		</ol>
-	</div>
-</div>
-<div class="Task" style="--progress: 1/1">
-	<time class="paper" datetime="2025-01-25">25 Jan</time>
-	<p>Get swimwear & go swimming :3</p>
-</div>
-<div class="Task" style="--progress: 16/16">
-	<time class="paper" datetime="2025-02-06">6 Feb</time>
-	<p>Finish <a href="https://pactwebserial.wordpress.com/">Pact by Wildbow</a></p>
-</div>
-<div class="Task" style="--progress: 2/6">
-	<div>
-		<p>6 blog posts</p>
-		<ol>
-			<li><time class="paper" datetime="2025-01-26">26 Jan</time><a href="/posts/swimming">Notes from swimming for the first time in ~3 years</a></li>
-			<li><time class="paper" datetime="2025-02-08">8 Feb</time><a href="/posts/doppler-intervals">Estimating speed with musical intervals</a></li>
-		</ol>
-	</div>
-</div>
-<div class="Task" style="--progress: 1">
-	<time class="paper" datetime="2025-01-17">17 Jan</time>
-	<p>Take every form of estradiol medication</p>
-</div>
-<div class="Task" style="--progress: 1">
-	<time class="paper" datetime="2025-02-25">25 Feb</time>
-	<p>Get a skirt I actually regularly wear</p>
-</div>
+<table>
+{% for month in ["January", "February", "March", "April", "May", "June", "July", "August"] %}
+<tr>
+	<th colspan="3"><h2>{{ month }}</h2></th>
+</tr>
+
+{% set mm = loop.index %}
+
+{% for goal in goals %}
+	{% for step in goal.progress %}
+		{% if step.at.month == mm %}
+		<tr>
+			<td class="text-align-right">{{ goal.text }}</td>
+			<td class="Task" style="--progress: 1/{{ goal.target }}">
+				<time class="paper" datetime="{{ step.at.strftime("%Y-%m-%d") }}">{{ step.at.strftime("%d %b") }}</time>
+			</td>
+			<td class="text-align-left">{{ step.text | default("") | markdownify }}</td>
+		{% endif %}
+	{% endfor %}
+{% endfor %}
+{% endfor %}
+</table>
 
 <style>
+.text-align-right { text-align: right !important; }
+.text-align-left { text-align: left !important; }
+
 .Task {
 	display: grid;
-
-	margin: 1em 0;
 
 	--star-size: 4.4rem;
 
@@ -232,7 +174,7 @@ Z
 		mask-image: conic-gradient(
 			#000 0%,
 			#000 calc(100% * var(--progress, 0)),
-			#0003 calc(100% * var(--progress, 0))
+			#0002 calc(100% * var(--progress, 0))
 		);
 		transform: rotate(calc((var(--random) - 50) / 100 * 60deg));
 	}
