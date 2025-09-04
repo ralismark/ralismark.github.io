@@ -1,3 +1,5 @@
+local augroup = vim.api.nvim_create_augroup("ralismark.github.io", { clear = true })
+
 local function try_require(m)
 	local ok, m = pcall(require, m)
 	if ok then return m else return nil end
@@ -47,4 +49,47 @@ if ls then
 		}),
 	})
 
+	local function skeleton(pat, snip)
+		vim.api.nvim_create_autocmd("BufNewFile", {
+			group = augroup,
+			pattern = pat,
+			callback = function(au)
+				if vim.b.skeleton == nil then
+					vim.b.skeleton = true
+
+					ls.snip_expand(snip, {})
+				end
+			end,
+		})
+	end
+
+	skeleton("*/ralismark.github.io/*.md", s("", {
+		t({ "---",
+			"layout: post",
+			"title: ", }), i(1), t({ "",
+			"excerpt:",
+			"date: " }), f(function() return vim.fn.strftime("%Y-%m-%d") end), t({ "",
+			"tags:",
+			"---",
+			"",
+			"" })
+	}))
+	skeleton("*/ralismark.github.io/*/links/*.md", s("", {
+		t({ "---",
+			"layout: link",
+			"title: ", }), i(1), t({ "",
+			"url: ", }), i(2), t({ "",
+			"date: " }), f(function() return vim.fn.strftime("%Y-%m-%d") end), t({ "",
+			"tags:",
+			"---",
+			"",
+			"" })
+	}))
 end
+
+vim.filetype.add {
+	extension = {
+		md = "markdown.django",
+		html = "htmldjango",
+	}
+}
