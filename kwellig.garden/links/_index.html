@@ -3,57 +3,58 @@ layout: default
 title: Links
 ---
 
+<main class="content-width h-feed">
+
 <p class="content-width">
 	These are places on the internet that I find pretty cool!
 </p>
 
 <hr class="lit">
 
-<main class="content-width h-feed">
-	{% for post in site.collections.links | reverse %}
-		{% set post = recipe.build(post) %}
+{% for post in site.collections.links | reverse %}
+	{% set post = recipe.build(post) %}
 
-		{% set post_year = post.props.date.year %}
-		{% if loop.changed(post_year) and not loop.first %}
-			<div
-				class="fence-t"
-				style="text-align: right; font-size: 1.2em; color: grey; width: 100%; margin-top: 1em"
-				role="separator"
-			>
-				{{ post_year }}
-			</div>
-		{% endif %}
+	{% set post_year = post.props.date.year %}
+	{% if loop.changed(post_year) and not loop.first %}
+		<div
+			class="fence-t"
+			style="text-align: right; font-size: 1.2em; color: grey; width: 100%; margin-top: 1em"
+			role="separator"
+		>
+			{{ post_year }}
+		</div>
+	{% endif %}
 
-		<details name="h-entry" class="h-entry">
-			<summary class="paper p-name">
-				{{ post.props.title }}
-			</summary>
+	<details name="h-entry" class="h-entry">
+		<summary class="paper p-name">
+			{{ post.props.title }}
+		</summary>
 
-			<div role="none">
-				<dt>url</dt>
-				<dd><a class="u-bookmark-of" href="{{ post.props.url }}">{{ post.props.url }}</a></dd>
+		<div role="none">
+			<dt>url</dt>
+			<dd><a class="u-bookmark-of" href="{{ post.props.url }}">{{ post.props.url }}</a></dd>
 
-				<dt>date added</dt>
-				<dd>
-					<a class="u-url" href="{{ post.url }}">
-						<time datetime="{{ post.props.date.strftime("%Y-%m-%d") }}" class="dt-published">
-							{{ post.props.date.strftime("%-d %b %Y") }}
-						</time>
-					</a>
-				</dd>
+			<dt>date added</dt>
+			<dd>
+				<a class="u-url" href="{{ post.url }}">
+					<time datetime="{{ post.props.date.strftime("%Y-%m-%d") }}" class="dt-published">
+						{{ post.props.date.strftime("%-d %b %Y") }}
+					</time>
+				</a>
+			</dd>
 
-				{% set tags = parse_tags(post.props) %}
-				{% if tags %}
-					<dt>tags</dt>
-					<dd>{% for tag in tags %}{{tag}} {% endfor %}</dd>
-				{% endif %}
+			{% set tags = parse_tags(post.props) %}
+			{% if tags %}
+				<dt>tags</dt>
+				<dd>{% for tag in tags %}{{tag}} {% endfor %}</dd>
+			{% endif %}
 
-				<section class="e-content">
-					{{ post.content }}
-				</section>
-			</div>
-		</details>
-	{% endfor %}
+			<section class="e-content">
+				{{ post.content }}
+			</section>
+		</div>
+	</details>
+{% endfor %}
 </main>
 
 <style>

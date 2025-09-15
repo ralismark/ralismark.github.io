@@ -42,12 +42,13 @@
 			// do it in head so we don't get flash of wrong style
 			(c => c && document.documentElement.setAttribute("data-color-scheme", c))(localStorage.getItem("xyz/color-scheme"));
 		</script>
+</style>
 	</head>
-	<body>
-		{% block body %}
+	{% block body %}
+	<body class="freestanding">
 		{{ content }}
-		{% endblock %}
 	</body>
+	{% endblock %}
 
 	<script src="{{ recipe.load("../../visual-feedback/_heron.py")("/assets/visual-feedback.js") | recipe.build }}"></script>
 </html>

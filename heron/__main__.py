@@ -125,10 +125,6 @@ def cmd_dev(args: argparse.Namespace):
 
     run_build()
 
-    from watchdog.events import FileSystemEventHandler
-    from watchdog.observers import Observer
-    import time
-
     class DevRequestHandler(heron.HTTPRequestHandler):
         def __init__(self, *args, driver: heron.GenerationalDriver, **kwargs):
             self.driver = driver
@@ -215,16 +211,26 @@ def cmd_dev(args: argparse.Namespace):
                 </div>
                 """
 
+    from watchdog.events import FileSystemEventHandler
+    from watchdog.observers import Observer
+    import time
+
+    observe_base = Path.cwd()
+
     class Handler(FileSystemEventHandler):
         def __init__(self):
             self.last_time = 0
 
         def on_any_event(self, event):
-            if event.event_type == "opened":
+            if event.event_type in ("opened", "closed", "closed_no_write"):
                 return
             if time.time() - self.last_time < 0.1:
                 return
-            if Path(event.src_path).is_relative_to(driver.builddir):
+            path = Path(event.src_path)
+            rel = path.relative_to(observe_base)
+            if path.is_relative_to(driver.builddir):
+                return
+            if any(part.startswith(".") for part in rel.parts):
                 return
 
             time.sleep(0.1)
@@ -232,7 +238,7 @@ def cmd_dev(args: argparse.Namespace):
             self.last_time = time.time()
 
     observer = Observer(timeout=0.1)
-    observer.schedule(Handler(), path=str(Path.cwd()), recursive=True)
+    observer.schedule(Handler(), path=str(observe_base), recursive=True)
     observer.start()
 
     try:
