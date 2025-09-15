@@ -1,6 +1,7 @@
 {% extends "./empty.html" %}
 
 {% block body %}
+<body>
 
 <header id="site-nav">
 	{% for name, url in [
@@ -55,13 +56,12 @@
 {# content ----------------------------------------------------------------- #}
 
 {% block content %}
-<main id="site-content">
 	{{ content }}
-</main>
 {% endblock content %}
 
 {% do recipe.page("assets/telegraph.svg", "/assets/telegraph.svg") %}
 <footer id="site-footer">
 </footer>
 
+</body>
 {% endblock body %}

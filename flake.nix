@@ -15,9 +15,12 @@
           nodejs = pkgs.nodejs;
           package = builtins.fromJSON (builtins.readFile ./package.json);
           packageLock = builtins.fromJSON (builtins.readFile ./package-lock.json);
+          derivationArgs = {
+            preferLocalBuild = true;
+          };
         };
         # create node_modules such that it can work with regular npm-install
-        node_modules = pkgs.runCommand "node_modules" {} ''
+        node_modules = pkgs.runCommandLocal "node_modules" {} ''
           mkdir $out
 
           for f in ${npmDeps}/node_modules/*; do

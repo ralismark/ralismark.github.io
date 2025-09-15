@@ -2,6 +2,13 @@
  * Styling affecting the overall site
  */
 
+body:not(.freestanding) {
+	display: grid;
+	min-height: 100vh;
+	grid-template-rows: auto 1fr auto;
+	align-items: start;
+}
+
 .p-summary {
 	font-style: italic;
 }
@@ -18,7 +25,6 @@
 	border-top: .2rem solid var(--filled-bg);
 
 	padding: 1rem 0 1.5rem;
-	margin-bottom: -1rem;
 
 	font-family: var(--hand-font-family);
 	font-weight: 700;
