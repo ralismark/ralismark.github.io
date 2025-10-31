@@ -92,6 +92,12 @@ parser_dev.add_argument(
     type=int,
     default=80,
 )
+parser_dev.add_argument(
+    "--serve",
+    action=argparse.BooleanOptionalAction,
+    help="Run a HTTP server",
+    default=True,
+)
 
 
 @register_func(parser_dev)
@@ -242,14 +248,18 @@ def cmd_dev(args: argparse.Namespace):
     observer.start()
 
     try:
-        directory = args.out
-        with http.server.HTTPServer(
-            ("", args.port),
-            lambda *args, **kwargs: DevRequestHandler(*args, **kwargs, directory=directory, driver=driver),
-        ) as srv:
-            actual_host, actual_port = srv.server_address
-            print(f"Serving {directory} on {actual_host}:{actual_port}")
-            srv.serve_forever()
+        if args.serve:
+            directory = args.out
+            with http.server.HTTPServer(
+                ("", args.port),
+                lambda *args, **kwargs: DevRequestHandler(*args, **kwargs, directory=directory, driver=driver),
+            ) as srv:
+                actual_host, actual_port = srv.server_address
+                print(f"Serving {directory} on {actual_host}:{actual_port}")
+                srv.serve_forever()
+        else:
+            while True:
+                time.sleep(1_000_000_000)
     except KeyboardInterrupt:
         observer.stop()
     observer.join()
