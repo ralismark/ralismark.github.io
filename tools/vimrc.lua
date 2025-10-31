@@ -29,7 +29,7 @@ if ls then
 	end
 
 	-- snippets
-	ls.add_snippets("pandoc", {
+	ls.add_snippets("markdown", {
 		s({
 			trig = ".. details::",
 			show_condition = show_condition,
@@ -91,5 +91,5 @@ vim.filetype.add {
 	extension = {
 		md = "markdown.django",
 		html = "htmldjango",
-	}
+	},
 }
