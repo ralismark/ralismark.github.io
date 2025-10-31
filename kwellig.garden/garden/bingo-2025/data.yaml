@@ -5,6 +5,7 @@
 - text: "50 ASL signs"
   target: 50
   progress: []
+  fail: true
 
 - text: "new bike"
   target: 1
@@ -23,6 +24,7 @@
 - text: "string ensemble"
   target: 1
   progress: []
+  fail: true
 
 - text: "learn pasta cooking"
   target: 1
@@ -43,6 +45,7 @@
 - text: "make 2 clothes"
   target: 2
   progress: []
+  fail: true
 
 - text: "get into drawing"
   target: 1
@@ -53,10 +56,12 @@
 - text: "makeup 19 times"
   target: 19
   progress: []
+  fail: true
 
 - text: "commission art"
   target: 1
   progress: []
+  fail: true
 
 - text: "move out!"
   target: 1
@@ -65,15 +70,20 @@
 - text: "progress towards bottom surgery"
   target: 1
   progress: []
+  fail: true
 
 - text: "2 new shoes"
   target: 2
   progress:
-    - at: 2025-06-08
+    - text: "Boots from the big Auburn thrift store"
+      at: 2025-06-08
+    - text: "New sneakers because my old ones had a hole"
+      at: 2025-10-05
 
 - text: "offhand chopsticks"
   target: 1
   progress: []
+  fail: true
 
 - text: "swimwear"
   target: 1
@@ -94,6 +104,7 @@
 - text: "B2"
   target: 1
   progress: []
+  fail: true
 
 - text: "6 glob posts"
   target: 6
@@ -129,6 +140,7 @@
 - text: "leave the state"
   target: 1
   progress: []
+  fail: true
 
 - text: "complete deltarune ch.2"
   target: 1
@@ -144,7 +156,7 @@
   progress:
     - at: 2025-02-06
 
-- text: "?"
+- text: "Drawabox"
   target: 1
   progress: []
 

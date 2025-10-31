@@ -18,7 +18,11 @@ title: 2025 New Year's <s>Resolution</s> Super-Bingo
 
 	{% for goal in goals %}
 		<div
-			class="tile"
+			class="
+				tile
+				{% if goal.fail %}fail{% endif %}
+				{% if goal.progress | length == goal.target %}complete{% endif %}
+			"
 			style="--progress: {{ goal.progress | length }}/{{ goal.target }};"
 		>
 			{{ goal.text }}
@@ -54,6 +58,15 @@ title: 2025 New Year's <s>Resolution</s> Super-Bingo
 	.tile {
 		padding: 0.25rem;
 		position: relative; /* to establish positioning root */
+
+		&.fail {
+			opacity: 50%;
+			text-decoration: line-through;
+		}
+
+		&.complete {
+			color: gold;
+		}
 	}
 
 	.tile::before {
@@ -116,7 +129,7 @@ Z
 {% set star_svg = recipe.write("/assets/star.svg", star_svg) %}
 
 <table>
-{% for month in ["January", "February", "March", "April", "May", "June", "July", "August"] %}
+{% for month in ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] %}
 <tr>
 	<th colspan="3"><h2>{{ month }}</h2></th>
 </tr>
