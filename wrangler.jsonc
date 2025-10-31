@@ -1,8 +1,10 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "kwellig-garden",
-  "compatibility_date": "2025-08-31",
+  "compatibility_date": "2025-08-23",
+  "main": "dist/_worker.js",
   "assets": {
+    "binding": "ASSETS",
     "directory": "dist",
     "not_found_handling": "404-page"
   },
@@ -11,5 +13,9 @@
       "pattern": "kwellig.garden",
       "custom_domain": true
     }
-  ]
+  ],
+  // local development settings
+  "dev": {
+    "port": 80
+  }
 }

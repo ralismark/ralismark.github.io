@@ -6,9 +6,11 @@
   "//": "(Miniflare is a dependency of wrangler, but without it here it doesn't work with nix-generated node_modules",
   "dependencies": {
     "esbuild": "^0.25.5",
+    "itty-router": "^5.0.22",
     "katex": "^0.16.22",
+    "microformats-parser": "^2.0.4",
     "miniflare": "^4.20250823.1",
     "typescript": "^5.8.3",
-    "wrangler": "^4.33.1"
+    "wrangler": "^4.37.0"
   }
 }

@@ -179,6 +179,7 @@ def inner_main(ctx: heron.core.BuildContext):
         "/assets/foundation.css",
         include_paths=(str(here / "layout/css"),),
     )
+    yield load("../worker/_heron.py")
 
 
 @dataclasses.dataclass(frozen=True)
