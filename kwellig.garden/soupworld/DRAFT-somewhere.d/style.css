@@ -1,0 +1,42 @@
+@media (not (prefers-reduced-motion)){
+  @keyframes fade {
+    from { opacity: 0; }
+  }
+
+  section {
+    animation: fade 0.5s;
+  }
+}
+
+/* only show the current, falling back to the last one */
+main:not(:target) > section:not(:last-of-type):not(:target),
+main:not(:target) > section:target ~ section:last-of-type {
+  display: none;
+  opacity: 0;
+}
+
+/* debug!! */
+main:target > section::before {
+  content: "#" attr(id);
+  background-color: var(--filled-bg);
+  display: block;
+}
+
+/* we have a big padding at the top of section so fragment links don't scroll. */
+section {
+  padding-top: 4rem;
+}
+
+main {
+  padding-bottom: 4rem;
+}
+
+header {
+  position: absolute;
+  top: 0;
+  height: 4rem;
+  width: 100%;
+  z-index: -99;
+
+  background-image: radial-gradient(80% 90% at top in xyz, color-mix(in srgb, var(--filled-bg), transparent 50%) 0%, color-mix(in srgb, var(--filled-bg), transparent 80%) 50%, transparent 100%);
+}

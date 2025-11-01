@@ -26,7 +26,7 @@ excerpt: "Somewhere..."
     {% set name = inp.stem %}
     <section id="{{ name }}" aria-label="{{ name }}">
       {% if inp.suffix == ".md" %}
-        {% filter markdownify %}{% include inp|string %}{% endfilter %}
+        {% filter markdownify %}{{ recipe.read(inp) }}{% endfilter %}
       {% elif inp.suffix == ".html" %}
         {% include inp|string %}
       {% else %}
