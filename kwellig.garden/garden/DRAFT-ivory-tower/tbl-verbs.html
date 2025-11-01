@@ -1,0 +1,38 @@
+{% set verbs = "
+cut mend fill break create explode convince arrange become return
+change reveal attract guide deal join miss fetch upstage lock
+inflate coil bathe seal distribute drive consume drop feel precede
+give jump maintain freeze retry twist shut settle send run
+kill possess control refuse set reflect unite enhance explore generate
+yield support advance progress contract wear bless curse clear circle
+play deal fly provide knit stand spread manipulate sustain understand
+convert counter draw grow bind spill fold stretch hold bite
+close open bring take get wipe drop back come put
+apricate ablate defenestrate stratify discombobulate bescumber carcinise bloviate gralloch scrump
+".strip().split() %}
+{# https://stackoverflow.com/questions/52515860/sort-a-list-in-jinja2-based-on-length #}
+{% set verbs = verbs | zip(verbs | map("count")) | sort(attribute=1) | map(attribute=0) | list %}
+
+<table
+    id="thesis"
+>
+    {%- for g in range(2) -%}
+        <thead>
+            <tr>
+                <th>d100</th>
+                {% for i in range(5) %}<th scope="col">{{5*g + i}}</th>{% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {%- for i in range(10) -%}
+            <tr>
+                <th scope="row">{{i}}</th>
+                {%- for j in range(10) -%}
+                <td>{{verbs[20*j + 2*i + g]}}</td>
+                {%- endfor -%}
+            </tr>
+            {%- endfor -%}
+        </tbody>
+    {%- endfor -%}
+    <caption>Table 1. Verbs</table>
+</table>

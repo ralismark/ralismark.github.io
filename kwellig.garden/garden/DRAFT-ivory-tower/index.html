@@ -1,0 +1,55 @@
+---
+layout: empty
+title: Ivory Tower TTRPG
+---
+
+<div
+  class="page"
+  style="
+    columns: auto 3;
+    column-fill: auto;
+  "
+>
+{% filter markdownify %}{% include "./page1.md" %}{% endfilter %}
+</div>
+
+<div
+  class="page"
+  style="
+    columns: auto 2;
+    column-fill: auto;
+  "
+>
+{% filter markdownify %}{% include "./page2.md" %}{% endfilter %}
+</div>
+
+
+<style>
+:root {
+	font-size: 10pt;
+}
+
+.page {
+	width: 297mm;
+	height: 210mm;
+	border: 1px solid grey;
+}
+
+@page {
+	size: A4 landscape;
+	margin: 0;
+}
+
+/* ------------- */
+
+h1 {
+	column-span: 2;
+}
+
+#thesis {
+	line-height: 1.2em;
+	th, td {
+		padding: 0;
+	}
+}
+</style>
