@@ -1,0 +1,41 @@
+---
+layout: empty
+title: "Somewhere"
+excerpt: "Somewhere..."
+---
+
+<!--
+	Spoilers!
+
+	Looking at the source code will spoil things!
+
+	For whatever reason I'm putting everything on the same page and using the URL
+	fragment (the bit after the hash) to determine where you are. This avoids
+	loading additional pages when you navigate around, but with the downside that
+	I can't really hide anything.
+
+	Inspired by <https://lunabee.space/archive.html>
+-->
+
+<header></header> {# for the glowy #}
+
+<style>{% include "./style.css" %}</style>
+
+<main id="debug" class="content-width">
+	{% for inp in recipe.readdir("./scenes") %}
+	{% set name = inp.stem %}
+	<section id="{{ name }}" aria-label="{{ name }}">
+		{% if inp.suffix == ".md" %}
+			{% filter markdownify %}{% include inp|string %}{% endfilter %}
+		{% elif inp.suffix == ".html" %}
+			{% include inp|string %}
+		{% else %}
+			{{ 0/0 }}
+		{% endif %}
+	</section>
+	{% endfor %}
+
+	<section>
+		{% filter markdownify %}{% include "./lost.md"|string %}{% endfilter %}
+	</section>
+</main>
