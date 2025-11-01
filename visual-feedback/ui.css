@@ -63,3 +63,10 @@ dialog#visual-feedback {
 		touch-action: none;
 	}
 }
+
+@media print {
+	#feedback-button,
+	#visual-feedback {
+		display: none;
+	}
+}

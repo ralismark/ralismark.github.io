@@ -3,9 +3,10 @@ Subclasses of jinja types to alter their behaviour.
 """
 
 from pathlib import Path
+import contextlib
 import datetime as dt
-import math
 import json
+import math
 import os
 import re
 import typing as t
@@ -16,6 +17,29 @@ import yaml
 
 from .. import core, util
 from .registry import RecipeBook
+
+
+@contextlib.contextmanager
+def overlay_dict_entry[K, V](d: dict[K, V], key: K, value: V):
+    had_value = key in d
+    old_value = d.get(key)
+    d[key] = value
+
+    yield
+
+    # restore old
+    new_value = d.get(key)
+    if key not in d or new_value is not value:
+        warnings.warn(
+            f"key {key} was modified: {value!r} -> {new_value!r}",
+            stacklevel=4,  # caller of caller
+        )
+
+    if had_value:
+        assert old_value is not None
+        d[key] = old_value
+    else:
+        del d[key]
 
 
 class Template(jinja2.Template):
@@ -43,24 +67,25 @@ class Template(jinja2.Template):
         self.mark_as_input()
         assert self.filename is not None
 
-        # save old __file__
-        context_has_file = "__file__" in context.vars
-        context_file = context.vars.get("__file__")
+        # processing for auto-indent
+        indent: str | None = ""
 
-        context.vars["__file__"] = Path(self.filename)
-        yield from self.__root_render_fn(context)
+        with (
+            overlay_dict_entry(context.vars, "__file__", Path(self.filename)),
+            overlay_dict_entry(context.vars, "__indent__", lambda: indent),
+        ):
 
-        if context.vars["__file__"] != Path(self.filename):
-            warnings.warn(
-                f"template variable __file__ was modified: {self.filename} -> {context.vars['__file__']}",
-                stacklevel=3,  # caller
-            )
-
-        # restore old __file__
-        if context_has_file:
-            context.vars["__file__"] = context_file
-        else:
-            del context.vars["__file__"]
+            for chunk in self.__root_render_fn(context):
+                if m := re.search(r"(^|\n)([ \t]*)$", chunk):
+                    if m.group(1):
+                        # new line!
+                        indent = m.group(2)
+                    elif indent:
+                        # continuation
+                        indent += m.group(2)
+                else:
+                    indent = None
+                yield chunk
 
     def new_context(self, *args, **kwargs):
         # for when we're being imported
@@ -129,10 +154,11 @@ base_env = Environment(
         "jinja2.ext.debug",
     ],
 )
+base_env.filters["recipe.build"] = lambda r: core.current_ctx().build(r)
+base_env.filters["repr"] = repr
+base_env.filters["zip"] = zip
 base_env.globals["dt"] = dt
 base_env.globals["math"] = math
-base_env.filters["repr"] = repr
-base_env.filters["recipe.build"] = lambda r: core.current_ctx().build(r)
 base_env.tests["recipe"] = lambda v: isinstance(v, core.Recipe)
 
 
@@ -147,6 +173,11 @@ def jinja_raise(msg: str) -> str:
 @util.setitem(base_env.filters, "re.sub")
 def jinja_re_sub(string: str, pattern: str, repl: str, count: int = 0) -> str:
     return re.sub(pattern, repl, string, count)
+
+
+@util.setitem(base_env.filters, "re.search")
+def jinja_re_search(string: str, pattern: str) -> re.Match | None:
+    return re.search(pattern, string)
 
 
 @util.setitem(base_env.filters, "re.split")
@@ -166,7 +197,7 @@ def jinja_parse_yaml(string: str) -> t.Any:
 
 @util.setitem(base_env.filters, "markdownify")
 @jinja2.pass_context
-def markdownify(ctx: jinja2.runtime.Context, content: str) -> str:
+def jinja_markdownify(ctx: jinja2.runtime.Context, content: str) -> str:
     from .. import md
 
     render = md.create_md(
@@ -177,3 +208,10 @@ def markdownify(ctx: jinja2.runtime.Context, content: str) -> str:
         ),
     )
     return render(content)
+
+
+@util.setitem(base_env.filters, "deindent")
+def jinja_deindent(string: str) -> str:
+    m = re.match("^\n*([ \t]*)", string)
+    assert m
+    return re.sub(f"(?m)^{m.group(1)}", "", string)
