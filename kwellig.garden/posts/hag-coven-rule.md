@@ -6,28 +6,38 @@ date: 2025-11-02
 tags:
 ---
 
-In my years I've been witness to what feels like an oddly high amount of sharehouse drama.
-I've heard about many cases among my friends, and I've even been in one myself.
-They all seem to have one thing in common:
-_they all involve sharehouses of 3 people._
+The Hag Coven Rule of Doom, or just simply the _Hag Coven Rule_ is as such:
 
-It all follows the same pattern, of two people ganging up on the third.
-It's very easy for a pair to become closer to each other than the third person.
-And the two in the pair can side with each other there's a disagreement with the third, or even just one passively endorses the other's behaviour.
+.. sparkle::
 
-Turns out that ["two people seem emotionally closer when excluding a third party"][triangulation]!
-Not great!
+	Three is the most unstable and drama-prone number of people living together.
+
+It's been the common thread in a lot of sharehouse drama and conflict I've been witness to over the years.
+Heck, I've even been in one myself!
+(miserable experience, 0 stars, would not recommend)
+
+They all follow the same pattern:
+one pair gets along better and become much closer to each other than with the third, so whenever a disagreement arises the pair support each other against the third.
+Or one of the pair just passive endorses and enables the other's shitty behaviour (that was the story of my situation).
+
+It's an actual thing apparently, that ["two people seem emotionally closer when excluding a third party"][triangulation]!
 
 [triangulation]: https://en.wikipedia.org/wiki/Triangulation_(psychology)
 
-And when you have two against one, that's a huge power imbalance -- two is a _supermajority_ over one and can easily push them around, whereas in a pair you have to directly talk to each other and figure things out together.
+An alliance like that in a triad is such power imbalance -- two against one is a *super*majority that easily outvotes the third and push them around!
+Even up to the point where their only option is to leave...
+which has happened a few times...
 
-It's also the reason behind the name:
+This dynamic when you have three people is the reason behind the name:
 
 > A coven consists of three hags so that any arguments between two hags can be settled by the third.
 >
 > --- [Monster Manual, D&D 5e 2014](https://5e.tools/bestiary/night-hag-mm.html)
 
-I've been burnt by this before, living in a triad consisting of me, a toxic guy, and their passively enabler friend.
-It's why I have a personal rule against sharehousing with 2 other people.
-Over that is too many, and living alone I start getting weird from lack of human contact, so that leaves a pair as the only option.
+Once burnt twice shy, so I have a rule against these 3-person sharehousing arrangements.
+Over that is too many.
+Living alone I start getting weird from lack of human contact.
+So that leaves a pair as the only option.
+
+Hopefully it'll will work out a lot better -- it should force the pair to directy talk to each other and sort out problems together, and do so on much more equal footing.
+Rather than creating drama through a third.
