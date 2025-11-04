@@ -263,7 +263,7 @@ But if you're stuck with C, these concepts will make memory management a little 
 .code-annotation {
   display: block;
   white-space: normal;
-  font: var(--main-font);
+  font-family: var(--main-font-family);
   color: var(--body-fg);
   // actual styling
   font-style: italic;
