@@ -24,7 +24,7 @@ details[open]::details-content {
 html {
 	color: var(--body-fg);
 	background-color: var(--body-bg);
-	font: var(--main-font);
+	font-family: var(--main-font-family);
 	text-align: left;
 
 	font-size-adjust: ex-height 0.53; // 0.53 is the metric of Helvetica
@@ -32,7 +32,7 @@ html {
 }
 
 pre, code {
-	font: var(--mono-font);
+	font-family: var(--mono-font-family);
 	tab-size: 4;
 }
 
@@ -117,7 +117,7 @@ del {
 // Elements: Basics ------------------------------------------------------ @@@2
 
 kbd {
-	font: var(--mono-font);
+	font-family: var(--mono-font-family);
 	vertical-align: baseline;
 	padding: 0.1em 0.2em;
 
