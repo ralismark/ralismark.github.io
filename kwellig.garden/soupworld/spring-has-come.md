@@ -1,6 +1,8 @@
 ---
-layout: standalone
+layout: post
 title: Spring Has Come!
+excerpt: "After eons, the Slobbering God has finally grown weak"
+date: 2025-04-22
 ---
 
 After eons, the Slobbering God has finally grown weak.

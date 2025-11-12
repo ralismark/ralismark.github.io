@@ -1,6 +1,7 @@
 ---
-layout: standalone
+layout: post
 title: The Fable of the Quetzal
+date: 2025-04-22
 ---
 
 .. poem::
