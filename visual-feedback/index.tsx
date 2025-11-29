@@ -33,7 +33,10 @@ User Agent: \`${navigator.userAgent}\`
 	})
 }
 
-function Form({ getcanvas }: { getcanvas: () => HTMLCanvasElement }) {
+function Form({ getcanvas, getdialog }: {
+	getcanvas: () => HTMLCanvasElement,
+	getdialog: () => HTMLDialogElement,
+}) {
 	const description = <textarea
 		style="grid-area: description"
 		name="description"
@@ -56,7 +59,7 @@ function Form({ getcanvas }: { getcanvas: () => HTMLCanvasElement }) {
 			style="grid-area: cancel"
 			type="button"
 			onclick={(e: PointerEvent) => {
-				(document.querySelector("#visual-feedback") as HTMLDialogElement).close()
+				getdialog().close()
 				e.preventDefault()
 			}}
 		>Cancel</button>
@@ -116,6 +119,7 @@ export function UI() {
 			<summary>Feedback</summary>
 			<Form
 				getcanvas={() => canvas}
+				getdialog={() => dialog}
 			/>
 		</details>
 		{canvas}
@@ -162,6 +166,6 @@ ${e}
 }
 
 const host = document.createElement("kwellig-visual-feedback")
-// const shadow = host.attachShadow({mode: "open"})
-host.appendChild(UI())
+const shadow = host.attachShadow({mode: "open"})
+shadow.appendChild(UI())
 document.currentScript!.insertAdjacentElement("afterend", host)

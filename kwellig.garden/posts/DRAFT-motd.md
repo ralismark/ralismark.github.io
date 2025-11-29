@@ -7,9 +7,9 @@ tags:
 series: motd
 ---
 
-I've been thinking a lot about TTRPG mechanics lately, and I've since come up with a bunch, so I'm gonna preserve them in this fine website.
-
-Things started as a reaction to the problems of D&D 5e, but there's way more cool systems out there to think about.
+I've been thinking a lot about TTRPG mechanics lately.
+Mostly about the things I've discovered I don't like about D&D.
+But I'm coming up with some cool ideas, so might as well preserve them here.
 
 Some are gonna be really fleshed out.
 Others are just a sketch of an idea.
