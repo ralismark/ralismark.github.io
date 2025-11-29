@@ -117,6 +117,10 @@
       at: 2025-06-14
     - text: "[A Draw Hobby Takes Flight](/posts/mayvian)"
       at: 2025-08-30
+    - text: "[Mechanic Of The Day #1: Came Back Wrong](/posts/motd-1)"
+      at: 2025-10-19
+    - text: "[The Hag Coven Rule](/posts/hag-coven-rule)"
+      at: 2025-11-02
 
 - text: "6 theatre things"
   target: 6
@@ -127,6 +131,7 @@
       at: 2025-02-19
     - text: "(MTS) Merrily We Roll Along"
       at: 2025-07-12
+  fail: true
 
 - text: "organise 3 picnics"
   target: 3

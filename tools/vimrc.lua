@@ -87,9 +87,9 @@ if ls then
 	}))
 end
 
-vim.filetype.add {
-	extension = {
-		md = "markdown.django",
-		html = "htmldjango",
-	},
-}
+-- vim.filetype.add {
+-- 	extension = {
+-- 		md = { "markdown.django", { priority = 100 } },
+-- 		html = { "htmldjango", { priority = 100 } },
+-- 	},
+-- }

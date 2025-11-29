@@ -187,6 +187,34 @@ async function cloneNode(node: Node): Promise<Node | null> {
 
 const RE_CSS_URL = /url\((['"]?)([^'"]+?)\1\)/g
 
+async function* preserveCssRules(rules: Iterable<CSSRule>): AsyncGenerator<string> {
+	for (const rule of rules) {
+		if (rule instanceof CSSMediaRule) {
+			if (matchMedia(rule.media.mediaText).matches) {
+				yield* preserveCssRules(rule.cssRules)
+			}
+			continue;
+		}
+
+		let text = rule.cssText
+		if (!(rule instanceof CSSFontFaceRule)) {
+			// convert url(...) to data url
+			const promises: Promise<string>[] = []
+			text.replace(RE_CSS_URL, (_, __, url) => {
+				promises.push(fetchAsDataUrl(url).catch(e => {
+					console.warn("Failed to preserve", url, e)
+					return ""
+				}))
+				return ""
+			})
+			const results = await Promise.all(promises)
+			text = text.replace(RE_CSS_URL, () => `url("${results.shift()}")`)
+		}
+
+		yield text
+	}
+}
+
 async function preserveStylesheet() {
 	const fragment = document.createDocumentFragment()
 
@@ -199,35 +227,17 @@ async function preserveStylesheet() {
 		}
 
 		const style = document.createElement("style")
-
-		for (const rule of stylesheet.cssRules) {
-			let text = rule.cssText
-
-			// TODO handle @import and font defns
-
-			if (!(rule instanceof CSSFontFaceRule)) {
-				// convert url(...) to data url
-				const promises: Promise<string>[] = []
-				text.replace(RE_CSS_URL, (_, __, url) => {
-					promises.push(fetchAsDataUrl(url).catch(e => {
-						console.warn("Failed to preserve", url, e)
-						return ""
-					}))
-					return ""
-				})
-				const results = await Promise.all(promises)
-				text = text.replace(RE_CSS_URL, () => `url("${results.shift()}")`)
-			}
-
+		for await (const text of preserveCssRules(stylesheet.cssRules)) {
 			style.appendChild(document.createTextNode(text + "\n"))
 		}
+
 		fragment.appendChild(style)
 	}
 
 	return fragment
 }
 
-export async function screenshot(): Promise<HTMLCanvasElement> {
+export async function screenshotVF(): Promise<HTMLCanvasElement> {
 	const width = document.documentElement.clientWidth
 	const height = document.documentElement.clientHeight
 
@@ -297,11 +307,14 @@ export async function screenshot(): Promise<HTMLCanvasElement> {
 	const context = canvas.getContext("2d")!
 	context.imageSmoothingEnabled = false
 
-	// Drawing to canvas at 1:1 scale is kinda blurry, we'd like to use larger
-	// width/height for the <canvas> and draw to the full side, but the svg uses
-	// the width/height of our drawImage call for media queries, so we must use
-	// exactly `width`/`height` (and cannot draw upscaled).
+	// Drawing to canvas at 1:1 scale is kinda blurry since its pixels are CSS
+	// pixels and not device pixels. Ideally we'd use device pixels by scaling
+	// everything by devicePixelRatio, but svg uses the width/height of our
+	// drawImage target area for media queries and vw/vh, so we just have to
+	// deal with the blurriness... :(
 	context.drawImage(img, 0, 0, width, height)
 
 	return canvas
 }
+
+export const screenshot = screenshotVF

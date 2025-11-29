@@ -5,7 +5,8 @@
 {%- endmacro %}
 
 You reach the base of a mountain.
-The ground begins to slope up ahead, and the dirt path transitions into a staircase that crawls and weaves its way up between the trees, eventually disappearing into the fog and clouds.
+
+Ahead, the ground begins to slope up, and the dirt path transitions into a staircase that crawls and weaves its way up between the trees, eventually disappearing into the fog and clouds.
 
 An individual in purple robes greets you and introduces himself as Autumn.
 Besides him stands a signpost, announcing the route as "{{ scram(20) }}, 1ly"
