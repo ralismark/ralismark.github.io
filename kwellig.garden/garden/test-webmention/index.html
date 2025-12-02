@@ -1,0 +1,65 @@
+---
+layout: standalone
+title: "Test: Webmention"
+---
+
+{% set host = "https://waratah.kwellig.garden" %}
+{% set target = host + page.url %}
+
+<dl>
+
+	<dt>This page's location</dt>
+	<dd id="js-target">{{ target }}</dd>
+
+	<dt>This page's endpoint</dt>
+	<dd id="js-endpoint">(failed to load)</dd>
+
+	<dt>
+		Test Webmentions
+		<a role="button" href="javascript:testpages()">Send all</a>
+	</dt>
+	<dd>(from https://github.com/voxpelli/node-webmention-testpinger)</dd>
+	{% for inp in recipe.readdir("./templates") %}
+		{#
+			Placeholders:
+			- http://example.com/webmention/target/placeholder -> webmentioned page
+			- http://example.com/webmention/target/alternate -> TODO
+			- http://example.com/webmention/comment -> TODO
+		#}
+		{% set wm = recipe.read(inp)
+			| replace("http://example.com/webmention/target/placeholder", target)
+		%}
+		{% set wm = recipe.write(page.url + "/" + inp.name, wm) %}
+		<dd><a class="js-testpage" href="{{ wm }}">{{ wm }}</a></dd>
+	{% endfor %}
+
+	<dt></dt>
+
+</dl>
+
+<aside class="content-width">
+	<h2>Interactions</h2>
+
+	{% import "../../layout/macros.html" as macros with context %}
+	{{ macros.comments() }}
+</aside>
+
+<script>
+	const endpoint = (document.querySelector("link[rel=webmention]") || {}).href
+	document.getElementById("js-endpoint").innerText = endpoint
+
+	const target = document.getElementById("js-target").innerText
+
+	async function testpages() {
+		const pages = Array.from(document.querySelectorAll(".js-testpage")).map(e => e.href)
+		for (const page of pages) {
+			const formdata = new FormData()
+			formdata.append("source", page)
+			formdata.append("target", target)
+			const r = await fetch(endpoint, {
+				method: "POST",
+				body: formdata
+			})
+		}
+	}
+</script>
