@@ -62,35 +62,7 @@
 	{% set location = site.url + page.url %}
 	<p>
 		I really like hearing people's thoughts about what I have here!
-		<br>
-		Commenting doesn't work right now unfortunately :( so just shoot me a message/shout it to me/send a carrier pidgeon :>
-
-{#
-		Please leave a comment!
-		I really like hearing people's thoughts about what I have here.
-
-		You can do so
-
-		<a role="button" target="_blank" href="https://sharetomastodon.github.io/?{{
-			{
-				"title": "@ralismark@cathode.church",
-				"url": location + "\n",
-			} | urlencode
-		}}">
-			via toot 🐘
-		</a>
-
-		{# {% set issue = recipe.posse_github("ralismark", "ralismark.github.io-comments", page.url) %}
-		{% if issue %}
-			or
-
-			<a href="{{ issue }}#new_comment_field" class="u-syndication" role="button">
-				via github 🤖
-			</a>
-		{% endif %} #}
-{#
-		or
-
+		Feel free to
 		<a role="button" target="_blank" href="https://quill.p3k.io/?{{
 			{
 				"dontask": "1",
@@ -98,13 +70,24 @@
 				"reply": location,
 			} | urlencode
 		}}">
-			anonymously 📝
+			leave a comment 📝
+		</a>
+
+		or
+
+		<a role="button" target="_blank" href="https://sharetomastodon.github.io/?{{
+			{
+				"title": "@ralismark@cathode.church",
+				"url": location + "\n",
+			} | urlencode
+		}}">
+			toot 🐘
 		</a>!
-#}
+
 	</p>
 
 	<section style="padding: 0 2rem">
 		<noscript>Sorry! JavaScript is required to load comments</noscript>
-		<script data-url="https://www.ralismark.xyz{{ page.url }}" src="{{ recipe.copy("/assets/webmention.js", "assets/webmention.js").url }}" async></script>
+		<script id="webmention-js" type="module" data-url="https://kwellig.garden{{ page.url }}" src="{{ recipe.copy("/assets/webmention.js", "assets/webmention.js").url }}" async></script>
 	</section>
 {%- endmacro -%}

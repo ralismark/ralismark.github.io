@@ -1,11 +1,9 @@
-"use strict"; // vim: set noet:
 
 (async function() {
 	// constants
-	const MAX_ENTRIES = 20;
-	const API_BASE = "https://webmention.io/api/mentions.jf2?target=";
+	const API_BASE = "/_dovecote?target=";
 
-	const scriptTag = document.currentScript;
+	const scriptTag = document.getElementById("webmention-js");
 
 	// get url
 	const url = scriptTag.getAttribute("data-url");
@@ -48,69 +46,53 @@
 
 	console.log("Got webmention data", response);
 
-	if(response.children.length === 0) {
+	if(response.entries.length === 0) {
 		return become(E("p", {}, T("Nothing here yet. You could be the first!")));
 	}
 
-	const actionTitle = {
-		"in-reply-to": "replied",
-		"like-of": "liked",
-		"repost-of": "reposted",
-		"bookmark-of": "bookmarked",
-		"mention-of": "mentioned",
-		"rsvp": "RSVPed",
-		"follow-of": "followed",
-	};
+	await import("https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js");
 
-	function getContent(r) {
-		if(!r.content) return null;
-
-		if(r.content.html) {
-			const e = E("blockquote", { class: "e-content" })
-			e.innerHTML = r.content.html; // webmention.io sanitises it for us ^.^
-			return e;
-		} else if(r.content.text) {
-			return E("blockquote", { class: "p-content" }, T(r.content.text));
-		}
-
-		return null;
-	}
-
-	const entries = response.children.slice(0, MAX_ENTRIES).map(r => {
-		const who = (r.author && r.author.name) || r.url.split("/")[2];
-		const when = new Date(r.published || r["wm-received"]);
-
+	const entries = response.entries.map(r => {
 		// first create the bits of the heading:
 		// (pic) {person name} {action} {time}
 
-		const nametag = E("a", { rel: "nofollow ugc", title: who, href: r.author && r.author.url, class: "u-author h-card" },
+		const who = r.author_name || (new URL(r.resolved_source)).host
+		const nametag = E("span", { title: who, class: "u-author h-card" },
 			// profile pic
-			r.author && r.author.photo &&
-				E("img", {
-					src: r.author.photo,
-					style: "display: inline-block; max-width: 2em; vertical-align: middle; border-radius: 50%",
-				}),
-			r.author && r.author.photo &&
-				T(" "),
-			T(who + " "),
+			E("img", {
+				src: r.author_photo,
+				style: "display: inline-block; max-width: 2em; vertical-align: middle; border-radius: 50%",
+			}),
+			T(" " + who),
 		);
 
-		const action = actionTitle[r["wm-property"]] && T(actionTitle[r["wm-property"]] + " ");
+		const actionTitle = {
+			"reply": "replied",
+			"repost": "reposted",
+			"like": "liked",
+		};
+		const action = T(actionTitle[r.type] || "mentioned")
 
-		const datetag = E("a", { class: "u-url", rel: "nofollow ugc", href: r.url },
+		const when = new Date(r._ts * 1000)
+		const datetag = E("a", { class: "u-url", rel: "nofollow ugc", href: r.source },
 			E("time", { class: "dt-published", datetime: when.toISOString(), },
 				T(when.toLocaleDateString(undefined, { dateStyle: "long" })),
 			)
 		);
 
 		// then, the body of the thing
-		const contentText = getContent(r);
+		let content = null
+		if (r.content_html) {
+			content = E("blockquote", { class: "e-content" })
+			content.innerHTML = DOMPurify.sanitize(r.content_html)
+		}
 
+		// assemble everything together
 		return E("li", { style: "margin-bottom: 1rem", class: "u-comment h-cite" },
 			E("div", {},
-				nametag, action, datetag,
+				nametag, T(" "), action, T(" on "), datetag,
 			),
-			contentText,
+			content,
 		);
 	});
 
@@ -118,9 +100,5 @@
 		E("ul", {
 			style: "list-style: none; padding: 0",
 		}, ...entries,),
-		response.children.length > MAX_ENTRIES &&
-		E("p", { style: "opacity: .7" },
-				T("+ " + (response.children.length - MAX_ENTRIES) + " more...")
-			),
 	);
 })();
