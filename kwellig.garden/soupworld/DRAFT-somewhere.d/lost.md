@@ -1,3 +1,0 @@
-You don't know where you are, you're not sure how you got here...
-
-- [let the stars guide you](#clearing)
