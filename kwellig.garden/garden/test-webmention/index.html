@@ -3,13 +3,10 @@ layout: standalone
 title: "Test: Webmention"
 ---
 
-{% set host = "https://waratah.kwellig.garden" %}
-{% set target = host + page.url %}
-
 <dl>
 
 	<dt>This page's location</dt>
-	<dd id="js-target">{{ target }}</dd>
+	<dd id="js-target">(failed to load)</dd>
 
 	<dt>This page's endpoint</dt>
 	<dd id="js-endpoint">(failed to load)</dd>
@@ -48,7 +45,13 @@ title: "Test: Webmention"
 	const endpoint = (document.querySelector("link[rel=webmention]") || {}).href
 	document.getElementById("js-endpoint").innerText = endpoint
 
-	const target = document.getElementById("js-target").innerText
+	const target = new URL(location.toString())
+	if (target.hostname === "localhost") {
+		// dovecote doesn't accept localhost to avoid prod security issues
+		target.protocol = "https"
+		target.host = "waratah.kwellig.garden"
+	}
+	document.getElementById("js-target").innerText = target
 
 	async function testpages() {
 		const pages = Array.from(document.querySelectorAll(".js-testpage")).map(e => e.href)
