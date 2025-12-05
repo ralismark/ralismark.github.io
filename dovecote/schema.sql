@@ -35,4 +35,3 @@ CREATE TABLE Webmention (
 -- (UNIQUE in table definition can't be changed!)
 CREATE UNIQUE INDEX idx_Webmention_source_target ON Webmention(source, target);
 CREATE INDEX idx_Webmention_canonical ON Webmention(resolved_target);
-
