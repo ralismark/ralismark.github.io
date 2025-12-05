@@ -13,7 +13,7 @@ tags:
 
 <br>
 
-.. admonition::
+.. admonition:: fortune
 	:image: {{ recipe.copy("/assets/fortune.png", "./fortune.png") }}
 	:alt: fortune cookie
 
@@ -62,7 +62,7 @@ async function fortune() {
 
 	const forts = await fortfile(url);
 	const text = forts[Math.floor(Math.random() * forts.length)];
-	document.querySelector("[admonition=fortune] p").innerText = text;
+	document.querySelector("blockquote[admonition=fortune] p").innerText = text;
 }
 
 async function setfortfile(url) {
@@ -99,27 +99,44 @@ You can also use some existing public fortune collections:
 
 .. details:: my own ones
 
-	<button onclick="setfortfile('https://raw.githubusercontent.com/ralismark/nixfiles/main/assets/fortunes')">My personal collection</button>
+	<button onclick="setfortfile('https://gist.githubusercontent.com/ralismark/3f3733e661358a2dc45e3ca10588b9d5/raw/fortune')">My personal collection</button>
 	<button onclick="setfortfile('{{ recipe.copy("/assets/fortune:jingling", "./jingling.txt") }}')">Compilers</button>
 
-.. details:: fortune-mod
+.. details:: fortune
 
-	These are fortunes from [`fortune-mod`](https://github.com/shlomif/fortune-mod/tree/master/fortune-mod/datfiles).
+	These are fortunes available in [`fortune-kind`](https://github.com/cafkafk/fortune-kind)[^not-shlomif].
 
-	Many of these are offensive.
-	I do not endorse their content, and only provide them as a demonstration.
+	[^not-shlomif]: I've intentionally not referenced the most popular [`fortune-mod`](https://github.com/shlomif/fortune-mod/tree/master/fortune-mod/datfiles).
+		The maintainer has been generally against moderating the existing fortune collection to remove bigoted and vile quotes.
 
 	{% for fortune in [
-		"art", "ascii-art", "computers", "cookie", "debian", "definitions",
-		"disclaimer", "drugs", "education", "ethnic", "food", "fortunes",
-		"goedel", "humorists", "kids", "knghtbrd", "law", "linux", "literature",
-		"love", "magic", "medicine", "men-women", "miscellaneous", "news",
-		"paradoxum", "people", "perl", "pets", "platitudes", "politics",
-		"pratchett", "riddles", "rules-of-acquisition", "science",
-		"shlomif-fav", "songs-poems", "sports", "startrek", "tao",
-		"translate-me", "wisdom", "work", "zippy",
+		"ascii-art",
+		"computers",
+		"debian",
+		"disclaimer",
+		"fedi",
+		"food",
+		"fortunes",
+		"goedel",
+		"humorists",
+		"kids",
+		"linux",
+		"magic",
+		"medicine",
+		"miscellaneous",
+		"nethack",
+		"news",
+		"nixos-offtopic",
+		"paradoxum",
+		"people",
+		"pets",
+		"pratchett",
+		"riddles",
+		"tao",
+		"testtunes",
+		"translate-me",
 	] -%}
-	<button onclick="setfortfile('https://raw.githubusercontent.com/shlomif/fortune-mod/master/fortune-mod/datfiles/{{ fortune }}')">{{ fortune }}</button>
+	<button onclick="setfortfile('https://raw.githubusercontent.com/cafkafk/fortune-kind/refs/heads/main/fortunes/{{ fortune }}')">{{ fortune }}</button>
 	{% endfor %}
 
 (Fortune cookie photo licensed under CC0 Public Domain from <https://www.publicdomainpictures.net/en/view-image.php?image=207643>)
