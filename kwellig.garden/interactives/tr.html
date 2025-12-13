@@ -1,0 +1,199 @@
+---
+layout: post
+title: Transliterator
+excerpt: Replace one set of characters with another
+date: 2025-12-13
+tags:
+---
+
+<center>
+	<textarea
+		id="input"
+		placeholder="Input"
+		oninput="updateOutput()"
+	></textarea>
+	&downarrow;
+	<textarea
+		id="output"
+		placeholder="Output"
+		readonly
+	></textarea>
+</center>
+
+<table>
+	<template id="trtemplate">
+		<tr class="trset">
+			<td><input oninput="updateTr()" name="from"></td>
+			<td>&rightarrow;</td>
+			<td><input oninput="updateTr()" name="to" placeholder="(delete)"></td>
+			<td><button onclick="setFlip(getTrSetOf(this));updateTr()" title="flip">&rlarr;</button></td>
+			<td><button onclick="setMoveUp(getTrSetOf(this));updateTr()" title="move up">&uarr;</button></td>
+			<td><button onclick="setMoveDown(getTrSetOf(this));updateTr()" title="move down">&darr;</button></td>
+			<td><button onclick="setDelete(getTrSetOf(this));updateTr()" title="delete">&times;</button></td>
+		</tr>
+	</template>
+
+	<tbody id="trsets"></tbody>
+	<tfoot>
+		<tr>
+			<td colspan="999">
+				<button onclick="addSet();updateTr()">add</button>
+				<button onclick="getTrSets().forEach(setFlip);updateTr()">flip all</button>
+				<button onclick="trsets.replaceChildren();updateTr()">clear</button>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="999" id="presetlist">
+				Presets:
+			</td>
+		</tr>
+	</tfoot>
+</table>
+
+<script>
+const presets = {
+	rot13: [[ "abcdefghijklmnopqrstuvwxyz", "nopqrstuvwxyzabcdefghijklm" ]],
+	superscript: [
+		[ "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "ᴬᴮꟲᴰᴱꟳᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾꟴᴿᶳᵀᵁⱽᵂᵡ𐞲ᶼ" ], // S, X, Y, Z are hacks
+		[ "abcdefghijklmnopqrstuvwxyz", "ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖ𐞥ʳˢᵗᵘᵛʷˣʸᶻ" ],
+		[ "0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹" ],
+		[ "+-=()", "⁺⁻⁼⁽⁾" ],
+	],
+	doublestruck: [
+		[ "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ" ],
+		[ "abcdefghijklmnopqrstuvwxyz", "𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫" ],
+		[ "0123456789", "𝟘𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡" ],
+	],
+	smallcaps: [
+		[ "abcdefghijklmnopqrstuvwxyz", "ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘꞯʀꜱᴛᴜᴠᴡxʏᴢ" ], // X is a hack
+	],
+	cursive: [
+		[ "abcdefghijklmnopqrstuvwxyz", "𝒶𝒷𝒸𝒹ℯ𝒻ℊ𝒽𝒾𝒿𝓀𝓁𝓂𝓃ℴ𝓅𝓆𝓇𝓈𝓉𝓊𝓋𝓌𝓍𝓎𝓏" ],
+		[ "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "𝒜ℬ𝒞𝒟ℰℱ𝒢ℋℐ𝒥𝒦ℒℳ𝒩𝒪𝒫𝒬ℛ𝒮𝒯𝒰𝒱𝒲𝒳𝒴𝒵" ],
+	],
+	fraktur: [
+		[ "abcdefghijklmnopqrstuvwxyz", "𝔞𝔟𝔠𝔡𝔢𝔣𝔤𝔥𝔦𝔧𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷" ],
+		[ "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "𝔄𝔅ℭ𝔇𝔈𝔉𝔊ℌℑ𝔍𝔎𝔏𝔐𝔑𝔒𝔓𝔔ℜ𝔖𝔗𝔘𝔙𝔚𝔛𝔜ℨ" ],
+	],
+}
+
+const trtemplate = document.getElementById("trtemplate").content.querySelector(".trset")
+
+function addSet() {
+	const el = trtemplate.cloneNode(true)
+	trsets.appendChild(el)
+	return el
+}
+
+function getTrSetOf(el) {
+	while (el !== null) {
+		if (el.className === "trset") return el
+		el = el.parentElement
+	}
+}
+
+function getTrSets() {
+	return Array.from(document.querySelectorAll(".trset"))
+}
+
+function setDelete(el) { el.remove() }
+function setMoveUp(el) { if (el.previousSibling) el.previousSibling.before(el) }
+function setMoveDown(el) { if (el.nextSibling) el.nextSibling.after(el) }
+function setFlip(el) {
+	const f = el.querySelector("[name=from]")
+	const t = el.querySelector("[name=to]")
+
+	const fvalue = f.value
+	const tvalue = t.value
+	f.value = tvalue
+	t.value = fvalue
+}
+
+function setSearchParams(kvs) {
+	const loc = new URL(window.location.href);
+	loc.search = ""
+	for (const [k, v] of Object.entries(kvs)) {
+		loc.searchParams.append(k ,v)
+	}
+	window.history.replaceState({}, "", loc);
+}
+
+function loadPreset(trs) {
+	trsets.replaceChildren()
+	for (const [f, t] of trs) {
+		const el = addSet()
+		el.querySelector("[name=from]").value = f
+		el.querySelector("[name=to]").value = t
+	}
+
+	updateTr()
+	updateOutput()
+}
+
+function loadPresetByName(name) {
+	loadPreset(presets[name])
+	setSearchParams({ "preset": name })
+}
+
+let tr = new Map()
+function updateTr() {
+	const serialised = getTrSets().map(el => {
+		const f = el.querySelector("[name=from]")
+		const t = el.querySelector("[name=to]")
+		return [f.value, t.value]
+	})
+
+	setSearchParams({ "tr": JSON.stringify(serialised) })
+
+	tr = new Map()
+	for (let [f, t] of serialised) {
+		f = Array.from(f)
+		t = Array.from(t)
+		for (const i in f) {
+			tr.set(f[i], t[i] || "")
+		}
+	}
+}
+
+function updateOutput() {
+	const inp = document.querySelector("#input").value
+	let out = ""
+	for (const c of inp) {
+		out += tr.get(c) ?? c
+	}
+	document.querySelector("#output").value = out
+}
+
+// Initialisation -------------------------------------------------------------
+
+addSet()
+
+const urlparams = new URLSearchParams(window.location.search)
+if (urlparams.get("preset")) loadPresetByName(urlparams.get("preset"))
+if (urlparams.get("tr")) loadPreset(JSON.parse(urlparams.get("tr")))
+
+for (const preset in presets) {
+	const el = document.createElement("button")
+	el.append(preset)
+	el.setAttribute("onclick", `loadPresetByName('${preset}')`)
+	presetlist.appendChild(el)
+}
+
+</script>
+
+<!---------------------------------------------------------------------------->
+
+<h2>What is this?</h2>
+<p>
+	This is a generic tool for replacing one set of characters for another in some text, like a substitution cipher.
+	But it has more uses than just ciphers &ndash; it's particularly useful for writing in one of the many character style variations available in Unicode.
+
+</p>
+<p>
+	<small>
+		(if you know Linux, this is <a href="https://man.archlinux.org/man/tr.1">tr(1)</a>)
+	</small>
+</p>
+
+
+
