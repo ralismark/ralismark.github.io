@@ -11,7 +11,7 @@ tags:
 		id="input"
 		placeholder="Input"
 		oninput="updateOutput()"
-	></textarea>
+	>The quick brown fox jumps over the lazy dog!</textarea>
 	&downarrow;
 	<textarea
 		id="output"
@@ -26,7 +26,7 @@ tags:
 			<td><input oninput="updateTr()" name="from"></td>
 			<td>&rightarrow;</td>
 			<td><input oninput="updateTr()" name="to" placeholder="(delete)"></td>
-			<td><button onclick="setFlip(getTrSetOf(this));updateTr()" title="flip">&rlarr;</button></td>
+			<td><button onclick="setReverse(getTrSetOf(this));updateTr()" title="reverse">&rlarr;</button></td>
 			<td><button onclick="setMoveUp(getTrSetOf(this));updateTr()" title="move up">&uarr;</button></td>
 			<td><button onclick="setMoveDown(getTrSetOf(this));updateTr()" title="move down">&darr;</button></td>
 			<td><button onclick="setDelete(getTrSetOf(this));updateTr()" title="delete">&times;</button></td>
@@ -38,7 +38,7 @@ tags:
 		<tr>
 			<td colspan="999">
 				<button onclick="addSet();updateTr()">add</button>
-				<button onclick="getTrSets().forEach(setFlip);updateTr()">flip all</button>
+				<button onclick="getTrSets().forEach(setReverse);updateTr()">reverse all</button>
 				<button onclick="trsets.replaceChildren();updateTr()">clear</button>
 			</td>
 		</tr>
@@ -57,7 +57,7 @@ const presets = {
 		[ "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "ᴬᴮꟲᴰᴱꟳᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾꟴᴿᶳᵀᵁⱽᵂᵡ𐞲ᶼ" ], // S, X, Y, Z are hacks
 		[ "abcdefghijklmnopqrstuvwxyz", "ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖ𐞥ʳˢᵗᵘᵛʷˣʸᶻ" ],
 		[ "0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹" ],
-		[ "+-=()", "⁺⁻⁼⁽⁾" ],
+		[ "+-=().!?/\\<$:", "⁺⁻⁼⁽⁾ꜝᐧˀᐟᐠᑉᙚ𐞁" ], // ? is a hack to the glottal stop
 	],
 	doublestruck: [
 		[ "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ" ],
@@ -99,7 +99,7 @@ function getTrSets() {
 function setDelete(el) { el.remove() }
 function setMoveUp(el) { if (el.previousSibling) el.previousSibling.before(el) }
 function setMoveDown(el) { if (el.nextSibling) el.nextSibling.after(el) }
-function setFlip(el) {
+function setReverse(el) {
 	const f = el.querySelector("[name=from]")
 	const t = el.querySelector("[name=to]")
 
@@ -186,14 +186,13 @@ for (const preset in presets) {
 <h2>What is this?</h2>
 <p>
 	This is a generic tool for replacing one set of characters for another in some text, like a substitution cipher.
-	But it has more uses than just ciphers &ndash; it's particularly useful for writing in one of the many character style variations available in Unicode.
-
+	But it has more uses than just ciphers &ndash; it's particularly useful for writing in one of the many character style variations available in Unicode!
 </p>
 <p>
 	<small>
 		(if you know Linux, this is <a href="https://man.archlinux.org/man/tr.1">tr(1)</a>)
 	</small>
 </p>
-
-
-
+<p>
+	Also~ I think this is the most comprehensive superscript converter out there!
+</p>

@@ -230,6 +230,10 @@ a[role=button] {
 
 	cursor: pointer;
 	background: var(--button-tint);
+
+	&:active {
+		background: var(--box-tint);
+	}
 }
 
 a[role=button] {
