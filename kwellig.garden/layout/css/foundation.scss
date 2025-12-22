@@ -316,6 +316,7 @@ Tablists are a very complicated layout
 [role=tablist] {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 
 	> details {
 		display: contents;
