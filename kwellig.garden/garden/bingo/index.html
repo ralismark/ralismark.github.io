@@ -1,0 +1,225 @@
+---
+layout: standalone
+title: New Year's <s>Resolution</s> Super-Bingo
+---
+
+{% set star_svg %}<?xml version="1.0" encoding="UTF-8"?>
+
+{% macro tracestar(outer, inner) -%}
+M0 -{{outer}}
+{% for i in range(1, 6) %}
+	L{{ math.sin(math.tau * (i - 0.5)/5)*inner }} {{ -math.cos(math.tau * (i - 0.5)/5)*inner }}
+	L{{ math.sin(math.tau * i/5)*outer }} {{ -math.cos(math.tau * i/5)*outer }}
+{% endfor %}
+Z
+{%- endmacro %}
+
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	viewBox="-100 -100 200 200"
+	fill="none"
+>
+	<path
+		stroke-width="18"
+		stroke-linejoin="round"
+		stroke="#f69228"
+		fill="#f69228"
+		d="{{ tracestar(90, 40) }}"
+	/>
+
+	<path
+		stroke="#fbc21a"
+		fill="#fbc21a"
+		d="{{ tracestar(70, 30) }}"
+	/>
+
+</svg>
+{% endset %}
+{% set star_svg = recipe.write("/assets/star.svg", star_svg) %}
+
+{% set data = {
+	"2025": recipe.read("2025.yaml") | parse_yaml,
+	"2026": recipe.read("2026.yaml") | parse_yaml,
+} %}
+
+<div role="tablist">
+	{% for year, goals in data.items() %}
+		<details name="bingo" open>
+			<summary role="tab">{{ year }}</summary>
+			<section id="{{ year }}" style="max-width: 100%">
+				<section
+					class="bingo"
+					style="--rows: {{ [(goals | length - 4 + 3) // 4, 5] | max }}"
+				>
+					<div class="head">{{ year[0] }}</div>
+					<div class="head">{{ year[1] }}</div>
+					<div class="head">❤</div>
+					<div class="head">{{ year[2] }}</div>
+					<div class="head">{{ year[3] }}</div>
+
+					<div class="tile free">
+						be me &lt;3
+					</div>
+
+					{% for goal in goals %}
+						<div
+							class="
+								tile
+								{% if goal.fail %}fail{% endif %}
+								{% if goal.progress | length == goal.target | default(1) %}complete{% endif %}
+							"
+							style="--progress: {{ goal.progress | length }}/{{ goal.target | default(1) }};"
+						>
+							{{ goal.text }}
+						</div>
+					{% endfor %}
+				</section>
+
+				<table>
+					{% for month in ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] %}
+						<tr>
+							<th colspan="3"><h2>{{ month }}</h2></th>
+						</tr>
+
+						{% set mm = loop.index %}
+
+						{% for goal in goals %}
+							{% for step in goal.progress %}
+								{% if step.at.month == mm %}
+								<tr>
+									<td class="text-align-right">{{ goal.text }}</td>
+									<td class="Task" style="--progress: 1/{{ goal.target | default(1) }}">
+										<time class="paper" datetime="{{ step.at.strftime("%Y-%m-%d") }}">{{ step.at.strftime("%d %b") }}</time>
+									</td>
+									<td class="text-align-left">{{ step.text | default("") | markdownify }}</td>
+								{% endif %}
+							{% endfor %}
+						{% endfor %}
+					{% endfor %}
+				</table>
+			</section>
+		</details>
+	{% endfor %}
+</div>
+
+<style>
+.bingo {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: auto repeat(var(--rows), 1fr);
+
+	border-bottom: 4px solid purple;
+	text-align: center;
+
+	overflow-x: auto;
+
+	> div {
+		align-content: center;
+	}
+
+	.head {
+		grid-row: 0 / span 1;
+		background: purple;
+		color: white;
+	}
+
+	.free {
+		grid-column: 3 / 4;
+		grid-row: 4 / span calc(var(--rows) - 4);
+		background: purple;
+		color: white;
+	}
+
+	.tile {
+		padding: 0.25rem;
+		position: relative; /* to establish positioning root */
+
+		min-height: 7em;
+
+		&.fail {
+			opacity: 50%;
+			text-decoration: line-through;
+		}
+
+		&.complete {
+			color: gold;
+		}
+	}
+
+	.tile::before {
+		content: "⭐";
+		font-size: 300%;
+		opacity: 50%;
+		pointer-events: none;
+
+		position: absolute;
+		left: 50%;
+		top: 50%;
+
+		mask-image: conic-gradient(
+			#000 0%,
+			#000 calc(100% * var(--progress, 0)),
+			#0000 calc(100% * var(--progress, 0))
+		);
+
+		transform: translate(-50%, -50%) rotate(calc(var(--random) * 36deg + 10deg));
+	}
+
+}
+
+</style>
+
+<style>
+.text-align-right { text-align: right !important; }
+.text-align-left { text-align: left !important; }
+
+.Task {
+	display: grid;
+
+	--star-size: 4.4rem;
+
+	grid-template-columns: var(--star-size) 1fr;
+	column-gap: 0.5rem;
+	grid-template-areas:
+		"star description";
+
+	& > div, & > p {
+		align-self: center;
+	}
+
+	& > p, & > div > * {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	&::before {
+		content: "";
+		display: block;
+
+		grid-area: star;
+
+		width: var(--star-size);
+		height: var(--star-size);
+
+		background-image: url("{{ star_svg }}");
+		mask-image: conic-gradient(
+			#000 0%,
+			#000 calc(100% * var(--progress, 0)),
+			#0002 calc(100% * var(--progress, 0))
+		);
+		transform: rotate(calc((var(--random) - 50) / 100 * 60deg));
+	}
+
+	& > time {
+		grid-area: star;
+		justify-self: center;
+		align-self: start;
+
+		margin-top: calc(var(--star-size) / 2 - 0.5lh - 4px);
+
+		padding: 4px;
+		line-height: 1em;
+	}
+
+}
+</style>

@@ -1,6 +1,7 @@
 - text: "HSK3"
   target: 1
-  progress: []
+  progress:
+    - at: 2025-12-09
 
 - text: "50 ASL signs"
   target: 50
@@ -65,7 +66,8 @@
 
 - text: "move out!"
   target: 1
-  progress: []
+  progress:
+    - at: 2025-12-20
 
 - text: "progress towards bottom surgery"
   target: 1
@@ -131,6 +133,8 @@
       at: 2025-02-19
     - text: "(MTS) Merrily We Roll Along"
       at: 2025-07-12
+    - text: "King Lear"
+      at: 2025-12-10
   fail: true
 
 - text: "organise 3 picnics"
@@ -165,9 +169,10 @@
   target: 1
   progress: []
 
-- text: "?"
+- text: "New signature!"
   target: 1
-  progress: []
+  progress:
+    - at: 2025-09-23
 
 - text: "?"
   target: 1
