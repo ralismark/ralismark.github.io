@@ -45,7 +45,7 @@ Z
 <div role="tablist">
 	{% for year, goals in data.items() %}
 		<details name="bingo" open>
-			<summary role="tab">{{ year }}</summary>
+			<summary onclick="setHash('{{ year }}')" role="tab">{{ year }}</summary>
 			<section id="{{ year }}" style="max-width: 100%">
 				<section
 					class="bingo"
@@ -223,3 +223,11 @@ Z
 
 }
 </style>
+
+<script>
+	function setHash(id) {
+		const loc = new URL(window.location.href);
+		loc.hash = "#" + id;
+		window.history.replaceState({}, "", loc);
+	}
+</script>
