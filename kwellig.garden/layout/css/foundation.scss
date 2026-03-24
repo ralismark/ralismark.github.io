@@ -102,11 +102,6 @@ del {
 
 @mixin card($inset: false) {
 	border: .1em solid var(--stroke);
-	@if $inset {
-		//box-shadow: inset .1em .1em .1em rgba(0, 0, 0, 0.5);
-	} @else {
-		//box-shadow: 0.15em 0.15em rgba(0, 0, 0, 0.5);
-	}
 
 	border-radius: .2em;
 
