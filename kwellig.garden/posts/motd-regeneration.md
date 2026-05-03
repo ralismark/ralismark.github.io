@@ -7,6 +7,9 @@ tags:
 series: motd
 ---
 
+{% import "layout/macros.html" as macros with context %}
+{% do macros.redirect_here("/posts/motd-1.html") %}
+
 .. admonition:: me/say
 
 	I'll do a proper introduction to this series in a bit...

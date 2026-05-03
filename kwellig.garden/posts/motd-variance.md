@@ -7,6 +7,9 @@ tags:
 series: motd
 ---
 
+{% import "layout/macros.html" as macros with context %}
+{% do macros.redirect_here("/posts/motd-2.html") %}
+
 One thing in D&D (and a lot of other systems) that irks me is how, if a character is better at a skill than others, they end up being the one doing _every_ attempt of that skill for the party.
 
 _"Who's got the highest History modifier here?"_
