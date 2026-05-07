@@ -99,6 +99,7 @@
 	return become(
 		E("ul", {
 			style: "list-style: none; padding: 0",
+			id: "comments",
 		}, ...entries,),
 	);
 })();

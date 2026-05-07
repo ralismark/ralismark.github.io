@@ -3,6 +3,7 @@ layout: post
 title: Behind the GM's Screen
 excerpt: "The rules and mechanisms that drive the world"
 date: 2025-03-23
+tags: ooc
 ---
 
 There is one principle underlying all "supernatural" phenomena in the world:

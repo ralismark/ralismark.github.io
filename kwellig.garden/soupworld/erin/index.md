@@ -16,7 +16,7 @@ A pretty ordinary star, with a rogue gas giant, and a habitable moon.
 Plus a derelict O'Neill cylinder somewhere.
 
 Anyways, I'm gonna bring that gas giant + habitable moon idea into Soupworld!
-The main world is a moon called Eula, which is tidally locked around a green gas giant called Erin.
+The main world is a moon called Soup, which is tidally locked around a green gas giant called Erin.
 Inspired, of course, by Adrian[^adrian] (_Project Hail Mary_) and Jool (_Kerbal Space Program_).
 
 [^adrian]: Only watching the movie, for the longest time I thought Adrian was a gas giant because of its swirling clouds.
