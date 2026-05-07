@@ -5,20 +5,20 @@ layout: default
 <link rel="feed" href="/posts">
 
 <main class="h-card content-width">
-	<div id="aboutme">
+	<section id="aboutme">
 		<h1>Call me <em class="p-name">Temmie</em></h1>
 
 		<p>I'm a lot of things...</p>
 		<p>
 			I've transed my gender 🏳️‍⚧️ (<strong>she/her</strong>)
 			<br>I tend software professionally
-			<br>&ndash; and often unprofessionally
+			<br>&ndash; and stories unprofessionally
 			<br>My adjectives are whimsical and cute 💜
 		</p>
-	</div>
+	</section>
 
-	<div id="socials">
-		<h1><em class="p-nickname">kwellig</em> is me</h1>
+	<section id="socials">
+		<h1><em class="p-nickname">lycheeleaves</em> is me</h1>
 
 		<p>...in many places</p>
 		<dl>
@@ -29,15 +29,28 @@ layout: default
 			<dt>toots</dt>
 			<dd><a href="https://cathode.church/@ralismark" rel="me">@ralismark@cathode.church</a></dd>
 		</dl>
-	</div>
+	</section>
+</main>
 
-	<div id="here">
-		<h1 style="text-align: center">You're at <em class="">{{ site.title }}</em></h1>
+<hr class="lit">
+
+<div id="belowthefold" role="presentation">
+	<nav>
+		<a class="paper" href="#">(top)</a>
+		<a class="paper" href="#welcome">welcome</a>
+		<a class="paper" href="#reviews">reviews</a>
+		<a class="paper" href="#guestbook">guestbook</a>
+		<a class="paper" href="#colophon">colophon</a>
+	</nav>
+
+	<section id="welcome">
+		<h2>Welcome to {{site.title}}</h2>
 
 		<p>
-			{{ site.fqdn }} "{{ site.title }}" is the home of my internet things!
+			"{{ site.title }}" is the home of my internet things!
 			They hold around {{ dt.datetime.now().year - 2017 }} sporadic years of my irregular writing, as well as a lot of other nice things.
 		</p>
+
 		<p>
 			Here's their 88x31:
 		</p>
@@ -70,27 +83,13 @@ layout: default
 			"
 			src="https://the-fruit-loop.kwellig.garden/embed/ralismark"
 		></iframe>
+	</section>
 
-	</div>
+{#
+	<section id="moreaboutme">
+		<h2>More about me</h2>
 
-</main>
-
-<hr class="lit">
-
-<div id="belowthefold" role="tablist" class="content-width">
-
-	<details name="tabs-main" open>
-		<summary role="tab">Guestbook</summary>
-		<section role="tabpanel">
-			{% import "layout/macros.html" as macros with context %}
-			{{ macros.comments() }}
-		</section>
-	</details>
-
-	<details name="tabs-main">
-		<summary role="tab">More about me</summary>
-		<section role="tabpanel">
-			{% filter markdownify -%}
+		{% filter markdownify -%}
 fun facts:
 
 1. Prominent Rust blogger [Amos / fasterthanli.me](https://fasterthanli.me) gave me a shout out on [one of his posts](https://fasterthanli.me/series/making-our-own-executable-packer/part-12#:~:text=Thanks%20to%20ralismark)
@@ -99,14 +98,23 @@ fun facts:
 4. I have about... [10 names](posts/april-fools-2024)!
 
 [fortune]: https://en.wikipedia.org/wiki/Fortune_(Unix)
+		{%- endfilter %}
+	</section>
+#}
 
-## Reviews
+	<section id="reviews">
+		<h2>Reviews</h2>
 
-_This list is incomplete; you can help by expanding it_\*
-<span style="float: right; font-size: small">(*if you know me in the real world)</span>
+		<p>
+			<em>This list is incomplete; you can help by expanding it<sup>*</sup></em>
+			<span style="float: right; font-size: small">(*if you know me in the real world)</span>
+			<span style="display: block; clear: both"></span>
+		</p>
 
-<span class="clearfix-end"></span>
-
+		<div style="
+			max-height: 75vh;
+			overflow-y: scroll;
+		">{% filter markdownify -%}
 > "Can I give you 5 stars?"
 >
 > Sometimes it feels like I was created to be <span class="p-name">Viv</span>'s conversation partner, so many of our interests overlap in such interesting ways!
@@ -138,14 +146,20 @@ _This list is incomplete; you can help by expanding it_\*
 > feels like a tamed wolf, not a domesticated one
 >
 > <p style="text-align: right">&mdash; Seraph, October 2025</p>
-			{%- endfilter %}
-		</section>
-	</details>
+		{%- endfilter %}</div>
+	</section>
 
-	<details name="tabs-main">
-		<summary role="tab">Colophon</summary>
-		<section role="tabpanel">
-			{% filter markdownify -%}
+	<section id="guestbook">
+		<h2>Guestbook!</h2>
+
+		{% import "layout/macros.html" as macros with context %}
+		{{ macros.comments() }}
+	</section>
+
+	<section id="colophon">
+		<h2>Colophon</h2>
+
+		{% filter markdownify -%}
 Unless otherwise noted, all work on this site is under *copyright*, all rights reserved.
 In particular, use of any material with generative AI, including but not limited to training of models and in prompts, is strictly prohibited...
 <small>though practically this probably has no effect.</small>
@@ -164,8 +178,7 @@ They're generated using my own mess of a static site generator that uses [Jinja]
 
 ## Cloudflare
 
-- Domain registration
-- DNS
+- Domain registration &amp; DNS
 - Hosting everything (via Cloudflare Worker Pages)
 
 ## brid.gy
@@ -175,9 +188,8 @@ They're generated using my own mess of a static site generator that uses [Jinja]
 ## commentpara.de + quill.p3k.io
 
 - Creating and hosting anonymous comments
-			{%- endfilter %}
-		</section>
-	</details>
+		{%- endfilter %}
+	</section>
 
 </div>
 
@@ -209,7 +221,7 @@ They're generated using my own mess of a static site generator that uses [Jinja]
 }
 
 main {
-	margin: 2rem 0 0;
+	margin: 1rem 0 1rem;
 }
 
 h1 {
@@ -222,9 +234,38 @@ h1 {
 }
 
 #belowthefold {
+	margin: 0 1rem;
+
 	justify-content: center;
+
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2em;
+
+	> section {
+		width: 30ch;
+		max-width: 60ch;
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+
+	> nav {
+		width: 100%;
+		position: sticky;
+		top: 0;
+
+		text-align: center;
+
+		@media (min-width: 80ch) {
+			display: none;
+		}
+	}
 }
 
+#comments {
+	max-height: 75vh;
+	overflow-y: scroll;
+}
 </style>
 
 <script>
@@ -239,5 +280,4 @@ h1 {
 			el.innerText = choose(["kwellig", "ralismark", "lycheeleaves", "vidiris"])
 		}
 	}
-	rename()
 </script>

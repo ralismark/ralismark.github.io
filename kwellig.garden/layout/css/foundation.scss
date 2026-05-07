@@ -12,13 +12,6 @@ html, body, div {
 	padding: 0;
 }
 
-// firefox/chromium compatibility:
-// - chrome supports the ::details-content pseudo-element, firefox doesn't
-// - chrome has it default to display: block, firefox defaults to display: contents
-details[open]::details-content {
-	display: contents;
-}
-
 // Typography ------------------------------------------------------------ @@@1
 
 html {
@@ -509,23 +502,6 @@ html {
 // Customisation Utils --------------------------------------------------- @@@1
 
 @for $i from 0 through 4 {
-	html .mt-#{$i} { margin-top:    $i * 1rem !important; }
-	html .mb-#{$i} { margin-bottom: $i * 1rem !important; }
 	html .mx-#{$i} { margin-left:   $i * 1rem !important; margin-right:  $i * 1rem !important; }
 	html .my-#{$i} { margin-top:    $i * 1rem !important; margin-bottom: $i * 1rem !important; }
-}
-html .mx-auto { margin-left: auto !important; margin-right: auto !important; }
-
-// Flexbox stuff
-.flex-centre {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-}
-
-.clearfix-end::after {
-	content: "";
-	display: block;
-	height: 0;
-	clear: both;
 }
