@@ -6,7 +6,7 @@ html { // for non-sass use
 	// based on <https://github.com/system-fonts/modern-font-stacks>
 	--main-font-family: Merriweather, "Iowan Old Style", "Palatino Linotype", "URW Palladio L", "P052", serif;
 	--mono-font-family: Menlo, Consolas, Monaco, "Liberation Mono", "Lucida Console", monospace;
-	--hand-font-family: "Segoe Print", "Bradley Hand", Chilanka, TSCu_Comic, casual, cursive;
+	--hand-font-family: cursive, sans-serif;
 
 	// light/dark mode; use --body-{fg,bg} for correctly coloured version
 	--body-fg-light: black;
