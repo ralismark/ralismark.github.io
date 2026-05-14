@@ -1,0 +1,118 @@
+---
+layout: default
+title: Links
+---
+
+<p class="content-width">
+	Book reviews!
+	I like to write out my thoughts on books I've read, so to help it not immediately get flushed from my mind the moment I close it.
+</p>
+
+<hr class="lit">
+
+<section class="h-feed content-width">
+	{# TODO make this work with macros.html/post_listing #}
+	{% for post in site.collections.media | reverse %}
+		{% set post = recipe.build(post.meta) %}
+		{% if separators and post.props.date and loop.changed(post.props.date.year) and not loop.first %}
+			<div
+				role="separator"
+			>
+				{{ post.props.date.year }}
+			</div>
+		{% endif %}
+
+		<a class="h-entry u-url" href="{{ post.url }}">
+			<h2
+				class="p-name"
+				{% if post.draft %}data-draft="{{ post.props.reason | default("no reason specified") | e }}"{% endif %}
+			>
+				{{ post.props.title | e }}
+			</h2>
+
+			{% if post.props.date %}
+			<time class="dt-published" datetime="{{ post.props.date.strftime("%Y-%m-%d") }}">
+				{{ post.props.date.strftime("%e %b '%y") }}
+			</time>
+			{% endif %}
+
+			<p>
+				By {{ post.props.author }}
+				&mdash;
+				Read {{ post.props.date.strftime("%-d %b %Y") }}
+				&mdash;
+				{% for i in range(5) %}{% if i < post.props.rating %}🟡{% else %}⚫{% endif %}{% endfor %} {{ post.props.rating }}/5
+			</p>
+		</a>
+	{% endfor %}
+
+	<style>
+	.h-feed {
+		margin-top: 2em;
+		margin-bottom: 4em;
+
+		> a.h-entry {
+			color: inherit;
+			text-decoration: none;
+			display: block;
+
+			margin: 0 2em;
+			padding: 0 1em;
+			background: linear-gradient(
+				var(--box-tint), 50%, var(--body-bg)
+			);
+
+			transform:
+				rotate(calc((var(--random) - 0.5) * 5deg))
+				translateX(calc((var(--random) - 0.5) * 3em))
+				;
+
+			margin-bottom: -2.5em;
+			padding-bottom: 4em;
+			border: 0.2em solid;
+			border-image: linear-gradient(var(--stroke), var(--body-bg)) 1;
+			border-bottom: none;
+
+			h2 {
+				margin: 0;
+
+				&[data-draft]::before {
+					content: "[DRAFT: " attr(data-draft) "]";
+					color: grey;
+					background: maroon;
+				}
+			}
+			p { margin: 0; }
+			time { display: none; }
+		}
+
+		> [role=separator] {
+			transform: rotate(calc((var(--random) - 0.5) * 1deg));
+			position: relative;
+			top: -2em;
+
+			display: block;
+			margin-left: auto;
+			width: fit-content;
+
+			background: var(--filled-bg);
+			color: var(--filled-fg);
+			padding: 0 1em;
+
+			border-radius: 0.5em 0.5em 0 0;
+
+			&::after {
+				content: "";
+
+				display: block;
+				height: 10em;
+				background: linear-gradient(var(--filled-bg), var(--body-bg));
+
+				position: absolute;
+				width: var(--content-width);
+				right: 0;
+			}
+		}
+	}
+	</style>
+</section>

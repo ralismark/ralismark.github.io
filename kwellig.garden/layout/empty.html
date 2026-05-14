@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>{% if page.props.title %}{{ page.props.title | striptags }} - {% endif %}{{ site.title }}</title>
-		<meta name="description" content="{{ page.props.excerpt | default(site.description) | e }}">
+		<meta name="description" content="{% block meta_description %}{{ page.props.excerpt | default(site.description) | e }}{% endblock %}">
 		<link rel="canonical" href="{{ site.url }}{{ page.url }}">
 		<link type="application/atom+xml" rel="alternate" href="/feed.xml" />
 

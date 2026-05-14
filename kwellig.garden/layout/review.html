@@ -1,0 +1,56 @@
+{% extends "./default.html" %}
+
+{% block meta_description %}
+By {{ page.props.author }} &mdash; Read {{ page.props.date.strftime("%-d %b %Y") }} &mdash; {% for i in range(5) %}{% if i < page.props.rating %}🟡{% else %}⚫{% endif %}{% endfor %} {{ page.props.rating }}/5
+{% endblock %}
+
+{% block content %}
+<article class="h-entry">
+
+{% import "layout/macros.html" as macros with context %}
+{{ macros.post_nav() }}
+
+<header class="content-width">
+	<dl>
+		<dt>title</dt>
+		<dd class="p-name">{{ page.props.title }}</dd>
+
+		<dt>author</dt>
+		<dd>{{ page.props.author }}</dd>
+
+		<dt>date finished</dt>
+		<dd>
+			<a class="u-url" href="{{ page.url }}">
+				<time datetime="{{ page.props.date.strftime("%Y-%m-%d") }}" class="dt-published">
+					{{ page.props.date.strftime("%-d %b %Y") }}
+				</time>
+			</a>
+		</dd>
+
+		<dt>rating</dt>
+		<dd>
+			{% for i in range(5) -%}
+			{% if i < page.props.rating %}🟡{% else %}⚫{% endif %}
+			{%- endfor %}
+			{{ page.props.rating }}/5
+		</dd>
+	</dl>
+</header>
+
+{% block post_content %}
+<main class="e-content content-width">
+	{{ content }}
+</main>
+{% endblock post_content %}
+
+<hr>
+
+<aside class="content-width">
+	<h2>Interactions</h2>
+
+	{% import "./macros.html" as macros with context %}
+	{{ macros.comments() }}
+</aside>
+
+</article>
+{% endblock content %}
