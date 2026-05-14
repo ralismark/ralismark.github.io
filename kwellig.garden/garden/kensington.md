@@ -1,5 +1,5 @@
 ---
-layout: standalone
+layout: post
 title: On Why I Moved Out
 ---
 

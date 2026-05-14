@@ -3,31 +3,19 @@
 {% block content %}
 <article class="h-entry">
 
-{% set post_nav %}
-	<nav class="my-1 content-width">
-		{% if prev and prev() %}
-			{% set prev = recipe.build(prev().meta) %}
-			<a style="float: left; text-align: left" href="{{ prev }}">&laquo; {{ prev.props.title | e }}</a>
-		{% endif %}
-
-		{% if next and next() %}
-			{% set next = recipe.build(next().meta) %}
-			<a style="float: right; text-align: right" href="{{ next }}">{{ next.props.title | e }} &raquo;</a>
-		{% endif %}
-
-		<div role="none" style="clear: both"></div>
-	</nav>
-{% endset %}
-
-	{{ post_nav }}
+	{% import "layout/macros.html" as macros with context %}
+	{{ macros.post_nav() }}
 
 	<header class="content-width" style="text-align: center">
-		<h1 class="p-name">{{ page.props.title | escape }}</h1>
+		<h1 class="p-name">{{ page.props.title }}</h1>
+		{% if page.props.excerpt %}
 		<p class="p-summary">
 			{{ page.props.excerpt | escape }}
 		</p>
+		{% endif %}
 
 		<ul class="li-flat">
+			{% if page.props.date %}
 			<li>
 				<a class="u-url" href="{{ page.url }}">
 					<time datetime="{{ page.props.date.strftime("%Y-%m-%d") }}" class="dt-published">
@@ -35,6 +23,7 @@
 					</time>
 				</a>
 			</li>
+			{% endif %}
 
 			<li>
 				{% set wc = content | striptags | wordcount %}
@@ -84,7 +73,7 @@
 	</main>
 	{% endblock post_content %}
 
-	{{ post_nav }}
+	{{ macros.post_nav() }}
 
 	<hr>
 

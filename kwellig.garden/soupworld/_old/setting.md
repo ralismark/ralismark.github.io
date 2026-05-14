@@ -1,5 +1,5 @@
 ---
-layout: standalone
+layout: post
 title: "BTS: The Setting of Ephemerides"
 ---
 

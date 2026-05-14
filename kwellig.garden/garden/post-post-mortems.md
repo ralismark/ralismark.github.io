@@ -1,5 +1,5 @@
 ---
-layout: standalone
+layout: post
 title: Post Post-Mortems
 ---
 

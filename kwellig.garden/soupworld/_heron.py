@@ -11,7 +11,7 @@ def main(
     jenv,
 ):
     yield heron.PageRecipe(
-        here / "_index.md",
+        here / "_index.html",
         "/soupworld/index.html",
         jenv,
     )

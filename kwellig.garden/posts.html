@@ -3,8 +3,6 @@ layout: default
 title: Blog
 ---
 
-<main class="content-width h-feed">
-
 {% set ns = namespace(wc=0) %}
 {% for post in site.collections.posts %}
 	{% set post = recipe.build(post) %}
@@ -24,7 +22,7 @@ title: Blog
 
 <hr class="lit">
 
+<section class="h-feed content-width">
 {% import "layout/macros.html" as macros %}
 {{ macros.post_listing(site.collections.posts) }}
-
-</main>
+</section>

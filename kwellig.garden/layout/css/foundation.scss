@@ -488,6 +488,7 @@ html {
 }
 
 .content-width {
+	width: var(--content-width);
 	max-width: var(--content-width);
 	margin-left: auto;
 	margin-right: auto;
