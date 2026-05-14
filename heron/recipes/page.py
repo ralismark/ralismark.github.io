@@ -112,7 +112,7 @@ class PageRecipe(core.InoutMixin[PageInout]):
             props=self.props,
         )
 
-    def extend_props(self, **kwargs: t.Hashable):
+    def extend_props(self, **kwargs: t.Hashable) -> t.Self:
         return dataclasses.replace(
             self,
             out=self.opath,

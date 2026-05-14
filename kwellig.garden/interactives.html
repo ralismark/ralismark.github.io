@@ -3,15 +3,13 @@ layout: default
 title: Interactives
 ---
 
-<main class="content-width h-feed">
-	<h1>{{ page.title | e }}</h1>
+<p class="content-width">
+	This is a collection of small HTML/JS toys I've made over the years that don't fit in the main blog series.
+</p>
 
-	<p class="content-width">
-		This is a collection of small HTML/JS toys I've made over the years that don't fit in the main blog series.
-	</p>
+<hr class="lit">
 
-	<hr class="lit">
-
-	{% import "layout/macros.html" as macros %}
-	{{ macros.post_listing(site.collections.interactives) }}
-</main>
+<section class="h-feed content-width">
+{% import "layout/macros.html" as macros %}
+{{ macros.post_listing(site.collections.interactives) }}
+</section>

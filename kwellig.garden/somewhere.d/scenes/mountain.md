@@ -20,28 +20,28 @@ You read some of the messages:
 
 .. html:: div
 	:class: paper
-	:style: --angle: calc((var(--random) - 50) * 0.03deg)
+	:style: --angle: calc((var(--random) - 0.5) * 3deg)
 	[Happiness has to be fought for](https://www.doomworld.com/forum/topic/134292-myhousewad/)
 
 .. html:: div
 	:class: paper
-	:style: --angle: calc((var(--random) - 50) * 0.03deg)
+	:style: --angle: calc((var(--random) - 0.5) * 3deg)
 	[I don't know how to feel ... but i wanna try\
 	I don't know how to feel ... but someday, i might](https://www.youtube.com/watch?v=dpnTd9Dx2OM)
 
 .. html:: div
 	:class: paper
-	:style: --angle: calc((var(--random) - 50) * 0.03deg)
+	:style: --angle: calc((var(--random) - 0.5) * 3deg)
 	[BIRD](https://www.youtube.com/watch?v=kB2KuC95cII)
 
 .. html:: div
 	:class: paper
-	:style: --angle: calc((var(--random) - 50) * 0.03deg)
+	:style: --angle: calc((var(--random) - 0.5) * 3deg)
 	[Get up, off your arse, and _win_.](https://www.youtube.com/watch?v=kB2KuC95cII)
 
 .. html:: div
 	:class: paper
-	:style: --angle: calc((var(--random) - 50) * 0.03deg)
+	:style: --angle: calc((var(--random) - 0.5) * 3deg)
 	[The life I've always longed for ... I will make it mine](https://www.tumblr.com/molabuddy/722107165081567232/a-little-personal-response-tribute-to-heres)
 
 _"Blessings left by those who embark on the climb.

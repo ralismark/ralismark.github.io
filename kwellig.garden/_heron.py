@@ -61,6 +61,7 @@ def make_collection(
     ctx: heron.core.BuildContext,
     pages: t.Iterable[heron.PageRecipe],
     require_date: bool = True,
+    prev_next: bool = True,
 ) -> t.Generator[heron.Recipe, None, Collection]:
     def post_date(meta: heron.PageInout):
         date = meta.props.get("date")
@@ -89,10 +90,10 @@ def make_collection(
             page.extend_props(
                 prev=heron.util.Impurity(
                     (lambda i: lambda: out.pages[i - 1] if i > 0 else None)(i)
-                ),
+                ) if prev_next else None,
                 next=heron.util.Impurity(
                     (lambda i: lambda: out.pages[i + 1] if i < len(out.pages) - 1 else None)(i)
-                ),
+                ) if prev_next else None,
                 collection=heron.util.Impurity(
                     lambda: out
                 ),
@@ -148,6 +149,7 @@ def inner_main(ctx: heron.core.BuildContext):
             for path in ctx.input(here / "garden").iterdir()
         ),
         require_date=False,
+        prev_next=False,
     )
 
     soupworld: Collection = yield from load("soupworld/_heron.py")(ctx, make_collection, jenv)

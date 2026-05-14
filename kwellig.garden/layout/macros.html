@@ -1,41 +1,121 @@
-{%- macro post_listing(posts) -%}
+{%- macro post_nav() -%}
+	<nav class="my-1 content-width">
+		{% if prev and prev() %}
+			{% set prev = recipe.build(prev().meta) %}
+			<a style="float: left; text-align: left" href="{{ prev }}">&laquo; {{ prev.props.title | e }}</a>
+		{% endif %}
+
+		{% if next and next() %}
+			{% set next = recipe.build(next().meta) %}
+			<a style="float: right; text-align: right" href="{{ next }}">{{ next.props.title | e }} &raquo;</a>
+		{% endif %}
+
+		<div role="none" style="clear: both"></div>
+	</nav>
+{%- endmacro -%}
+
+{%- macro post_listing(posts, separators=True) -%}
 	{% for post in posts | reverse %}
 		{% set post = recipe.build(post.meta) %}
-		{% set post_year = post.props.date.year %}
-		{% if loop.changed(post_year) and not loop.first %}
+		{% if separators and post.props.date and loop.changed(post.props.date.year) and not loop.first %}
 			<div
-				class="fence-t"
-				style="text-align: right; font-size: 1.2em; color: grey"
 				role="separator"
 			>
-				{{ post_year }}
+				{{ post.props.date.year }}
 			</div>
 		{% endif %}
 
-		<article class="mb-1 h-entry">
-			<header>
-				<h2 class="my-0" style="display: inline-block">
-					{% if post.draft %}
-					[draft: {{ post.props.reason | default("no reason specified") | e }}]
-					{% endif %}
-					<a class="p-name u-url" href="{{ post.url }}">{{ post.props.title|e }}</a>
-				</h2>
+		<a class="h-entry u-url" href="{{ post.url }}">
+			<h2
+				class="p-name"
+				{% if post.draft %}data-draft="{{ post.props.reason | default("no reason specified") | e }}"{% endif %}
+			>
+				{{ post.props.title | e }}
+			</h2>
 
-				<time class="dt-published" datetime="{{ post.props.date.strftime("%Y-%m-%d") }}">
-					{{ post.props.date.strftime("%e %b '%y") }}
-				</time>
-			</header>
+			{% if post.props.date %}
+			<time class="dt-published" datetime="{{ post.props.date.strftime("%Y-%m-%d") }}">
+				{{ post.props.date.strftime("%e %b '%y") }}
+			</time>
+			{% endif %}
 
-			<p class="my-0 p-summary">
-				{{ post.props.excerpt|e }}
+			{% if post.props.excerpt %}
+			<p class="p-summary">
+				{{ post.props.excerpt | e }}
 			</p>
-
-			{# {% set issue = recipe.posse_github("ralismark", "ralismark.github.io-comments", post.url) %}
-			{% if issue %}
-			<link class="u-syndication" href="{{ issue }}"/>
-			{% endif %} #}
-		</article>
+			{% endif %}
+		</a>
 	{% endfor %}
+
+	<style>
+	.h-feed {
+		margin-top: 2em;
+		margin-bottom: 4em;
+
+		> a.h-entry {
+			color: inherit;
+			text-decoration: none;
+			display: block;
+
+			margin: 0 2em;
+			padding: 0 1em;
+			background: linear-gradient(
+				var(--box-tint), 50%, var(--body-bg)
+			);
+
+			transform:
+				rotate(calc((var(--random) - 0.5) * 5deg))
+				translateX(calc((var(--random) - 0.5) * 3em))
+				;
+
+			margin-bottom: -2.5em;
+			padding-bottom: 4em;
+			border: 0.2em solid;
+			border-image: linear-gradient(var(--stroke), var(--body-bg)) 1;
+			border-bottom: none;
+
+			h2 {
+				margin: 0;
+
+				&[data-draft]::before {
+					content: "[DRAFT: " attr(data-draft) "]";
+					color: grey;
+					background: maroon;
+				}
+			}
+			p { margin: 0; }
+			time { display: none; }
+		}
+
+		> [role=separator] {
+			transform: rotate(calc((var(--random) - 0.5) * 1deg));
+			position: relative;
+			top: -2em;
+
+			display: block;
+			margin-left: auto;
+			width: fit-content;
+
+			background: var(--filled-bg);
+			color: var(--filled-fg);
+			padding: 0 1em;
+
+			border-radius: 0.5em 0.5em 0 0;
+
+			&::after {
+				content: "";
+
+				display: block;
+				height: 10em;
+				background: linear-gradient(var(--filled-bg), var(--body-bg));
+
+				position: absolute;
+				width: var(--content-width);
+				right: 0;
+			}
+		}
+	}
+	</style>
 {%- endmacro -%}
 
 {%- macro redirect_here(opath) -%}

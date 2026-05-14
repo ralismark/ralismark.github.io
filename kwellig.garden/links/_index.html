@@ -3,15 +3,15 @@ layout: default
 title: Links
 ---
 
-<main class="content-width h-feed">
 
-<p style="text-style: italic">
+<p class="content-width">
 	Crows collect shiny things in their nests.
 	I collect here links to a bunch of places on the internet that I find pretty cool!
 </p>
 
 <hr class="lit">
 
+<main class="content-width h-feed">
 {% for post in site.collections.links | reverse %}
 	{% set post = recipe.build(post) %}
 
@@ -31,29 +31,27 @@ title: Links
 			{{ post.props.title }}
 		</summary>
 
-		<div role="none">
-			<dt>url</dt>
-			<dd><a class="u-bookmark-of" href="{{ post.props.url }}">{{ post.props.url }}</a></dd>
+		<dt>url</dt>
+		<dd><a class="u-bookmark-of" href="{{ post.props.url }}">{{ post.props.url }}</a></dd>
 
-			<dt>date added</dt>
-			<dd>
-				<a class="u-url" href="{{ post.url }}">
-					<time datetime="{{ post.props.date.strftime("%Y-%m-%d") }}" class="dt-published">
-						{{ post.props.date.strftime("%-d %b %Y") }}
-					</time>
-				</a>
-			</dd>
+		<dt>date added</dt>
+		<dd>
+			<a class="u-url" href="{{ post.url }}">
+				<time datetime="{{ post.props.date.strftime("%Y-%m-%d") }}" class="dt-published">
+					{{ post.props.date.strftime("%-d %b %Y") }}
+				</time>
+			</a>
+		</dd>
 
-			{% set tags = parse_tags(post.props) %}
-			{% if tags %}
-				<dt>tags</dt>
-				<dd>{% for tag in tags %}{{tag}} {% endfor %}</dd>
-			{% endif %}
+		{% set tags = parse_tags(post.props) %}
+		{% if tags %}
+			<dt>tags</dt>
+			<dd>{% for tag in tags %}{{tag}} {% endfor %}</dd>
+		{% endif %}
 
-			<section class="e-content">
-				{{ post.content }}
-			</section>
-		</div>
+		<section class="e-content">
+			{{ post.content }}
+		</section>
 	</details>
 {% endfor %}
 </main>
@@ -74,17 +72,17 @@ details.h-entry {
 
 	> summary {
 		display: inline-block;
-		--angle: calc((var(--random) - 50) * 0.03deg);
+		--angle: calc((var(--random) - 0.5) * 3deg);
 	}
 
 	&[open] > summary {
 		background: var(--filled-bg);
 		color: var(--filled-fg);
 
-		--angle: calc((var(--random) - 50) * -0.05deg);
+		--angle: calc((var(--random) - 0.5) * -5deg);
 	}
 
-	> div {
+	&[open]::details-content {
 		width: 100%;
 	}
 }
