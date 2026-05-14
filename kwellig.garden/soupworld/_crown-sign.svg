@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+{% set apex = 100 %}
+{% set mid_ang = 2 / 3 %}
+{% set mid_length = 125 %}
+{% set ring_ang = 1 / 3 %}
+{% set ring_length = 140 %}
+{% set pinky_ang = 1 / 6 %}
+{% set pinky_length = 50 %}
+
+<svg
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns="http://www.w3.org/2000/svg"
+	viewBox="-100 {{ -apex - 5 }} 200 {{ apex + 10 }}"
+	fill="CanvasText"
+	stroke="CanvasText"
+	stroke-linecap="round"
+>
+
+	<line x1="-50" y1="0" x2="50" y2="0" />
+	<line x1="-50" y1="0" x2="0" y2="{{ -apex }}" />
+	<line x1="50" y1="0" x2="0" y2="{{ -apex }}" />
+
+	{% set base_angle = math.atan2(apex, 50) %}
+	<!-- base_angle={{ base_angle / math.pi * 180 }} -->
+
+	{% set ring_x = math.cos(base_angle * ring_ang) * ring_length - 50 %}
+	{% set ring_y = math.sin(base_angle * ring_ang) * ring_length %}
+	<line x1="-50" y1="0" x2="{{ ring_x }}" y2="{{ -ring_y }}" />
+	<line x1="50" y1="0" x2="{{ ring_x }}" y2="{{ -ring_y }}" />
+	<line x1="50" y1="0" x2="{{ -ring_x }}" y2="{{ -ring_y }}" />
+	<line x1="-50" y1="0" x2="{{ -ring_x }}" y2="{{ -ring_y }}" />
+
+	{% set mid_x = math.cos(base_angle * mid_ang) * mid_length - 50 %}
+	{% set mid_y = math.sin(base_angle * mid_ang) * mid_length %}
+	<line x1="-50" y1="0" x2="{{ mid_x }}" y2="{{ -mid_y }}" />
+	<line x1="50" y1="0" x2="{{ -mid_x }}" y2="{{ -mid_y }}" />
+
+	{% set pinky_x = math.cos(base_angle * pinky_ang) * pinky_length + 50 %}
+	{% set pinky_y = math.sin(base_angle * pinky_ang) * pinky_length %}
+	<line x1="50" y1="0" x2="{{ pinky_x }}" y2="{{ -pinky_y }}" />
+	<line x1="-50" y1="0" x2="{{ -pinky_x }}" y2="{{ -pinky_y }}" />
+
+</svg>
