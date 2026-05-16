@@ -19,7 +19,7 @@ The touch telepathy is a really interesting idea, and even better that it aligns
 It's really cool how it's such a torrent both ways if you're not prepared, and that you start with pure thoughts and have to build up towards more legible communication.
 I think the book is pretty good at covering many of the different kinds of situations you could have involving it.
 
-Kinda tangential to the review, but there's so many ways you could take this in a worldbuilding way.
+Kinda tangential to the review, but there's so many ways you could take this in a worldbuilding way!
 The way it lets you understand others at such an innate and precise level, if you wanted.
 There's also hivemind-esque stuff, where the barriers between who you are to yourself vs society are much more permeable -- topics of cohesion, individuality, personality bleed, isolation, and so on.
 From an implementation perspective, I came up with [sensing and emitting electricity](https://en.wikipedia.org/wiki/Electroreception_and_electrogenesis).
