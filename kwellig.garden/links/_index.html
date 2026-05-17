@@ -15,7 +15,7 @@ title: Links
 {% for post in site.collections.links | reverse %}
 	{% set post = recipe.build(post) %}
 
-	{% set post_year = post.props.date.year %}
+	{% set post_year = post.date.year %}
 	{% if loop.changed(post_year) and not loop.first %}
 		<div
 			class="fence-t"
@@ -28,22 +28,22 @@ title: Links
 
 	<details name="h-entry" class="h-entry">
 		<summary class="paper p-name">
-			{{ post.props.title }}
+			{{ post.title }}
 		</summary>
 
 		<dt>url</dt>
-		<dd><a class="u-bookmark-of" href="{{ post.props.url }}">{{ post.props.url }}</a></dd>
+		<dd><a class="u-bookmark-of" href="{{ post.url }}">{{ post.url }}</a></dd>
 
 		<dt>date added</dt>
 		<dd>
 			<a class="u-url" href="{{ post.url }}">
-				<time datetime="{{ post.props.date.strftime("%Y-%m-%d") }}" class="dt-published">
-					{{ post.props.date.strftime("%-d %b %Y") }}
+				<time datetime="{{ post.date.strftime("%Y-%m-%d") }}" class="dt-published">
+					{{ post.date.strftime("%-d %b %Y") }}
 				</time>
 			</a>
 		</dd>
 
-		{% set tags = parse_tags(post.props) %}
+		{% set tags = parse_tags(post) %}
 		{% if tags %}
 			<dt>tags</dt>
 			<dd>{% for tag in tags %}{{tag}} {% endfor %}</dd>

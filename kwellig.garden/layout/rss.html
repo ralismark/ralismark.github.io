@@ -6,21 +6,21 @@
 	<updated>{{ dt.datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ") }}</updated>
 	<author><name>Temmie</name></author>
 	<link rel="self" type="application/atom+xml" href="{{ site.url }}{{ page.url }}" />
-	{% if page.props.alternate %}
-		<link rel="alternate" type="text/html" href="{{ site.url }}/{{ page.props.alternate }}" />
+	{% if page.alternate %}
+		<link rel="alternate" type="text/html" href="{{ site.url }}/{{ page.alternate }}" />
 	{% endif %}
 	<subtitle>{{ site.description }}</subtitle>
-	{% if not site.collections[page.props.collection] %}{{ raise("props.collection not valid") }}{% endif %}
-	{% for post in site.collections[page.props.collection] %}
+	{% if not site.collections[page.collection] %}{{ raise("collection not valid") }}{% endif %}
+	{% for post in site.collections[page.collection] %}
 		{% set post = recipe.build(post) %}
 		<entry>
 			<id>{{ site.url }}{{ post.url }}</id>
-			<title>{{ post.props.title|e }}</title>
-			<updated>{{ post.props.date.strftime("%Y-%m-%dT%H:%M:%SZ") }}</updated>
+			<title>{{ post.title|e }}</title>
+			<updated>{{ post.date.strftime("%Y-%m-%dT%H:%M:%SZ") }}</updated>
 			<content type="html">{{ post.content|e }}</content>
 			<link rel="alternate" type="text/html" href="{{ post.url }}" />
-			<summary type="html">{{ post.props.excerpt|e }}</summary>
-			<published>{{ post.props.date.strftime("%Y-%m-%dT%H:%M:%SZ") }}</published>
+			<summary type="html">{{ post.excerpt|e }}</summary>
+			<published>{{ post.date.strftime("%Y-%m-%dT%H:%M:%SZ") }}</published>
 		</entry>
 	{% endfor %}
 </feed>

@@ -14,34 +14,34 @@ title: Media reviews
 	{# TODO make this work with macros.html/post_listing #}
 	{% for post in site.collections.media | reverse %}
 		{% set post = recipe.build(post.meta) %}
-		{% if separators and post.props.date and loop.changed(post.props.date.year) and not loop.first %}
+		{% if separators and post.date and loop.changed(post.date.year) and not loop.first %}
 			<div
 				role="separator"
 			>
-				{{ post.props.date.year }}
+				{{ post.date.year }}
 			</div>
 		{% endif %}
 
 		<a class="h-entry u-url" href="{{ post.url }}">
 			<h2
 				class="p-name"
-				{% if post.draft %}data-draft="{{ post.props.reason | default("no reason specified") | e }}"{% endif %}
+				{% if post.draft %}data-draft="{{ post.reason | default("no reason specified") | e }}"{% endif %}
 			>
-				{{ post.props.title | e }}
+				{{ post.title | e }}
 			</h2>
 
-			{% if post.props.date %}
-			<time class="dt-published" datetime="{{ post.props.date.strftime("%Y-%m-%d") }}">
-				{{ post.props.date.strftime("%e %b '%y") }}
+			{% if post.date %}
+			<time class="dt-published" datetime="{{ post.date.strftime("%Y-%m-%d") }}">
+				{{ post.date.strftime("%e %b '%y") }}
 			</time>
 			{% endif %}
 
 			<p>
-				By {{ post.props.author }}
+				By {{ post.author }}
 				&mdash;
-				Read {{ post.props.date.strftime("%-d %b %Y") }}
+				Read {{ post.date.strftime("%-d %b %Y") }}
 				&mdash;
-				{% for i in range(5) %}{% if i < post.props.rating %}🟡{% else %}⚫{% endif %}{% endfor %} {{ post.props.rating }}/5
+				{% for i in range(5) %}{% if i < post.rating %}🟡{% else %}⚫{% endif %}{% endfor %} {{ post.rating }}/5
 			</p>
 		</a>
 	{% endfor %}

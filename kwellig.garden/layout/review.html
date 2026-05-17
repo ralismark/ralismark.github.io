@@ -1,7 +1,7 @@
 {% extends "./default.html" %}
 
 {% block meta_description %}
-By {{ page.props.author }} &mdash; Read {{ page.props.date.strftime("%-d %b %Y") }} &mdash; {% for i in range(5) %}{% if i < page.props.rating %}🟡{% else %}⚫{% endif %}{% endfor %} {{ page.props.rating }}/5
+By {{ page.author }} &mdash; Read {{ page.date.strftime("%-d %b %Y") }} &mdash; {% for i in range(5) %}{% if i < page.rating %}🟡{% else %}⚫{% endif %}{% endfor %} {{ page.rating }}/5
 {% endblock %}
 
 {% block content %}
@@ -13,16 +13,16 @@ By {{ page.props.author }} &mdash; Read {{ page.props.date.strftime("%-d %b %Y")
 <header class="content-width">
 	<dl>
 		<dt>title</dt>
-		<dd class="p-name">{{ page.props.title }}</dd>
+		<dd class="p-name">{{ page.title }}</dd>
 
 		<dt>author</dt>
-		<dd>{{ page.props.author }}</dd>
+		<dd>{{ page.author }}</dd>
 
 		<dt>date finished</dt>
 		<dd>
 			<a class="u-url" href="{{ page.url }}">
-				<time datetime="{{ page.props.date.strftime("%Y-%m-%d") }}" class="dt-published">
-					{{ page.props.date.strftime("%-d %b %Y") }}
+				<time datetime="{{ page.date.strftime("%Y-%m-%d") }}" class="dt-published">
+					{{ page.date.strftime("%-d %b %Y") }}
 				</time>
 			</a>
 		</dd>
@@ -30,9 +30,9 @@ By {{ page.props.author }} &mdash; Read {{ page.props.date.strftime("%-d %b %Y")
 		<dt>rating</dt>
 		<dd>
 			{% for i in range(5) -%}
-			{% if i < page.props.rating %}🟡{% else %}⚫{% endif %}
+			{% if i < page.rating %}🟡{% else %}⚫{% endif %}
 			{%- endfor %}
-			{{ page.props.rating }}/5
+			{{ page.rating }}/5
 		</dd>
 	</dl>
 </header>

@@ -27,17 +27,26 @@ def main_file(ctx: core.BuildContext, path: Path) -> Path:
 
 @dataclasses.dataclass(frozen=True)
 class PageInout(core.Inout):
-    props: frozendict[str, t.Hashable]
+    preamble_props: frozendict[str, t.Hashable]
     recipe_props: frozendict[str, t.Hashable]
     content: t.Optional[str]
 
+    def get(self, name: str, default: t.Any = None) -> t.Any:
+        if name in self.recipe_props:
+            return self.recipe_props[name]
+        if name in self.preamble_props:
+            return self.preamble_props[name]
+        return default
+
     def __getitem__(self, name: str) -> t.Hashable:
-        return self.recipe_props[name]
+        if name in self.recipe_props:
+            return self.recipe_props[name]
+        return self.preamble_props[name]
 
 
 @dataclasses.dataclass(frozen=True)
 class PageMetaRecipe(core.InoutMixin[PageInout]):
-    props: frozendict[str, t.Hashable] = frozendict()
+    recipe_props: frozendict[str, t.Hashable] = frozendict()
 
     def build_impl(self, ctx: core.BuildContext) -> PageInout:
         path = main_file(ctx, self.path)
@@ -47,13 +56,13 @@ class PageMetaRecipe(core.InoutMixin[PageInout]):
         # 1. preamble
         preamble = util.Preamble.parse(content)
         content = preamble.content
-        props = preamble.preamble_or(dict())
+        preamble_props = preamble.preamble_or(dict())
 
         return PageInout(
             path=self.path,
             opath=self.opath,
-            props=t.cast(frozendict, util.freeze(props)),
-            recipe_props=self.props,
+            preamble_props=t.cast(frozendict, util.freeze(preamble_props)),
+            recipe_props=self.recipe_props,
             content=None,
         )
 
@@ -109,7 +118,7 @@ class PageRecipe(core.InoutMixin[PageInout]):
         return PageMetaRecipe(
             path=self.path,
             out=self.opath,
-            props=self.props,
+            recipe_props=self.props,
         )
 
     def extend_props(self, **kwargs: t.Hashable) -> t.Self:
@@ -127,17 +136,15 @@ class PageRecipe(core.InoutMixin[PageInout]):
         # 1. preamble
         preamble = util.Preamble.parse(content)
         content = preamble.content
-        props = preamble.preamble_or(dict())
 
-        # 2. jinja
+        # variables
+        vars = frozendict(dataclasses.asdict(super().inout()) | dict(self.props) | preamble.preamble_or({}))
         jinja_vars = frozendict(
             **self.props,
-            page=frozendict(
-                **dataclasses.asdict(super().inout()),
-                props=frozendict(props),
-            ),
+            page=vars,
         )
 
+        # 2. jinja
         content = ctx.build(
             JinjaStage(
                 content="\n" * preamble.line_offset + content,  # fix up line numbers
@@ -171,7 +178,7 @@ class PageRecipe(core.InoutMixin[PageInout]):
         pre_layout_content = content
 
         # 4. layout
-        layout = props.get("layout")
+        layout = vars.get("layout")
         if layout:
             if not isinstance(layout, str):
                 raise TypeError(f"expected str for layout prop but got {type(layout)}")
@@ -190,7 +197,7 @@ class PageRecipe(core.InoutMixin[PageInout]):
         return PageInout(
             path=self.path,
             opath=self.opath,
-            props=t.cast(frozendict, util.freeze(props)),
+            preamble_props=t.cast(frozendict, util.freeze(preamble.preamble_or({}))),
             recipe_props=self.props,
             content=pre_layout_content,
         )

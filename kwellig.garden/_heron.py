@@ -64,7 +64,7 @@ def make_collection(
     prev_next: bool = True,
 ) -> t.Generator[heron.Recipe, None, Collection]:
     def post_date(meta: heron.PageInout):
-        date = meta.props.get("date")
+        date = meta.get("date")
         if date is None:
             if require_date:
                 raise RuntimeError(f"{meta.path:} no date")
@@ -83,7 +83,7 @@ def make_collection(
     # do the filtering and ordering
     pairs: t.Iterable[tuple[heron.PageRecipe, heron.PageInout]]
     pairs = ((page.extend_props(draft=extract_draft(page.path)), ctx.build(page.meta)) for page in pages)
-    pairs = ((page, meta) for page, meta in pairs if site["drafts"] or not page.props["draft"])
+    pairs = ((page, meta) for page, meta in pairs if site["drafts"] or not page["draft"])
     pairs = sorted(pairs, key=lambda p: post_date(p[1]))
     pairs = (
         (
@@ -106,7 +106,7 @@ def make_collection(
 
     series: dict[str, list[heron.PageRecipe]] = dict()
     for page, meta in pairs:
-        s = meta.props.get("series")
+        s = meta.get("series")
         if not s:
             continue
         if not isinstance(s, str):
