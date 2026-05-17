@@ -27,10 +27,6 @@ body:not(.freestanding) {
 	@media print { display: none; }
 }
 
-.p-summary {
-	font-style: italic;
-}
-
 #site-nav {
 	@media print { display: none; }
 

@@ -1,9 +1,5 @@
 {% extends "./default.html" %}
 
-{% block meta_description %}
-By {{ page.author }} &mdash; Read {{ page.date.strftime("%-d %b %Y") }} &mdash; {% for i in range(5) %}{% if i < page.rating %}🟡{% else %}⚫{% endif %}{% endfor %} {{ page.rating }}/5
-{% endblock %}
-
 {% block content %}
 <article class="h-entry">
 

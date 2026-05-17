@@ -3,9 +3,20 @@
 - text: "learn makeup"
 - text: "3 picnics"
 - text: "B2"
+  target: 1
+  progress:
+    - at: 2026-02-10
 - text: "dye hair"
-- text: ":)"
-- text: "u.u"
+- text: "Leave the state!"
+  target: 1
+  progress:
+    - at: 2026-04-03
+      text: "Canberra! Thanks Alex!"
+- text: "See Jupiter's Moons"
+  target: 1
+  progress:
+    - at: 2026-04-11
+      text: "Thanks Chris and your telescope!"
 - text: ":>"
 - text: "run a oneshot"
 - text: "draw a blorbo"
@@ -17,8 +28,12 @@
 - text: "\\o/"
 - text: "??"
 - text: "go to Melbourne"
-- text: "leave the country"
+- text: "-"
 - text: "drunk!"
 - text: "deltarune"
 - text: "watch 7 movies"
+  target: 7
+  progress:
+    - at: 2026-04-01
+      text: "Project Hail Mary!"
 - text: "+3 Melbourne friends"

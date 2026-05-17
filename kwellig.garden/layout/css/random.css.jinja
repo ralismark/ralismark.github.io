@@ -1,13 +1,8 @@
-{% set limit = 100 %}
-{% set randomseq = [] %}
-{% for i in range(limit) %}
-	{% do randomseq.append(((limit / 0.618) * (i + 9)) % limit) %}
-{% endfor %}
-
-{%- for outer in range(10) -%}
-	{%- for inner in range(19) -%}
-		*:nth-child(10n + {{ outer }}) > *:nth-child(20n + {{ inner }}) {
-			--random: {{ randomseq[(17 * outer + inner) % limit] / limit }}
+{% set limit = 13 %}
+{%- for outer in range(limit) -%}
+	{%- for inner in range(limit) -%}
+		*:nth-child({{limit}}n+{{outer}}) > *:nth-child({{limit}}n+{{inner}}) {
+			--random: {{ "{:.3g}".format(0.619 * (outer + inner + 3) % 1) }}
 		}
 	{%- endfor -%}
 {%- endfor -%}

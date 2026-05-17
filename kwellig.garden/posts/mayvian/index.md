@@ -65,7 +65,7 @@ I may be _just_ a little obsessed.[^malleability]
 	Definitely started identifying with the Australian raven (the primary corvid in Sydney) a bit, basically the avian equivalent of a furry :p
 	{# https://discord.com/channels/1287402199097413712/1287402199097413715/1356397930772303962 #}
 
-	...but the incredibly euphoria of being carrried away by this obsession began to fade after two weeks.
+	...but the incredible euphoria of being carried away by this obsession began to fade after two weeks.
 	I was a bit sad for it to go, but a friend gave me some good advice:
 	{# https://discord.com/channels/692945454601601095/1070623310674673684/1361328615781957884 #}
 	"Simply make the conscious choice for birds to be your thing and then the obsession will return. It may be a quiet, calmer obsession, but it will be an obsession nonetheless."

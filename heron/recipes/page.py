@@ -31,6 +31,9 @@ class PageInout(core.Inout):
     recipe_props: frozendict[str, t.Hashable]
     content: t.Optional[str]
 
+    def __contains__(self, name: str) -> bool:
+        return name in self.recipe_props or name in self.preamble_props
+
     def get(self, name: str, default: t.Any = None) -> t.Any:
         if name in self.recipe_props:
             return self.recipe_props[name]
