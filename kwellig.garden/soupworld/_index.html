@@ -16,7 +16,7 @@ excerpt: "Temmie's Worldbuilding Art Project"
 </p>
 
 <section class="h-feed">
-	{% import "../layout/macros.html" as macros %}
+	{% import "../layout/macros.html" as macros with context %}
 	{{ macros.post_listing(site.collections.soupworld) }}
 </section>
 

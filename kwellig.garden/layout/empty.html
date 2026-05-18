@@ -5,7 +5,6 @@
 		<title>{% if page.title %}{{ page.title | striptags }} - {% endif %}{{ site.title }}</title>
 		<meta name="description" content="{{ page.excerpt | default(site.description) | e }}">
 		<link rel="canonical" href="{{ site.url }}{{ page.url }}">
-		<link type="application/atom+xml" rel="alternate" href="/feed.xml" />
 
 		{% if page.noindex %}<meta name="robots" content="noindex">{% endif %}
 

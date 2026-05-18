@@ -14,7 +14,41 @@
 	</nav>
 {%- endmacro -%}
 
+{%- macro rss(out, posts) -%}
+{% set rss_content %}
+{% endset %}
+{%- endmacro -%}
+
 {%- macro post_listing(posts, separators=True) -%}
+	{% set rss_out = "/" + (page.opath | string | re.sub("(index)?\\.html$", ".rss")) %}
+	{% set rss_content -%}
+<?xml version="1.0" encoding="utf-8"?>
+{# https://validator.w3.org/feed/docs/atom.html #}
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<id>{{ site.url }}{{ rss_out }}</id>
+	<title>{{ page.title }} - {{ site.title }}</title>
+	<updated>{{ dt.datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ") }}</updated>
+	<author><name>Temmie</name></author>
+	<link rel="self" type="application/atom+xml" href="{{ site.url }}{{ rss_out }}" />
+	<link rel="alternate" type="text/html" href="{{ site.url }}{{ page.url }}" />
+	<subtitle>{{ site.description }}</subtitle>
+	{% for post in posts %}
+		{% set post = recipe.build(post) %}
+		<entry>
+			<id>{{ site.url }}{{ post.url }}</id>
+			<title>{{ post.title|e }}</title>
+			<updated>{{ post['date'].strftime("%Y-%m-%dT%H:%M:%SZ") }}</updated>
+			<content type="html">{{ post.content|e }}</content>
+			<link rel="alternate" type="text/html" href="{{ post.url }}" />
+			<summary type="html">{{ post.excerpt|e }}</summary>
+			<published>{{ post['date'].strftime("%Y-%m-%dT%H:%M:%SZ") }}</published>
+		</entry>
+	{% endfor %}
+</feed>
+	{%- endset %}
+	{% set rss = recipe.write(rss_out, rss_content) %}
+	<link rel="alternate" type="application/atom+xml" href="{{ rss }}">
+
 	{% for post in posts | reverse %}
 		{% set post = recipe.build(post.meta) %}
 		{% if separators and post.date and loop.changed(post.date.year) and not loop.first %}
@@ -47,10 +81,13 @@
 		</a>
 	{% endfor %}
 
+	<a class="rss" href="{{ rss }}">
+		As an rss feed
+	</a>
+
 	<style>
 	.h-feed {
 		margin-top: 2em;
-		margin-bottom: 4em;
 
 		> a.h-entry {
 			color: inherit;
@@ -113,6 +150,13 @@
 				width: var(--content-width);
 				right: 0;
 			}
+		}
+
+		> .rss {
+			display: block;
+			margin-top: 4em;
+			font-style: italic;
+			text-align: center;
 		}
 	}
 	</style>

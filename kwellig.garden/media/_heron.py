@@ -45,7 +45,6 @@ def main(
             for path in ctx.input(here).iterdir()
             if not path.stem.startswith("_")
         ),
-        require_date=False,
     )
 
     return interactives

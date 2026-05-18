@@ -14,15 +14,9 @@ title: Blog
 	As a fun statistic, there's <strong>{{ site.collections.posts | length }} posts</strong>, totalling <strong>{{ ns.wc }} words</strong>!
 </p>
 
-<nav style="text-align: center">
-	{# <a class="paper" href="{{ recipe.page("./tags.html", "/tags.html") }}">tags</a> #}
-	<a class="paper" href="{{ recipe.page("./feed.xml", "/feed.xml") }}">rss feed</a>
-	<a class="paper" href="{{ recipe.page("./everything.html", "/everything.html") }}">cat *</a>
-</nav>
-
 <hr class="lit">
 
 <section class="h-feed content-width">
-{% import "layout/macros.html" as macros %}
+{% import "layout/macros.html" as macros with context %}
 {{ macros.post_listing(site.collections.posts) }}
 </section>

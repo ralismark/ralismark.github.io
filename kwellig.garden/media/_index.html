@@ -11,6 +11,6 @@ title: Media reviews
 <hr class="lit">
 
 <section class="h-feed content-width">
-	{% import "layout/macros.html" as macros %}
+	{% import "layout/macros.html" as macros with context %}
 	{{ macros.post_listing(site.collections.media) }}
 </section>

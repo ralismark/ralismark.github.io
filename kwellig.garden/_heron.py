@@ -129,6 +129,7 @@ def inner_main(ctx: heron.core.BuildContext):
         (
             heron.PageRecipe(path, f"/posts/{path.stem}.html", jenv)
             for path in ctx.input(here / "posts").iterdir()
+            if path.stem != "_index"
         ),
     )
 
@@ -137,6 +138,7 @@ def inner_main(ctx: heron.core.BuildContext):
         (
             heron.PageRecipe(path, f"/interactives/{path.stem}.html", jenv)
             for path in ctx.input(here / "interactives").iterdir()
+            if path.stem != "_index"
         ),
     )
 
@@ -171,11 +173,12 @@ def inner_main(ctx: heron.core.BuildContext):
 
     # root pages
 
+    yield heron.PageRecipe(here / "posts/_index.html", "/posts/index.html", jenv)
+    yield heron.PageRecipe(here / "interactives/_index.html", "/interactives/index.html", jenv)
+
     for root_page_glob in ["*.html", "*.md", "*.d"]:
         for path in ctx.input(here).glob(root_page_glob):
             yield heron.PageRecipe(path, f"/{path.stem}.html", jenv)
-
-    # extra stuff
 
     yield heron.CopyRecipe("/favicon.ico", here / "favicon.ico")
     yield heron.CopyRecipe("/robots.txt", here / "robots.txt")
