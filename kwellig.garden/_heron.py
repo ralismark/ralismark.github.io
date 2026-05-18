@@ -83,7 +83,7 @@ def make_collection(
     # do the filtering and ordering
     pairs: t.Iterable[tuple[heron.PageRecipe, heron.PageInout]]
     pairs = ((page.extend_props(draft=extract_draft(page.path)), ctx.build(page.meta)) for page in pages)
-    pairs = ((page, meta) for page, meta in pairs if site["drafts"] or not page["draft"])
+    pairs = ((page, meta) for page, meta in pairs if site["drafts"] or not meta.get("draft"))
     pairs = sorted(pairs, key=lambda p: post_date(p[1]))
     pairs = (
         (
@@ -160,16 +160,15 @@ def inner_main(ctx: heron.core.BuildContext):
 
     media: Collection = yield from load("media/_heron.py")(ctx, make_collection, jenv)
 
-    site["collections"] = heron.util.Impurity(
-        lambda: {
-            "posts": posts,
-            "interactives": interactives,
-            "garden": garden,
-            "soupworld": soupworld,
-            "links": links,
-            "media": media,
-        }
-    )
+    collections = {
+        "posts": posts,
+        "interactives": interactives,
+        "garden": garden,
+        "soupworld": soupworld,
+        "links": links,
+        "media": media,
+    }
+    site["collections"] = heron.util.Impurity(lambda: collections)
 
     # root pages
 

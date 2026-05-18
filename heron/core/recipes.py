@@ -203,7 +203,7 @@ class Inout:
 
 
 @dataclasses.dataclass(frozen=True)
-class InoutMixin[T: Inout](Recipe[Inout], OutputMixin, InputMixin):
+class InoutMixin[T: Inout](Recipe[T], OutputMixin, InputMixin):
     """
     Base for recipes that produce a single output file from a single input
     file.
