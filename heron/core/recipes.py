@@ -25,12 +25,10 @@ __all__ = [
     "permalink",
     "Inout",
     "InoutMixin",
-    "NullRecipe",
-    "null_recipe",
+    "ConstRecipe",
     "LoadRecipe",
     "FnRecipe",
     "ReadRecipe",
-    "WriteRecipe",
     "ReaddirRecipe",
     "CopyRecipe",
 ]
@@ -216,17 +214,15 @@ class InoutMixin[T: Inout](Recipe[T], OutputMixin, InputMixin):
 # -----------------------------------------------------------------------------
 
 
-@recipe()
-def NullRecipe(ctx: BuildContext) -> None:
+@dataclasses.dataclass(frozen=True)
+class ConstRecipe[T: t.Hashable]:
     """
-    Recipe that does nothing.
-
-    Useful for examples/etc.
+    Return a constant value
     """
-    return None
+    value: T
 
-
-null_recipe = NullRecipe()
+    def build_impl(self, ctx: BuildContext) -> T:
+        return self.value
 
 
 @recipe()
@@ -260,16 +256,6 @@ def FnRecipe[R](ctx: BuildContext, fn: Callable[[BuildContext], R]) -> R:
 def ReadRecipe(ctx: BuildContext, path: Path, binary: bool = False) -> str:
     with ctx.input(path).open("rb" if binary else "rt") as f:
         return f.read()
-
-
-@recipe()
-def WriteRecipe(ctx: BuildContext, out: Pathish, content: str | bytes) -> str:
-    opath = canonicalise_opath(out)
-
-    mode = "wb" if isinstance(content, bytes) else "wt"
-    with ctx.output(opath).open(mode) as f:
-        f.write(content)
-    return permalink(opath)
 
 
 @recipe()

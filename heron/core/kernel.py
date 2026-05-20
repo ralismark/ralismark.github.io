@@ -80,7 +80,7 @@ class Manifest[R]:
 
         data: t.Any = dataclasses.field(compare=False)
 
-    Entry: t.ClassVar = t.Union[Input, Output, SubRecipe, Trace]
+    Entry: t.ClassVar[t.TypeAlias] = t.Union[Input, Output, SubRecipe, Trace]
 
     # the actual dataclass content
 

@@ -1,20 +1,31 @@
 import typing as t
 from frozendict import frozendict
 
+__all__ = [
+    "setitem",
+    "d_then",
+    "Freezable",
+    "freeze",
+    "Impurity",
+]
+
+
 _T = t.TypeVar("_T")
 _F = t.TypeVar("_F")
 
 
-def setitem(d: dict[_T, _F], key: _T) -> t.Callable[[_F], _F]:
+def setitem[K, V](d: dict[K, V], key: K) -> t.Callable[[V], V]:
     """
     Decorator for setting an item in a dict.
     """
-
-    def decorate(fn: _F) -> _F:
-        d[key] = fn
-        return fn
-
+    def decorate(v: V) -> V:
+        d[key] = v
+        return v
     return decorate
+
+
+def d_then[I, R, **P](g: t.Callable[[I], R]) -> t.Callable[[t.Callable[P, I]], t.Callable[P, R]]:
+    return lambda f: lambda *args, **kwargs: g(f(*args, **kwargs))
 
 
 def one(x: t.Iterable[_T]) -> _T:

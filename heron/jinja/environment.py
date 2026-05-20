@@ -157,6 +157,7 @@ base_env = Environment(
 base_env.filters["recipe.build"] = lambda r: core.current_ctx().build(r)
 base_env.filters["repr"] = repr
 base_env.filters["zip"] = zip
+base_env.filters |= core.STEP_FILTERS
 base_env.globals["dt"] = dt
 base_env.globals["math"] = math
 base_env.tests["recipe"] = lambda v: isinstance(v, core.Recipe)

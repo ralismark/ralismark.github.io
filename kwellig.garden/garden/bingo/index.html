@@ -35,7 +35,7 @@ Z
 
 </svg>
 {% endset %}
-{% set star_svg = recipe.write("/assets/star.svg", star_svg) %}
+{% set star_svg = star_svg | step.write("/assets/star.svg") %}
 
 {% set data = {
 	"2025": recipe.read("2025.yaml") | parse_yaml,

@@ -25,8 +25,8 @@ title: "Test: Webmention"
 		#}
 		{% set wm = recipe.read(inp)
 			| replace("http://example.com/webmention/target/placeholder", target)
+			| step.write(page.url + "/" + inp.name)
 		%}
-		{% set wm = recipe.write(page.url + "/" + inp.name, wm) %}
 		<dd><a class="js-testpage" href="{{ wm }}">{{ wm }}</a></dd>
 	{% endfor %}
 
