@@ -67,9 +67,7 @@ Where are the fantastical astronomical phenomenon?
 
 Soupworld is my own, and so I will drip sci-fi into this fantasy world as I please.
 
-<br>
-<br>
-<br>
+<hr class="hr--fish">
 
 # Appendix: How green?
 

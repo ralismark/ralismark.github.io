@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The Fable of the Quetzal
+title: The Quetzal
 date: 2025-04-22
 ---
 
@@ -62,117 +62,121 @@ date: 2025-04-22
 	And a few mammals too, mottled with a different hue.
 	_And finally this brilliant green bird soared, colouring the sky at dusk anew!_
 
-.. details:: Scrap Basket
+<hr class="hr--fish">
 
-	.. details:: Original narrative draft
+# Author's Notes
 
-		In a faraway forest, there was a Quetzal that lived with his many bright feathered friends.
+Here is my waste paper basket.
 
-		One day, Quetzal had to go to the plains for (something).
-		He flew for one whole day and one whole night, passing rivers and mountains, before he found the plains, where he was greeted by Hare, Rabbit, and Weasel.
-		These would be his new friends while he was here over summer.
+.. details:: Original narrative draft
 
-		The plains are a land of earthy colours, of browns and faded greens, and Quetzal, with his brilliant greens and reds, stood out no matter everywhere he went.
-		Even when with Hare, Rabbit, and Weasel, he would get looks of surprise and wonder from passerbys.
-		Some would even come up to ask him about his homelands!
+	In a faraway forest, there was a Quetzal that lived with his many bright feathered friends.
 
-		But Quetzal was a quiet fellow, and did not like the questions.
-		So he began to hide his feathers under a big grey coat.
-		It made him not able to fly, but that was something he was willing to sacrifice for a bit of peace.
+	One day, Quetzal had to go to the plains for (something).
+	He flew for one whole day and one whole night, passing rivers and mountains, before he found the plains, where he was greeted by Hare, Rabbit, and Weasel.
+	These would be his new friends while he was here over summer.
 
-		(unfinished)
+	The plains are a land of earthy colours, of browns and faded greens, and Quetzal, with his brilliant greens and reds, stood out no matter everywhere he went.
+	Even when with Hare, Rabbit, and Weasel, he would get looks of surprise and wonder from passerbys.
+	Some would even come up to ask him about his homelands!
 
-	.. details:: Draft 0 (Free verse to get the plot ironed out)
+	But Quetzal was a quiet fellow, and did not like the questions.
+	So he began to hide his feathers under a big grey coat.
+	It made him not able to fly, but that was something he was willing to sacrifice for a bit of peace.
 
-		.. poem::
+	(unfinished)
 
-			In a faraway land was a brilliant green bird -- the Quetzal.
-			He lived with his colourful feathered friends up in the trees,
-			and when it rains, together they sang a colourful melody.
-			And each one's tune would paint the sky and flowers.
+.. details:: Draft 0 (Free verse to get the plot ironed out)
 
-			But one day, the plains called for him, and Quetzal had to go.
-			Flying a day and a night, over mountains and rivers,
-			until he found the plains and was greeted by a hare and a weasel.
-			These would be his friends for the season.
+	.. poem::
 
-			You see, the plains are a land of earthy shades, of browns and faded yellows.
-			Not a land of red and brilliant greens.
-			Quetzal was all alone, with no one who knew his tune.
-			His song was not a solo one, but there was no band to accompany him.
-			Only the rhythm of hoofs and paws.
+		In a faraway land was a brilliant green bird -- the Quetzal.
+		He lived with his colourful feathered friends up in the trees,
+		and when it rains, together they sang a colourful melody.
+		And each one's tune would paint the sky and flowers.
 
-			And so he sung along, no more playful chirps.
-			Instead replaced by longer tones, a rumble, a growl.
-			And that's if he even made a sound at all.
+		But one day, the plains called for him, and Quetzal had to go.
+		Flying a day and a night, over mountains and rivers,
+		until he found the plains and was greeted by a hare and a weasel.
+		These would be his friends for the season.
 
-			And as he lost his song, he lost his colours.
-			Brilliant shades fading to drab and dry.
-			The mammals of the plain saw him as one of their own.
-			And with it, he gained a sickness -- his feathers crinkled and bent.
-			And debated whether to keep him aloft.
+		You see, the plains are a land of earthy shades, of browns and faded yellows.
+		Not a land of red and brilliant greens.
+		Quetzal was all alone, with no one who knew his tune.
+		His song was not a solo one, but there was no band to accompany him.
+		Only the rhythm of hoofs and paws.
 
-			But one day, his colourful friends came to say hi.
-			Bringing their melody that Quetzal hadn't heard in a while.
-			He needed a while to remember the tune,
-			but when he did his colours returned.
-			And when they did his feathers remembered their role
-			And that brilliant green bird could colour the sky once more.
+		And so he sung along, no more playful chirps.
+		Instead replaced by longer tones, a rumble, a growl.
+		And that's if he even made a sound at all.
 
-	.. details:: Draft 1
+		And as he lost his song, he lost his colours.
+		Brilliant shades fading to drab and dry.
+		The mammals of the plain saw him as one of their own.
+		And with it, he gained a sickness -- his feathers crinkled and bent.
+		And debated whether to keep him aloft.
 
-		.. poem::
+		But one day, his colourful friends came to say hi.
+		Bringing their melody that Quetzal hadn't heard in a while.
+		He needed a while to remember the tune,
+		but when he did his colours returned.
+		And when they did his feathers remembered their role
+		And that brilliant green bird could colour the sky once more.
 
-			In a faraway forest, among rainbow flowers and emerald trees,
-			there was a brilliant green bird -- Quetzal was he!
-			He'd fly with his feathered friends across the sky, singing out their melody,
-			and in their wake would be a chorus of chords, ringing out in harmony.
-			And when the sun took its leave, and when the clouds poured down, they'd bring out their tune
-			that would paint the flowers and the sky all colours from violet to maroon.
+.. details:: Draft 1
 
-			But one day the plains called for him, and so the Quetzal had to go.
-			Flying a day and a night, over mountains and their snow.
-			Following rivers and valleys, crossing the sky all alone
-			until he was so, so, so far from home.
+	.. poem::
 
-			And he reaches the plain, this flat sea of shrubs and grass,
-			and the grounded mammals he's with until this season would pass.
-			So different from his home of blues and red, in which colour pervades,
-			this is the land of browns and greys. Earthy shades.
+		In a faraway forest, among rainbow flowers and emerald trees,
+		there was a brilliant green bird -- Quetzal was he!
+		He'd fly with his feathered friends across the sky, singing out their melody,
+		and in their wake would be a chorus of chords, ringing out in harmony.
+		And when the sun took its leave, and when the clouds poured down, they'd bring out their tune
+		that would paint the flowers and the sky all colours from violet to maroon.
 
-			And like how his brilliant colours didn't belong,
-			with no one else who knew it, neither did his song.
-			No harmony to be found, no tunes around.
-			Only a steady rhythm of hoofs against the ground.
+		But one day the plains called for him, and so the Quetzal had to go.
+		Flying a day and a night, over mountains and their snow.
+		Following rivers and valleys, crossing the sky all alone
+		until he was so, so, so far from home.
 
-			And so he sung along -- for him, what choice was there?
-			And that's if he would even dare.
-			Why would he sing his tune if no one would listen or care?
-			If no one wanted what he wanted to share?
+		And he reaches the plain, this flat sea of shrubs and grass,
+		and the grounded mammals he's with until this season would pass.
+		So different from his home of blues and red, in which colour pervades,
+		this is the land of browns and greys. Earthy shades.
 
-			And as he lost his song, he lost his colour.
-			A brilliant coat, fading, now duller.
-			Washed out and bleached. Muddier. Greyer.
-			........................
+		And like how his brilliant colours didn't belong,
+		with no one else who knew it, neither did his song.
+		No harmony to be found, no tunes around.
+		Only a steady rhythm of hoofs against the ground.
 
-			With his feathered friends of every colour, he'd fly
-			And sing a melody, ............ they'd dye
+		And so he sung along -- for him, what choice was there?
+		And that's if he would even dare.
+		Why would he sing his tune if no one would listen or care?
+		If no one wanted what he wanted to share?
 
-			...
+		And as he lost his song, he lost his colour.
+		A brilliant coat, fading, now duller.
+		Washed out and bleached. Muddier. Greyer.
+		........................
 
-			But one day the plain called for him, and Quetzal had to go.
-			He flew a day and a night, over mountains and their snow.
-			Following rivers and crossing biomes,
-			until he was so far from home.
+		With his feathered friends of every colour, he'd fly
+		And sing a melody, ............ they'd dye
 
-			He finds the plains, flat sea of shrubs and grass,
-			and the grounded mammals, his friends until the season would pass.
-			So different from that world of reds and yellows,
-			this is a land of faded browns and greens, earthy shades -- much more mellow.
+		...
 
-			His song he had sang, in the plains it wasn't known.
-			With no more chorus, the chords became a single tone.
-			And no one heard -- among the sounds of the plain it drowned
-			leaving only a steady rhythm of hoofs and paws against the ground.
+		But one day the plain called for him, and Quetzal had to go.
+		He flew a day and a night, over mountains and their snow.
+		Following rivers and crossing biomes,
+		until he was so far from home.
 
-			:)
+		He finds the plains, flat sea of shrubs and grass,
+		and the grounded mammals, his friends until the season would pass.
+		So different from that world of reds and yellows,
+		this is a land of faded browns and greens, earthy shades -- much more mellow.
+
+		His song he had sang, in the plains it wasn't known.
+		With no more chorus, the chords became a single tone.
+		And no one heard -- among the sounds of the plain it drowned
+		leaving only a steady rhythm of hoofs and paws against the ground.
+
+:)

@@ -18,7 +18,9 @@ But we have a strength now, a hope in our hearts...
 
 Spring has come at last!
 
----
+<hr class="hr--fish">
+
+# Author's Notes
 
 This is a bit of new lore I want to put into Soupworld!
 Making it a world of larger-than-life powers that you need to respect, but at a turning point in the world, where the pockets of civilisation that have endured that for centuries can now start to blossom again and reconnect.

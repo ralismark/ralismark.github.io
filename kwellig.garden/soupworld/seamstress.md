@@ -25,21 +25,23 @@ So as one final act, She fragmented Her title into the stars of the night and pa
 A canvas for the world to span with constellations so that, just as She once did with the world, the world could draw upon Her image.
 And monument to what She gave the world -- the freedom, hope, and agency to rewrite their own narratives!
 
-.. details:: Author's Notes
+<hr class="hr--fish">
 
-	One day, I was visited by a bout of anxiety at midnight.
-	So, in an attempt to stave it off, I turned my churning thoughts towards Soupworld, and weaved up this tale of the stars.
+# Author's Notes
 
-	The stars are a very significant and _innate_ part of the world.
-	They are an explicitly magical source of power, able to bend the wills of the world.
-	Towards this, they also symbolise the vastness of possibility, hope, and, tangentially, guidance.
+One day, I was visited by a bout of anxiety at midnight.
+So, in an attempt to stave it off, I turned my churning thoughts towards Soupworld, and weaved up this tale of the stars.
 
-	The constellations, meanwhile, are purely in the minds of the people.
-	They are not universal.
-	Different folks memorialise different ideas through constellations.
+The stars are a very significant and _innate_ part of the world.
+They are an explicitly magical source of power, able to bend the wills of the world.
+Towards this, they also symbolise the vastness of possibility, hope, and, tangentially, guidance.
 
-	Also mentioned herein is the "Songs of Creation".
-	There is no lore behind it as of yet, but it's a hook into future work!
+The constellations, meanwhile, are purely in the minds of the people.
+They are not universal.
+Different folks memorialise different ideas through constellations.
 
-	I was very sad I couldn't slip a "dis-aster" pun into this.
-	However, I did manage "draw upon Her image", with the double meaning of both coming up with constellations and wielding Her magic.
+Also mentioned herein is the "Songs of Creation".
+There is no lore behind it as of yet, but it's a hook into future work!
+
+I was very sad I couldn't slip a "dis-aster" pun into this.
+However, I did manage "draw upon Her image", with the double meaning of both coming up with constellations and wielding Her magic.

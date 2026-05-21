@@ -14,7 +14,7 @@ import heron
 here = Path(__file__).parent
 
 site = {
-    "drafts": os.getenv("HERON_ENV") == "development",
+    "drafts": False,
     "url": "https://kwellig.garden",
     "fqdn": "kwellig.garden",
     "title": "Kwellig's Garden",
@@ -83,7 +83,7 @@ def make_collection(
     # do the filtering and ordering
     pairs: t.Iterable[tuple[heron.PageRecipe, heron.PageInout]]
     pairs = ((page.extend_props(draft=extract_draft(page.path)), ctx.build(page.meta)) for page in pages)
-    pairs = ((page, meta) for page, meta in pairs if site["drafts"] or not meta.get("draft"))
+    pairs = ((page, meta) for page, meta in pairs if not page.path.name.startswith("DRAFT-") or site["drafts"])
     pairs = sorted(pairs, key=lambda p: post_date(p[1]))
     pairs = (
         (

@@ -1,7 +1,7 @@
 ---
 layout: link
 title: Suricrasia Online
-url: https://suricrasia.online/
+href: https://suricrasia.online/
 date: 2025-06-11
 tags: blogroll fiction
 ---

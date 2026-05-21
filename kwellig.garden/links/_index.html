@@ -9,7 +9,7 @@ title: Links
 	I collect here links to a bunch of places on the internet that I find pretty cool!
 </p>
 
-<hr class="lit">
+<hr class="hr--lit">
 
 <section class="content-width h-feed">
 {% for post in site.collections.links | reverse %}
@@ -18,8 +18,14 @@ title: Links
 	{% set post_year = post.date.year %}
 	{% if loop.changed(post_year) and not loop.first %}
 		<div
-			class="fence-t"
-			style="text-align: right; font-size: 1.2em; color: grey; width: 100%; margin-top: 1em"
+			style="
+				text-align: right;
+				font-size: 1.2em;
+				color: grey;
+				width: 100%;
+				margin: 1em 0;
+				border-bottom: 1px solid var(--stroke);
+			"
 			role="separator"
 		>
 			{{ post_year }}
@@ -32,7 +38,7 @@ title: Links
 		</summary>
 
 		<dt>url</dt>
-		<dd><a class="u-bookmark-of" href="{{ post.url }}">{{ post.url }}</a></dd>
+		<dd><a class="u-bookmark-of" href="{{ post.href }}">{{ post.href }}</a></dd>
 
 		<dt>date added</dt>
 		<dd>
@@ -54,7 +60,7 @@ title: Links
 		</section>
 	</details>
 {% endfor %}
-</main>
+</section>
 
 <style>
 .h-feed {
