@@ -181,10 +181,13 @@ def inner_main(ctx: heron.core.BuildContext):
 
     yield heron.CopyRecipe("/favicon.ico", here / "favicon.ico")
     yield heron.CopyRecipe("/robots.txt", here / "robots.txt")
-    yield heron.SassRecipe(
-        here / "layout/css/main-foundation.scss",
-        "/assets/foundation.css",
-        include_paths=(str(here / "layout/css"),),
+    yield (
+        heron.SassRecipe(
+            here / "layout/css/main-foundation.scss",
+            include_paths=(str(here / "layout/css"),),
+        )
+        | heron.WriteStep("/assets/foundation.css")
+
     )
     yield load("../worker/_heron.py")
 

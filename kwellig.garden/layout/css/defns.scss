@@ -58,4 +58,3 @@ html {
 	&[data-color-scheme="light"] { @include light; }
 	&[data-color-scheme="dark"] { @include dark; }
 }
-

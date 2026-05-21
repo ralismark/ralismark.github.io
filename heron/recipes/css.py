@@ -4,15 +4,15 @@ from pathlib import Path, PurePosixPath
 
 import sass
 
-from .. import core, recipe
+from .. import core
 from ..jinja.registry import jinja_recipe_builder
 
 
 @dataclasses.dataclass(frozen=True)
-class SassRecipe(core.InoutMixin):
+class SassRecipe(core.Recipe[str], core.InputMixin):
     include_paths: tuple[str, ...] = tuple()
 
-    def build_impl(self, ctx: core.BuildContext) -> core.Inout:
+    def build_impl(self, ctx: core.BuildContext) -> str:
         # TODO there is an impurity with importing here, since adding a file
         # could change what was imported
 
@@ -25,15 +25,12 @@ class SassRecipe(core.InoutMixin):
             include_paths=self.include_paths,
             importers=[(0, handle_import)],
         )
-        with ctx.output(self.opath).open("w") as f:
-            f.write(content)
-        return self.inout()
+        return content
 
     @jinja_recipe_builder("sass")
     @staticmethod
     def jinja(
         path: str | PurePosixPath,
-        out: str,
         include: str | PurePosixPath | t.Sequence[str | PurePosixPath] = tuple(),
         *,
         __file__: Path,
@@ -44,6 +41,5 @@ class SassRecipe(core.InoutMixin):
 
         return SassRecipe(
             path=__file__.parent / path,
-            out=out,
             include_paths=include,
         )

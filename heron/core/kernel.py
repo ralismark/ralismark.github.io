@@ -2,6 +2,7 @@
 Basic types that everything else is built on.
 """
 
+import abc
 import contextvars
 import dataclasses
 import time
@@ -19,8 +20,7 @@ __all__ = [
 ]
 
 
-@t.runtime_checkable
-class Recipe[R](t.Protocol):
+class Recipe[R](abc.ABC):
     """
     Recipe represents a single build task.
 
@@ -29,6 +29,7 @@ class Recipe[R](t.Protocol):
     This fact is used by the builder to deduplicate recipes.
     """
 
+    @abc.abstractmethod
     def build_impl(self, ctx: "BuildContext") -> R:
         """
         Perform the build step.
@@ -36,7 +37,8 @@ class Recipe[R](t.Protocol):
         The behaviour of this MUST only depend on member variables and the
         outputs of various methods of `ctx`.
         """
-        raise NotImplementedError()
+
+    # TODO enforce hashable
 
 
 @dataclasses.dataclass(frozen=True)

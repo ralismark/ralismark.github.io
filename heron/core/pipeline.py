@@ -2,6 +2,7 @@
 Compose stages together into a pipeline
 """
 
+import abc
 import typing as t
 import dataclasses
 
@@ -9,21 +10,24 @@ from .kernel import BuildContext, Recipe, current_ctx
 from .recipes import permalink, OutputMixin, ConstRecipe
 
 __all__ = [
-    "StepFn",
     "Step",
     "Pipeline",
+    "PipelineContext",
     "WriteStep",
     "jinja_filter_from_final_step",
     "STEP_FILTERS",
 ]
 
 
-type StepFn[I, O] = t.Callable[[BuildContext, "Pipeline", I], O]
-
-
-@dataclasses.dataclass(frozen=True)
-class Step[I, O]:
-    fn: StepFn[I, O]
+class Step[I, O](abc.ABC):
+    @abc.abstractmethod
+    def __call__(
+        self,
+        ctx: BuildContext,
+        pctx: "PipelineContext",
+        inp: I,
+    ) -> O:
+        ...
 
     def __ror__(self, left: Recipe[I] | "Pipeline[I]") -> "Pipeline[O]":
         if isinstance(left, Pipeline):
@@ -52,28 +56,33 @@ class Pipeline[T](Recipe[T]):
         return dataclasses.replace(self, stages=(*self.stages, stage))
 
     def build_impl(self, ctx: BuildContext) -> t.Any:
-        # TODO call build_impl directly to avoid caching intermediate value?
         content = self.source.build_impl(ctx)
+        pctx = PipelineContext(pipeline=self)
         for stage in self.stages:
-            content = stage.fn(ctx, self, content)
+            content = stage(ctx, pctx, content)
         return content
 
 
+@dataclasses.dataclass
+class PipelineContext:
+    pipeline: Pipeline
+
+
 @dataclasses.dataclass(frozen=True)
-class WriteStep(OutputMixin):
+class WriteStep(Step[str | bytes, str], OutputMixin):
     def __call__(
         self,
         ctx: BuildContext,
-        pipeline: Pipeline,
+        pctx: PipelineContext,
         content: str | bytes,
     ) -> str:
         mode = "wb" if isinstance(content, bytes) else "wt"
         with ctx.output(self.opath).open(mode) as f:
-            f.write(mode)
+            f.write(content)
         return permalink(self.opath)
 
 
-def jinja_filter_from_final_step[I, R, **P](step: t.Callable[P, StepFn[I, R]]) -> t.Any:
+def jinja_filter_from_final_step[I, R, **P](step: t.Callable[P, Step[I, R]]) -> t.Any:
     """
     Create a Jinja filter from a step that finalises the pipeline.
     """
@@ -83,7 +92,7 @@ def jinja_filter_from_final_step[I, R, **P](step: t.Callable[P, StepFn[I, R]]) -
             prev = ConstRecipe(prev)
         if not isinstance(prev, Pipeline):
             prev = Pipeline(prev)
-        return current_ctx().build(prev.extend(Step(step(*args, **kwargs))))
+        return current_ctx().build(prev.extend(step(*args, **kwargs)))
     return filter
 
 

@@ -143,7 +143,7 @@ class GenerationalDriver(DriverWrapper):
             self.cache.pop(recipe, None)
 
             if recipe in self.gen_cached:
-                warnings.warn(f"duplicate output: {opath}", RuntimeWarning, 3)
+                raise RuntimeError(f"duplicate output {opath}: {recipe}")
                 self.gen_cached.discard(recipe)
 
         return path

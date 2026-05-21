@@ -15,3 +15,6 @@ from .graph import (
 from .posse import (
     GitHubIssueRecipe,
 )
+from .fetch import (
+    FetchRecipe,
+)

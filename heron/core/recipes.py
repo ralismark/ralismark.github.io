@@ -3,11 +3,11 @@ Basic recipe and helpers for making recipes.
 """
 
 import dataclasses
+import collections
 import inspect
 import os
 import shutil
 import typing as t
-from collections.abc import Callable
 from pathlib import Path, PurePosixPath
 
 from frozendict import frozendict
@@ -35,7 +35,7 @@ __all__ = [
 
 
 class RecipeFromDecorator[**P, R](Recipe[R]):
-    inner: t.ClassVar[Callable]
+    inner: t.ClassVar[t.Callable]
 
     def __init__(self, *args: P.args, **kwargs: P.kwargs): ...
 
@@ -44,8 +44,8 @@ RECIPES_FROM_DECORATION: list[type[Recipe]] = list()
 
 
 def recipe[**P, R]() -> (
-    Callable[
-        [Callable[t.Concatenate[BuildContext, P], R]], type[RecipeFromDecorator[P, R]]
+    t.Callable[
+        [t.Callable[t.Concatenate[BuildContext, P], R]], type[RecipeFromDecorator[P, R]]
     ]
 ):
     """
@@ -55,7 +55,7 @@ def recipe[**P, R]() -> (
     # `recipe` is a function to allow addition of arguments :)
 
     def decorate(
-        fn: Callable[t.Concatenate[BuildContext, P], R],
+        fn: t.Callable[t.Concatenate[BuildContext, P], R],
     ) -> type[RecipeFromDecorator[P, R]]:
         sig = inspect.signature(fn)
 
@@ -74,7 +74,7 @@ def recipe[**P, R]() -> (
                 object.__setattr__(self, "_args", frozendict(arguments.arguments))
 
             def build_impl(self, ctx: BuildContext) -> R:
-                arguments = inspect.BoundArguments(sig_without_ctx, self._args)
+                arguments = inspect.BoundArguments(sig_without_ctx, collections.OrderedDict(self._args))
                 return fn(ctx, *arguments.args, **arguments.kwargs)
 
             def __setattr__(self, name, value):
@@ -215,7 +215,7 @@ class InoutMixin[T: Inout](Recipe[T], OutputMixin, InputMixin):
 
 
 @dataclasses.dataclass(frozen=True)
-class ConstRecipe[T: t.Hashable]:
+class ConstRecipe[T: t.Hashable](Recipe[T]):
     """
     Return a constant value
     """
@@ -245,7 +245,7 @@ def LoadRecipe(ctx: BuildContext, path: Path, name: str = "main") -> t.Any:
 
 
 @recipe()
-def FnRecipe[R](ctx: BuildContext, fn: Callable[[BuildContext], R]) -> R:
+def FnRecipe[R](ctx: BuildContext, fn: t.Callable[[BuildContext], R]) -> R:
     """
     Adaptor, for use with lambdas etc.
     """

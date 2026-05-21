@@ -14,9 +14,9 @@
 		<link rel="stylesheet" href="{{
 			recipe.sass(
 				"css/main.scss",
-				"/assets/main.css",
 				include="./css",
 			)
+			| step.write("/assets/main.css")
 		}}">
 		<link rel="stylesheet" href="{{
 			recipe.page("css/random.css.jinja", "/assets/random.css")

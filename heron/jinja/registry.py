@@ -82,7 +82,7 @@ def recipe_class_as_builder(cls: type[core.Recipe]) -> t.Callable:
             # input paths are relative to processed file
             if param.annotation in (Path, dataclasses.InitVar[Path]):
                 assert isinstance(value, Path) or (isinstance(value, str) and not value.startswith("/"))
-                bound.arguments[name] = context.get("__file__").parent / value
+                bound.arguments[name] = context.get("__file__").parent.absolute() / value
             # output paths are absolute
             if param.annotation in (core.Pathish, dataclasses.InitVar[core.Pathish]):
                 assert isinstance(value, str) and value.startswith("/")

@@ -6,7 +6,7 @@ import jinja2
 from frozendict import frozendict
 
 from .. import core, util
-from ..jinja.registry import RECIPE_FILTERS, jinja_recipe_builder
+from ..jinja.registry import jinja_recipe_builder
 
 
 def main_file(ctx: core.BuildContext, path: Path) -> Path:
@@ -71,19 +71,23 @@ class PageMetaRecipe(core.InoutMixin[PageInout]):
 
 
 @dataclasses.dataclass(frozen=True)
-class JinjaStage(core.Recipe[str]):
-    content: str
+class JinjaStep(core.Step[str, str]):
     filename: str
     jenv: jinja2.Environment
     vars: frozendict
 
-    def build_impl(self, ctx: core.BuildContext) -> str:
+    def __call__(
+        self,
+        ctx: core.BuildContext,
+        pctx: core.PipelineContext,
+        inp: str,
+    ) -> str:
         # manually instantiating using from_code allows us to specify the
         # filename
         return self.jenv.template_class.from_code(
             self.jenv,
             self.jenv.compile(
-                self.content,
+                inp,
                 name=self.filename,
                 filename=self.filename,
             ),
@@ -93,12 +97,16 @@ class JinjaStage(core.Recipe[str]):
 
 
 @dataclasses.dataclass(frozen=True)
-class JMarkdownStage(core.Recipe[str]):
-    content: str
+class JMarkdownStep(core.Step[str, str]):
     filename: str
     jenv: jinja2.Environment
 
-    def build_impl(self, ctx: core.BuildContext) -> str:
+    def __call__(
+        self,
+        ctx: core.BuildContext,
+        pctx: core.PipelineContext,
+        inp: str,
+    ) -> str:
         from .. import md
 
         renderer = md.create_md(
@@ -107,7 +115,7 @@ class JMarkdownStage(core.Recipe[str]):
                 self.filename,
             )
         )
-        return renderer(self.content)
+        return renderer(inp)
 
 
 @dataclasses.dataclass(frozen=True)
@@ -148,36 +156,22 @@ class PageRecipe(core.InoutMixin[PageInout]):
         )
 
         # 2. jinja
-        content = ctx.build(
-            JinjaStage(
-                content="\n" * preamble.line_offset + content,  # fix up line numbers
-                filename=str(path),
-                jenv=self.jenv,
-                vars=jinja_vars,
-            )
-        )
+        content = "\n" * preamble.line_offset + content  # fix up line numbers
+        recipe = core.Pipeline(core.ConstRecipe(content))
+
+        recipe |= JinjaStep(filename=str(path), jenv=self.jenv, vars=jinja_vars)
 
         # 3. render
         ext = self.ext or path.suffix.lstrip(".")
         if ext == "md":
-            content = ctx.build(
-                JMarkdownStage(
-                    content=content,
-                    filename=str(path),
-                    jenv=self.jenv,
-                )
+            recipe |= JMarkdownStep(
+                filename=str(path),
+                jenv=self.jenv,
             )
-        elif ext == "html":
-            pass  # don't need to do anything
         else:
             pass
-            # warnings.warn_explicit(
-            #     f"no processor for extension {ext!r}",
-            #     UserWarning,
-            #     str(path),
-            #     0,
-            # )
 
+        content = ctx.build(recipe)
         pre_layout_content = content
 
         # 4. layout

@@ -57,7 +57,7 @@ Credits:
 {% endfilter %}
 </details>
 
-<link rel="stylesheet" href="{{ recipe.sass("./main.scss", page.url + "/main.css") }}">
+<link rel="stylesheet" href="{{ recipe.copy_ca("./main.css") }}">
 {% for path in recipe.readdir(".") %}
 	{% if path.suffix == ".mjs" %}
 		{% do recipe.copy(page.url + "/" + path.name, path) %}

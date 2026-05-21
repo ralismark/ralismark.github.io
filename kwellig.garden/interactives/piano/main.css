@@ -8,8 +8,8 @@
 	--black-key-width: calc(var(--white-key-width) * 0.7);
 
 	max-width: calc(100% - 2em);
-	// overflow: scroll;
-	// width: fit-content;
+	/* overflow: scroll; */
+	/* width: fit-content; */
 	margin: 1em auto;
 
 	display: flex;
