@@ -287,10 +287,17 @@ hr.hr--fish {
 	&::after {
 		content: "𓆝     𓆟     𓆞     𓆝     𓆟     ";
 		font-size: 2em;
-		white-space: pre-wrap;
+		white-space: pre;
 
 		display: block;
 		text-align: center;
+	}
+}
+
+img.img--zoom {
+	transition: transform 0.3s ease;
+	&:hover {
+		transform: scale(2);
 	}
 }
 

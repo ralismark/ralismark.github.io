@@ -3,11 +3,12 @@ Compose stages together into a pipeline
 """
 
 import abc
-import typing as t
 import dataclasses
+import hashlib
+import typing as t
 
 from .kernel import BuildContext, Recipe, current_ctx
-from .recipes import permalink, OutputMixin, ConstRecipe
+from .recipes import permalink, OutputMixin, ConstRecipe, canonicalise_opath
 
 __all__ = [
     "Step",
@@ -82,6 +83,27 @@ class WriteStep(Step[str | bytes, str], OutputMixin):
         return permalink(self.opath)
 
 
+@dataclasses.dataclass(frozen=True)
+class WriteCaStep(Step[str | bytes, str]):
+    name: str
+
+    def __call__(
+        self,
+        ctx: BuildContext,
+        pctx: PipelineContext,
+        content: str | bytes,
+    ) -> str:
+        if isinstance(content, str):
+            content = content.encode("utf-8")
+        digest = hashlib.md5(content if isinstance(content, bytes) else content.encode("utf-8")).hexdigest()
+
+        out = canonicalise_opath(f"/ca/{digest}/{self.name}")
+
+        with ctx.output(out).open("wb") as f:
+            f.write(content)
+        return permalink(out)
+
+
 def jinja_filter_from_final_step[I, R, **P](step: t.Callable[P, Step[I, R]]) -> t.Any:
     """
     Create a Jinja filter from a step that finalises the pipeline.
@@ -98,4 +120,5 @@ def jinja_filter_from_final_step[I, R, **P](step: t.Callable[P, Step[I, R]]) -> 
 
 STEP_FILTERS = {
     "step.write": jinja_filter_from_final_step(WriteStep),
+    "step.write_ca": jinja_filter_from_final_step(WriteCaStep),
 }

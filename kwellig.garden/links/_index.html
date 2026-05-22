@@ -62,6 +62,33 @@ title: Links
 {% endfor %}
 </section>
 
+<hr class="content-width">
+
+<section id="buttons" class="content-width">
+	{% macro mirror(src) %}
+	{{- recipe.fetch(src) | step.write_ca("88x31." + src.rsplit(".", 1)[-1]) -}}
+	{% endmacro %}
+
+	{% for href, name, src in [
+		("https://suricrasia.online/", "Suricrasia Online", mirror("https://www.blackle-mori.com/images/suricrasia_online_88x31.png")),
+		("https://lunabee.space/", "beespace", mirror("https://lunabee.space/8831.gif")),
+		("https://citrons.xyz/memetic-apioform-page", "what is an apioform?", mirror("https://citrons.xyz/a/static/apiopage88x31.png")),
+		("https://neocities.org/", "Neocities", mirror("https://plasticdino.net/neocities-pink.gif")),
+		("https://kwellig.garden/", "Kwellig's Garden", "/88x31.png"),
+	] %}
+	<a href="{{href}}">
+		<img
+			src="{{src}}"
+			title="{{name}}"
+			style="image-rendering: pixelated"
+			width="88"
+			height="31"
+			class="img--zoom"
+		/>
+	</a>
+	{% endfor %}
+</section>
+
 <style>
 .h-feed {
 	display: flex;
@@ -90,6 +117,19 @@ details.h-entry {
 
 	&[open]::details-content {
 		width: 100%;
+	}
+}
+
+
+#buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 0.2em;
+
+	> * {
+		flex-grow: 0;
+		flex-shrink: 0;
 	}
 }
 </style>
