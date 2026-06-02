@@ -64,33 +64,7 @@ title: Links
 
 <hr class="content-width">
 
-<section id="marquee" class="content-width">
-	{% macro mirror(src) %}
-	{{- recipe.fetch(src) | step.write_ca("88x31." + src.rsplit(".", 1)[-1]) -}}
-	{% endmacro %}
-
-	{% for i in range(5) %}
-	<div>
-		{% for href, name, src in [
-			("https://suricrasia.online/", "Suricrasia Online", mirror("https://www.blackle-mori.com/images/suricrasia_online_88x31.png")),
-			("https://lunabee.space/", "beespace", mirror("https://lunabee.space/8831.gif")),
-			("https://citrons.xyz/memetic-apioform-page", "what is an apioform?", mirror("https://citrons.xyz/a/static/apiopage88x31.png")),
-			("https://neocities.org/", "Neocities", mirror("https://plasticdino.net/neocities-pink.gif")),
-			("https://kwellig.garden/", "Kwellig's Garden", "/88x31.png"),
-		] %}
-		<a class="marquee__button" href="{{href}}">
-			<img
-				src="{{src}}"
-				title="{{name}}"
-				style="image-rendering: pixelated"
-				width="88"
-				height="31"
-			/>
-		</a>
-		{% endfor %}
-	</div>
-	{% endfor %}
-</section>
+{% include "./_button-marquee.html" %}
 
 <style>
 .h-feed {
@@ -120,34 +94,6 @@ details.h-entry {
 
 	&[open]::details-content {
 		width: 100%;
-	}
-}
-
-@keyframes marquee {
-	0% { transform: translateX(0%); }
-	100% { transform: translateX(-100%); }
-}
-
-#marquee {
-	&, > div {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-
-		> * {
-			flex-grow: 0;
-			flex-shrink: 0;
-		}
-	}
-
-	> div {
-		animation: 10s linear infinite marquee;
-	}
-
-	overflow-x: hidden;
-
-	&:hover > div {
-		animation-play-state: paused;
 	}
 }
 </style>

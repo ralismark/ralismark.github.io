@@ -1,0 +1,64 @@
+{% macro mirror(src) %}
+{{- recipe.fetch(src) | step.write_ca("88x31." + src.rsplit(".", 1)[-1]) -}}
+{% endmacro %}
+
+{% set buttons = namespace(list=[
+	("https://citrons.xyz/memetic-apioform-page", "what is an apioform?", mirror("https://citrons.xyz/a/static/apiopage88x31.png")),
+	("https://neocities.org/", "Neocities", mirror("https://plasticdino.net/neocities-pink.gif")),
+	("https://kwellig.garden/", "Kwellig's Garden", "/88x31.png"),
+]) %}
+{% for link in site.collections.links %}
+	{% set link = recipe.build(link) %}
+	{% if link.button %}
+		{% do buttons.list.append((link.href, link.title, mirror(link.button))) %}
+	{% endif %}
+{% endfor %}
+{% do random.shuffle(buttons.list) %}
+
+<section class="marquee">
+	{% for i in range(5) %}
+	<div role="none">
+		{% for href, name, src in buttons.list %}
+		<a href="{{href}}">
+			<img
+				src="{{src}}"
+				title="{{name}}"
+				style="image-rendering: pixelated"
+				width="88"
+				height="31"
+			/>
+		</a>
+		{% endfor %}
+	</div>
+	{% endfor %}
+</section>
+
+<style>
+@keyframes marquee {
+	0% { transform: translateX(0%); }
+	100% { transform: translateX(-100%); }
+}
+
+.marquee {
+	&, > div {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+
+		> * {
+			flex-grow: 0;
+			flex-shrink: 0;
+		}
+	}
+
+	> div {
+		animation: 15s linear infinite marquee;
+	}
+
+	overflow-x: hidden;
+
+	&:hover > div {
+		animation-play-state: paused;
+	}
+}
+</style>
