@@ -35,6 +35,13 @@
 
 {% block post_content %}
 <main class="e-content content-width">
+{% filter markdownify %}
+.. admonition:: me/warn
+
+	Spoilers ahead!
+	Turn back now if you want to experience this blind.
+{% endfilter %}
+
 	{{ content }}
 </main>
 {% endblock post_content %}
