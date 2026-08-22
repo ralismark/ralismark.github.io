@@ -9,6 +9,6 @@ def FetchRecipe(
     ctx: core.BuildContext,
     url: str,
 ) -> bytes:
-    r = requests.get(url)
+    r = requests.get(url, timeout=5)
     r.raise_for_status()
     return r.content

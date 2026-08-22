@@ -203,7 +203,7 @@ class LoggingDriver(DriverWrapper):
     def build(self, recipe):
         if self.log_recipes:
             if self.log_recipes == "type":
-                self.logger.info("building %s", recipe.__class__.__name__)
+                self.logger.info("building %s", recipe)
 
         mf = super().build(recipe)
         for e in mf.log:

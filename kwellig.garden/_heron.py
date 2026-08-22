@@ -14,7 +14,7 @@ import heron
 here = Path(__file__).parent
 
 site = {
-    "drafts": False,
+    "drafts": os.getenv("HERON_ENV") == "development",
     "url": "https://kwellig.garden",
     "fqdn": "kwellig.garden",
     "title": "Kwellig's Garden",

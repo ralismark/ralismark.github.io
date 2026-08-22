@@ -40,6 +40,9 @@ class Recipe[R](abc.ABC):
 
     # TODO enforce hashable
 
+    def __str__(self) -> str:
+        return type(self).__name__
+
 
 @dataclasses.dataclass(frozen=True)
 class Manifest[R]:

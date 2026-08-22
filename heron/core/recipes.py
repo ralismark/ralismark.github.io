@@ -88,11 +88,14 @@ def recipe[**P, R]() -> (
 
             def __repr__(self) -> str:
                 return (
-                    self.__class__.__name__
+                    type(self).__name__
                     + "("
                     + ", ".join(f"{k}={v!r}" for k, v in self._args.items())
                     + ")"
                 )
+
+            def __str__(self) -> str:
+                return repr(self)
 
         # patch the name
         recipetype.__name__ = fn.__name__
@@ -210,6 +213,8 @@ class InoutMixin[T: Inout](Recipe[T], OutputMixin, InputMixin):
     def inout(self) -> Inout:
         return Inout(self.path, self.opath)
 
+    def __str__(self) -> str:
+        return f"{type(self).__name__}(path={self.path}, opath={self.opath})"
 
 # -----------------------------------------------------------------------------
 
