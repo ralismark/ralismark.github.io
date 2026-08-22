@@ -8,11 +8,9 @@ html { // for non-sass use
 	--mono-font-family: Menlo, Consolas, Monaco, "Liberation Mono", "Lucida Console", monospace;
 	--hand-font-family: cursive, sans-serif;
 
-	// light/dark mode; use --body-{fg,bg} for correctly coloured version
-	--body-fg-light: black;
-	--body-bg-light: white;
-	--body-fg-dark: #e7e6e5;
-	--body-bg-dark: #191a1a;
+	/* text */
+	--body-fg: light-dark(black, #e7e6e5);
+	--body-bg: light-dark(white, #191a1a);
 
 	// ui lines
 	--stroke: rgba(127.5, 127.5, 127.5, 0.4);
@@ -30,31 +28,16 @@ html { // for non-sass use
 	--secondary: #A747FF;
 	--tertiary: #939C28;
 
-	// colour of links
-	--linking-light: #094EBA;
-	--linking-dark: #4890FF;
-}
-
-@mixin light {
-	--body-bg: var(--body-bg-light);
-	--body-fg: var(--body-fg-light);
-	--linking: var(--linking-light);
-	color-scheme: light;
-}
-@mixin dark {
-	--body-bg: var(--body-bg-dark);
-	--body-fg: var(--body-fg-dark);
-	--linking: var(--linking-dark);
-	color-scheme: dark;
+	/* colour of links */
+	--linking: light-dark(#094EBA, #4890FF);
 }
 
 html {
 	// order of these determines priority of conditions for light/dark
-	// TODO is this too opinionated? we default to dark mode
-	@include dark;
-	@media (prefers-color-scheme: light) { @include light; }
-	@media (prefers-color-scheme: dark) { @include dark; }
-	@media print { @include light; }
-	&[data-color-scheme="light"] { @include light; }
-	&[data-color-scheme="dark"] { @include dark; }
+	color-scheme: dark;
+	@media (prefers-color-scheme: light) { color-scheme: light; }
+	@media (prefers-color-scheme: dark) { color-scheme: dark; }
+	@media print { color-scheme: light; }
+	&[data-color-scheme="light"] { color-scheme: light; }
+	&[data-color-scheme="dark"] { color-scheme: dark; }
 }

@@ -1,5 +1,5 @@
 {%- macro post_nav() -%}
-	<nav class="my-1 content-width">
+	<nav class="content-width" style="margin: 1rem auto">
 		{% if prev and prev() %}
 			{% set prev = recipe.build(prev().meta) %}
 			<a style="float: left; text-align: left" href="{{ prev }}">&laquo; {{ prev.title | e }}</a>

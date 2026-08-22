@@ -37,7 +37,6 @@ strong {
 	font-weight: 700;
 }
 
-// TODO this is opinionated, move it out of foundation
 h1 {
 	text-align: center;
 	font-size: 2em;
@@ -481,23 +480,7 @@ table:not(.rouge-line-table):not(.rouge-table) {
 // Layout: Content Width ------------------------------------------------- @@@2
 
 html {
-	$breaking-width: 55rem; // "clamp" page width to this if above. Used to transition between desktop-like and mobile-like sizing
-	$content-frac: .90; // maximum proportion of page width to use for content (i.e. remaining space is margin)
-	$bleed-frac: .75; // amount of margin to include in bleed
-
-	// --content-width is width of content
-	// --inset-margin is extra margin for "inset" thing (e.g. admonitions)
-	// --bleed-size is "negative margin" for bleed elements
-
-	--content-width: #{$breaking-width * $content-frac};
-	--bleed-size: calc(#{$bleed-frac} * 50vw - #{$bleed-frac} * #{$breaking-width * $content-frac / 2});
-	// --inset-margin: 1rem;
-
-	@media(max-width: $breaking-width) {
-		--content-width: #{$content-frac * 100}vw;
-		--bleed-size: #{$bleed-frac * (1 - $content-frac) * 100 / 2}vw;
-		// --inset-margin: 0rem;
-	}
+	--content-width: min(50rem, 90vw);
 }
 
 .content-width {
@@ -505,17 +488,4 @@ html {
 	max-width: var(--content-width);
 	margin-left: auto;
 	margin-right: auto;
-}
-
-// .content-width > *:not(.bleed, .content-width) {
-// 	max-width: var(--content-width);
-// 	margin-left: auto;
-// 	margin-right: auto;
-// }
-
-// Customisation Utils --------------------------------------------------- @@@1
-
-@for $i from 0 through 4 {
-	html .mx-#{$i} { margin-left:   $i * 1rem !important; margin-right:  $i * 1rem !important; }
-	html .my-#{$i} { margin-top:    $i * 1rem !important; margin-bottom: $i * 1rem !important; }
 }

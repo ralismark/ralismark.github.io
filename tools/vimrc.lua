@@ -63,22 +63,35 @@ if ls then
 		})
 	end
 
-	skeleton("*/ralismark.github.io/*.md", s("", {
+	skeleton("*/ralismark.github.io/kwellig.garden/links/*.md", s("", {
 		t({ "---",
-			"layout: post",
+			"layout: link",
 			"title: ", }), i(1), t({ "",
-			"excerpt:",
+			"url: ", }), i(2), t({ "",
 			"date: " }), f(function() return vim.fn.strftime("%Y-%m-%d") end), t({ "",
 			"tags:",
 			"---",
 			"",
 			"" })
 	}))
-	skeleton("*/ralismark.github.io/*/links/*.md", s("", {
+	skeleton("*/ralismark.github.io/kwellig.garden/media/*.md", s("", {
 		t({ "---",
-			"layout: link",
+			"layout: review",
+			"",
 			"title: ", }), i(1), t({ "",
-			"url: ", }), i(2), t({ "",
+			"author: ", }), i(2), t({ "",
+			"rating: ", }), i(3), t({ "",
+			"",
+			"date: " }), f(function() return vim.fn.strftime("%Y-%m-%d") end), t({ "",
+			"---",
+			"",
+			"" })
+	}))
+	skeleton("*/ralismark.github.io/*.md", s("", {
+		t({ "---",
+			"layout: post",
+			"title: ", }), i(1), t({ "",
+			"excerpt:",
 			"date: " }), f(function() return vim.fn.strftime("%Y-%m-%d") end), t({ "",
 			"tags:",
 			"---",

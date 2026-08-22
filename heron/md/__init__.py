@@ -20,6 +20,7 @@ def create_md(renderer):
         renderer=renderer,
         plugins=[
             mistune.plugins.formatting.strikethrough,
+            mistune.plugins.formatting.mark,
             mistune.plugins.footnotes.footnotes,
             mistune.plugins.table.table,
             mistune.plugins.math.math,
