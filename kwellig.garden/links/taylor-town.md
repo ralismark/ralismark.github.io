@@ -1,10 +1,7 @@
 ---
 layout: link
-title: talyor.town
-href: https://taylor.town/
+title: My website is ugly because I made it (talyor.town)
+url: https://goodinternetmagazine.com/my-website-is-ugly-because-i-made-it/
 date: 2025-06-30
-tags:
+tags: article
 ---
-
-Haven't looked at content that much (hence no `blog` tag), but that's a really unique index page!
-There's a breakdown of it here: <https://goodinternetmagazine.com/my-website-is-ugly-because-i-made-it/>

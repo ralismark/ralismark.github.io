@@ -1,10 +1,10 @@
 ---
 layout: link
 title: Suricrasia Online
-href: https://suricrasia.online/
+url: https://suricrasia.online/
 button: https://www.blackle-mori.com/images/suricrasia_online_88x31.png
 date: 2025-06-11
-tags: blogroll fiction
+tags: blog fiction
 ---
 
 Incredible fiction.

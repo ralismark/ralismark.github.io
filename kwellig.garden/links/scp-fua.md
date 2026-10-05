@@ -1,7 +1,7 @@
 ---
 layout: link
 title: "SCP: Find Us Alive"
-href: https://hodgepodgeaudio.com/#fua
+url: https://hodgepodgeaudio.com/#fua
 date: 2025-07-06
 tags: fiction
 ---

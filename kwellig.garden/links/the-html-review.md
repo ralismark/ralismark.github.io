@@ -1,7 +1,7 @@
 ---
 layout: link
 title: the html review
-href: https://thehtml.review/
+url: https://thehtml.review/
 date: 2026-03-25
 tags:
 ---
