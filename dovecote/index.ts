@@ -1,14 +1,8 @@
 import { IttyRouter } from "itty-router"
 import { mf2 } from "microformats-parser"
 import { discoverPostType, PostType } from "./post-type-discovery"
-import { JSDOM } from "jsdom"
-import DOMPurify from "dompurify"
-
-
-// TODO database interactions
-// TODO API for getting webmentions
-
-type Datetime = number // unix time in seconds
+import { Datetime, WebmentionRow } from "./types"
+import { generateAtomFeed } from "./rss"
 
 function now(): Datetime {
 	return Math.floor(Date.now() / 1000)
@@ -404,8 +398,19 @@ router
 			WHERE valid = TRUE
 				AND (?1 IS NULL OR resolved_target = ?1)
 			ORDER BY _ts DESC
-		`).bind(target).run()
+		`).bind(target).run<WebmentionRow & { _ts: Datetime }>()
 
+		let feed = ""
+		for (const chunk of generateAtomFeed(r.results)) feed += chunk
+
+		return new Response(
+			feed,
+			{
+				headers: {
+					"Content-Type": "application/atom+xml",
+				},
+			},
+		)
 	})
 	.all("*", () => new Response("dovecote: nothing here", {status:404}))
 
