@@ -316,7 +316,14 @@ async function receive(formData: FormData, env: Env): Promise<Response> {
 	).run()
 	console.log("insert", { result: r })
 
-	return new Response(JSON.stringify(r))
+	return new Response(
+		JSON.stringify(r),
+		{
+			headers: {
+				"Content-Type": "application/json",
+			},
+		}
+	)
 }
 
 function protectFromCancel(ctx: ExecutionContext, p: Promise<Response>): Promise<Response> {
@@ -345,10 +352,17 @@ router
 		const mf = mf2(await r.text(), { baseUrl: r.url })
 		const distilled = distill(mf)
 
-		return new Response(JSON.stringify({
-			mf,
-			distilled,
-		}))
+		return new Response(
+			JSON.stringify({
+				mf,
+				distilled,
+			}),
+			{
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		)
 	})
 	.get("/", async (request: Request, env: Env) => {
 		const params = (new URL(request.url)).searchParams
@@ -367,9 +381,31 @@ router
 			target: target,
 			query_meta: r.meta
 		})
-		return new Response(JSON.stringify({
-			entries: r.results
-		}))
+		return new Response(
+			JSON.stringify({
+				entries: r.results
+			}),
+			{
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		)
+	})
+	.get("/.rss", async (request: Request, env: Env) => {
+		const params = (new URL(request.url)).searchParams
+		const target = params.get("target")
+
+		const r = await env.dovecote.prepare(`
+			SELECT
+				coalesce(published_ts, entered_ts) AS _ts,
+				*
+			FROM Webmention
+			WHERE valid = TRUE
+				AND (?1 IS NULL OR resolved_target = ?1)
+			ORDER BY _ts DESC
+		`).bind(target).run()
+
 	})
 	.all("*", () => new Response("dovecote: nothing here", {status:404}))
 

@@ -3,3 +3,4 @@ __pycache__/
 result
 
 node_modules/
+.wrangler/

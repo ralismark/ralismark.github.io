@@ -3,10 +3,10 @@ import dovecote from "../dovecote"
 
 const router = IttyRouter()
 router
-	.get("/_hello", () => "Hello world")
+	// make sure all routes here are in .assets.run_worker_first of
+	// ../wrangler.jsonc
+	.get("/_hello", async () => new Response("Hello from cloudflare worker!"))
 	.all("/_dovecote/*", dovecote.fetch)
-	.all("*", async (request, env) => {
-		return await env.ASSETS.fetch(new Request(request.url, { ...request }))
-	})
+	.all("*", async () => new Response("no matching route in cloudflare worker", {status: 404}))
 
 export default { ...router }
