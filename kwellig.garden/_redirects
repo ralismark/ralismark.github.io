@@ -1,0 +1,39 @@
+# https://developers.cloudflare.com/workers/static-assets/redirects/
+
+# posts before 2020-11-27 (commit df7394d) were located at /YYYY/MM/DD/<name>
+/2017/04/13/a-tale-of-indices.html         /posts/a-tale-of-indices         301
+/2017/04/17/redundancy.html                /posts/redundancy                301
+/2017/04/18/school-proxy.html              /posts/school-proxy              301
+/2017/04/11/initial-post.html              /posts/initial-post              301
+/2017/12/19/git-ep-cleanup.html            /posts/git-ep-cleanup            301
+/2017/08/24/stateless-brachistochrone.html /posts/stateless-brachistochrone 301
+/2017/11/30/git-ep-deleted-ref.html        /posts/git-ep-deleted-ref        301
+/2017/05/07/cpp14-concept-1.html           /posts/cpp14-concept-1           301
+/2018/02/20/wrtc-hell-1.html               /posts/wrtc-hell-1               301
+/2018/11/07/table-mode.html                /posts/table-mode                301
+/2018/01/06/ultivec-1.html                 /posts/ultivec-1                 301
+/2018/06/07/math-pet-peeves.html           /posts/math-pet-peeves           301
+/2018/09/19/ioi-stories.html               /posts/ioi-stories               301
+/2019/05/28/edge-trees.html                /posts/edge-trees                301
+/2019/01/18/r-deep-end.html                /posts/r-deep-end                301
+/2019/01/04/bluehid-1.html                 /posts/bluehid-1                 301
+/2019/01/07/bluehid-2.html                 /posts/bluehid-2                 301
+/2019/01/07/nice-01-knapsack.html          /posts/nice-01-knapsack          301
+/2019/01/13/bluehid-3.html                 /posts/bluehid-3                 301
+/2019/12/08/spaces-and-tabs.html           /posts/spaces-and-tabs           301
+/2019/03/04/rsi.html                       /posts/rsi                       301
+/2019/03/29/diversifying.html              /posts/diversifying              301
+/2019/04/05/speed-of-light.html            /posts/speed-of-light            301
+/2020/11/20/inline-notes.html              /posts/inline-notes              301
+/2020/11/15/keyboard.html                  /posts/keyboard                  301
+/2020/02/08/graphical-user-services.html   /posts/graphical-user-services   301
+/2020/08/29/how-i-use-vim-1.html           /posts/how-i-use-vim-1           301
+/2020/03/14/rabbit-holes.html              /posts/rabbit-holes              301
+/2020/03/10/nearer-optimal-solution.html   /posts/nearer-optimal-solution   301
+/2020/10/28/blog-ci.html                   /posts/blog-ci                   301
+/2020/10/16/blog-style.html                /posts/blog-style                301
+/2020/10/30/git-graph.html                 /posts/git-graph                 301
+/2020/10/30/intuition.html                 /posts/intuition                 301
+/2020/04/21/small-merge.html               /posts/small-merge               301
+/2020/04/21/alberts-lis.html               /posts/alberts-lis               301
+/2020/07/04/binary-search.html             /posts/binary-search             301
