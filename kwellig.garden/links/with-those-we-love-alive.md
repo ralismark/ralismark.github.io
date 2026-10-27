@@ -1,7 +1,7 @@
 ---
 layout: link
 title: With Those We Love Alive
-url: https://xrafstar.monster/games/twine/wtwla/
+href: https://xrafstar.monster/games/twine/wtwla/
 date: 2025-06-11
 tags: fiction
 ---

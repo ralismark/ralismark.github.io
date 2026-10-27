@@ -1,7 +1,7 @@
 ---
 layout: link
 title: Houyhnhnm Computing
-url: https://ngnghm.github.io/index.html
+href: https://ngnghm.github.io/index.html
 date: 2026-06-02
 tags: compsci blog
 ---
